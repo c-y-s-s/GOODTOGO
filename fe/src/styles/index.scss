@@ -1,0 +1,99 @@
+$color-green: #668c4a;
+$color-lightGreen: #a6bf4b;
+$color-light: #f2f0d5;
+$color-yellow: #f2c53d;
+$color-grey: #b1b1ac;
+$color-darkGrey: #666666;
+$navbar-height: 100px;
+$navbar-link-txt: 1rem;
+$footer-height: 241px;
+
+.navbar {
+  background-color: white;
+  height: $navbar-height;
+  font-size: $navbar-link-txt;
+  .nav {
+    margin: 0 150px;
+    padding: 0;
+    .navbar-nav {
+      justify-content: center;
+      align-items: center;
+      .navLogo {
+        height: 40px;
+        margin: 0 88px 0 0;
+      }
+      .nav-item {
+        height: 23px;
+        padding: 0;
+        .navLink {
+          color: $color-darkGrey;
+          margin-right: 50px;
+          text-decoration: none;
+          justify-content: center;
+        }
+        .navIcon {
+          color: $color-darkGrey;
+          margin-left: 23px;
+        }
+      }
+    }
+  }
+}
+.hero2 {
+  height: 726px;
+  background-color: $color-lightGreen;
+}
+.hero3 {
+  height: 2178px;
+  background-color: $color-light;
+}
+.hero4 {
+  height: 726px;
+  background-color: $color-yellow;
+}
+footer {
+  height: $footer-height;
+  .footerSec1 {
+    width: 1140px;
+    margin: 49px auto;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    .footerIcon {
+      height: 40px;
+    }
+
+    span {
+      margin: 0;
+      line-height: 40px;
+      color: $color-darkGrey;
+    }
+    .link-groups {
+      width: 350px;
+      .FooterLink {
+        color: $color-darkGrey;
+        text-decoration: none;
+        padding: 10px 0 10px 30px;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20.27px;
+      }
+    }
+  }
+  .split {
+    background-color: $color-grey;
+    height: 1px;
+    margin: auto;
+    width: 1140px;
+  }
+  .footerSec2 {
+    width: 1140px;
+    margin: 24px auto;
+    color: $color-grey;
+
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}
