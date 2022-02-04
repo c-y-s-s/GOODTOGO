@@ -10,9 +10,10 @@ let pool = mysql.createPool({
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-//   // 加上連線數限制
-//   connectionLimit: 10,
-//   dateStrings: true,
+  // 加上連線數限制
+  connectionLimit: 10,
+  // 遇到 data 轉成字串，就不會產生時區問題 
+  dateStrings: true,
 });
 
 // 傳回 pool.promise()

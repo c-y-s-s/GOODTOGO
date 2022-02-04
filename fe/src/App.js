@@ -4,7 +4,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/index.scss";
 
-// 這邊的資料夾命名方式可以不用指定裡面的index
+// 這邊的資料夾命名方式可以不用指定裡面的 index
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
