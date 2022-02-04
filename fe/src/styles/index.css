@@ -2,7 +2,7 @@
 #root {
   width: 100vw;
   overflow: hidden;
-  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 .navbar {
@@ -295,5 +295,47 @@ footer .footerSec2 {
           align-items: center;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
+}
+
+.storeLogo {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+}
+
+.storeLogo .storeLogoImg {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.store-data {
+  margin-top: 4rem;
+  color: #666666;
+}
+
+.store-data .storeDataLeft h1 {
+  font-size: 1.75rem;
+  font-weight: 500;
+}
+
+.store-data .storeDataLeft p {
+  font-weight: 400;
+}
+
+.store-data .store-map {
+  border: 1px solid black;
+  width: 665px;
+  height: 286px;
+  margin-left: 5rem;
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0 0px;
+          flex: 1 0 0;
 }
 /*# sourceMappingURL=index.css.map */
