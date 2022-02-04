@@ -97,3 +97,43 @@ footer {
     box-sizing: border-box;
   }
 }
+
+.storeLogo {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  .storeLogoImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.store-data {
+  margin-top: 4rem;
+  color: $color-darkGrey;
+  .storeDataLeft {
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+    }
+    p {
+      font-weight: 400;
+    }
+  }
+
+  .store-map {
+    border: 1px solid black;
+    width: 665px;
+    height: 286px;
+    margin-left: 5rem;
+    flex: 1 0 0;
+  }
+}
+
+// @import "./product_storedata.scss";
