@@ -26,10 +26,13 @@ function App() {
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/store" element={<Store />}></Route>
+        {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
+        <Route path="/store/:storeId" element={<Product />}></Route>
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/my_account" element={<MyAccount />}></Route>
+
       </Routes>
 
       {/* <StoreList />
