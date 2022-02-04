@@ -7,26 +7,73 @@ const Product = () => {
 
   //後端資料使用陣列格式，所以這邊給她空陣列
   const [data, setData] = useState([]);
+  const [storeData, setStoreData] = useState([]);
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
   useEffect(() => {
     let getProducts = async () => {
-      let response = await axios.get(
+      let productsResponse = await axios.get(
         `http://localhost:3001/api/products/${storeId}`
       );
-
-      setData(response.data);
+      let storeResponse = await axios.get(
+        `http://localhost:3001/api/stores/${storeId}`
+      );
+      // console.log("productsData", productsResponse.data);
+      // console.log("setStoreData", storeResponse.data);
+      setData(productsResponse.data);
+      setStoreData(storeResponse.data);
     };
     getProducts();
   }, []);
 
   return (
     <div>
-      <div class="ms-5">這是商家商品頁</div>
-      {data.map((item) => {
+      {storeData.map((item) => {
         return (
           <div>
+            <div class="container-fluid p-0">
+              <div class="storeLogo">
+                <img
+                  class="w-100 storeLogoImg"
+                  src={require(`../../images/store_img/${item.logo}`)}
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="container store-data">
+              <div class="d-flex">
+                <div class="storeDataLeft">
+                  <h1>{item.name}</h1>
+                  <div class="d-flex">
+                    <p>分類</p>
+                    <p>星星</p>
+                    <p>愛心</p>
+                  </div>
+                  <p>{item.address}</p>
+                  <div>
+                    <p>營業日</p>
+                    <p>顯示營業中非營業中</p>
+                  </div>
+                  <p>{item.tel_no}</p>
+                  <p>店家介紹 : Lorem ipsum, dolor sit amet consectetur</p>
+                </div>
+                <div class="store-map">
+                  <p class="">google地圖</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+export default Product;
+
+{
+  /* <div>
             <ul class=" ms-5 list-unstyled">
               <li>name : {item.name}</li>
               <li>
@@ -42,11 +89,5 @@ const Product = () => {
               <li>due_time: {item.due_time}</li>
               <li>created_at: {item.created_at}</li>
             </ul>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
-
-export default Product;
+          </div> */
+}
