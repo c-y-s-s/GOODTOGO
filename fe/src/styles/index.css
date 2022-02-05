@@ -164,4 +164,27 @@ footer .footerSec2 {
       -ms-flex: 1 0 0px;
           flex: 1 0 0;
 }
+
+.horizontalBar div {
+  margin-top: 5rem;
+  background-color: #668c4a;
+  padding: 1.03rem;
+}
+
+.canopy ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.canopy ul li {
+  padding: 1.85rem 1.35rem;
+  background-color: #9b1313;
+  border-radius: 0 0 1.2rem 1.2rem;
+  -webkit-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.canopy ul li:nth-child(even) {
+  background-color: #ffffff;
+}
 /*# sourceMappingURL=index.css.map */
