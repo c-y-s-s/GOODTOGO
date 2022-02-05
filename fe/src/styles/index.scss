@@ -287,4 +287,27 @@ footer {
   }
 }
 
+.horizontalBar {
+  div {
+    margin-top: 5rem;
+    background-color: $color-green;
+    padding: 1.03rem;
+  }
+}
+
+.canopy {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding: 1.85rem 1.35rem;
+      background-color: $color-canopy-dominant;
+      border-radius: 0 0 1.2rem 1.2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    li:nth-child(even) {
+      background-color: $color-canopy-Subtone;
+    }
+  }
+}
 // @import "./product_storedata.scss";

@@ -8,6 +8,7 @@ const Product = () => {
   //後端資料使用陣列格式，所以這邊給她空陣列
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
+
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
@@ -26,6 +27,8 @@ const Product = () => {
     };
     getProducts();
   }, []);
+
+  const canopyTotal = Array.from({ length: 30 });
 
   return (
     <div>
@@ -66,6 +69,18 @@ const Product = () => {
           </div>
         );
       })}
+
+      <div className="container-fluid p-0 canopy">
+        <div></div>
+      </div>
+
+      <div className="container canopy">
+        <ul class="d-flex">
+          {canopyTotal.map((item) => {
+            return <li></li>;
+          })}
+        </ul>
+      </div>
     </div>
   );
 };
