@@ -70,7 +70,7 @@ const Product = () => {
         );
       })}
 
-      <div className="container-fluid p-0 canopy">
+      <div className="container-fluid p-0 horizontalBar">
         <div></div>
       </div>
 
