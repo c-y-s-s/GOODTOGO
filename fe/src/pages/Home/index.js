@@ -6,7 +6,11 @@ import { ReactComponent as Hero1TextArrow } from "./images/hero1TextArrow.svg";
 import { ReactComponent as Hero2Text } from "./images/hero2Text.svg";
 import { ReactComponent as Hero2Trash } from "./images/hero2Trash.svg";
 import { ReactComponent as Hero3Text } from "./images/hero3Text.svg";
+import { ReactComponent as Hero3Tower } from "./images/hero3Tower.svg";
+import { ReactComponent as Hero3Earth } from "./images/hero3Earth.svg";
+import { ReactComponent as WaveTest } from "./images/waveTest.svg";
 //import { ReactComponent as Hero3Wave } from "./images/hero3Wave.svg";
+import "./wave.js";
 
 const Home = () => {
   return (
@@ -49,7 +53,13 @@ const Home = () => {
           </div>
           <div className="hero3food" />
         </div>
-        {/* <canvas id="c" className="wave" width="1440px" height="1049.85px" /> */}
+        <div className="ocean">
+          <div className="wave"></div>
+          <div className="wave"></div>
+        </div>
+        <Hero3Tower />
+        <Hero3Earth className="hero3earth" />
+        {/* <canvas id="wave" className="wave" width="1440px" height="1532px" /> */}
       </div>
       <div className="hero4"></div>
     </div>

@@ -101,11 +101,13 @@ $footer-height: 241px;
 .hero3 {
   height: 2178px;
   background-color: $color-light;
+  overflow: hidden;
   .hero3food {
     width: 532px;
     height: 735px;
     background-color: pink;
     margin-top: 27px;
+    z-index: 2;
   }
   .hero3Info {
     text-align: center;
@@ -117,12 +119,56 @@ $footer-height: 241px;
     .hero3Text {
       margin-bottom: 68.4px;
     }
+    .hero3earth {
+      z-index: 2;
+    }
   }
+  .ocean {
+    height: 10%;
+    width: 100%;
+
+    position: absolute;
+    top: 2835.15px;
+    // bottom: 0;
+    // left: 0;
+    background: transparent;
+    z-index: 990;
+  }
+
   .wave {
-    position: relative;
-    border: 1px solid red;
-    // top: 366px;
-    display: block;
+    background-image: url(../pages/Home/images/waveTest.svg);
+    position: absolute;
+    top: -120px;
+    width: 14400px;
+    overflow: hidden;
+    height: 1049.85px;
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
+    transform: translate3d(0, 0, 0);
+    &:nth-of-type(2) {
+      top: -165px;
+      animation: wave 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+        swell 7s ease -1.25s infinite;
+      opacity: 0.5;
+      z-index: 993;
+    }
+  }
+  @keyframes wave {
+    0% {
+      margin-left: 0;
+    }
+    100% {
+      margin-left: -1600px;
+    }
+  }
+
+  @keyframes swell {
+    0%,
+    100% {
+      transform: translate3d(0, -25px, 0);
+    }
+    50% {
+      transform: translate3d(0, 10px, 0);
+    }
   }
 }
 .hero4 {
