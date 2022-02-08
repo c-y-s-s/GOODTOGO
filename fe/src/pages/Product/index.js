@@ -15,17 +15,8 @@ const Product = () => {
 
   useEffect(() => {
     let getProducts = async () => {
-<<<<<<< HEAD
-      let productsResponse = await axios.get(
-        `http://localhost:3002/api/products/${storeId}`
-      );
-      let storeResponse = await axios.get(
-        `http://localhost:3002/api/stores/${storeId}`
-      );
-=======
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
->>>>>>> ee19471 (style - 切版商品卡片)
       // console.log("productsData", productsResponse.data);
       // console.log("setStoreData", storeResponse.data);
       setData(productsResponse.data);
