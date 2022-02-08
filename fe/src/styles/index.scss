@@ -13,9 +13,8 @@ $footer-height: 15.063rem;
 #root {
   width: 100vw;
   overflow: hidden;
-  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
-    "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
+    "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 // @mixin lg {
 //   @media (min-width: 1441px) {
@@ -249,3 +248,66 @@ footer {
     box-sizing: border-box;
   }
 }
+
+.storeLogo {
+  height: 300px;
+  position: relative;
+  overflow: hidden;
+  .storeLogoImg {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.store-data {
+  margin-top: 4rem;
+  color: $color-darkGrey;
+  .storeDataLeft {
+    h1 {
+      font-size: 1.75rem;
+      font-weight: 500;
+    }
+    p {
+      font-weight: 400;
+    }
+  }
+
+  .store-map {
+    border: 1px solid black;
+    width: 665px;
+    height: 286px;
+    margin-left: 5rem;
+    flex: 1 0 0;
+  }
+}
+
+.horizontalBar {
+  div {
+    margin-top: 5rem;
+    background-color: $color-green;
+    padding: 1.03rem;
+  }
+}
+
+.canopy {
+  ul {
+    list-style: none;
+    padding-left: 0;
+    li {
+      padding: 1.85rem 1.35rem;
+      background-color: $color-canopy-dominant;
+      border-radius: 0 0 1.2rem 1.2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    li:nth-child(even) {
+      background-color: $color-canopy-Subtone;
+    }
+  }
+}
+// @import "./product_storedata.scss";
