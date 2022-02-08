@@ -1,7 +1,17 @@
-import React from 'react';
+import React from "react";
 
 const Login = () => {
-  return <div>這是登入頁</div>;
+  return (
+    <>
+      <div
+        className="LoginMain d-flex"
+        style={{ height: "897px", margin: "3% 10%" }}
+      >
+        <content className="col-10"></content>
+        <sidebar className="col-2"></sidebar>
+      </div>
+    </>
+  );
 };
 
 export default Login;

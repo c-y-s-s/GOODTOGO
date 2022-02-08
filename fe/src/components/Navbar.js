@@ -2,13 +2,15 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEnvironment } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
+import { RiUserSmileLine } from "react-icons/ri";
+
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-const Navbar = () => {
+const Navbar = ({ auth }) => {
   return (
     <nav className="navbar navbar-expand shadow">
       <div className="nav container-fluid">
@@ -41,8 +43,17 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
-            <Link to="/member" className="navIcon">
-              <BiUserCircle />
+            <Link to="/login" className="navIcon">
+              {auth ? (
+                <>
+                  <RiUserSmileLine className="me-2" /> 登出
+                </>
+              ) : (
+                <>
+                  <BiUserCircle className="me-2" />
+                  登入
+                </>
+              )}
             </Link>
           </li>
           <li>
