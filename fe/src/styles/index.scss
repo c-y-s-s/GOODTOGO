@@ -51,6 +51,7 @@ $footer-height: 241px;
   height: 755px;
   .hero1bg {
     z-index: 1;
+    width: 100vw;
   }
   .drop-shadow {
     -webkit-filter: drop-shadow(3px 3px 2px $color-darkGrey);
@@ -123,12 +124,16 @@ $footer-height: 241px;
       margin-bottom: 68.4px;
     }
   }
-  .hero3earth {
-    z-index: 2000;
+  .hero3Earth {
+    position: absolute;
+    top: 3164px;
+    left: 115px;
+    z-index: 11;
   }
   .wave {
     width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+    z-index: 100;
     .waveA {
       position: absolute;
       background-image: url(../pages/Home/images/waveA.svg);

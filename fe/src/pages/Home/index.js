@@ -55,13 +55,15 @@ const Home = () => {
           </div>
           <div className="hero3food" />
         </div>
+
         <div className="wave">
           <div className="waveA" />
           <div className="waveA" />
           <div className="waveA" />
-          {/* <WaveA /> */}
           <WaveB className="waveB" />
         </div>
+        <Hero3Tower />
+        <Hero3Earth className="hero3Earth" />
       </div>
       <div className="hero4"></div>
     </div>
