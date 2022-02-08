@@ -1,0 +1,39 @@
+$color-green: #668c4a;
+$color-lightGreen: #a6bf4b;
+$color-light: #f2f0d5;
+
+$color-yellow: #f2c53d;
+$color-darkYellow: #f9af08;
+
+$color-grey: #b1b1ac;
+$color-darkGrey: #666666;
+$color-lightGrey: #d3d3d3;
+
+$color-black: #262626;
+
+$color-red: #9b1313;
+$color-lightRed: #c80000;
+
+$text-sm: 0.75rem; //12px
+$text-sm-sm: 0.8125rem; //13px
+$text-sm: 0.875rem; //14px
+$text-md: 0.9375rem; //15px
+$text-lg: 1rem; //16px
+
+$font-family: "Noto Sans TC", sans-serif;
+
+.font {
+  font-family: $font-family;
+}
+
+.leftMenu {
+  .headShot {
+    height: 5rem;
+    width: 5rem;
+    border: 1px solid $color-lightGrey;
+    border-radius: 50%;
+  }
+}
+
+p {
+}
