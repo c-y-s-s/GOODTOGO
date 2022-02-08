@@ -7,7 +7,10 @@ $color-darkGrey: #666666;
 $navbar-height: 100px;
 $navbar-link-txt: 1rem;
 $footer-height: 241px;
-
+#root {
+  width: 100vw;
+  overflow: hidden;
+}
 .navbar {
   background-color: white;
   height: $navbar-height;
@@ -47,14 +50,14 @@ $footer-height: 241px;
 .hero1 {
   height: 755px;
   .hero1bg {
-    z-index: 1000;
+    z-index: 1;
   }
   .drop-shadow {
     -webkit-filter: drop-shadow(3px 3px 2px $color-darkGrey);
     filter: drop-shadow(3px 3px 2px $color-darkGrey);
   }
   .hero1Text {
-    z-index: 1;
+    z-index: 3;
     position: absolute;
     top: 200px;
     left: 203.5px;
@@ -64,13 +67,13 @@ $footer-height: 241px;
   }
   .hero-actionBtn {
     .hero1TextGo {
-      z-index: 2;
+      z-index: 4;
       position: absolute;
       top: 356px;
       right: 268.88px;
     }
     .hero1TextArrow {
-      z-index: 3;
+      z-index: 4;
       position: absolute;
       top: 371.51px;
       right: 212px;
@@ -119,58 +122,55 @@ $footer-height: 241px;
     .hero3Text {
       margin-bottom: 68.4px;
     }
-    .hero3earth {
-      z-index: 2;
-    }
   }
-  .ocean {
-    height: 10%;
-    width: 100%;
-
-    position: absolute;
-    top: 2835.15px;
-    // bottom: 0;
-    // left: 0;
-    background: transparent;
-    z-index: 990;
+  .hero3earth {
+    z-index: 2000;
   }
-
   .wave {
-    background-image: url(../pages/Home/images/waveTest.svg);
-    position: absolute;
-    top: -120px;
-    width: 14400px;
+    width: 100vw;
     overflow: hidden;
-    height: 1049.85px;
-    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) infinite;
-    transform: translate3d(0, 0, 0);
-    &:nth-of-type(2) {
-      top: -165px;
-      animation: wave 5s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
-        swell 7s ease -1.25s infinite;
-      opacity: 0.5;
-      z-index: 993;
+    .waveA {
+      position: absolute;
+      background-image: url(../pages/Home/images/waveA.svg);
+      background-repeat: repeat-x;
+      top: 2719.15px;
+      left: 0;
+      right: 0;
+      height: 180px;
+      width: 200%;
+      height: 100%;
+      animation: wave 10s -3s linear infinite;
+      transform: translate3d(0, 0, 0);
+      opacity: 1;
+      &:nth-of-type(2) {
+        bottom: 0;
+        animation: wave 18s linear reverse infinite;
+        opacity: 0.5;
+      }
+      &:nth-of-type(3) {
+        bottom: 0;
+        animation: wave 20s -1s linear infinite;
+        opacity: 0.3;
+      }
     }
-  }
-  @keyframes wave {
-    0% {
-      margin-left: 0;
+    @keyframes wave {
+      0% {
+        transform: translateX(0);
+      }
+      50% {
+        transform: translateX(-25%);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
     }
-    100% {
-      margin-left: -1600px;
-    }
-  }
-
-  @keyframes swell {
-    0%,
-    100% {
-      transform: translate3d(0, -25px, 0);
-    }
-    50% {
-      transform: translate3d(0, 10px, 0);
+    .waveB {
+      position: absolute;
+      top: 2899.15px;
     }
   }
 }
+
 .hero4 {
   height: 726px;
   background-color: $color-yellow;
