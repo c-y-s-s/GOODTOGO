@@ -10,7 +10,7 @@ require("../images/navLogo.png");
 
 const Navbar = () => {
   return (
-    <nav className="navbar navbar-expand shadow sticky-top">
+    <nav className="navbar navbar-expand shadow">
       <div className="nav container-fluid">
         <ul className="navbar-nav">
           <li>
