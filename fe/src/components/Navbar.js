@@ -13,21 +13,23 @@ const Navbar = () => {
     <nav className="navbar navbar-expand shadow">
       <div className="nav container-fluid">
         <ul className="navbar-nav">
-          <li>
-            <img
-              className="navLogo navbar-brand"
-              src={require("../images/navLogo.png")}
-              alt="logo"
-            ></img>
-          </li>
+          <Link to="/">
+            <li>
+              <img
+                className="navLogo navbar-brand"
+                src={require("../images/navLogo.png")}
+                alt="logo"
+              ></img>
+            </li>
+          </Link>
           <li className="nav-item">
             <Link to="/about" className="navLink ">
               了解我們
             </Link>
           </li>
           <li className="nav-item ">
-            <Link to="/member" className="navLink">
-              會員中心
+            <Link to="/joinus" className="navLink">
+              申請店家
             </Link>
           </li>
           <li className="nav-item">
@@ -43,7 +45,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/map" className=" navIcon">
+            <Link to="/member" className=" navIcon">
               <BiUserCircle />
             </Link>
           </li>

@@ -132,7 +132,7 @@ $footer-height: 241px;
   }
   .wave {
     width: 100vw;
-    overflow-x: hidden;
+    overflow: hidden;
     z-index: 100;
     .waveA {
       position: absolute;
