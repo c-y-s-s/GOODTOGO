@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-
+import { API_URL } from "../../utils/config";
+import "./styles/product.scss";
 const Product = () => {
   const [error, setError] = useState(null);
 
@@ -14,12 +15,17 @@ const Product = () => {
 
   useEffect(() => {
     let getProducts = async () => {
+<<<<<<< HEAD
       let productsResponse = await axios.get(
         `http://localhost:3002/api/products/${storeId}`
       );
       let storeResponse = await axios.get(
         `http://localhost:3002/api/stores/${storeId}`
       );
+=======
+      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
+      let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
+>>>>>>> ee19471 (style - 切版商品卡片)
       // console.log("productsData", productsResponse.data);
       // console.log("setStoreData", storeResponse.data);
       setData(productsResponse.data);
@@ -29,7 +35,7 @@ const Product = () => {
   }, []);
 
   const canopyTotal = Array.from({ length: 30 });
-
+  console.log(data);
   return (
     <div>
       {storeData.map((item) => {
@@ -80,6 +86,50 @@ const Product = () => {
             return <li></li>;
           })}
         </ul>
+
+        <div class="product-button text-center">
+          <button type="button" class="btn  ">
+            餐點
+          </button>
+          <button type="button" class="btn  ">
+            評論
+          </button>
+        </div>
+
+        <div class="container">
+          <div className="row cards">
+            {data.map((item) => {
+              return (
+                <div
+                  className="col-12 col-md-6 col-lg-3 product-card "
+                  style={{ width: `18rem` }}
+                >
+                  <div class="card m-0 ">
+                    <div class="d-flex product-card-text">
+                      <div class="time-text">
+                        時間倒數<span>02:56:33</span>
+                      </div>
+                      <div class="amount-text">剩餘{item.amount}</div>
+                    </div>
+                    <div class="product-img ratio ratio-4x3 ">
+                      <img
+                        class=" cover-fit"
+                        src={require(`../../images/products_img/${item.img}`)}
+                        alt="商品"
+                      />
+                    </div>
+                    <div class="card-body">
+                      <div class="card-title">{item.name}</div>
+                      <div class="card-star">評價的部分</div>
+                      <div class="card-text">{item.description}</div>
+                      <div class="text-end "> NT$ {item.price}</div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
       </div>
     </div>
   );
