@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import { AiOutlineEnvironment } from "react-icons/ai";
 import { BiUserCircle } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
+import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-require("../images/navLogo.png");
 
 const Navbar = () => {
   return (
@@ -15,19 +15,15 @@ const Navbar = () => {
         <ul className="navbar-nav">
           <Link to="/">
             <li>
-              <img
-                className="navLogo navbar-brand"
-                src={require("../images/navLogo.png")}
-                alt="logo"
-              ></img>
+              <Logo className="navLogo" />
             </li>
           </Link>
-          <li className="nav-item">
+          <li className="nav-item ms-5">
             <Link to="/about" className="navLink ">
               了解我們
             </Link>
           </li>
-          <li className="nav-item ">
+          <li className="nav-item">
             <Link to="/joinus" className="navLink">
               申請店家
             </Link>
@@ -38,18 +34,18 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <ul className="navbar-nav ">
-          <li className="nav-item  ">
-            <Link to="/map" className=" navIcon">
+        <ul className="navbar-nav">
+          <li className="navIcons">
+            <Link to="/map" className="navIcon">
               <AiOutlineEnvironment />
             </Link>
           </li>
-          <li className="nav-item">
-            <Link to="/member" className=" navIcon">
+          <li>
+            <Link to="/member" className="navIcon">
               <BiUserCircle />
             </Link>
           </li>
-          <li className="nav-item">
+          <li>
             <Link to="/cart" className=" navIcon">
               <BsBag />
             </Link>

@@ -1,16 +1,32 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap");
 $color-green: #668c4a;
 $color-lightGreen: #a6bf4b;
 $color-light: #f2f0d5;
 $color-yellow: #f2c53d;
 $color-grey: #b1b1ac;
 $color-darkGrey: #666666;
-$navbar-height: 100px;
+$navbar-height: 6.25rem;
 $navbar-link-txt: 1rem;
-$footer-height: 241px;
+$nav-icon: 1.5rem;
+$footer-height: 15.063rem;
+
 #root {
   width: 100vw;
   overflow: hidden;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+    "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
 }
+// @mixin lg {
+//   @media (min-width: 1441px) {
+//     @content;
+//   }
+// }
+// @mixin sm {
+//   @media (min-width: 1441px) {
+//     @content;
+//   }
+// }
 .navbar {
   background-color: white;
   height: $navbar-height;
@@ -22,7 +38,7 @@ $footer-height: 241px;
       justify-content: center;
       align-items: center;
       .navLogo {
-        height: 40px;
+        height: 2.5rem;
         margin: 0 88px 0 0;
       }
       .nav-item {
@@ -34,44 +50,51 @@ $footer-height: 241px;
           text-decoration: none;
           justify-content: center;
         }
-        .navIcon {
+        .navIcons {
+          margin: 1rem;
           color: $color-darkGrey;
-          margin-left: 23px;
+          .navIcon {
+            font-size: $nav-icon;
+            color: $color-darkGrey;
+            margin: 3rem;
+          }
         }
       }
     }
   }
 }
 .hero-text-sm {
-  font-size: 20px;
-  line-height: 29px;
-  letter-spacing: 2px;
+  font-size: 1.25rem;
+  line-height: 1.813rem;
+  letter-spacing: 0.125rem;
 }
 .hero1 {
-  height: 755px;
+  margin: auto;
   .hero1bg {
     z-index: 1;
     width: 100vw;
   }
   .drop-shadow {
-    -webkit-filter: drop-shadow(3px 3px 2px $color-darkGrey);
-    filter: drop-shadow(3px 3px 2px $color-darkGrey);
+    -webkit-filter: drop-shadow(0.188rem 0.188rem 0.125rem $color-darkGrey);
+    filter: drop-shadow(0.188rem 0.188rem 2px $color-darkGrey);
   }
   .hero1Text {
-    z-index: 3;
     position: absolute;
-    top: 200px;
-    left: 203.5px;
-    width: 1033px;
-    height: 227.02px;
+    top: 0;
+    left: 0;
+    margin: 14% 8% 5%;
+    z-index: 50;
+    padding: 0 2%;
+    width: 86vw;
+    // height: 227.02px;
     fill: white;
   }
   .hero-actionBtn {
     .hero1TextGo {
       z-index: 4;
       position: absolute;
-      top: 356px;
-      right: 268.88px;
+      top: 47%;
+      right: 16.805rem;
     }
     .hero1TextArrow {
       z-index: 4;

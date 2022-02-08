@@ -1,5 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+// --------引用圖片--------
 import { ReactComponent as Hero1Text } from "./images/hero1Text.svg";
 import { ReactComponent as Hero1TextGo } from "./images/hero1TextGo.svg";
 import { ReactComponent as Hero1TextArrow } from "./images/hero1TextArrow.svg";
@@ -18,16 +20,16 @@ const Home = () => {
   return (
     <div>
       <div className="hero1">
-        <Hero1Text className="hero1Text drop-shadow" />
-        <Link to="/store" className="hero-actionBtn">
-          <Hero1TextGo className="hero1TextGo drop-shadow " />
-          <Hero1TextArrow className="hero1TextArrow drop-shadow " />
-        </Link>
         <img
           src={require("./images/hero1.png")}
           alt="hero1"
           className="hero1bg"
         ></img>
+        <Hero1Text className="hero1Text drop-shadow" />
+        <Link to="/store" className="hero-actionBtn">
+          <Hero1TextGo className="hero1TextGo drop-shadow " />
+          <Hero1TextArrow className="hero1TextArrow drop-shadow " />
+        </Link>
       </div>
 
       <div className="hero2 d-flex">

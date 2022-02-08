@@ -1,16 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 const Footer = () => {
   return (
     <footer>
       <div className="footerSec1 d-flex ">
         <div>
-          <img
-            src={require("../images/navLogo.png")}
-            alt="logo"
-            className="footerIcon"
-          ></img>
+          <Logo />
         </div>
         <div className="p-0">
           <span className="align-middle">Tel: 03-000-1234</span>
