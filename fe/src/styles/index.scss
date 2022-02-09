@@ -13,6 +13,7 @@ $color-light-grey: #d3d3d3;
 $color-dark-grey: #666666;
 $color-black: #262626;
 
+
 // -------- font-size 文字大小 --------
 $fz-ss-sm: 12 / 16 + rem; // 12px
 $fz-s-sm: 13 / 16 + rem; // 13px
@@ -22,6 +23,7 @@ $fz-lg: 1rem; // 16px
 $fz-x-lg: 17 / 16 + rem; // 17px
 $fz-xx-lg: 18 / 16 + rem; // 18px
 $fz-xxx-lg: 20 / 16 + rem; // 20px
+
 
 // -------- letter-spacing 文字間距 --------
 $ls-sm: 0.05rem; // 1px
@@ -48,3 +50,5 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   font-size: $fz-lg;
   font-weight: $fw-medium;
 }
+
+// @import "./product_storedata.scss";
