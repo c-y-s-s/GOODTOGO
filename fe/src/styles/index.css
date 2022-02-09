@@ -319,6 +319,7 @@ footer .footerSec2 {
 .store-data {
   margin-top: 4rem;
   color: #666666;
+  height: 100%;
 }
 
 .store-data .storeDataLeft h1 {
@@ -332,18 +333,19 @@ footer .footerSec2 {
 
 .store-data .store-map {
   border: 1px solid black;
-  width: 665px;
-  height: 286px;
-  margin-left: 5rem;
-  -webkit-box-flex: 1;
-      -ms-flex: 1 0 0px;
-          flex: 1 0 0;
+  height: 100%;
 }
 
 .horizontalBar div {
   margin-top: 5rem;
   background-color: #668c4a;
   padding: 1.03rem;
+}
+
+.horizontalBarBottom div {
+  margin-top: 7rem;
+  background-color: #668c4a;
+  padding: 2.65rem 0;
 }
 
 .canopy ul {
@@ -366,7 +368,6 @@ footer .footerSec2 {
 .product-button button {
   color: #668c4a;
   margin-top: 4.7rem;
-  margin-left: 2rem;
   border: 1px solid #668c4a;
   border-radius: 0;
   padding: 0.4rem 2.9rem;
@@ -386,9 +387,9 @@ footer .footerSec2 {
   border-top: 0.54rem solid #f2c53d;
   border-bottom: 0.54rem solid #f2c53d;
   border-radius: 0.4rem;
-  -webkit-transition: 0.3s;
-  transition: 0.3s;
-  margin-left: 2.2rem;
+  -webkit-transition: 0.38s;
+  transition: 0.38s;
+  margin-left: 2.22rem;
 }
 
 .product-card .card {
@@ -422,11 +423,22 @@ footer .footerSec2 {
   padding: 0.125rem 0.5rem;
 }
 
-.product-card .cover-fit {
+.product-card .product-img {
+  overflow: hidden;
+}
+
+.product-card .product-img .cover-fit {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
+  -webkit-transition: all 0.45s ease;
+  transition: all 0.45s ease;
+}
+
+.product-card .product-img .cover-fit:hover {
+  -webkit-transform: scale(1.15);
+          transform: scale(1.15);
 }
 
 .product-card .card-body {
@@ -455,10 +467,14 @@ footer .footerSec2 {
 }
 
 .product-card:hover {
-  -webkit-transform: translateY(-1.3rem);
-          transform: translateY(-1.3rem);
+  -webkit-transform: translateY(-1.1rem);
+          transform: translateY(-1.1rem);
   -webkit-box-shadow: 0rem 1rem 1rem #ccc;
           box-shadow: 0rem 1rem 1rem #ccc;
+}
+
+.product-card:nth-child(-n + 5) {
+  margin-top: 0rem;
 }
 
 @media screen and (max-width: 1400px) {
@@ -466,6 +482,9 @@ footer .footerSec2 {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  .product-card:nth-child(-n + 5) {
+    margin-top: 4.95rem;
   }
 }
 /*# sourceMappingURL=index.css.map */
