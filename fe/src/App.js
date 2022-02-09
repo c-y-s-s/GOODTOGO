@@ -17,7 +17,7 @@ import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-
+import ProductComment from "../src/pages/Productcomment" 
 function App() {
   const [auth, setAuth] = useState(false);
   return (
@@ -29,7 +29,10 @@ function App() {
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId" element={<Product />}></Route>
-        <Route path="/productcomment/:storeId" element={<Product />}></Route>
+        <Route
+          path="/productcomment/:storeId"
+          element={<ProductComment />}
+        ></Route>
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
