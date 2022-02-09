@@ -10,6 +10,7 @@ import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
 import Store from "./pages/Store";
+import StoreBg from "./pages/Storebg";
 import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
@@ -30,6 +31,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/storebg" element={<StoreBg />}></Route>
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId" element={<Product />}></Route>
