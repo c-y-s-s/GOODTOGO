@@ -335,18 +335,6 @@ footer .footerSec2 {
   height: 270px;
 }
 
-.horizontalBar div {
-  margin-top: 5rem;
-  background-color: #668c4a;
-  padding: 1.03rem;
-}
-
-.horizontalBarBottom div {
-  margin-top: 7rem;
-  background-color: #668c4a;
-  padding: 2.65rem 0;
-}
-
 .canopy ul {
   list-style: none;
   padding-left: 0;
@@ -364,7 +352,7 @@ footer .footerSec2 {
   background-color: #9b1313;
 }
 
-.product-button button {
+.product-button a {
   color: #668c4a;
   margin-top: 4.7rem;
   margin-left: 1.45rem;
@@ -374,7 +362,7 @@ footer .footerSec2 {
   font-size: 1.2rem;
 }
 
-.product-button button:hover {
+.product-button a:hover {
   color: #fff;
   background: #668c4a;
 }
@@ -400,7 +388,7 @@ footer .footerSec2 {
 
 .product-card .card .product-card-text {
   padding: 1.25rem 0 0.75rem 0;
-  letter-spacing: 0.22rem;
+  letter-spacing: 0.16rem;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -498,5 +486,17 @@ footer .footerSec2 {
   .product-card:nth-child(2) {
     margin: 0;
   }
+}
+
+.horizontalBar div {
+  margin-top: 5rem;
+  background-color: #668c4a;
+  padding: 1.03rem;
+}
+
+.horizontalBarBottom div {
+  margin-top: 7rem;
+  background-color: #668c4a;
+  padding: 2.65rem 0;
 }
 /*# sourceMappingURL=index.css.map */
