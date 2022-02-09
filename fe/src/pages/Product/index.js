@@ -2,7 +2,15 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
-import "./styles/product.scss";
+
+// -------- 引入元件區塊 --------
+import StoreLogo from "./component/StoreLogo";
+import StoreDetails from "./component/StoreDetails";
+import StoreCanopy from "./component/StoreCanopy";
+import Storebutton from "./component/Storebutton";
+import StoreCard from "./component/StoreCard";
+// -------- 引入元件區塊結束 --------
+
 const Product = () => {
   const [error, setError] = useState(null);
 
@@ -13,146 +21,55 @@ const Product = () => {
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
+  //串接後端API
   useEffect(() => {
     let getProducts = async () => {
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
-      // console.log("productsData", productsResponse.data);
-      // console.log("setStoreData", storeResponse.data);
       setData(productsResponse.data);
       setStoreData(storeResponse.data);
     };
     getProducts();
   }, []);
 
+  // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
-  console.log(data);
+
   return (
     <div>
+      {/* -------- 商家Logo、詳細資訊區塊 -------- */}
       {storeData.map((item) => {
         return (
           <div>
-            <div class="container-fluid p-0">
-              <div class="storeLogo">
-                <img
-                  class="w-100 storeLogoImg"
-                  src={require(`../../images/store_img/${item.logo}`)}
-                  alt=""
-                />
-              </div>
-            </div>
-            <div class="container store-data">
-              <div class="row">
-                <div className="col-12 col-md-6 col-lg-4">
-                  <div class="storeDataLeft">
-                    <h1>{item.name}</h1>
-                    <div class="d-flex">
-                      <p>分類</p>
-                      <p>星星</p>
-                      <p>愛心</p>
-                    </div>
-                    <p>{item.address}</p>
-                    <div>
-                      <p>營業日</p>
-                      <p>顯示營業中非營業中</p>
-                    </div>
-                    <p>{item.tel_no}</p>
-                    <p>店家介紹 : Lorem ipsum, dolor sit amet consectetur</p>
-                  </div>
-                </div>
-                <div className="col-12 col-md-6 col-lg-8 h-100">
-                  <div class="store-map">
-                    <p class="">google地圖</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <StoreLogo logo={item.logo} />
+            <StoreDetails
+              name={item.name}
+              address={item.address}
+              tel={item.tel_no}
+            />
           </div>
         );
       })}
+      {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
+      {/* -------- 綠色裝飾橫條小條的 --------*/}
       <div className="container-fluid p-0 horizontalBar">
         <div></div>
       </div>
 
-      {/* 遮雨棚區塊 */}
-      <div className="container canopy">
-        <ul class="d-flex">
-          {canopyTotal.map((item) => {
-            return <li></li>;
-          })}
-        </ul>
-
-        <div class="product-button text-center">
-          <button type="button" class="btn">
-            餐點
-          </button>
-          <button type="button" class="btn">
-            評論
-          </button>
-        </div>
-
-        <div class="container">
-          <div className="row cards">
-            <div className="text-center text-md-end py-4">共 6 樣商品</div>
-            {data.map((item) => {
-              return (
-                <div
-                  className="col-12 col-md-6 col-lg-3 product-card "
-                  style={{ width: `18rem` }}
-                >
-                  <div class="card m-0 ">
-                    <div class="d-flex product-card-text">
-                      <div class="time-text">
-                        時間倒數<span>02:56:33</span>
-                      </div>
-                      <div class="amount-text">剩餘{item.amount}</div>
-                    </div>
-                    <div class="product-img ratio ratio-4x3 ">
-                      <img
-                        class=" cover-fit"
-                        src={require(`../../images/products_img/${item.img}`)}
-                        alt="商品"
-                      />
-                    </div>
-                    <div class="card-body">
-                      <div class="card-title">{item.name}</div>
-                      <div class="card-star">評價的部分</div>
-                      <div class="card-text">{item.description}</div>
-                      <div class="text-end "> NT$ {item.price}</div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+      <div className="container">
+        {/* 遮雨棚區塊 */}
+        <StoreCanopy canopy={canopyTotal} />
+        {/* 餐點、評論按鈕 */}
+        <Storebutton />
       </div>
+
+      <StoreCard data={data} />
+      {/* -------- 綠色裝飾橫條大條的 --------*/}
       <div className="container-fluid p-0  horizontalBarBottom">
         <div></div>
       </div>
     </div>
   );
 };
-
 export default Product;
-
-{
-  /* <div>
-            <ul class=" ms-5 list-unstyled">
-              <li>name : {item.name}</li>
-              <li>
-                <img
-                  src={require(`../../images/products_img/${item.img}`)}
-                  alt=""
-                />
-              </li>
-              <li>price : {item.price}</li>
-              <li>amount : {item.amount}</li>
-              <li>description: {item.description}</li>
-              <li>start_time: {item.start_time}</li>
-              <li>due_time: {item.due_time}</li>
-              <li>created_at: {item.created_at}</li>
-            </ul>
-          </div> */
-}
