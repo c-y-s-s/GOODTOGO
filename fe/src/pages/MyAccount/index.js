@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from "react";
+// import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 import "./myAccount.scss";
+import { User, Clipboard, Gift } from "react-feather";
+import TwCitySelector from "tw-city-selector";
 
 const MyAccount = () => {
   const [data, setData] = useState([]);
+
+  // -------- 地址選擇器 --------
+  new TwCitySelector({
+    el: ".city-selector-standard-words",
+    elCounty: ".county", // 在 el 裡查找 element
+    elDistrict: ".district", // 在 el 裡查找 element
+    elZipcode: ".zipcode", // 在 el 裡查找 element
+    standardWords: true, // 使用正體字 臺
+  });
 
   useEffect(() => {
     // http://localhost:3002/api/users
@@ -24,16 +36,132 @@ const MyAccount = () => {
     // </div>
 
     <div>
-      {/* <div className="font">test 這樣成功嗎</div> */}
-      <div className="container">
+      <div className="container my-5">
         <div className="row">
           <div className="col-lg-2">
-            <div className="leftMenu">
+            <div className="user_Info d-flex align-items-center mb-5">
               <div className="headShot"></div>
-              <p>王xx</p>
+              <p className="ms-4 mb-0">王小明</p>
+            </div>
+            <div className="user_Menu">
+              <ul className="list-unstyled">
+                <li>
+                  <User className="menu_Icon" />
+                  <span className="menu_Text">我的帳戶</span>
+                  <ul className="list-unstyled ms-4">
+                    <li>會員資料修改</li>
+                    <li>信用卡資訊</li>
+                    <li>店家收藏清單</li>
+                  </ul>
+                </li>
+                <li>
+                  <Clipboard className="menu_Icon" />
+                  <span className="menu_Text">我的訂單</span>
+                </li>
+                <li>
+                  <Gift className="menu_Icon" />
+                  <span className="menu_Text">優惠券</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="col-lg-10">456</div>
+          <div className="col-lg-10">
+            <div>會員資料修改</div>
+            <hr></hr>
+            {/* -------- 會員資料表單開始 -------- */}
+            <form>
+              <div className="row">
+                {/* -------- 表單左 -------- */}
+                <div className="col-lg-7 form_Text">
+
+                  <div className="my-4">
+                    <div className="d-flex align-items-center text-nowrap">
+                      <label htmlFor="name" className="col-sm-2">
+                        姓名
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        className="form-control"
+                        // value=""
+                        placeholder="中文 / 英文姓名"
+                      />
+                    </div>
+                    <div className="error text-danger text-end"></div>
+                  </div>
+
+                  <div className="my-4">
+                    <div className="d-flex align-items-center text-nowrap">
+                      <label htmlFor="email" className="col-sm-2">
+                        電子信箱
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        className="form-control"
+                        // value=""
+                        placeholder="name@example.com"
+                      />
+                    </div>
+                    <div className="error text-danger text-end"></div>
+                  </div>
+
+                  <div className="my-4">
+                    <div className="d-flex align-items-center text-nowrap">
+                      <label htmlFor="password" className="col-sm-2">
+                        密碼
+                      </label>
+                      <input
+                        id="password"
+                        type="password"
+                        name="password"
+                        className="form-control"
+                        value="123233434"
+                        disabled
+                      />
+                    </div>
+                    <div className="error text-danger text-end"></div>
+                  </div>
+
+                  <div className="my-4">
+                    <div className="d-flex align-items-center text-nowrap">
+                      <label htmlFor="phone" className="col-sm-2">
+                        手機號碼
+                      </label>
+                      <input
+                        id="phone"
+                        type="phone"
+                        name="phone"
+                        className="form-control"
+                        // value=""
+                        placeholder="09xxxxxxxx"
+                      />
+                    </div>
+                    <div className="error text-danger text-end"></div>
+                  </div>
+
+                  <div className="my-4">
+                    <label htmlFor="address">地址</label>
+                    <div className="d-inline">
+                      <div className="city-selector-standard-words d-inline">
+                        <select className="county form-select"></select>
+                        <select className="district form-select"></select>
+                      </div>
+                    </div>
+                    <div className="my-2">
+                      <input className="d-block" type="text" name="address" />
+                    </div>
+                  </div>
+                  <button type="submit">儲存</button>
+                </div>
+                {/* -------- 表單右 -------- */}
+                <div className="col-lg-5">aaa</div>
+              </div>
+            </form>
+            {/* -------- 會員資料表單結束 -------- */}
+          </div>
         </div>
       </div>
     </div>
