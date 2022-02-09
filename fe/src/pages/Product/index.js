@@ -42,24 +42,28 @@ const Product = () => {
               </div>
             </div>
             <div class="container store-data">
-              <div class="d-flex">
-                <div class="storeDataLeft">
-                  <h1>{item.name}</h1>
-                  <div class="d-flex">
-                    <p>分類</p>
-                    <p>星星</p>
-                    <p>愛心</p>
+              <div class="row">
+                <div className="col-12 col-md-6 col-lg-4">
+                  <div class="storeDataLeft">
+                    <h1>{item.name}</h1>
+                    <div class="d-flex">
+                      <p>分類</p>
+                      <p>星星</p>
+                      <p>愛心</p>
+                    </div>
+                    <p>{item.address}</p>
+                    <div>
+                      <p>營業日</p>
+                      <p>顯示營業中非營業中</p>
+                    </div>
+                    <p>{item.tel_no}</p>
+                    <p>店家介紹 : Lorem ipsum, dolor sit amet consectetur</p>
                   </div>
-                  <p>{item.address}</p>
-                  <div>
-                    <p>營業日</p>
-                    <p>顯示營業中非營業中</p>
-                  </div>
-                  <p>{item.tel_no}</p>
-                  <p>店家介紹 : Lorem ipsum, dolor sit amet consectetur</p>
                 </div>
-                <div class="store-map">
-                  <p class="">google地圖</p>
+                <div className="col-12 col-md-6 col-lg-8 h-100">
+                  <div class="store-map">
+                    <p class="">google地圖</p>
+                  </div>
                 </div>
               </div>
             </div>
@@ -71,6 +75,7 @@ const Product = () => {
         <div></div>
       </div>
 
+      {/* 遮雨棚區塊 */}
       <div className="container canopy">
         <ul class="d-flex">
           {canopyTotal.map((item) => {
@@ -79,16 +84,17 @@ const Product = () => {
         </ul>
 
         <div class="product-button text-center">
-          <button type="button" class="btn  ">
+          <button type="button" class="btn">
             餐點
           </button>
-          <button type="button" class="btn  ">
+          <button type="button" class="btn">
             評論
           </button>
         </div>
 
         <div class="container">
           <div className="row cards">
+            <div className="text-center text-md-end py-4">共 6 樣商品</div>
             {data.map((item) => {
               return (
                 <div
@@ -121,6 +127,9 @@ const Product = () => {
             })}
           </div>
         </div>
+      </div>
+      <div className="container-fluid p-0  horizontalBarBottom">
+        <div></div>
       </div>
     </div>
   );

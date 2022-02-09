@@ -22,6 +22,7 @@
 .store-data {
     margin-top: 4rem;
     color: $color-darkGrey;
+
     .storeDataLeft {
         h1 {
             font-size: 1.75rem;
@@ -36,20 +37,30 @@
     //-------- 地圖 -------
     .store-map {
         border: 1px solid black;
-        width: 665px;
-        height: 286px;
-        margin-left: 5rem;
-        flex: 1 0 0;
+        // width: 665px;
+        // height: 286px;
+        height: 270px;
     }
 }
 //-------- 地圖結束 -------
 
 //-------- 綠色橫條裝飾線 -------
+
+//上面
 .horizontalBar {
     div {
         margin-top: 5rem;
         background-color: $color-green;
         padding: 1.03rem;
+    }
+}
+
+//下面
+.horizontalBarBottom {
+    div {
+        margin-top: 7rem;
+        background-color: $color-green;
+        padding: 2.65rem 0;
     }
 }
 //-------- 綠色橫條裝飾線結束 -------
@@ -78,7 +89,7 @@
     button {
         color: $color-green;
         margin-top: 4.7rem;
-        margin-left: 2rem;
+        margin-left: 1.45rem;
         border: 1px solid $color-green;
         border-radius: 0;
         padding: 0.4rem 2.9rem;
@@ -87,6 +98,10 @@
             color: #fff;
             background: $color-green;
         }
+
+        // &:nth-child(2) {
+        //     margin-left: 0.75rem;
+        // }
     }
 }
 // -------- 餐點、評論按鈕結束 --------
@@ -101,8 +116,7 @@
     border-bottom: 0.54rem solid #f2c53d;
     border-radius: 0.4rem;
     transition: 0.38s;
-    margin-left: 2.2rem;
-
+    margin-left: 2.22rem;
     // card 上下底線
     .card {
         border-bottom: 0.8rem;
@@ -173,6 +187,20 @@
         transform: translateY(-1.1rem);
         box-shadow: 0rem 1rem 1rem #ccc;
     }
+    // &:nth-child(4n + 5) {
+    //     margin-left: 2.95rem;
+    // }
+
+    // &:nth-child(4n + 4) {
+    //     margin-left: 2.95rem;
+    // }
+    // &:nth-child(4n + 3) {
+    //     margin-left: 2.95rem;
+    // }
+
+    &:nth-child(-n + 5) {
+        margin-top: 0rem;
+    }
 }
 // -------- 商品卡片結束 --------
 
@@ -180,5 +208,20 @@
 @media screen and (max-width: 1400px) {
     .cards {
         justify-content: center;
+    }
+    .product-card:nth-child(-n + 5) {
+        margin-top: 4.95rem;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .store-map {
+        margin-top: 1.8rem;
+    }
+    .product-card {
+        margin: 1.5rem 0rem;
+    }
+    .product-card:nth-child(2) {
+        margin: 0;
     }
 }
