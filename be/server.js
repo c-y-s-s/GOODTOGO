@@ -25,6 +25,11 @@ let productsRouter = require("./routers/products");
 app.use("/api/products", productsRouter);
 // -------- 商品 RESTful API 列表 結束 --------
 
+// :TODO: -------- 商品評論 RESTful API 列表 --------
+let productsCommitRouter = require("./routers/productsCommit");
+app.use("/api/productscommit", productsCommitRouter);
+// -------- 商品評論 RESTful API 列表 結束 --------
+
 // :TODO: -------- 會員 RESTful API 列表 --------
 let memberRouter = require("./routers/member");
 app.use("/api/users", memberRouter);
