@@ -1,0 +1,184 @@
+@import "../../../styles/color.scss";
+
+//-------- 商家大圖 -------
+.storeLogo {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+    .storeLogoImg {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+}
+//-------- 商家大圖結束 -------
+
+//-------- 商家資料 -------
+.store-data {
+    margin-top: 4rem;
+    color: $color-darkGrey;
+    .storeDataLeft {
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 500;
+        }
+        p {
+            font-weight: 400;
+        }
+    }
+    //-------- 商家資料結束 -------
+
+    //-------- 地圖 -------
+    .store-map {
+        border: 1px solid black;
+        width: 665px;
+        height: 286px;
+        margin-left: 5rem;
+        flex: 1 0 0;
+    }
+}
+//-------- 地圖結束 -------
+
+//-------- 綠色橫條裝飾線 -------
+.horizontalBar {
+    div {
+        margin-top: 5rem;
+        background-color: $color-green;
+        padding: 1.03rem;
+    }
+}
+//-------- 綠色橫條裝飾線結束 -------
+
+//-------- 遮雨棚區塊 -------
+.canopy {
+    ul {
+        list-style: none;
+        padding-left: 0;
+        li {
+            padding: 1.85rem 1.35rem;
+            background-color: $color-canopy-dominant;
+            border-radius: 0 0 1.2rem 1.2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        li:nth-child(even) {
+            background-color: $color-canopy-Subtone;
+        }
+    }
+}
+//-------- 遮雨棚區塊結束 -------
+
+// -------- 餐點、評論按鈕 --------
+
+.product-button {
+    button {
+        color: $color-green;
+        margin-top: 4.7rem;
+        margin-left: 2rem;
+        border: 1px solid $color-green;
+        border-radius: 0;
+        padding: 0.4rem 2.9rem;
+        font-size: 1.2rem;
+        &:hover {
+            color: #fff;
+            background: $color-green;
+        }
+    }
+}
+// -------- 餐點、評論按鈕結束 --------
+
+// -------- 商品卡片 --------
+
+.product-card {
+    padding: 0;
+    margin-top: 4.95rem;
+    box-shadow: 0rem 0rem 1rem #ccc;
+    border-top: 0.54rem solid #f2c53d;
+    border-bottom: 0.54rem solid #f2c53d;
+    border-radius: 0.4rem;
+    transition: 0.38s;
+    margin-left: 2.2rem;
+
+    // card 上下底線
+    .card {
+        border-bottom: 0.8rem;
+        border: none;
+        padding: 0 1.35rem;
+        //上排文字
+        .product-card-text {
+            padding: 1.25rem 0 0.75rem 0;
+            letter-spacing: 0.22rem;
+            justify-content: space-between;
+            //時間倒數
+            .time-text {
+                font-size: 0.88rem;
+                span {
+                    padding-left: 0.45rem;
+                    font-size: 1rem;
+                    color: $color-green;
+                    font-weight: 500;
+                }
+            }
+            //剩餘
+            .amount-text {
+                border-radius: 1rem;
+                background-color: #eaeaea;
+                padding: 0.125rem 0.5rem;
+            }
+        }
+    }
+    // 圖片限制大小置中
+
+    .product-img {
+        overflow: hidden;
+        .cover-fit {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.45s ease;
+            &:hover {
+                transform: scale(1.15);
+            }
+        }
+    }
+
+    // 卡片樣式
+    .card-body {
+        padding: 0;
+        .card-title {
+            padding-top: 0.85rem;
+            font-size: 1.35rem;
+            letter-spacing: 0.22rem;
+            margin: 0;
+        }
+        .card-star {
+            letter-spacing: 0.22rem;
+        }
+        .card-text {
+            padding-top: 0.5rem;
+        }
+        .text-end {
+            padding-top: 0.5rem;
+            padding-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+    }
+
+    // 卡片動畫
+    &:hover {
+        transform: translateY(-1.1rem);
+        box-shadow: 0rem 1rem 1rem #ccc;
+    }
+}
+// -------- 商品卡片結束 --------
+
+// -------- 商品卡片 RWD 樣式 --------
+@media screen and (max-width: 1400px) {
+    .cards {
+        justify-content: center;
+    }
+}
