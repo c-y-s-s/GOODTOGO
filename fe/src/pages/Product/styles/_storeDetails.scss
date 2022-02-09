@@ -1,0 +1,25 @@
+//-------- 商家資料 -------
+.store-data {
+    margin-top: 4rem;
+    color: $color-darkGrey;
+
+    .storeDataLeft {
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 500;
+        }
+        p {
+            font-weight: 400;
+        }
+    }
+    //-------- 商家資料結束 -------
+
+    //-------- 地圖 -------
+    .store-map {
+        border: 1px solid black;
+        // width: 665px;
+        // height: 286px;
+        height: 270px;
+    }
+}
+//-------- 地圖結束 -------
