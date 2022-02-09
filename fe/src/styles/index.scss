@@ -1,99 +1,52 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
+
+// -------- color 顏色區 --------
 $color-green: #668c4a;
-$color-lightGreen: #a6bf4b;
+$color-light-green: #a6bf4b;
 $color-light: #f2f0d5;
 $color-yellow: #f2c53d;
+$color-dark-yellow: #f9af08;
+$color-red: #9b1313;
+$color-light-red: #c80000;
 $color-grey: #b1b1ac;
-$color-darkGrey: #666666;
-$navbar-height: 100px;
-$navbar-link-txt: 1rem;
-$footer-height: 241px;
+$color-light-grey: #d3d3d3;
+$color-dark-grey: #666666;
+$color-black: #262626;
 
-.navbar {
-  background-color: white;
-  height: $navbar-height;
-  font-size: $navbar-link-txt;
-  .nav {
-    margin: 0 150px;
-    padding: 0;
-    .navbar-nav {
-      justify-content: center;
-      align-items: center;
-      .navLogo {
-        height: 40px;
-        margin: 0 88px 0 0;
-      }
-      .nav-item {
-        height: 23px;
-        padding: 0;
-        .navLink {
-          color: $color-darkGrey;
-          margin-right: 50px;
-          text-decoration: none;
-          justify-content: center;
-        }
-        .navIcon {
-          color: $color-darkGrey;
-          margin-left: 23px;
-        }
-      }
-    }
-  }
-}
-.hero2 {
-  height: 726px;
-  background-color: $color-lightGreen;
-}
-.hero3 {
-  height: 2178px;
-  background-color: $color-light;
-}
-.hero4 {
-  height: 726px;
-  background-color: $color-yellow;
-}
-footer {
-  height: $footer-height;
-  .footerSec1 {
-    width: 1140px;
-    margin: 49px auto;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    .footerIcon {
-      height: 40px;
-    }
+// -------- font-size 文字大小 --------
+$fz-ss-sm: 12 / 16 + rem; // 12px
+$fz-s-sm: 13 / 16 + rem; // 13px
+$fz-sm: 14 / 16 + rem; // 14px
+$fz-md: 15 / 16 + rem; // 15px
+$fz-lg: 1rem; // 16px
+$fz-x-lg: 17 / 16 + rem; // 17px
+$fz-xx-lg: 18 / 16 + rem; // 18px
+$fz-xxx-lg: 20 / 16 + rem; // 20px
 
-    span {
-      margin: 0;
-      line-height: 40px;
-      color: $color-darkGrey;
-    }
-    .link-groups {
-      width: 350px;
-      .FooterLink {
-        color: $color-darkGrey;
-        text-decoration: none;
-        padding: 10px 0 10px 30px;
-        justify-content: center;
-        align-items: center;
-        font-size: 14px;
-        line-height: 20.27px;
-      }
-    }
-  }
-  .split {
-    background-color: $color-grey;
-    height: 1px;
-    margin: auto;
-    width: 1140px;
-  }
-  .footerSec2 {
-    width: 1140px;
-    margin: 24px auto;
-    color: $color-grey;
+// -------- letter-spacing 文字間距 --------
+$ls-sm: 0.05rem; // 1px
+$ls-md: 0.1rem; // 1.5px
+$ls-lg: 0.15rem; // 2px
 
-    justify-content: flex-end;
-    align-items: center;
-    box-sizing: border-box;
-  }
+// -------- font-weight 文字粗細 --------
+$fw-thin: 100;
+$fw-regular: 300; // regular
+$fw-medium: 400; // medium
+$fw-bold: 500; // bold
+$fw-black: 700; // black
+
+// -------- font-family 字體 --------
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+
+#root {
+  width: 100vw;
+  overflow: hidden;
+  font-family: $font-family;
+  color: $color-dark-grey;
+  font-size: $fz-lg;
+  font-weight: $fw-medium;
 }
+
+// @import "./product_storedata.scss";
