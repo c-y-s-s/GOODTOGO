@@ -36,7 +36,7 @@ app.use((req, res, next) => {
 });
 
 //引用 env 檔裡的 Port 號 ， 建立 server
-const port = 3001 || 3000;
+const port = process.env.SERVER_PORT || 3000;
 app.listen(port, () => {
   console.log(`Server啟用，運行在 port : ${port}`);
 });
