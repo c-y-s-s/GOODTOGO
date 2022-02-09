@@ -3,10 +3,10 @@ import React from 'react';
 const StoreLogo = ({logo}) => {
   return (
     <div>
-      <div class="container-fluid p-0">
-        <div class="storeLogo">
+      <div className="container-fluid p-0">
+        <div className="storeLogo">
           <img
-            class="w-100 storeLogoImg"
+            className="w-100 storeLogoImg"
             src={require(`../../../images/store_img/${logo}`)}
             alt=""
           />

@@ -1,13 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Storebutton = () => {
+const Storebutton = ({ storeId }) => {
   return (
     <div>
-      <div class="product-button text-center">
-        <Link to="/store/1" className="btn" type="button">
+      <div className="product-button text-center">
+        <Link to={"/store/" + storeId} className="btn" type="button">
           餐點
         </Link>
-        <Link to="/productcomment" className="btn" type="button">
+        <Link to={"/productcomment/" + storeId} className="btn" type="button">
           評論
         </Link>
       </div>

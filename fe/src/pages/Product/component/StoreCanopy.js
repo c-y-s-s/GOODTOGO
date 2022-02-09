@@ -1,12 +1,16 @@
-import React from 'react';
+import React from "react";
 
+let canopyID = 100;
 const StoreCanopy = ({ canopy }) => {
   return (
     <div>
-      <div class="canopy">
-        <ul class="d-flex">
+      <div className="canopy">
+        <ul className="d-flex">
           {canopy.map(() => {
-            return <li></li>;
+            {
+              canopyID++;
+            }
+            return <li key={canopyID}></li>;
           })}
         </ul>
       </div>
