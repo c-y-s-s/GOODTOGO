@@ -1,0 +1,19 @@
+//-------- 綠色橫條裝飾線 -------
+//上面
+.horizontalBar {
+    div {
+        margin-top: 5rem;
+        background-color: $color-green;
+        padding: 1.03rem;
+    }
+}
+
+//下面
+.horizontalBarBottom {
+    div {
+        margin-top: 7rem;
+        background-color: $color-green;
+        padding: 2.65rem 0;
+    }
+}
+//-------- 綠色橫條裝飾線結束 -------
