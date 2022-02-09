@@ -11,7 +11,7 @@ import Register from "../pages/Register";
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand shadow">
-      <div className="nav container-fluid">
+      <div className="nav container">
         <ul className="navbar-nav">
           <Link to="/">
             <li>
