@@ -15,10 +15,10 @@ const Product = () => {
   useEffect(() => {
     let getProducts = async () => {
       let productsResponse = await axios.get(
-        `http://localhost:3001/api/products/${storeId}`
+        `http://localhost:3002/api/products/${storeId}`
       );
       let storeResponse = await axios.get(
-        `http://localhost:3001/api/stores/${storeId}`
+        `http://localhost:3002/api/stores/${storeId}`
       );
       // console.log("productsData", productsResponse.data);
       // console.log("setStoreData", storeResponse.data);
