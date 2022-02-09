@@ -1,15 +1,15 @@
 import React from "react";
-
+import { Link } from "react-router-dom";
 const Storebutton = () => {
   return (
     <div>
       <div class="product-button text-center">
-        <button type="button" class="btn">
+        <Link to="/store/1" className="btn" type="button">
           餐點
-        </button>
-        <button type="button" class="btn">
+        </Link>
+        <Link to="/productcomment" className="btn" type="button">
           評論
-        </button>
+        </Link>
       </div>
     </div>
   );
