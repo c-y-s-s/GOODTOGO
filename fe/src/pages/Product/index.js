@@ -7,7 +7,7 @@ import { API_URL } from "../../utils/config";
 import StoreLogo from "./component/StoreLogo";
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
-import Storebutton from "./component/Storebutton";
+import Storebutton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
 // -------- 引入元件區塊結束 --------
 
@@ -52,10 +52,11 @@ const Product = () => {
       })}
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
-      {/* -------- 綠色裝飾橫條小條的 --------*/}
+      {/* -------- 綠色裝飾橫條小條  --------*/}
       <div className="container-fluid p-0 horizontalBar">
         <div></div>
       </div>
+      {/* -------- 綠色裝飾橫條小條結束 --------*/}
 
       <div className="container">
         {/* 遮雨棚區塊 */}
@@ -63,12 +64,14 @@ const Product = () => {
         {/* 餐點、評論按鈕 */}
         <Storebutton />
       </div>
-
+      {/* 商品資訊 */}
       <StoreCard data={data} />
-      {/* -------- 綠色裝飾橫條大條的 --------*/}
+
+      {/* -------- 綠色裝飾橫條大條 --------*/}
       <div className="container-fluid p-0  horizontalBarBottom">
         <div></div>
       </div>
+      {/* -------- 綠色裝飾橫條大條 --------*/}
     </div>
   );
 };
