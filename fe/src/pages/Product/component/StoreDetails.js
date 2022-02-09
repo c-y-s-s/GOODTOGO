@@ -3,12 +3,12 @@ import React from 'react';
 const StoreDetails = ({name,address,tel_no,}) => {
   return (
     <div>
-      <div class="container store-data">
-        <div class="row">
+      <div className="container store-data">
+        <div className="row">
           <div className="col-12 col-md-6 col-lg-4">
-            <div class="storeDataLeft">
+            <div className="storeDataLeft">
               <h1>{name}</h1>
-              <div class="d-flex">
+              <div className="d-flex">
                 <p>分類</p>
                 <p>星星</p>
                 <p>愛心</p>
@@ -23,8 +23,8 @@ const StoreDetails = ({name,address,tel_no,}) => {
             </div>
           </div>
           <div className="col-12 col-md-6 col-lg-8 h-100">
-            <div class="store-map">
-              <p class="">google地圖</p>
+            <div className="store-map">
+              <p className="">google地圖</p>
             </div>
           </div>
         </div>
