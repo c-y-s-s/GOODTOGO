@@ -1,0 +1,69 @@
+.products-details {
+    .products-details-data {
+        font-weight: 540;
+        .card {
+            border-top: 0.54rem solid $color-yellow;
+            border-bottom: 0.54rem solid #f2c53d;
+            border-radius: 0.4rem 0.4rem 0 0;
+
+            .card-body {
+                .card-title {
+                    font-size: $fz-xx-lg;
+                    font-weight: $fw-black;
+                }
+                .card-value {
+                    border-bottom: 1px solid #b1b1ac;
+                    padding-bottom: 0.3rem;
+                    .card-star {
+                    }
+                    .card-price {
+                        font-size: $fz-xx-lg;
+                        font-weight: $fw-black;
+                    }
+                }
+                .card-text {
+                    padding-top: 0.3rem;
+                    font-size: $fz-md;
+                    p:nth-child(2) {
+                    }
+                }
+                .card-amount {
+                    border-bottom: 1px solid #b1b1ac;
+                    padding-top: 0.3rem;
+                    padding-bottom: 0.3rem;
+                    .card-total-price {
+                        font-size: 1.625rem;
+                        font-weight: 900;
+                        color: $color-green;
+                    }
+                    .buy-num {
+                        align-items: center;
+
+                        .equation {
+                            // border: 2px solid $color-grey;
+                            // border-radius: 50%;
+                            // font-size: 1.375rem;
+                            // padding: 0.2rem 0.7rem;
+                            // width: 100%;
+                            // height: 100%;
+                        }
+                        .buy-num-minus {
+                            padding: 0.01rem 0.25rem;
+                        }
+                        .buy-num-num {
+                            padding: 0px 0.95rem;
+                            color: $color-green;
+                            font-weight: 900;
+                            font-size: 1.375rem;
+                        }
+                        .buy-num-plus {
+                        }
+                    }
+                }
+            }
+
+            .product-buy-car {
+            }
+        }
+    }
+}

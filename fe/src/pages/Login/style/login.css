@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
+#root {
+  width: 100vw;
+  overflow: hidden;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #666666;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.container-fluid {
+  background: #f2c53d;
+  height: calc(100vh - $navbar-height);
+  padding-top: calc((100vh - $navbar-height - 578px) / 2);
+}
+
+.container-fluid .content {
+  background: white;
+  height: 578px;
+  width: 475px;
+  -webkit-filter: drop-shadow(0 0 0.5rem #b1b1ac);
+          filter: drop-shadow(0 0 0.5rem #b1b1ac);
+  margin: auto;
+}
+/*# sourceMappingURL=login.css.map */

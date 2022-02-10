@@ -5,12 +5,12 @@
         padding-left: 0;
         li {
             padding: 1.85rem 1.35rem;
-            background-color: $color-canopy-dominant;
+            background-color: #fff;
             border-radius: 0 0 1.2rem 1.2rem;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         li:nth-child(even) {
-            background-color: $color-canopy-Subtone;
+            background-color: $color-red;
         }
     }
 }

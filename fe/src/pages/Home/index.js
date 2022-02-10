@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "../Home/style/home.scss";
 
 // --------引用圖片--------
+import { ReactComponent as Hero1 } from "./images/hero1.svg";
 import { ReactComponent as Hero1Text } from "./images/hero1Text.svg";
-import { ReactComponent as Hero1TextGo } from "./images/hero1TextGo.svg";
 import { ReactComponent as Hero1TextArrow } from "./images/hero1TextArrow.svg";
 import { ReactComponent as Hero2Text } from "./images/hero2Text.svg";
 import { ReactComponent as Hero2Trash } from "./images/hero2Trash.svg";
@@ -11,37 +12,46 @@ import { ReactComponent as Hero3food } from "./images/hero3food.svg";
 import { ReactComponent as Hero3Text } from "./images/hero3Text.svg";
 import { ReactComponent as Hero3Tower } from "./images/hero3Tower.svg";
 import { ReactComponent as Hero3Earth } from "./images/hero3Earth.svg";
-import { ReactComponent as WaveA } from "./images/waveA.svg";
 import { ReactComponent as WaveB } from "./images/waveB.svg";
-//import { ReactComponent as WaveTest } from "./images/waveTest.svg";
-//import { ReactComponent as Hero3Wave } from "./images/hero3Wave.svg";
+import { ReactComponent as Hero4Text } from "./images/hero4Text.svg";
+import { ReactComponent as Hero4Logo } from "./images/hero4Logo.svg";
+
+//-------- icons --------
+import { BiRightArrowAlt } from "react-icons/bi";
 
 const Home = () => {
   return (
-    <div>
+    <div className="container-fluid p-0">
       <div className="hero1">
-        <img
-          src={require("./images/hero1.png")}
-          alt="hero1"
-          className="hero1bg"
-        ></img>
-        <Hero1Text className="hero1Text drop-shadow" />
-        <Link to="/store" className="hero-actionBtn">
-          <Hero1TextGo className="hero1TextGo drop-shadow " />
-          <Hero1TextArrow className="hero1TextArrow drop-shadow " />
-        </Link>
+        <div className="row p-0 m-0">
+          <div className="container d-flex justify-content-around m-0 p-0">
+            <div className="col-lg-1" />
+            <div className="col-lg-auto  align-items-center">
+              <div className="hero1-btn ">
+                <Link to="/store">
+                  <Hero1Text />
+                  <Hero1TextArrow className="hero1-btn-arrow" />
+                </Link>
+              </div>
+            </div>
+            <div className="col-lg-1"></div>
+          </div>
+        </div>
       </div>
-
       <div className="hero2 d-flex">
-        <Hero2Trash />
-        <div className="hero2Info hero-text-sm">
-          據聯合國環境署統計
-          <br />
-          <Hero2Text className="hero2Text" />
-          <br />
-          全球 1/3 食物還沒進到胃，就先進了垃圾桶
-          <br />
-          其中餐廳和商店食物浪費，佔總食物浪費量的 17 ％
+        <div className="col-lg-6">
+          <Hero2Trash />
+        </div>
+        <div className="col-lg-6">
+          <div className="hero2Info hero-text-sm">
+            據聯合國環境署統計
+            <br />
+            <Hero2Text className="hero2Text" />
+            <br />
+            全球 1/3 食物還沒進到胃，就先進了垃圾桶
+            <br />
+            其中餐廳和商店食物浪費，佔總食物浪費量的 17 ％
+          </div>
         </div>
       </div>
       <div className="hero3">
@@ -67,7 +77,36 @@ const Home = () => {
         <Hero3Tower />
         <Hero3Earth className="hero3Earth" />
       </div>
-      <div className="hero4"></div>
+      <div className="hero4 pt-5">
+        <div className="container-fluid p-0 m-0 ">
+          <div className="row hero4-top justify-content-around ">
+            <div className="col-lg-2 p-0 m-0"></div>
+            <div className="col-auto hero4-title p-0 m-0 mt-5">
+              <Hero4Text className=" mt-5" />
+            </div>
+            <div className="col-lg-2 p-0 m-0"></div>
+          </div>
+          <div className="row hero4-bottom justify-content-around pt-5 mt-3">
+            <div className="col-lg-1"></div>
+            <div className="box"></div>
+            <div className="box"></div>
+            <div className="box"></div>
+            <div className="col-lg-3 hero4-btn-group flex-column d-flex justify-content-evenly align-items-center">
+              <Hero4Logo />
+              <p className="align-middle m-0">探索您周邊的即期美食</p>
+              <div className="btn-box text-center align-middle m-0 pt-1">
+                立即前往
+                <BiRightArrowAlt />
+              </div>
+              {/* <Link to="" /> */}
+            </div>
+            <div className="col-lg-1"></div>
+          </div>
+        </div>
+      </div>
+      <div className="hero5">
+        <div className="container-fluid hero5-bg m-0 p-0"></div>
+      </div>
     </div>
   );
 };
