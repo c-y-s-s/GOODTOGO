@@ -7,6 +7,8 @@ import { API_URL } from "../../utils/config";
 // -------- 引入元件區塊 --------
 import LeftNavbar from "./component/LeftNavbar";
 import TopNavbar from "./component/TopNavbar";
+import NewProduct from "./component/NewProduct";
+import Total from "./component/Total";
 
 // -------- 引入元件區塊結束 --------
 
@@ -24,16 +26,20 @@ import { ReactComponent as Logo } from "../../images/logo.svg";
 const StoreBg = () => {
   const [error, setError] = useState(null);
 
+  const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
 
   // const { storeId } = useParams();
 
   useEffect(() => {
     let getProducts = async () => {
+      let productsResponse = await axios.get(`${API_URL}/products`);
       let storeResponse = await axios.get(`${API_URL}/stores`);
 
+      setData(productsResponse.data);
       setStoreData(storeResponse.data);
-      console.log(storeResponse.data);
+      // console.log(storeResponse.data);
+      // console.log(productsResponse.data);
     };
     getProducts();
   }, []);
@@ -46,52 +52,46 @@ const StoreBg = () => {
 
       <div className="main">
         {/* -------- 至頂導覽列 開始 -------- */}
-        {/* {storeData.map((item) => {
+        {storeData.map((item) => {
           return (
-            <div>
+            <div key={item.id}>
               <TopNavbar name={item.name} />
             </div>
           );
-        })} */}
+        })}
+        {/* <TopNavbar /> */}
         {/* -------- 至頂導覽列 結束 -------- */}
-
-        <div className="store-bg-sortAndAdd">
-          <div className="store-bg-sort">
-            <BsSortUp />
-            排序
-          </div>
-          <div>
-            <button>新增商品</button>
-          </div>
-        </div>
-        
-        <div className="store-bg-amount">
-              <div>
-                <h6>1~8筆</h6>
-              </div>
-              <div>
-                <h6>共20樣商品</h6>
-              </div>
+        {/* -------- 排序和新增商品 開始 -------- */}
+        <NewProduct />
+        {/* -------- 排序和新增商品 結束 -------- */}
+        {/* -------- 筆數和總數 開始 -------- */}
+        <Total />
+        {/* {storeData.map((item) => {
+          return (
+            <div key={item.id}>
+              <Total name={item.name} />
             </div>
-        {storeData.map((item) => {
-          return(<div>
-
-            <table>
-              <thead>
-                <tr>
-                  <td className=""></td>
-                  <td className="store-bg-td ">商家名稱</td>
-                  <td className="store-bg-td">價格</td>
-                  <td className="store-bg-td">數量</td>
-                  <td className="store-bg-td">已售出</td>
-                  <td className="store-bg-td">販售時間</td>
-                  <td className="store-bg-td">上架時間</td>
-                  <td className="store-bg-td">狀態</td>
-                  <td className=""></td>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="store-bg-center">
+          );
+        })}; */}
+        {/* -------- 筆數和總數 結束 -------- */}
+        <table>
+          <thead>
+            <tr>
+              <th className=""></th>
+              <th className="store-bg-td ">商家名稱</th>
+              <th className="store-bg-td">價格</th>
+              <th className="store-bg-td">數量</th>
+              <th className="store-bg-td">已售出</th>
+              <th className="store-bg-td">販售時間</th>
+              <th className="store-bg-td">上架時間</th>
+              <th className="store-bg-td">狀態</th>
+              <th className=""></th>
+            </tr>
+          </thead>
+          <tbody>
+            {storeData.map((item) => {
+              return (
+                <tr key={item.id} className="store-bg-center">
                   <td className="">
                     <div className="user">
                       <img src={require("./images/img1.jpg")} alt="" />
@@ -115,11 +115,39 @@ const StoreBg = () => {
                     <FiMoreVertical />
                   </td>
                 </tr>
-              </tbody>
-            </table>
-          </div>)
-          
-        })}
+              );
+            })}
+          </tbody>
+        </table>
+        <nav aria-label="Page navigation example">
+          <ul className="pagination">
+            <li className="page-item">
+              <a className="page-link" href="#/" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#/">
+                1
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#/">
+                2
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#/">
+                3
+              </a>
+            </li>
+            <li className="page-item">
+              <a className="page-link" href="#/" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
       </div>
     </>
   );
