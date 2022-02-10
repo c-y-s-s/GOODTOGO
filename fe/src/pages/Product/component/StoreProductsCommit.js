@@ -10,7 +10,10 @@ const StoreProductsCommit = () => {
             <div className="">
               <div className="d-flex user-data ">
                 <div className="user-photo">
-                  <img src={require(`../../../images/store_img/01.jpg`)} alt="" />
+                  <img
+                    src={require(`../../../images/store_img/01.jpg`)}
+                    alt=""
+                  />
                 </div>
                 <div className="ms-4">
                   <div className="pt-1">王小明</div>
@@ -37,16 +40,16 @@ const StoreProductsCommit = () => {
                 </div>
 
                 <div className="ps-3 ">
-                  <div class="">
+                  <div className="">
                     <button
-                      class="btn"
+                      className="btn"
                       type="button"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
                       &#x22EE;
                     </button>
-                    <ul class="dropdown-menu">
+                    <ul className="dropdown-menu">
                       <a href="">檢舉</a>
                     </ul>
                   </div>
