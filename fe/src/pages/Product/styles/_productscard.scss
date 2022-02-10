@@ -8,11 +8,16 @@
     border-radius: 0.4rem;
     transition: 0.38s;
     margin-left: 2.55rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+
     // card 上下底線
     .card {
         border-bottom: 0.8rem;
         border: none;
         padding: 0 1.35rem;
+        height: 100%;
         //上排文字
         .product-card-text {
             padding: 1.25rem 0 0.75rem 0;
@@ -54,6 +59,9 @@
     // 卡片樣式
     .card-body {
         padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         .card-title {
             padding-top: 0.85rem;
             font-size: 1.35rem;
@@ -66,6 +74,7 @@
         .card-text {
             padding-top: 0.5rem;
         }
+
         .text-end {
             padding-top: 0.5rem;
             padding-bottom: 0.75rem;

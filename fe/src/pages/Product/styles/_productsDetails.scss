@@ -1,69 +1,137 @@
 .products-details {
     .products-details-data {
         font-weight: 540;
+        // -------- 商品上半部 --------
         .card {
             border-top: 0.54rem solid $color-yellow;
-            border-bottom: 0.54rem solid #f2c53d;
             border-radius: 0.4rem 0.4rem 0 0;
-
             .card-body {
+                padding: 0 1.5rem;
+                //商品名稱
                 .card-title {
                     font-size: $fz-xx-lg;
                     font-weight: $fw-black;
+                    letter-spacing: $ls-md;
                 }
                 .card-value {
                     border-bottom: 1px solid #b1b1ac;
-                    padding-bottom: 0.3rem;
+                    padding-bottom: 0.45rem;
+                    //商品評價
                     .card-star {
                     }
+                    //商品價格
                     .card-price {
                         font-size: $fz-xx-lg;
                         font-weight: $fw-black;
                     }
                 }
+                //商品描述
                 .card-text {
-                    padding-top: 0.3rem;
+                    padding-top: 0.6rem;
                     font-size: $fz-md;
+                    letter-spacing: 0.035rem;
                     p:nth-child(2) {
                     }
                 }
+                //商品數量
                 .card-amount {
                     border-bottom: 1px solid #b1b1ac;
                     padding-top: 0.3rem;
                     padding-bottom: 0.3rem;
                     .card-total-price {
                         font-size: 1.625rem;
-                        font-weight: 900;
+                        font-weight: $fw-black;
                         color: $color-green;
                     }
                     .buy-num {
                         align-items: center;
 
                         .equation {
-                            // border: 2px solid $color-grey;
-                            // border-radius: 50%;
-                            // font-size: 1.375rem;
-                            // padding: 0.2rem 0.7rem;
-                            // width: 100%;
-                            // height: 100%;
+                            border: 2px solid $color-grey;
+                            border-radius: 50%;
                         }
+                        //減號
                         .buy-num-minus {
-                            padding: 0.01rem 0.25rem;
                         }
+                        //購買數量
                         .buy-num-num {
                             padding: 0px 0.95rem;
                             color: $color-green;
-                            font-weight: 900;
+                            font-weight: $fw-black;
                             font-size: 1.375rem;
                         }
+                        //加號
                         .buy-num-plus {
                         }
                     }
                 }
             }
-
+            //加入購物車按鈕
             .product-buy-car {
+                padding-top: 1.2rem;
+
+                a {
+                    padding: 0.85rem 3.2rem;
+                    border-radius: 2rem;
+                    font-size: $fz-xxx-lg;
+                    letter-spacing: $ls-lg;
+                    background-color: $color-light-green;
+                    border: none;
+                }
             }
+            //下面裝飾線
+            .decorative {
+                border-bottom: 0.54rem solid #f2c53d;
+            }
+            // -------- 商品上半部結束 --------
+
+            // -------- 評論下半部 --------
+            .product-users-commit {
+                padding: 0 1.7rem;
+                //用戶圖片
+                .product-users-commit-photo {
+                    width: 3.8rem;
+                    height: 3.8rem;
+
+                    .cover-photo {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+                .product-users-commit-data {
+                    border-bottom: 1px solid #668c4a;
+                    padding-bottom: 2rem;
+                    .product-users-commit-userdata {
+                        flex: 1 0 0;
+                        //用戶名稱
+                        .product-users-commit-userdata-name {
+                            letter-spacing: $ls-md;
+                        }
+                        //留言時間
+                        .product-users-commit-userdata-time {
+                            font-size: $fz-sm;
+                            color: $color-grey;
+                            font-weight: $fw-medium;
+                            flex: 0 0 1;
+                            align-items: center;
+                            letter-spacing: -0.5px;
+                        }
+                        //用戶給的評價
+                        .product-users-commit-userdata-star {
+                            padding-top: 1rem;
+                        }
+                        //用戶評論
+                        .product-users-commit-userdata-text {
+                            font-size: $fz-md;
+                            padding-top: 1rem;
+                            font-weight: $fw-medium;
+                        }
+                    }
+                }
+            }
+            // -------- 顧客評論結束 --------
         }
     }
 }
