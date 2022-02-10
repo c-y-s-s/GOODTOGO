@@ -53,7 +53,8 @@ const Login = () => {
                       </label>
                     </div>
                   </div>
-                  <button type="submit" className="submit-btn mb-3">
+                  <button type="submit" className="submit-btn mb-3" />
+                  <button type="submit" className="submit-btn">
                     登入
                   </button>
                 </form>
