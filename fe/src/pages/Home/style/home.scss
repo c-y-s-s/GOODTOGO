@@ -37,13 +37,14 @@ $footer-height: 15.063rem;
           text-decoration: none;
           justify-content: center;
         }
-        .navIcons {
-          margin: 1rem;
+      }
+      .nav-icons {
+        // margin: 1rem;
+        // color: $color-dark-grey;
+        .nav-icon {
           color: $color-dark-grey;
-          .navIcon {
-            color: $color-dark-grey;
-            margin: 3rem;
-          }
+          margin-left: 2rem;
+          font-size: $fz-xxx-lg;
         }
       }
     }
@@ -180,8 +181,25 @@ $footer-height: 15.063rem;
   .hero4-top {
     height: 11.866rem;
     .hero4-title {
-      position: relative;
-      top: 16vh;
+      // position: relative;
+      // top: 13vh;
+    }
+  }
+  .hero4-bottom {
+    .box {
+      background: $color-light;
+      height: 279px;
+      width: 251px;
+      border-radius: 20%;
+    }
+    .hero4-btn-group {
+      font-size: $fz-xxxx-lg;
+      color: white;
+      .btn-box {
+        border: 4px solid white;
+        height: 45px;
+        width: 238px;
+      }
     }
   }
 }

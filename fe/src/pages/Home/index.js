@@ -16,6 +16,9 @@ import { ReactComponent as WaveB } from "./images/waveB.svg";
 import { ReactComponent as Hero4Text } from "./images/hero4Text.svg";
 import { ReactComponent as Hero4Logo } from "./images/hero4Logo.svg";
 
+//-------- icons --------
+import { BiRightArrowAlt } from "react-icons/bi";
+
 const Home = () => {
   return (
     <div className="container-fluid p-0">
@@ -74,16 +77,31 @@ const Home = () => {
         <Hero3Tower />
         <Hero3Earth className="hero3Earth" />
       </div>
-      <div className="hero4">
-        <div className="container-lg p-0 m-0">
-          <div className="d-flex flex-row hero4-top">
-            <div className="col-lg-3 p-0 m-0"></div>
-            <div className="col-auto p-0 m-0 ">
-              <Hero4Text className="hero4-title" />
+      <div className="hero4 pt-5">
+        <div className="container-fluid p-0 m-0 ">
+          <div className="row hero4-top justify-content-around ">
+            <div className="col-lg-2 p-0 m-0"></div>
+            <div className="col-auto hero4-title p-0 m-0 mt-5">
+              <Hero4Text className=" mt-5" />
             </div>
-            <div className="col-lg-3 p-0 m-0"></div>
+            <div className="col-lg-2 p-0 m-0"></div>
           </div>
-          <div className="row"></div>
+          <div className="row hero4-bottom justify-content-around pt-5 mt-3">
+            <div className="col-lg-1"></div>
+            <div className="box"></div>
+            <div className="box"></div>
+            <div className="box"></div>
+            <div className="col-lg-3 hero4-btn-group flex-column d-flex justify-content-evenly align-items-center">
+              <Hero4Logo />
+              <p className="align-middle m-0">探索您周邊的即期美食</p>
+              <div className="btn-box text-center align-middle m-0 pt-1">
+                立即前往
+                <BiRightArrowAlt />
+              </div>
+              {/* <Link to="" /> */}
+            </div>
+            <div className="col-lg-1"></div>
+          </div>
         </div>
       </div>
       <div className="hero5">

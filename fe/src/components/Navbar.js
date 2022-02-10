@@ -35,18 +35,18 @@ const Navbar = () => {
           </li>
         </ul>
         <ul className="navbar-nav">
-          <li className="navIcons">
-            <Link to="/map" className="navIcon">
+          <li className="nav-icons">
+            <Link to="/map" className="nav-icon">
               <AiOutlineEnvironment />
             </Link>
           </li>
-          <li>
-            <Link to="/member" className="navIcon">
+          <li className="nav-icons">
+            <Link to="/member" className="nav-icon">
               <BiUserCircle />
             </Link>
           </li>
-          <li>
-            <Link to="/cart" className=" navIcon">
+          <li className="nav-icons">
+            <Link to="/cart" className=" nav-icon">
               <BsBag />
             </Link>
           </li>

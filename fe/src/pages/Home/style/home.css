@@ -58,14 +58,10 @@
           justify-content: center;
 }
 
-.navbar .nav .navbar-nav .nav-item .navIcons {
-  margin: 1rem;
+.navbar .nav .navbar-nav .nav-icons .nav-icon {
   color: #666666;
-}
-
-.navbar .nav .navbar-nav .nav-item .navIcons .navIcon {
-  color: #666666;
-  margin: 3rem;
+  margin-left: 2rem;
+  font-size: 1.25rem;
 }
 
 .hero1 {
@@ -249,9 +245,22 @@
   height: 11.866rem;
 }
 
-.hero4 .hero4-top .hero4-title {
-  position: relative;
-  top: 16vh;
+.hero4 .hero4-bottom .box {
+  background: #f2f0d5;
+  height: 279px;
+  width: 251px;
+  border-radius: 20%;
+}
+
+.hero4 .hero4-bottom .hero4-btn-group {
+  font-size: 1.375rem;
+  color: white;
+}
+
+.hero4 .hero4-bottom .hero4-btn-group .btn-box {
+  border: 4px solid white;
+  height: 45px;
+  width: 238px;
 }
 
 .hero5 {
