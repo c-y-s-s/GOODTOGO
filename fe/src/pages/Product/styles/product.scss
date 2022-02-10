@@ -1,15 +1,16 @@
-@import "../../../styles/color.scss";
-//-------- 商家大圖 -------
+// -------- 商家大圖 -------
 @import "./storelogo";
-//-------- 商家資料 -------
+// -------- 商家資料 -------
 @import "./storeDetails";
-//-------- 遮雨棚區塊 -------
+// -------- 遮雨棚區塊 -------
 @import "./storecanopy";
 // -------- 餐點、評論按鈕 --------
 @import "./storebutton";
 // -------- 商品卡片 --------
-@import "./storecard";
-//-------- 綠色橫條裝飾線 -------
+@import "./productscard";
+// -------- 綠色橫條裝飾線 -------
 @import "./storehorizontalbar";
-//------- 商品評論 --------
+// ------- 商品評論 --------
 @import "./productscommit";
+// -------- 商品詳細資訊 --------
+@import "./productsDetails";

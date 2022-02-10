@@ -2,9 +2,7 @@
 #root {
   width: 100vw;
   overflow: hidden;
-  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
-    "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-    sans-serif;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 1rem;
   font-weight: 400;
