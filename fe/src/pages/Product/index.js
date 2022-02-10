@@ -10,6 +10,7 @@ import StoreCanopy from "./component/StoreCanopy";
 import Storebutton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
 import StoreProductsCommit from "./component/StoreProductsCommit";
+import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
 const Product = () => {
@@ -82,44 +83,7 @@ const Product = () => {
       {/* -------- 商店總評論 -------- */}
       <StoreProductsCommit />
       {/* 商品詳細資料 */}
-      <div className="container products-details">
-        <div className="col-12 mt-5 products-details-data">
-          <div className="card mx-auto" style={{ width: `22rem` }}>
-            <img src={require(`../../images/store_img/01.jpg`)} alt="" />
-            <div className="card-body px-4">
-              <h5 className="card-title">鴨肉蓋飯</h5>
-              <div className="d-flex justify-content-between card-value">
-                <div className="card-star">星星</div>
-                <div className="card-price">NT$ 60</div>
-              </div>
-              <p className="card-text mb-0">
-                使用特選鴨肉及米飯，吃得出師傅的好手藝及食材本身的美味
-              </p>
-              <p className=" card-text">本商品不附帶免洗餐具</p>
-              <div>
-                <div className="d-flex justify-content-between">
-                  <div>合計金額</div>
-                  <div>餐點剩餘 0</div>
-                </div>
-
-                <div className="d-flex justify-content-between card-amount">
-                  <div className="card-total-price ">NT $ 240</div>
-                  <div className="d-flex buy-num">
-                    <button className=" buy-num-minus equation">-</button>
-                    <div className="buy-num-num ">4</div>
-                    <button className=" buy-num-plus equation">+</button>
-                  </div>
-                </div>
-              </div>
-              <div className="product-buy-car my-3 text-center">
-                <a href="#" className="btn btn-primary py-3  ">
-                  加入購物車
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <ProductsDetails />
 
       {/* 商品詳細資料結束 */}
       {/* -------- 綠色裝飾橫條大條 --------*/}
