@@ -94,9 +94,12 @@ const Home = () => {
             <div className="col-lg-3 hero4-btn-group flex-column d-flex justify-content-evenly align-items-center">
               <Hero4Logo />
               <p className="align-middle m-0">探索您周邊的即期美食</p>
-              <div className="btn-box text-center align-middle m-0 pt-1">
-                立即前往
-                <BiRightArrowAlt />
+
+              <div className="btn-box text-center  align-items-center m-0">
+                <div className="">
+                  立即前往
+                  <BiRightArrowAlt />
+                </div>
               </div>
               {/* <Link to="" /> */}
             </div>
