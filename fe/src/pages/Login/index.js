@@ -46,10 +46,21 @@ const Login = () => {
                       </label>
                     </div>
                   </div>
-                  <button type="submit" className="submit-btn">
+                  <button type="submit" className="submit-btn mb-3">
                     登入
                   </button>
                 </form>
+                <button className="fb-login">使用Facebook登入</button>
+                <Link to="">
+                  <p>忘記密碼？</p>
+                </Link>
+
+                <p>
+                  尚未加入GOODTOGO？
+                  <Link to="/register">
+                    <span>立即註冊</span>
+                  </Link>
+                </p>
               </div>
               <div className="col-lg-1"></div>
             </div>
