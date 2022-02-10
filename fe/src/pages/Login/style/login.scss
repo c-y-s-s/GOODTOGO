@@ -1,0 +1,21 @@
+@import "../../../styles/index.scss";
+
+.container-fluid {
+  background: $color-yellow;
+  height: calc(100vh - $navbar-height);
+  padding-top: calc((100vh - $navbar-height - 578px) / 2);
+  .content {
+    background: white;
+    height: 578px;
+    width: 475px;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
+    margin: auto;
+  }
+}
+.label-title {
+  color: $color-green;
+}
+.submit-btn {
+  background-color: $color-green;
+  color: white;
+}
