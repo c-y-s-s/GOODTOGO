@@ -25,6 +25,11 @@ let productsRouter = require("./routers/products");
 app.use("/api/products", productsRouter);
 // -------- 商品 RESTful API 列表 結束 --------
 
+// :TODO: -------- 商品評論 RESTful API 列表 --------
+let productsCommitRouter = require("./routers/productsCommit");
+app.use("/api/productscommit", productsCommitRouter);
+// -------- 商品評論 RESTful API 列表 結束 --------
+
 // :TODO: -------- 會員 RESTful API 列表 --------
 let memberRouter = require("./routers/member");
 app.use("/api/users", memberRouter);
@@ -36,7 +41,7 @@ app.use((req, res, next) => {
 });
 
 //引用 env 檔裡的 Port 號 ， 建立 server
-const port = 3001 || 3000;
+const port = 3002 || 3000;
 app.listen(port, () => {
   console.log(`Server啟用，運行在 port : ${port}`);
 });

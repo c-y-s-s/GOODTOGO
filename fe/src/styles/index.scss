@@ -37,9 +37,8 @@ $fw-bold: 500; // bold
 $fw-black: 700; // black
 
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
-  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-  sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
+  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #root {
   width: 100vw;
@@ -50,10 +49,8 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   font-weight: $fw-medium;
 }
 
-
 //------echo
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
 // @import "./product_storedata.scss";
-

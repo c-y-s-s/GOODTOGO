@@ -8,7 +8,7 @@ import { ReactComponent as Hero1Text } from "./images/hero1Text.svg";
 import { ReactComponent as Hero1TextArrow } from "./images/hero1TextArrow.svg";
 import { ReactComponent as Hero2Text } from "./images/hero2Text.svg";
 import { ReactComponent as Hero2Trash } from "./images/hero2Trash.svg";
-import { ReactComponent as Hero3Food } from "./images/hero3food.svg";
+import { ReactComponent as Hero3food } from "./images/hero3food.svg";
 import { ReactComponent as Hero3Text } from "./images/hero3Text.svg";
 import { ReactComponent as Hero3Tower } from "./images/hero3Tower.svg";
 import { ReactComponent as Hero3Earth } from "./images/hero3Earth.svg";
