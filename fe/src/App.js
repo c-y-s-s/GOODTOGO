@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -19,9 +19,10 @@ import Product from "./pages/Product";
 import Footer from "./components/Footer";
 
 function App() {
+  const [auth, setAuth] = useState(false);
   return (
     <Router>
-      <Navbar />
+      <Navbar auth={auth} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>

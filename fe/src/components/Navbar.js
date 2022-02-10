@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineEnvironment } from "react-icons/ai";
+import { RiUserSmileLine } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
@@ -8,7 +9,7 @@ import { ReactComponent as Logo } from "../images/navLogo.svg";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-const Navbar = () => {
+const Navbar = ({ auth }) => {
   return (
     <nav className="navbar navbar-expand shadow">
       <div className="nav container">
@@ -41,9 +42,19 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-icons">
-            <Link to="/member" className="nav-icon">
-              <BiUserCircle />
-            </Link>
+            {auth ? (
+              <>
+                <Link to="/member" className="nav-icon">
+                  <RiUserSmileLine className="me-2" />{" "}
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link to="/login" className="nav-icon">
+                  <BiUserCircle className="me-2" />
+                </Link>
+              </>
+            )}
           </li>
           <li className="nav-icons">
             <Link to="/cart" className=" nav-icon">
