@@ -1,6 +1,6 @@
 @import "../../../styles/index.scss";
-$navbar-height: 6.25rem;
-$footer-height: 15.063rem;
+// $navbar-height: 6.25rem;
+// $footer-height: 15.063rem;
 
 .hero-text-sm {
   font-size: 1.25rem;
@@ -52,7 +52,8 @@ $footer-height: 15.063rem;
 }
 // -------- hero 1 --------
 .hero1 {
-  display: block;
+  // display: block;
+  padding: 0;
   .row {
     background-image: url(../images/hero1.svg);
     height: 47.188rem;

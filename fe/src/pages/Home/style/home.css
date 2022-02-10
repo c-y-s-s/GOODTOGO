@@ -65,7 +65,7 @@
 }
 
 .hero1 {
-  display: block;
+  padding: 0;
 }
 
 .hero1 .row {

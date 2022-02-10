@@ -5,7 +5,7 @@ import "../Login/style/login.scss";
 const Login = () => {
   return (
     <>
-      <div className="container-fluid ">
+      <div className="container-fluid login-con">
         <div className="row">
           <div className="col-lg-4 m-0 p-0"></div>
           <div className="col-lg-4 m-0 p-0">
@@ -46,7 +46,7 @@ const Login = () => {
                       </label>
                     </div>
                   </div>
-                  <button type="submit" className="">
+                  <button type="submit" className="submit-btn">
                     登入
                   </button>
                 </form>
