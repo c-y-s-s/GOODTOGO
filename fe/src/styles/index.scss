@@ -22,6 +22,7 @@ $fz-lg: 1rem; // 16px
 $fz-x-lg: 17 / 16 + rem; // 17px
 $fz-xx-lg: 18 / 16 + rem; // 18px
 $fz-xxx-lg: 20 / 16 + rem; // 20px
+$fz-xxxx-lg: 22/16 + rem; //22px
 
 // -------- letter-spacing 文字間距 --------
 $ls-sm: 0.05rem; // 1px
@@ -36,9 +37,8 @@ $fw-bold: 500; // bold
 $fw-black: 700; // black
 
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
-  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-  sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
+  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #root {
   width: 100vw;
@@ -48,5 +48,9 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   font-size: $fz-lg;
   font-weight: $fw-medium;
 }
+
+//------echo
+$navbar-height: 6.25rem;
+$footer-height: 15.063rem;
 
 // @import "./product_storedata.scss";
