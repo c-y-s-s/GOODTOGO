@@ -14,7 +14,9 @@ const LeftNavbar = () => {
       <div className="navigation">
         <ul>
           <li>
+            <div className="logo-mb">
             <Logo />
+            </div>
           </li>
           <li>
             <a href="#/">
