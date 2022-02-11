@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
-import "./myAccount.scss";
-import { User, Clipboard, Gift } from "react-feather";
+// import "./styles/myAccount.scss";
+import "../../styles/index.scss";
+import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
 import TwCitySelector from "tw-city-selector";
 
 const MyAccount = () => {
@@ -29,6 +30,7 @@ const MyAccount = () => {
   }, []);
 
   return (
+    // 撈資料呈現
     // <div>
     //   {data.map((users) => {
     //     return <div>{users.name}</div>;
@@ -39,31 +41,100 @@ const MyAccount = () => {
       <div className="container my-5">
         <div className="row">
           <div className="col-lg-2">
+            {/* -------- 會員頭貼 -------- */}
             <div className="user_Info d-flex align-items-center mb-5">
               <div className="headShot"></div>
-              <p className="ms-4 mb-0">王小明</p>
+              <p className="ms-4 mb-0 text-nowrap">王小明</p>
             </div>
-            <div className="user_Menu">
-              <ul className="list-unstyled">
-                <li>
-                  <User className="menu_Icon" />
-                  <span className="menu_Text">我的帳戶</span>
-                  <ul className="list-unstyled ms-4">
-                    <li>會員資料修改</li>
-                    <li>信用卡資訊</li>
-                    <li>店家收藏清單</li>
+            {/* -------- 左方選單列開始 -------- */}
+            <ul className="list-unstyled">
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    "d-flex align-items-center mb-2 me-5 text-decoration-none menu_Title_unActive" +
+                    (isActive ? " menu_Open" : " menu_Close")
+                  }
+                  to={
+                    "/my_account" ||
+                    "/my_account/payment" ||
+                    "/my_account/like-list"
+                  }
+                >
+                  <FiUser className="menu_Icon" />
+                  <span className="menu_Title">我的帳戶</span>
+                </NavLink>
+                {/* -------- 我的帳戶選單開始 -------- */}
+                <div className="menu_Open">
+                  <ul className="list-unstyled">
+                    <li className="mb-2">
+                      <NavLink
+                        className={({ isActive }) =>
+                          "menu_Text text-decoration-none" +
+                          (isActive
+                            ? " menu_Text_Active"
+                            : " menu_Text_unActive")
+                        }
+                        to="/my_account"
+                      >
+                        會員資料修改
+                      </NavLink>
+                    </li>
+                    <li className="my-2">
+                      <NavLink
+                        className={({ isActive }) =>
+                          "menu_Text text-decoration-none" +
+                          (isActive
+                            ? " menu_Text_Active"
+                            : " menu_Text_unActive")
+                        }
+                        to="/my_account/payment"
+                      >
+                        信用卡資訊
+                      </NavLink>
+                    </li>
+                    <li className="mb-2">
+                      <NavLink
+                        className={({ isActive }) =>
+                          "menu_Text text-decoration-none" +
+                          (isActive
+                            ? " menu_Text_Active"
+                            : " menu_Text_unActive")
+                        }
+                        to="/my_account/like-list"
+                      >
+                        店家收藏清單
+                      </NavLink>
+                    </li>
                   </ul>
-                </li>
-                <li>
-                  <Clipboard className="menu_Icon" />
-                  <span className="menu_Text">我的訂單</span>
-                </li>
-                <li>
-                  <Gift className="menu_Icon" />
-                  <span className="menu_Text">優惠券</span>
-                </li>
-              </ul>
-            </div>
+                </div>
+                {/* -------- 我的帳戶選單結束 -------- */}
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    "d-flex align-items-center my-3 me-5 text-decoration-none" +
+                    (isActive ? " menu_Title_Active" : " menu_Title_unActive")
+                  }
+                  to="/my_account/order"
+                >
+                  <FiClipboard className="menu_Icon" />
+                  <span className="menu_Title">我的訂單</span>
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    "d-flex align-items-center mb-3 me-5 text-decoration-none" +
+                    (isActive ? " menu_Title_Active" : " menu_Title_unActive")
+                  }
+                  to="/my_account/coupon"
+                >
+                  <FiGift className="menu_Icon" />
+                  <span className="menu_Title">優惠券</span>
+                </NavLink>
+              </li>
+            </ul>
+            {/* -------- 左方選單列結束 -------- */}
           </div>
           <div className="col-lg-10">
             <div>會員資料修改</div>
@@ -73,7 +144,6 @@ const MyAccount = () => {
               <div className="row">
                 {/* -------- 表單左 -------- */}
                 <div className="col-lg-7 form_Text">
-
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
                       <label htmlFor="name" className="col-sm-2">
