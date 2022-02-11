@@ -2,7 +2,7 @@ import React from "react";
 
 let canopyID = 100;
 const StoreCanopy = ({ canopy }) => {
-  return (
+  return ( 
     <div>
       <div className="canopy">
         <ul className="d-flex">
@@ -10,7 +10,7 @@ const StoreCanopy = ({ canopy }) => {
             {
               canopyID++;
             }
-            return <li key={canopyID}></li>;
+            return <li key={canopyID} ></li>;
           })}
         </ul>
       </div>

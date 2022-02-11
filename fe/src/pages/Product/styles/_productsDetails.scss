@@ -129,6 +129,9 @@
                             font-weight: $fw-medium;
                         }
                     }
+                    &:last-child() {
+                        margin-bottom: 2rem;
+                    }
                 }
             }
             // -------- 顧客評論結束 --------

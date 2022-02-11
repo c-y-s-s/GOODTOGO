@@ -5,7 +5,7 @@ const ProductsDetails = () => {
     <div>
       <div className="container products-details">
         <div className="col-12 mt-5 products-details-data">
-          <div className="card mx-auto" style={{ width: `25rem` }}>
+          <div className="card mx-auto" style={{ width: `22rem` }}>
             <img src={require(`../../../images/store_img/01.jpg`)} alt="" />
             <div className="card-body py-4">
               <h5 className="card-title">鴨肉蓋飯</h5>
@@ -76,6 +76,8 @@ const ProductsDetails = () => {
                   </div>
                 </div>
               </div>
+
+              
             </div>
           </div>
         </div>

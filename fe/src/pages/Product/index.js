@@ -9,7 +9,7 @@ import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
 import Storebutton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
-import StoreProductsCommit from "./component/StoreProductsCommit";
+import StoreProductsCommit from "./component/Productscommit.js";
 import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
