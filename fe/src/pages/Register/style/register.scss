@@ -1,0 +1,20 @@
+.reg-con {
+  background: $color-yellow;
+}
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+.label-group {
+  font-size: $fz-sm;
+  .custom-input {
+    border-radius: 2px;
+    border: 2px solid $color-light-grey;
+  }
+  .btn-register {
+    background-color: $color-green;
+    color: white;
+    border-radius: 2px;
+  }
+}
