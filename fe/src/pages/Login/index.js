@@ -1,8 +1,53 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import "../Login/style/login.scss";
+import React, { useState } from "react";
+import { Routes, Route, Link } from "react-router-dom";
+import LoginForm from "./components/LoginForm";
+import Reset from "./components/Reset";
 
 const Login = () => {
+  const [fields, setFields] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [fieldErrors, setFieldErrors] = useState({
+    email: "",
+    password: "",
+  });
+
+  const onFieldChange = (e) => {
+    const newData = { ...fields, [e.target.name]: e.target.value };
+    setFields(newData);
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    // 作驗証
+    const formData = new FormData(e.target);
+    console.log(formData.get("username"));
+    console.log(formData.get("email"));
+    console.log(formData.get("password"));
+  };
+
+  const handleInvalid = (e) => {
+    e.preventDefault();
+
+    const updatedFieldErrors = {
+      ...fieldErrors,
+      [e.target.name]: e.target.validationMessage,
+    };
+
+    setFieldErrors(updatedFieldErrors);
+  };
+
+  const onFormChange = (e) => {
+    const updatedFieldErrors = {
+      ...fieldErrors,
+      [e.target.name]: "",
+    };
+
+    // 3. 設定回錯誤訊息狀態
+    setFieldErrors(updatedFieldErrors);
+  };
   return (
     <>
       <div className="container-fluid login-con">
@@ -11,56 +56,18 @@ const Login = () => {
           <div className="col-lg-4 m-0 p-0">
             <div className="content text-center row justify-content-between gy-0">
               <div className="col-lg-1"></div>
-              <div className="col-lg-10">
-                <div className="h3">會員登入</div>
-                <form>
-                  <div className="label-group">
-                    {/* email */}
-                    <label for="" className="col-form-label label-title p-0">
-                      電子郵件
-                    </label>
-                    <div class="form-floating mb-3">
-                      <input
-                        type="email"
-                        className="form-control "
-                        id="floatingInput"
-                        placeholder="name@example.com"
-                      />
-                      <label for="floatingInput" className="floating-label">
-                        請填入電子信箱
-                      </label>
-                    </div>
-                    {/* password */}
-                    <label for="" className="col-form-label label-title p-0">
-                      密碼
-                    </label>
-                    <div class="form-floating mb-3">
-                      <input
-                        type="password"
-                        className="form-control "
-                        id="floatingInput"
-                        placeholder="name@example.com"
-                      />
-                      <label for="floatingInput" className="floating-label">
-                        請填入密碼
-                      </label>
-                    </div>
-                  </div>
-                  <button type="submit" className="submit-btn mb-3">
-                    登入
-                  </button>
-                </form>
-                <button className="fb-login">使用Facebook登入</button>
-                <Link to="">
-                  <p>忘記密碼？</p>
-                </Link>
-
-                <p>
-                  尚未加入GOODTOGO？
-                  <Link to="/register">
-                    <span>立即註冊</span>
-                  </Link>
-                </p>
+              <div className="col-lg-10 row mt-4 mb-4 flex-column justify-content-evenly align-items-center">
+                <LoginForm
+                  fields={fields}
+                  setFields={setFields}
+                  fieldErrors={fieldErrors}
+                  setFieldErrors={setFieldErrors}
+                  onFieldChange={onFieldChange}
+                  onFormChange={onFormChange}
+                  onSubmit={onSubmit}
+                  onInvalid={handleInvalid}
+                />
+                {/* <Reset /> */}
               </div>
               <div className="col-lg-1"></div>
             </div>

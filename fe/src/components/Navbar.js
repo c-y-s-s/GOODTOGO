@@ -41,19 +41,17 @@ const Navbar = ({ auth }) => {
             </Link>
           </li>
           <li className="nav-icons">
-            {auth ? (
-              <>
-                <Link to="/member" className="nav-icon">
-                  <RiUserSmileLine className="me-2" />{" "}
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="nav-icon">
-                  <BiUserCircle className="me-2" />
-                </Link>
-              </>
-            )}
+            <Link to="/login">
+              <BiUserCircle
+                role="button"
+                className=" nav-icon"
+                data-bs-toggle="popover"
+                data-bs-placement="bottom"
+                data-bs-content="會員登入"
+                da
+                ta-bs-container="body"
+              />
+            </Link>
           </li>
           <li className="nav-icons">
             <Link to="/cart" className=" nav-icon">

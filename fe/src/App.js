@@ -17,8 +17,10 @@ import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment" 
+import ProductComment from "../src/pages/Productcomment";
+import Reset from "./pages/Login/components/Reset";
 function App() {
+  // -------- 判斷登入與否 --------
   const [auth, setAuth] = useState(false);
   return (
     <Router>
@@ -35,6 +37,7 @@ function App() {
         ></Route>
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/reset" element={<Reset />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/my_account" element={<MyAccount />}></Route>
       </Routes>

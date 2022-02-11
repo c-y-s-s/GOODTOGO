@@ -1,5 +1,4 @@
 import React from "react";
-import "../Home/style/home.scss";
 
 import Hero1 from "./components/hero1";
 import Hero2 from "./components/hero2";
