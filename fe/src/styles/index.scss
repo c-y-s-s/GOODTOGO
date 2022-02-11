@@ -1,3 +1,4 @@
+// -------- 字體 --------
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
 
 // -------- color 顏色區 --------
@@ -37,8 +38,13 @@ $fw-bold: 500; // bold
 $fw-black: 700; // black
 
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
-  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+
+// -------- 欄位高度 --------
+$navbar-height: 6.25rem;
+$footer-height: 15.063rem;
 
 #root {
   width: 100vw;
@@ -49,8 +55,14 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   font-weight: $fw-medium;
 }
 
+<<<<<<< Updated upstream
 //------echo
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
 // @import "./product_storedata.scss";
+=======
+@import "../pages/Product/styles/product.scss";
+@import "../pages/Register/style/register.scss";
+@import "../pages/MyAccount/styles/myAccount.scss";
+>>>>>>> Stashed changes
