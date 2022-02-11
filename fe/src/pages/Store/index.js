@@ -9,7 +9,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BsBellFill } from "react-icons/bs";
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
-
+// Sort icon
+import { BsSortUp } from "react-icons/bs";
 // -------- icons --------
 
 // -------- images --------
@@ -77,32 +78,44 @@ const Story = () => {
             <img src={require("./images/img1.jpg")} alt="" />
           </div>
         </div>
-        <div className="aaa">
-          <div className="bbb">排序</div>
-          <div className="ccc">新增商品</div>
+        <div className="store-be-sortAndAdd">
+          <div className="store-be-sort">
+            <BsSortUp />
+            排序
+          </div>
+          <div>
+            <button>新增商品</button>
+          </div>
         </div>
-        <div className="recentOrders">
-          <div className="cardHeader">
-            <h2>Recent Orders</h2>
-            <a href="#/" className="btn">
-              View All
-            </a>
+        <div>
+          <div className="store-be-amount">
+            <div>
+              <h6>1~8筆</h6>
+            </div>
+            <div>
+              <h6>共20樣商品</h6>
+            </div>
           </div>
           <table>
             <thead>
               <tr>
-                <td>商品名稱</td>
-                <td>價格</td>
-                <td>數量</td>
-                <td>已售出</td>
-                <td>販售時間</td>
-                <td>上架時間</td>
-                <td>狀態</td>
+                <td className="store-be-td">商品名稱</td>
+                <td className="store-be-td">價格</td>
+                <td className="store-be-td">數量</td>
+                <td className="store-be-td">已售出</td>
+                <td className="store-be-td">販售時間</td>
+                <td className="store-be-td">上架時間</td>
+                <td className="store-be-td">狀態</td>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>麵包</td>
+                <td className="ddd1">
+                  <div className="user ddd2">
+                    <img src={require("./images/img1.jpg")} alt="" />
+                  </div>
+                  <div className="eee">麵包</div>
+                </td>
                 <td>NT$45</td>
                 <td>10</td>
                 <td>1</td>
@@ -112,7 +125,7 @@ const Story = () => {
                   <button>下架中</button>
                 </td>
                 <td>
-                <FiMoreVertical />
+                  <FiMoreVertical />
                 </td>
               </tr>
               <tr>
