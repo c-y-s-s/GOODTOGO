@@ -15,6 +15,10 @@ import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
+import UserLikeList from "./pages/MyAccount/UserLikeList";
+import UserOrderList from "./pages/MyAccount/UserOrderList";
+import UserCoupon from "./pages/MyAccount/UserCoupon";
+import UserCreditCard from "./pages/MyAccount/UserCreditCard";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment" 
@@ -36,6 +40,10 @@ function App() {
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
+        <Route path="/my_account/like-list" element={<UserLikeList />}></Route>
+        <Route path="/my_account/order" element={<UserOrderList />}></Route>
+        <Route path="/my_account/coupon" element={<UserCoupon />}></Route>
+        <Route path="/my_account/payment" element={<UserCreditCard />}></Route>
         <Route path="/my_account" element={<MyAccount />}></Route>
       </Routes>
 
