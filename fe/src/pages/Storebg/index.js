@@ -50,104 +50,102 @@ const StoreBg = () => {
       <LeftNavbar />
       {/* -------- 左邊導覽列 結束 -------- */}
 
-      <div className="main">
-        {/* -------- 至頂導覽列 開始 -------- */}
-        {storeData.map((item) => {
-          return (
-            <div key={item.id}>
-              <TopNavbar name={item.name} />
-            </div>
-          );
-        })}
-        {/* <TopNavbar /> */}
-        {/* -------- 至頂導覽列 結束 -------- */}
-        {/* -------- 排序和新增商品 開始 -------- */}
-        <NewProduct />
-        {/* -------- 排序和新增商品 結束 -------- */}
-        {/* -------- 筆數和總數 開始 -------- */}
-        <Total />
-        {/* {storeData.map((item) => {
+      <div className="store-bg-main">
+        <TopNavbar storeData={storeData} />
+        <div className="store-bg-green p-5">
+          <div className="store-bg-dominant">
+            {/* -------- 至頂導覽列 開始 -------- */}
+            {/* <TopNavbar /> */}
+            {/* -------- 至頂導覽列 結束 -------- */}
+            {/* -------- 排序和新增商品 開始 -------- */}
+            <NewProduct />
+            {/* -------- 排序和新增商品 結束 -------- */}
+            {/* -------- 筆數和總數 開始 -------- */}
+            <Total />
+            {/* {storeData.map((item) => {
           return (
             <div key={item.id}>
               <Total name={item.name} />
             </div>
           );
         })}; */}
-        {/* -------- 筆數和總數 結束 -------- */}
-        <table>
-          <thead>
-            <tr>
-              <th className=""></th>
-              <th className="store-bg-td ">商家名稱</th>
-              <th className="store-bg-td">價格</th>
-              <th className="store-bg-td">數量</th>
-              <th className="store-bg-td">已售出</th>
-              <th className="store-bg-td">販售時間</th>
-              <th className="store-bg-td">上架時間</th>
-              <th className="store-bg-td">狀態</th>
-              <th className=""></th>
-            </tr>
-          </thead>
-          <tbody>
-            {storeData.map((item) => {
-              return (
-                <tr key={item.id} className="store-bg-center">
-                  <td className="">
-                    <div className="user">
-                      <img src={require("./images/img1.jpg")} alt="" />
-                    </div>
-                  </td>
-                  <td className="store-bg-td-1">
-                    <div>麵包</div>
-                  </td>
-                  <td>NT$45</td>
-                  <td>10</td>
-                  <td>1</td>
-                  <td>PM 6:30 ~ PM 8:30</td>
-                  <td>
-                    <div>May 26,2019</div>
-                    <div>PM 6:30</div>
-                  </td>
-                  <td>
-                    <button>下架中</button>
-                  </td>
-                  <td>
-                    <FiMoreVertical />
-                  </td>
+            {/* -------- 筆數和總數 結束 -------- */}
+            <table>
+              <thead>
+                <tr>
+                  <th className=""></th>
+                  <th className="store-bg-td ">商家名稱</th>
+                  <th className="store-bg-td">價格</th>
+                  <th className="store-bg-td">數量</th>
+                  <th className="store-bg-td">已售出</th>
+                  <th className="store-bg-td">販售時間</th>
+                  <th className="store-bg-td">上架時間</th>
+                  <th className="store-bg-td">狀態</th>
+                  <th className=""></th>
                 </tr>
-              );
-            })}
-          </tbody>
-        </table>
-        <nav aria-label="Page navigation example">
-          <ul className="pagination">
-            <li className="page-item">
-              <a className="page-link" href="#/" aria-label="Previous">
-                <span aria-hidden="true">&laquo;</span>
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#/">
-                1
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#/">
-                2
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#/">
-                3
-              </a>
-            </li>
-            <li className="page-item">
-              <a className="page-link" href="#/" aria-label="Next">
-                <span aria-hidden="true">&raquo;</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
+              </thead>
+              <tbody>
+                {storeData.map((item) => {
+                  return (
+                    <tr key={item.id} className="store-bg-center">
+                      <td className="">
+                        <div className="user">
+                          <img src={require("./images/img1.jpg")} alt="" />
+                        </div>
+                      </td>
+                      <td className="store-bg-td-1">
+                        <div>麵包</div>
+                      </td>
+                      <td>NT$45</td>
+                      <td>10</td>
+                      <td>1</td>
+                      <td>PM 6:30 ~ PM 8:30</td>
+                      <td>
+                        <div>May 26,2019</div>
+                        <div>PM 6:30</div>
+                      </td>
+                      <td>
+                        <button>下架中</button>
+                      </td>
+                      <td>
+                        <FiMoreVertical />
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example ">
+              <ul className="pagination justify-content-center py-3">
+                <li className="page-item">
+                  <a className="page-link" href="#/" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li className="page-item">
+                  <a className="page-link" href="#/">
+                    1
+                  </a>
+                </li>
+                <li className="page-item">
+                  <a className="page-link" href="#/">
+                    2
+                  </a>
+                </li>
+                <li className="page-item">
+                  <a className="page-link" href="#/">
+                    3
+                  </a>
+                </li>
+                <li className="page-item">
+                  <a className="page-link" href="#/" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
       </div>
     </>
   );
