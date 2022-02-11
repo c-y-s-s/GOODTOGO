@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const Storebutton = ({ storeId }) => {
+const StoreButton = ({ storeId }) => {
   return (
     <div>
       <div className="product-button text-center">
@@ -15,4 +15,4 @@ const Storebutton = ({ storeId }) => {
   );
 };
 
-export default Storebutton;
+export default StoreButton;

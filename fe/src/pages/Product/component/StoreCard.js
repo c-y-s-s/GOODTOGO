@@ -1,18 +1,17 @@
-import React from 'react';
+import React from "react";
 
-let StoreCardID = 1011
-const StoreCard = ({data}) => {
+let StoreCardID = 1011;
+const StoreCard = ({ data }) => {
   return (
     <div>
       <div className="container">
         <div className="row cards">
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
           {data.map((item) => {
-                {
-                  StoreCardID++;
-                }
+            {
+              StoreCardID++;
+            }
             return (
-          
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
                 style={{ width: `18rem` }}
@@ -32,10 +31,13 @@ const StoreCard = ({data}) => {
                       alt="商品"
                     />
                   </div>
-                  <div className="card-body">
-                    <div className="card-title">{item.name}</div>
-                    <div className="card-star">評價的部分</div>
-                    <div className="card-text">{item.description}</div>
+                  <div className="card-body ">
+                    <div className="">
+                      <div className="card-title">{item.name}</div>
+                      <div className="card-star">評價的部分</div>
+                      <div className="card-text pt-2">{item.description}</div>
+                    </div>
+
                     <div className="text-end "> NT$ {item.price}</div>
                   </div>
                 </div>

@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-import { API_URL } from "../../utils/config";
+import { API_URL } from "../../../utils/config";
 // import "./styles/myAccount.scss";
-import "../../styles/index.scss";
+import "../../../styles/index.scss";
 import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
 import TwCitySelector from "tw-city-selector";
 
-const MyAccount = () => {
+const UserOrderList = () => {
   const [data, setData] = useState([]);
 
   // -------- 地址選擇器 --------
@@ -64,7 +64,7 @@ const MyAccount = () => {
                   <span className="menu_Title">我的帳戶</span>
                 </NavLink>
                 {/* -------- 我的帳戶選單開始 -------- */}
-                <div className="menu_Open">
+                <div className="menu_Close">
                   <ul className="list-unstyled">
                     <li className="mb-2">
                       <NavLink
@@ -238,4 +238,4 @@ const MyAccount = () => {
   );
 };
 
-export default MyAccount;
+export default UserOrderList;
