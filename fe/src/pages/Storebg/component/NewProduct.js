@@ -7,12 +7,12 @@ const NewProduct = () => {
   return (
     <>
       <div className="store-bg-sortAndAdd">
-        <div className="store-bg-sort">
+        <div className="store-bg-sort ">
           <BsSortUp />
           排序
         </div>
         <div>
-          <button>新增商品</button>
+          <button className="rounded text-white bg-warning border-0">新增商品</button>
         </div>
       </div>
     </>
