@@ -1,0 +1,42 @@
+.mapContainer {
+    height: 75vh;
+    width: 100%;
+    padding: 0px;
+}
+.paper {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100px;
+}
+.markerContainer{
+    position: absolute;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    &:hover{z-index: 2};
+}
+.pointer{
+    cursor:pointer;
+}
+.formControl{
+min-width : 120;
+margin-bottom: 30px;
+}
+.marginBottom{
+    margin-bottom: 30px;
+}
+.list{
+    height: 20vh;
+    overflow: auto;
+padding: 0px;    
+background: #668c4a;
+}
+.mapList{
+    background: #668c4a;
+    padding: 0px;
+    height: 75vh;
+}
+.selector{
+    margin: 33.5px;
+}
