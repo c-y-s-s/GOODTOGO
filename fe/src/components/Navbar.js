@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+// -------- icons --------
 import { AiOutlineEnvironment } from "react-icons/ai";
 import { RiUserSmileLine } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
-
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 
 const Navbar = ({ auth }) => {
   return (
