@@ -12,8 +12,8 @@ let app = express();
 //使用 cors 設定的中間鍵，開放所有網域皆可連線
 app.use(cors());
 
-
-
+let authRouter = require("./routers/auth");
+app.use("/api/auth", authRouter);
 
 // :TODO: -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
