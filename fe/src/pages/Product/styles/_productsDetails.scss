@@ -1,7 +1,26 @@
+// -------- 商品光箱 --------
 .products-details {
     .products-details-data {
         font-weight: 540;
         // -------- 商品上半部 --------
+        .product-logo {
+            height: 10rem;
+            position: relative;
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .products-close {
+            position: absolute;
+            left: 89%;
+            top: 0%;
+            font-size: 1.5rem;
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            color: #fff;
+        }
         .card {
             border-top: 0.54rem solid $color-yellow;
             border-radius: 0.4rem 0.4rem 0 0;
@@ -9,8 +28,7 @@
                 padding: 0 1.5rem;
                 //商品名稱
                 .card-title {
-                    font-size: $fz-xx-lg;
-                    font-weight: $fw-black;
+                    font-size: $fz-xxx-lg;
                     letter-spacing: $ls-md;
                 }
                 .card-value {
@@ -21,8 +39,7 @@
                     }
                     //商品價格
                     .card-price {
-                        font-size: $fz-xx-lg;
-                        font-weight: $fw-black;
+                        font-size: $fz-xxx-lg;
                     }
                 }
                 //商品描述
@@ -30,14 +47,19 @@
                     padding-top: 0.6rem;
                     font-size: $fz-md;
                     letter-spacing: 0.035rem;
-                    p:nth-child(2) {
+                    .fialert-circle {
+                        padding-right: 0.75rem;
+                        color: $color-green;
+                        font-size: 1.5rem;
+                        height: 2.65rem;
                     }
                 }
                 //商品數量
                 .card-amount {
                     border-bottom: 1px solid #b1b1ac;
-                    padding-top: 0.3rem;
+
                     padding-bottom: 0.3rem;
+                    align-items: center;
                     .card-total-price {
                         font-size: 1.625rem;
                         font-weight: $fw-black;
@@ -45,23 +67,36 @@
                     }
                     .buy-num {
                         align-items: center;
-
+                        // 加減號
                         .equation {
-                            border: 2px solid $color-grey;
-                            border-radius: 50%;
+                            background: #fff;
+                            border: none;
+                            color: $color-grey;
+                            font-size: 2rem;
+                            padding-bottom: 0.6rem;
+                            font-weight: "normal";
                         }
                         //減號
                         .buy-num-minus {
+                            transition: 0.32s;
+                            &:hover {
+                                color: $color-green;
+                            }
                         }
                         //購買數量
                         .buy-num-num {
                             padding: 0px 0.95rem;
                             color: $color-green;
                             font-weight: $fw-black;
-                            font-size: 1.375rem;
+                            font-size: $fz-xxxx-lg;
                         }
                         //加號
                         .buy-num-plus {
+                            padding-right: 0;
+                            transition: 0.32s;
+                            &:hover {
+                                color: $color-green;
+                            }
                         }
                     }
                 }
@@ -77,6 +112,10 @@
                     letter-spacing: $ls-lg;
                     background-color: $color-light-green;
                     border: none;
+                    transition: 0.3s;
+                    &:hover {
+                        background-color: $color-green;
+                    }
                 }
             }
             //下面裝飾線
@@ -89,6 +128,24 @@
             .product-users-commit {
                 padding: 0 1.7rem;
                 //用戶圖片
+                .product-users-commit-filter {
+                    .product-users-commit-filter-star {
+                        color: $color-green;
+                    }
+                    .product-users-commit-filter-time {
+                        color: $color-green;
+                    }
+                    .product-users-commit-filter-icon {
+                        border: none;
+                        background-color: rgba(0, 0, 0, 0);
+                        transition: 0.3s;
+                        color: $color-grey;
+                        &:hover {
+                            color: $color-green;
+                        }
+                    }
+                }
+
                 .product-users-commit-photo {
                     width: 3.8rem;
                     height: 3.8rem;
@@ -101,8 +158,11 @@
                     }
                 }
                 .product-users-commit-data {
-                    border-bottom: 1px solid #668c4a;
+                    border-bottom: 1px solid $color-green;
                     padding-bottom: 2rem;
+                    &:last-child {
+                        margin-bottom: 3.2rem;
+                    }
                     .product-users-commit-userdata {
                         flex: 1 0 0;
                         //用戶名稱
@@ -117,6 +177,25 @@
                             flex: 0 0 1;
                             align-items: center;
                             letter-spacing: -0.5px;
+                            .user-data-report {
+                                color: $color-grey;
+                                font-weight: $fw-medium;
+                                border: none;
+                                background-color: rgba(0, 0, 0, 0);
+                            }
+                            .dropdown-menu {
+                                padding-left: 0.3rem;
+                                background-color: rgba(0, 0, 0, 0);
+                                min-width: 3rem;
+                                a {
+                                    text-decoration: none;
+                                    color: $color-black;
+                                    transition: 0.3s;
+                                    &:hover {
+                                        color: $color-light-red;
+                                    }
+                                }
+                            }
                         }
                         //用戶給的評價
                         .product-users-commit-userdata-star {
@@ -128,9 +207,6 @@
                             padding-top: 1rem;
                             font-weight: $fw-medium;
                         }
-                    }
-                    &:last-child() {
-                        margin-bottom: 2rem;
                     }
                 }
             }

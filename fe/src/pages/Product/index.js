@@ -15,7 +15,6 @@ import ProductsDetails from "./component/ProductsDetails";
 
 const Product = () => {
   const [error, setError] = useState(null);
-
   //後端資料使用陣列格式，所以這邊給她空陣列
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);

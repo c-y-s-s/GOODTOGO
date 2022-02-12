@@ -1,5 +1,10 @@
+// -------- 商品評論 --------
+
 .products-commit {
-    margin-top: 4.5rem;
+    margin-top: 10rem;
+
+    // 區塊置中
+    //設定寬度 75% 是因為 RWD 要變成 100%
     .products-commit-total {
         width: 75%;
         margin: auto;
@@ -10,6 +15,7 @@
         width: 75%;
         margin: auto;
         .user-data {
+            // -------- 用戶照片 --------
             .user-photo {
                 width: 4.1rem;
                 height: 4.1rem;
@@ -23,20 +29,39 @@
 
             .user-data-name {
             }
+            // -------- 留言時間 --------
             .user-data-commit-time {
                 font-size: $fz-ss-sm;
                 color: $color-grey;
                 font-weight: $fw-medium;
             }
+            // -------- 檢舉按鈕 --------
             .user-data-report {
                 color: $color-grey;
                 font-weight: $fw-medium;
+                border: none;
+                background-color: rgba(0, 0, 0, 0);
+            }
+            .dropdown-menu {
+                padding-left: 0.3rem;
+                background-color: rgba(0, 0, 0, 0);
+                min-width: 3rem;
+                a {
+                    text-decoration: none;
+                    color: $color-black;
+                    transition: 0.3s;
+                    &:hover {
+                        color: $color-light-red;
+                    }
+                }
             }
             .product-data {
                 padding-right: 1.92rem;
+                // -------- 商品名稱 --------
                 .product-data-name {
                     color: $color-grey;
                 }
+                // -------- 商品圖片 --------
                 .product-photo {
                     width: 7rem;
                     height: 5rem;
@@ -48,6 +73,7 @@
                 }
             }
         }
+        // -------- 用戶評論 --------
         .user-commit {
             padding-right: 3.5rem;
             font-size: $fz-md;
@@ -55,6 +81,7 @@
     }
 }
 
+// -------- 平板 RWD --------
 @media screen and (max-width: 768px) {
     .products-commit {
         .product-commit {
@@ -69,6 +96,7 @@
     }
 }
 
+// -------- 手機 RWD --------
 @media screen and (max-width: 390px) {
     .products-commit {
         .products-commit-total {
