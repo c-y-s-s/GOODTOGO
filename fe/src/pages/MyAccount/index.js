@@ -6,6 +6,7 @@ import { API_URL } from "../../utils/config";
 import "../../styles/index.scss";
 import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
 import TwCitySelector from "tw-city-selector";
+import headShot from "./images/headShot.png";
 
 const MyAccount = () => {
   const [data, setData] = useState([]);
@@ -43,15 +44,19 @@ const MyAccount = () => {
           <div className="col-lg-2">
             {/* -------- 會員頭貼 -------- */}
             <div className="user_Info d-flex align-items-center mb-5">
-              <div className="headShot"></div>
+              <div>
+                <div className="headShot">
+                  <img src={headShot} alt="" className="cover-fit" />
+                </div>
+              </div>
               <p className="ms-4 mb-0 text-nowrap">王小明</p>
             </div>
             {/* -------- 左方選單列開始 -------- */}
-            <ul className="list-unstyled">
+            <ul className="list-unstyled text-nowrap d-flex d-lg-block align-items-start justify-content-around">
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    "d-flex align-items-center mb-2 me-5 text-decoration-none menu_Title_unActive" +
+                    "d-flex align-items-center mb-3 me-5 text-decoration-none menu_Title_unActive" +
                     (isActive ? " menu_Open" : " menu_Close")
                   }
                   to={
@@ -60,12 +65,14 @@ const MyAccount = () => {
                     "/my_account/like-list"
                   }
                 >
-                  <FiUser className="menu_Icon" />
+                  <div>
+                    <FiUser className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">我的帳戶</span>
                 </NavLink>
                 {/* -------- 我的帳戶選單開始 -------- */}
                 <div className="menu_Open">
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled mb-4">
                     <li className="mb-2">
                       <NavLink
                         className={({ isActive }) =>
@@ -79,7 +86,7 @@ const MyAccount = () => {
                         會員資料修改
                       </NavLink>
                     </li>
-                    <li className="my-2">
+                    <li className="mb-2">
                       <NavLink
                         className={({ isActive }) =>
                           "menu_Text text-decoration-none" +
@@ -112,12 +119,14 @@ const MyAccount = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    "d-flex align-items-center my-3 me-5 text-decoration-none" +
+                    "d-flex align-items-center mb-3 me-5 text-decoration-none" +
                     (isActive ? " menu_Title_Active" : " menu_Title_unActive")
                   }
                   to="/my_account/order"
                 >
-                  <FiClipboard className="menu_Icon" />
+                  <div>
+                    <FiClipboard className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">我的訂單</span>
                 </NavLink>
               </li>
@@ -129,7 +138,9 @@ const MyAccount = () => {
                   }
                   to="/my_account/coupon"
                 >
-                  <FiGift className="menu_Icon" />
+                  <div>
+                    <FiGift className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">優惠券</span>
                 </NavLink>
               </li>
@@ -137,16 +148,19 @@ const MyAccount = () => {
             {/* -------- 左方選單列結束 -------- */}
           </div>
           <div className="col-lg-10">
-            <div>會員資料修改</div>
+            <div className="page_Title">會員資料修改</div>
             <hr></hr>
             {/* -------- 會員資料表單開始 -------- */}
             <form>
               <div className="row">
                 {/* -------- 表單左 -------- */}
-                <div className="col-lg-7 form_Text">
+                <div className="col-lg-7 form_Text pe-5">
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="name" className="col-sm-2">
+                      <label
+                        htmlFor="name"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         姓名
                       </label>
                       <input
@@ -163,7 +177,10 @@ const MyAccount = () => {
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="email" className="col-sm-2">
+                      <label
+                        htmlFor="email"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         電子信箱
                       </label>
                       <input
@@ -180,7 +197,10 @@ const MyAccount = () => {
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="password" className="col-sm-2">
+                      <label
+                        htmlFor="password"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         密碼
                       </label>
                       <input
@@ -191,13 +211,19 @@ const MyAccount = () => {
                         value="123233434"
                         disabled
                       />
+                      <button className="btn btn_Password ms-3">
+                        更改密碼
+                      </button>
                     </div>
                     <div className="error text-danger text-end"></div>
                   </div>
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="phone" className="col-sm-2">
+                      <label
+                        htmlFor="phone"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         手機號碼
                       </label>
                       <input
@@ -213,21 +239,63 @@ const MyAccount = () => {
                   </div>
 
                   <div className="my-4">
-                    <label htmlFor="address">地址</label>
-                    <div className="d-inline">
-                      <div className="city-selector-standard-words d-inline">
-                        <select className="county form-select"></select>
+                    <div className="d-flex align-items-center text-nowrap">
+                      <label
+                        htmlFor="address"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
+                        地址
+                      </label>
+                      <div className="city-selector-standard-words d-flex flex-grow-1">
+                        <select className="county form-select me-3"></select>
                         <select className="district form-select"></select>
                       </div>
                     </div>
-                    <div className="my-2">
-                      <input className="d-block" type="text" name="address" />
+                    <div className="d-flex align-items-center text-nowrap">
+                      <div className="col-3 col-sm-2 col-lg-3 col-xl-2"></div>
+                      <input
+                        id="address"
+                        type="text"
+                        name="address"
+                        className="form-control mt-4"
+                        // value=""
+                        placeholder="請輸入詳細地址"
+                      />
+                    </div>
+                    <div className="error text-danger text-end"></div>
+                  </div>
+
+                  <div className="d-flex align-items-center text-nowrap">
+                    <div className="col-3 col-sm-2 col-lg-3 col-xl-2"></div>
+                    <div className="d-flex justify-content-center w-100">
+                      <button
+                        type="submit"
+                        className="btn text-white btn_Submit"
+                      >
+                        儲&emsp;存
+                      </button>
                     </div>
                   </div>
-                  <button type="submit">儲存</button>
                 </div>
-                {/* -------- 表單右 -------- */}
-                <div className="col-lg-5">aaa</div>
+                {/* -------- 表單右 (上傳大頭照)-------- */}
+                <div className="col-lg-5">
+                  <div className="user_Upload_Img mt-4">
+                    <div>
+                      <div className="headShot">
+                        <img src={headShot} alt="" className="cover-fit" />
+                      </div>
+                    </div>
+                    <input type="file" className="" />
+                    <label class="btn btn-info">
+                      <input
+                        id="upload_img"
+                        style={{ display: "none" }}
+                        type="file"
+                      />
+                      <i class="fa fa-photo"></i> 上傳圖片
+                    </label>
+                  </div>
+                </div>
               </div>
             </form>
             {/* -------- 會員資料表單結束 -------- */}

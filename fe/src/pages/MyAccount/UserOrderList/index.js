@@ -6,6 +6,7 @@ import { API_URL } from "../../../utils/config";
 import "../../../styles/index.scss";
 import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
 import TwCitySelector from "tw-city-selector";
+import headShot from "./../images/headShot.png";
 
 const UserOrderList = () => {
   const [data, setData] = useState([]);
@@ -43,15 +44,19 @@ const UserOrderList = () => {
           <div className="col-lg-2">
             {/* -------- 會員頭貼 -------- */}
             <div className="user_Info d-flex align-items-center mb-5">
-              <div className="headShot"></div>
+              <div>
+                <div className="headShot">
+                  <img src={headShot} alt="" className="cover-fit" />
+                </div>
+              </div>
               <p className="ms-4 mb-0 text-nowrap">王小明</p>
             </div>
             {/* -------- 左方選單列開始 -------- */}
-            <ul className="list-unstyled">
+            <ul className="list-unstyled text-nowrap d-flex d-lg-block align-items-start justify-content-around">
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    "d-flex align-items-center mb-2 me-5 text-decoration-none menu_Title_unActive" +
+                    "d-flex align-items-center mb-3 me-5 text-decoration-none menu_Title_unActive" +
                     (isActive ? " menu_Open" : " menu_Close")
                   }
                   to={
@@ -60,12 +65,14 @@ const UserOrderList = () => {
                     "/my_account/like-list"
                   }
                 >
-                  <FiUser className="menu_Icon" />
+                  <div>
+                    <FiUser className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">我的帳戶</span>
                 </NavLink>
                 {/* -------- 我的帳戶選單開始 -------- */}
                 <div className="menu_Close">
-                  <ul className="list-unstyled">
+                  <ul className="list-unstyled mb-4">
                     <li className="mb-2">
                       <NavLink
                         className={({ isActive }) =>
@@ -79,7 +86,7 @@ const UserOrderList = () => {
                         會員資料修改
                       </NavLink>
                     </li>
-                    <li className="my-2">
+                    <li className="mb-2">
                       <NavLink
                         className={({ isActive }) =>
                           "menu_Text text-decoration-none" +
@@ -112,12 +119,14 @@ const UserOrderList = () => {
               <li>
                 <NavLink
                   className={({ isActive }) =>
-                    "d-flex align-items-center my-3 me-5 text-decoration-none" +
+                    "d-flex align-items-center mb-3 me-5 text-decoration-none" +
                     (isActive ? " menu_Title_Active" : " menu_Title_unActive")
                   }
                   to="/my_account/order"
                 >
-                  <FiClipboard className="menu_Icon" />
+                  <div>
+                    <FiClipboard className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">我的訂單</span>
                 </NavLink>
               </li>
@@ -129,7 +138,9 @@ const UserOrderList = () => {
                   }
                   to="/my_account/coupon"
                 >
-                  <FiGift className="menu_Icon" />
+                  <div>
+                    <FiGift className="menu_Icon d-flex" />
+                  </div>
                   <span className="menu_Title">優惠券</span>
                 </NavLink>
               </li>
@@ -137,7 +148,7 @@ const UserOrderList = () => {
             {/* -------- 左方選單列結束 -------- */}
           </div>
           <div className="col-lg-10">
-            <div>會員資料修改</div>
+            <div className="page_Title">會員資料修改</div>
             <hr></hr>
             {/* -------- 會員資料表單開始 -------- */}
             <form>
