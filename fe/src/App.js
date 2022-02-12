@@ -17,7 +17,8 @@ import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment" 
+import ProductComment from "../src/pages/Productcomment"; 
+import Admin from "./pages/Admin/";
 function App() {
   const [auth, setAuth] = useState(false);
   return (
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
+        <Route path="/admin" element={<Admin />}></Route>
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId" element={<Product />}></Route>
