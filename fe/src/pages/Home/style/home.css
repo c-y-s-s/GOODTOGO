@@ -625,12 +625,12 @@
   font-weight: 400;
 }
 
-.background-admin .background-admin-data .background-admin-data-left {
+.background-admin-data-left {
   background: #fff;
   min-width: 255px;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav {
+.background-admin-data-left .background-admin-data-left-nav {
   position: fixed;
   z-index: 10;
   width: 255px;
@@ -639,52 +639,52 @@
   padding-top: 3rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav .background-admin-data-left-nav-logo {
+.background-admin-data-left .background-admin-data-left-nav .background-admin-data-left-nav-logo {
   text-align: center;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav ul {
+.background-admin-data-left .background-admin-data-left-nav ul {
   list-style: none;
   padding-left: 0;
   margin-top: 2rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav ul li {
+.background-admin-data-left .background-admin-data-left-nav ul li {
   padding: 0;
   padding: 0.75rem 0;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav ul li img {
+.background-admin-data-left .background-admin-data-left-nav ul li img {
   width: 1.35rem;
   height: 1.35rem;
   padding-bottom: 0.1rem;
   margin-right: 0.5rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav ul li a {
+.background-admin-data-left .background-admin-data-left-nav ul li a {
   text-decoration: none;
   padding-left: 2.6rem;
   color: #d3d3d3;
   width: 100%;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav .active {
+.background-admin-data-left .background-admin-data-left-nav .active {
   border-left: 6px solid #668c4a;
   padding: 0.75rem 0;
 }
 
-.background-admin .background-admin-data .background-admin-data-left .background-admin-data-left-nav .active a {
+.background-admin-data-left .background-admin-data-left-nav .active a {
   color: #666666;
 }
 
-.background-admin .background-admin-data .background-admin-data-right {
+.background-admin-data-right {
   background-color: #668c4a;
   min-width: 100vw;
   position: absolute;
   height: 125vh;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav {
+.background-admin-data-right-nav {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -701,12 +701,12 @@
           box-shadow: 0.1rem 0.085rem 0.5rem rgba(19, 19, 19, 0.5);
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-title {
+.background-admin-data-right-nav .background-admin-data-right-nav-title {
   font-size: 1.375rem;
   margin-left: 285px;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content {
+.background-admin-data-right-nav .background-admin-data-right-nav-content {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -715,26 +715,26 @@
           align-items: center;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content .icon {
+.background-admin-data-right-nav .background-admin-data-right-nav-content .icon {
   color: #668c4a;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content .icon-border {
+.background-admin-data-right-nav .background-admin-data-right-nav-content .icon-border {
   border-right: 1px solid #ccc;
   padding-right: 1rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content .username {
+.background-admin-data-right-nav .background-admin-data-right-nav-content .username {
   font-size: 0.875rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content .user-photo {
+.background-admin-data-right-nav .background-admin-data-right-nav-content .user-photo {
   margin-left: 1rem;
   width: 2.5rem;
   height: 2.5rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-nav .background-admin-data-right-nav-content .user-photo img {
+.background-admin-data-right-nav .background-admin-data-right-nav-content .user-photo img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
@@ -742,55 +742,62 @@
   border-radius: 50%;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content {
+.background-admin-data-right-content {
   width: 1125px;
   background-color: #fff;
   margin-left: 570px;
   margin-top: 1.5rem;
   border-radius: 1.25rem;
   padding: 1rem;
+  height: 840px;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-sort {
+.background-admin-data-right-content .background-admin-data-right-sort {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   color: #666666;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-sort-options {
+.background-admin-data-right-content .background-admin-data-right-sort-options {
   min-width: 1rem;
   padding: 1rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-sort-options li a {
+.background-admin-data-right-content .background-admin-data-right-sort-options li a {
   text-decoration: none;
   color: #666666;
   -webkit-transform: 0.3s;
           transform: 0.3s;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-sort-options li a:hover {
+.background-admin-data-right-content .background-admin-data-right-sort-options li a:hover {
   color: #668c4a;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .text-end {
+.background-admin-data-right-content .text-end {
   color: #666666;
   font-weight: 600;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-content-table {
+@media screen and (max-width: 1650px) {
+  .background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content {
+    margin-left: 300px;
+  }
+}
+
+.background-admin-data-right-content-table {
   color: #262626;
   border-color: #d3d3d3;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-content-table tbody tr td {
+.background-admin-data-right-content-table tbody tr td {
   padding: 1.1rem 0;
   padding-left: 0.5rem;
   vertical-align: middle;
   font-size: 0.875rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-content-table tbody tr td a {
+.background-admin-data-right-content-table tbody tr td a {
   text-decoration: none;
   background-color: #a6bf4b;
   color: #fff;
@@ -798,8 +805,12 @@
   border-radius: 1rem;
 }
 
-.background-admin .background-admin-data .background-admin-data-right .background-admin-data-right-content .background-admin-data-right-content-pages {
-  background-color: yellow;
+.background-admin-data-right-content-pages ul li {
+  margin: 0px 0.2rem;
+}
+
+.background-admin-data-right-content-pages ul li a {
+  color: #666666;
 }
 
 @media screen and (max-width: 1650px) {

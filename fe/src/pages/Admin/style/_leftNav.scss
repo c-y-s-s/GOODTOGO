@@ -1,0 +1,48 @@
+// 左邊欄位區塊開始
+.background-admin-data-left {
+    background: #fff;
+    min-width: 255px;
+    // 左欄樣式讓他固定在左邊不動
+    .background-admin-data-left-nav {
+        position: fixed;
+        z-index: 10;
+        width: 255px;
+        height: 100%;
+        background: #fff;
+        padding-top: 3rem;
+        .background-admin-data-left-nav-logo {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 2rem;
+            li {
+                padding: 0;
+                padding: 0.75rem 0;
+                img {
+                    width: 1.35rem;
+                    height: 1.35rem;
+                    padding-bottom: 0.1rem;
+                    margin-right: 0.5rem;
+                }
+                a {
+                    text-decoration: none;
+                    padding-left: 2.6rem;
+                    color: $color-light-grey;
+                    width: 100%;
+                }
+            }
+        }
+
+        .active {
+            border-left: 6px solid $color-green;
+            padding: 0.75rem 0;
+
+            a {
+                color: $color-dark-grey;
+            }
+        }
+    }
+    // 左邊欄位區塊結束
+}

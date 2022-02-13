@@ -1,0 +1,23 @@
+.background-admin-data-right-content-table {
+    color: $color-black;
+    border-color: $color-light-grey;
+
+    tbody {
+        tr {
+            td {
+                padding: 1.1rem 0;
+                padding-left: 0.5rem;
+                vertical-align: middle;
+                font-size: $fz-sm;
+
+                a {
+                    text-decoration: none;
+                    background-color: $color-light-green;
+                    color: #fff;
+                    padding: 0.4rem;
+                    border-radius: 1rem;
+                }
+            }
+        }
+    }
+}
