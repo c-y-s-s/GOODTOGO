@@ -1,0 +1,76 @@
+.background-storebg-data-right-content-table {
+  color: $color-black;
+  border-color: $color-light-grey;
+
+  tbody {
+    tr {
+      td {
+        padding: 1.1rem 0;
+        padding-left: 0.5rem;
+        vertical-align: middle;
+        font-size: $fz-sm;
+
+        // a {
+        //   text-decoration: none;
+        //   background-color: $color-light-red;
+        //   color: #fff;
+        //   padding: 0.4rem;
+        //   border-radius: 1rem;
+        // }
+      }
+    }
+  }
+}
+
+.product-photo {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.storebg-data-green {
+  text-decoration: none;
+  background-color: $color-light-green;
+  color: #fff;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  &:hover {
+    color: $color-light-red;
+  }
+}
+.storebg-data-modal-green {
+  text-decoration: none;
+  background-color: $color-light-green;
+  color: #fff;
+  // padding: 0.4rem;
+  // border-radius: 1rem;
+  &:hover {
+    color: $color-light-red;
+  }
+}
+
+.storebg-data-red {
+  text-decoration: none;
+  background-color: $color-light-red;
+  color: #fff;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  outline: none;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+// bootstrap 彈出視窗 頁首 刪除水平線
+.modal-header {
+  border-bottom: 0 none;
+}
+// bootstrap 彈出視窗 頁尾 刪除水平線
+.modal-footer {
+  border-top: 0 none;
+}
