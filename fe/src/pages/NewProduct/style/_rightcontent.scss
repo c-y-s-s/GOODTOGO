@@ -1,0 +1,38 @@
+.background-newproduct-data-right-content {
+    width: 1125px;
+    background-color: #fff;
+    margin-left: 570px;
+    margin-top: 1.5rem;
+    border-radius: 1.25rem;
+    padding: 1rem;
+    height: 700px;
+    .background-newproduct-data-right-sort {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        color: $color-dark-grey;
+    }
+    .background-newproduct-data-right-sort-options {
+        min-width: 1rem;
+        padding: 1rem;
+        li {
+            a {
+                text-decoration: none;
+                color: $color-dark-grey;
+                transform: 0.3s;
+                &:hover {
+                    color: $color-green;
+                }
+            }
+        }
+    }
+    .text-end {
+        color: $color-dark-grey;
+        font-weight: 600;
+    }
+}
+//白色區塊RWD調margin
+@media screen and (max-width: 1650px) {
+    .background-newproduct .background-newproduct-data .background-newproduct-data-right .background-newproduct-data-right-content {
+        margin-left: 300px;
+    }
+}
