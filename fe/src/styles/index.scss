@@ -81,16 +81,13 @@ $footer-height: 15.063rem;
   font-weight: $fw-medium;
 }
 
-<<<<<<< HEAD
 //------echo
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
-@import "../pages/Product/styles/product.scss";
 @import "../pages/Admin/style/admin.scss";
 @import "../pages/MyAccount/styles/myAccount.scss";
 // @import "../pages/Product/styles/product.scss";
-=======
 //-------- 頁首 --------
 @import "./navbar";
 //-------- 頁尾 --------
@@ -98,11 +95,10 @@ $footer-height: 15.063rem;
 //-------- 首頁 --------
 @import "../pages/Home/style/home.scss";
 //-------- 註冊中心 --------
->>>>>>> af86651 (feat - 註冊\登\入忘記密碼切版完成)
 @import "../pages/Register/style/register.scss";
 //-------- 登入 --------
 @import "../pages/Login/style/login.scss";
 //-------- 會員中心 --------
 // @import "../pages/MyAccount/styles/myAccount.scss";
 //-------- 商品列表 --------
-// @import "../pages/Product/styles/product.scss";
+@import "../pages/Product/styles/product.scss";
