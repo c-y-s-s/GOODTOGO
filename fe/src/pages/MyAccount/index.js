@@ -2,23 +2,22 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
-// import "./styles/myAccount.scss";
 import "../../styles/index.scss";
-import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
-import TwCitySelector from "tw-city-selector";
+import { FiUser, FiClipboard, FiGift, FiFolder } from "react-icons/fi";
+// import TwCitySelector from "tw-city-selector";
 import headShot from "./images/headShot.png";
 
 const MyAccount = () => {
   const [data, setData] = useState([]);
 
   // -------- 地址選擇器 --------
-  new TwCitySelector({
-    el: ".city-selector-standard-words",
-    elCounty: ".county", // 在 el 裡查找 element
-    elDistrict: ".district", // 在 el 裡查找 element
-    elZipcode: ".zipcode", // 在 el 裡查找 element
-    standardWords: true, // 使用正體字 臺
-  });
+  // new TwCitySelector({
+  //   el: ".city-selector-standard-words",
+  //   elCounty: ".county", // 在 el 裡查找 element
+  //   elDistrict: ".district", // 在 el 裡查找 element
+  //   elZipcode: ".zipcode", // 在 el 裡查找 element
+  //   standardWords: true, // 使用正體字 臺
+  // });
 
   useEffect(() => {
     // http://localhost:3002/api/users
@@ -40,7 +39,7 @@ const MyAccount = () => {
 
     <div>
       <div className="container my-5">
-        <div className="row">
+        <div className="row size">
           <div className="col-lg-2">
             {/* -------- 會員頭貼 -------- */}
             <div className="user_Info d-flex align-items-center mb-5">
@@ -238,7 +237,7 @@ const MyAccount = () => {
                     <div className="error text-danger text-end"></div>
                   </div>
 
-                  <div className="my-4">
+                  {/* <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
                       <label
                         htmlFor="address"
@@ -263,7 +262,7 @@ const MyAccount = () => {
                       />
                     </div>
                     <div className="error text-danger text-end"></div>
-                  </div>
+                  </div> */}
 
                   <div className="d-flex align-items-center text-nowrap">
                     <div className="col-3 col-sm-2 col-lg-3 col-xl-2"></div>
@@ -286,13 +285,16 @@ const MyAccount = () => {
                       </div>
                     </div>
                     <input type="file" className="" />
-                    <label class="btn btn-info">
+                    <label class="btn btn_Upload">
                       <input
-                        id="upload_img"
+                        id="upload_headShot"
                         style={{ display: "none" }}
                         type="file"
                       />
-                      <i class="fa fa-photo"></i> 上傳圖片
+                      <div>
+                        <FiFolder className="menu_Icon d-flex" />
+                      </div>
+                      <span>選擇圖片</span>
                     </label>
                   </div>
                 </div>

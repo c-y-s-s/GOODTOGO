@@ -1,7 +1,22 @@
-// .size {
-//   margin: auto 90px;
-//   padding: 0;
-// }
+@mixin btn_OutLine($fz-sm, $color-green) {
+  font-size: $fz-sm;
+  color: $color-green;
+  border-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  letter-spacing: $ls-sm;
+  height: 2.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  &:hover {
+    background-color: $color-green;
+    border-color: $color-green;
+    color: white;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
 
 .cover-fit {
   width: 100%;
@@ -133,37 +148,23 @@
   letter-spacing: -0.3rem;
 }
 
-.form-select {
-  border-radius: 2px;
-  color: $color-dark-grey;
-  font-size: $fz-sm;
-  letter-spacing: $ls-sm;
-  height: 2.5rem;
-  &:focus {
-    box-shadow: none;
-    border-color: $color-green;
-  }
-}
+// -------- 地址 下拉式選單 (刪除) --------
+// .form-select {
+//   border-radius: 2px;
+//   color: $color-dark-grey;
+//   font-size: $fz-sm;
+//   letter-spacing: $ls-sm;
+//   height: 2.5rem;
+//   &:focus {
+//     box-shadow: none;
+//     border-color: $color-green;
+//   }
+// }
 
 // -------- 按鈕 --------
+
 .btn_Password {
-  font-size: $fz-sm;
-  color: $color-green;
-  border-color: $color-green;
-  border-color: $color-green;
-  border-radius: 2px;
-  letter-spacing: $ls-sm;
-  height: 2.5rem;
-  padding-left: 15px;
-  padding-right: 15px;
-  &:hover {
-    background-color: $color-green;
-    border-color: $color-green;
-    color: white;
-  }
-  &:focus {
-    box-shadow: none;
-  }
+  @include btn_OutLine($fz-sm, $color-green);
 }
 
 .btn_Submit {
@@ -190,5 +191,15 @@
     border: 1px solid $color-light-grey;
     border-radius: 50%;
     margin: 0 auto;
+  }
+}
+
+.btn_Upload {
+  @include btn_OutLine($fz-sm, $color-green);
+  width: 100%;
+  &:hover {
+    .menu_Icon {
+      color: white;
+    }
   }
 }
