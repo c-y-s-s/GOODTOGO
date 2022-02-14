@@ -1,6 +1,10 @@
 const express = require("express");
 const router = express.Router();
+<<<<<<< HEAD
 const argon2 = require("argon2");
+=======
+const argon = require("argon2");
+>>>>>>> d19a37b (doc - app.js拿掉拿掉root overflow:hidden; be在在server.js加上加上urlencode)
 const connection = require("../utils/db");
 
 //-------- 後端驗證套件 express-validator --------
@@ -12,14 +16,14 @@ const passwordRule = [
   body("confirmPassword")
     .trim()
     .custom((value, { req }) => {
-      return value === req.body.password;
+      return value == req.body.password;
     })
     .withMessage("兩次輸入的密碼不相同"),
 ];
 
 // /api/auth/register
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
-  // console.log(res.body);
+  console.log(req.body);
   //TODO: 確認格式是否正確
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -41,6 +45,7 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
     });
   }
 
+  // console.log(users);
   //TODO:雜湊密碼
   try {
     const hashpassword = await argon2.hash(req.body.password);
