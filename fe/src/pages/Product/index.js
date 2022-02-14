@@ -9,13 +9,12 @@ import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
 import StoreButton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
-import StoreProductsCommit from "./component/StoreProductsCommit";
+import StoreProductsCommit from "./component/Productscommit.js";
 import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
 const Product = () => {
   const [error, setError] = useState(null);
-
   //後端資料使用陣列格式，所以這邊給她空陣列
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
