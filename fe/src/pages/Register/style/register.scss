@@ -1,6 +1,5 @@
 .reg-con {
   background: $color-yellow;
-<<<<<<< HEAD
   padding: 4rem;
 
   .content {
@@ -18,7 +17,6 @@
   .input-label-title {
     font-size: $fz-x-lg;
   }
-=======
 }
 .btn-fb-login {
   color: white;
@@ -27,19 +25,14 @@
 }
 .label-group {
   font-size: $fz-sm;
->>>>>>> 6415498 (feat - 註冊欄位)
-  .custom-input {
-    border-radius: 2px;
-    border: 2px solid $color-light-grey;
-  }
-<<<<<<< HEAD
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
 }
 
 .label-group {
   font-size: $fz-sm;
-
-=======
->>>>>>> 6415498 (feat - 註冊欄位)
   .btn-register {
     background-color: $color-green;
     color: white;

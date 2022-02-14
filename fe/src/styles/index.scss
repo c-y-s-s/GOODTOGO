@@ -44,7 +44,32 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
 
 // -------- 高度 --------
 $navbar-height: 6.25rem;
+
 $footer-height: 15.063rem;
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-x-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
 
 // -------- 文字樣式 --------
 .text-light {
@@ -81,7 +106,6 @@ $footer-height: 15.063rem;
   font-weight: $fw-medium;
 }
 
-// @import "../pages/Product/styles/product.scss";
 //-------- 頁首 --------
 @import "./navbar";
 //-------- 頁尾 --------
