@@ -1,0 +1,41 @@
+.reg-con {
+  background: $color-yellow;
+  padding: 4rem;
+
+  .content {
+    background-color: white;
+    .btn-fb-login {
+      color: white;
+      background-color: #3b5998;
+      border-radius: 2px;
+      .big-icon {
+        font-size: 26px;
+      }
+    }
+  }
+  // -------- input樣式 --------
+  .input-label-title {
+    font-size: $fz-x-lg;
+  }
+}
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+.label-group {
+  font-size: $fz-sm;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
+
+.label-group {
+  font-size: $fz-sm;
+  .btn-register {
+    background-color: $color-green;
+    color: white;
+    border-radius: 2px;
+  }
+}

@@ -1,13 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+// -------- icons --------
 import { AiOutlineEnvironment } from "react-icons/ai";
 import { RiUserSmileLine } from "react-icons/ri";
 import { BiUserCircle } from "react-icons/bi";
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
-
-import Login from "../pages/Login";
-import Register from "../pages/Register";
 
 const Navbar = ({ auth }) => {
   return (
@@ -42,19 +41,17 @@ const Navbar = ({ auth }) => {
             </Link>
           </li>
           <li className="nav-icons">
-            {auth ? (
-              <>
-                <Link to="/member" className="nav-icon">
-                  <RiUserSmileLine className="me-2" />{" "}
-                </Link>
-              </>
-            ) : (
-              <>
-                <Link to="/login" className="nav-icon">
-                  <BiUserCircle className="me-2" />
-                </Link>
-              </>
-            )}
+            <Link to="/login">
+              <BiUserCircle
+                role="button"
+                className=" nav-icon"
+                data-bs-toggle="popover"
+                data-bs-placement="bottom"
+                data-bs-content="會員登入"
+                da
+                ta-bs-container="body"
+              />
+            </Link>
           </li>
           <li className="nav-icons">
             <Link to="/cart" className=" nav-icon">

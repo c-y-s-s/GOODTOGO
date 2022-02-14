@@ -1,9 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
 #root {
   width: 100vw;
+<<<<<<< HEAD
   font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
     "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
     sans-serif;
+=======
+  overflow: hidden;
+<<<<<<< HEAD
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+>>>>>>> 9520249 (doc - 將首頁模組化)
+=======
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+    "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+    sans-serif;
+>>>>>>> 102b439 (doc - 解衝突)
   color: #666666;
   font-size: 1rem;
   font-weight: 400;
@@ -448,7 +459,12 @@
   .card-body
   .card-value
   .card-price {
+<<<<<<< HEAD
   font-size: 1.25rem;
+=======
+  font-size: 1.125rem;
+  font-weight: 700;
+>>>>>>> 102b439 (doc - 解衝突)
 }
 
 .products-details .products-details-data .card .card-body .card-text {
@@ -469,6 +485,7 @@
   height: 2.65rem;
 }
 
+<<<<<<< HEAD
 .products-details .products-details-data .card .card-body .card-amount {
   border-bottom: 1px solid #b1b1ac;
   padding-bottom: 0.3rem;
@@ -477,6 +494,8 @@
   align-items: center;
 }
 
+=======
+>>>>>>> 102b439 (doc - 解衝突)
 .products-details
   .products-details-data
   .card
@@ -506,12 +525,17 @@
   .card-amount
   .buy-num
   .equation {
+<<<<<<< HEAD
   background: #fff;
   border: none;
   color: #b1b1ac;
   font-size: 2rem;
   padding-bottom: 0.6rem;
   font-weight: "normal";
+=======
+  border: 2px solid #b1b1ac;
+  border-radius: 50%;
+>>>>>>> 102b439 (doc - 解衝突)
 }
 
 .products-details
@@ -520,6 +544,7 @@
   .card-body
   .card-amount
   .buy-num
+<<<<<<< HEAD
   .buy-num-minus {
   -webkit-transition: 0.32s;
   transition: 0.32s;
@@ -541,6 +566,8 @@
   .card-body
   .card-amount
   .buy-num
+=======
+>>>>>>> 102b439 (doc - 解衝突)
   .buy-num-num {
   padding: 0px 0.95rem;
   color: #668c4a;
@@ -601,6 +628,7 @@
   .products-details-data
   .card
   .product-users-commit
+<<<<<<< HEAD
   .product-users-commit-filter
   .product-users-commit-filter-star {
   color: #668c4a;
@@ -641,6 +669,8 @@
   .products-details-data
   .card
   .product-users-commit
+=======
+>>>>>>> 102b439 (doc - 解衝突)
   .product-users-commit-photo {
   width: 3.8rem;
   height: 3.8rem;
@@ -672,8 +702,16 @@
   .products-details-data
   .card
   .product-users-commit
+<<<<<<< HEAD
   .product-users-commit-data:last-child {
   margin-bottom: 3.2rem;
+=======
+  .product-users-commit-data
+  .product-users-commit-userdata {
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 0px;
+  flex: 1 0 0;
+>>>>>>> 102b439 (doc - 解衝突)
 }
 
 .products-details
@@ -681,6 +719,7 @@
   .card
   .product-users-commit
   .product-users-commit-data
+<<<<<<< HEAD
   .product-users-commit-userdata {
   -webkit-box-flex: 1;
   -ms-flex: 1 0 0px;
@@ -692,6 +731,8 @@
   .card
   .product-users-commit
   .product-users-commit-data
+=======
+>>>>>>> 102b439 (doc - 解衝突)
   .product-users-commit-userdata
   .product-users-commit-userdata-name {
   letter-spacing: 0.1rem;
@@ -722,6 +763,7 @@
   .product-users-commit
   .product-users-commit-data
   .product-users-commit-userdata
+<<<<<<< HEAD
   .product-users-commit-userdata-time
   .user-data-report {
   color: #b1b1ac;
@@ -776,6 +818,8 @@
   .product-users-commit
   .product-users-commit-data
   .product-users-commit-userdata
+=======
+>>>>>>> 102b439 (doc - 解衝突)
   .product-users-commit-userdata-star {
   padding-top: 1rem;
 }
@@ -830,6 +874,7 @@
   margin-right: 0.5rem;
 }
 
+<<<<<<< HEAD
 .background-admin-data-left .background-admin-data-left-nav ul li a {
   text-decoration: none;
   padding-left: 2.6rem;
@@ -840,6 +885,26 @@
 .background-admin-data-left .background-admin-data-left-nav .active {
   border-left: 6px solid #668c4a;
   padding: 0.75rem 0;
+=======
+.menu_Open {
+  -webkit-transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: auto;
+  opacity: 1;
+}
+
+.menu_Close {
+  -webkit-transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  display: none;
+>>>>>>> 102b439 (doc - 解衝突)
 }
 
 .background-admin-data-left .background-admin-data-left-nav .active a {
@@ -875,6 +940,7 @@
   margin-left: 285px;
 }
 
+<<<<<<< HEAD
 .background-admin-data-right-nav .background-admin-data-right-nav-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -882,6 +948,43 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+=======
+.form_Text div label {
+  letter-spacing: 0.05rem;
+}
+<<<<<<< HEAD
+
+=======
+>>>>>>> 9520249 (doc - 將首頁模組化)
+.reg-con {
+  background: #f2c53d;
+}
+
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.label-group {
+  font-size: 0.875rem;
+}
+
+.label-group .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.label-group .btn-register {
+  background-color: #668c4a;
+  color: white;
+  border-radius: 2px;
+<<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> 9520249 (doc - 將首頁模組化)
+>>>>>>> 5f02a46 (doc - 解衝突)
+=======
+>>>>>>> 9c56999 (doc - 解衝突)
 }
 
 .background-admin-data-right-nav
@@ -1011,3 +1114,10 @@
   }
 }
 /*# sourceMappingURL=index.css.map */
+=======
+}
+/*# sourceMappingURL=index.css.map */
+>>>>>>> 9520249 (doc - 將首頁模組化)
+=======
+/*# sourceMappingURL=index.css.map */
+>>>>>>> 102b439 (doc - 解衝突)

@@ -1,3 +1,4 @@
+// -------- 字體 --------
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
 
 // -------- color 顏色區 --------
@@ -37,23 +38,89 @@ $fw-bold: 500; // bold
 $fw-black: 700; // black
 
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
-  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+
+// -------- 高度 --------
+$navbar-height: 6.25rem;
+$footer-height: 15.063rem;
+
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-x-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
+
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-x-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
 
 #root {
-  width: 100vw;
-  //寫這個我的後台會不見餒
-  // overflow: hidden;
   font-family: $font-family;
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
+  .container {
+    max-width: 1140px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
-//------echo
-$navbar-height: 6.25rem;
-$footer-height: 15.063rem;
-
+//-------- 頁首 --------
+@import "./navbar";
+//-------- 頁尾 --------
+@import "./footer";
+//-------- 首頁 --------
+@import "../pages/Home/style/home.scss";
+//-------- 註冊中心 --------
+@import "../pages/Register/style/register.scss";
+//-------- 登入 --------
+@import "../pages/Login/style/login.scss";
+//-------- 會員中心 --------
+// @import "../pages/MyAccount/styles/myAccount.scss";
+// -------- 商品列表 --------
 @import "../pages/Product/styles/product.scss";
+// -------- 管理員後台 --------
 @import "../pages/Admin/style/admin.scss";
-@import "../pages/MyAccount/styles/myAccount.scss";

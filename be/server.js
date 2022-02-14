@@ -9,11 +9,22 @@ const cors = require("cors");
 
 let app = express();
 
+app.use(express.urlencoded({ extended: true }));
+//要讓express認得json
+app.use(express.json());
+
 //使用 cors 設定的中間鍵，開放所有網域皆可連線
-app.use(cors());
+// app.use(cors());
+app.use(
+  cors({
+    // 為了要讓 browser 在 CORS 的情況下還是幫我們送 cookie
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  })
+);
 
-
-
+let authRouter = require("./routers/auth");
+app.use("/api/auth", authRouter);
 
 // :TODO: -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
