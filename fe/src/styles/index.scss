@@ -44,8 +44,8 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
 
 // -------- 高度 --------
 $navbar-height: 6.25rem;
-
 $footer-height: 15.063rem;
+
 // -------- 文字樣式 --------
 .text-light {
   color: white;
@@ -97,13 +97,15 @@ $footer-height: 15.063rem;
 }
 
 #root {
-  width: 100vw;
-  //寫這個我的後台會不見餒
-  // overflow: hidden;
   font-family: $font-family;
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
+  .container {
+    max-width: 1140px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 //-------- 頁首 --------
@@ -118,5 +120,7 @@ $footer-height: 15.063rem;
 @import "../pages/Login/style/login.scss";
 //-------- 會員中心 --------
 // @import "../pages/MyAccount/styles/myAccount.scss";
-//-------- 商品列表 --------
+// -------- 商品列表 --------
 @import "../pages/Product/styles/product.scss";
+// -------- 管理員後台 --------
+@import "../pages/Admin/style/admin.scss";

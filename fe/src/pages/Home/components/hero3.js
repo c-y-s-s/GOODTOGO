@@ -61,3 +61,4 @@ const hero3 = () => {
     </div>
   );
 };
+export default hero3;
