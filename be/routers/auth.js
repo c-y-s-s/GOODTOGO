@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const argon = require("argon2");
+const argon2 = require("argon2");
 const connection = require("../utils/db");
 
 //-------- 後端驗證套件 express-validator --------
@@ -41,9 +41,22 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
     });
   }
 
-  // console.log(users);
   //TODO:雜湊密碼
+  try {
+    const hashpassword = await argon2.hash(req.body.password);
+    console.log(hashpassword);
+  } catch (err) {
+    return res.status(400).send({
+      code: "33003",
+      msg: "密碼處理失敗",
+    });
+  }
   //TODO:存入資料庫
+  let [result] = await connection.execute(
+    "INSERT INTO users (emails, password, name, photo) VALUES (?,?,?,?)",
+    [req.body.email, hashpassword, req.body.name, req.body.phone]
+  );
+  console.log(result);
   res.json({ message: "ok" });
 });
 module.exports = router;

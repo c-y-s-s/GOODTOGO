@@ -4,7 +4,7 @@ import LoginForm from "./components/LoginForm";
 import Reset from "./components/Reset";
 
 const Login = () => {
-  const [toggleLogin, setToggleLogin] = useState("login"); //register
+  // const [toggleLogin, setToggleLogin] = useState("login"); //register
   return (
     <>
       <div className="container-fluid login-con">
