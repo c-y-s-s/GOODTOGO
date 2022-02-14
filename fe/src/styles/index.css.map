@@ -19,6 +19,7 @@
         "../pages/Admin/style/_rightcontent.scss",
         "../pages/Admin/style/_table.scss",
         "../pages/Admin/style/_pageunation.scss"
+        "../pages/MyAccount/styles/myAccount.scss"
     ],
     "names": [],
     "file": "index.css"
