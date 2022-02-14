@@ -1,6 +1,7 @@
 import React from "react";
 
 // -------- 圖檔 --------
+<<<<<<< HEAD
 import Hero3Food from "../images/hero3Food.png";
 import { ReactComponent as Hero3Text } from "../images/hero3Text.svg";
 import { ReactComponent as Hero3Text1 } from "../images/hero3Text-1.svg";
@@ -9,12 +10,23 @@ import { ReactComponent as Hero3Tower } from "../images/hero3Tower.svg";
 import { ReactComponent as Hero3Earth } from "../images/hero3Earth.svg";
 // import { ReactComponent as WaveB } from "../images/waveB.svg";
 // import { ReactComponent as Wave } from "../images/wave.svg";
+=======
+import Hero3Food from "../images/food.png";
+import { ReactComponent as Hero3Text } from "../images/hero3Text.svg";
+import { ReactComponent as Hero3Tower } from "../images/hero3Tower.svg";
+import { ReactComponent as Hero3Earth } from "../images/hero3Earth.svg";
+import { ReactComponent as WaveB } from "../images/waveB.svg";
+>>>>>>> 9520249 (doc - 將首頁模組化)
 
 const hero3 = () => {
   return (
     <div className="hero3">
       <div className="d-flex justify-content-between">
+<<<<<<< HEAD
         <div className="hero3-info hero-text-sm">
+=======
+        <div className="hero3Info hero-text-sm">
+>>>>>>> 9520249 (doc - 將首頁模組化)
           <Hero3Text className="hero3Text" />
           <br />
           台灣一天丟棄的廚餘量，可以堆 100 棟 101 大樓
@@ -24,6 +36,7 @@ const hero3 = () => {
           比中國大陸、日本、韓國平均多 20 ％
         </div>
         <img src={Hero3Food} alt="food" />
+<<<<<<< HEAD
       </div>
       <Hero3Text1 className="mb-5 " />
       <div className="hero-text-sm text-light">
@@ -33,10 +46,17 @@ const hero3 = () => {
       </div>
       <div className="container-fluid wave-bg p-0">
         {/* <div className="wave">
+=======
+        {/* <div className="hero3food" /> */}
+      </div>
+
+      <div className="wave">
+>>>>>>> 9520249 (doc - 將首頁模組化)
         <div className="waveA" />
         <div className="waveA" />
         <div className="waveA" />
         <WaveB className="waveB" />
+<<<<<<< HEAD
       </div> */}
         <Hero3Tower className="hero3Tower" />
 
@@ -58,6 +78,11 @@ const hero3 = () => {
           <div className="col-lg-1"></div>
         </div>
       </div>
+=======
+      </div>
+      <Hero3Tower />
+      <Hero3Earth className="hero3Earth" />
+>>>>>>> 9520249 (doc - 將首頁模組化)
     </div>
   );
 };

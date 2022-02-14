@@ -1,0 +1,62 @@
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
+#root {
+  width: 100vw;
+  overflow: hidden;
+  font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #666666;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+<<<<<<< Updated upstream
+=======
+.reg-con {
+  background: #f2c53d;
+}
+
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.label-group {
+  font-size: 0.875rem;
+}
+
+.label-group .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.label-group .btn-register {
+  background-color: #668c4a;
+  color: white;
+  border-radius: 2px;
+}
+
+>>>>>>> Stashed changes
+.login-con {
+  background: #f2c53d;
+  height: calc(100vh - $navbar-height);
+  padding-top: calc((100vh - $navbar-height - 578px) / 2);
+}
+
+.login-con .content {
+  background: white;
+  height: 578px;
+  width: 475px;
+  -webkit-filter: drop-shadow(0 0 0.5rem #b1b1ac);
+          filter: drop-shadow(0 0 0.5rem #b1b1ac);
+  margin: auto;
+}
+
+.label-title {
+  color: #668c4a;
+}
+
+.submit-btn {
+  background-color: #668c4a;
+  color: white;
+}
+/*# sourceMappingURL=login.css.map */

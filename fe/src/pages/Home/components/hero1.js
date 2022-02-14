@@ -4,7 +4,10 @@ import { Link } from "react-router-dom";
 // -------- svg圖檔 --------
 import { ReactComponent as Hero1Text } from "../images/hero1Text.svg";
 import { ReactComponent as Hero1TextArrow } from "../images/hero1TextArrow.svg";
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9520249 (doc - 將首頁模組化)
 const hero1 = () => {
   return (
     <div className="hero1">

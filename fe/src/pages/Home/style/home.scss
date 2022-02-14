@@ -15,6 +15,7 @@
 
 // -------- hero 1 --------
 <<<<<<< HEAD
+<<<<<<< HEAD
 @import "./_hero1.scss";
 =======
 .hero1 {
@@ -50,6 +51,9 @@
   }
 }
 >>>>>>> 63d10a5 (debug - 首頁跑版)
+=======
+@import "./_hero1.scss";
+>>>>>>> 9520249 (doc - 將首頁模組化)
 // -------- hero 2 --------
 @import "./_hero2.scss";
 // -------- hero 3 --------
@@ -57,6 +61,7 @@
 // -------- hero 4 --------
 @import "./_hero4.scss";
 // -------- hero 5 --------
+<<<<<<< HEAD
 <<<<<<< HEAD
 @import "./_hero5.scss";
 =======
@@ -77,6 +82,9 @@
     // background-size:100%  ;
   }
 }
+=======
+@import "./_hero5.scss";
+>>>>>>> 9520249 (doc - 將首頁模組化)
 // -------- footer --------
 footer {
   height: $footer-height;

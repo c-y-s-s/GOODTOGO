@@ -1,11 +1,17 @@
 import React from "react";
+<<<<<<< HEAD
 
 <<<<<<< HEAD
+=======
+import "../Home/style/home.scss";
+
+>>>>>>> 9520249 (doc - 將首頁模組化)
 import Hero1 from "./components/hero1";
 import Hero2 from "./components/hero2";
 import Hero3 from "./components/hero3";
 import Hero4 from "./components/hero4";
 import Hero5 from "./components/hero5";
+<<<<<<< HEAD
 =======
 // --------引用圖片--------
 import { ReactComponent as Hero1Text } from "./images/hero1Text.svg";
@@ -23,16 +29,22 @@ import { ReactComponent as Hero4Logo } from "./images/hero4Logo.svg";
 //-------- icons --------
 import { BiRightArrowAlt } from "react-icons/bi";
 >>>>>>> 6415498 (feat - 註冊欄位)
+=======
+>>>>>>> 9520249 (doc - 將首頁模組化)
 
 const Home = () => {
   return (
     <div className="container-fluid p-0">
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9520249 (doc - 將首頁模組化)
       <Hero1 />
       <Hero2 />
       <Hero3 />
       <Hero4 />
       <Hero5 />
+<<<<<<< HEAD
 =======
       <div className="hero1">
         <div className="row p-0 m-0">
@@ -124,6 +136,8 @@ const Home = () => {
         <div className="container-fluid hero5-bg m-0 p-0"></div>
       </div>
 >>>>>>> 53c5f90 (feat - login)
+=======
+>>>>>>> 9520249 (doc - 將首頁模組化)
     </div>
   );
 };
