@@ -2,13 +2,13 @@ import React from "react";
 
 // -------- svg圖檔 --------
 import { ReactComponent as Hero2Text } from "../images/hero2Text.svg";
-import { ReactComponent as Hero2Trash } from "../images/hero2Trash.svg";
+// import { ReactComponent as Hero2Trash } from "../images/hero2Trash.svg";
 
 const hero2 = () => {
   return (
     <div className="hero2 d-flex">
       <div className="col-lg-6">
-        <Hero2Trash />
+        <img src="../images/hero2Trash.png" alt="hero2Trash" />
       </div>
       <div className="col-lg-6">
         <div className="hero2Info hero-text-sm">
