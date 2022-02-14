@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
 
 import { ImFacebook2 } from "react-icons/im";
-import Reset from "./StoreReset";
+import StoreReset from "./StoreReset";
 
 const LoginForm = ({
   fields,

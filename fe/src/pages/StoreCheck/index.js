@@ -12,7 +12,7 @@ const Storecheck = () => {
           <div className="col-lg-4 m-0 p-0">
             <Logo className="" />
           </div>
-          <div className="col-lg-8 m-0 p-0">
+          <div className="col-lg-7 m-0 p-0">
             <div className="content text-center row justify-content-between gy-0">
               <div className="col-lg-1  m-0 p-0"></div>
               <div className="col-lg-10 mt-3 mb-3 p-0 ">
