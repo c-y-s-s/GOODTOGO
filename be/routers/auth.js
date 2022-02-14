@@ -1,10 +1,7 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
 const argon2 = require("argon2");
-=======
-const argon = require("argon2");
->>>>>>> d19a37b (doc - app.js拿掉拿掉root overflow:hidden; be在在server.js加上加上urlencode)
+const argon2 = require("argon2");
 const connection = require("../utils/db");
 
 //-------- 後端驗證套件 express-validator --------
@@ -45,7 +42,6 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
     });
   }
 
-  // console.log(users);
   //TODO:雜湊密碼
   try {
     const hashpassword = await argon2.hash(req.body.password);
