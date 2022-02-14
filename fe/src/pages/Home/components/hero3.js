@@ -1,15 +1,14 @@
 import React from "react";
 
 // -------- 圖檔 --------
-import Hero3Food from "../images/food.png";
+import Hero3Food from "../images/hero3Food.png";
 import { ReactComponent as Hero3Text } from "../images/hero3Text.svg";
 import { ReactComponent as Hero3Text1 } from "../images/hero3Text-1.svg";
 import { ReactComponent as Hero3Text3 } from "../images/hero3Text-3.svg";
 import { ReactComponent as Hero3Tower } from "../images/hero3Tower.svg";
-// import { ReactComponent as Hero3Man } from "../images/hero3human.svg";
 import { ReactComponent as Hero3Earth } from "../images/hero3Earth.svg";
-import { ReactComponent as WaveB } from "../images/waveB.svg";
-import { ReactComponent as Wave } from "../images/wave.svg";
+// import { ReactComponent as WaveB } from "../images/waveB.svg";
+// import { ReactComponent as Wave } from "../images/wave.svg";
 
 const hero3 = () => {
   return (
@@ -25,7 +24,6 @@ const hero3 = () => {
           比中國大陸、日本、韓國平均多 20 ％
         </div>
         <img src={Hero3Food} alt="food" />
-        {/* <div className="hero3food" /> */}
       </div>
       <Hero3Text1 className="mb-5 " />
       <div className="hero-text-sm text-light">

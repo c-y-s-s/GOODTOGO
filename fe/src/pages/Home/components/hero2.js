@@ -8,7 +8,7 @@ const hero2 = () => {
   return (
     <div className="hero2 d-flex">
       <div className="col-lg-6">
-        <img src="../images/hero2Trash.png" alt="hero2Trash" />
+        <img src={require("../images/hero2Trash.png")} alt="hero2Trash" />
       </div>
       <div className="col-lg-6">
         <div className="hero2Info hero-text-sm">
