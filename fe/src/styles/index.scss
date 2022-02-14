@@ -62,11 +62,10 @@ $footer-height: 15.063rem;
 .no-link {
   text-decoration: none;
 }
-// -------- input 標頭 --------
+// -------- input樣式 --------
 .input-label-title {
   font-size: $fz-x-lg;
 }
-// --------  input 欄位 --------
 .custom-input {
   border-radius: 2px;
   border: 2px solid $color-light-grey;
@@ -107,13 +106,6 @@ $footer-height: 15.063rem;
   font-weight: $fw-medium;
 }
 
-<<<<<<< HEAD
-=======
-//------echo
-$navbar-height: 6.25rem;
-$footer-height: 15.063rem;
-
->>>>>>> 102b439 (doc - 解衝突)
 //-------- 頁首 --------
 @import "./navbar";
 //-------- 頁尾 --------
