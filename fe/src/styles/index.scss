@@ -41,12 +41,17 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #root {
-  width: 100vw;
-  overflow: hidden;
+  // width: 100vw;
+  // overflow: hidden;
   font-family: $font-family;
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
+  .container {
+    max-width: 1140px;
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 //------echo

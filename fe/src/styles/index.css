@@ -1,11 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
 #root {
-  width: 100vw;
-  overflow: hidden;
   font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #666666;
   font-size: 1rem;
   font-weight: 400;
+}
+
+#root .container {
+  max-width: 1140px;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .storeLogo {
@@ -396,18 +400,18 @@
   font-weight: 400;
 }
 
+.cover-fit {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
 .user_Info .headShot {
   height: 5rem;
   width: 5rem;
   border: 1px solid #d3d3d3;
   border-radius: 50%;
-}
-
-.user_Info .headShot .cover-fit {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .user_Info p {
@@ -476,15 +480,16 @@
 
 .page_Title {
   font-size: 1.125rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.15rem;
 }
 
 .form_Text div label {
-  letter-spacing: 0.05rem;
+  letter-spacing: 0.1rem;
+  color: #999999;
 }
 
-.form_Text div input {
-  border: 1px solid #b1b1ac;
+.error {
+  height: 10px;
 }
 
 .form-control {
@@ -500,7 +505,7 @@
 
 .form-control::-webkit-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #aaa;
+  color: #b1b1ac;
   font-size: 0.875rem;
   letter-spacing: 0.05rem;
   opacity: 1;
@@ -509,7 +514,7 @@
 
 .form-control:-ms-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #aaa;
+  color: #b1b1ac;
   font-size: 0.875rem;
   letter-spacing: 0.05rem;
   opacity: 1;
@@ -518,7 +523,7 @@
 
 .form-control::-ms-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #aaa;
+  color: #b1b1ac;
   font-size: 0.875rem;
   letter-spacing: 0.05rem;
   opacity: 1;
@@ -527,7 +532,7 @@
 
 .form-control::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #aaa;
+  color: #b1b1ac;
   font-size: 0.875rem;
   letter-spacing: 0.05rem;
   opacity: 1;
@@ -537,16 +542,8 @@
 .form-control:disabled,
 .form-control[readonly] {
   background-color: #eaf1e4;
-}
-
-.form-select {
-  border-radius: 2px;
-}
-
-.form-select:focus {
-  -webkit-box-shadow: none;
-          box-shadow: none;
-  border-color: #668c4a;
+  color: #666666;
+  letter-spacing: -0.3rem;
 }
 
 .btn_Password {
@@ -556,11 +553,15 @@
   border-color: #668c4a;
   border-radius: 2px;
   letter-spacing: 0.05rem;
+  height: 2.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .btn_Password:hover {
   background-color: #668c4a;
   border-color: #668c4a;
+  color: white;
 }
 
 .btn_Password:focus {
@@ -569,11 +570,12 @@
 }
 
 .btn_Submit {
-  font-size: 0.9375rem;
-  width: 300px;
+  font-size: 0.875rem;
+  width: 60%;
   background-color: #668c4a;
   border-color: #668c4a;
   border-radius: 2px;
+  height: 2.5rem;
 }
 
 .btn_Submit:hover {
@@ -584,5 +586,41 @@
 .btn_Submit:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.user_Upload_Img .headShot {
+  height: 10rem;
+  width: 10rem;
+  border: 1px solid #d3d3d3;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.btn_Upload {
+  font-size: 0.875rem;
+  color: #668c4a;
+  border-color: #668c4a;
+  border-color: #668c4a;
+  border-radius: 2px;
+  letter-spacing: 0.05rem;
+  height: 2.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  width: 100%;
+}
+
+.btn_Upload:hover {
+  background-color: #668c4a;
+  border-color: #668c4a;
+  color: white;
+}
+
+.btn_Upload:focus {
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+
+.btn_Upload:hover .menu_Icon {
+  color: white;
 }
 /*# sourceMappingURL=index.css.map */
