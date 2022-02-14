@@ -1,12 +1,27 @@
-import React from 'react';
-
+import React from "react";
+import { FiMinusCircle } from "react-icons/fi";
+import { FiPlusCircle } from "react-icons/fi";
+import { FiAlertCircle } from "react-icons/fi";
+import { FiX } from "react-icons/fi";
+import { RiArrowUpDownFill } from "react-icons/ri";
+import { FiMoreVertical } from "react-icons/fi";
+// -------- 商品光箱 --------
 const ProductsDetails = () => {
   return (
     <div>
+      {/* -------- 商品資訊上半部分 -------- */}
       <div className="container products-details">
         <div className="col-12 mt-5 products-details-data">
-          <div className="card mx-auto" style={{ width: `25rem` }}>
-            <img src={require(`../../../images/store_img/01.jpg`)} alt="" />
+          <div className="card mx-auto" style={{ width: `22rem` }}>
+            <div className="product-logo">
+              <img
+                className=""
+                src={require(`../../../images/store_img/01.jpg`)}
+              />
+            </div>
+            <button className="products-close">
+              <FiX />
+            </button>
             <div className="card-body py-4">
               <h5 className="card-title">鴨肉蓋飯</h5>
               <div className="d-flex justify-content-between card-value">
@@ -16,9 +31,14 @@ const ProductsDetails = () => {
               <p className="card-text mb-0">
                 使用特選鴨肉及米飯，吃得出師傅的好手藝及食材本身的美味
               </p>
-              <p className=" card-text">本商品不附帶免洗餐具</p>
+              <div className=" card-text d-flex align-items-center">
+                <div className="fialert-circle">
+                  <FiAlertCircle />
+                </div>
+                本商品不附帶免洗餐具
+              </div>
               <div>
-                <div className="d-flex justify-content-between">
+                <div className="d-flex justify-content-between pt-4">
                   <div>合計金額</div>
                   <div>餐點剩餘 0</div>
                 </div>
@@ -26,10 +46,15 @@ const ProductsDetails = () => {
                 <div className="d-flex justify-content-between card-amount">
                   <div className="card-total-price ">NT $ 240</div>
                   <div className="d-flex buy-num">
-                    <button className="btn buy-num-minus equation">-</button>
-
+                    {/* 減號 */}
+                    <button className=" buy-num-minus equation">
+                      <FiMinusCircle />
+                    </button>
                     <div className=" buy-num-num ">4</div>
-                    <button className="btn buy-num-plus equation">+</button>
+                    {/* 加號 */}
+                    <button className=" buy-num-plus equation">
+                      <FiPlusCircle />
+                    </button>
                   </div>
                 </div>
               </div>
@@ -39,14 +64,26 @@ const ProductsDetails = () => {
                 </a>
               </div>
             </div>
+            {/* -------- 商品資訊上半部分結束 -------- */}
+
             {/* 裝飾條 */}
             <div className="decorative "></div>
-            {/* 評論區塊阿~~~ */}
+            {/* --------- 評論區塊 --------*/}
             <div class="product-users-commit">
               <div className="commit-filter d-flex justify-content-between mt-4">
-                <div className="d-flex">
-                  <div className="me-2">評分</div>
-                  <div>留言時間</div>
+                <div className="d-flex product-users-commit-filter">
+                  <div className="me-2 product-users-commit-filter-star">
+                    評分
+                    <button className="product-users-commit-filter-icon">
+                      <RiArrowUpDownFill />
+                    </button>
+                  </div>
+                  <div className="product-users-commit-filter-time">
+                    留言時間
+                    <button className="product-users-commit-filter-icon">
+                      <RiArrowUpDownFill />
+                    </button>
+                  </div>
                 </div>
                 <div>共 6 則評論</div>
               </div>
@@ -66,7 +103,19 @@ const ProductsDetails = () => {
                     </div>
                     <div className="d-flex product-users-commit-userdata-time">
                       <div>2022-2-10 10:10 PM</div>
-                      <div>:</div>
+                      <div className="">
+                        <button
+                          class=" user-data-report"
+                          type="button"
+                          data-bs-toggle="dropdown"
+                          aria-expanded="false"
+                        >
+                          <FiMoreVertical />
+                        </button>
+                        <ul class="dropdown-menu">
+                          <a href="">檢舉</a>
+                        </ul>
+                      </div>
                     </div>
                   </div>
 
@@ -77,6 +126,7 @@ const ProductsDetails = () => {
                 </div>
               </div>
             </div>
+            {/* --------- 評論區塊結束--------*/}
           </div>
         </div>
       </div>

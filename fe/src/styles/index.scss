@@ -42,7 +42,8 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
 
 #root {
   width: 100vw;
-  overflow: hidden;
+  //寫這個我的後台會不見餒
+  // overflow: hidden;
   font-family: $font-family;
   color: $color-dark-grey;
   font-size: $fz-lg;
@@ -54,4 +55,5 @@ $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
 @import "../pages/Product/styles/product.scss";
+@import "../pages/Admin/style/admin.scss";
 @import "../pages/MyAccount/styles/myAccount.scss";
