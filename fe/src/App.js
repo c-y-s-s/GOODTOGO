@@ -11,14 +11,19 @@ import Map from "./pages/Map";
 import About from "./pages/About";
 import Store from "./pages/Store";
 import StoreList from "./pages/StoreList";
-import StoreCheck from "./pages/StoreCheck";
+import Storecheck from "./pages/StoreCheck";
+import StoreReset from "./pages/StoreCheck/components/StoreReset";
+import StoreLogin from "./pages/StoreCheck/components/StoreLogin";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment" 
+import ProductComment from "../src/pages/Productcomment";
+import Reset from "./pages/Login/components/Reset";
+
 function App() {
+  // -------- 判斷登入與否 --------
   const [auth, setAuth] = useState(false);
   return (
     <Router>
@@ -35,8 +40,12 @@ function App() {
         ></Route>
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/reset" element={<Reset />}></Route>
         <Route path="/register" element={<Register />}></Route>
         <Route path="/my_account" element={<MyAccount />}></Route>
+        <Route path="/Storecheck" element={<Storecheck />}></Route>
+        <Route path="/StoreLogin" element={<StoreLogin />}></Route>
+        <Route path="/StoreReset" element={<StoreReset />}></Route>
       </Routes>
 
       {/* <StoreList />

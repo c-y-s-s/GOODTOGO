@@ -8,6 +8,31 @@
   font-weight: 400;
 }
 
+.reg-con {
+  background: #f2c53d;
+}
+
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.label-group {
+  font-size: 0.875rem;
+}
+
+.label-group .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.label-group .btn-register {
+  background-color: #668c4a;
+  color: white;
+  border-radius: 2px;
+}
+
 .login-con {
   background: #f2c53d;
   height: calc(100vh - $navbar-height);

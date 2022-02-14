@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Routes, Route, Link } from "react-router-dom";
-import LoginForm from "./components/LoginForm";
-import Reset from "./components/Reset";
+import LoginForm from "./LoginForm";
+import Reset from "./StoreReset";
+import "../Storecheck.scss"
 
-const Login = () => {
+const StoreLogin = () => {
   const [fields, setFields] = useState({
     email: "",
     password: "",
@@ -50,7 +51,7 @@ const Login = () => {
   };
   return (
     <>
-      <div className="container-fluid login-con">
+      <div className="container-fluid storelogin-con">
         <div className="row">
           <div className="col-lg-4 m-0 p-0"></div>
           <div className="col-lg-4 m-0 p-0">
@@ -79,4 +80,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default StoreLogin;

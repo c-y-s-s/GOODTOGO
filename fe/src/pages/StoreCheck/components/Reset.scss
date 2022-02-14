@@ -1,5 +1,7 @@
-.login-con {
-  background: $color-yellow;
+@import "../../styles/index.scss";
+
+.storelogin-con {
+  background: $color-green;
   // height: calc(100vh - $navbar-height);
   // padding-top: calc((100vh - $navbar-height - 578px) / 2);
   padding: 4rem;

@@ -7,7 +7,7 @@ import { API_URL } from "../../utils/config";
 import StoreLogo from "./component/StoreLogo";
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
-import Storebutton from "./component/StoreButton";
+import Storebutton from "./component/Storebutton";
 import StoreCard from "./component/StoreCard";
 import StoreProductsCommit from "./component/StoreProductsCommit";
 // -------- 引入元件區塊結束 --------
