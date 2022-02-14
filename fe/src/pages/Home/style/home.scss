@@ -57,4 +57,71 @@
 // -------- hero 4 --------
 @import "./_hero4.scss";
 // -------- hero 5 --------
+<<<<<<< HEAD
 @import "./_hero5.scss";
+=======
+.hero5 {
+  overflow: hidden;
+  .hero5-bg {
+    background: radial-gradient(
+        rgba(166, 191, 75, 0.3),
+        rgba(102, 140, 74, 0.3)
+      ),
+      url(../images/hero5.svg);
+    height: 45.375rem;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-blend-mode: soft-light;
+
+    filter: blur(3px);
+    // background-size:100%  ;
+  }
+}
+// -------- footer --------
+footer {
+  height: $footer-height;
+  .footerSec1 {
+    width: 1140px;
+    margin: 49px auto;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    .footerIcon {
+      height: 40px;
+    }
+
+    span {
+      margin: 0;
+      line-height: 40px;
+      color: $color-dark-grey;
+    }
+    .link-groups {
+      width: 350px;
+      .FooterLink {
+        color: $color-dark-grey;
+        text-decoration: none;
+        padding: 10px 0 10px 30px;
+        justify-content: center;
+        align-items: center;
+        font-size: 14px;
+        line-height: 20.27px;
+      }
+    }
+  }
+  .split {
+    background-color: $color-grey;
+    height: 1px;
+    margin: auto;
+    width: 1140px;
+  }
+  .footerSec2 {
+    width: 1140px;
+    margin: 24px auto;
+    color: $color-grey;
+
+    justify-content: flex-end;
+    align-items: center;
+    box-sizing: border-box;
+  }
+}
+>>>>>>> 6415498 (feat - 註冊欄位)

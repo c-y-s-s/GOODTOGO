@@ -1,10 +1,28 @@
 import React from "react";
 
+<<<<<<< HEAD
 import Hero1 from "./components/hero1";
 import Hero2 from "./components/hero2";
 import Hero3 from "./components/hero3";
 import Hero4 from "./components/hero4";
 import Hero5 from "./components/hero5";
+=======
+// --------引用圖片--------
+import { ReactComponent as Hero1Text } from "./images/hero1Text.svg";
+import { ReactComponent as Hero1TextArrow } from "./images/hero1TextArrow.svg";
+import { ReactComponent as Hero2Text } from "./images/hero2Text.svg";
+import { ReactComponent as Hero2Trash } from "./images/hero2Trash.svg";
+import Hero3Food from "./images/food.png";
+import { ReactComponent as Hero3Text } from "./images/hero3Text.svg";
+import { ReactComponent as Hero3Tower } from "./images/hero3Tower.svg";
+import { ReactComponent as Hero3Earth } from "./images/hero3Earth.svg";
+import { ReactComponent as WaveB } from "./images/waveB.svg";
+import { ReactComponent as Hero4Text } from "./images/hero4Text.svg";
+import { ReactComponent as Hero4Logo } from "./images/hero4Logo.svg";
+
+//-------- icons --------
+import { BiRightArrowAlt } from "react-icons/bi";
+>>>>>>> 6415498 (feat - 註冊欄位)
 
 const Home = () => {
   return (
@@ -59,7 +77,8 @@ const Home = () => {
             <br />
             比中國大陸、日本、韓國平均多 20 ％
           </div>
-          <div className="hero3food" />
+          <img src={Hero3Food} alt="food" />
+          {/* <div className="hero3food" /> */}
         </div>
 
         <div className="wave">
