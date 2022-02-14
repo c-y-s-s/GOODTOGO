@@ -12,12 +12,12 @@ const Login = () => {
           <div className="col-lg-4 m-0 p-0"></div>
           <div className="col-lg-4 m-0 p-0">
             <div className="content text-center row justify-content-between gy-0">
-              <div className="col-lg-1"></div>
-              <div className="col-lg-10 row mt-4 mb-4 flex-column justify-content-evenly align-items-center">
+              <div className="col-lg-2"></div>
+              <div className="col-lg-8 row mt-4 mb-4 flex-column justify-content-evenly align-items-center">
                 <LoginForm />
                 {/* <Reset /> */}
               </div>
-              <div className="col-lg-1"></div>
+              <div className="col-lg-2"></div>
             </div>
           </div>
           <div className="col-lg-4 m-0 p-0"></div>
