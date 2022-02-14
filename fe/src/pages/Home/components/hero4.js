@@ -23,7 +23,7 @@ const hero4 = () => {
           <div className="box"></div>
           <div className="box"></div>
           <div className="box"></div>
-          <div className="col-lg-3 hero4-btn-group flex-column d-flex justify-content-evenly align-items-center">
+          <div className="col-lg-3 hero4-btn-group  text-light flex-column d-flex justify-content-evenly align-items-center">
             <Hero4Logo />
             <p className="align-middle m-0">探索您周邊的即期美食</p>
 

@@ -42,9 +42,34 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
   sans-serif;
 
-// -------- 欄位高度 --------
+// -------- 高度 --------
 $navbar-height: 6.25rem;
+
 $footer-height: 15.063rem;
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-x-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
 
 #root {
   width: 100vw;
@@ -56,6 +81,7 @@ $footer-height: 15.063rem;
   font-weight: $fw-medium;
 }
 
+<<<<<<< HEAD
 //------echo
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
@@ -64,5 +90,19 @@ $footer-height: 15.063rem;
 @import "../pages/Admin/style/admin.scss";
 @import "../pages/MyAccount/styles/myAccount.scss";
 // @import "../pages/Product/styles/product.scss";
+=======
+//-------- 頁首 --------
+@import "./navbar";
+//-------- 頁尾 --------
+@import "./footer";
+//-------- 首頁 --------
+@import "../pages/Home/style/home.scss";
+//-------- 註冊中心 --------
+>>>>>>> af86651 (feat - 註冊\登\入忘記密碼切版完成)
 @import "../pages/Register/style/register.scss";
+//-------- 登入 --------
+@import "../pages/Login/style/login.scss";
+//-------- 會員中心 --------
 // @import "../pages/MyAccount/styles/myAccount.scss";
+//-------- 商品列表 --------
+// @import "../pages/Product/styles/product.scss";
