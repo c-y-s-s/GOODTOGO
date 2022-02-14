@@ -7,7 +7,7 @@ import { API_URL } from "../../utils/config";
 import StoreLogo from "./component/StoreLogo";
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
-import Storebutton from "./component/StoreButton";
+import StoreButton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
 import StoreProductsCommit from "./component/StoreProductsCommit";
 import ProductsDetails from "./component/ProductsDetails";
@@ -74,7 +74,7 @@ const Product = () => {
         {/*-------- 遮雨棚區塊 --------*/}
         <StoreCanopy canopy={canopyTotal} />
         {/* -------- 餐點、評論按鈕 --------*/}
-        <Storebutton storeId={storeId} />
+        <StoreButton storeId={storeId} />
       </div>
 
       {/* ------- 商品資訊 --------*/}
