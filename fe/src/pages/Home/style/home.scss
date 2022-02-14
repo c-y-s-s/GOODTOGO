@@ -1,3 +1,7 @@
+@import "../../../styles/index.scss";
+// $navbar-height: 6.25rem;
+// $footer-height: 15.063rem;
+
 .hero-text-sm {
   font-size: 1.25rem;
   line-height: 2.5rem;
@@ -10,7 +14,42 @@
 }
 
 // -------- hero 1 --------
+<<<<<<< HEAD
 @import "./_hero1.scss";
+=======
+.hero1 {
+  // display: block;
+  padding: 0;
+  .row {
+    background-image: url(../images/hero1.svg);
+    height: 47.188rem;
+    width: 100vw;
+    .hero1-btn {
+      position: relative;
+      top: 6.5rem;
+      margin: 0;
+      margin-left: 3.5rem;
+      .hero1-btn-arrow {
+        position: relative;
+        top: 4.063rem;
+        left: -3rem;
+      }
+      &:hover {
+        .hero1-btn-arrow {
+          animation: btn-go 0.9s infinite linear;
+        }
+      }
+      @keyframes btn-go {
+        0% {
+        }
+        100% {
+          transform: translateX(1rem);
+        }
+      }
+    }
+  }
+}
+>>>>>>> 63d10a5 (debug - 首頁跑版)
 // -------- hero 2 --------
 @import "./_hero2.scss";
 // -------- hero 3 --------
