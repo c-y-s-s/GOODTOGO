@@ -9,6 +9,7 @@
   font-weight: 400;
 }
 
+<<<<<<< HEAD
 .storeLogo {
   height: 300px;
   position: relative;
@@ -875,6 +876,7 @@
   margin-left: 285px;
 }
 
+<<<<<<< HEAD
 .background-admin-data-right-nav .background-admin-data-right-nav-content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -882,6 +884,35 @@
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+=======
+.form_Text div label {
+  letter-spacing: 0.05rem;
+=======
+.reg-con {
+  background: #f2c53d;
+}
+
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.label-group {
+  font-size: 0.875rem;
+}
+
+.label-group .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.label-group .btn-register {
+  background-color: #668c4a;
+  color: white;
+  border-radius: 2px;
+>>>>>>> 9520249 (doc - 將首頁模組化)
+>>>>>>> 5f02a46 (doc - 解衝突)
 }
 
 .background-admin-data-right-nav
