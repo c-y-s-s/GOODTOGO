@@ -22,6 +22,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cors());
 
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);

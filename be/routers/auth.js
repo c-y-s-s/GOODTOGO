@@ -12,14 +12,14 @@ const passwordRule = [
   body("confirmPassword")
     .trim()
     .custom((value, { req }) => {
-      return value == req.body.password;
+      return value === req.body.password;
     })
     .withMessage("兩次輸入的密碼不相同"),
 ];
 
 // /api/auth/register
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
-  console.log(req.body);
+  // console.log(res.body);
   //TODO: 確認格式是否正確
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
