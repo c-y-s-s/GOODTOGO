@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Store from "./pages/Store";
 import StoreBg from "./pages/Storebg";
 import NewProduct from "./pages/NewProduct";
+import StoreProfileEditing from "./pages/StoreProfileEditing";
 import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
@@ -23,17 +24,24 @@ import UserCoupon from "./pages/MyAccount/UserCoupon";
 import UserCreditCard from "./pages/MyAccount/UserCreditCard";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment" 
+import ProductComment from "../src/pages/Productcomment";
 function App() {
   const [auth, setAuth] = useState(false);
+  // 後台不用頁首頁尾
+  const [isAdmin, setIsAdmin] =useState(true)
+
   return (
     <Router>
-      <Navbar auth={auth} />
+      <Navbar auth={auth} isAdmin={isAdmin}/>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
         <Route path="/storebg" element={<StoreBg />}></Route>
         <Route path="/newproduct" element={<NewProduct />}></Route>
+        <Route
+          path="/storeprofileediting"
+          element={<StoreProfileEditing />}
+        ></Route>
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId" element={<Product />}></Route>
@@ -55,7 +63,7 @@ function App() {
       <StoreCheck />
 
       <Product /> */}
-      <Footer />
+      <Footer isAdmin={isAdmin}/>
     </Router>
   );
 }
