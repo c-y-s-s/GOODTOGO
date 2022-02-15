@@ -38,7 +38,7 @@ const Table = () => {
             <td>
               <button
                 type="button"
-                class="btn storebg-data-red rounded-pill"
+                className="btn storebg-data-red rounded-pill"
                 data-bs-toggle="modal"
                 data-bs-target="#takeDown"
               >
