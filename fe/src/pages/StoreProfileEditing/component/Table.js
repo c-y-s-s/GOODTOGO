@@ -1,5 +1,4 @@
 import React from "react";
-
 const Table = () => {
   return (
     <div>
@@ -93,8 +92,9 @@ const Table = () => {
                   <select
                     className="form-select mx-1 text-muted"
                     aria-label="Default select example"
+                    defaultValue=""
                   >
-                    <option selected>請選擇縣市</option>
+                    <option value="">請選擇縣市</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -102,8 +102,9 @@ const Table = () => {
                   <select
                     className="form-select mx-1 text-muted"
                     aria-label="Default select example"
+                    defaultValue=""
                   >
-                    <option selected>請選擇區域</option>
+                    <option value="">請選擇區域</option>
                     <option value="1">One</option>
                     <option value="2">Two</option>
                     <option value="3">Three</option>
@@ -120,21 +121,124 @@ const Table = () => {
               </div>
             </div>
           </div>
-          <div className="col-6 d-flex justify-content-center">
+          <div className="col-6">
             <div className="mb-3">
-              <label
-                htmlFor="formFile"
-                className="form-label d-flex justify-content-center fw-bold"
-              >
-                商品圖片
-              </label>
+              <div className="d-flex justify-content-between">
+                <label htmlFor="logoImage" className="form-label fw-bold">
+                  店家 Logo 圖像
+                </label>
+                <label className="text-danger">
+                  限用.jpg/.jpeg/.png檔 上限 2MB
+                </label>
+              </div>
               <input
-                className="mt-3 form-control"
+                className=" form-control"
                 type="file"
-                id="formFile"
-                data-buttonText="Your label here."
+                id="logoImage"
+                accept=".png, .jpg, .jpeg"
               />
-
+            </div>
+            <div className="mb-3">
+              <div className="d-flex justify-content-between">
+                <label htmlFor="logoImage" className="form-label fw-bold">
+                  店家營業登記證
+                </label>
+                <label className="text-danger">
+                  限用.jpg/.jpeg/.png檔 上限 2MB
+                </label>
+              </div>
+              <input
+                className=" form-control"
+                type="file"
+                id="businessLicense"
+                accept=".png, .jpg, .jpeg"
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="name" className="form-label fw-bold">
+                營業星期 (複選)
+              </label>
+              <div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox1"
+                    value="option1"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox2"
+                    value="option2"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox3"
+                    value="option3"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox3"
+                    value="option3"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox3"
+                    value="option3"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox3"
+                    value="option3"
+                  />
+                </div>
+                <div className="form-check form-check-inline">
+                  <input
+                    className="form-check-input"
+                    type="checkbox"
+                    id="inlineCheckbox3"
+                    value="option3"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox1">
+                  一
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox2">
+                  二
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox3">
+                  三
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox4">
+                  四
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox5">
+                  五
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox6">
+                  六
+                </label>
+                <label className="form-check-label  form-check-inline" htmlFor="inlineCheckbox7">
+                  日
+                </label>
+              </div>
             </div>
           </div>
         </div>
