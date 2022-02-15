@@ -42,11 +42,11 @@ function App() {
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/my_account/like-list" element={<UserLikeList />}></Route>
-        <Route path="/my_account/order" element={<UserOrderList />}></Route>
-        <Route path="/my_account/coupon" element={<UserCoupon />}></Route>
-        <Route path="/my_account/payment" element={<UserCreditCard />}></Route>
-        <Route path="/my_account" element={<MyAccount />}></Route>
+        <Route path="/member/like" element={<UserLikeList />}></Route>
+        <Route path="/member/order" element={<UserOrderList />}></Route>
+        <Route path="/member/coupon" element={<UserCoupon />}></Route>
+        <Route path="/member/payment" element={<UserCreditCard />}></Route>
+        <Route path="/member/profile" element={<MyAccount />}></Route>
       </Routes>
 
       {/* <StoreList />

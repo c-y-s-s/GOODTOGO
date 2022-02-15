@@ -2,23 +2,11 @@ import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-// import "./styles/myAccount.scss";
-import "../../../styles/index.scss";
-import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
-import TwCitySelector from "tw-city-selector";
+import { FiUser, FiClipboard, FiGift, FiFolder } from "react-icons/fi";
 import headShot from "./../images/headShot.png";
 
-const UserOrderList = () => {
+const MyAccount = () => {
   const [data, setData] = useState([]);
-
-  // -------- 地址選擇器 --------
-  new TwCitySelector({
-    el: ".city-selector-standard-words",
-    elCounty: ".county", // 在 el 裡查找 element
-    elDistrict: ".district", // 在 el 裡查找 element
-    elZipcode: ".zipcode", // 在 el 裡查找 element
-    standardWords: true, // 使用正體字 臺
-  });
 
   useEffect(() => {
     // http://localhost:3002/api/users
@@ -148,23 +136,26 @@ const UserOrderList = () => {
             {/* -------- 左方選單列結束 -------- */}
           </div>
           <div className="col-lg-10">
-            <div className="page_Title">會員資料修改</div>
+            <div className="page_Title">我的訂單</div>
             <hr></hr>
             {/* -------- 會員資料表單開始 -------- */}
             <form>
               <div className="row">
                 {/* -------- 表單左 -------- */}
-                <div className="col-lg-7 form_Text">
+                <div className="col-lg-7 form_Text pe-5">
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="name" className="col-sm-2">
+                      <label
+                        htmlFor="name"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         姓名
                       </label>
                       <input
                         id="name"
                         type="text"
                         name="name"
-                        className="form-control"
+                        className="form-control form_Input"
                         // value=""
                         placeholder="中文 / 英文姓名"
                       />
@@ -174,14 +165,17 @@ const UserOrderList = () => {
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="email" className="col-sm-2">
+                      <label
+                        htmlFor="email"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         電子信箱
                       </label>
                       <input
                         id="email"
                         type="email"
                         name="email"
-                        className="form-control"
+                        className="form-control form_Input"
                         // value=""
                         placeholder="name@example.com"
                       />
@@ -191,54 +185,80 @@ const UserOrderList = () => {
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="password" className="col-sm-2">
+                      <label
+                        htmlFor="password"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         密碼
                       </label>
                       <input
                         id="password"
                         type="password"
                         name="password"
-                        className="form-control"
+                        className="form-control form_Input"
                         value="123233434"
                         disabled
                       />
+                      <button className="btn btn_Password ms-3">
+                        更改密碼
+                      </button>
                     </div>
                     <div className="error text-danger text-end"></div>
                   </div>
 
                   <div className="my-4">
                     <div className="d-flex align-items-center text-nowrap">
-                      <label htmlFor="phone" className="col-sm-2">
+                      <label
+                        htmlFor="phone"
+                        className="col-3 col-sm-2 col-lg-3 col-xl-2"
+                      >
                         手機號碼
                       </label>
                       <input
                         id="phone"
                         type="phone"
                         name="phone"
-                        className="form-control"
+                        className="form-control form_Input"
                         // value=""
                         placeholder="09xxxxxxxx"
                       />
                     </div>
                     <div className="error text-danger text-end"></div>
                   </div>
-
-                  <div className="my-4">
-                    <label htmlFor="address">地址</label>
-                    <div className="d-inline">
-                      <div className="city-selector-standard-words d-inline">
-                        <select className="county form-select"></select>
-                        <select className="district form-select"></select>
-                      </div>
-                    </div>
-                    <div className="my-2">
-                      <input className="d-block" type="text" name="address" />
+                  <div className="d-flex align-items-center text-nowrap">
+                    <div className="col-3 col-sm-2 col-lg-3 col-xl-2"></div>
+                    <div className="d-flex justify-content-center w-100">
+                      <button
+                        type="submit"
+                        className="btn text-white btn_Submit"
+                      >
+                        儲&emsp;存
+                      </button>
                     </div>
                   </div>
-                  <button type="submit">儲存</button>
                 </div>
-                {/* -------- 表單右 -------- */}
-                <div className="col-lg-5">aaa</div>
+                {/* -------- 表單右 (上傳大頭照)-------- */}
+                <div className="col-lg-5">
+                  <div className="user_Upload_Img mt-4">
+                    <div>
+                      <div className="headShot">
+                        <img src={headShot} alt="" className="cover-fit" />
+                      </div>
+                    </div>
+                    <input type="file" className="" />
+                    <label class="btn btn_Upload">
+                      <input
+                        id="upload_headShot"
+                        style={{ display: "none" }}
+                        type="file"
+                      />
+                      <div>
+                        <FiFolder className="menu_Icon d-flex" />
+                      </div>
+                      <span>選擇圖片</span>
+                    </label>
+                  </div>
+                </div>
               </div>
             </form>
             {/* -------- 會員資料表單結束 -------- */}
@@ -249,4 +269,4 @@ const UserOrderList = () => {
   );
 };
 
-export default UserOrderList;
+export default MyAccount;

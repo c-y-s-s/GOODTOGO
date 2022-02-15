@@ -21,7 +21,7 @@ const Footer = () => {
           <Link to="/store_check" className="FooterLink ">
             申請店家
           </Link>
-          <Link to="/my_account" className="FooterLink ">
+          <Link to="/member/profile" className="FooterLink ">
             我的帳戶
           </Link>
           <Link to="#" className="FooterLink ">

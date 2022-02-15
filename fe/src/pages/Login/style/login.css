@@ -1039,4 +1039,28 @@
   width: 18px;
   height: 18px;
 }
-/*# sourceMappingURL=index.css.map */
+
+.login-con {
+  background: #f2c53d;
+  height: calc(100vh - $navbar-height);
+  padding-top: calc((100vh - $navbar-height - 578px) / 2);
+}
+
+.login-con .content {
+  background: white;
+  height: 578px;
+  width: 475px;
+  -webkit-filter: drop-shadow(0 0 0.5rem #b1b1ac);
+          filter: drop-shadow(0 0 0.5rem #b1b1ac);
+  margin: auto;
+}
+
+.label-title {
+  color: #668c4a;
+}
+
+.submit-btn {
+  background-color: #668c4a;
+  color: white;
+}
+/*# sourceMappingURL=login.css.map */
