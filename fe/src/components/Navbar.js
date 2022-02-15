@@ -9,7 +9,9 @@ import { ReactComponent as Logo } from "../images/navLogo.svg";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
-const Navbar = ({ auth }) => {
+const Navbar = ({ auth, isAdmin }) => {
+  if (isAdmin) return <></>;
+
   return (
     <nav className="navbar navbar-expand shadow">
       <div className="nav container">

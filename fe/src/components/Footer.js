@@ -2,7 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 
-const Footer = () => {
+const Footer = (props) => {
+  if(props.isAdmin) return <></>
+
   return (
     <footer>
       <div className="footerSec1 d-flex ">
