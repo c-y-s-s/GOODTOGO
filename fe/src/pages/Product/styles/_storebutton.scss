@@ -1,5 +1,5 @@
 .product-button {
-    a {
+    button {
         color: $color-green;
         margin-top: 4.7rem;
         margin-left: 1.45rem;
@@ -15,5 +15,9 @@
         // &:nth-child(2) {
         //     margin-left: 0.75rem;
         // }
+    }
+    .active {
+        color: #fff;
+        background: $color-green;
     }
 }

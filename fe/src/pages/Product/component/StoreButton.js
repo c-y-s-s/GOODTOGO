@@ -1,16 +1,29 @@
 import React from "react";
 // -------- 餐點評論切換按鈕 --------
-import { Link } from "react-router-dom";
-const StoreButton = ({ storeId }) => {
+
+const StoreButton = ({ storeId, setbutonToggle}) => {
+
   return (
     <div>
       <div className="product-button text-center">
-        <Link to={"/store/" + storeId} className="btn" type="button">
+        <button
+          className="active btn"
+          type="button"
+          onClick={()=>{
+            setbutonToggle("products");
+          }}
+        >
           餐點
-        </Link>
-        <Link to={"/productcomment/" + storeId} className="btn" type="button">
+        </button>
+        <button
+          className="btn"
+          type="button"
+          onClick={() => {
+            setbutonToggle("commit");
+          }}
+        >
           評論
-        </Link>
+        </button>
       </div>
     </div>
   );

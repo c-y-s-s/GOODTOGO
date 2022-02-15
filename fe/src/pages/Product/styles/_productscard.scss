@@ -1,5 +1,6 @@
 // -------- 商品卡片 --------
 .product-card {
+    border: none;
     padding: 0;
     margin-top: 4.95rem;
     box-shadow: 0rem 0rem 1rem #ccc;
@@ -11,7 +12,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-
+    cursor: pointer;
     // card 上下底線
     .card {
         border-bottom: 0.8rem;

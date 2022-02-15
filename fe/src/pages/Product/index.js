@@ -19,6 +19,10 @@ const Product = () => {
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
   const [productsComment, setproductsComment] = useState([]);
+  //切換按鈕
+  const [buttonToggle , setbutonToggle] = useState("products");
+  //切換 className
+
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
@@ -33,6 +37,7 @@ const Product = () => {
       setData(productsResponse.data);
       setStoreData(storeResponse.data);
       setproductsComment(productsCommentResponse.data);
+      console.log(productsCommentResponse);
     };
     getProducts();
   }, []);
@@ -73,16 +78,21 @@ const Product = () => {
         {/*-------- 遮雨棚區塊 --------*/}
         <StoreCanopy canopy={canopyTotal} />
         {/* -------- 餐點、評論按鈕 --------*/}
-        <Storebutton storeId={storeId} />
+        <Storebutton storeId={storeId} setbutonToggle={setbutonToggle} />
       </div>
 
       {/* ------- 商品資訊 --------*/}
-      <StoreCard data={data} />
+      {buttonToggle === "products" ? (
+        <StoreCard data={data} />
+      ) : (
+        <StoreProductsCommit productsComment={productsComment} />
+      )}
 
       {/* -------- 商店總評論 -------- */}
-      <StoreProductsCommit />
+      {/* <StoreProductsCommit /> */}
+
       {/* 商品詳細資料 */}
-      <ProductsDetails />
+      {/* <ProductsDetails /> */}
 
       {/* 商品詳細資料結束 */}
       {/* -------- 綠色裝飾橫條大條 --------*/}

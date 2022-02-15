@@ -1,7 +1,7 @@
 // -------- 商品評論 --------
 
 .products-commit {
-    margin-top: 10rem;
+    margin-top: 3.7rem;
 
     // 區塊置中
     //設定寬度 75% 是因為 RWD 要變成 100%
@@ -11,7 +11,7 @@
     }
     .product-commit {
         border-bottom: 1px solid $color-green;
-        padding-bottom: 1.65rem;
+        padding-bottom: 1.05rem;
         width: 75%;
         margin: auto;
         .user-data {
@@ -28,6 +28,7 @@
             }
 
             .user-data-name {
+                letter-spacing: $ls-md;
             }
             // -------- 留言時間 --------
             .user-data-commit-time {
@@ -57,13 +58,15 @@
             }
             .product-data {
                 padding-right: 1.92rem;
+                padding-top: 0.5rem;
                 // -------- 商品名稱 --------
                 .product-data-name {
                     color: $color-grey;
+                    letter-spacing: $ls-md;
                 }
                 // -------- 商品圖片 --------
                 .product-photo {
-                    width: 7rem;
+                    width: 6.5rem;
                     height: 5rem;
                     img {
                         width: 100%;
@@ -77,6 +80,7 @@
         .user-commit {
             padding-right: 3.5rem;
             font-size: $fz-md;
+            letter-spacing: $ls-md;
         }
     }
 }
