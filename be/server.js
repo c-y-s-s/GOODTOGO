@@ -7,6 +7,9 @@ const path = require("path");
 // 引用 cors 套件解決瀏覽器同源問題
 const cors = require("cors");
 
+const session = require("express-session");
+let FileStore = require("session-file-store")(session);
+
 let app = express();
 
 app.use(express.urlencoded({ extended: true }));
@@ -22,7 +25,16 @@ app.use(
     credentials: true,
   })
 );
-
+app.use(
+  session({
+    store: new FileStore({
+      path: path.join(__dirname, "..", "sessions"),
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
 

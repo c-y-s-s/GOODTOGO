@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const argon2 = require("argon2");
-const argon2 = require("argon2");
 const connection = require("../utils/db");
 
 //-------- 後端驗證套件 express-validator --------
@@ -41,23 +40,59 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
       msg: "這個 email 已經已經註冊過了",
     });
   }
-
   //TODO:雜湊密碼
-  try {
-    const hashpassword = await argon2.hash(req.body.password);
-    console.log(hashpassword);
-  } catch (err) {
-    return res.status(400).send({
-      code: "33003",
-      msg: "密碼處理失敗",
-    });
-  }
+  let hashpassword = await argon2.hash(req.body.password);
+
   //TODO:存入資料庫
   let [result] = await connection.execute(
-    "INSERT INTO users (emails, password, name, photo) VALUES (?,?,?,?)",
-    [req.body.email, hashpassword, req.body.name, req.body.phone]
+    "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
+    [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
   );
   console.log(result);
   res.json({ message: "ok" });
+});
+
+// -------- 登入 --------
+// /api/auth/login
+router.post("/login", async (req, res, next) => {
+  //TODO: 確認帳號是否存在
+  let [users] = await connection.execute("SELECT * FROM users WHERE email=?", [
+    req.body.email,
+  ]);
+  console.log(users);
+  if (users.length === 0) {
+    //沒有查到這個email
+    return res.status(404).send({
+      code: "33003",
+      msg: "尚未註冊",
+    });
+  }
+  //TODO: 如果有這個帳號，再去比對密碼
+  let user = users[0];
+  //TODO: 密碼比對成功，記錄在session
+
+  let result = await argon2.verify(user.password, req.body.password);
+  if (!result) {
+    //password not match
+    return res.status(400).send({
+      code: "33005",
+      msg: "帳號或密碼錯誤",
+    });
+  }
+  // 整理需要的資料
+  let returnUser = {
+    id: user.id,
+    name: user.name,
+    photo: user.photo,
+  };
+
+  // 如果密碼比對成功，記錄在 session
+  // 寫 session
+  req.session.user = returnUser;
+
+  res.json({
+    code: "0",
+    data: returnUser,
+  });
 });
 module.exports = router;
