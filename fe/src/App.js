@@ -27,7 +27,7 @@ import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment";
 function App() {
   const [auth, setAuth] = useState(false);
-  // 後台不用頁首頁尾
+  // 判斷後台不用頁首頁尾
   const [isAdmin, setIsAdmin] =useState(true)
 
   return (
