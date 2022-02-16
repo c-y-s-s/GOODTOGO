@@ -44,6 +44,9 @@ app.use(
 );
 
 
+// -------- 靜態圖片 --------
+app.use("/static", express.static(path.join(__dirname, "public")));
+
 
 // :TODO: -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
