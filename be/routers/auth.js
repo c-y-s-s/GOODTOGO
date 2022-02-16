@@ -1,7 +1,6 @@
 const express = require("express");
 const router = express.Router();
 const argon2 = require("argon2");
-const argon2 = require("argon2");
 const connection = require("../utils/db");
 
 //-------- 後端驗證套件 express-validator --------
