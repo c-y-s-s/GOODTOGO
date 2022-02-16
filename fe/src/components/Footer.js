@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 const Footer = (props) => {
+    // 判斷後台不用頁首頁尾
   if(props.isAdmin) return <></>
 
   return (

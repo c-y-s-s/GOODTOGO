@@ -10,6 +10,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 
 const Navbar = ({ auth, isAdmin }) => {
+    // 判斷後台不用頁首頁尾
   if (isAdmin) return <></>;
 
   return (
