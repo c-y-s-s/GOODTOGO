@@ -23,6 +23,10 @@ const Product = () => {
   const [buttonToggle , setbutonToggle] = useState("products");
   //切換 className
 
+
+  //:TODO:測試
+  const [yo,setyo] = useState([]);
+  console.log("yoyoyoyo",yo)
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
@@ -76,18 +80,18 @@ const Product = () => {
 
       <div className="container">
         {/*-------- 遮雨棚區塊 --------*/}
-        <StoreCanopy canopy={canopyTotal} />
+        {/* <StoreCanopy canopy={canopyTotal} /> */}
         {/* -------- 餐點、評論按鈕 --------*/}
         <Storebutton storeId={storeId} setbutonToggle={setbutonToggle} />
       </div>
 
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
-        <StoreCard data={data} />
+        <StoreCard data={data} setyo={setyo} />
       ) : (
         <StoreProductsCommit productsComment={productsComment} />
       )}
-
+      {console.log("最外層傳進去的商品資訊", data)}
       {/* -------- 商店總評論 -------- */}
       {/* <StoreProductsCommit /> */}
 

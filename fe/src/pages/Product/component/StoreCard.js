@@ -4,7 +4,7 @@ import { API_URL } from "../../../utils/config";
 import axios from "axios";
 import ProductsDetails from "./ProductsDetails";
 
-const StoreCard = ({ data }) => {
+const StoreCard = ({ data, setyo }) => {
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
   //撈出按下商品卡片的 ID
@@ -12,6 +12,10 @@ const StoreCard = ({ data }) => {
 
   //撈指定 ID 的商品 data 出來存放
   const [productModalData, setproductModalData] = useState([]);
+
+
+  //取詳細頁面裡面的總評價出來渲染
+  // const [touchProductAVG,settouchProductAVG] = useState(0)
 
   // 撈出店家所有的商品
   useLayoutEffect(() => {
@@ -24,7 +28,7 @@ const StoreCard = ({ data }) => {
     getProductId();
   }, [openProductsModaID]);
 
-  console.log("card", productModalData);
+
   return (
     <div>
       <div className="container">
@@ -39,8 +43,9 @@ const StoreCard = ({ data }) => {
                 key={item.id}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
-                  console.log("點商品card取到的id",item.id);
+                  console.log("點商品card取到的id", item.id);
                   setOpenProductsModal(true);
+                  setyo([...setyo,item.id]);
                 }}
               >
                 <div className="card m-0 ">

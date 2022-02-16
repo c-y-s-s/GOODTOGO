@@ -32,6 +32,7 @@ const ProductsDetails = ({
 
   //計算指定商品的評論平均分數
   // console.log("算評價total的地方", productModalCommitData);
+
   let productstarTotal = 0;
   productModalCommitData.forEach((item) => {
     productstarTotal += item.star;
@@ -39,6 +40,9 @@ const ProductsDetails = ({
   let productstarTotalAVG = (
     productstarTotal / productModalCommitData.length
   ).toFixed(1);
+
+
+
 
   return (
     <div>
