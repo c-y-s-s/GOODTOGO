@@ -830,6 +830,7 @@
   width: 5rem;
   border: 1px solid #d3d3d3;
   border-radius: 50%;
+  overflow: hidden;
 }
 
 .user_Info p {
@@ -908,6 +909,8 @@
 
 .error {
   height: 10px;
+  font-size: 0.875rem;
+  letter-spacing: 0.05rem;
 }
 
 .form_Input {
@@ -1012,6 +1015,7 @@
   border: 1px solid #d3d3d3;
   border-radius: 50%;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 .btn_Upload {
@@ -1032,6 +1036,10 @@
 .btn_Upload:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
+}
+
+.btn_Upload input {
+  display: none;
 }
 
 .btn_Upload .menu_Icon {

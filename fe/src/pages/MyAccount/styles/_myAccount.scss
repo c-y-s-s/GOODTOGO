@@ -47,6 +47,7 @@
     width: 5rem;
     border: 1px solid $color-light-grey;
     border-radius: 50%;
+    overflow: hidden;
   }
   p {
     font-size: $fz-xx-lg;
@@ -137,6 +138,8 @@
 
 .error {
   height: 10px;
+  font-size: $fz-sm;
+  letter-spacing: $ls-sm;
 }
 
 // -------- 欄位 --------
@@ -194,12 +197,16 @@
     border: 1px solid $color-light-grey;
     border-radius: 50%;
     margin: 0 auto;
+    overflow: hidden;
   }
 }
 
 .btn_Upload {
   @include btn_Block($fz-sm, $color-green);
   width: 50%;
+  input {
+    display: none;
+  }
   .menu_Icon {
     color: white;
     width: 18px;
