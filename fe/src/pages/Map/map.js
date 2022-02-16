@@ -1,7 +1,6 @@
-import React, { Component, useState } from 'react';
-
+import React, { Component, useState } from "react";
+import { Search } from "react-feather";
 import GoogleMapReact from "google-map-react";
-
 import '../MapStyle.scss';
 
 const AnyReactComponent = ({ text }) => <div>{text}</div>;
@@ -18,10 +17,15 @@ const Map = () => {
     return (
         <>
             <div className="container-fluid">
-                <div className="container .d-none .d-sm-block .d-md-none" style="width: 120px">
+            
+                <div className="searchContainer container-fluid d-lg-block d-none">
+                    短版搜尋
 
+                    <Search color="light-green" size={20} />
+                    <input className="searchInput" placeholder="地圖搜尋: 關鍵字？">
+                    </input>
                 </div>
-                    <div className="row">
+                <div className="row">
                     <div className="col-lg-9 m-0 p-0 mapContainer">
                         <GoogleMapReact
                             //最後記得把KEY放進環境變數
@@ -37,7 +41,6 @@ const Map = () => {
                         </GoogleMapReact>
                     </div>
                     <div className="col-lg-3 m-0 p-0">
-
 
                     </div>
 

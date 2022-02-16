@@ -1,3 +1,5 @@
+@import "../../styles/index.scss";
+
 .mapContainer {
     height: 75vh;
     width: 100%;
@@ -23,9 +25,6 @@
 min-width : 120;
 margin-bottom: 30px;
 }
-.marginBottom{
-    margin-bottom: 30px;
-}
 .list{
     height: 20vh;
     overflow: auto;
@@ -35,4 +34,37 @@ background: #668c4a;
 
 .selector{
     margin: 33.5px;
+}
+.searchInput{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    height: 40px;
+    top: 12.5px;
+    border-top-color: $color-lightGreen;
+    border-bottom-color: $color-lightGreen;
+    border-right-color: $color-lightGreen;
+    border-left-color: rgba($color: #FFFFFF, $alpha: 0);
+}
+.mSearchContainer{
+    display: flex;
+    align-items: center ;
+    justify-content: center ;
+    height: 65px;
+  }
+ .input-group{
+min-width: 300px;
+display: flex;
+align-items: center ;
+justify-content: center ;
+
+
+  }
+.input-group-text{
+    border-color: rgba($color: #ffffff, $alpha: 0);
+}
+.filterBtn{
+    width: 40px;
+    height: 40px;
+    border-color:rgba(0,0,0,0);
+    background:rgba($color: #FFFFFF, $alpha: 0);
 }

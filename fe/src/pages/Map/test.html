@@ -12,11 +12,36 @@
 </head>
 
 <body>
-    <div class="float-end w-25 p-3" style="background-color: #eee;">Width 25%</div>
-    <div class="w-50 p-3" style="background-color: #eee;">Width 50%</div>
-    <div class="w-75 p-3" style="background-color: #eee;">Width 75%</div>
-    <div class="w-100 p-3" style="background-color: #eee;">Width 100%</div>
-    <div class="w-auto p-3" style="background-color: #eee;">Width auto</div>
+    <div class="container-fluid">
+        <div class="container d-lg-block d-none">
+            TEST
+        </div>
+        <div class="row">
+            <div class="col-lg-9 m-0 p-0 mapContainer">
+                TESTT
+                <input value="搜尋字">
+
+                </input>
+                <!-- <GoogleMapReact
+                    <!-- 最後記得把KEY放進環境變數 -->
+                <!-- bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }} -->
+                <!-- defaultCenter={coordinates} -->
+                <!-- center={coordinates} -->
+                <!-- defaultZoom={13} -->
+                <!-- margin={[0, 0, 0, 0]} -->
+                <!-- options={""} -->
+                <!-- onChange={""} -->
+                <!-- onChildClick={""} -->
+                <!-- > -->
+                <!-- </GoogleMapReact> -->
+            </div>
+            <div class="col-lg-3 m-0 p-0">
+                TESTTT
+
+            </div>
+
+        </div>
+    </div>
 </body>
 
 </html>
