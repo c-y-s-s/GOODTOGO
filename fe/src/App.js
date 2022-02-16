@@ -19,6 +19,7 @@ import UserLikeList from "./pages/MyAccount/UserLikeList";
 import UserOrderList from "./pages/MyAccount/UserOrderList";
 import UserCoupon from "./pages/MyAccount/UserCoupon";
 import UserCreditCard from "./pages/MyAccount/UserCreditCard";
+import UserPassword from "./pages/MyAccount/UserPassword";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment"; 
@@ -46,6 +47,7 @@ function App() {
         <Route path="/member/order" element={<UserOrderList />}></Route>
         <Route path="/member/coupon" element={<UserCoupon />}></Route>
         <Route path="/member/payment" element={<UserCreditCard />}></Route>
+        <Route path="/member/password" element={<UserPassword />}></Route>
         <Route path="/member/profile" element={<MyAccount />}></Route>
       </Routes>
 
