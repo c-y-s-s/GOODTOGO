@@ -27,6 +27,7 @@ app.use("/api/products", productsRouter);
 
 
 // :TODO: -------- 指定商品 RESTful API 列表 --------
+// 先分開寫 等會設定api變數之後寫再跟上面寫一起
 let productRouter = require("./routers/productsModal");
 app.use("/api/product", productRouter);
 // -------- 商品 RESTful API 列表 結束 --------
@@ -35,6 +36,12 @@ app.use("/api/product", productRouter);
 let productsCommitRouter = require("./routers/productsCommit");
 app.use("/api/productscommit", productsCommitRouter);
 // -------- 商品評論 RESTful API 列表 結束 --------
+
+// :TODO: -------- 指定商品評論 RESTful API 列表 --------
+let productsDesignateCommitRouter = require("./routers/productsModalCommit");
+app.use("/api/productsdesignatecommit", productsDesignateCommitRouter);
+// -------- 指定商品評論 RESTful API 列表 結束 --------
+
 
 // :TODO: -------- 會員 RESTful API 列表 --------
 let memberRouter = require("./routers/member");
