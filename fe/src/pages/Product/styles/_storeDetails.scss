@@ -1,0 +1,65 @@
+//-------- 商家資料 -------
+.store-data {
+    margin-top: 4rem;
+    color: $color-dark-grey;
+
+    .store-data-left {
+        .store-data-left-outline {
+            border-bottom: 1px solid $color-grey;
+            .store-data-left-name {
+                font-size: 1.75rem;
+                font-weight: 500;
+            }
+            .store-data-left-category {
+                background-color: #eaeaea;
+                padding: 0.1rem 0.75rem;
+                border-radius: 1rem;
+                font-size: $fz-sm;
+            }
+            .store-data-left-star {
+                margin-left: 4rem;
+            }
+            .store-data-left-favorite {
+                font-size: $fz-xx-lg;
+
+                .store-data-left-icon {
+                    margin: 0 0.5rem 0 2.5rem;
+                    color: $color-light-red;
+                }
+                .store-data-left-favorite-num {
+                }
+            }
+        }
+
+        .store-data-left-content {
+            margin-top: 0.75rem;
+            font-size: $fz-xx-lg;
+            .store-data-icon {
+                color: $color-light-green;
+                padding-right: 1rem;
+
+                font-size: 1.15rem;
+            }
+            .store-data-left-content-business {
+                background-color: $color-light-green;
+                color: white;
+                border-radius: 0.5rem;
+                padding: 0.1rem 0.5rem;
+                margin-left: 1rem;
+            }
+            &:nth-child(4) {
+                align-items: flex-start;
+            }
+        }
+    }
+    //-------- 商家資料結束 -------
+
+    //-------- 地圖 -------
+    .store-map {
+        border: 1px solid black;
+        // width: 665px;
+        // height: 286px;
+        height: 270px;
+    }
+}
+//-------- 地圖結束 -------

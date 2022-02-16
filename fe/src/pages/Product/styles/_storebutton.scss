@@ -1,0 +1,19 @@
+.product-button {
+    a {
+        color: $color-green;
+        margin-top: 4.7rem;
+        margin-left: 1.45rem;
+        border: 1px solid $color-green;
+        border-radius: 0;
+        padding: 0.4rem 2.9rem;
+        font-size: 1.2rem;
+        &:hover {
+            color: #fff;
+            background: $color-green;
+        }
+
+        // &:nth-child(2) {
+        //     margin-left: 0.75rem;
+        // }
+    }
+}

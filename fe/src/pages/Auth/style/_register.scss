@@ -1,0 +1,43 @@
+.reg-con {
+  background: $color-yellow;
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+  margin: auto;
+  .content {
+    background-color: white;
+    border-radius: 4px;
+    .btn-fb-login {
+      color: white;
+      background-color: #3b5998;
+      border-radius: 2px;
+      .big-icon {
+        font-size: 26px;
+      }
+    }
+  }
+
+  .input-label-title {
+    font-size: $fz-x-lg;
+  }
+}
+.btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+.label-group {
+  font-size: $fz-sm;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
+
+.label-group {
+  font-size: $fz-sm;
+  .btn-register {
+    background-color: $color-green;
+    color: white;
+    border-radius: 2px;
+  }
+}

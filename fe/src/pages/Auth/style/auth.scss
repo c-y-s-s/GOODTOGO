@@ -1,0 +1,33 @@
+// -------- input樣式 --------
+.label-group {
+  .input-label-title {
+    font-size: $fz-x-lg;
+  }
+  .form-control {
+    border-radius: 2px;
+    border: 2px solid #ced4da;
+  }
+}
+.btn-group {
+  .submit-btn {
+    background-color: $color-green;
+    border-radius: 2px;
+  }
+  .btn-fb-login {
+    color: white;
+    background-color: #3b5998;
+    border-radius: 2px;
+    border: 1px solid #3b5998;
+
+    .fb-icon {
+      font-size: 26px;
+    }
+  }
+}
+
+//-------- login --------
+@import "./login";
+// //-------- reset --------
+@import "./reset";
+// //-------- register --------
+@import "./register";
