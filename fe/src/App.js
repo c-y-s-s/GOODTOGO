@@ -28,6 +28,7 @@ import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
+  // 全域狀態
   // -------- 判斷登入與否 --------
   const [isLogin, setIsLogin] = useState(false);
   return (

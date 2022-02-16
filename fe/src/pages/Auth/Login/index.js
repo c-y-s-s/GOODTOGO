@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 
-const Login = () => {
+const Login = ({ auth }) => {
   const [loginUser, setLoginUser] = useState({
     email: "song@test.com",
     password: "song12345",
@@ -21,7 +21,9 @@ const Login = () => {
     e.preventDefault();
 
     try {
-      let response = await axios.post(`${API_URL}/auth/login`, loginUser);
+      let response = await axios.post(`${API_URL}/auth/login`, loginUser, {
+        withCredentials: true,
+      });
       setIsLogin(true);
       console.log(response.data);
     } catch (e) {
@@ -29,7 +31,7 @@ const Login = () => {
       console.error("測試登入", ERR_MSG[e.response.data].code);
     }
   };
-  if (isLogin) {
+  if (auth) {
     // 轉頁效果
     return <Navigate to="/" />;
   }

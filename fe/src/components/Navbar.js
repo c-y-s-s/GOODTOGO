@@ -10,6 +10,7 @@ import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 const Navbar = ({ auth }) => {
   const [isOpen, setOpen] = useState(false);
+
   return (
     <navbar className="container-fluid navbar justify-content-center sticky-top">
       <div className="nav-content">
@@ -45,10 +46,22 @@ const Navbar = ({ auth }) => {
             常見問題
           </Link>
         </div>
+
         <div className="nav-icons">
-          <Link to="/auth/login">
-            <BiUserCircle role="button" className="nav-icon" />
-          </Link>
+          {auth ? (
+            <>
+              <Link to="/my_account">
+                <div>圖</div>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link to="/auth/login">
+                <BiUserCircle role="button" className="nav-icon" />
+              </Link>
+            </>
+          )}
+
           <Link to="/cart" className="nav-icon">
             <BsBag />
           </Link>
