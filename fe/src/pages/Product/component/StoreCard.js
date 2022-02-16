@@ -5,21 +5,26 @@ import axios from "axios";
 import ProductsDetails from "./ProductsDetails";
 
 const StoreCard = ({ data }) => {
+  // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
+  //撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
 
-//撈指定ID的商品出來
-  const [productModalData,setproductModalData]  = useState([])
+  //撈指定 ID 的商品 data 出來存放
+  const [productModalData, setproductModalData] = useState([]);
+
+  // 撈出店家所有的商品
   useLayoutEffect(() => {
     let getProductId = async () => {
       let productModalResponse = await axios.get(
         `${API_URL}/product/${openProductsModaID}`
       );
       setproductModalData(productModalResponse.data);
-      console.log(productModalResponse.data);
     };
     getProductId();
   }, [openProductsModaID]);
+
+  console.log("card", productModalData);
   return (
     <div>
       <div className="container">
@@ -34,6 +39,7 @@ const StoreCard = ({ data }) => {
                 key={item.id}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
+                  console.log("點商品card取到的id",item.id);
                   setOpenProductsModal(true);
                 }}
               >
@@ -71,6 +77,7 @@ const StoreCard = ({ data }) => {
           <ProductsDetails
             setOpenProductsModal={setOpenProductsModal}
             productModalData={productModalData}
+            openProductsModaID={openProductsModaID}
           />
         </div>
       )}

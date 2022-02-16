@@ -409,6 +409,7 @@
 }
 
 .products-details .products-details-data {
+  overflow-y: auto;
   position: fixed;
   top: 0%;
   left: 0%;
@@ -416,6 +417,7 @@
   height: 100%;
   z-index: 3;
   font-weight: 540;
+  height: 100vh;
 }
 
 .products-details .products-details-data .product-logo {
@@ -441,7 +443,10 @@
 }
 
 .products-details .products-details-data .card {
-  border-top: 0.54rem solid #f2c53d;
+  border-top: 0.5rem solid #f2c53d;
+  border-right: 0;
+  border-left: 0;
+  border-bottom: 0;
   border-radius: 0.4rem 0.4rem 0 0;
 }
 
@@ -655,6 +660,20 @@
   font-size: 0.9375rem;
   padding-top: 1rem;
   font-weight: 400;
+}
+
+.nothing-product-commit {
+  padding: 3rem 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.125rem;
 }
 
 .background-admin-data-left {

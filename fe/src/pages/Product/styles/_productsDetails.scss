@@ -12,6 +12,7 @@
 // -------- 商品光箱 --------
 .products-details {
     .products-details-data {
+        overflow-y: auto;
         position: fixed;
         top: 0%;
         left: 0%;
@@ -19,11 +20,12 @@
         height: 100%;
         z-index: 3;
         font-weight: 540;
-
+        height: 100vh;
         // -------- 商品上半部 --------
         .product-logo {
             height: 10rem;
             position: relative;
+
             img {
                 width: 100%;
                 height: 100%;
@@ -40,7 +42,10 @@
             color: #fff;
         }
         .card {
-            border-top: 0.54rem solid $color-yellow;
+            border-top: 0.5rem solid $color-yellow;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 0;
             border-radius: 0.4rem 0.4rem 0 0;
             .card-body {
                 padding: 0 1.5rem;
@@ -145,6 +150,7 @@
             // -------- 評論下半部 --------
             .product-users-commit {
                 padding: 0 1.7rem;
+
                 //用戶圖片
                 .product-users-commit-filter {
                     .product-users-commit-filter-star {
@@ -231,4 +237,12 @@
             // -------- 顧客評論結束 --------
         }
     }
+}
+
+.nothing-product-commit {
+    padding: 3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $fz-xx-lg;
 }

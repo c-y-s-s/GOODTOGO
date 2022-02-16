@@ -4,7 +4,7 @@ import React from "react";
 const StoreProductsCommit = ({ productsComment }) => {
   return (
     <div>
-      <div className="container products-commit">
+      <div className="container products-commit" >
         <div className="text-end products-commit-total">
           共 {productsComment.length} 則留言
         </div>

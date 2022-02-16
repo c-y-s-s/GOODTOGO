@@ -37,7 +37,7 @@ const Product = () => {
       setData(productsResponse.data);
       setStoreData(storeResponse.data);
       setproductsComment(productsCommentResponse.data);
-      console.log(productsCommentResponse);
+    
     };
     getProducts();
   }, []);
