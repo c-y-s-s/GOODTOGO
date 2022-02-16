@@ -29,15 +29,15 @@ import Register from "./pages/Auth/Register";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
   // -------- 判斷登入與否 --------
-  const [auth, setAuth] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
   return (
     <Router>
-      <Navbar auth={auth} />
+      <Navbar auth={isLogin} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/auth" element={<Auth />}>
-          <Route path="login" element={<Login />}></Route>
+        <Route path="/auth" element={<Auth />} auth={isLogin}>
+          <Route path="login" element={<Login />} auth={isLogin}></Route>
           <Route path="register" element={<Register />}></Route>
           <Route path="reset" element={<Reset />}></Route>
         </Route>
