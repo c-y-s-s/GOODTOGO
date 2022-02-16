@@ -27,6 +27,9 @@ const Product = () => {
   //:TODO:測試
   const [yo,setyo] = useState([]);
   console.log("yoyoyoyo",yo)
+
+
+  
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
