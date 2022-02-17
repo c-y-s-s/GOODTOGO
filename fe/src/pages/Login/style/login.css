@@ -6,10 +6,10 @@
   font-weight: 400;
 }
 
-#root .container {
-  max-width: 1140px;
-  padding-left: 0;
-  padding-right: 0;
+@media screen and (min-width: 1400px) {
+  #root .container {
+    max-width: 1140px;
+  }
 }
 
 .storeLogo {
@@ -825,6 +825,46 @@
      object-fit: cover;
 }
 
+.fz-sm {
+  font-size: 0.875rem;
+}
+
+.fz-md {
+  font-size: 0.9375rem;
+}
+
+.fz-lg {
+  font-size: 1rem;
+}
+
+.fz-xx-lg {
+  font-size: 1.125rem;
+}
+
+.ls-sm {
+  letter-spacing: 0.05rem;
+}
+
+.ls-md {
+  letter-spacing: 0.1rem;
+}
+
+.ls-lg {
+  letter-spacing: 0.15rem;
+}
+
+.c-green {
+  color: #668c4a;
+}
+
+.c-grey {
+  color: #b1b1ac;
+}
+
+.c-l-grey {
+  color: #d3d3d3;
+}
+
 .user_Info .headShot {
   height: 5rem;
   width: 5rem;
@@ -835,7 +875,7 @@
 
 .user_Info p {
   font-size: 1.125rem;
-  letter-spacing: 0.1rem;
+  letter-spacing: 0.15rem;
   color: #b1b1ac;
 }
 
@@ -967,7 +1007,7 @@
   letter-spacing: -0.3rem;
 }
 
-.btn_Password {
+.btn_Other {
   font-size: 0.875rem;
   color: #668c4a;
   border-color: #668c4a;
@@ -977,15 +1017,17 @@
   height: 2.5rem;
   padding-left: 15px;
   padding-right: 15px;
+  -webkit-transition: 0.07s;
+  transition: 0.07s;
 }
 
-.btn_Password:hover {
+.btn_Other:hover {
   background-color: #668c4a;
   border-color: #668c4a;
   color: white;
 }
 
-.btn_Password:focus {
+.btn_Other:focus {
   -webkit-box-shadow: none;
           box-shadow: none;
 }
@@ -1025,7 +1067,6 @@
   border-color: #668c4a;
   border-radius: 2px;
   height: 2.5rem;
-  width: 50%;
 }
 
 .btn_Upload:hover {
@@ -1046,6 +1087,13 @@
   color: white;
   width: 18px;
   height: 18px;
+}
+
+@media screen and (max-width: 991px) {
+  .user_Upload_Img .headShot {
+    height: 8rem;
+    width: 8rem;
+  }
 }
 
 .login-con {
