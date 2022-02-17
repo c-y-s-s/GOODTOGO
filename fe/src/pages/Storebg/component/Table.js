@@ -51,7 +51,7 @@ const Table = () => {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog modal-sm">
+                <div className="modal-dialog modal-sm modal-dialog-centered">
                   <div className="modal-content">
                     <div className="modal-header">
                       <button
@@ -132,7 +132,7 @@ const Table = () => {
                 aria-labelledby="exampleModalLabel"
                 aria-hidden="true"
               >
-                <div className="modal-dialog modal-sm">
+                <div className="modal-dialog modal-sm modal-dialog-centered">
                   <div className="modal-content">
                     <div className="modal-header">
                       <button
