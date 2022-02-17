@@ -43,7 +43,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="nav-item">
-            <Link to="/map" className=" navIcon">
+            <Link to="/register" className=" navIcon">
               <BiUserCircle />
             </Link>
           </li>

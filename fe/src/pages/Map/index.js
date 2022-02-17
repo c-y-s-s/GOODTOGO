@@ -2,12 +2,12 @@ import React, { Component, useState } from 'react';
 import GoogleMapReact from "google-map-react";
 import './MapStyle.scss';
 import { Search } from "react-feather";
-import Mapfilter from "./Mapfilter.svg";
+// import Mapfilter from "./Mapfilter.svg";
 import "../../styles/index.scss"
 // import PlaceDetails from './components/PlaceDetails';
 
 
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 // -------- Map功能開始 --------//
 
@@ -26,20 +26,19 @@ const Map = () => {
   return (
     <>
       {/* -------- 地圖區塊開始 -------- */}
-      <div className="container-fluid vh-75" >
+      <div className="container-fluid" >
         <div className="container-fluid mSearchContainer d-lg-none">
           <div className="input-group">
-          <label className="input-group-text" htmlFor="searchInput">
-            <Search/>
-          </label>
-          <input className="searchInput" id="searchInput" placeholder="地圖搜尋: 關鍵字？"/>
-        <button className="filterBtn">
-          <Mapfilter/>
-        </button>
+            <label className="input-group-text searchIcon" htmlFor="searchInput">
+              <Search />
+            </label>
+            <input className="searchInput " id="searchInput" placeholder="地圖搜尋: 關鍵字？" />
+            <button className="filterBtn">
+            </button>
+          </div>
         </div>
-        </div>
-        <div className="row">
-          <div className="col-lg-9 m-0 p-0 mapContainer">
+        <div className="row gx-0">
+          <div className="col-lg-9 gy-0 m-0 p-0 mapContainer">
             <GoogleMapReact
               //最後記得把KEY放進環境變數
               bootstrapURLKeys={{ key: process.env.REACT_APP_GOOGLE_API_KEY }}
@@ -53,51 +52,23 @@ const Map = () => {
             >
             </GoogleMapReact>
           </div>
-          <div className="col-lg-3 m-0 p-0">
-
+          <div className="col-lg-3 gy-0 m-0 p-0 searchContainer d-none d-lg-block">
+            <div className="input-group mt-3 mb-3">
+              {/* 搜尋列，暫時先放在這，之後在移到地圖上 */}
+              {/* <label className="input-group-text searchIcon" htmlFor="searchInput">
+                <Search />
+              </label>
+              <input className="searchInput" id="searchInput" placeholder="地圖搜尋: 關鍵字？" /> */}
+              <h4 className="col-9 mb-3 mt-3">搜尋附近店家</h4>
+              <select class="col-9 form-select" aria-label="Default select example">
+                <option selected></option>
+                <option value="1">安安</option>
+                <option value="2">這裡</option>
+                <option value="3">在幹嘛</option>
+              </select>
+            </div>
           </div>
-
         </div>
-        {/* -------- 地圖區塊結束 -------- */}
-
-        {/* -------- 清單區塊開始 -------- */}
-        {/* <Grid item xs={12} md={3}>
-          <div className="mapList">
-            <h4 align="center">
-              搜尋附近店家
-            </h4>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                營業中店家
-              </button>
-              <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a className="dropdown-item" href="#">Action</a></li>
-                <li><a className="dropdown-item" href="#">Another action</a></li>
-                <li><a className="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </div> */}
-        {/* <FormControl fullWidth className="formControl">
-              <Select className="selector" disableUnderline align="center" value={type} onChange={(e) => setType(e.target.value)}>
-                <MenuItem value="type1">種類1</MenuItem>
-                <MenuItem value="type2">種類2</MenuItem>
-              </Select>
-            </FormControl>
-            <FormControl fullWidth className="formControl">
-              <Select className="selector" disableUnderline align="center" value={where} onChange={(e) => setWhere(e.target.value)}>
-                <MenuItem value="chung-li">中壢區</MenuItem>
-                <MenuItem value="ping-jun">平鎮區</MenuItem>
-              </Select>
-            </FormControl>
-            <Grid container spacing={3} className="list">
-              {stores?.map((store, i) =>
-                <Grid item key={i} xs={12}>
-                  <storeDetails place={'1'} />
-                </Grid>
-              )}
-            </Grid>
-          </div>
-        </Grid> */}
-        {/* -------- 清單區塊結束 -------- */}
       </div>
     </>
   );
