@@ -45,10 +45,10 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
-  .container {
-    max-width: 1140px;
-    padding-left: 0;
-    padding-right: 0;
+  @media screen and (min-width: 1400px) {
+    .container {
+      max-width: 1140px;
+    }
   }
 }
 
