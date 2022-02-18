@@ -36,8 +36,8 @@ function App() {
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId/" element={<Product />}>
           <Route path=":currentPage" element={<Product />} />
-         
         </Route>
+        
         <Route
           path="/productcomment/:storeId"
           element={<ProductComment />}

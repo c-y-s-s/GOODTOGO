@@ -3,6 +3,24 @@
 .products-commit {
     margin-top: 3.7rem;
 
+    //篩選區塊
+    .product-users-commit-filter {
+        .product-users-commit-filter-star {
+            color: $color-green;
+        }
+        .product-users-commit-filter-time {
+            color: $color-green;
+        }
+        .product-users-commit-filter-icon {
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            transition: 0.3s;
+            color: $color-grey;
+            &:hover {
+                color: $color-green;
+            }
+        }
+    }
     // 區塊置中
     //設定寬度 75% 是因為 RWD 要變成 100%
     .products-commit-total {
@@ -14,6 +32,7 @@
         padding-bottom: 1.05rem;
         width: 75%;
         margin: auto;
+
         .user-data {
             // -------- 用戶照片 --------
             .user-photo {
@@ -81,6 +100,10 @@
             padding-right: 3.5rem;
             font-size: $fz-md;
             letter-spacing: $ls-md;
+        }
+    }
+    .pagination {
+        .commit-pages {
         }
     }
 }

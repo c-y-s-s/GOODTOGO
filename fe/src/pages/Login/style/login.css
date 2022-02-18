@@ -284,6 +284,26 @@
   margin-top: 3.7rem;
 }
 
+.products-commit .product-users-commit-filter .product-users-commit-filter-star {
+  color: #668c4a;
+}
+
+.products-commit .product-users-commit-filter .product-users-commit-filter-time {
+  color: #668c4a;
+}
+
+.products-commit .product-users-commit-filter .product-users-commit-filter-icon {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+  color: #b1b1ac;
+}
+
+.products-commit .product-users-commit-filter .product-users-commit-filter-icon:hover {
+  color: #668c4a;
+}
+
 .products-commit .products-commit-total {
   width: 75%;
   margin: auto;

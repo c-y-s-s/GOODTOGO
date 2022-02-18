@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 
@@ -14,36 +14,71 @@ import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
 const Product = () => {
+  //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
+  const { storeId } = useParams();
+  const { currentPage } = useParams();
+
   const [error, setError] = useState(null);
   //後端資料使用陣列格式，所以這邊給她空陣列
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
   const [productsComment, setproductsComment] = useState([]);
-  
+  //總筆數
+  const [totalPages, setTotalPages] = useState([]);
+  //拿到總共要幾頁
+  const [lastPage, SetLastPage] = useState(1);
+  const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
   //切換按鈕
-  const [buttonToggle , setbutonToggle] = useState("products");
+  const [buttonToggle, setbutonToggle] = useState("products");
   //切換 className
-
-  
-  //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
-  const {storeId} = useParams();
-  console.log(storeId);
 
   //串接後端API
   useEffect(() => {
     let getProducts = async () => {
+      // let page = currentPage ? currentPage : 1;
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
       let productsCommentResponse = await axios.get(
-        `${API_URL}/productscommit/${storeId}`
+        `${API_URL}/productscommit/${storeId}?page=${page}`
       );
       setData(productsResponse.data);
       setStoreData(storeResponse.data);
-      setproductsComment(productsCommentResponse.data);
-    
+      setproductsComment(productsCommentResponse.data.data);
+      setTotalPages(productsCommentResponse.data.pagination.total);
+      SetLastPage(productsCommentResponse.data.pagination.lastPage);
     };
     getProducts();
-  }, []);
+  }, [page]);
+
+
+  let navigate = useNavigate();
+  //頁碼
+  const getPages = () => {
+    let pages = [];
+    for (let i = 1; i <= lastPage; i++) {
+      pages.push(
+        <button
+          key={i}
+          onClick={(e) => {
+            setPage(i);
+            navigate(`/store/1/page=${i}`)
+          }}
+        >
+          {i}
+        </button>
+      );
+    }
+    return pages;
+  };
+  //計算商家平均評價
+  function storeStarTotal() {
+    let StarTotal = 0;
+    productsComment.map((item) => {
+      StarTotal += item.star;
+    });
+    return (StarTotal = (StarTotal / productsComment.length).toFixed(1));
+  }
+  storeStarTotal();
 
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
@@ -62,11 +97,7 @@ const Product = () => {
         return (
           <div key={storeDataID}>
             <StoreLogo logo={item.logo} />
-            <StoreDetails
-              name={item.name}
-              address={item.address}
-              tel={item.tel_no}
-            />
+            <StoreDetails item={item} storeStarTotal={storeStarTotal()} />
           </div>
         );
       })}
@@ -88,9 +119,13 @@ const Product = () => {
       {buttonToggle === "products" ? (
         <StoreCard data={data} />
       ) : (
-        <StoreProductsCommit productsComment={productsComment} />
+        <StoreProductsCommit
+          productsComment={productsComment}
+          totalPages={totalPages}
+          getPages={getPages()}
+        />
       )}
-      {console.log("最外層傳進去的商品資訊", data)}
+
       {/* -------- 商店總評論 -------- */}
       {/* <StoreProductsCommit /> */}
 

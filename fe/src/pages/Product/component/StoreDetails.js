@@ -5,7 +5,9 @@ import { FaPhoneAlt } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
-const StoreDetails = ({ name, address, tel_no }) => {
+const StoreDetails = ({ item, storeStarTotal }) => {
+
+ 
   return (
     <div>
       <div className="container store-data">
@@ -13,10 +15,10 @@ const StoreDetails = ({ name, address, tel_no }) => {
           <div className="col-12 col-md-6 col-lg-4 pe-lg-3">
             <div className="store-data-left">
               <div className="store-data-left-outline">
-                <h1 className="store-data-left-name">{name}</h1>
+                <h1 className="store-data-left-name">{item.name}</h1>
                 <div className="d-flex mt-4 ">
-                  <p className="store-data-left-category">麵食</p>
-                  <p className="store-data-left-star">評價的部分</p>
+                  <p className="store-data-left-category ">{item.category}</p>
+                  <p className="store-data-left-star">{storeStarTotal}</p>
                   <div className="d-flex store-data-left-favorite">
                     <div className="store-data-left-icon">
                       <FaHeart />
@@ -30,14 +32,20 @@ const StoreDetails = ({ name, address, tel_no }) => {
                 <div className="store-data-icon">
                   <FaMapMarkerAlt />
                 </div>
-                <div>{address}</div>
+                <div>{item.address}</div>
               </div>
 
               <div className="d-flex store-data-left-content">
                 <div className="store-data-icon">
                   <FaClock />
                 </div>
-                <div>周一至周六 08:00 - 21:00</div>
+                <div>
+                  星期 {JSON.parse(item.close_day)} 公休
+                  <div>
+                    {item.open_time} - {item.close_time}{" "}
+                  </div>
+                </div>
+
                 <div className="d-flex store-data-left-content-business">
                   營業中
                 </div>
@@ -47,14 +55,14 @@ const StoreDetails = ({ name, address, tel_no }) => {
                 <div className="store-data-icon">
                   <FaPhoneAlt />
                 </div>
-                <div> 04-2326-0001</div>
+                <div>{item.tel_no}</div>
               </div>
 
               <div className="d-flex store-data-left-content">
                 <div className="store-data-icon">
                   <FaExclamationCircle />
                 </div>
-                <div>店家介紹 : Lorem ipsum, dolor sit amet consectetur</div>
+                <div>店家介紹 : 這欄考慮拿掉</div>
               </div>
             </div>
           </div>

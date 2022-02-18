@@ -1,14 +1,33 @@
 import { FiMoreVertical } from "react-icons/fi";
 import React from "react";
+import { RiArrowUpDownFill } from "react-icons/ri";
+
 // -------- 商品評論 --------
-const StoreProductsCommit = ({ productsComment }) => {
+const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
+  console.log(productsComment, getPages);
   return (
     <div>
-      <div className="container products-commit" >
-        <div className="text-end products-commit-total">
-          共 {productsComment.length} 則留言
+      <div className="container products-commit">
+        <div>
+          <div className="d-flex  justify-content-between text-end products-commit-total">
+            <div className="d-flex product-users-commit-filter">
+              <div className="me-2 product-users-commit-filter-star">
+                評分
+                <button className="product-users-commit-filter-icon">
+                  <RiArrowUpDownFill />
+                </button>
+              </div>
+              <div className="product-users-commit-filter-time">
+                留言時間
+                <button className="product-users-commit-filter-icon">
+                  <RiArrowUpDownFill />
+                </button>
+              </div>
+            </div>
+            <div>共 {totalPages} 則留言</div>
+          </div>
         </div>
-        {productsComment.map((item)=>{
+        {productsComment.map((item) => {
           return (
             <div className="col-12 mt-3 product-commit">
               <div className="d-flex justify-content-between ">
@@ -64,7 +83,6 @@ const StoreProductsCommit = ({ productsComment }) => {
                     </div>
                   </div>
                 </div>
-
                 <div className="text-end">
                   <div className="d-flex">
                     <div className="d-flex"></div>
@@ -74,7 +92,11 @@ const StoreProductsCommit = ({ productsComment }) => {
             </div>
           );
         })}
-   
+      </div>
+      <div>
+        {getPages.map((item) => {
+          return item;
+        })}
       </div>
     </div>
   );

@@ -41,9 +41,14 @@ const ProductsDetails = ({
     productstarTotal / productModalCommitData.length
   ).toFixed(1);
 
+const [buyamount, setBuyamount] = useState(0);
+function handlePlus(){
+  setBuyamount(buyamount + 1);
+}
 
-
-
+function handleMinus() {
+  setBuyamount(buyamount - 1);
+}
   return (
     <div>
       <div
@@ -95,17 +100,39 @@ const ProductsDetails = ({
                     </div>
 
                     <div className="d-flex justify-content-between card-amount">
-                      <div className="card-total-price ">NT $ 0</div>
+                      <div className="card-total-price ">NT $ {buyamount*data.price}</div>
                       <div className="d-flex buy-num">
                         {/* 減號 */}
-                        <button className=" buy-num-minus equation">
-                          <FiMinusCircle />
-                        </button>
-                        <div className=" buy-num-num ">0</div>
+                        {buyamount > 0 ? (
+                          <button
+                            className=" buy-num-minus equation"
+                            onClick={handleMinus}
+                          >
+                            <FiMinusCircle />
+                          </button>
+                        ) : (
+                          <button className=" buy-num-minus equation">
+                            <FiMinusCircle />
+                          </button>
+                        )}
+
+                        <div className=" buy-num-num ">
+                          {buyamount > data.amount ? data.amount : buyamount}
+                        </div>
+
                         {/* 加號 */}
-                        <button className=" buy-num-plus equation">
-                          <FiPlusCircle />
-                        </button>
+                        {buyamount < data.amount ? (
+                          <button
+                            className=" buy-num-plus equation"
+                            onClick={handlePlus}
+                          >
+                            <FiPlusCircle />
+                          </button>
+                        ) : (
+                          <button className=" buy-num-plus equation">
+                            <FiPlusCircle />
+                          </button>
+                        )}
                       </div>
                     </div>
                   </div>
