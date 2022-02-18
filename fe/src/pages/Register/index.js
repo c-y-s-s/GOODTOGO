@@ -60,7 +60,7 @@ const Register = () => {
                       >
                         姓名
                       </label>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
                           name="name"
                           type="text"
