@@ -259,6 +259,7 @@ const Storecheck = () => {
                             />
                           </div>
                         </div>
+                        {/* 待加入 1~7label */}
                       </div>
                     </div>
 
