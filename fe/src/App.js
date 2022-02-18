@@ -13,6 +13,7 @@ import Store from "./pages/Store";
 import StoreBg from "./pages/Storebg";
 import NewProduct from "./pages/NewProduct";
 import StoreProfileEditing from "./pages/StoreProfileEditing";
+import LatestNews from "./pages/LatestNews";
 import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
@@ -28,7 +29,7 @@ import ProductComment from "../src/pages/Productcomment";
 function App() {
   const [auth, setAuth] = useState(false);
   // 判斷後台不用頁首頁尾
-  const [isAdmin, setIsAdmin] =useState(true)
+  const [isAdmin, setIsAdmin] =useState(false)
 
   return (
     <Router>
@@ -42,6 +43,7 @@ function App() {
           path="/storeprofileediting"
           element={<StoreProfileEditing />}
         ></Route>
+        <Route path="/latestnews" element={<LatestNews />}></Route>
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
         <Route path="/store/:storeId" element={<Product />}></Route>
