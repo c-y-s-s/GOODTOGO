@@ -9,7 +9,10 @@ router.get("/", async (req, res, next) => {
   let [data, fields] = await connection.execute("SELECT * FROM products");
   // console.log(data);
   res.json(data);
-});
+        if (req.query.storeid) {
+       
+        }
+        })
 // -------- 撈出全部商品結束 --------
 
 
@@ -28,6 +31,7 @@ router.get("/:storeId", async (req, res, next) => {
   // console.log(req.params.storeId);
   //撈資料
       // "SELECT * FROM products WHERE store_id = ?",
+
   let [data, fields] = await connection.execute(
     "SELECT * FROM products WHERE store_id = ?",
     [req.params.storeId]

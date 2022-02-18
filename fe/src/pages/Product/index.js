@@ -19,19 +19,15 @@ const Product = () => {
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
   const [productsComment, setproductsComment] = useState([]);
+  
   //切換按鈕
   const [buttonToggle , setbutonToggle] = useState("products");
   //切換 className
 
-
-  //:TODO:測試
-  const [yo,setyo] = useState([]);
-  console.log("yoyoyoyo",yo)
-
-
   
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
-  const { storeId } = useParams();
+  const {storeId} = useParams();
+  console.log(storeId);
 
   //串接後端API
   useEffect(() => {
@@ -90,7 +86,7 @@ const Product = () => {
 
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
-        <StoreCard data={data} setyo={setyo} />
+        <StoreCard data={data} />
       ) : (
         <StoreProductsCommit productsComment={productsComment} />
       )}

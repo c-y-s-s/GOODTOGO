@@ -22,12 +22,14 @@ router.get("/:storeId", async (req, res, next) => {
   // res.json(data);
   // req.params.storeId
   //取出網址上的 stockId 確認
-  // console.log(req.params.storeId);
+
   //撈資料
   let [data, fields] = await connection.execute(
     "SELECT * FROM products_comment WHERE store_id = ?",
     [req.params.storeId]
   );
+    console.log(req.params.storeId);
+ 
   res.json(data);
 });
 

@@ -4,7 +4,7 @@ import { API_URL } from "../../../utils/config";
 import axios from "axios";
 import ProductsDetails from "./ProductsDetails";
 
-const StoreCard = ({ data, setyo }) => {
+const StoreCard = ({ data }) => {
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
   //撈出按下商品卡片的 ID
@@ -45,7 +45,7 @@ const StoreCard = ({ data, setyo }) => {
                   setOpenProductsModalID(item.id);
                   console.log("點商品card取到的id", item.id);
                   setOpenProductsModal(true);
-                  setyo([...setyo,item.id]);
+                 
                 }}
               >
                 <div className="card m-0 ">
