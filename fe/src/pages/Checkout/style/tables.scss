@@ -1,0 +1,22 @@
+.product-category {
+  background: $color-light-grey;
+  font-size: smaller;
+}
+
+.product-image {
+  max-width: 100px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.credit-card {
+  color: $color-light-green;
+  border: 1px solid $color-light-green;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+
+.complete-checkout {
+  background: $color-light-green;
+}
