@@ -32,11 +32,30 @@ router.get("/:storeId", async (req, res, next) => {
   //撈資料
       // "SELECT * FROM products WHERE store_id = ?",
 
-  let [data, fields] = await connection.execute(
-    "SELECT * FROM products WHERE store_id = ?",
+  let [products, fields] = await connection.execute(
+    `SELECT * FROM products WHERE store_id = ?;`,
     [req.params.storeId]
   );
-  res.json(data);
+
+  let productIds = products.map((d) => {
+    return d.id;
+  });
+ 
+  let [comments] = await connection.execute(
+    `SELECT count(id) AS count, products_id, round(AVG(star),1) AS score FROM products_comment WHERE products_id IN (${productIds.join(",")}) GROUP BY products_id;`
+  );
+  // res.json(comments);
+  products.map(p => {
+    let comment = comments.find(c => c.products_id === p.id);
+    if(comment) {
+      p.score = comment.score;
+    } else {
+      p.score = null;
+    }
+
+  });
+
+  res.json(products);
 });
 
 // -------- 撈出對應商家 ID 商品結束 --------
