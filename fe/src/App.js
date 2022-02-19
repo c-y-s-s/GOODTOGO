@@ -38,19 +38,18 @@ function App() {
   const [auth, setAuth] = useState(false);
   // 判斷後台不用頁首頁尾
   const [isAdmin, setIsAdmin] = useState(false);
-  const arrLists = ["/storebg", "/newproduct", "/storeprofileediting"];
-
+ 
   return (
     <Router>
       <Navbar auth={auth} isAdmin={isAdmin} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/storebg" isAdmin={isAdmin} element={<StoreBg /> }></Route>
-        <Route path="/newproduct" element={<NewProduct />}></Route>
+        <Route path="/storebg"  element={<StoreBg setIsAdmin={setIsAdmin}/> }></Route>
+        <Route path="/newproduct" element={<NewProduct setIsAdmin={setIsAdmin}/>}></Route>
         <Route
           path="/storeprofileediting"
-          element={<StoreProfileEditing />}
+          element={<StoreProfileEditing setIsAdmin={setIsAdmin}/>}
         ></Route>
         <Route path="/latestnews" element={<LatestNews />}></Route>
         <Route path="/activity" element={<Activity />}></Route>
