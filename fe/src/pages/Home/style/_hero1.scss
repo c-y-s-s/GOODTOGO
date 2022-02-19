@@ -1,7 +1,8 @@
 // -------- hero 1 --------
 .hero1 {
+  width: 100%;
   padding: 0;
-  height: 100vh;
+  height: 85vh;
   background-image: url(../images/hero1.svg);
   background-size: cover;
   .hero1-bg {
@@ -10,9 +11,10 @@
     .hero1-btn {
       position: relative;
       top: 6.5rem;
-      margin: 0;
-      margin-left: 3.5rem;
+      margin: 0 5%;
+      // margin-left: 3.5rem;
       .hero1-text {
+        width: 100%;
       }
       .hero1-btn-arrow {
         position: relative;

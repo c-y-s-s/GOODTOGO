@@ -43,9 +43,11 @@ function App() {
           <Route path="reset" element={<Reset />}></Route>
         </Route>
         <Route path="/admin" element={<Admin />}></Route>
-        <Route path="/store" element={<Store />}></Route>
+        <Route path="/stores" element={<StoreList />}>
+          <Route to="/stores/p/:currentPage" element={<StoreList />}></Route>
+        </Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
-        <Route path="/store/:storeId" element={<Product />}></Route>
+        <Route path="/stores/:storeId" element={<Product />}></Route>
         <Route
           path="/productcomment/:storeId"
           element={<ProductComment />}

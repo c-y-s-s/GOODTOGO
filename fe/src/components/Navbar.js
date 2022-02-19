@@ -12,7 +12,7 @@ const Navbar = ({ auth }) => {
   const [isOpen, setOpen] = useState(false);
 
   return (
-    <navbar className="container-fluid navbar justify-content-center sticky-top">
+    <div className="container-fluid navbar justify-content-center sticky-top">
       <div className="nav-content">
         <div>
           <Link to="/">
@@ -39,7 +39,7 @@ const Navbar = ({ auth }) => {
           <Link to="/joinus" className="nav-link">
             店家申請
           </Link>
-          <Link to="/store" className="nav-link">
+          <Link to="/stores" className="nav-link">
             立即訂購
           </Link>
           <Link to="/faq" className="nav-link">
@@ -70,7 +70,7 @@ const Navbar = ({ auth }) => {
           </Link>
         </div>
       </div>
-    </navbar>
+    </div>
     //   <nav
     //     className="navbar container-fluid
     //  shadow justify-content-center"

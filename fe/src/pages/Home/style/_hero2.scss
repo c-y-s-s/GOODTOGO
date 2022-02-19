@@ -1,8 +1,11 @@
 // -------- hero 2 --------
 .hero2 {
-  height: 726px;
+  height: 66%;
   background-color: $color-light-green;
   color: white;
+  .hero2-trash {
+    width: 100%;
+  }
   .hero2Text {
     margin-top: 50px;
     margin-bottom: 50px;

@@ -18,7 +18,7 @@ const Reset = () => {
                     {/* email */}
                     <label
                       for=""
-                      className=" input-label-title p-0 text-start text-green mt-3"
+                      className=" input-label-title p-0 text-start text-green mt-3 mb-4"
                     >
                       電子郵件
                     </label>
