@@ -4,16 +4,25 @@ import { ImFacebook2 } from "react-icons/im";
 import { ReactComponent as Logo } from "../../images/logo-face.svg";
 import "./Storecheck.scss"
 import axios from "axios";
+import TWzipcode from "react-twzipcode";
+import TwCitySelector from "tw-city-selector";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 
+new TwCitySelector({
+  el: ".city-selector-standard-words",
+  elCounty: ".county", // 在 el 裡查找 element
+  elDistrict: ".district", // 在 el 裡查找 element
+  elZipcode: ".zipcode", // 在 el 裡查找 element
+  standardWords: true, // 使用正體字 臺
+});
 
 const Storecheck = () => {
   const [member, setMember] = useState({
     email: "",
     password: "",
     confirmPassword: "",
-    name: "申請人姓名",
+    name: "",
     phone: "",
 
 
@@ -46,32 +55,32 @@ const Storecheck = () => {
         </div>
         <div className="col-lg-7 m-0 p-0">
           <div className="content text-center row justify-content-between gy-0">
-            <div className="col-lg-1  m-0 p-0"></div>
+            <div className="col-lg-1 m-0 p-0"></div>
             <div className="col-lg-10 mt-3 mb-3 p-0 ">
               <div className="col-lg-12 row m-0 p-0 gy-3 flex-column ">
-                <div className="h6">商家註冊</div>
+                <div className="h6">商家註冊
+                </div>
                 {/* -------- 註冊資料開始 -------- */}
                 <div className="label-group d-flex text-start flex-column justify-content-evenly gy-2">
-                  <form
-                    className="d-flex row"
-                    onSubmit={handleSubmit}
-                  >
-                    {/* -------- 姓名 -------- */}
-                    <div className="col-lg-6">
+                  <form className="d-flex row"
+                    onSubmit={handleSubmit}>
+                    <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
+                    <div className="col-lg-6 col-md-10 col-sm-10 col-10">
+                      {/* -------- 姓名 -------- */}
                       <label
                         htmlFor="name"
                         className="col-form-label input-label-title text-green p-0"
                       >
                         姓名
                       </label>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
                           name="name"
-                          type="text"
-                          className="form-control custom-input "
-                          id="name"
-                          placeholder="name"
                           value={member.name}
+                          type="text"
+                          className="form-control custom-input"
+                          id="name"
+                          placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
                         />
                         <label
@@ -81,35 +90,14 @@ const Storecheck = () => {
                           請填入中文 / 英文姓名
                         </label>
                       </div>
-                    </div>
-                    {/* -------- 店家LOGO上傳 -------- */}
-                    <div className="col-lg-6">
-                      <label
-                        htmlFor="formFile"
-                        className="col-form-label input-label-title text-green p-0"
-                      >
-                        店家LOGO上傳
-                      </label>
-                      <div className="form-floating mb-3">
-                        <input
-                          name="storeLogo"
-                          type="file"
-                          className="form-control custom-input"
-                          id="storeLogo"
-                          placeholder=".jpg/.jpeg/.png 上限 2MB"
-
-                        />
-                      </div>
-                    </div>
-                    {/* -------- 電子郵件 -------- */}
-                    <div className="col-lg-6">
+                      {/* -------- 電子郵件 -------- */}
                       <label
                         htmlFor="email"
                         className="col-form-label input-label-title text-green p-0"
                       >
                         電子郵件
                       </label>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
                           name="email"
                           value={member.email}
@@ -126,35 +114,14 @@ const Storecheck = () => {
                           請填入電子信箱
                         </label>
                       </div>
-                    </div>
-                    {/* -------- 營業登記證上傳 -------- */}
-
-                    <div className="col-lg-6">
+                      {/* -------- 密碼 -------- */}
                       <label
-                        htmlFor="formFile"
-                        className="col-form-label input-label-title text-green p-0"
+                        htmlFor="password"
+                        className="col-form-label input-label-title  text-green p-0"
                       >
-                        營業登記證上傳
+                        密碼
                       </label>
                       <div className="form-floating mb-3">
-                        <input
-                          name="storeLicence"
-                          type="file"
-                          className="form-control custom-input"
-                          id="storeLogo"
-                          placeholder=".jpg/.jpeg/.png 上限 2MB"
-
-                        />
-                      </div>
-                    </div>
-                    {/* -------- 密碼 -------- */}
-                    <div className="col-lg-6"><label
-                      htmlFor="password"
-                      className="col-form-label input-label-title  text-green p-0"
-                    >
-                      密碼
-                    </label>
-                      <div class="form-floating mb-3">
                         <input
                           name="password"
                           type="password"
@@ -168,116 +135,23 @@ const Storecheck = () => {
                           htmlFor="password"
                           className="floating-label text-grey"
                         >
-                          請填入密碼
+                          請設定密碼(須包含最少一個大、小寫英文字母與數字)
                         </label>
                       </div>
-                    </div>
-                    {/* ------- 營業星期 (複選) -------- */}
-                    <div className="col-lg-6"><label
-                      htmlFor="opendayCheck"
-                      className="col-form-label input-label-title text-green p-0"
-                    >
-                      營業星期(複選)
-                    </label>
-                      <div className="d-block mb-3 me-0 opendayCheck">
-                        <div className="form-check row align-items-center">
-                          <div className="col">
-                            <input
-                              name="Mon"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="mon"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Tue"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="tue"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Wed"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="wed"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Thu"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="thu"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Fri"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="fri"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Sat"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="sat"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                          <div className="col">
-                            <input
-                              name="Sun"
-                              type="checkbox"
-                              className="form-check-input"
-                              id="sun"
-                              placeholder=""
-                              value={member.openDays}
-                              onChange={handleChange}
-                            />
-                          </div>
-                        </div>
-                        {/* 待加入 1~7label */}
-                      </div>
-                    </div>
-
-
-                    {/* -------- 密碼確認 -------- */}
-                    <div className="col-lg-6">
+                      
+                      {/* -------- 密碼確認 -------- */}
                       <label
-                        htmlFor="confirmPassword"
+                        htmlFor="confirmpassword"
                         className="col-form-label input-label-title text-green p-0"
                       >
                         密碼確認
                       </label>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
                           name="confirmPassword"
                           type="password"
                           className="form-control custom-input"
-                          id="confirm-password"
+                          id="confirmpassword"
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
@@ -286,24 +160,84 @@ const Storecheck = () => {
                           htmlFor="confirmpassword"
                           className="floating-label text-grey"
                         >
-                          請再次輸入密碼
+                          請再次輸入密碼確認
                         </label>
                       </div>
-                    </div>
-                    {/* -------- 手機-------- */}
-                    <div className="col-lg-6">
+                        {/* -------- 地址資料 -------- */}
+                        <div className="row">
+                        <div className="col-6">
+                          <select
+                            className="form-select custom-input"
+                          >
+                            <option className="">
+                              請選擇縣市
+                            </option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          </div>
+                         {/* -------- 區域 -------- */}
+                          <div className="col-6">
+                          <select
+                            className="form-select custom-input"
+                          >
+                            <option >請選擇區域 </option>
+                            <option value="1">One</option>
+                            <option value="2">Two</option>
+                            <option value="3">Three</option>
+                          </select>
+                          </div>
+                          
+                          <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
+                          handleChangeCoounty={member.county}
+                          handleChangeDistrict={member.district}
+                          onChange={handleChange}
+                          />
+                          <div className="city-selector-standard-words d-flex flex-grow-1">
+                          <select className="county form-select me-3"></select>
+                          <select 
+                          className="district form-select"></select>
+                          </div>
+                          </div>
+                      {/* -------- 營業店家名稱 -------- */}
                       <label
-                        htmlFor="phone"
+                        htmlFor="storename"
                         className="col-form-label input-label-title  text-green p-0"
                       >
-                        手機
+                        營業店家名稱
                       </label>
-                      <div class="form-floating mb-3">
+                      <div className="form-floating mb-3">
                         <input
-                          name="phone"
+                          name="storename"
+                          type="text"
+                          className="form-control custom-input"
+                          id="storename"
+                          placeholder="營業店家名稱"
+                          value={member.storename}
+                          maxLength="30"
+                          onChange={handleChange}
+                        />
+                        <label
+                          htmlFor="phone"
+                          className="floating-label  text-grey"
+                        >
+                          請輸入營業商店名稱
+                        </label>
+                      </div>
+                      {/* -------- 營業店家電話 -------- */}
+                      <label
+                        htmlFor="storephone"
+                        className="col-form-label input-label-title  text-green p-0"
+                      >
+                        營業店家電話
+                      </label>
+                      <div className="form-floating mb-3">
+                        <input
+                          name="storephone"
                           type="phone"
                           className="form-control custom-input"
-                          id="floatingInput"
+                          id="storephone"
                           placeholder="name@example.com"
                           value={member.phone}
                           maxLength="10"
@@ -316,66 +250,96 @@ const Storecheck = () => {
                           09XXXXXXXX
                         </label>
                       </div>
+                      {/* -------- 使用者同意條款 -------- */}
+
                     </div>
-                    {/* -------- 使用者同意條款 -------- */}
-                    <div className="col-lg-12 align-items-center text-grey input-label-title ">
-                      <input
-                        type="checkbox"
-                        checked={agree}
-                        onChange={(e) => {
-                          setAgree(e.target.checked);
-                        }}
-                      />
-                      我已閱讀並同意
-                      <Link to="" className="no-link text-yellow">
-                        用戶權益和隱私條款
-                      </Link>
-                      {/* -------- 縣市 -------- */}
-                      {/* <div class="col-lg-6">
-                          <select
-                            className="form-select custom-input"
-                            aria-label="Default select example"
-                          >
-                            <option selected className="">
-                              請選擇縣市
-                            </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div> */}
-                      {/* -------- 區域 -------- */}
-                      {/* <div class=" col-lg-6">
-                          <select
-                            className="form-select custom-input"
-                            aria-label="Floating label select example"
-                          >
-                            <option selected>請選擇區域 </option>
-                            <option value="1">One</option>
-                            <option value="2">Two</option>
-                            <option value="3">Three</option>
-                          </select>
-                        </div> */}
+                    <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
+                    <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
+                    <div className="col-lg-6 col-md-10 col-sm-10 col-10">
+                      {/* -------- 店家LOGO上傳 -------- */}
+                      {/* -------- 營業登記證上傳 -------- */}
+                      <label
+                        htmlFor="formFile"
+                        className="col-form-label input-label-title text-green p-0"
+                      >
+                        營業登記證上傳
+                      </label>
+                      <div className="form-floating mb-3">
+                        <input
+                          name="storeLicence"
+                          type="file"
+                          className="form-control custom-input"
+                          id="storeLogo"
+                          placeholder=".jpg/.jpeg/.png 上限 2MB"
+                        />
+                      </div>
+
+                      {/* ------- 營業星期 (複選) -------- */}
+                      <label
+                        htmlFor="opendayCheck"
+                        className="col-form-label input-label-title text-green p-0"
+                      >
+                        營業星期(複選)
+                      </label>
+                      <div className="d-block mb-3 me-0 opendayCheck">
+                        <div className="row mt-3 mb-3 ms-1 me-1">
+                          <input type="checkbox" id="mon" value="一" className="col dayCheck"></input>
+                          <input type="checkbox" id="tue" value="三" className="col dayCheck"></input>
+                          <input type="checkbox" id="wed" value="二" className="col dayCheck"></input>
+                          <input type="checkbox" id="thu" value="四" className="col dayCheck"></input>
+                          <input type="checkbox" id="fri" value="五" className="col dayCheck"></input>
+                          <input type="checkbox" id="sat" value="六" className="col dayCheck"></input>
+                          <input type="checkbox" id="sun" value="日" className="col dayCheck"></input>
+                        </div>
+                        <div className="row input-label-title text-green text-center mt-3 mb-3 ms-1 me-1">
+                          <label htmlFor="mon" className="col">一</label>
+                          <label htmlFor="tue" className="col">二</label>
+                          <label htmlFor="wed" className="col">三</label>
+                          <label htmlFor="thu" className="col">四</label>
+                          <label htmlFor="fri" className="col">五</label>
+                          <label htmlFor="sat" className="col">六</label>
+                          <label htmlFor="sun" className="col">七</label>
+                        </div>
+                      </div>
+                      {/* -------- 註冊同意按鈕開始 -------- */}
+                      <div className="align-items-center text-grey input-label-title">
+                        <input
+                          type="checkbox"
+                          checked={agree}
+                          onChange={(e) => {
+                            setAgree(e.target.checked);
+                          }}
+                        />
+                        我已閱讀並同意
+                        <Link to="" className="no-link text-yellow" >
+                          用戶權益和隱私條款
+                        </Link>
+                      </div>
+                      {/* TODO:當同意條款為true時以下按鈕才生效 */}
+                      <button
+                        type="submit"
+                        className="btn btn-register col-lg-12 mb-2"
+                        disabled={!agree}
+                      >
+                        註冊
+                      </button>
+                      {/* -------- 註冊同意按鈕結束 -------- */}
                     </div>
-                    {/* TODO:當同意條款為true時以下按鈕才生效 */}
-                    <button
-                      type="submit"
-                      className="btn btn-register col-lg-12 mb-2"
-                      disabled={!agree}
-                    >
-                      註冊
-                    </button>
+
+                    <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
+
                   </form>
                   {/* -------- 註冊資料結束 -------- */}
-                  <div className="d-flex align-items-center justify-content-between mb-2">
-                    <hr className="col-lg-5" />或<hr className="col-lg-5" />
+                  <div className="d-flex align-items-center justify-content-between mb-2" >
+                    <hr className="col-lg-5" />或 <hr className="col-lg-5" />
                   </div>
                   {/* -------- Facebook 登入 -------- */}
                   <button
                     className="col-lg-12 btn-fb-login btn d-flex align-items-center text-center justify-content-center m-0 mb-3"
                   >
                     <ImFacebook2 className="big-icon col-lg-2" />
-                    使用 Facebook 註冊<div className="col-lg-2"> </div>
+                    使用 Facebook 註冊
+                    <div className="col-lg-2"> </div>
                   </button>
 
                   <p className=" input-label-title text-grey text-center m-0 mb-3">
@@ -389,7 +353,6 @@ const Storecheck = () => {
             </div>
             <div className="col-lg-1"></div>
           </div>
-
           <div className="col-lg-1"></div>
         </div>
       </div>
