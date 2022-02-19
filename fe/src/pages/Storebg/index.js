@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import React, { useEffect } from "react";
 
 import LeftNav from "./component/LeftNav";
 import TopNav from "./component/TopNav";
@@ -7,30 +6,10 @@ import FilterContent from "./component/FilterContent";
 import PenCount from "./component/PenCount";
 import Table from "./component/Table";
 import Pagination from "./component/Pagination";
-const Storebg = () => {
-  const location = useLocation();
-  const path = location.pathname;
-  // console.log(path);
-  const arrLists = ["/storebg", "/newproduct", "/storeprofileediting"];
-  // const [isAdmin, setIsAdmin] = useState(false);
-
-  // for (let i = 0; i < arrLists.length; i++) {
-  //   // console.log(arrLists[i]);
-  //   // console.log(location.pathname);
-
-  //   if (arrLists[i] === path) {
-  //     console.log("12323");
-  //     setIsAdmin(true);
-  //   }
-  // }
-
+const Storebg = ({ setIsAdmin }) => {
+  // 判斷頁首頁尾
   useEffect(() => {
-    for (let i = 0; i < arrLists.length; i++) {
-      if (arrLists[i] === path) {
-        console.log(arrLists[i] === path);
-        // setIsAdmin(true);
-      }
-    }
+    setIsAdmin(true);
   }, []);
 
   return (
