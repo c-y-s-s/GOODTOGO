@@ -15,14 +15,14 @@ import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
-import UserLikeList from "./pages/MyAccount/UserLikeList";
-import UserOrderList from "./pages/MyAccount/UserOrderList";
-import UserCoupon from "./pages/MyAccount/UserCoupon";
-import UserCreditCard from "./pages/MyAccount/UserCreditCard";
-import UserPassword from "./pages/MyAccount/UserPassword";
+// import UserLikeList from "./pages/MyAccount/UserLikeList";
+// import UserOrderList from "./pages/MyAccount/UserOrderList";
+// import UserCoupon from "./pages/MyAccount/UserCoupon";
+// import UserCreditCard from "./pages/MyAccount/UserCreditCard";
+// import UserPassword from "./pages/MyAccount/UserPassword";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment"; 
+import ProductComment from "../src/pages/Productcomment";
 import Admin from "./pages/Admin/";
 function App() {
   const [auth, setAuth] = useState(false);
@@ -43,12 +43,11 @@ function App() {
         <Route path="/map" element={<Map />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/member/like" element={<UserLikeList />}></Route>
-        <Route path="/member/order" element={<UserOrderList />}></Route>
-        <Route path="/member/coupon" element={<UserCoupon />}></Route>
-        <Route path="/member/payment" element={<UserCreditCard />}></Route>
-        <Route path="/member/password" element={<UserPassword />}></Route>
-        <Route path="/member/profile" element={<MyAccount />}></Route>
+        <Route path="member/*" element={<MyAccount />}>
+          <Route path=":userInfo" element={<MyAccount />}>
+            <Route path=":status" element={<MyAccount />} />
+          </Route>
+        </Route>
       </Routes>
 
       {/* <StoreList />
