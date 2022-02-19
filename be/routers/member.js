@@ -20,15 +20,18 @@ router.use((req, res, next) => {
   // }
   req.session.member = {
     id: 1,
-    name: "倪振軒",
-    photo: "/static/uploads/headshots/member-1644765422913.png",
+    name: "林振軒",
+    // photo: "",
+    photo: "/static/uploads/headshots/member-1645247983164.png",
   };
   // ----- 測試，假設已取得登入後的 session
 
+  console.log("routes", req.session.member);
   // 有無 session
   if (req.session.member) {
     // 表示登入過
-    // next(); // 這樣會跳出 router 到 server.js 繼續 next()???
+    console.log("測試 has session")
+    next(); // 這樣會跳出 router 到 server.js 繼續 next()???
   } else {
     // 表示尚未登入
     res.status(400).json({
@@ -38,7 +41,7 @@ router.use((req, res, next) => {
   }
 
   // 到這裡，表示 req.session.member 一定有資料
-  next(); // 往下走讓 其他頁撈資料
+  // next(); // 往下走讓 其他頁撈資料
   // res.json(req.session.member); // 先測試看看前端能不能得到 session
 });
 // -------- 驗證是否已登入 中間件 結束 --------
@@ -160,7 +163,7 @@ router.post(
     // 處理圖片
     console.log("前端送來、multer中間件處理過 req.file: ", req.file);
     let filename = req.file
-      ? "/static/uploads/" + req.file.filename
+      ? "/static/uploads/headshots/" + req.file.filename
       : req.session.member.photo;
     console.log("加上路徑的 filename: ", filename);
 
@@ -179,7 +182,10 @@ router.post(
 
     // 寫內容前先測試能不能得到 req
     // console.log("req.body: ", req.body);
-    res.json({ message: "儲存資料 ok" });
+    res.json({ 
+      name: req.body.name,
+      photo: filename,
+      message: "儲存資料 ok" });
   }
 );
 
