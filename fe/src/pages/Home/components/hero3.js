@@ -7,8 +7,6 @@ import { ReactComponent as Hero3Text1 } from "../images/hero3Text-1.svg";
 import { ReactComponent as Hero3Text3 } from "../images/hero3Text-3.svg";
 import { ReactComponent as Hero3Tower } from "../images/hero3Tower.svg";
 import { ReactComponent as Hero3Earth } from "../images/hero3Earth.svg";
-// import { ReactComponent as WaveB } from "../images/waveB.svg";
-// import { ReactComponent as Wave } from "../images/wave.svg";
 
 const hero3 = () => {
   return (

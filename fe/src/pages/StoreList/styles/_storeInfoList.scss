@@ -91,12 +91,33 @@
   }
   .pages {
     display: flex;
+    margin: auto;
     list-style-type: none;
-    grid-column-start: 6;
-    grid-column-end: 8;
+    text-decoration: none;
+    grid-column-start: 5;
+    grid-column-end: 9;
     grid-row-start: 8;
     grid-row-end: 9;
+
+    .page-li {
+      .page-links {
+        margin: 0.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
+
+        border: 1px solid transparent;
+        border-radius: 50%;
+        color: $color-green;
+        transition: 0.3s;
+        text-decoration: none;
+        &:hover {
+          background-color: $color-light-green;
+          color: white;
+        }
+      }
+    }
   }
+
   .footer {
     background-image: url(../images/storelist_bg_3.svg);
     grid-column-start: -1;
@@ -107,9 +128,8 @@
 }
 @media screen and (max-width: 390px) {
   .store-list {
-    height: 1000px;
     grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: [row-1] 2rem [row2-head] 2.29rem [row3-title] 5rem [row4-start] 11rem [row4-end]auto [row5-start]3rem[third-line] 2rem[last-line];
+    grid-template-rows: [row-1] 2rem [row2-head] 2.29rem [row3-title] 5rem [row4-start] 11rem [row4-end]auto [row5-start]1rem [row6-start]3rem [third-line] 5rem[last-line];
     grid-template-areas:
       "header header header header header  header header header"
       "main main main main main main main main "
@@ -208,13 +228,43 @@
       grid-template-columns: 1fr;
       row-gap: 1rem;
     }
+    .pages {
+      display: flex;
+      margin: auto;
+      list-style-type: none;
+      text-decoration: none;
+      grid-column-start: -8;
+      grid-column-end: -2;
+      grid-row-start: 7;
+      grid-row-end: 8;
+
+      .page-li {
+        .page-links {
+          margin: 0.5rem;
+          width: 2.4rem;
+          height: 2.4rem;
+
+          border: 1px solid transparent;
+          border-radius: 50%;
+          color: $color-green;
+          transition: 0.3s;
+          text-decoration: none;
+          &:hover {
+            background-color: $color-light-green;
+            color: white;
+          }
+        }
+      }
+    }
     .footer {
       background-size: cover;
       background-size: 100%;
       grid-column-start: 1;
-      grid-column-end: 8;
+      grid-column-end: 9;
       grid-row-start: -1;
       grid-row-end: -2;
+    }
+    .footer-fix {
     }
   }
 }

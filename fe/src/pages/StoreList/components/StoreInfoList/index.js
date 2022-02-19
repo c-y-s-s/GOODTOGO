@@ -11,6 +11,7 @@ import SearchBar from "../SearchBar.js/index.js";
 import Rating from "../Rating";
 //引用圖檔
 import { ReactComponent as Star } from "../../images/star.svg";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const StoreInfoList = () => {
   //總共有lastPage這個麽多頁
@@ -54,9 +55,9 @@ const StoreInfoList = () => {
     let pages = [];
     for (let i = 1; i <= lastPage; i++) {
       pages.push(
-        <Link to={`p/${i}`}>
-          <li className="page-item">
-            <button className="page-link" key={i}>
+        <Link to={`-${i}`}>
+          <li className="page-li">
+            <button className="page-links btn" key={i}>
               {i}
             </button>
           </li>
@@ -98,8 +99,13 @@ const StoreInfoList = () => {
       <div className="store-info-list">
         <StoreInfoCard storeList={storeList} />
       </div>
-      <ul className="pages">{getPages()}</ul>
+      <ul className="pages p-0 align-items-center">
+        <IoIosArrowBack />
+        {getPages()}
+        <IoIosArrowForward />
+      </ul>
       <div className="footer"></div>
+      <div className="footer-fix"></div>
     </div>
   );
 };

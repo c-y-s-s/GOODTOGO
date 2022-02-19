@@ -7,20 +7,12 @@ import { ReactComponent as Hero1TextArrow } from "../images/hero1TextArrow.svg";
 
 const hero1 = () => {
   return (
-    <div className="hero1">
-      <div className="hero1-bg p-0 m-0">
-        <div className=" d-flex justify-content-around m-0 p-0">
-          <div className="col-lg-1" />
-          <div className="col-lg-auto  align-items-center">
-            <div className="hero1-btn ">
-              <Link to="/store">
-                <Hero1Text className="hero1-text" />
-                <Hero1TextArrow className="hero1-btn-arrow" />
-              </Link>
-            </div>
-          </div>
-          <div className="col-lg-1"></div>
-        </div>
+    <div className="hero1 m-auto d-grid">
+      <div className="hero1-btn ">
+        <Link to="/stores" className="d-flex align-items-center">
+          <Hero1Text className="hero1-text" />
+          <Hero1TextArrow className="hero1-btn-arrow align-self-end" />
+        </Link>
       </div>
     </div>
   );

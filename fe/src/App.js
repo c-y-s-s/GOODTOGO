@@ -44,10 +44,11 @@ function App() {
         </Route>
         <Route path="/admin" element={<Admin />}></Route>
         <Route path="/stores" element={<StoreList />}>
-          <Route to="/stores/p/:currentPage" element={<StoreList />}></Route>
+          <Route path=":currentPage" element={<StoreList />}></Route>
+          <Route path="all/:storeId" element={<Product />}></Route>
         </Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
-        <Route path="/stores/:storeId" element={<Product />}></Route>
+
         <Route
           path="/productcomment/:storeId"
           element={<ProductComment />}

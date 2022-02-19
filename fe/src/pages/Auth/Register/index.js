@@ -37,189 +37,183 @@ const Register = () => {
   return (
     <>
       <div className="reg-con">
-        <div className="container-fluid d-flex">
-          <div className="col-lg-6 m-0 p-0"></div>
-          <div className="col-lg-5 m-0 p-0">
+        <div className="container-fluid m-auto">
+          <div className="col-lg-5 col-md-8 m-auto col-12 m-0 p-0">
             <div className="content text-center row justify-content-center gy-0 gx-0 shadow">
-              <div className=" col-lg-8  p-0 ">
-                <div className="col-lg-12 d-flex flex-column pt-5 pb-4">
-                  <div className="h4 text-dark-grey">會員註冊</div>
-                  {/* -------- 表格開始 -------- */}
-                  <div className="label-group d-flex text-start flex-column justify-content-evenly">
-                    <form
-                      className="d-flex flex-column"
-                      onSubmit={handleSubmit}
+              <div className="col-lg-10 col-10 d-flex flex-column pt-5 pb-4">
+                <div className="h4 text-dark-grey">會員註冊</div>
+                {/* -------- 表格開始 -------- */}
+                <div className="label-group d-flex text-start flex-column justify-content-evenly">
+                  <form className="d-flex flex-column" onSubmit={handleSubmit}>
+                    {/* -------- 姓名 -------- */}
+                    <label
+                      htmlFor=""
+                      className="col-form-label input-label-title text-green p-0"
                     >
-                      {/* -------- 姓名 -------- */}
+                      姓名
+                    </label>
+                    <div class="form-floating mb-3">
+                      <input
+                        name="name"
+                        type="text"
+                        className="form-control custom-input "
+                        id="name"
+                        placeholder="name"
+                        value={user.name}
+                        onChange={handleChange}
+                      />
                       <label
-                        htmlFor=""
-                        className="col-form-label input-label-title text-green p-0"
+                        htmlFor="name"
+                        className="floating-label text-grey"
                       >
-                        姓名
+                        請填入中文 / 英文姓名
                       </label>
-                      <div class="form-floating mb-3">
-                        <input
-                          name="name"
-                          type="text"
-                          className="form-control custom-input "
-                          id="name"
-                          placeholder="name"
-                          value={user.name}
-                          onChange={handleChange}
-                        />
-                        <label
-                          htmlFor="name"
-                          className="floating-label text-grey"
-                        >
-                          請填入中文 / 英文姓名
-                        </label>
-                      </div>
-                      {/* -------- 電子郵件 -------- */}
+                    </div>
+                    {/* -------- 電子郵件 -------- */}
+                    <label
+                      htmlFor=""
+                      className="col-form-label input-label-title text-green p-0"
+                    >
+                      電子郵件
+                    </label>
+                    <div class="form-floating mb-3">
+                      <input
+                        name="email"
+                        value={user.email}
+                        type="email"
+                        className="form-control custom-input"
+                        id="email"
+                        placeholder="email"
+                        onChange={handleChange}
+                      />
                       <label
-                        htmlFor=""
-                        className="col-form-label input-label-title text-green p-0"
+                        htmlFor="email"
+                        className="floating-label  text-grey"
                       >
-                        電子郵件
+                        請填入電子信箱
                       </label>
-                      <div class="form-floating mb-3">
-                        <input
-                          name="email"
-                          value={user.email}
-                          type="email"
-                          className="form-control custom-input"
-                          id="email"
-                          placeholder="email"
-                          onChange={handleChange}
-                        />
-                        <label
-                          htmlFor="email"
-                          className="floating-label  text-grey"
-                        >
-                          請填入電子信箱
-                        </label>
-                      </div>
-                      {/* -------- 密碼 -------- */}
+                    </div>
+                    {/* -------- 密碼 -------- */}
+                    <label
+                      for=""
+                      className="col-form-label input-label-title  text-green p-0"
+                    >
+                      密碼
+                    </label>
+                    <div class="form-floating mb-3">
+                      <input
+                        name="password"
+                        type="password"
+                        className="form-control custom-input"
+                        id="password"
+                        placeholder="密碼"
+                        value={user.password}
+                        onChange={handleChange}
+                      />
                       <label
-                        for=""
-                        className="col-form-label input-label-title  text-green p-0"
+                        htmlFor="password"
+                        className="floating-label text-grey"
                       >
-                        密碼
+                        請填入密碼
                       </label>
-                      <div class="form-floating mb-3">
-                        <input
-                          name="password"
-                          type="password"
-                          className="form-control custom-input"
-                          id="password"
-                          placeholder="密碼"
-                          value={user.password}
-                          onChange={handleChange}
-                        />
-                        <label
-                          htmlFor="password"
-                          className="floating-label text-grey"
-                        >
-                          請填入密碼
-                        </label>
-                      </div>
-                      {/* -------- 密碼確認 -------- */}
+                    </div>
+                    {/* -------- 密碼確認 -------- */}
+                    <label
+                      htmlFor=""
+                      className="col-form-label input-label-title text-green p-0"
+                    >
+                      密碼確認
+                    </label>
+                    <div class="form-floating mb-3">
+                      <input
+                        name="confirmPassword"
+                        type="password"
+                        className="form-control custom-input"
+                        id="confirm-password"
+                        placeholder=""
+                        value={user.confirmPassword}
+                        onChange={handleChange}
+                      />
                       <label
-                        htmlFor=""
-                        className="col-form-label input-label-title text-green p-0"
+                        htmlFor="confirm-password"
+                        className="floating-label text-grey"
                       >
-                        密碼確認
+                        請再次輸入密碼
                       </label>
-                      <div class="form-floating mb-3">
-                        <input
-                          name="confirmPassword"
-                          type="password"
-                          className="form-control custom-input"
-                          id="confirm-password"
-                          placeholder=""
-                          value={user.confirmPassword}
-                          onChange={handleChange}
-                        />
-                        <label
-                          htmlFor="confirm-password"
-                          className="floating-label text-grey"
-                        >
-                          請再次輸入密碼
-                        </label>
-                      </div>
-                      {/* -------- 手機-------- */}
+                    </div>
+                    {/* -------- 手機-------- */}
+                    <label
+                      htmlFor=""
+                      className="col-form-label input-label-title  text-green p-0"
+                    >
+                      手機
+                    </label>
+                    <div class="form-floating mb-3">
+                      <input
+                        name="phone"
+                        type="phone"
+                        className="form-control custom-input"
+                        id="floatingInput"
+                        placeholder="name@example.com"
+                        value={user.phone}
+                        maxLength="10"
+                        onChange={handleChange}
+                      />
                       <label
-                        htmlFor=""
-                        className="col-form-label input-label-title  text-green p-0"
+                        htmlFor="floatingInput"
+                        className="floating-label  text-grey"
                       >
-                        手機
+                        09XXXXXXXX
                       </label>
-                      <div class="form-floating mb-3">
-                        <input
-                          name="phone"
-                          type="phone"
-                          className="form-control custom-input"
-                          id="floatingInput"
-                          placeholder="name@example.com"
-                          value={user.phone}
-                          maxLength="10"
-                          onChange={handleChange}
-                        />
-                        <label
-                          htmlFor="floatingInput"
-                          className="floating-label  text-grey"
-                        >
-                          09XXXXXXXX
-                        </label>
-                      </div>
-                      {/* -------- 使用者同意條款 -------- */}
-                      <div className="col-lg-12 align-items-center text-grey input-label-title text-center">
-                        <input
-                          type="checkbox"
-                          checked={agree}
-                          onChange={(e) => {
-                            setAgree(e.target.checked);
-                          }}
-                        />
-                        我已閱讀並同意
-                        <Link to="" className="no-link text-yellow">
-                          用戶權益和隱私條款
-                        </Link>
-                      </div>
-                      {/* TODO:當同意條款為true時以下按鈕才生效 */}
+                    </div>
+                    {/* -------- 使用者同意條款 -------- */}
+                    <div className="col-lg-12 align-items-center text-grey input-label-title text-center">
+                      <input
+                        type="checkbox"
+                        checked={agree}
+                        onChange={(e) => {
+                          setAgree(e.target.checked);
+                        }}
+                      />
+                      我已閱讀並同意
+                      <Link to="" className="no-link text-yellow">
+                        用戶權益和隱私條款
+                      </Link>
+                    </div>
+                    {/* TODO:當同意條款為true時以下按鈕才生效 */}
+                    <div className="btn-group flex-column mt-2">
                       <button
                         type="submit"
-                        className="btn btn-register col-lg-12 mb-2"
+                        className="btn submit-btn col-lg-12 mb-2"
                         disabled={!agree}
                       >
                         註冊
                       </button>
-                    </form>
-                    {/* -------- 表格結束 -------- */}
-                    <div className="d-flex align-items-center justify-content-between mb-2">
-                      <hr className="col-lg-5" />或<hr className="col-lg-5" />
-                    </div>
-                    {/* -------- Facebook 登入 -------- */}
-                    <button
-                      className="col-lg-12 btn-fb-login btn d-flex align-items-center text-center justify-content-center m-0 mb-3"
-                      disabled={!agree}
-                    >
-                      <ImFacebook2 className="big-icon col-lg-2" />
-                      使用 Facebook 註冊<div className="col-lg-2"> </div>
-                    </button>
+                      {/* -------- 表格結束 -------- */}
+                      <div className="d-flex align-items-center justify-content-between mb-2">
+                        <hr className="col-lg-5" />或<hr className="col-lg-5" />
+                      </div>
 
-                    <p className=" input-label-title text-grey text-center m-0 mb-3">
-                      註冊過了嗎？
-                      <Link to="/auth/login" className="no-link">
-                        <span className=" text-yellow ">立即登入</span>
-                      </Link>
-                    </p>
-                  </div>
+                      {/* -------- Facebook 登入 -------- */}
+
+                      <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between mb-2">
+                        <ImFacebook2 className="fb-icon col-lg-2 " />
+                        使用 Facebook 註冊
+                        <div className="col-lg-2"> </div>
+                      </button>
+                    </div>
+                  </form>
+                  <p className=" input-label-title text-grey text-center m-0 mb-3">
+                    註冊過了嗎？
+                    <Link to="/auth/login" className="no-link">
+                      <span className=" text-yellow ">立即登入</span>
+                    </Link>
+                  </p>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="col-lg-1 m-0 p-0"></div>
       </div>
     </>
   );

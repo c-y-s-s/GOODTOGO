@@ -10,15 +10,20 @@
 }
 .btn-group {
   .submit-btn {
-    background-color: $color-green;
+    border: 2px solid $color-green;
+    // background-color: $color-green;
     border-radius: 2px;
+    color: $color-green;
+    &:hover {
+      background-color: $color-green;
+      color: white;
+    }
   }
   .btn-fb-login {
     color: white;
     background-color: #3b5998;
     border-radius: 2px;
     border: 1px solid #3b5998;
-
     .fb-icon {
       font-size: 26px;
     }

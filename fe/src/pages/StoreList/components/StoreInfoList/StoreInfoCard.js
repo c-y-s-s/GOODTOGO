@@ -9,7 +9,7 @@ const StoreInfoCard = (props) => {
     <>
       {storeList.map((item, i) => {
         return (
-          <Link to={`:${item.id}`} className="no-link">
+          <Link to={`all/${item.id}`} className="no-link">
             <div
               className="store-info-card shadow d-flex align-items-center"
               key={item.id}

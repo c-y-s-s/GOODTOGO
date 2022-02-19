@@ -1,21 +1,13 @@
-.login-con {
+.login-bg {
+  margin: auto;
   background: $color-yellow;
-  // height: calc(100vh - $navbar-height);
-  // padding-top: calc((100vh - $navbar-height - 578px) / 2);
   padding: 4rem;
   .content {
-    background: white;
-    // height: 578px;
-    // width: 475px;
-    filter: drop-shadow(0 0 0.5rem $color-grey);
-    margin: auto;
     border-radius: 4px;
+    background: white;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
   }
 }
-
 .error {
   color: $color-red;
-}
-.fix-height {
-  height: 100vh-$navbar-height;
 }
