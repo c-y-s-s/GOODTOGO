@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 import "./styles/index.scss";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
@@ -28,23 +33,20 @@ import UserCreditCard from "./pages/MyAccount/UserCreditCard";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment";
+
 function App() {
   const [auth, setAuth] = useState(false);
   // 判斷後台不用頁首頁尾
-  const [isAdmin, setIsAdmin] =useState(false)
-
-  // [].map()
-  // const location = useLocation();
-  // const path = location.pathname; 
-  // console.log(path)
+  const [isAdmin, setIsAdmin] = useState(false);
+  const arrLists = ["/storebg", "/newproduct", "/storeprofileediting"];
 
   return (
     <Router>
-      <Navbar auth={auth} isAdmin={isAdmin}/>
+      <Navbar auth={auth} isAdmin={isAdmin} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/storebg" element={<StoreBg />}></Route>
+        <Route path="/storebg" isAdmin={isAdmin} element={<StoreBg /> }></Route>
         <Route path="/newproduct" element={<NewProduct />}></Route>
         <Route
           path="/storeprofileediting"
@@ -74,7 +76,7 @@ function App() {
       <StoreCheck />
 
       <Product /> */}
-      <Footer isAdmin={isAdmin}/>
+      <Footer isAdmin={isAdmin} />
     </Router>
   );
 }
