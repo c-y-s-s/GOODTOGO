@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import LeftNav from "./component/LeftNav";
 import TopNav from "./component/TopNav";
 import Table from "./component/Table";
-const storeprofileediting = () => {
+const Storeprofileediting = ({ setIsAdmin }) => {
+  // 判斷頁首頁尾
+  useEffect(() => {
+    setIsAdmin(true);
+  }, []);
+
   return (
     <div className="background-storeprofileediting">
       <div className="background-storeprofileediting-data">
@@ -26,4 +31,4 @@ const storeprofileediting = () => {
   );
 };
 
-export default storeprofileediting;
+export default Storeprofileediting;
