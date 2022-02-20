@@ -29,3 +29,8 @@ input[type="file"]::file-selector-button {
 textarea {
   resize: none;
 }
+
+// 取消按鈕顏色
+.cancel-bg{
+  background: $color-light-grey;
+}
