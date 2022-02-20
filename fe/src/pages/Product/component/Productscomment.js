@@ -1,13 +1,23 @@
 import { FiMoreVertical } from "react-icons/fi";
 import React from "react";
+import { useParams, Link } from "react-router-dom";
 import { RiArrowUpDownFill } from "react-icons/ri";
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- 商品評論 --------
-const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
-  console.log(productsComment);
+const StoreProductsComment = ({
+  productsComment,
+  totalPages,
+  getPages,
+  setPage,
+}) => {
+  const { currentPage } = useParams();
+
+  console.log("ccc", currentPage);
+  let page = parseInt(currentPage, 10) || 1;
+
   return (
     <div>
       <div className="container products-comment">
@@ -31,6 +41,9 @@ const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
           </div>
         </div>
         {productsComment.map((item) => {
+          {
+            console.log(item);
+          }
           return (
             <div className="col-12 mt-3 product-comment">
               <div className="d-flex justify-content-between ">
@@ -81,7 +94,7 @@ const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
                                   readOnly
                                 />
                               </Stack>
-                              <div>{console.log(item)}</div>
+                              <div>product name</div>
                             </div>
                           </div>
                           <div className="ps-3 product-data-name">
@@ -111,7 +124,10 @@ const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
         <div className="products-comment-pagination">
           {/* // ! 前一頁 後一頁功能未完成 */}
           <div className="pages-icon">
-            <FiChevronLeft />
+            
+            <Link to={`${page - 1}`} className="page-arrow" >
+              <FiChevronLeft />
+            </Link>
           </div>
           <div>
             {getPages.map((item) => {
@@ -119,7 +135,9 @@ const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
             })}
           </div>
           <div className="pages-icon">
-            <FiChevronRight />
+            <Link to={`${page + 1}`} className="page-arrow">
+              <FiChevronRight />
+            </Link>
           </div>
         </div>
       </div>

@@ -30,6 +30,7 @@ const Product = () => {
   const [totalPages, setTotalPages] = useState([]);
   // 總頁數預設 1
   const [lastPage, SetLastPage] = useState(1);
+
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
@@ -44,7 +45,7 @@ const Product = () => {
       let productsCommentResponse = await axios.get(
         `${API_URL}/productscommit/${storeId}?page=${page}`
       );
-      //! 店家評論無效原因可能是api預設頁數是1 需要從用一個可以撈到全部評論的 api
+
       setProducts(productsResponse.data);
       setStoreData(storeResponse.data);
       setproductsComment(productsCommentResponse.data.data);
@@ -67,7 +68,7 @@ const Product = () => {
           key={i}
           onClick={(e) => {
             setPage(i);
-            navigate(`/store/1/page=${i}`)
+            navigate(`/store/1/${i}`)
           }}
         >
           {i}
@@ -95,15 +96,9 @@ const Product = () => {
 
   return (
     <div>
-
-
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
 
-
-            <StoreDetails
-              storeData={storeData}
-              storeId={storeId}
-            />
+      <StoreDetails storeData={storeData} storeId={storeId} />
 
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
@@ -127,6 +122,7 @@ const Product = () => {
           productsComment={productsComment}
           totalPages={totalPages}
           getPages={getPages()}
+          setPage={setPage}
         />
       )}
       {/* -------- 綠色裝飾橫條大條 --------*/}
