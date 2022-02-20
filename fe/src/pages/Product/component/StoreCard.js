@@ -31,7 +31,7 @@ const StoreCard = ({ data }) => {
                       alt="商品"
                     />
                   </div>
-                  <div className="card-body ">
+                  <div className="card-body">
                     <div className="">
                       <div className="card-title">{item.name}</div>
                       <div className="card-star">評價的部分</div>
