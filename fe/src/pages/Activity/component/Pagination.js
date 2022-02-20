@@ -8,16 +8,20 @@ const Pagination = () => {
         <div className="col-6">
           <nav
             aria-label="Page navigation example m-auto "
-            className="background-storebg-data-right-content-pages"
+            className="background-activity-data-right-content-pages"
           >
             <ul className="pagination justify-content-between">
               <li className="page-item">
-                <a className="page-link" href="#/" aria-label="Previous">
-                  <span aria-hidden="true">&lt; 上一篇</span>
+                <a
+                  className="page-link  border-0"
+                  href="#/"
+                  aria-label="Previous"
+                >
+                  &lt; 上一篇
                 </a>
               </li>
               <li className="page-item">
-                <a className="page-link" href="#/" aria-label="Next">
+                <a className="page-link  border-0" href="#/" aria-label="Next">
                   <span aria-hidden="true">下一篇 &gt;</span>
                 </a>
               </li>
