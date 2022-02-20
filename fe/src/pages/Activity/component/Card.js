@@ -9,7 +9,6 @@ const Card = () => {
           <div className="card mb-3 border-top-0 border-start-0 border-end-0">
             <img
               src={require(`../images/LatestNews.png`)}
-              className="card-img-top"
               alt="..."
             />
             <div className="card-body">
