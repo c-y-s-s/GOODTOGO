@@ -112,7 +112,7 @@ const Table = () => {
         </div>
         <div className="row  mt-3">
           <div className="col-3"></div>
-          <button type="button" className="col-2 btn btn-light btn-lg ">
+          <button type="button" className="col-2 btn btn-lg cancel-bg">
             取消
           </button>
           <div className="col-1"></div>
