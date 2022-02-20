@@ -6,6 +6,7 @@ import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
 
 import UserProfile from "./pages/UserProfile";
 import UserPassword from "./pages/UserPassword";
+import UserLike from "./pages/UserLike";
 
 // user 帶著 session 進入此頁
 
@@ -36,7 +37,7 @@ const MyAccount = () => {
         response.data.name
       );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
-      setHeadShot(`${response.data.photo}`);
+      setHeadShot(response.data.photo);
       setUserName(response.data.name);
     };
     getUser();
@@ -180,6 +181,7 @@ const MyAccount = () => {
               }
             />
             <Route path="password" element={<UserPassword />} />
+            <Route path="like" element={<UserLike />} />
             {/* <Route path="payment" element={<Payment />} />
             <Route path="password" element={<Password />} />
             <Route path="like" element={<Like />} />
