@@ -122,7 +122,7 @@ const StoreProductsComment = () => {
                       <div>
                         <div className="d-flex ">
                           <div className="">
-                            <div>
+                            <div className="d-flex ">
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
@@ -131,7 +131,9 @@ const StoreProductsComment = () => {
                                   readOnly
                                 />
                               </Stack>
-                              <div>product name</div>
+                              <div className="ps-2 product-data-name">
+                                {item.products_name}
+                              </div>
                             </div>
                           </div>
                           <div className="ps-3 product-data-name">
@@ -142,7 +144,7 @@ const StoreProductsComment = () => {
                       </div>
                       <img
                         className="product-photo "
-                        src={require(`../../../images/store_img/01.jpg`)}
+                        src={require(`../../../images/products_img/${item.img}`)}
                         alt=""
                       />
                     </div>
@@ -158,7 +160,7 @@ const StoreProductsComment = () => {
           );
         })}
         {/* // 頁碼功能 */}
-        {/* // ! Link尚未設定錨點 */}
+        {/*  ! Link尚未設定錨點 */}
         <div className="products-comment-pagination">
           <div className="pages-icon">
             {page <= 1 ? (

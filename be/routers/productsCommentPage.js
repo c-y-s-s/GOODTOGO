@@ -30,7 +30,17 @@ router.get("/:storeId", async (req, res, next) => {
   // 計算offsSELECT 
   let offset = (page-1) * perPage;
   let [data] = await connection.execute(
-    "SELECT  a.* ,b.name FROM products_comment AS a JOIN users AS b ON  a.user_id = b.id WHERE store_id = ? LIMIT ? OFFSET ?",
+    `SELECT a.* ,
+    b.name,
+    b.headshots,
+    c.img,
+    c.name AS products_name
+    FROM products_comment AS a 
+    JOIN users AS b ON  a.user_id = b.id 
+    JOIN products AS c ON a.products_id = c.id
+    WHERE a.store_id = ? 
+    LIMIT ? 
+    OFFSET ?`,
     [req.params.storeId, perPage, offset]
   );
     //response

@@ -48,6 +48,7 @@
 
             .user-data-name {
                 letter-spacing: $ls-md;
+                font-size: $fz-xx-lg;
             }
             // -------- 留言時間 --------
             .user-data-comment-time {
@@ -100,6 +101,7 @@
             padding-right: 3.5rem;
             font-size: $fz-md;
             letter-spacing: $ls-md;
+            color: $color-dark-grey;
         }
     }
     .products-comment-pagination {
