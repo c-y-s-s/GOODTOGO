@@ -19,7 +19,7 @@ const Product = () => {
   const [data, setData] = useState([]);
   const [storeData, setStoreData] = useState([]);
   const [productsComment, setproductsComment] = useState([]);
-  //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
+  //取出網址上的 storeId 這邊的 storeId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
 
   //串接後端API

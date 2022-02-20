@@ -1,0 +1,20 @@
+.reset-bg {
+  background-color: $color-yellow;
+  height: 60vh;
+  margin-top: auto;
+  .content {
+    border-radius: 4px;
+    background: white;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
+  }
+}
+@media screen and (max-width: 390px) {
+  .sm-fix {
+    display: inline-block;
+  }
+  .btn-group {
+    .btn {
+      font-size: $fz-sm;
+    }
+  }
+}
