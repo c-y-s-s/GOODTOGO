@@ -7,13 +7,10 @@ const StoreInfoCard = (props) => {
   const { storeList } = props;
   return (
     <>
-      {storeList.map((item, i) => {
+      {storeList.map((item) => {
         return (
           <Link to={`all/${item.id}`} className="no-link">
-            <div
-              className="store-info-card shadow d-flex align-items-center"
-              key={item.id}
-            >
+            <div className="store-info-card shadow d-flex align-items-center">
               <div className="info-img col-12">
                 <img
                   src={require(`../../../../images/store_img/${item.logo}`)}

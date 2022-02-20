@@ -2,7 +2,6 @@ import React from "react";
 
 const FilterBar = (props) => {
   const { category, selectedCat, setSelectedCat } = props;
-  console.log(category);
   return (
     <>
       {/* 篩選區域 */}

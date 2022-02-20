@@ -10,10 +10,10 @@ const SearchBar = (props) => {
         type="text"
         className="store-search"
         placeholder="熱門搜尋: 麵包"
-        // value={searchWord}
-        // onChange={(e) => {
-        //   setSearchWord(e.target.value);
-        // }}
+        value={searchWord}
+        onChange={(e) => {
+          setSearchWord(e.target.value);
+        }}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-
+//後端套件
 import axios from "axios";
 import { API_URL } from "../../../../utils/config";
 //引用元件
@@ -14,25 +14,18 @@ import { ReactComponent as Star } from "../../images/star.svg";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const StoreInfoList = () => {
+  // -------- 分頁處理 --------
   //總共有lastPage這個麽多頁
   const [lastPage, setLastPage] = useState(1);
 
   //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
   const { currentPage } = useParams();
 
-  //const [page, setPage] = useState(;
+  // const [page, setPage] = useState("");
+  //TODO: 怎麼設定當前頁面顯示
+  const [isActive, setIsActive] = useState("");
   let page = parseInt(currentPage, 10) || 1;
   console.log("currentPage", currentPage, page);
-
-  //商家列表
-  const [storeList, setStoreList] = useState([]);
-  //處理後列表
-  const [filteredStore, setFilteredStore] = useState("");
-  //類別篩選
-  const [category, setCategory] = useState([]);
-  const [selectedCat, setSelectedCat] = useState("");
-  //關鍵字搜尋
-  const [searchWord, setSearchWord] = useState("");
 
   //後端api傳資料
   useEffect(() => {
@@ -48,8 +41,6 @@ const StoreInfoList = () => {
     };
     getStore();
   }, [page]);
-  // console.log(category);
-  //console.log(storeList);
 
   const getPages = () => {
     let pages = [];
@@ -57,7 +48,10 @@ const StoreInfoList = () => {
       pages.push(
         <Link to={`${i}`}>
           <li className="page-li">
-            <button className="page-links btn" key={i}>
+            <button
+              className={isActive ? "page-links btn active" : "page-links btn"}
+              key={i}
+            >
               {i}
             </button>
           </li>
@@ -66,6 +60,21 @@ const StoreInfoList = () => {
     }
     return pages;
   };
+  // -------- 篩選處理 --------
+  //商家列表
+  const [storeList, setStoreList] = useState([]);
+  //處理後要顯示的列表
+  const [displayLis, setDisplayList] = useState("");
+  //類別篩選
+  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("");
+  //關鍵字搜尋
+  const [searchWord, setSearchWord] = useState("");
+
+  //當function-box資料有更動時
+  useEffect(() => {
+    let filteredStore = [];
+  });
 
   return (
     <div className="store-list d-grid">
@@ -82,7 +91,7 @@ const StoreInfoList = () => {
         </div>
       </div>
       {/* 商家列表處理區 */}
-      <div className="function-box ">
+      <div className="function-box">
         <SearchBar searchWord={searchWord} setSearchWord={setSearchWord} />
         <div className="col-lg-4 justify-content-between d-flex">
           <FilterBar
