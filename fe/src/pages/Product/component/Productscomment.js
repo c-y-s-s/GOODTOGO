@@ -1,22 +1,61 @@
 import { FiMoreVertical } from "react-icons/fi";
+import { useState, useEffect } from "react";
 import React from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { RiArrowUpDownFill } from "react-icons/ri";
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
 // -------- 商品評論 --------
-const StoreProductsComment = ({
-  productsComment,
-  totalPages,
-  getPages,
-  setPage,
-}) => {
+const StoreProductsComment = () => {
+  const { storeId } = useParams();
   const { currentPage } = useParams();
+  console.log("currentPage", currentPage);
+  // 存指定商家 ID 評論
+  const [productsComment, setproductsComment] = useState([]);
+  // 存總筆數
+  const [totalPages, setTotalPages] = useState([]);
+  // 總頁數預設 1
+  const [lastPage, SetLastPage] = useState(1);
+  const [page, setPage] = useState(parseInt(currentPage, 10) || parseInt(1));
+  console.log("lastPage", lastPage);
+  // 撈指定商家評論
+  useEffect(() => {
+    let getComment = async () => {
+      let productsCommentResponse = await axios.get(
+        `${API_URL}/productscommit/${storeId}?page=${page}`
+      );
 
-  console.log("ccc", currentPage);
-  let page = parseInt(currentPage, 10) || 1;
+      setproductsComment(productsCommentResponse.data.data);
+      setTotalPages(productsCommentResponse.data.pagination.total);
+      SetLastPage(productsCommentResponse.data.pagination.lastPage);
+    };
+    getComment();
+  }, [page]);
+
+  let navigate = useNavigate();
+  let pages = [];
+  for (let i = 1; i <= lastPage; i++) {
+    pages.push(
+      <a
+        className="pages"
+        key={i}
+        onClick={(e) => {
+          setPage(i);
+          navigate(`/store/1/${i}`);
+        }}
+      >
+        {i}
+      </a>
+    );
+  }
+
+  console.log("pagepagepagepage", typeof page, page);
+
+  // let navigate = useNavigate();
 
   return (
     <div>
@@ -41,9 +80,6 @@ const StoreProductsComment = ({
           </div>
         </div>
         {productsComment.map((item) => {
-          {
-            console.log(item);
-          }
           return (
             <div className="col-12 mt-3 product-comment">
               <div className="d-flex justify-content-between ">
@@ -124,20 +160,56 @@ const StoreProductsComment = ({
         <div className="products-comment-pagination">
           {/* // ! 前一頁 後一頁功能未完成 */}
           <div className="pages-icon">
-            
-            <Link to={`${page - 1}`} className="page-arrow" >
-              <FiChevronLeft />
-            </Link>
+            {page <= 1 ? (
+              <Link
+                to={`${page}`}
+                className="page-arrow"
+                onClick={() => {
+                  setPage(page);
+                }}
+              >
+                {" "}
+              </Link>
+            ) : (
+              <Link
+                to={`${page - 1}`}
+                className="page-arrow"
+                onClick={() => {
+                  setPage(page - 1);
+                }}
+              >
+                <FiChevronLeft />
+              </Link>
+            )}
+
           </div>
           <div>
-            {getPages.map((item) => {
+            {pages.map((item) => {
               return item;
             })}
           </div>
           <div className="pages-icon">
-            <Link to={`${page + 1}`} className="page-arrow">
-              <FiChevronRight />
-            </Link>
+            {page >= lastPage ? (
+              <Link
+                to={`${page}`}
+                className="page-arrow"
+                onClick={() => {
+                  setPage(page);
+                }}
+              ></Link>
+            ) : (
+              <Link
+                to={`${page + 1}`}
+                className="comment-page-arrow"
+                onClick={() => {
+                  setPage(page + 1);
+                }}
+              >
+                <FiChevronRight />
+              </Link>
+            )}
+
+
           </div>
         </div>
       </div>

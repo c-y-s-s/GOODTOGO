@@ -24,14 +24,15 @@ const Product = () => {
   const [productsdata, setProducts] = useState([]);
   // 存商家資料
   const [storeData, setStoreData] = useState([]);
-  // 存指定商家 ID
+  // 存指定商家 ID 評論
   const [productsComment, setproductsComment] = useState([]);
   // 存總筆數
-  const [totalPages, setTotalPages] = useState([]);
-  // 總頁數預設 1
-  const [lastPage, SetLastPage] = useState(1);
+  // const [totalPages, setTotalPages] = useState([]);
+  // // 總頁數預設 1
+  // const [lastPage, SetLastPage] = useState(1);
 
-  const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
+  // const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
+
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
   // 切換 className
@@ -42,57 +43,45 @@ const Product = () => {
  
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
-      let productsCommentResponse = await axios.get(
-        `${API_URL}/productscommit/${storeId}?page=${page}`
-      );
+      // let productsCommentResponse = await axios.get(
+      //   `${API_URL}/productscommit/${storeId}?page=${page}`
+      // );
 
       setProducts(productsResponse.data);
       setStoreData(storeResponse.data);
-      setproductsComment(productsCommentResponse.data.data);
-      setTotalPages(productsCommentResponse.data.pagination.total);
-      SetLastPage(productsCommentResponse.data.pagination.lastPage);
+      // setproductsComment(productsCommentResponse.data.data);
+      // setTotalPages(productsCommentResponse.data.pagination.total);
+      // SetLastPage(productsCommentResponse.data.pagination.lastPage);
     };
     getProducts();
-  }, [page]);
+  }, []);
 
 
-  let navigate = useNavigate();
+  // let navigate = useNavigate();
   // 算出頁碼傳進評論頁
-  const getPages = () => {
-    let pages = [];
-    for (let i = 1; i <= lastPage; i++) {
-      pages.push(
-        <a
-        href="#mark-1"
-         className="pages"
-          key={i}
-          onClick={(e) => {
-            setPage(i);
-            navigate(`/store/1/${i}`)
-          }}
-        >
-          {i}
-        </a>
-      );
-    }
-    return pages;
-  };
-  // 計算商家平均評價
-  // function storeStarTotal() {
-  //   let StarTotal = 0;
-  //   productsComment.map((item) => {
-  //     StarTotal += item.star;
-  //   });
-  //   return (StarTotal = (StarTotal / productsComment.length).toFixed(1));
-  // }
-  // storeStarTotal();
+  // const getPages = () => {
+  //   let pages = [];
+  //   for (let i = 1; i <= lastPage; i++) {
+  //     pages.push(
+  //       <a
+  //       href="#mark-1"
+  //        className="pages"
+  //         key={i}
+  //         onClick={(e) => {
+  //           setPage(i);
+  //           // navigate(`/store/1/${i}`)
+  //         }}
+  //       >
+  //         {i}
+  //       </a>
+  //     );
+  //   }
+  //   return pages;
+  // };
+
 
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
-
-  // -------- ID區塊先用來避免產生錯誤之後會修改 -------
-  let storeDataID = 1;
-  // -------- ID 結束 --------
 
   return (
     <div>
@@ -120,9 +109,9 @@ const Product = () => {
       ) : (
         <StoreProductsComment
           productsComment={productsComment}
-          totalPages={totalPages}
-          getPages={getPages()}
-          setPage={setPage}
+          // totalPages={totalPages}
+          // getPages={getPages()}
+          // setPage={setPage}
         />
       )}
       {/* -------- 綠色裝飾橫條大條 --------*/}
