@@ -5,7 +5,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-import ProductsDetailsCommit from "./ProductsDetailsCommit";
+import ProductsDetailsComment from "./ProductsDetailsComment";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import { AiOutlineConsoleSql } from "react-icons/ai";
@@ -15,7 +15,7 @@ const ProductsDetails = ({
   // productModalData,
   openProductsModaID,
 }) => {
-  const [productModalCommitData, setProductModalCommitData] = useState([]);
+  const [productModalCommentData, setProductModalCommentData] = useState([]);
   //算商品評論數字 全部評價相加 除 筆數 取小數點後一位
   const [productStarTotal, setProductStarTotal] = useState(0);
 
@@ -25,13 +25,13 @@ const ProductsDetails = ({
   //撈指定 商品 ID 的 評論
   useLayoutEffect(() => {
     let getProductId = async () => {
-      let productModalCommitResponse = await axios.get(
+      let productModalCommentResponse = await axios.get(
         `${API_URL}/productsdesignatecommit/${openProductsModaID}`
       );
       let productModalResponse = await axios.get(
         `${API_URL}/product/${openProductsModaID}`
       );
-      setProductModalCommitData(productModalCommitResponse.data);
+      setProductModalCommentData(productModalCommentResponse.data);
       setproductModalData(productModalResponse.data);
     };
     getProductId();
@@ -41,11 +41,11 @@ const ProductsDetails = ({
   // console.log("算評價total的地方", productModalCommitData);
 
   let productstarTotal = 0;
-  productModalCommitData.forEach((item) => {
+  productModalCommentData.forEach((item) => {
     productstarTotal += item.star;
   });
   let productstarTotalAVG = (
-    productstarTotal / productModalCommitData.length
+    productstarTotal / productModalCommentData.length
   ).toFixed(1);
  
   const [buyamount, setBuyamount] = useState(0);
@@ -171,8 +171,8 @@ const ProductsDetails = ({
                 {/* 裝飾條 */}
                 <div className="decorative "></div>
                 {/* --------- 評論區塊 --------*/}
-                <ProductsDetailsCommit
-                  productModalCommitData={productModalCommitData}
+                <ProductsDetailsComment
+                  productModalCommentData={productModalCommentData}
                 />
                 {/* --------- 評論區塊結束--------*/}
               </div>

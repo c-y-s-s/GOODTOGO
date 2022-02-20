@@ -1,17 +1,17 @@
 // -------- 商品評論 --------
 
-.products-commit {
+.products-comment {
     margin-top: 3.7rem;
 
     //篩選區塊
-    .product-users-commit-filter {
-        .product-users-commit-filter-star {
+    .product-users-comment-filter {
+        .product-users-comment-filter-star {
             color: $color-green;
         }
-        .product-users-commit-filter-time {
+        .product-users-comment-filter-time {
             color: $color-green;
         }
-        .product-users-commit-filter-icon {
+        .product-users-comment-filter-icon {
             border: none;
             background-color: rgba(0, 0, 0, 0);
             transition: 0.3s;
@@ -23,11 +23,11 @@
     }
     // 區塊置中
     //設定寬度 75% 是因為 RWD 要變成 100%
-    .products-commit-total {
+    .products-comment-total {
         width: 75%;
         margin: auto;
     }
-    .product-commit {
+    .product-comment {
         border-bottom: 1px solid $color-green;
         padding-bottom: 1.05rem;
         width: 75%;
@@ -50,7 +50,7 @@
                 letter-spacing: $ls-md;
             }
             // -------- 留言時間 --------
-            .user-data-commit-time {
+            .user-data-comment-time {
                 font-size: $fz-ss-sm;
                 color: $color-grey;
                 font-weight: $fw-medium;
@@ -96,13 +96,13 @@
             }
         }
         // -------- 用戶評論 --------
-        .user-commit {
+        .user-comment {
             padding-right: 3.5rem;
             font-size: $fz-md;
             letter-spacing: $ls-md;
         }
     }
-    .products-commit-pagination {
+    .products-comment-pagination {
         display: flex;
         text-align: center;
         align-items: center;
@@ -139,9 +139,9 @@
 
 // -------- 平板 RWD --------
 @media screen and (max-width: 768px) {
-    .products-commit {
-        .product-commit {
-            .user-commit {
+    .products-comment {
+        .product-comment {
+            .user-comment {
                 padding-right: 0;
                 font-weight: 100;
             }
@@ -154,12 +154,12 @@
 
 // -------- 手機 RWD --------
 @media screen and (max-width: 390px) {
-    .products-commit {
-        .products-commit-total {
+    .products-comment {
+        .products-comment-total {
             width: 100%;
         }
-        .product-commit {
-            .user-commit {
+        .product-comment {
+            .user-comment {
             }
 
             .product-data-name {
@@ -167,8 +167,8 @@
             }
         }
     }
-    .products-commit {
-        .product-commit {
+    .products-comment {
+        .product-comment {
             width: 100%;
             .user-data {
                 .product-data {

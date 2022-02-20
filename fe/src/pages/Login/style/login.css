@@ -281,19 +281,19 @@
   padding: 2.65rem 0;
 }
 
-.products-commit {
+.products-comment {
   margin-top: 3.7rem;
 }
 
-.products-commit .product-users-commit-filter .product-users-commit-filter-star {
+.products-comment .product-users-comment-filter .product-users-comment-filter-star {
   color: #668c4a;
 }
 
-.products-commit .product-users-commit-filter .product-users-commit-filter-time {
+.products-comment .product-users-comment-filter .product-users-comment-filter-time {
   color: #668c4a;
 }
 
-.products-commit .product-users-commit-filter .product-users-commit-filter-icon {
+.products-comment .product-users-comment-filter .product-users-comment-filter-icon {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition: 0.3s;
@@ -301,28 +301,28 @@
   color: #b1b1ac;
 }
 
-.products-commit .product-users-commit-filter .product-users-commit-filter-icon:hover {
+.products-comment .product-users-comment-filter .product-users-comment-filter-icon:hover {
   color: #668c4a;
 }
 
-.products-commit .products-commit-total {
+.products-comment .products-comment-total {
   width: 75%;
   margin: auto;
 }
 
-.products-commit .product-commit {
+.products-comment .product-comment {
   border-bottom: 1px solid #668c4a;
   padding-bottom: 1.05rem;
   width: 75%;
   margin: auto;
 }
 
-.products-commit .product-commit .user-data .user-photo {
+.products-comment .product-comment .user-data .user-photo {
   width: 4.1rem;
   height: 4.1rem;
 }
 
-.products-commit .product-commit .user-data .user-photo .cover-photo {
+.products-comment .product-comment .user-data .user-photo .cover-photo {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -330,69 +330,69 @@
      object-fit: cover;
 }
 
-.products-commit .product-commit .user-data .user-data-name {
+.products-comment .product-comment .user-data .user-data-name {
   letter-spacing: 0.1rem;
 }
 
-.products-commit .product-commit .user-data .user-data-commit-time {
+.products-comment .product-comment .user-data .user-data-comment-time {
   font-size: 0.75rem;
   color: #b1b1ac;
   font-weight: 400;
 }
 
-.products-commit .product-commit .user-data .user-data-report {
+.products-comment .product-comment .user-data .user-data-report {
   color: #b1b1ac;
   font-weight: 400;
   border: none;
   background-color: rgba(0, 0, 0, 0);
 }
 
-.products-commit .product-commit .user-data .dropdown-menu {
+.products-comment .product-comment .user-data .dropdown-menu {
   padding-left: 0.3rem;
   background-color: rgba(0, 0, 0, 0);
   min-width: 3rem;
 }
 
-.products-commit .product-commit .user-data .dropdown-menu a {
+.products-comment .product-comment .user-data .dropdown-menu a {
   text-decoration: none;
   color: #262626;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.products-commit .product-commit .user-data .dropdown-menu a:hover {
+.products-comment .product-comment .user-data .dropdown-menu a:hover {
   color: #c80000;
 }
 
-.products-commit .product-commit .user-data .product-data {
+.products-comment .product-comment .user-data .product-data {
   padding-right: 1.92rem;
   padding-top: 0.5rem;
 }
 
-.products-commit .product-commit .user-data .product-data .product-data-name {
+.products-comment .product-comment .user-data .product-data .product-data-name {
   color: #b1b1ac;
   letter-spacing: 0.1rem;
 }
 
-.products-commit .product-commit .user-data .product-data .product-photo {
+.products-comment .product-comment .user-data .product-data .product-photo {
   width: 6.5rem;
   height: 5rem;
 }
 
-.products-commit .product-commit .user-data .product-data .product-photo img {
+.products-comment .product-comment .user-data .product-data .product-photo img {
   width: 100%;
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
 }
 
-.products-commit .product-commit .user-commit {
+.products-comment .product-comment .user-comment {
   padding-right: 3.5rem;
   font-size: 0.9375rem;
   letter-spacing: 0.1rem;
 }
 
-.products-commit .products-commit-pagination {
+.products-comment .products-comment-pagination {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -407,12 +407,12 @@
   margin-top: 2rem;
 }
 
-.products-commit .products-commit-pagination .pages-icon {
+.products-comment .products-comment-pagination .pages-icon {
   font-size: 1.4rem;
   margin: 0rem 1rem;
 }
 
-.products-commit .products-commit-pagination .pages {
+.products-comment .products-comment-pagination .pages {
   color: #668c4a;
   text-decoration: none;
   border: none;
@@ -426,7 +426,7 @@
   transition: 0.3s;
 }
 
-.products-commit .products-commit-pagination .pages:hover {
+.products-comment .products-comment-pagination .pages:hover {
   border-radius: 50%;
   margin: 2rem 0.8rem;
   background: red;
@@ -437,26 +437,26 @@
 }
 
 @media screen and (max-width: 768px) {
-  .products-commit .product-commit .user-commit {
+  .products-comment .product-comment .user-comment {
     padding-right: 0;
     font-weight: 100;
   }
-  .products-commit .product-commit .product-photo {
+  .products-comment .product-comment .product-photo {
     display: none;
   }
 }
 
 @media screen and (max-width: 390px) {
-  .products-commit .products-commit-total {
+  .products-comment .products-comment-total {
     width: 100%;
   }
-  .products-commit .product-commit .product-data-name {
+  .products-comment .product-comment .product-data-name {
     display: none;
   }
-  .products-commit .product-commit {
+  .products-comment .product-comment {
     width: 100%;
   }
-  .products-commit .product-commit .user-data .product-data {
+  .products-comment .product-comment .user-data .product-data {
     padding: 0;
   }
 }
@@ -625,12 +625,12 @@
   border-bottom: 0.54rem solid #f2c53d;
 }
 
-.products-details .products-details-data .card .product-users-commit {
+.products-details .products-details-data .card .product-users-comment {
   scroll-behavior: smooth;
   padding: 0 1.7rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-gotop {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-gotop {
   font-size: 2.5rem;
   color: #668c4a;
   position: fixed;
@@ -641,21 +641,21 @@
   transition: 0.3s;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-gotop:hover {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-gotop:hover {
   opacity: 1;
   -webkit-transform: translateY(-10%);
           transform: translateY(-10%);
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-filter .product-users-commit-filter-star {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-filter .product-users-comment-filter-star {
   color: #668c4a;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-filter .product-users-commit-filter-time {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-filter .product-users-comment-filter-time {
   color: #668c4a;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-filter .product-users-commit-filter-icon {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-filter .product-users-comment-filter-icon {
   border: none;
   background-color: rgba(0, 0, 0, 0);
   -webkit-transition: 0.3s;
@@ -663,16 +663,16 @@
   color: #b1b1ac;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-filter .product-users-commit-filter-icon:hover {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-filter .product-users-comment-filter-icon:hover {
   color: #668c4a;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-photo {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-photo {
   width: 3.8rem;
   height: 3.8rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-photo .cover-photo {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-photo .cover-photo {
   width: 100%;
   height: 100%;
   border-radius: 50%;
@@ -680,26 +680,26 @@
      object-fit: cover;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data {
   border-bottom: 1px solid #668c4a;
   padding-bottom: 2rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data:last-child {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data:last-child {
   margin-bottom: 3.2rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata {
   -webkit-box-flex: 1;
       -ms-flex: 1 0 0px;
           flex: 1 0 0;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-name {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-name {
   letter-spacing: 0.1rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-time {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-time {
   font-size: 0.875rem;
   color: #b1b1ac;
   font-weight: 400;
@@ -712,41 +712,41 @@
   letter-spacing: -0.5px;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-time .user-data-report {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-time .user-data-report {
   color: #b1b1ac;
   font-weight: 400;
   border: none;
   background-color: rgba(0, 0, 0, 0);
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-time .dropdown-menu {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-time .dropdown-menu {
   padding-left: 0.3rem;
   background-color: rgba(0, 0, 0, 0);
   min-width: 3rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-time .dropdown-menu a {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-time .dropdown-menu a {
   text-decoration: none;
   color: #262626;
   -webkit-transition: 0.3s;
   transition: 0.3s;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-time .dropdown-menu a:hover {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-time .dropdown-menu a:hover {
   color: #c80000;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-star {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-star {
   padding-top: 1rem;
 }
 
-.products-details .products-details-data .card .product-users-commit .product-users-commit-data .product-users-commit-userdata .product-users-commit-userdata-text {
+.products-details .products-details-data .card .product-users-comment .product-users-comment-data .product-users-comment-userdata .product-users-comment-userdata-text {
   font-size: 0.9375rem;
   padding-top: 1rem;
   font-weight: 400;
 }
 
-.nothing-product-commit {
+.nothing-product-comment {
   padding: 3rem 0;
   display: -webkit-box;
   display: -ms-flexbox;

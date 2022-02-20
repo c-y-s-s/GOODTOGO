@@ -6,23 +6,23 @@ import { FiChevronRight } from "react-icons/fi";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- 商品評論 --------
-const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
+const StoreProductsComment = ({ productsComment, totalPages, getPages }) => {
   console.log(productsComment);
   return (
     <div>
-      <div className="container products-commit">
+      <div className="container products-comment">
         <div>
-          <div className="d-flex  justify-content-between text-end products-commit-total">
-            <div className="d-flex product-users-commit-filter">
-              <div className="me-2 product-users-commit-filter-star">
+          <div className="d-flex  justify-content-between text-end products-comment-total">
+            <div className="d-flex product-users-comment-filter">
+              <div className="me-2 product-users-comment-filter-star">
                 評分
-                <button className="product-users-commit-filter-icon">
+                <button className="product-users-comment-filter-icon">
                   <RiArrowUpDownFill />
                 </button>
               </div>
-              <div className="product-users-commit-filter-time">
+              <div className="product-users-comment-filter-time">
                 留言時間
-                <button className="product-users-commit-filter-icon">
+                <button className="product-users-comment-filter-icon">
                   <RiArrowUpDownFill />
                 </button>
               </div>
@@ -32,7 +32,7 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
         </div>
         {productsComment.map((item) => {
           return (
-            <div className="col-12 mt-3 product-commit">
+            <div className="col-12 mt-3 product-comment">
               <div className="d-flex justify-content-between ">
                 <div className="d-flex user-data w-100">
                   <div>
@@ -49,7 +49,7 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                       <div className="pt-2 user-data-name">{item.name}</div>
                       <div className="d-flex align-items-center">
-                        <div className="user-data-commit-time">
+                        <div className="user-data-comment-time">
                           {/* 2021-12-12 10 : 10 PM */}
                           {item.create_time}
                         </div>
@@ -88,7 +88,7 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
                             {item.products}
                           </div>
                         </div>
-                        <p className="pt-2 mb-0 user-commit">{item.comment}</p>
+                        <p className="pt-2 mb-0 user-comment">{item.comment}</p>
                       </div>
                       <img
                         className="product-photo "
@@ -108,7 +108,7 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
           );
         })}
         {/* // 頁碼功能 */}
-        <div className="products-commit-pagination">
+        <div className="products-comment-pagination">
           {/* // ! 前一頁 後一頁功能未完成 */}
           <div className="pages-icon">
             <FiChevronLeft />
@@ -127,4 +127,4 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
   );
 };
 
-export default StoreProductsCommit;
+export default StoreProductsComment;

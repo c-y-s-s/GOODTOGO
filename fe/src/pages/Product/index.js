@@ -9,7 +9,7 @@ import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
 import Storebutton from "./component/StoreButton";
 import StoreCard from "./component/StoreCard";
-import StoreProductsCommit from "./component/Productscommit.js";
+import StoreProductsComment from "./component/Productscomment.js";
 import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
@@ -123,20 +123,12 @@ const Product = () => {
       {buttonToggle === "products" ? (
         <StoreCard data={productsdata} />
       ) : (
-        <StoreProductsCommit
+        <StoreProductsComment
           productsComment={productsComment}
           totalPages={totalPages}
           getPages={getPages()}
         />
       )}
-
-      {/* -------- 商店總評論 -------- */}
-      {/* <StoreProductsCommit /> */}
-
-      {/* 商品詳細資料 */}
-      {/* <ProductsDetails /> */}
-
-      {/* 商品詳細資料結束 */}
       {/* -------- 綠色裝飾橫條大條 --------*/}
       <div className="container-fluid p-0  horizontalBarBottom">
         <div></div>

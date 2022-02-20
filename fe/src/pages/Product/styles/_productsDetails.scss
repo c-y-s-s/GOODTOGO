@@ -149,11 +149,11 @@
             // -------- 商品上半部結束 --------
 
             // -------- 評論下半部 --------
-            .product-users-commit {
+            .product-users-comment {
                 scroll-behavior: smooth;
                 padding: 0 1.7rem;
                 //箭頭錨點
-                .product-users-commit-gotop {
+                .product-users-comment-gotop {
                     font-size: 2.5rem;
                     color: $color-green;
                     position: fixed;
@@ -167,14 +167,14 @@
                     }
                 }
                 //用戶圖片
-                .product-users-commit-filter {
-                    .product-users-commit-filter-star {
+                .product-users-comment-filter {
+                    .product-users-comment-filter-star {
                         color: $color-green;
                     }
-                    .product-users-commit-filter-time {
+                    .product-users-comment-filter-time {
                         color: $color-green;
                     }
-                    .product-users-commit-filter-icon {
+                    .product-users-comment-filter-icon {
                         border: none;
                         background-color: rgba(0, 0, 0, 0);
                         transition: 0.3s;
@@ -185,7 +185,7 @@
                     }
                 }
 
-                .product-users-commit-photo {
+                .product-users-comment-photo {
                     width: 3.8rem;
                     height: 3.8rem;
 
@@ -196,20 +196,20 @@
                         object-fit: cover;
                     }
                 }
-                .product-users-commit-data {
+                .product-users-comment-data {
                     border-bottom: 1px solid $color-green;
                     padding-bottom: 2rem;
                     &:last-child {
                         margin-bottom: 3.2rem;
                     }
-                    .product-users-commit-userdata {
+                    .product-users-comment-userdata {
                         flex: 1 0 0;
                         //用戶名稱
-                        .product-users-commit-userdata-name {
+                        .product-users-comment-userdata-name {
                             letter-spacing: $ls-md;
                         }
                         //留言時間
-                        .product-users-commit-userdata-time {
+                        .product-users-comment-userdata-time {
                             font-size: $fz-sm;
                             color: $color-grey;
                             font-weight: $fw-medium;
@@ -237,11 +237,11 @@
                             }
                         }
                         //用戶給的評價
-                        .product-users-commit-userdata-star {
+                        .product-users-comment-userdata-star {
                             padding-top: 1rem;
                         }
                         //用戶評論
-                        .product-users-commit-userdata-text {
+                        .product-users-comment-userdata-text {
                             font-size: $fz-md;
                             padding-top: 1rem;
                             font-weight: $fw-medium;
@@ -254,7 +254,7 @@
     }
 }
 
-.nothing-product-commit {
+.nothing-product-comment {
     padding: 3rem 0;
     display: flex;
     align-items: center;

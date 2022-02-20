@@ -4,8 +4,8 @@ import { FiMoreVertical } from "react-icons/fi";
 import { FiArrowUpCircle } from "react-icons/fi";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-const ProductsDetailsCommit = ({ productModalCommitData }) => {
-  let data = productModalCommitData;
+const ProductsDetailsComment = ({ productModalCommentData }) => {
+  let data = productModalCommentData;
   console.log(data);
   // 評價排序開關
   const [starSort, setStarSort] = useState();
@@ -45,56 +45,56 @@ const ProductsDetailsCommit = ({ productModalCommitData }) => {
     setTimeSort(!timeSort);
   }
 
-  // console.log("最上層", productModalCommitData);
+  // console.log("最上層", productModalcommentData);
   return (
     <div>
-      {productModalCommitData.length ? (
-        <div className="product-users-commit">
-          <a href="#product-top" className="product-users-commit-gotop">
+      {productModalCommentData.length ? (
+        <div className="product-users-comment">
+          <a href="#product-top" className="product-users-comment-gotop">
             <FiArrowUpCircle />
           </a>
-          <div className="commit-filter d-flex justify-content-between mt-4">
-            <div className="d-flex product-users-commit-filter">
-              <div className="me-2 product-users-commit-filter-star">
+          <div className="comment-filter d-flex justify-content-between mt-4">
+            <div className="d-flex product-users-comment-filter">
+              <div className="me-2 product-users-comment-filter-star">
                 評分
                 <button
-                  className="product-users-commit-filter-icon"
+                  className="product-users-comment-filter-icon"
                   onClick={handleStarSort}
                 >
                   <RiArrowUpDownFill />
                 </button>
               </div>
-              <div className="product-users-commit-filter-time">
+              <div className="product-users-comment-filter-time">
                 留言時間
                 <button
-                  className="product-users-commit-filter-icon"
+                  className="product-users-comment-filter-icon"
                   onClick={handleTimeSort}
                 >
                   <RiArrowUpDownFill />
                 </button>
               </div>
             </div>
-            <div>共 {productModalCommitData.length} 則評論</div>
+            <div>共 {productModalCommentData.length} 則評論</div>
           </div>
           {data.map((item) => {
             return (
               <div
-                className="d-flex mt-3 product-users-commit-data mt-4"
+                className="d-flex mt-3 product-users-comment-data mt-4"
                 key={item.id}
               >
-                <div className="product-users-commit-photo ratio ratio-4x3">
+                <div className="product-users-comment-photo ratio ratio-4x3">
                   <img
                     className=" img-fluid  cover-photo"
                     src={require(`../images/pexels-charles-1851164.jpg`)}
                     alt=""
                   />
                 </div>
-                <div className="ms-3 product-users-commit-userdata">
+                <div className="ms-3 product-users-comment-userdata">
                   <div className="d-flex justify-content-between">
-                    <div className="product-users-commit-userdata-name">
+                    <div className="product-users-comment-userdata-name">
                       {item.name}
                     </div>
-                    <div className="d-flex product-users-commit-userdata-time">
+                    <div className="d-flex product-users-comment-userdata-time">
                       <div>{item.create_time}</div>
                       <div className="">
                         <button
@@ -111,7 +111,7 @@ const ProductsDetailsCommit = ({ productModalCommitData }) => {
                       </div>
                     </div>
                   </div>
-                  <div className="product-users-commit-userdata-star">
+                  <div className="product-users-comment-userdata-star">
                     <div>
                       <Stack spacing={1}>
                         <Rating
@@ -123,7 +123,7 @@ const ProductsDetailsCommit = ({ productModalCommitData }) => {
                       </Stack>
                     </div>
                   </div>
-                  <div className="product-users-commit-userdata-text">
+                  <div className="product-users-comment-userdata-text">
                     {item.comment}
                   </div>
                 </div>
@@ -132,10 +132,10 @@ const ProductsDetailsCommit = ({ productModalCommitData }) => {
           })}
         </div>
       ) : (
-        <div className="nothing-product-commit">商品還沒有評論呦</div>
+        <div className="nothing-product-comment">商品還沒有評論呦</div>
       )}
     </div>
   );
 };
 
-export default ProductsDetailsCommit;
+export default ProductsDetailsComment;

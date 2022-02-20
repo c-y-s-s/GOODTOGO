@@ -11,24 +11,24 @@ import { API_URL } from "../../../utils/config";
 const StoreDetails = ({storeId, storeData }) => {
 
   // 存店家所有評論資料
-  const [storeCommitTotalData, setStoreCommitTotalData] = useState([]);
+  const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
 
   useEffect(() => {
-    let getStoreCommit = async () => {
+    let getStoreComment = async () => {
       // 撈店家所有評論
-      let storeCommitTotalResponse = await axios.get(
+      let storeCommentTotalResponse = await axios.get(
         `${API_URL}/storecommittotal/${storeId}`
       );
-      setStoreCommitTotalData(storeCommitTotalResponse.data);
+      setStoreCommentTotalData(storeCommentTotalResponse.data);
     };
-    getStoreCommit();
+    getStoreComment();
   }, []);
 
   // 計算店家評價總分
   let storeStarTotal = 0;
   // 評論總筆數
   let storeStarCount = 0;
-  storeCommitTotalData.forEach((item) => {
+  storeCommentTotalData.forEach((item) => {
     storeStarTotal += item.star;
     storeStarCount++;
   });

@@ -1,12 +1,12 @@
 import React from 'react';
 
-const StoreProductsCommit = () => {
+const StoreProductsComment = () => {
   return (
     <div>
-      <div className="container products-commit w-75 ">
+      <div className="container products-comment w-75 ">
         <div className="text-end">共 24 則留言</div>
 
-        <div className="col-12 mt-5 product-commit">
+        <div className="col-12 mt-5 product-comment">
           <div className="d-flex justify-content-between ">
             <div className="">
               <div className="d-flex user-data ">
@@ -64,4 +64,4 @@ const StoreProductsCommit = () => {
   );
 };
 
-export default StoreProductsCommit;
+export default StoreProductsComment;
