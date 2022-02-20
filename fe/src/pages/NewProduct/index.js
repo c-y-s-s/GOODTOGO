@@ -1,9 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import LeftNav from "./component/LeftNav";
 import TopNav from "./component/TopNav";
 import Table from "./component/Table";
-const newproduct = () => {
+const Newproduct = ({ setIsAdmin }) => {
+  // 判斷頁首頁尾
+  useEffect(() => {
+    setIsAdmin(true);
+  }, []);
   return (
     <div className="background-newproduct">
       <div className="background-newproduct-data">
@@ -26,4 +30,4 @@ const newproduct = () => {
   );
 };
 
-export default newproduct;
+export default Newproduct;
