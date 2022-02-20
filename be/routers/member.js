@@ -6,11 +6,14 @@ const path = require("path");
 const { body, validationResult } = require("express-validator");
 // multer 上傳圖片用
 const multer = require("multer");
+// bcrypt 雜湊密碼用
+const bcrypt = require("bcrypt");
 
 // TODO: 會員登入後 先到 auth 比對帳密 -> 登入成功 -> 回應前端(登入頁) session 資料
 // TODO: 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
 
 // -------- 驗證是否已登入 中間件 --------
+// TODO: router.use(checkLogin); // 最後要抽離成 middleware 引入
 router.use((req, res, next) => {
   // ----- 測試，假設已取得登入後的 session
   // req.session.member = {
@@ -30,7 +33,7 @@ router.use((req, res, next) => {
   // 有無 session
   if (req.session.member) {
     // 表示登入過
-    console.log("測試 has session")
+    console.log("測試 has session");
     next(); // 這樣會跳出 router 到 server.js 繼續 next()???
   } else {
     // 表示尚未登入
@@ -47,7 +50,8 @@ router.use((req, res, next) => {
 // -------- 驗證是否已登入 中間件 結束 --------
 
 // 檢查要 update 的資料是否符合格式 中間件
-const updateRules = [
+// express-validator {body} 驗證
+const updateProfileRules = [
   // FIXME: 前後端錯誤訊息
   body("name").contains().withMessage("姓名 請填寫正確格式"),
   body("email").isEmail().withMessage("電子信箱 請填寫正確格式"),
@@ -98,6 +102,19 @@ const uploader = multer({
   },
 });
 
+// 檢查 新密碼 確認密碼 是否一致 中間件
+// express-validator {body} 驗證
+const updatePasswordRules = [
+  body("confirmPassword")
+    .custom((value, { req }) => {
+      // confirmPassword value
+      // 傳入兩個值 value, { req } (文件這樣寫的)
+      return value === req.body.newPassword; // true or false
+      // confirmPassword value === req.body.newPassword
+    })
+    .withMessage("新密碼、確認密碼欄位輸入不一致"),
+];
+
 // -------- 會員資料顯示 --------
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
@@ -125,7 +142,7 @@ router.post(
   "/profile/edit",
   uploader.single("photo"),
   // 只傳一張 single // fieldname: photo 表單欄位名稱
-  updateRules, // 驗證更新資料中間件
+  updateProfileRules, // 驗證更新資料中間件
 
   async (req, res, next) => {
     // express-validator 驗證結果 回傳錯誤訊息
@@ -134,7 +151,7 @@ router.post(
       // 驗證結果有問題
       let error = validateResult.mapped();
       // 錯誤驗證結果轉為 array / mapped 方便取得錯誤結果
-      console.log("validateResult(error): ", error); // 測試錯誤訊息是否會出現
+      console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
       // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
       return res.status(400).json({
         code: "66001",
@@ -168,7 +185,7 @@ router.post(
     console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
-    let [result] = await connection.execute(
+    let [updateProfileResult] = await connection.execute(
       "UPDATE users SET name=?, email=?, phone=?, headshots=? WHERE id=?",
       [
         req.body.name,
@@ -178,15 +195,76 @@ router.post(
         req.session.member.id,
       ]
     );
-    console.log(result);
+    console.log(updateProfileResult);
 
     // 寫內容前先測試能不能得到 req
     // console.log("req.body: ", req.body);
-    res.json({ 
+    res.json({
       name: req.body.name,
       photo: filename,
-      message: "儲存資料 ok" });
+      message: "儲存修改資料 ok",
+    });
   }
 );
+
+// -------- 會員密碼修改儲存 --------
+// /api/member/password (post)
+router.post("/password", updatePasswordRules, async (req, res, next) => {
+  // 拿到 updatePasswordRules 驗證的結果
+  // express-validator {validationResult}
+  const validateResult = validationResult(req);
+  if (!validateResult.isEmpty()) {
+    // validateResult 不是空的 (表示驗證結果有問題)
+    let error = validateResult.array();
+    // 把錯誤驗證結果變成 array 方便我們取得錯誤結果
+    console.log("password validateResult(error): ", error);
+    // 測試錯誤訊息是否會出現
+    // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
+    // 錯誤訊息作為 res 傳回給前端 (後端處理自訂給前端)
+    return res.status(400).json({
+      code: "33003",
+      msg: error[0].msg,
+      // 根據上面測試錯誤的話 回傳的結構 知道驗證完若沒通過的withMessage訊息會在 error[0].msg 裡
+    });
+  }
+
+  // 檢查 req.body.password 密碼是否正確，正確才能改新密碼
+  let [passwordResult] = await connection.execute(
+    `SELECT password FROM users WHERE id=?;`,
+    [req.session.member.id]
+  );
+  // 把會員資料從陣列中拿出來
+  let userPassword = passwordResult[0];
+  // 比對密碼
+  let result = await bcrypt.compare(req.body.password, userPassword.password);
+  if (!result) {
+    // 如果比對失敗
+    console.log("比對密碼結果失敗: ", result);
+    return res.status(400).send({
+      code: "33004",
+      msg: "會員密碼驗證錯誤",
+    });
+  }
+
+  // 寫到這 先測試 是否能比對密碼成功(用前台送出表單測試)
+  // 再進行後續儲存
+
+  // 雜湊 newPassword
+  let hashNewPassword = await bcrypt.hash(req.body.newPassword, 10);
+  // 第二個參數是 saltRounds 是指把輸入的密碼再去加其他字母的次數 10就是加10次
+
+  // -------- 儲存到資料庫 --------
+  let [updatePasswordResult] = await connection.execute(
+    `UPDATE users SET password=? WHERE id=?;`,
+    [hashNewPassword, req.session.member.id]
+  );
+  console.log(updatePasswordResult);
+
+  // 寫內容前先測試能不能得到 req
+  // console.log("req.body: ", req.body);
+  res.json({
+    message: "儲存修改密碼 ok",
+  });
+});
 
 module.exports = router;
