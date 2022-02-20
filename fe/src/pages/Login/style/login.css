@@ -955,6 +955,8 @@
 .form_Input {
   border-radius: 2px;
   height: 2.5rem;
+  padding-bottom: 0.45rem;
+  letter-spacing: 0.1rem;
 }
 
 .form_Input:focus {
@@ -965,36 +967,40 @@
 
 .form_Input::-webkit-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #b1b1ac;
+  color: #c5c5c1;
   font-size: 0.875rem;
-  letter-spacing: 0.05rem;
+  margin: 0;
+  letter-spacing: 0.1rem;
   opacity: 1;
   /* Firefox */
 }
 
 .form_Input:-ms-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #b1b1ac;
+  color: #c5c5c1;
   font-size: 0.875rem;
-  letter-spacing: 0.05rem;
+  margin: 0;
+  letter-spacing: 0.1rem;
   opacity: 1;
   /* Firefox */
 }
 
 .form_Input::-ms-input-placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #b1b1ac;
+  color: #c5c5c1;
   font-size: 0.875rem;
-  letter-spacing: 0.05rem;
+  margin: 0;
+  letter-spacing: 0.1rem;
   opacity: 1;
   /* Firefox */
 }
 
 .form_Input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
-  color: #b1b1ac;
+  color: #c5c5c1;
   font-size: 0.875rem;
-  letter-spacing: 0.05rem;
+  margin: 0;
+  letter-spacing: 0.1rem;
   opacity: 1;
   /* Firefox */
 }
@@ -1088,10 +1094,84 @@
   height: 18px;
 }
 
+.form_Input_Password[type="password"] {
+  letter-spacing: -0.25rem;
+  padding-left: 10px;
+}
+
+.form_Input_Password[type="text"] {
+  padding: 14px;
+  letter-spacing: 0.15rem;
+}
+
+.form_Input_Password[type="password"]::-webkit-input-placeholder {
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.form_Input_Password[type="password"]:-ms-input-placeholder {
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+.form_Input_Password[type="password"]::-ms-input-placeholder {
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+
+.form_Input_Password[type="password"]::placeholder {
+  padding-left: 5px;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.form_Input_Password[type="text"]::-webkit-input-placeholder {
+  padding-left: 1px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.form_Input_Password[type="text"]:-ms-input-placeholder {
+  padding-left: 1px;
+  box-sizing: content-box;
+}
+
+.form_Input_Password[type="text"]::-ms-input-placeholder {
+  padding-left: 1px;
+  box-sizing: content-box;
+}
+
+.form_Input_Password[type="text"]::placeholder {
+  padding-left: 1px;
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+}
+
+.eye_Open {
+  color: #668c4a;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.eye_Close {
+  color: #b1b1ac;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 991px) {
   .user_Upload_Img .headShot {
     height: 8rem;
     width: 8rem;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .form_Input_SmallSize {
+    margin-left: 1.3rem;
   }
 }
 

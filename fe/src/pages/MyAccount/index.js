@@ -11,7 +11,7 @@ import UserPassword from "./pages/UserPassword";
 
 const MyAccount = () => {
   let { userInfo } = useParams();
-  console.log(userInfo);
+  // console.log(userInfo);
 
   // db head shot、name
   // 顯示使用者資訊 : 頭貼、姓名
