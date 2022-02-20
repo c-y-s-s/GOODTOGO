@@ -16,8 +16,6 @@ import ProductsDetails from "./component/ProductsDetails";
 const Product = () => {
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
-  // 取出頁數
-  const { currentPage } = useParams();
 
   const [error, setError] = useState(null);
   // 存商家商品
@@ -26,12 +24,6 @@ const Product = () => {
   const [storeData, setStoreData] = useState([]);
   // 存指定商家 ID 評論
   const [productsComment, setproductsComment] = useState([]);
-  // 存總筆數
-  // const [totalPages, setTotalPages] = useState([]);
-  // // 總頁數預設 1
-  // const [lastPage, SetLastPage] = useState(1);
-
-  // const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
 
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
@@ -43,41 +35,13 @@ const Product = () => {
  
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
-      // let productsCommentResponse = await axios.get(
-      //   `${API_URL}/productscommit/${storeId}?page=${page}`
-      // );
 
       setProducts(productsResponse.data);
       setStoreData(storeResponse.data);
-      // setproductsComment(productsCommentResponse.data.data);
-      // setTotalPages(productsCommentResponse.data.pagination.total);
-      // SetLastPage(productsCommentResponse.data.pagination.lastPage);
+
     };
     getProducts();
   }, []);
-
-
-  // let navigate = useNavigate();
-  // 算出頁碼傳進評論頁
-  // const getPages = () => {
-  //   let pages = [];
-  //   for (let i = 1; i <= lastPage; i++) {
-  //     pages.push(
-  //       <a
-  //       href="#mark-1"
-  //        className="pages"
-  //         key={i}
-  //         onClick={(e) => {
-  //           setPage(i);
-  //           // navigate(`/store/1/${i}`)
-  //         }}
-  //       >
-  //         {i}
-  //       </a>
-  //     );
-  //   }
-  //   return pages;
-  // };
 
 
   // 遮雨棚參數
@@ -100,19 +64,18 @@ const Product = () => {
         {/*-------- 遮雨棚區塊 --------*/}
         {/* <StoreCanopy canopy={canopyTotal} /> */}
         {/* -------- 餐點、評論按鈕 --------*/}
-        <Storebutton storeId={storeId} setbutonToggle={setbutonToggle} />
+        <Storebutton
+          storeId={storeId}
+          setbutonToggle={setbutonToggle}
+          buttonToggle={buttonToggle}
+        />
       </div>
 
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
         <StoreCard data={productsdata} />
       ) : (
-        <StoreProductsComment
-          productsComment={productsComment}
-          // totalPages={totalPages}
-          // getPages={getPages()}
-          // setPage={setPage}
-        />
+        <StoreProductsComment productsComment={productsComment} />
       )}
       {/* -------- 綠色裝飾橫條大條 --------*/}
       <div className="container-fluid p-0  horizontalBarBottom">

@@ -1,13 +1,13 @@
 import React from "react";
 // -------- 餐點評論切換按鈕 --------
 
-const StoreButton = ({ storeId, setbutonToggle}) => {
-
+const StoreButton = ({ storeId, setbutonToggle, buttonToggle }) => {
+  console.log("aaa", typeof buttonToggle);
   return (
     <div>
       <div className="product-button text-center" id="mark-1">
         <button
-          className="active btn"
+          className={`btn ${buttonToggle === "products" ? "active" : ""}`}
           type="button"
           onClick={() => {
             setbutonToggle("products");
@@ -16,7 +16,7 @@ const StoreButton = ({ storeId, setbutonToggle}) => {
           餐點
         </button>
         <button
-          className="btn"
+          className={`btn ${buttonToggle === "commit" ? "active" : ""}`}
           type="button"
           onClick={() => {
             setbutonToggle("commit");

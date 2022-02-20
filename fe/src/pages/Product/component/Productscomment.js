@@ -13,7 +13,7 @@ import { API_URL } from "../../../utils/config";
 const StoreProductsComment = () => {
   const { storeId } = useParams();
   const { currentPage } = useParams();
-  console.log("currentPage", currentPage);
+
   // 存指定商家 ID 評論
   const [productsComment, setproductsComment] = useState([]);
   // 存總筆數
@@ -21,7 +21,7 @@ const StoreProductsComment = () => {
   // 總頁數預設 1
   const [lastPage, SetLastPage] = useState(1);
   const [page, setPage] = useState(parseInt(currentPage, 10) || parseInt(1));
-  console.log("lastPage", lastPage);
+
   // 撈指定商家評論
   useEffect(() => {
     let getComment = async () => {
@@ -54,7 +54,7 @@ const StoreProductsComment = () => {
     );
   }
 
-  console.log("pagepagepagepage", typeof page, page);
+  // console.log("pagepagepagepage", typeof page, page);
 
   // let navigate = useNavigate();
 
