@@ -98,7 +98,33 @@
     grid-column-end: 9;
     grid-row-start: 8;
     grid-row-end: 9;
-
+    .page-arrow {
+      font-size: 1.5rem;
+      color: $color-grey;
+      margin-bottom: 0.3rem;
+      &:nth-child(1):hover {
+        animation: page-arrow-prev 0.9s infinite linear;
+        color: $color-green;
+      }
+      &:nth-last-child(1):hover {
+        animation: page-arrow-next 0.9s infinite linear;
+        color: $color-green;
+      }
+      @keyframes page-arrow-next {
+        0% {
+        }
+        100% {
+          transform: translateX(1rem);
+        }
+      }
+      @keyframes page-arrow-prev {
+        0% {
+        }
+        100% {
+          transform: translateX(-1rem);
+        }
+      }
+    }
     .page-li {
       .page-links {
         margin: 0.5rem;

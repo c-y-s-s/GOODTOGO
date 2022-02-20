@@ -6,7 +6,7 @@ require("dotenv").config();
 const path = require("path");
 // 引用 cors 套件解決瀏覽器同源問題
 const cors = require("cors");
-
+//引用express-session、session-file-store 來儲存資料
 const session = require("express-session");
 let FileStore = require("session-file-store")(session);
 
@@ -35,6 +35,7 @@ app.use(
     saveUninitialized: false,
   })
 );
+// -------- 會員註冊、登入API --------
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
 

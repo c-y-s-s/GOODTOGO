@@ -1,3 +1,4 @@
+// -------- 目前沒有用到 ------ 是從store.js複製過來的
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
@@ -20,17 +21,16 @@ router.get("/", async (req, res, next) => {
   // 計算 SQL 要用的 offset
   let offset = (page - 1) * perPage;
 
-  // TODO: 取得有分類的商家資料，並設定每頁幾個，第n頁的位移
-
-  let [data] = await connection.execute(
-    "SELECT * FROM stores_category JOIN stores ON stores_category.id = stores.stores_category_id LIMIT ? OFFSET?",
-    [perPage, offset]
-  );
+  // TODO: 取得有分類的商家資料，並設定每頁幾個跟最後頁
+  // let [data] = await connection.execute(
+  //   "SELECT * FROM stores_category JOIN stores ON stores_category.id = stores.stores_category_id LIMIT ? OFFSET?",
+  //   [perPage, offset]
+  // );
 
   //--------尚未設分頁的資料
-  // let [data, fields] = await connection.execute(
-  //   "SELECT * FROM stores JOIN stores_category ON stores.stores_category_id = stores_category.id"
-  // );
+  let [data, fields] = await connection.execute(
+    "SELECT * FROM stores JOIN stores_category ON stores.stores_category_id = stores_category.id"
+  );
   // console.log(data);
   //TODO: 取得商家分類
   let [category] = await connection.execute("SELECT * FROM stores_category");
@@ -39,18 +39,6 @@ router.get("/", async (req, res, next) => {
   //console.log("category", category);
   //console.log("pagination", pagination);
   //console.log("data", data);
-  res.json([data, category, pagination]);
+  // res.json([data, category, pagination]);
+  res.json([data, category]);
 });
-
-// -------- 撈出對應商家 ID 詳細資訊 --------
-router.get("/:storeId", async (req, res, next) => {
-  let [data, fields] = await connection.execute(
-    "SELECT * FROM stores WHERE id = ?",
-    [req.params.storeId]
-  );
-
-  res.json(data);
-});
-// ------- 結束 --------
-
-module.exports = router;

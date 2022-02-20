@@ -16,12 +16,12 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 const StoreInfoList = () => {
   //總共有lastPage這個麽多頁
   const [lastPage, setLastPage] = useState(1);
+
+  //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
   const { currentPage } = useParams();
-  // /stock/2330 => currentPage: undefined
-  // /stock/2330/2 => currentPage: 2
+
   //const [page, setPage] = useState(;
   let page = parseInt(currentPage, 10) || 1;
-
   console.log("currentPage", currentPage, page);
 
   //商家列表
@@ -44,7 +44,7 @@ const StoreInfoList = () => {
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
-      console.log(pagination);
+      console.log("pagination", pagination);
     };
     getStore();
   }, [page]);
@@ -55,7 +55,7 @@ const StoreInfoList = () => {
     let pages = [];
     for (let i = 1; i <= lastPage; i++) {
       pages.push(
-        <Link to={`-${i}`}>
+        <Link to={`${i}`}>
           <li className="page-li">
             <button className="page-links btn" key={i}>
               {i}
@@ -99,10 +99,14 @@ const StoreInfoList = () => {
       <div className="store-info-list">
         <StoreInfoCard storeList={storeList} />
       </div>
-      <ul className="pages p-0 align-items-center">
-        <IoIosArrowBack />
+      <ul className="pages p-0 align-items-center d-flex">
+        <Link to={`${page - 1}`} className="page-arrow">
+          <IoIosArrowBack />
+        </Link>
         {getPages()}
-        <IoIosArrowForward />
+        <Link to={`${page + 1}`} className="page-arrow">
+          <IoIosArrowForward />
+        </Link>
       </ul>
       <div className="footer"></div>
       <div className="footer-fix"></div>
