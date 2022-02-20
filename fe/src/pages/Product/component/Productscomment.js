@@ -41,7 +41,8 @@ const StoreProductsComment = () => {
   for (let i = 1; i <= lastPage; i++) {
     pages.push(
       <a
-        className="pages"
+        href="#mark-1"
+        className={`pages ${page === i ? "active" : ""}`}
         key={i}
         onClick={(e) => {
           setPage(i);
@@ -157,23 +158,23 @@ const StoreProductsComment = () => {
           );
         })}
         {/* // 頁碼功能 */}
+        {/* // ! Link尚未設定錨點 */}
         <div className="products-comment-pagination">
-          {/* // ! 前一頁 後一頁功能未完成 */}
           <div className="pages-icon">
             {page <= 1 ? (
               <Link
-                to={`${page}`}
-                className="page-arrow"
+                to={`${page}#mark-1`}
+                className="comment-page-arrow page-opcity"
                 onClick={() => {
                   setPage(page);
                 }}
               >
-                {" "}
+                <FiChevronLeft />
               </Link>
             ) : (
               <Link
-                to={`${page - 1}`}
-                className="page-arrow"
+                to={`${page - 1}#mark-1`}
+                className="comment-page-arrow"
                 onClick={() => {
                   setPage(page - 1);
                 }}
@@ -181,7 +182,6 @@ const StoreProductsComment = () => {
                 <FiChevronLeft />
               </Link>
             )}
-
           </div>
           <div>
             {pages.map((item) => {
@@ -192,7 +192,7 @@ const StoreProductsComment = () => {
             {page >= lastPage ? (
               <Link
                 to={`${page}`}
-                className="page-arrow"
+                className="comment-page-arrow page-opcity"
                 onClick={() => {
                   setPage(page);
                 }}
@@ -208,8 +208,6 @@ const StoreProductsComment = () => {
                 <FiChevronRight />
               </Link>
             )}
-
-
           </div>
         </div>
       </div>
