@@ -77,13 +77,13 @@ const Product = () => {
     return pages;
   };
   // 計算商家平均評價
-  function storeStarTotal() {
-    let StarTotal = 0;
-    productsComment.map((item) => {
-      StarTotal += item.star;
-    });
-    return (StarTotal = (StarTotal / productsComment.length).toFixed(1));
-  }
+  // function storeStarTotal() {
+  //   let StarTotal = 0;
+  //   productsComment.map((item) => {
+  //     StarTotal += item.star;
+  //   });
+  //   return (StarTotal = (StarTotal / productsComment.length).toFixed(1));
+  // }
   // storeStarTotal();
 
   // 遮雨棚參數
@@ -95,22 +95,16 @@ const Product = () => {
 
   return (
     <div>
+
+
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
-      {storeData.map((item) => {
-        {
-          storeDataID++;
-        }
-        return (
-          <div key={storeDataID}>
-            <StoreLogo logo={item.logo} />
+
+
             <StoreDetails
-              item={item}
+              storeData={storeData}
               storeId={storeId}
-              storeStarTotal={storeStarTotal()}
             />
-          </div>
-        );
-      })}
+
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
       {/* -------- 綠色裝飾橫條小條  --------*/}

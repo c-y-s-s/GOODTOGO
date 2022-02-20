@@ -15,18 +15,6 @@ const StoreCard = ({ data }) => {
   // 取詳細頁面裡面的總評價出來渲染
   // const [touchProductAVG,settouchProductAVG] = useState(0)
 
-  // ! 原本由這邊送到商品細節 移到商品細節頁抓資料 才不會顯示閃動顯示上一筆
-  // 撈出店家所有的商品
-  // useLayoutEffect(() => {
-  //   let getProductId = async () => {
-  //     let productModalResponse = await axios.get(
-  //       `${API_URL}/product/${openProductsModaID}`
-  //     );
-  //     setproductModalData(productModalResponse.data);
-  //   };
-  //   getProductId();
-  // }, [openProductsModaID]);
-
   return (
     <div>
       <div className="container">
