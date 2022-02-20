@@ -3,31 +3,29 @@ import { useParams } from "react-router-dom";
 import { API_URL } from "../../../utils/config";
 import axios from "axios";
 import ProductsDetails from "./ProductsDetails";
-
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 const StoreCard = ({ data }) => {
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
-  //撈出按下商品卡片的 ID
+  // 撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
 
-  //撈指定 ID 的商品 data 出來存放
-  const [productModalData, setproductModalData] = useState([]);
-
-
-  //取詳細頁面裡面的總評價出來渲染
+  // 存入商品詳細內容評論總比數
+  // 取詳細頁面裡面的總評價出來渲染
   // const [touchProductAVG,settouchProductAVG] = useState(0)
 
+  // ! 原本由這邊送到商品細節 移到商品細節頁抓資料 才不會顯示閃動顯示上一筆
   // 撈出店家所有的商品
-  useLayoutEffect(() => {
-    let getProductId = async () => {
-      let productModalResponse = await axios.get(
-        `${API_URL}/product/${openProductsModaID}`
-      );
-      setproductModalData(productModalResponse.data);
-    };
-    getProductId();
-  }, [openProductsModaID]);
-
+  // useLayoutEffect(() => {
+  //   let getProductId = async () => {
+  //     let productModalResponse = await axios.get(
+  //       `${API_URL}/product/${openProductsModaID}`
+  //     );
+  //     setproductModalData(productModalResponse.data);
+  //   };
+  //   getProductId();
+  // }, [openProductsModaID]);
 
   return (
     <div>
@@ -45,7 +43,6 @@ const StoreCard = ({ data }) => {
                   setOpenProductsModalID(item.id);
                   console.log("點商品card取到的id", item.id);
                   setOpenProductsModal(true);
-                 
                 }}
               >
                 <div className="card m-0 ">
@@ -65,7 +62,25 @@ const StoreCard = ({ data }) => {
                   <div className="card-body ">
                     <div className="">
                       <div className="card-title">{item.name}</div>
-                      <div className="card-star">評價的部分</div>
+                      <div className="card-star ">
+                        {item.score > 0 ? (
+                          <div className="d-flex">
+                            <div>
+                              <Stack spacing={1}>
+                                <Rating
+                                  name="half-rating-read"
+                                  defaultValue={item.score}
+                                  precision={0.1}
+                                  readOnly
+                                />
+                              </Stack>
+                            </div>
+                            <div className="ms-2">{item.score}</div>
+                          </div>
+                        ) : (
+                          "商品沒有評價"
+                        )}
+                      </div>
                       <div className="card-text pt-2">{item.description}</div>
                     </div>
 
@@ -81,7 +96,7 @@ const StoreCard = ({ data }) => {
         <div>
           <ProductsDetails
             setOpenProductsModal={setOpenProductsModal}
-            productModalData={productModalData}
+            // productModalData={productModalData}
             openProductsModaID={openProductsModaID}
           />
         </div>

@@ -32,8 +32,15 @@ let productRouter = require("./routers/productsModal");
 app.use("/api/product", productRouter);
 // -------- 商品 RESTful API 列表 結束 --------
 
-// :TODO: -------- 商品評論 RESTful API 列表 --------
-let productsCommitRouter = require("./routers/productsCommit");
+// :TODO: -------- 指定商家所有評論  RESTful API --------
+// ! 商家個人頁面評價所用 因為頁數版會有誤差 必須撈出所有資料去做計算
+let storeCommitTotal = require("./routers/storeCommitTotal");
+app.use("/api/storecommittotal", storeCommitTotal);
+// -------- 指定商家所有評論  RESTful API 結束  --------
+
+
+// :TODO: -------- 商品評論做頁數處理 RESTful API 列表 --------
+let productsCommitRouter = require("./routers/productsCommitPage");
 app.use("/api/productscommit", productsCommitRouter);
 // -------- 商品評論 RESTful API 列表 結束 --------
 

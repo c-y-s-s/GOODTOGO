@@ -6,16 +6,21 @@ import { FiX } from "react-icons/fi";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import ProductsDetailsCommit from "./ProductsDetailsCommit";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 // -------- 商品光箱 --------
 const ProductsDetails = ({
   setOpenProductsModal,
-  productModalData,
+  // productModalData,
   openProductsModaID,
 }) => {
   const [productModalCommitData, setProductModalCommitData] = useState([]);
   //算商品評論數字 全部評價相加 除 筆數 取小數點後一位
   const [productStarTotal, setProductStarTotal] = useState(0);
 
+  // 撈指定 ID 的商品 data 出來存放
+  const [productModalData, setproductModalData] = useState([]);
 
   //撈指定 商品 ID 的 評論
   useLayoutEffect(() => {
@@ -23,12 +28,14 @@ const ProductsDetails = ({
       let productModalCommitResponse = await axios.get(
         `${API_URL}/productsdesignatecommit/${openProductsModaID}`
       );
-
+      let productModalResponse = await axios.get(
+        `${API_URL}/product/${openProductsModaID}`
+      );
       setProductModalCommitData(productModalCommitResponse.data);
+      setproductModalData(productModalResponse.data);
     };
     getProductId();
   }, [openProductsModaID]);
-
 
   //計算指定商品的評論平均分數
   // console.log("算評價total的地方", productModalCommitData);
@@ -40,15 +47,15 @@ const ProductsDetails = ({
   let productstarTotalAVG = (
     productstarTotal / productModalCommitData.length
   ).toFixed(1);
+ 
+  const [buyamount, setBuyamount] = useState(0);
+  function handlePlus() {
+    setBuyamount(buyamount + 1);
+  }
 
-const [buyamount, setBuyamount] = useState(0);
-function handlePlus(){
-  setBuyamount(buyamount + 1);
-}
-
-function handleMinus() {
-  setBuyamount(buyamount - 1);
-}
+  function handleMinus() {
+    setBuyamount(buyamount - 1);
+  }
   return (
     <div>
       <div
@@ -65,6 +72,7 @@ function handleMinus() {
                   <img
                     className=""
                     src={require(`../../../images/products_img/${data.img}`)}
+                    id="product-top"
                   />
                 </div>
                 {/* 關閉按鈕 */}
@@ -77,9 +85,23 @@ function handleMinus() {
                 <div className="card-body py-4">
                   <h5 className="card-title">{data.name}</h5>
                   <div className="d-flex justify-content-between card-value">
-                    {/* TODO: 已撈到全部評論相加除筆數 */}
+                    {/* 評價的地方 */}
+
                     {productstarTotal ? (
-                      <div className="card-star">{productstarTotalAVG}</div>
+                      <div className="card-star d-flex">
+                        <div>
+                          {console.log(productstarTotalAVG)}
+                          <Stack spacing={2}>
+                            <Rating
+                              name="half-rating-read"
+                              defaultValue={productstarTotalAVG}
+                              precision={0.1}
+                              readOnly
+                            />
+                          </Stack>
+                        </div>
+                        <div className="ms-2"> {productstarTotalAVG}</div>
+                      </div>
                     ) : (
                       <div>商品還沒有評價呦</div>
                     )}
@@ -100,7 +122,9 @@ function handleMinus() {
                     </div>
 
                     <div className="d-flex justify-content-between card-amount">
-                      <div className="card-total-price ">NT $ {buyamount*data.price}</div>
+                      <div className="card-total-price ">
+                        NT $ {buyamount * data.price}
+                      </div>
                       <div className="d-flex buy-num">
                         {/* 減號 */}
                         {buyamount > 0 ? (

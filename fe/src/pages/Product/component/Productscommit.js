@@ -1,10 +1,13 @@
 import { FiMoreVertical } from "react-icons/fi";
 import React from "react";
 import { RiArrowUpDownFill } from "react-icons/ri";
-
+import { FiChevronLeft } from "react-icons/fi";
+import { FiChevronRight } from "react-icons/fi";
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
 // -------- 商品評論 --------
 const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
-  console.log(productsComment, getPages);
+  console.log(productsComment);
   return (
     <div>
       <div className="container products-commit">
@@ -68,7 +71,19 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
                     <div className="d-flex justify-content-between  product-data">
                       <div>
                         <div className="d-flex ">
-                          <div className="">星星</div>
+                          <div className="">
+                            <div>
+                              <Stack spacing={1}>
+                                <Rating
+                                  name="half-rating-read"
+                                  defaultValue={item.star}
+                                  precision={0.1}
+                                  readOnly
+                                />
+                              </Stack>
+                              <div>{console.log(item)}</div>
+                            </div>
+                          </div>
                           <div className="ps-3 product-data-name">
                             {item.products}
                           </div>
@@ -92,11 +107,21 @@ const StoreProductsCommit = ({ productsComment, totalPages, getPages }) => {
             </div>
           );
         })}
-      </div>
-      <div>
-        {getPages.map((item) => {
-          return item;
-        })}
+        {/* // 頁碼功能 */}
+        <div className="products-commit-pagination">
+          {/* // ! 前一頁 後一頁功能未完成 */}
+          <div className="pages-icon">
+            <FiChevronLeft />
+          </div>
+          <div>
+            {getPages.map((item) => {
+              return item;
+            })}
+          </div>
+          <div className="pages-icon">
+            <FiChevronRight />
+          </div>
+        </div>
       </div>
     </div>
   );

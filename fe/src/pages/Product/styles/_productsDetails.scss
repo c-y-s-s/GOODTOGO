@@ -12,6 +12,7 @@
 // -------- 商品光箱 --------
 .products-details {
     .products-details-data {
+        scroll-behavior: smooth;
         overflow-y: auto;
         position: fixed;
         top: 0%;
@@ -149,8 +150,22 @@
 
             // -------- 評論下半部 --------
             .product-users-commit {
+                scroll-behavior: smooth;
                 padding: 0 1.7rem;
-
+                //箭頭錨點
+                .product-users-commit-gotop {
+                    font-size: 2.5rem;
+                    color: $color-green;
+                    position: fixed;
+                    opacity: 0.5;
+                    left: 57%;
+                    bottom: 7.5%;
+                    transition: 0.3s;
+                    &:hover {
+                        opacity: 1;
+                        transform: translateY(-10%);
+                    }
+                }
                 //用戶圖片
                 .product-users-commit-filter {
                     .product-users-commit-filter-star {

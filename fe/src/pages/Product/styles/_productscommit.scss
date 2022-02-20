@@ -102,8 +102,37 @@
             letter-spacing: $ls-md;
         }
     }
-    .pagination {
-        .commit-pages {
+    .products-commit-pagination {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        color: $color-green;
+        margin-top: 2rem;
+        .pages-icon {
+            font-size: 1.4rem;
+            margin: 0rem 1rem;
+        }
+        .pages {
+            color: $color-green;
+            text-decoration: none;
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            padding: 0.5rem 0.9rem;
+            margin: 5rem 0.8rem;
+            border-radius: 0.8rem 0rem 0.8rem;
+            background-color: rgba(0, 0, 0, 0);
+            transition: 0.3s;
+            &:hover {
+                border-radius: 50%;
+                margin: 2rem 0.8rem;
+                background: red;
+                width: 2.3rem;
+                height: 2.3rem;
+                background: $color-light-green;
+                color: white;
+            }
         }
     }
 }

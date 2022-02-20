@@ -48,6 +48,8 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
+  //錨點平滑移動
+  scroll-behavior: smooth;
 }
 
 //------echo
