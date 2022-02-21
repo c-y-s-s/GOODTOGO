@@ -52,6 +52,9 @@
 .fz-lg {
   font-size: $fz-lg;
 }
+.fz-x-lg {
+  font-size: $fz-x-lg;
+}
 .fz-xx-lg {
   font-size: $fz-xx-lg;
 }
@@ -288,6 +291,67 @@
 }
 
 // -------- 店家收藏清單頁 --------
+.page_Title_Category {
+  font-size: $fz-xx-lg;
+  letter-spacing: $ls-lg;
+  color: $color-green;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 31px;
+    width: 0%;
+    border-bottom: 4px solid $color-yellow;
+    transition: 0.5s;
+    // left: 50%; // 線條從中間開始動畫
+  }
+}
+.page_Title_Category_Hover {
+  &:hover {
+    .page_Title_Category {
+      &::before {
+        width: 100%;
+        left: 0;
+      }
+    }
+    .page_Title_Category_List {
+      // opacity: 1;
+      display: block;
+    }
+  }
+}
+
+.page_Title_Arrow {
+  color: $color-green;
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5px;
+}
+
+.page_Title_Category_List {
+  top: 160px;
+  font-size: $fz-sm;
+  color: lighten($color-dark-grey, 8%);
+  width: 6.6rem;
+  padding: 8px 0px 8px 0px;
+  background-color: #fff;
+  letter-spacing: $ls-md;
+  cursor: pointer;
+  z-index: 8;
+  // opacity: 0;
+  display: none;
+  transition: 0.5s;
+  li {
+    padding: 6px 5px 6px 12px;
+    &:hover {
+      background-color: $color-yellow;
+      color: #fff;
+    }
+  }
+}
+
 .card_Link {
   color: $color-dark-grey;
   &:hover {
@@ -315,6 +379,41 @@
   }
 }
 
+.store_Status_Open {
+  width: 60px;
+  height: 26px;
+  color: #fff;
+  font-size: $fz-sm;
+  background-color: $color-light-green;
+  text-align: center;
+  font-weight: $fw-medium;
+  text-shadow: 0px 0.5px $color-grey;
+  letter-spacing: $ls-sm;
+  padding-left: 8px;
+  line-height: 18px;
+  right: 7px;
+  top: 160px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+.store_Status_Close {
+  width: 60px;
+  height: 26px;
+  color: #fff;
+  font-size: $fz-sm;
+  background-color: lighten($color-grey, 10%);
+  text-align: center;
+  font-weight: $fw-medium;
+  text-shadow: 0px 0.5px $color-grey;
+  letter-spacing: $ls-sm;
+  padding-left: 8px;
+  line-height: 18px;
+  right: 7px;
+  top: 160px;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+}
+
 .store_Img {
   height: 10rem;
   overflow: hidden;
@@ -330,12 +429,11 @@
 .store_Category {
   background-color: lighten($color-light-grey, 10%);
   font-size: $fz-sm;
-  letter-spacing: $ls-md;
+  letter-spacing: $ls-sm;
   padding: 2px 12px;
   transform: translateY(0.5px);
   span {
     display: block;
-    transform: translateX(0.8px) translateY(-0.3px);
   }
 }
 .store_Info {
@@ -343,7 +441,7 @@
   letter-spacing: $ls-sm;
   font-size: $fz-md;
   border-bottom: 1px solid $color-grey;
-  padding-bottom: 7px;
+  padding-bottom: 5px;
 }
 .store_Clock {
   width: 16px;
@@ -351,12 +449,30 @@
   transform: translateY(0.8px);
 }
 .store_Score {
-  margin: 14px 0;
+  margin: 12px 0;
+  span.store_Star {
+    font-size: 22px;
+    color: $color-yellow;
+  }
 }
 
-.store_Like {
-  width: 20px;
-  height: 20px;
+.store_Like_unActive {
+  width: 19px;
+  height: 19px;
+  color: $color-light-red;
+  transform: translateY(0.5px);
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.2);
+    fill: $color-light-red;
+  }
+}
+.store_Like_Active {
+  width: 19px;
+  height: 19px;
+  fill: $color-light-red;
+  color: $color-light-red;
+  transform: translateY(0.5px);
 }
 
 // -------- RWD --------
