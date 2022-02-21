@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/react": "^11.8.1",
+    "@emotion/styled": "^11.8.1",
+    "@mui/icons-material": "^5.4.2",
+    "@mui/material": "^5.4.2",
+    "@mui/styled-engine-sc": "^5.4.2",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -19,6 +24,7 @@
     "react-scripts": "5.0.0",
     "react-twzipcode": "^3.0.0",
     "sass": "^1.49.0",
+    "styled-components": "^5.3.3",
     "tw-city-selector": "^2.1.1",
     "web-vitals": "^2.1.4"
   },

@@ -1,36 +1,58 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+// import { AuthContext } from "./context/auth";
+import { API_URL } from "./utils/config";
+import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/index.scss";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
 import Store from "./pages/Store";
-import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
+//註冊登入
 import Auth from "./pages/Auth";
-// import Register from "./pages/Register";
+import Login from "./pages/Auth/Login";
+import Reset from "./pages/Auth/Reset";
+import Register from "./pages/Auth/Register";
+//會員中心
 import MyAccount from "./pages/MyAccount";
 import UserLikeList from "./pages/MyAccount/UserLikeList";
 import UserOrderList from "./pages/MyAccount/UserOrderList";
 import UserCoupon from "./pages/MyAccount/UserCoupon";
 import UserCreditCard from "./pages/MyAccount/UserCreditCard";
+import StoreList from "./pages/StoreList";
 import Product from "./pages/Product";
-import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment";
 import Admin from "./pages/Admin/";
-import Login from "./pages/Auth/Login";
-import Reset from "./pages/Auth/Reset";
-import Register from "./pages/Auth/Register";
+
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
-  // 全域狀態
   // -------- 判斷登入與否 --------
   const [isLogin, setIsLogin] = useState(false);
+  //
+  // const [loginMember, setLoginMember]
+  // useEffect(() => {
+  //   // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
+  //   const getMember = async () => {
+  //     try {
+  //       let result = await axios.get(`${API_URL}/member`, {
+  //         withCredentials: true,
+  //       });
+  //       setMember(result.data);
+  //     } catch (e) {
+  //       // 尚未登入過
+  //       // 401 也不會去 setMember
+  //     }
+  //   };
+  //   getMember();
+  // }, []);
+
   return (
     <Router>
       <Navbar auth={isLogin} />

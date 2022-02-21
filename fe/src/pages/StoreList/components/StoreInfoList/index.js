@@ -7,13 +7,24 @@ import { API_URL } from "../../../../utils/config";
 import StoreInfoCard from "./StoreInfoCard";
 //篩選功能
 import FilterBar from "../FilterBar";
-import SearchBar from "../SearchBar.js/index.js";
+import SearchBar from "../SearchBar";
 import Rating from "../Rating";
 //引用圖檔
 import { ReactComponent as Star } from "../../images/star.svg";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
 const StoreInfoList = () => {
+  // -------- 篩選處理 --------
+  //商家列表
+  const [storeList, setStoreList] = useState([]);
+  //處理後要顯示的列表
+  const [displayList, setDisplayList] = useState([]);
+  //類別篩選
+  const [category, setCategory] = useState([]);
+  const [selectedCat, setSelectedCat] = useState("");
+  //關鍵字搜尋
+  const [searchWord, setSearchWord] = useState("");
+  //排序
   // -------- 分頁處理 --------
   //總共有lastPage這個麽多頁
   const [lastPage, setLastPage] = useState(1);
@@ -31,13 +42,16 @@ const StoreInfoList = () => {
   useEffect(() => {
     let getStore = async () => {
       let storeRes = await axios.get(`${API_URL}/stores?page=${page}`);
-      let category = storeRes.data[1];
       let stores = storeRes.data[0];
-      let pagination = storeRes.data[2];
+      let rawStore = storeRes.data[1];
+      let category = storeRes.data[2];
+      let pagination = storeRes.data[3];
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
+      setDisplayList(stores);
       console.log("pagination", pagination);
+      console.log("storeRes", storeRes);
     };
     getStore();
   }, [page]);
@@ -60,21 +74,27 @@ const StoreInfoList = () => {
     }
     return pages;
   };
-  // -------- 篩選處理 --------
-  //商家列表
-  const [storeList, setStoreList] = useState([]);
-  //處理後要顯示的列表
-  const [displayLis, setDisplayList] = useState("");
-  //類別篩選
-  const [category, setCategory] = useState([]);
-  const [selectedCat, setSelectedCat] = useState("");
-  //關鍵字搜尋
-  const [searchWord, setSearchWord] = useState("");
+
+  //處理搜尋欄位
+  const handleSearch = (storeList, searchWord) => {
+    let newList = [...storeList];
+
+    if (searchWord.length) {
+      newList = storeList.filter((storeList) => {
+        return storeList.name.includes(searchWord);
+      });
+    }
+
+    return newList;
+  };
 
   //當function-box資料有更動時
   useEffect(() => {
-    let filteredStore = [];
-  });
+    let newList = [];
+
+    newList = handleSearch(storeList, searchWord);
+    setDisplayList(newList);
+  }, [searchWord, storeList]);
 
   return (
     <div className="store-list d-grid">
@@ -85,7 +105,7 @@ const StoreInfoList = () => {
         <div className="title-box mb-2">
           <Star />
           <span className="ps-3 pe-3 text-dark-grey input-label-title">
-            探索美食
+            探索美食{" "}
           </span>
           <Star />
         </div>
@@ -106,7 +126,7 @@ const StoreInfoList = () => {
       </div>
       {/* 商家列表顯示區 */}
       <div className="store-info-list">
-        <StoreInfoCard storeList={storeList} />
+        <StoreInfoCard storeList={displayList} />
       </div>
       <ul className="pages p-0 align-items-center d-flex">
         <Link to={`${page - 1}`} className="page-arrow">

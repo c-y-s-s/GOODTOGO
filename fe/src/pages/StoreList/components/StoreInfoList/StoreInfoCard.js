@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineClockCircle } from "react-icons/ai";
+import { Rating } from "@mui/material";
 const moment = require("moment");
 
 const StoreInfoCard = (props) => {
@@ -36,7 +37,9 @@ const StoreInfoCard = (props) => {
                 </div>
                 <span className="text-dark-grey">剩餘餐點：14</span>
                 <hr className="col-12 mt-2 mb-2" />
-                <span>Rating</span>
+                <Rating name="read-only" value={1} readOnly />
+                {/* <span>Rating</span> */}
+
                 <span> heart </span>
               </div>
             </div>
