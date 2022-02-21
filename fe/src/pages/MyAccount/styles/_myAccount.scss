@@ -298,7 +298,7 @@
   position: relative;
   cursor: pointer;
   transition: 0.3s;
-  &::before {
+  &::after {
     content: "";
     position: absolute;
     top: 31px;
@@ -311,7 +311,7 @@
 .page_Title_Category_Hover {
   &:hover {
     .page_Title_Category {
-      &::before {
+      &::after {
         width: 100%;
         left: 0;
       }
@@ -328,6 +328,7 @@
   width: 20px;
   height: 20px;
   stroke-width: 2.5px;
+  margin-top: 4px;
 }
 
 .page_Title_Category_List {
@@ -343,8 +344,9 @@
   // opacity: 0;
   display: none;
   transition: 0.5s;
+  box-shadow: 0px 3px 6px lighten($color-light-grey, 10%);
   li {
-    padding: 6px 5px 6px 12px;
+    padding: 8px 5px 8px 12px;
     &:hover {
       background-color: $color-yellow;
       color: #fff;
@@ -390,7 +392,7 @@
   text-shadow: 0px 0.5px $color-grey;
   letter-spacing: $ls-sm;
   padding-left: 8px;
-  line-height: 18px;
+  line-height: 16px;
   right: 7px;
   top: 160px;
   transform: translate(-50%, -50%);
@@ -407,7 +409,7 @@
   text-shadow: 0px 0.5px $color-grey;
   letter-spacing: $ls-sm;
   padding-left: 8px;
-  line-height: 18px;
+  line-height: 16px;
   right: 7px;
   top: 160px;
   transform: translate(-50%, -50%);
@@ -490,6 +492,10 @@
   }
 }
 @media screen and (max-width: 767px) {
+  // 店家收藏清單頁
+  .page_Title_Category_List {
+    top: 504px;
+  }
 }
 @media screen and (max-width: 576px) {
 }

@@ -267,4 +267,25 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   });
 });
 
+// -------- 會員店家收藏清單 --------
+// /api/member/like (get)
+router.get("/like", async (req, res, next) => {
+  let [userLikeData] = await connection.execute(
+    "SELECT * FROM user_like WHERE user_id=?",
+    [req.session.member.id]
+  );
+  console.log("db_users id: ", req.session.member.id);
+  console.log("取得 user Like Data: ", userLikeData);
+
+  // 打包資料給 res
+  // let userLike = {
+  //   name: userLikeData[0].name,
+  //   email: userLikeData[0].email,
+  //   phone: userLikeData[0].phone,
+  //   // photo: data[0].headshots,
+  //   photo: req.session.member.photo,
+  // };
+  res.json(userLikeData);
+});
+
 module.exports = router;
