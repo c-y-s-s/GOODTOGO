@@ -115,12 +115,20 @@ const Tables = () => {
           >
             <div className="modal-dialog modal-dialog-centered modal-sm">
               <div className="modal-content">
-                <div className="modal-header">
-                  <h5 className="modal-title" id="exampleModalLabel">
-                  <img src={require(`../images/check.png`)} alt="..."/>
-
-                    訂購成功
-                  </h5>
+                <div className="modal-header border-bottom mx-3">
+                  <img
+                    src={require(`../images/check.png`)}
+                    alt="..."
+                    className="check-img me-3"
+                  />
+                  <div>
+                    {/* <h5 className="d-inline">訂購成功</h5> */}
+                    {/* <div className="aaa">訂購成功</div> */}
+                    <h5>訂購成功</h5>
+                    <h6>謝謝您替地球盡的每份力量</h6>
+                    {/* <div className="aaa">謝謝您替地球盡的每份力量</div> */}
+                    {/* <h6 className="aaa d-inline">謝謝您替地球盡的每份力量</h6> */}
+                  </div>
                   <button
                     type="button"
                     className="btn-close"
@@ -128,18 +136,45 @@ const Tables = () => {
                     aria-label="Close"
                   ></button>
                 </div>
-                <div className="modal-body">...</div>
-                <div className="modal-footer">
-                  <button
-                    type="button"
-                    className="btn btn-secondary"
-                    data-bs-dismiss="modal"
-                  >
-                    Close
-                  </button>
-                  <button type="button" className="btn btn-primary">
-                    Save changes
-                  </button>
+                <div className="modal-body row">
+                  <div className="d-flex justify-content-center mb-1">
+                    訂單時間: 2022-02-11 12:22:33
+                  </div>
+                  <div className="d-flex justify-content-center mb-1">
+                    <button>訂單編號: XXXXXXX</button>
+                  </div>
+                  <div className="d-flex justify-content-center mb-1">
+                    已傳送到您的電子信箱
+                  </div>
+                  <div className="d-flex justify-content-center mb-1">
+                    取餐時請
+                    <span className="text-colors-g">
+                      &nbsp;出示訂單編號 &nbsp;
+                    </span>
+                    取餐
+                  </div>
+                  <div className="d-flex justify-content-center mb-1">
+                    或可至
+                    <span className="text-colors-g">
+                      &nbsp;我的訂單 {">"} 待領取 &nbsp;
+                    </span>
+                    頁面查看訂單編號
+                  </div>
+                </div>
+                <div className="modal-footer border-top mx-3">
+                  <div className="text-size mx-4">
+                    <div className="d-inline align-middle">
+                      <img
+                        src={require(`../images/subtract.png`)}
+                        alt="..."
+                        className="check-img d-inline align-middle"
+                      />
+                    </div>
+                    <div className="d-inline mx-3">
+                      請於當日店家營業結束前取餐， 逾時未取 &nbsp; &nbsp; &nbsp;
+                      &nbsp; &nbsp; &nbsp; &nbsp;餐，帳號將停權一個月
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
