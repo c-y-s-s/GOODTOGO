@@ -13,6 +13,10 @@ const StoreCard = ({ data }) => {
 
 moment.locale("zh-tw");
 
+// 計算當前時間秒數 hh:mm:ss
+let timeInsecond = moment().format("LTS");
+let timeInsecondResult = parseInt(timeInsecond[0] + timeInsecond[1]) * 60 +parseInt(timeInsecond[3] + timeInsecond[4])*60+parseInt(timeInsecond[6] + timeInsecond[7])
+
 
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
@@ -21,7 +25,7 @@ moment.locale("zh-tw");
 
 
 
-  const Completionist = () => <span>You are good to go!</span>;
+  const Completionist = () => <span>時間已過</span>;
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a complete state
@@ -43,9 +47,15 @@ moment.locale("zh-tw");
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
 
           {data.map((item) => {
-            console.log(parseInt(item.due_time)*60*60)    
-            console.log(parseInt(new Date().getTime() / 1000)); 
-            let startime = parseInt(item.due_time) * 60 * 60;      
+            let itemTimeInsecondResult =
+              parseInt(item.due_time[0] + item.due_time[1]) * 60 +
+              parseInt(item.due_time[3] + item.due_time[4]) * 60 +
+              parseInt(item.due_time[6] + item.due_time[7]);
+       
+            {/* let startime = parseInt(item.due_time) * 60 * 60;   */}
+            let yoyoyo = (itemTimeInsecondResult - timeInsecondResult) * 100;
+            {/* console.log("商品開始販售秒數",startime, "當前秒數",timeInsecondResult,"計算結果" ,yoyoyo); */}
+            console.log("tototo",yoyoyo)
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
@@ -62,12 +72,11 @@ moment.locale("zh-tw");
                       時間倒數
                       <span>
                         <Countdown
-                          date={Date.now() + startime*100}
+                          date={Date.now() + yoyoyo}
                           zeroPadTime={2}
                           renderer={renderer}
                         />
                       </span>
-                
                     </div>
                     <div className="amount-text">剩餘{item.amount}</div>
                   </div>
