@@ -20,6 +20,12 @@ let storesRouter = require("./routers/stores");
 app.use("/api/stores", storesRouter);
 // -------- 商家 RESTful API 列表 結束 --------
 
+// :TODO: ------- 指定商家座標 RESTful API 列表 -------
+let storesMapRouter = require("./routers/storemap");
+app.use("/api/storesmap", storesMapRouter);
+// :TODO: ------- 指定商家座標 RESTful API 結束 -------
+
+
 // :TODO: -------- 商品 RESTful API 列表 --------
 let productsRouter = require("./routers/products");
 app.use("/api/products", productsRouter);

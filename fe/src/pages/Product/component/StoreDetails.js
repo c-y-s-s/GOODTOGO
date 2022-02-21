@@ -8,21 +8,44 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-const StoreDetails = ({storeId, storeData }) => {
+import { MAP_KEY } from "../../../key";
+import GoogleMapReact from "google-map-react";
+import { FiMapPin } from "react-icons/fi";
+import MapPin from "./MapPin";
 
+const StoreDetails = ({ storeId, storeData }) => {
+  
   // 存店家所有評論資料
   const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
-
+  // 店家經度
+  const [storeMapDataLat, setStoreMapDataLat] = useState([]);
+  // 店家緯度
+   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
   useEffect(() => {
-    let getStoreComment = async () => {
+    let getStoreDetalis = async () => {
       // 撈店家所有評論
       let storeCommentTotalResponse = await axios.get(
         `${API_URL}/storecommittotal/${storeId}`
       );
+      // 撈店家經緯度
+      let storeMapDataReaponse = await axios.get(
+        `${API_URL}/storesmap/${storeId}`
+      );
       setStoreCommentTotalData(storeCommentTotalResponse.data);
+      setStoreMapDataLat(storeMapDataReaponse.data[0].longitude);
+      setStoreMapDataLng(storeMapDataReaponse.data[0].latitude);
     };
-    getStoreComment();
+    getStoreDetalis();
   }, []);
+
+  // 地圖預設顯示地點
+  const defaultProps = {
+    center: {
+      lat: storeMapDataLat,
+      lng: storeMapDataLng,
+    },
+    zoom: 17,
+  };
 
   // 計算店家評價總分
   let storeStarTotal = 0;
@@ -37,7 +60,7 @@ const StoreDetails = ({storeId, storeData }) => {
 
   return (
     <div>
-      {storeData.map((item)=>{
+      {storeData.map((item) => {
         return (
           <div>
             <div>
@@ -124,13 +147,23 @@ const StoreDetails = ({storeId, storeData }) => {
                 </div>
                 <div className="col-12 col-md-6 col-lg-8 h-100">
                   <div className="store-map">
-                    <p className="">google地圖</p>
+                    <GoogleMapReact
+                      bootstrapURLKeys={{ key: MAP_KEY }}
+                      defaultCenter={defaultProps.center}
+                      defaultZoom={defaultProps.zoom}
+                    >
+                      <MapPin
+                        lat={storeMapDataLat}
+                        lng={storeMapDataLng}
+                        text={item.address}
+                      />
+                    </GoogleMapReact>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        );      
+        );
       })}
     </div>
   );
