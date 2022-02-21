@@ -27,8 +27,8 @@ router.get("/:storeId", async (req, res, next) => {
   //計算總共要有幾頁
   const perPage = 8;
   const lastPage = Math.ceil(total / perPage);
-  // 計算offsSELECT 
-  let offset = (page-1) * perPage;
+  // 計算offsSELECT
+  let offset = (page - 1) * perPage;
   let [data] = await connection.execute(
     `SELECT a.* ,
     b.name,
@@ -39,21 +39,19 @@ router.get("/:storeId", async (req, res, next) => {
     JOIN users AS b ON  a.user_id = b.id 
     JOIN products AS c ON a.products_id = c.id
     WHERE a.store_id = ?
-    ORDER BY create_time DESC
+    ORDER BY star ASC
     LIMIT ? 
     OFFSET ?`,
     [req.params.storeId, perPage, offset]
   );
-    //response
-res.json(
-  {pagination:{total,perPage,page,lastPage},
-data});
-//   let [data, fields] = await connection.execute(
-//     "SELECT a.* ,b.name FROM products_comment AS a JOIN users AS b ON  a.user_id = b.id WHERE store_id = ? ",
-//     [req.params.storeId]
-//   );
+  //response
+  res.json({ pagination: { total, perPage, page, lastPage }, data });
+  //   let [data, fields] = await connection.execute(
+  //     "SELECT a.* ,b.name FROM products_comment AS a JOIN users AS b ON  a.user_id = b.id WHERE store_id = ? ",
+  //     [req.params.storeId]
+  //   );
 
-//   res.json(data);
+  //   res.json(data);
 });
 
 // -------- 撈出對應商家 ID 商品評論結束 --------

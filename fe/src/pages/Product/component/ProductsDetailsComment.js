@@ -122,6 +122,7 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
                         />
                       </Stack>
                     </div>
+                    {console.log(item.star)}
                   </div>
                   <div className="product-users-comment-userdata-text">
                     {item.comment}
