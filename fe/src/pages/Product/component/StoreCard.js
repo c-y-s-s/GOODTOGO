@@ -1,19 +1,40 @@
 import { useState, useEffect, useLayoutEffect } from "react";
-import { useParams } from "react-router-dom";
-import { API_URL } from "../../../utils/config";
-import axios from "axios";
 import ProductsDetails from "./ProductsDetails";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+import Countdown, {
+  zeroPad,
+  calcTimeDelta,
+  formatTimeDelta,
+} from "react-countdown";
+import moment from "moment";
+import "moment/min/locales";
 const StoreCard = ({ data }) => {
+
+moment.locale("zh-tw");
+
+
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
   // 撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
 
-  // 存入商品詳細內容評論總比數
-  // 取詳細頁面裡面的總評價出來渲染
-  // const [touchProductAVG,settouchProductAVG] = useState(0)
+
+
+  const Completionist = () => <span>You are good to go!</span>;
+  const renderer = ({ hours, minutes, seconds, completed }) => {
+    if (completed) {
+      // Render a complete state
+      return <Completionist />;
+    } else {
+      // Render a countdown
+      return (
+        <span>
+          {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
+        </span>
+      );
+    }
+  };
 
   return (
     <div>
@@ -22,6 +43,9 @@ const StoreCard = ({ data }) => {
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
 
           {data.map((item) => {
+            console.log(parseInt(item.due_time)*60*60)    
+            console.log(parseInt(new Date().getTime() / 1000)); 
+            let startime = parseInt(item.due_time) * 60 * 60;      
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
@@ -29,14 +53,21 @@ const StoreCard = ({ data }) => {
                 key={item.id}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
-                  console.log("點商品card取到的id", item.id);
                   setOpenProductsModal(true);
                 }}
               >
                 <div className="card m-0 ">
                   <div className="d-flex product-card-text">
                     <div className="time-text">
-                      時間倒數<span>02:56:33</span>
+                      時間倒數
+                      <span>
+                        <Countdown
+                          date={Date.now() + startime*100}
+                          zeroPadTime={2}
+                          renderer={renderer}
+                        />
+                      </span>
+                
                     </div>
                     <div className="amount-text">剩餘{item.amount}</div>
                   </div>
@@ -46,6 +77,7 @@ const StoreCard = ({ data }) => {
                       src={require(`../../../images/products_img/${item.img}`)}
                       alt="商品"
                     />
+                    {/* //!  資料庫時間 - 目前時間 得出秒數 + 上去套件倒數 */}
                   </div>
                   <div className="card-body ">
                     <div className="">
@@ -63,6 +95,7 @@ const StoreCard = ({ data }) => {
                                 />
                               </Stack>
                             </div>
+
                             <div className="ms-2">{item.score}</div>
                           </div>
                         ) : (
@@ -91,6 +124,6 @@ const StoreCard = ({ data }) => {
       )}
     </div>
   );
-};
+};;
 
 export default StoreCard;

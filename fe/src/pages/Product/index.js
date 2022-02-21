@@ -16,7 +16,6 @@ import ProductsDetails from "./component/ProductsDetails";
 const Product = () => {
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
-
   const [error, setError] = useState(null);
   // 存商家商品
   const [productsdata, setProducts] = useState([]);
@@ -24,7 +23,6 @@ const Product = () => {
   const [storeData, setStoreData] = useState([]);
   // 存指定商家 ID 評論
   const [productsComment, setproductsComment] = useState([]);
-
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
   // 切換 className
@@ -42,24 +40,19 @@ const Product = () => {
     };
     getProducts();
   }, []);
-
-
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
 
   return (
     <div>
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
-
       <StoreDetails storeData={storeData} storeId={storeId} />
-
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
       {/* -------- 綠色裝飾橫條小條  --------*/}
       <div className="container-fluid p-0 horizontalBar">
         <div></div>
       </div>
-
       <div className="container">
         {/*-------- 遮雨棚區塊 --------*/}
         {/* <StoreCanopy canopy={canopyTotal} /> */}
@@ -70,7 +63,6 @@ const Product = () => {
           buttonToggle={buttonToggle}
         />
       </div>
-
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
         <StoreCard data={productsdata} />

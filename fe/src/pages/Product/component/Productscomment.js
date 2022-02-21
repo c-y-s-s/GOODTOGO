@@ -18,6 +18,9 @@ const StoreProductsComment = () => {
   const [productsComment, setproductsComment] = useState([]);
   // 存總筆數
   const [totalPages, setTotalPages] = useState([]);
+
+  const [productsCommitStarSortSwitch, setproductsCommitStarSortSwitch] =
+    useState("");
   // 總頁數預設 1
   const [lastPage, SetLastPage] = useState(1);
   const [page, setPage] = useState(parseInt(currentPage, 10) || parseInt(1));
@@ -28,6 +31,12 @@ const StoreProductsComment = () => {
       let productsCommentResponse = await axios.get(
         `${API_URL}/productscommit/${storeId}?page=${page}`
       );
+      let productsCommentStarDescResponse = await axios.get(
+        `${API_URL}/productscommentstardesc/${storeId}?page=${page}`
+      );
+      let productsCommentStarAscResponse = await axios.get(
+        `${API_URL}/productscommentstarasc/${storeId}?page=${page}`
+      );
 
       setproductsComment(productsCommentResponse.data.data);
       setTotalPages(productsCommentResponse.data.pagination.total);
@@ -35,7 +44,15 @@ const StoreProductsComment = () => {
     };
     getComment();
   }, [page]);
+  let id = 1
+  console.log(productsComment);
+  id +=1
+  //! 評分排序切換按鈕? 資料有對 但評價套價星數不對?
+  function handleStarSort() {
+    setproductsCommitStarSortSwitch(!productsCommitStarSortSwitch);
+  }
 
+  // 頁碼
   let navigate = useNavigate();
   let pages = [];
   for (let i = 1; i <= lastPage; i++) {
@@ -66,7 +83,10 @@ const StoreProductsComment = () => {
             <div className="d-flex product-users-comment-filter">
               <div className="me-2 product-users-comment-filter-star">
                 評分
-                <button className="product-users-comment-filter-icon">
+                <button
+                  className="product-users-comment-filter-icon"
+                  onClick={handleStarSort}
+                >
                   <RiArrowUpDownFill />
                 </button>
               </div>
@@ -123,14 +143,16 @@ const StoreProductsComment = () => {
                         <div className="d-flex ">
                           <div className="">
                             <div className="d-flex ">
+                              {console.log("為啥會錯", item.star)}
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
-                                  defaultValue={item.star}
+                                  defaultValue={item.star }
                                   precision={0.1}
                                   readOnly
                                 />
                               </Stack>
+
                               <div className="ps-2 product-data-name">
                                 {item.products_name}
                               </div>

@@ -14,7 +14,9 @@ router.get("/:commitId", async (req, res, next) => {
     b.headshots,
     b.name FROM products_comment AS a 
     JOIN users AS b on a.user_id = b.id 
-    WHERE a.products_id = ?`,
+    WHERE a.products_id = ?
+    ORDER BY create_time DESC
+    `,
     // "SELECT * FROM products_comment WHERE products_id = ?",
     [req.params.commitId]
   );
