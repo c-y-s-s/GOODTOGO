@@ -3,7 +3,7 @@ import React from "react";
 const Breadcrumb = () => {
   return (
     <div>
-      <nav aria-label="breadcrumb">
+      <nav aria-label="breadcrumb" className="breadcrumb-center">
         <ol className="breadcrumb mt-5">
           <li className="breadcrumb-item ">
             <a href="#/" className="text-decoration-none">
