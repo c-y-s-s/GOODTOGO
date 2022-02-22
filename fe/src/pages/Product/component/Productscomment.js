@@ -75,16 +75,16 @@ const StoreProductsComment = () => {
 
   // });
 
-  //! 如果time是空值,star排序會失效
-  console.log("star", productsCommitStarSortSwitch);
-  console.log("time", productsCommitTimeSortSwitch);
+
 
   function handleStarSort() {
     setproductsCommitStarSortSwitch(!productsCommitStarSortSwitch);
+    setproductsCommitTimeSortSwitch("")
   }
 
   function handleTimeSort() {
     setproductsCommitTimeSortSwitch(!productsCommitTimeSortSwitch);
+    setproductsCommitStarSortSwitch("")
   }
 
   // 計算頁碼
