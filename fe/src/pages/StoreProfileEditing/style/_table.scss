@@ -22,7 +22,7 @@
 
 // 改變選擇檔案、送出申請顏色
 input[type="file"]::file-selector-button ,.sendApply {
-  background-color: $color-light-green;
+  background-color: $color-green;
 }
 
 // 禁用 textarea 的 resizable 屬性
