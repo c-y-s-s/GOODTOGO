@@ -1,30 +1,30 @@
 import { useState, useEffect, useLayoutEffect } from "react";
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
+import ProductsDetailsComment from "./ProductsDetailsComment";
+// -------- React icon --------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiAlertCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-import axios from "axios";
-import { API_URL } from "../../../utils/config";
-import ProductsDetailsComment from "./ProductsDetailsComment";
+// -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import { AiOutlineConsoleSql } from "react-icons/ai";
+
 // -------- 商品光箱 --------
 const ProductsDetails = ({
   setOpenProductsModal,
-  // productModalData,
   openProductsModaID,
 }) => {
+  //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
-  //算商品評論數字 全部評價相加 除 筆數 取小數點後一位
-  const [productStarTotal, setProductStarTotal] = useState(0);
-
-  // 撈指定 ID 的商品 data 出來存放
+  // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
 
-  //撈指定 商品 ID 的 評論
+
   useLayoutEffect(() => {
     let getProductId = async () => {
+      //撈指定 ID 商品的評論
       let productModalCommentResponse = await axios.get(
         `${API_URL}/productsdesignatecommit/${openProductsModaID}`
       );
@@ -37,9 +37,7 @@ const ProductsDetails = ({
     getProductId();
   }, [openProductsModaID]);
 
-  //計算指定商品的評論平均分數
-  // console.log("算評價total的地方", productModalCommitData);
-
+  // 計算指定商品的評論平均分數
   let productstarTotal = 0;
   productModalCommentData.forEach((item) => {
     productstarTotal += item.star;
@@ -47,7 +45,8 @@ const ProductsDetails = ({
   let productstarTotalAVG = (
     productstarTotal / productModalCommentData.length
   ).toFixed(1);
- 
+
+  // 購買數量計數器
   const [buyamount, setBuyamount] = useState(0);
   function handlePlus() {
     setBuyamount(buyamount + 1);
@@ -173,7 +172,6 @@ const ProductsDetails = ({
                 {/* --------- 評論區塊 --------*/}
                 <ProductsDetailsComment
                   productModalCommentData={productModalCommentData}
-         
                 />
                 {/* --------- 評論區塊結束--------*/}
               </div>

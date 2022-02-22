@@ -1,25 +1,30 @@
 import React, { useState } from "react";
+// -------- react icon --------
 import { RiArrowUpDownFill } from "react-icons/ri";
 import { FiMoreVertical } from "react-icons/fi";
 import { FiArrowUpCircle } from "react-icons/fi";
+// -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
+
+
+
 const ProductsDetailsComment = ({ productModalCommentData }) => {
+
   let data = productModalCommentData;
-  console.log(data);
+
   // 評價排序開關
   const [starSort, setStarSort] = useState();
   // 時間排序開關
   const [timeSort, setTimeSort] = useState();
 
-  //! 有 bug 待修 其中一個如果後面先點 再點會失效
   // 評價排序判斷
   if (starSort) {
     data = [...data].sort((a, b) => a.star - b.star);
   } else if (starSort === false) {
     data = [...data].sort((a, b) => b.star - a.star);
   }
-  // 時間排序判斷
+  // 時間排序判斷 原本字串轉換成數字才能比對 
   if (timeSort) {
     data = [...data].sort(
       (a, b) =>
@@ -34,20 +39,21 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
     );
   }
 
-  console.log("timeSort", timeSort, "starSort", starSort);
-
   // 評價排序開關
   function handleStarSort() {
     setStarSort(!starSort);
+    // 清空 time 開關值才不會有衝突
+    setTimeSort("")
   }
   // 時間排序開關
   function handleTimeSort() {
     setTimeSort(!timeSort);
+    setStarSort("");
   }
 
-  // console.log("最上層", productModalcommentData);
   return (
     <div>
+      {/* // 判斷有無資料 */}
       {productModalCommentData.length ? (
         <div className="product-users-comment">
           <a href="#product-top" className="product-users-comment-gotop">

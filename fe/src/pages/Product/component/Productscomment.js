@@ -1,15 +1,17 @@
-import { FiMoreVertical } from "react-icons/fi";
-import { useState, useEffect } from "react";
 import React from "react";
+import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+// -------- React Icon --------
 import { RiArrowUpDownFill } from "react-icons/ri";
 import { FiChevronLeft } from "react-icons/fi";
 import { FiChevronRight } from "react-icons/fi";
+import { FiMoreVertical } from "react-icons/fi";
+// -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-import { AiOutlineConsoleSql } from "react-icons/ai";
+
 // -------- 商品評論 --------
 const StoreProductsComment = () => {
   const { storeId } = useParams();
@@ -49,22 +51,20 @@ const StoreProductsComment = () => {
         `${API_URL}/productscommenttimeasc/${storeId}?page=${page}`
       );
       setproductsComment(productsCommentResponse.data.data);
+      // 總筆數
       setTotalPages(productsCommentResponse.data.pagination.total);
+      // 共幾頁
       SetLastPage(productsCommentResponse.data.pagination.lastPage);
-
+      // 判斷 評分、留言開關 boolean 帶入不同支api
       if (productsCommitTimeSortSwitch === false) {
         setproductsComment(productsCommentResponse.data.data);
-        
       } else if (productsCommitStarSortSwitch === true) {
         setproductsComment(productsCommentStarDescResponse.data.data);
-        console.log("aaaaaaaaaaaaa",productsCommitStarSortSwitch);
-
+        console.log("aaaaaaaaaaaaa", productsCommitStarSortSwitch);
       } else if (productsCommitStarSortSwitch === false) {
         setproductsComment(productsCommentStarAscResponse.data.data);
-
       } else if (productsCommitTimeSortSwitch === true) {
         setproductsComment(productsCommentTimeAscResponse.data.data);
-   
       }
     };
     getComment();
@@ -75,16 +75,15 @@ const StoreProductsComment = () => {
 
   // });
 
-
-
+  // 開關切換
   function handleStarSort() {
     setproductsCommitStarSortSwitch(!productsCommitStarSortSwitch);
-    setproductsCommitTimeSortSwitch("")
+    setproductsCommitTimeSortSwitch("");
   }
 
   function handleTimeSort() {
     setproductsCommitTimeSortSwitch(!productsCommitTimeSortSwitch);
-    setproductsCommitStarSortSwitch("")
+    setproductsCommitStarSortSwitch("");
   }
 
   // 計算頁碼
@@ -105,10 +104,6 @@ const StoreProductsComment = () => {
       </a>
     );
   }
-
-  // console.log("pagepagepagepage", typeof page, page);
-
-  // let navigate = useNavigate();
 
   return (
     <div>
@@ -157,9 +152,7 @@ const StoreProductsComment = () => {
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                       <div className="pt-2 user-data-name">{item.name}</div>
                       <div className="d-flex align-items-center">
-                        <div className="user-data-comment-time">
-                          {/* 2021-12-12 10 : 10 PM */}
-                          {item.create_time}
+                        <div className="user-data-comment-time">{item.create_time}
                         </div>
                         <div className="">
                           <button
@@ -181,8 +174,6 @@ const StoreProductsComment = () => {
                         <div className="d-flex ">
                           <div className="">
                             <div className="d-flex ">
-                              {/* // ! 評價無法正常顯示 星數與資料對不上 */}
-
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
@@ -191,7 +182,6 @@ const StoreProductsComment = () => {
                                   readOnly
                                 />
                               </Stack>
-
                               <div className="ps-2 product-data-name">
                                 {item.products_name}
                               </div>

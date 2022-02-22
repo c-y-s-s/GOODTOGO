@@ -1,17 +1,18 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import ProductsDetails from "./ProductsDetails";
+
+// -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import Countdown, {
-  zeroPad,
-  calcTimeDelta,
-  formatTimeDelta,
-} from "react-countdown";
+// -------- 倒數計時套件 --------
+import Countdown, {zeroPad} from "react-countdown";
+// -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-const StoreCard = ({ data }) => {
-  moment.locale("zh-tw");
 
+const StoreCard = ({ data }) => {
+
+  moment.locale("zh-tw");
   // !計算當前時間秒數 hh:mm:ss
   let timeInsecond = moment().format("LTS");
 

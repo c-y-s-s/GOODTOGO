@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
+// -------- React Icon -------- 
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
+
+// -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import axios from "axios";
-import { API_URL } from "../../../utils/config";
+// -------- google map -------
 import { MAP_KEY } from "../../../key";
 import GoogleMapReact from "google-map-react";
-import { FiMapPin } from "react-icons/fi";
 import MapPin from "./MapPin";
 
 const StoreDetails = ({ storeId, storeData }) => {
