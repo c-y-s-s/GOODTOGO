@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-// -------- React Icon -------- 
+// -------- React Icon --------
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -17,14 +17,18 @@ import GoogleMapReact from "google-map-react";
 import MapPin from "./MapPin";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
+// -------- Moment plugin --------
+import moment from "moment";
+import "moment/min/locales";
 const StoreDetails = ({ storeId, storeData }) => {
-  
+  moment.locale("zh-tw");
+
   // 存店家所有評論資料
   const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
   // 店家經度
   const [storeMapDataLat, setStoreMapDataLat] = useState([]);
   // 店家緯度
-   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
+  const [storeMapDataLng, setStoreMapDataLng] = useState([]);
   useEffect(() => {
     let getStoreDetalis = async () => {
       // 撈店家所有評論
@@ -65,6 +69,12 @@ const StoreDetails = ({ storeId, storeData }) => {
   return (
     <div>
       {storeData.map((item) => {
+        //修昔日陣列加入頓號
+       let closeday = JSON.parse(item.close_day).join("、");
+        console.log(item.tel_no);
+        // ! 帶修正
+        let newstr =item.tel_no.substring(2,"-")
+        console.log(newstr)
         return (
           <div key={uuidv4()}>
             <div>
@@ -121,15 +131,15 @@ const StoreDetails = ({ storeId, storeData }) => {
                       <div className="store-data-icon">
                         <FaClock />
                       </div>
-                      <div>
-                        星期 {JSON.parse(item.close_day)} 公休
-                        <div>
-                          {item.open_time} - {item.close_time}
+                      <div className="d-flex workday">
+                        <div>星期 {closeday} 公休</div>
+                        <div className="work-time">
+                          {moment(item.open_time, "hh:mm:ss").format("hh:mm")}-
+                          {moment(item.close_time, "hh:mm:ss").format("LT")}
                         </div>
-                      </div>
-
-                      <div className="d-flex store-data-left-content-business">
-                        營業中
+                        <div className="d-flex store-data-left-content-business">
+                          營業中
+                        </div>
                       </div>
                     </div>
 
@@ -152,7 +162,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: "",
+                        key: MAP_KEY,
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}

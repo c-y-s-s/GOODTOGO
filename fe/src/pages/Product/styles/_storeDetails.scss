@@ -34,19 +34,28 @@
         .store-data-left-content {
             margin-top: 0.75rem;
             font-size: $fz-xx-lg;
+            display: flex;
             .store-data-icon {
                 color: $color-light-green;
                 padding-right: 1rem;
 
                 font-size: 1.15rem;
             }
-            .store-data-left-content-business {
-                background-color: $color-light-green;
-                color: white;
-                border-radius: 0.5rem;
-                padding: 0.1rem 0.5rem;
-                margin-left: 1rem;
+            .workday {
+                width: 100%;
+
+                .store-data-left-content-business {
+                    background-color: $color-light-green;
+                    color: white;
+                    border-radius: 0.5rem;
+                    padding: 0.1rem 0.5rem;
+                    margin-left: 1rem;
+                }
+                .work-time {
+                    margin-left: 1.2rem;
+                }
             }
+
             &:nth-child(4) {
                 align-items: flex-start;
             }
