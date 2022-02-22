@@ -121,7 +121,7 @@ const Tables = () => {
                     alt="..."
                     className="check-img me-3"
                   />
-                  <div>
+                  <div className="text-colors-g">
                     {/* <h5 className="d-inline">訂購成功</h5> */}
                     {/* <div className="aaa">訂購成功</div> */}
                     <h5>訂購成功</h5>
@@ -137,25 +137,25 @@ const Tables = () => {
                   ></button>
                 </div>
                 <div className="modal-body row">
-                  <div className="d-flex justify-content-center mb-1">
+                  <div className="d-flex justify-content-center mb-1 text-size text-colors-g">
                     訂單時間: 2022-02-11 12:22:33
                   </div>
-                  <div className="d-flex justify-content-center mb-1">
-                    <button>訂單編號: XXXXXXX</button>
+                  <div className="d-flex justify-content-center text-size my-2 ">
+                    <button className="order-bt border-0 px-5">訂單編號: XXXXXXX</button>
                   </div>
-                  <div className="d-flex justify-content-center mb-1">
+                  <div className="d-flex justify-content-center mb-1 text-size">
                     已傳送到您的電子信箱
                   </div>
-                  <div className="d-flex justify-content-center mb-1">
+                  <div className="d-flex justify-content-center mb-1 text-size">
                     取餐時請
                     <span className="text-colors-g">
                       &nbsp;出示訂單編號 &nbsp;
                     </span>
                     取餐
                   </div>
-                  <div className="d-flex justify-content-center mb-1">
+                  <div className="d-flex justify-content-center mb-1 text-size">
                     或可至
-                    <span className="text-colors-g">
+                    <span className="text-colors-g ">
                       &nbsp;我的訂單 {">"} 待領取 &nbsp;
                     </span>
                     頁面查看訂單編號
@@ -163,16 +163,15 @@ const Tables = () => {
                 </div>
                 <div className="modal-footer border-top mx-3">
                   <div className="text-size mx-4">
-                    <div className="d-inline align-middle">
+                    <div>
                       <img
                         src={require(`../images/subtract.png`)}
                         alt="..."
-                        className="check-img d-inline align-middle"
+                        className="ms-3 pt-2 me-3 float-start"
                       />
                     </div>
-                    <div className="d-inline mx-3">
-                      請於當日店家營業結束前取餐， 逾時未取 &nbsp; &nbsp; &nbsp;
-                      &nbsp; &nbsp; &nbsp; &nbsp;餐，帳號將停權一個月
+                    <div className="text-colors-dy">
+                      請於當日店家營業結束前取餐， 逾時未取餐，帳號將停權一個月
                     </div>
                   </div>
                 </div>

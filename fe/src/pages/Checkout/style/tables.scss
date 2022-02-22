@@ -30,9 +30,18 @@
 }
 
 .text-colors-g{
-  color: $color-light-green;
+  color: $color-green;
 }
 
 .text-size{
   font-size: 0.5rem;
+}
+
+.text-colors-dy{
+  color: $color-dark-yellow;
+}
+
+.order-bt{
+  background: $color-green;
+  color: $color-light;
 }
