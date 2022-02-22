@@ -166,19 +166,7 @@
                 scroll-behavior: smooth;
                 padding: 0 1.7rem;
                 //箭頭錨點
-                .product-users-comment-gotop {
-                    font-size: 2.5rem;
-                    color: $color-green;
-                    position: fixed;
-                    opacity: 0.5;
-                    left: 57%;
-                    bottom: 7.5%;
-                    transition: 0.3s;
-                    &:hover {
-                        opacity: 1;
-                        transform: translateY(-10%);
-                    }
-                }
+
                 //用戶圖片
                 .product-users-comment-filter {
                     .product-users-comment-filter-star {
@@ -273,4 +261,42 @@
     align-items: center;
     justify-content: center;
     font-size: $fz-xx-lg;
+}
+.product-users-comment-gotop {
+    font-size: 2.8rem;
+    color: $color-green;
+    position: fixed;
+    opacity: 0.5;
+    left: 65%;
+    top: 90%;
+    bottom: 7.5%;
+    transition: 0.3s;
+    &:hover {
+        color: $color-green;
+        opacity: 1;
+        transform: translateY(-10%);
+    }
+}
+@media screen and (max-width: 1920px) {
+    .product-users-comment-gotop {
+        font-size: 2.7rem;
+        left: 55%;
+        top: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-users-comment-gotop {
+        font-size: 2.5rem;
+        left: 65%;
+        top: 90%;
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .product-users-comment-gotop {
+        font-size: 2.5rem;
+        left: 76%;
+        top: 90%;
+    }
 }

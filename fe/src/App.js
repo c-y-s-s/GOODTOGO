@@ -27,7 +27,7 @@ function App() {
   const [auth, setAuth] = useState(false);
   return (
     <Router>
-      <Navbar auth={auth} />
+      {/* <Navbar auth={auth} /> */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
@@ -56,7 +56,7 @@ function App() {
       <StoreCheck />
 
       <Product /> */}
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
