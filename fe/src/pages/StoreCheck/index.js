@@ -1,39 +1,95 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { ImFacebook2 } from "react-icons/im";
-import { ReactComponent as Logo } from "../../images/logo-face.svg";
-import "./Storecheck.scss"
 import axios from "axios";
 import TWzipcode from "react-twzipcode";
+
+import { ReactComponent as Logo } from "../../images/logo-face.svg";
 import TwCitySelector from "tw-city-selector";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
+import "./Storecheck.scss";
 
-new TwCitySelector({
-  el: ".city-selector-standard-words",
-  elCounty: ".county", // 在 el 裡查找 element
-  elDistrict: ".district", // 在 el 裡查找 element
-  elZipcode: ".zipcode", // 在 el 裡查找 element
-  standardWords: true, // 使用正體字 臺
-});
+
+
+
 
 const Storecheck = () => {
+
+
+
+
+
+  const [picture, setPicture] = useState([]);
+
+  const licenceChange = e => {
+    console.log('picture: ', picture);
+    setPicture(e.target.files[0]);
+  };
+
+
+  new TwCitySelector({
+    el: ".city-selector",
+    elCounty: ".county", // 在 el 裡查找 element
+    elDistrict: ".district", // 在 el 裡查找 element
+  });
+
+  // -------- checkbox 同意條款 --------
+  const [agree, setAgree] = useState(true);
+
+  const [day, setDay] = useState({
+    一: "false",
+    二: "false",
+    三: "false",
+    四: "false",
+    五: "false",
+    六: "false",
+    日: "flase"
+  });
+
   const [member, setMember] = useState({
     email: "",
     password: "",
     confirmPassword: "",
     name: "",
     phone: "",
-
-
+    storename: "",
+    picture: "",
+    county: "",
   });
 
-  // -------- checkbox 同意條款 --------
-  const [agree, setAgree] = useState(true);
+  const handleDayChange = (e) => {
+    console.log(e.target.checked);
+    setDay({ ...day, [e.target.name]: e.target.checked });
+    setMember({ ...member, ...{ day } });
+  };
   // -------- 處理表格改變 --------
   const handleChange = (e) => {
+    console.log(e.target.value);
     setMember({ ...member, [e.target.name]: e.target.value });
   };
+
+  const handleLicenseChange = (e) =>{
+    console.log(e.target.value);
+    const file = e.target.files[0]; // 抓取上傳的圖片
+    const reader = new FileReader(); // 讀取 input type="file" 的 file
+    reader.addEventListener(
+      "load",
+      function () {
+        // convert image file to base64 string
+        setImageSrc(reader.result);
+      },
+      false // false -> e.preventDefault() 阻擋預設行為
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+      // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+    }
+    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    setMember({ ...member, [e.target.name]: e.target.files[0] });
+  }
   // -------- 表單送出 --------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -138,7 +194,7 @@ const Storecheck = () => {
                           請設定密碼(須包含最少一個大、小寫英文字母與數字)
                         </label>
                       </div>
-                      
+
                       {/* -------- 密碼確認 -------- */}
                       <label
                         htmlFor="confirmpassword"
@@ -163,8 +219,8 @@ const Storecheck = () => {
                           請再次輸入密碼確認
                         </label>
                       </div>
-                        {/* -------- 地址資料 -------- */}
-                        <div className="row">
+                      {/* -------- 地址資料 -------- */}
+                      <div className="row">
                         <div className="col-6">
                           <select
                             className="form-select custom-input"
@@ -176,9 +232,9 @@ const Storecheck = () => {
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                           </select>
-                          </div>
-                         {/* -------- 區域 -------- */}
-                          <div className="col-6">
+                        </div>
+                        {/* -------- 區域 -------- */}
+                        <div className="col-6">
                           <select
                             className="form-select custom-input"
                           >
@@ -187,19 +243,18 @@ const Storecheck = () => {
                             <option value="2">Two</option>
                             <option value="3">Three</option>
                           </select>
-                          </div>
-                          
-                          <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
-                          handleChangeCoounty={member.county}
-                          handleChangeDistrict={member.district}
-                          onChange={handleChange}
-                          />
-                          <div className="city-selector-standard-words d-flex flex-grow-1">
+                        </div>
+                        <div id="twzipcode"></div>
+                        {/* <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
+                          handleChangeCounty={this.handleChange}
+                          handleChangeDistrict={this.handleChange}
+                          handleChangeZipcode={this.handleChange}
+                          /> */}
+                        <div className="city-selector d-flex flex-grow-1" id="citySelector">
                           <select className="county form-select me-3"></select>
-                          <select 
-                          className="district form-select"></select>
-                          </div>
-                          </div>
+                          <select className="district form-select"></select>
+                        </div>
+                      </div>
                       {/* -------- 營業店家名稱 -------- */}
                       <label
                         htmlFor="storename"
@@ -271,6 +326,7 @@ const Storecheck = () => {
                           className="form-control custom-input"
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
+                          onChange={licenceChange}
                         />
                       </div>
 
@@ -283,13 +339,13 @@ const Storecheck = () => {
                       </label>
                       <div className="d-block mb-3 me-0 opendayCheck">
                         <div className="row mt-3 mb-3 ms-1 me-1">
-                          <input type="checkbox" id="mon" value="一" className="col dayCheck"></input>
-                          <input type="checkbox" id="tue" value="三" className="col dayCheck"></input>
-                          <input type="checkbox" id="wed" value="二" className="col dayCheck"></input>
-                          <input type="checkbox" id="thu" value="四" className="col dayCheck"></input>
-                          <input type="checkbox" id="fri" value="五" className="col dayCheck"></input>
-                          <input type="checkbox" id="sat" value="六" className="col dayCheck"></input>
-                          <input type="checkbox" id="sun" value="日" className="col dayCheck"></input>
+                          <input type="checkbox" id="mon" name="一" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="tue" name="二" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="wed" name="三" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="thu" name="四" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="fri" name="五" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="sat" name="六" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="sun" name="日" className="col dayCheck" onChange={handleDayChange}></input>
                         </div>
                         <div className="row input-label-title text-green text-center mt-3 mb-3 ms-1 me-1">
                           <label htmlFor="mon" className="col">一</label>
