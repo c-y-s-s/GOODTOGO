@@ -10,22 +10,24 @@ import Countdown, {
 import moment from "moment";
 import "moment/min/locales";
 const StoreCard = ({ data }) => {
+  moment.locale("zh-tw");
 
-moment.locale("zh-tw");
+  // !計算當前時間秒數 hh:mm:ss
+  let timeInsecond = moment().format("LTS");
 
-// 計算當前時間秒數 hh:mm:ss
-let timeInsecond = moment().format("LTS");
-let timeInsecondResult = parseInt(timeInsecond[0] + timeInsecond[1]) * 60 +parseInt(timeInsecond[3] + timeInsecond[4])*60+parseInt(timeInsecond[6] + timeInsecond[7])
-
-
+  //!目前時間總秒數
+  let timeInsecondResult =
+    parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
+    parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
+    parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
+ 
+ console.log("aaaaa", timeInsecond);
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
   // 撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
 
-
-
-  const Completionist = () => <span>時間已過</span>;
+  const Completionist = () => <span>明日再擱來</span>;
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a complete state
@@ -47,15 +49,15 @@ let timeInsecondResult = parseInt(timeInsecond[0] + timeInsecond[1]) * 60 +parse
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
 
           {data.map((item) => {
+
+            //!商品結束販售時間
             let itemTimeInsecondResult =
-              parseInt(item.due_time[0] + item.due_time[1]) * 60 +
+              parseInt(item.due_time[0] + item.due_time[1]) * 60*60 +
               parseInt(item.due_time[3] + item.due_time[4]) * 60 +
               parseInt(item.due_time[6] + item.due_time[7]);
-       
-            {/* let startime = parseInt(item.due_time) * 60 * 60;   */}
-            let yoyoyo = (itemTimeInsecondResult - timeInsecondResult) * 100;
-            {/* console.log("商品開始販售秒數",startime, "當前秒數",timeInsecondResult,"計算結果" ,yoyoyo); */}
-            console.log("tototo",yoyoyo)
+            // !商品結束販售時間 - 現在時間
+            let timeEnd = itemTimeInsecondResult - timeInsecondResult;
+            
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
@@ -72,10 +74,11 @@ let timeInsecondResult = parseInt(timeInsecond[0] + timeInsecond[1]) * 60 +parse
                       時間倒數
                       <span>
                         <Countdown
-                          date={Date.now() + yoyoyo}
+                          date={Date.now() + timeEnd * 1000}
                           zeroPadTime={2}
                           renderer={renderer}
                         />
+                      
                       </span>
                     </div>
                     <div className="amount-text">剩餘{item.amount}</div>
@@ -133,6 +136,6 @@ let timeInsecondResult = parseInt(timeInsecond[0] + timeInsecond[1]) * 60 +parse
       )}
     </div>
   );
-};;
+};
 
 export default StoreCard;

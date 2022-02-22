@@ -148,7 +148,9 @@ const StoreDetails = ({ storeId, storeData }) => {
                 <div className="col-12 col-md-6 col-lg-8 h-100">
                   <div className="store-map">
                     <GoogleMapReact
-                      bootstrapURLKeys={{ key: "" }}
+                      bootstrapURLKeys={{
+                        key: "AIzaSyDe_ - CWR1J_V3iRnEh1ar8NZ_EhhzIrWHs"
+                      }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}
                     >
