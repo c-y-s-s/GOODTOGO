@@ -21,7 +21,6 @@ const StoreCard = ({ data }) => {
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
  
- console.log("aaaaa", timeInsecond);
   // 光箱啟動、關閉
   const [openProductsModal, setOpenProductsModal] = useState(false);
   // 撈出按下商品卡片的 ID
@@ -59,6 +58,7 @@ const StoreCard = ({ data }) => {
             let timeEnd = itemTimeInsecondResult - timeInsecondResult;
             
             return (
+         
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
                 style={{ width: `18rem` }}

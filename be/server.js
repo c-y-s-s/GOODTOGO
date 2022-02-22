@@ -38,6 +38,9 @@ app.use("/api/productscommentstardesc", productsCommentStarDesc);
 let productsCommentStarAsc = require("./routers/productsCommentStarAsc");
 app.use("/api/productscommentstarasc", productsCommentStarAsc);
 
+// :TODO: -------- 商家評價留言時間由遠到近 --------
+let productsCommentTimeAsc = require("./routers/productsCommentTimeAsc");
+app.use("/api/productscommenttimeasc", productsCommentTimeAsc);
 
 
 

@@ -149,7 +149,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: "AIzaSyDe_ - CWR1J_V3iRnEh1ar8NZ_EhhzIrWHs"
+                        key: ""
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}

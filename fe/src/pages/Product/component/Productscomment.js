@@ -9,6 +9,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
+import { AiOutlineConsoleSql } from "react-icons/ai";
 // -------- 商品評論 --------
 const StoreProductsComment = () => {
   const { storeId } = useParams();
@@ -18,8 +19,11 @@ const StoreProductsComment = () => {
   const [productsComment, setproductsComment] = useState([]);
   // 存總筆數
   const [totalPages, setTotalPages] = useState([]);
-
+  // 評分留言切換開關
   const [productsCommitStarSortSwitch, setproductsCommitStarSortSwitch] =
+    useState("");
+  // 時間排序切換開關
+  const [productsCommitTimeSortSwitch, setproductsCommitTimeSortSwitch] =
     useState("");
   // 總頁數預設 1
   const [lastPage, SetLastPage] = useState(1);
@@ -28,31 +32,62 @@ const StoreProductsComment = () => {
   // 撈指定商家評論
   useEffect(() => {
     let getComment = async () => {
+      // 預設 create_time DESC API
       let productsCommentResponse = await axios.get(
         `${API_URL}/productscommit/${storeId}?page=${page}`
       );
+      //評價 DESC API
       let productsCommentStarDescResponse = await axios.get(
         `${API_URL}/productscommentstardesc/${storeId}?page=${page}`
       );
+      // 評價 ASC API
       let productsCommentStarAscResponse = await axios.get(
         `${API_URL}/productscommentstarasc/${storeId}?page=${page}`
       );
-
+      // create_time ASC API
+      let productsCommentTimeAscResponse = await axios.get(
+        `${API_URL}/productscommenttimeasc/${storeId}?page=${page}`
+      );
       setproductsComment(productsCommentResponse.data.data);
       setTotalPages(productsCommentResponse.data.pagination.total);
       SetLastPage(productsCommentResponse.data.pagination.lastPage);
+
+      if (productsCommitTimeSortSwitch === false) {
+        setproductsComment(productsCommentResponse.data.data);
+        
+      } else if (productsCommitStarSortSwitch === true) {
+        setproductsComment(productsCommentStarDescResponse.data.data);
+        console.log("aaaaaaaaaaaaa",productsCommitStarSortSwitch);
+
+      } else if (productsCommitStarSortSwitch === false) {
+        setproductsComment(productsCommentStarAscResponse.data.data);
+
+      } else if (productsCommitTimeSortSwitch === true) {
+        setproductsComment(productsCommentTimeAscResponse.data.data);
+   
+      }
     };
     getComment();
-  }, [page]);
-  let id = 1
-  console.log(productsComment);
-  id +=1
-  //! 評分排序切換按鈕? 資料有對 但評價套價星數不對?
+  }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
+
+  // productsComment.map((item) => {
+  //   console.log(item.name, item.star ,item.create_time);
+
+  // });
+
+  //! 如果time是空值,star排序會失效
+  console.log("star", productsCommitStarSortSwitch);
+  console.log("time", productsCommitTimeSortSwitch);
+
   function handleStarSort() {
     setproductsCommitStarSortSwitch(!productsCommitStarSortSwitch);
   }
 
-  // 頁碼
+  function handleTimeSort() {
+    setproductsCommitTimeSortSwitch(!productsCommitTimeSortSwitch);
+  }
+
+  // 計算頁碼
   let navigate = useNavigate();
   let pages = [];
   for (let i = 1; i <= lastPage; i++) {
@@ -92,7 +127,10 @@ const StoreProductsComment = () => {
               </div>
               <div className="product-users-comment-filter-time">
                 留言時間
-                <button className="product-users-comment-filter-icon">
+                <button
+                  className="product-users-comment-filter-icon"
+                  onClick={handleTimeSort}
+                >
                   <RiArrowUpDownFill />
                 </button>
               </div>
@@ -102,7 +140,7 @@ const StoreProductsComment = () => {
         </div>
         {productsComment.map((item) => {
           return (
-            <div className="col-12 mt-3 product-comment">
+            <div className="col-12 mt-3 product-comment" key={item.id}>
               <div className="d-flex justify-content-between ">
                 <div className="d-flex user-data w-100">
                   <div>
@@ -143,11 +181,12 @@ const StoreProductsComment = () => {
                         <div className="d-flex ">
                           <div className="">
                             <div className="d-flex ">
-                              {console.log("為啥會錯", item.star)}
+                              {/* // ! 評價無法正常顯示 星數與資料對不上 */}
+
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
-                                  defaultValue={item.star }
+                                  defaultValue={item.star}
                                   precision={0.1}
                                   readOnly
                                 />
@@ -182,7 +221,7 @@ const StoreProductsComment = () => {
           );
         })}
         {/* // 頁碼功能 */}
-        {/*  ! Link尚未設定錨點 */}
+        {/* // ! Link尚未設定錨點 */}
         <div className="products-comment-pagination">
           <div className="pages-icon">
             {page <= 1 ? (

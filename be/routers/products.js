@@ -31,7 +31,7 @@ router.get("/:storeId", async (req, res, next) => {
   let productIds = products.map((d) => {
     return d.id;
   });
-  console.log(productIds); //[1,2,3,4,5,6]
+
 
   let [comments] = await connection.execute(
     `SELECT count(id) AS count, 
