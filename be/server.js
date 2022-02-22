@@ -35,6 +35,11 @@ let memberRouter = require("./routers/member");
 app.use("/api/users", memberRouter);
 // -------- 會員 RESTful API 列表 --------
 
+// :TODO: -------- 店家 註冊 API 列表 --------
+let storeRegisterRouter = require("./routers/storeRegister");
+app.use("/api/storeregister", storeRegisterRouter);
+// -------- 店家 註冊 API 列表 結束 --------
+
 // 404
 app.use((req, res, next) => {
   res.status(404).send("404");
