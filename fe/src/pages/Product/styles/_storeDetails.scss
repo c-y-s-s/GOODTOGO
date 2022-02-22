@@ -43,16 +43,26 @@
             }
             .workday {
                 width: 100%;
-
-                .store-data-left-content-business {
+                align-items: center;
+                .work-time {
+                    margin-left: 1.2rem;
+                    letter-spacing: $ls-sm;
+                }
+                .store-data-left-content-open {
                     background-color: $color-light-green;
                     color: white;
                     border-radius: 0.5rem;
-                    padding: 0.1rem 0.5rem;
+                    padding: 0.3rem 0.6rem;
                     margin-left: 1rem;
+                    font-size: $fz-sm;
                 }
-                .work-time {
-                    margin-left: 1.2rem;
+                .store-data-left-content-close {
+                    background-color: $color-grey;
+                    color: white;
+                    border-radius: 0.5rem;
+                    padding: 0.3rem 0.6rem;
+                    margin-left: 1rem;
+                    font-size: $fz-sm;
                 }
             }
 

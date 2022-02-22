@@ -141,6 +141,19 @@
                         background-color: $color-green;
                     }
                 }
+                .close-buy-car {
+                    cursor: not-allowed;
+                    padding: 0.85rem 3.2rem;
+                    border-radius: 2rem;
+                    font-size: $fz-xxx-lg;
+                    letter-spacing: $ls-lg;
+                    background-color: $color-light-grey;
+                    border: none;
+                    transition: 0.3s;
+                    &:hover {
+                        background-color: $color-dark-grey;
+                    }
+                }
             }
             //下面裝飾線
             .decorative {

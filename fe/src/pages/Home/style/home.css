@@ -63,6 +63,9 @@
 .store-data .store-data-left .store-data-left-content {
   margin-top: 0.75rem;
   font-size: 1.125rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
 }
 
 .store-data .store-data-left .store-data-left-content .store-data-icon {
@@ -71,12 +74,34 @@
   font-size: 1.15rem;
 }
 
-.store-data .store-data-left .store-data-left-content .store-data-left-content-business {
+.store-data .store-data-left .store-data-left-content .workday {
+  width: 100%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.store-data .store-data-left .store-data-left-content .workday .work-time {
+  margin-left: 1.2rem;
+  letter-spacing: 0.05rem;
+}
+
+.store-data .store-data-left .store-data-left-content .workday .store-data-left-content-open {
   background-color: #a6bf4b;
   color: white;
   border-radius: 0.5rem;
-  padding: 0.1rem 0.5rem;
+  padding: 0.3rem 0.6rem;
   margin-left: 1rem;
+  font-size: 0.875rem;
+}
+
+.store-data .store-data-left .store-data-left-content .workday .store-data-left-content-close {
+  background-color: #b1b1ac;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  margin-left: 1rem;
+  font-size: 0.875rem;
 }
 
 .store-data .store-data-left .store-data-left-content:nth-child(4) {
@@ -170,6 +195,13 @@
   font-size: 0.88rem;
 }
 
+.product-card .card .product-card-text .time-text .count-down-one-hour span {
+  padding-left: 0.45rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #c80000;
+}
+
 .product-card .card .product-card-text .time-text span {
   padding-left: 0.45rem;
   font-size: 1rem;
@@ -192,13 +224,17 @@
   height: 100%;
   -o-object-fit: cover;
      object-fit: cover;
-  -webkit-transition: all 0.45s ease;
-  transition: all 0.45s ease;
+  -webkit-transition: all 0.75s ease;
+  transition: all 0.75s ease;
 }
 
 .product-card .product-img .cover-fit:hover {
   -webkit-transform: scale(1.15);
           transform: scale(1.15);
+}
+
+.product-card .close-active {
+  opacity: 0.4;
 }
 
 .product-card .card-body {
@@ -640,6 +676,22 @@
 
 .products-details .products-details-data .card .product-buy-car a:hover {
   background-color: #668c4a;
+}
+
+.products-details .products-details-data .card .product-buy-car .close-buy-car {
+  cursor: not-allowed;
+  padding: 0.85rem 3.2rem;
+  border-radius: 2rem;
+  font-size: 1.25rem;
+  letter-spacing: 0.15rem;
+  background-color: #d3d3d3;
+  border: none;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.products-details .products-details-data .card .product-buy-car .close-buy-car:hover {
+  background-color: #666666;
 }
 
 .products-details .products-details-data .card .decorative {

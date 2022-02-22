@@ -15,12 +15,12 @@ import Stack from "@mui/material/Stack";
 const ProductsDetails = ({
   setOpenProductsModal,
   openProductsModaID,
+  storeinOperation,
 }) => {
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
-
 
   useLayoutEffect(() => {
     let getProductId = async () => {
@@ -117,7 +117,9 @@ const ProductsDetails = ({
                   <div>
                     <div className="d-flex justify-content-between pt-4">
                       <div>合計金額</div>
-                      <div>餐點剩餘 {data.amount}</div>
+                      <div>
+                        餐點剩餘 {storeinOperation === false ? 0 : data.amount}
+                      </div>
                     </div>
 
                     <div className="d-flex justify-content-between card-amount">
@@ -160,9 +162,15 @@ const ProductsDetails = ({
                     </div>
                   </div>
                   <div className="product-buy-car my-3 text-center">
-                    <a href="#" className="btn btn-primary   ">
-                      加入購物車
-                    </a>
+                    {storeinOperation ? (
+                      <a href="#" className="btn btn-primary">
+                        加入購物車
+                      </a>
+                    ) : (
+                      <div href="#" className="btn btn-primary close-buy-car">
+                        無法提供
+                      </div>
+                    )}
                   </div>
                 </div>
                 {/* -------- 商品資訊上半部分結束 -------- */}

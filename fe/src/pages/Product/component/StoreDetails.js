@@ -20,8 +20,18 @@ import { v4 as uuidv4 } from "uuid";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-const StoreDetails = ({ storeId, storeData }) => {
+
+const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
   moment.locale("zh-tw");
+
+  let timeInsecond = moment().format("LTS");
+  // ! 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
+  //!目前時間總秒數
+  let timeInsecondResult =
+    parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
+    parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
+    parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
+  console.log("現在時間總秒數", timeInsecondResult + " 秒");
 
   // 存店家所有評論資料
   const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
@@ -29,6 +39,7 @@ const StoreDetails = ({ storeId, storeData }) => {
   const [storeMapDataLat, setStoreMapDataLat] = useState([]);
   // 店家緯度
   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
+
   useEffect(() => {
     let getStoreDetalis = async () => {
       // 撈店家所有評論
@@ -65,16 +76,52 @@ const StoreDetails = ({ storeId, storeData }) => {
   });
   // 店家評價總分除總筆數
   let storeStarAVG = (storeStarTotal / storeStarCount).toFixed(1);
-
+  console.log(storeData);
   return (
     <div>
       {storeData.map((item) => {
-        //修昔日陣列加入頓號
-       let closeday = JSON.parse(item.close_day).join("、");
+        
+          /* // 休息日調整格式 */
+        
+        let closeday = JSON.parse(item.close_day).join("、");
         console.log(item.tel_no);
-        // ! 帶修正
-        let newstr =item.tel_no.substring(2,"-")
-        console.log(newstr)
+        
+          /* 電話號碼加上- */
+        
+        let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
+
+        
+          /* // !營業時間秒數 */
+        
+        let storeOpenTimeSecond =
+          parseInt(item.open_time[0] + item.open_time[1]) * 60 * 60 +
+          parseInt(item.open_time[3] + item.open_time[4]) * 60 +
+          parseInt(item.open_time[6] + item.open_time[7]);
+
+        
+          /* // !關店時間秒數 */
+        
+        let storeCloseTimeSecond =
+          parseInt(item.close_time[0] + item.close_time[1]) * 60 * 60 +
+          parseInt(item.close_time[3] + item.close_time[4]) * 60 +
+          parseInt(item.close_time[6] + item.close_time[7]);
+        
+          /*   // !判斷營業中或是非營業中 */
+        
+
+        let inOperation = "";
+        if (
+          timeInsecondResult > storeOpenTimeSecond &&
+          timeInsecondResult < storeCloseTimeSecond
+        ) {
+          inOperation = true;
+          setStoreInOperation(true);
+        } else {
+          inOperation = false;
+          setStoreInOperation(false);
+        }
+        console.log(inOperation);
+
         return (
           <div key={uuidv4()}>
             <div>
@@ -94,11 +141,11 @@ const StoreDetails = ({ storeId, storeData }) => {
                   <div className="store-data-left">
                     <div className="store-data-left-outline py-1">
                       <h1 className="store-data-left-name">{item.name}</h1>
-                      <div className="d-flex mt-4 a">
+                      <div className="d-flex mt-4 align-items-center">
                         <div className="store-data-left-category mb-1">
                           {item.category}
                         </div>
-                        <div className="store-data-left-star pb-2 d-flex ">
+                        <div className="store-data-left-star  d-flex ">
                           <Stack spacing={1}>
                             <Rating
                               name="half-rating-read"
@@ -111,8 +158,8 @@ const StoreDetails = ({ storeId, storeData }) => {
                           <div className="ps-2">{storeStarAVG}</div>
                           <div className="ps-2">({storeStarCount})</div>
                         </div>
-                        <div className="d-flex store-data-left-favorite">
-                          <div className="store-data-left-icon">
+                        <div className="d-flex store-data-left-favorite pb-1">
+                          <div className="store-data-left-icon pb-1">
                             <FaHeart />
                           </div>
                           <div className="store-data-left-favorite-num">33</div>
@@ -134,12 +181,18 @@ const StoreDetails = ({ storeId, storeData }) => {
                       <div className="d-flex workday">
                         <div>星期 {closeday} 公休</div>
                         <div className="work-time">
-                          {moment(item.open_time, "hh:mm:ss").format("hh:mm")}-
+                          {moment(item.open_time, "hh:mm:ss").format("LT")}-
                           {moment(item.close_time, "hh:mm:ss").format("LT")}
                         </div>
-                        <div className="d-flex store-data-left-content-business">
-                          營業中
-                        </div>
+                        {inOperation ? (
+                          <div className="d-flex store-data-left-content-open">
+                            營業中
+                          </div>
+                        ) : (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        )}
                       </div>
                     </div>
 
@@ -147,7 +200,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                       <div className="store-data-icon">
                         <FaPhoneAlt />
                       </div>
-                      <div>{item.tel_no}</div>
+                      <div>{newTelNo}</div>
                     </div>
 
                     <div className="d-flex store-data-left-content">
@@ -162,7 +215,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: MAP_KEY,
+                        key: "",
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}

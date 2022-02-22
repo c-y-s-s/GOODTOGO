@@ -27,6 +27,12 @@
             //時間倒數
             .time-text {
                 font-size: 0.88rem;
+                .count-down-one-hour span {
+                    padding-left: 0.45rem;
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: $color-light-red;
+                }
                 span {
                     padding-left: 0.45rem;
                     font-size: 1rem;
@@ -40,23 +46,27 @@
                 background-color: #eaeaea;
                 padding: 0.125rem 0.5rem;
             }
+            // 倒數計時剩一小樣式
         }
     }
     // 圖片限制大小置中
 
     .product-img {
         overflow: hidden;
+
         .cover-fit {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.45s ease;
+            transition: all 0.75s ease;
             &:hover {
                 transform: scale(1.15);
             }
         }
     }
-
+    .close-active {
+        opacity: 0.4;
+    }
     // 卡片樣式
     .card-body {
         padding: 0;

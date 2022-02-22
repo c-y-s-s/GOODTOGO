@@ -34,17 +34,22 @@
                 background-color: #eaeaea;
                 padding: 0.125rem 0.5rem;
             }
+            // 倒數計時剩一小樣式
+            .count-down-one-hour {
+                color: $color-red;
+            }
         }
     }
     // 圖片限制大小置中
 
     .product-img {
         overflow: hidden;
+        opacity: 0.6;
         .cover-fit {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: all 0.45s ease;
+            transition: all 0.7s ease;
             &:hover {
                 transform: scale(1.15);
             }

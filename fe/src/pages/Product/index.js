@@ -25,8 +25,9 @@ const Product = () => {
   const [productsComment, setproductsComment] = useState([]);
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
-  // 切換 className
-
+  // 店家休息營業?
+  const [storeinOperation , setStoreInOperation] =useState("")
+  console.log(storeinOperation);
   //串接後端API
   useEffect(() => {
     let getProducts = async () => {
@@ -46,7 +47,11 @@ const Product = () => {
   return (
     <div>
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
-      <StoreDetails storeData={storeData} storeId={storeId} />
+      <StoreDetails
+        storeData={storeData}
+        storeId={storeId}
+        setStoreInOperation={setStoreInOperation}
+      />
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
       {/* -------- 綠色裝飾橫條小條  --------*/}
@@ -65,7 +70,7 @@ const Product = () => {
       </div>
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
-        <StoreCard data={productsdata} />
+        <StoreCard data={productsdata} storeinOperation={storeinOperation} />
       ) : (
         <StoreProductsComment productsComment={productsComment} />
       )}
