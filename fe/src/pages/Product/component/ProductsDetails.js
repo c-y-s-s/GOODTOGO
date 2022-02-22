@@ -16,7 +16,9 @@ const ProductsDetails = ({
   setOpenProductsModal,
   openProductsModaID,
   storeinOperation,
+  openProductsModaltimeEnd,
 }) => {
+  console.log(openProductsModaltimeEnd);
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
@@ -89,7 +91,7 @@ const ProductsDetails = ({
                     {productstarTotal ? (
                       <div className="card-star d-flex">
                         <div>
-                          {console.log(productstarTotalAVG)}
+                          {/* {console.log(productstarTotalAVG)} */}
                           <Stack spacing={2}>
                             <Rating
                               name="half-rating-read"
@@ -114,55 +116,69 @@ const ProductsDetails = ({
                     </div>
                     本商品不附帶免洗餐具
                   </div>
-                  <div>
-                    <div className="d-flex justify-content-between pt-4">
-                      <div>合計金額</div>
-                      <div>
-                        餐點剩餘 {storeinOperation === false ? 0 : data.amount}
-                      </div>
-                    </div>
-
-                    <div className="d-flex justify-content-between card-amount">
-                      <div className="card-total-price ">
-                        NT $ {buyamount * data.price}
-                      </div>
-                      <div className="d-flex buy-num">
-                        {/* 減號 */}
-                        {buyamount > 0 ? (
-                          <button
-                            className=" buy-num-minus equation"
-                            onClick={handleMinus}
-                          >
-                            <FiMinusCircle />
-                          </button>
-                        ) : (
-                          <button className=" buy-num-minus equation">
-                            <FiMinusCircle />
-                          </button>
-                        )}
-
-                        <div className=" buy-num-num ">
-                          {buyamount > data.amount ? data.amount : buyamount}
+                  {/* // !這邊還沒測試有沒有bug */}
+                  {openProductsModaltimeEnd <= 0 ? (
+                    ""
+                  ) : storeinOperation ? (
+                    <div>
+                      <div className="d-flex justify-content-between pt-4">
+                        <div>合計金額</div>
+                        <div>
+                          餐點剩餘{" "}
+                          {storeinOperation === false ? 0 : data.amount}
                         </div>
+                      </div>
 
-                        {/* 加號 */}
-                        {buyamount < data.amount ? (
-                          <button
-                            className=" buy-num-plus equation"
-                            onClick={handlePlus}
-                          >
-                            <FiPlusCircle />
-                          </button>
-                        ) : (
-                          <button className=" buy-num-plus equation">
-                            <FiPlusCircle />
-                          </button>
-                        )}
+                      <div className="d-flex justify-content-between card-amount">
+                        <div className="card-total-price ">
+                          NT $ {buyamount * data.price}
+                        </div>
+                        <div className="d-flex buy-num">
+                          {/* 減號 */}
+                          {buyamount > 0 ? (
+                            <button
+                              className=" buy-num-minus equation"
+                              onClick={handleMinus}
+                            >
+                              <FiMinusCircle />
+                            </button>
+                          ) : (
+                            <button className=" buy-num-minus equation">
+                              <FiMinusCircle />
+                            </button>
+                          )}
+
+                          <div className=" buy-num-num ">
+                            {buyamount > data.amount ? data.amount : buyamount}
+                          </div>
+
+                          {/* 加號 */}
+                          {buyamount < data.amount ? (
+                            <button
+                              className=" buy-num-plus equation"
+                              onClick={handlePlus}
+                            >
+                              <FiPlusCircle />
+                            </button>
+                          ) : (
+                            <button className=" buy-num-plus equation">
+                              <FiPlusCircle />
+                            </button>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    ""
+                  )}
+
+                  {/* // !這邊還沒測試有沒有bug */}
                   <div className="product-buy-car my-3 text-center">
-                    {storeinOperation ? (
+                    {openProductsModaltimeEnd <= 0 ? (
+                      <div href="#" className="btn btn-primary close-buy-car">
+                        無法提供
+                      </div>
+                    ) : storeinOperation ? (
                       <a href="#" className="btn btn-primary">
                         加入購物車
                       </a>

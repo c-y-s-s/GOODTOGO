@@ -26,8 +26,10 @@ const StoreCard = ({ data, storeinOperation }) => {
   const [openProductsModal, setOpenProductsModal] = useState(false);
   // 撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
+  // 存商品是否已結束販售
+  const [openProductsModaltimeEnd , setopenProductsModaltimeEnd] =useState(0);
 
-  const [productTimeEnd , setProductTimeEnd] = useState(0)
+  
   // 倒數套件樣式
   const Completionist = () => <span>結束販售</span>;
   const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -63,6 +65,7 @@ const StoreCard = ({ data, storeinOperation }) => {
               parseInt(item.due_time[6] + item.due_time[7]);
             // ! 商品結束販售時間 - 現在時間
             let timeEnd = itemTimeProductCloseSecond - timeInsecondResult;
+
             //! 店家休息 false 就不倒數
             storeinOperation
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
@@ -72,7 +75,6 @@ const StoreCard = ({ data, storeinOperation }) => {
             timeInsecondResult > itemTimeProductOpenSecond
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
-
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
@@ -81,6 +83,7 @@ const StoreCard = ({ data, storeinOperation }) => {
                 onClick={() => {
                   setOpenProductsModalID(item.id);
                   setOpenProductsModal(true);
+                  setopenProductsModaltimeEnd(timeEnd);
                 }}
               >
                 <div className="card m-0 ">
@@ -101,7 +104,7 @@ const StoreCard = ({ data, storeinOperation }) => {
                       剩餘
                       {storeinOperation === false
                         ? 0
-                        : timeEnd === 0
+                        : timeEnd <= 0
                         ? 0
                         : item.amount}
                     </div>
@@ -110,9 +113,10 @@ const StoreCard = ({ data, storeinOperation }) => {
                     className={`product-img ratio ratio-4x3 ${
                       storeinOperation === false
                         ? "close-active"
-                        : timeEnd === 0 && "close-active"
+                        : timeEnd <= 0 && "close-active"
                     }`}
                   >
+                    {console.log("AAAAAAAAAA", timeEnd)}
                     <img
                       className=" cover-fit"
                       src={require(`../../../images/products_img/${item.img}`)}
@@ -161,7 +165,7 @@ const StoreCard = ({ data, storeinOperation }) => {
             // productModalData={productModalData}
             openProductsModaID={openProductsModaID}
             storeinOperation={storeinOperation}
-
+            openProductsModaltimeEnd={openProductsModaltimeEnd}
           />
         </div>
       )}

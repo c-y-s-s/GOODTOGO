@@ -31,7 +31,7 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
     parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
-  console.log("現在時間總秒數", timeInsecondResult + " 秒");
+
 
   // 存店家所有評論資料
   const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
