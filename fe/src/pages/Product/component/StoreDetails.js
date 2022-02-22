@@ -15,7 +15,8 @@ import Stack from "@mui/material/Stack";
 import { MAP_KEY } from "../../../key";
 import GoogleMapReact from "google-map-react";
 import MapPin from "./MapPin";
-
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 const StoreDetails = ({ storeId, storeData }) => {
   
   // 存店家所有評論資料
@@ -65,7 +66,7 @@ const StoreDetails = ({ storeId, storeData }) => {
     <div>
       {storeData.map((item) => {
         return (
-          <div>
+          <div key={uuidv4()}>
             <div>
               <div className="container-fluid p-0">
                 <div className="storeLogo">
@@ -88,7 +89,6 @@ const StoreDetails = ({ storeId, storeData }) => {
                           {item.category}
                         </div>
                         <div className="store-data-left-star pb-2 d-flex ">
-                          {/* // ? 評論星數無效 已解決*/}
                           <Stack spacing={1}>
                             <Rating
                               name="half-rating-read"
@@ -124,7 +124,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                       <div>
                         星期 {JSON.parse(item.close_day)} 公休
                         <div>
-                          {item.open_time} - {item.close_time}{" "}
+                          {item.open_time} - {item.close_time}
                         </div>
                       </div>
 
@@ -152,7 +152,7 @@ const StoreDetails = ({ storeId, storeData }) => {
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: ""
+                        key: "",
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}

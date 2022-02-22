@@ -9,7 +9,8 @@ import Countdown, {zeroPad} from "react-countdown";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 const StoreCard = ({ data }) => {
 
   moment.locale("zh-tw");
@@ -59,11 +60,10 @@ const StoreCard = ({ data }) => {
             let timeEnd = itemTimeInsecondResult - timeInsecondResult;
             
             return (
-         
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
                 style={{ width: `18rem` }}
-                key={item.id}
+                key={uuidv4()}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
                   setOpenProductsModal(true);
@@ -79,7 +79,6 @@ const StoreCard = ({ data }) => {
                           zeroPadTime={2}
                           renderer={renderer}
                         />
-                      
                       </span>
                     </div>
                     <div className="amount-text">剩餘{item.amount}</div>

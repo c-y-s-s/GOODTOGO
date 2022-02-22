@@ -6,7 +6,8 @@ import { FiArrowUpCircle } from "react-icons/fi";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 
 
 const ProductsDetailsComment = ({ productModalCommentData }) => {
@@ -86,7 +87,7 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
             return (
               <div
                 className="d-flex mt-3 product-users-comment-data mt-4"
-                key={item.id}
+                key={uuidv4()}
               >
                 <div className="product-users-comment-photo ratio ratio-4x3">
                   <img
@@ -128,7 +129,6 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
                         />
                       </Stack>
                     </div>
-                    {console.log(item.star)}
                   </div>
                   <div className="product-users-comment-userdata-text">
                     {item.comment}

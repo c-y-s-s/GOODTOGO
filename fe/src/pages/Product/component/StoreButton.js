@@ -2,7 +2,6 @@ import React from "react";
 // -------- 餐點評論切換按鈕 --------
 
 const StoreButton = ({ storeId, setbutonToggle, buttonToggle }) => {
-  console.log("aaa", typeof buttonToggle);
   return (
     <div>
       <div className="product-button text-center" id="mark-1">

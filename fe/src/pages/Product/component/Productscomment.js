@@ -11,7 +11,8 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 // -------- 商品評論 --------
 const StoreProductsComment = () => {
   const { storeId } = useParams();
@@ -94,7 +95,7 @@ const StoreProductsComment = () => {
       <a
         href="#mark-1"
         className={`pages ${page === i ? "active" : ""}`}
-        key={i}
+        key={uuidv4()}
         onClick={(e) => {
           setPage(i);
           navigate(`/store/1/${i}`);
@@ -135,7 +136,7 @@ const StoreProductsComment = () => {
         </div>
         {productsComment.map((item) => {
           return (
-            <div className="col-12 mt-3 product-comment" key={item.id}>
+            <div className="col-12 mt-3 product-comment" key={uuidv4()}>
               <div className="d-flex justify-content-between ">
                 <div className="d-flex user-data w-100">
                   <div>
@@ -152,7 +153,8 @@ const StoreProductsComment = () => {
                     <div className="d-flex justify-content-between align-items-center flex-wrap">
                       <div className="pt-2 user-data-name">{item.name}</div>
                       <div className="d-flex align-items-center">
-                        <div className="user-data-comment-time">{item.create_time}
+                        <div className="user-data-comment-time">
+                          {item.create_time}
                         </div>
                         <div className="">
                           <button
