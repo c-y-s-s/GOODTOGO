@@ -1,6 +1,7 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import ProductsDetails from "./ProductsDetails";
-
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -11,7 +12,7 @@ import moment from "moment";
 import "moment/min/locales";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
-const StoreCard = ({ data, storeinOperation, setCountdownTimeUp }) => {
+const StoreCard = ({ storeId, storeinOperation }) => {
   moment.locale("zh-tw");
   // !計算當前時間秒數 hh:mm:ss
   let timeInsecond = moment().format("LTS");
@@ -28,18 +29,41 @@ const StoreCard = ({ data, storeinOperation, setCountdownTimeUp }) => {
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
   // 存商品是否已結束販售
   const [openProductsModaltimeEnd, setopenProductsModaltimeEnd] = useState(0);
+  // 存商家商品
+  const [productsdata, setProducts] = useState([]);
 
-  // 倒數套件樣式
-  const Completionist = () => <span>結束販售</span>;
+
+  // ! 開關
+  const [countdownTimeUp, setCountdownTimeUp] = useState("");
+
+  useEffect(() => {
+    let getProducts = async () => {
+      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
+      setProducts(productsResponse.data);
+    };
+    getProducts();
+  }, [countdownTimeUp]);
+
+
+  console.log("開關值 ->", countdownTimeUp);
+
+  // ! 時間到執行這個元件
+  const Completionist = () => {
+    setCountdownTimeUp(true);
+    return <span>結束販售</span>;
+  };
+
+  // ! 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
-      // Render a complete state
- 
-      setCountdownTimeUp(completed);
+      // Render a Completionist complete
+      // ! 商品結束販售給開關true 
+      setCountdownTimeUp(true)
       return <Completionist />;
     } else {
-      // Render a countdown
-       setCountdownTimeUp(completed);
+      //  Render 倒數時間
+      // ! 商品倒數中給 false 但是會一直重複跑導致往頁很慢
+         setCountdownTimeUp(false);
       return (
         <span>
           {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
@@ -54,7 +78,7 @@ const StoreCard = ({ data, storeinOperation, setCountdownTimeUp }) => {
         <div className="row cards">
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
 
-          {data.map((item) => {
+          {productsdata.map((item) => {
             //! 商品開始販售時間
             let itemTimeProductOpenSecond =
               parseInt(item.start_time[0] + item.start_time[1]) * 60 * 60 +

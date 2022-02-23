@@ -18,7 +18,7 @@ const ProductsDetails = ({
   storeinOperation,
   openProductsModaltimeEnd,
 }) => {
-  console.log(openProductsModaltimeEnd);
+
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data

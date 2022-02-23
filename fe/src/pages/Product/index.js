@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useParams ,useNavigate} from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 
@@ -18,7 +18,7 @@ const Product = () => {
   const { storeId } = useParams();
   const [error, setError] = useState(null);
   // 存商家商品
-  const [productsdata, setProducts] = useState([]);
+  // const [productsdata, setProducts] = useState([]);
   // 存商家資料
   const [storeData, setStoreData] = useState([]);
   // 存指定商家 ID 評論
@@ -28,30 +28,20 @@ const Product = () => {
   // 店家休息營業?
   const [storeinOperation, setStoreInOperation] = useState("");
   // 存倒數計時有沒有結束
-  const [countdownTimeUp, setCountdownTimeUp] = useState("");
-  // console.log("aaaaa",countdownTimeUp);
+  // const [countdownTimeUp, setCountdownTimeUp] = useState("");
+  // console.log("index --------->",countdownTimeUp);
   //串接後端API
   //倒數計時變 true 自動重抓一次 api
+
+
   useEffect(() => {
-    let getProducts = async () => {
-      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
+    let getStores = async () => {
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
 
-      setProducts(productsResponse.data);
       setStoreData(storeResponse.data);
     };
-    getProducts();
-  }, [countdownTimeUp]);
-    useEffect(() => {
-    let getProducts = async () => {
-      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
-      let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
-
-      setProducts(productsResponse.data);
-      setStoreData(storeResponse.data);
-    };
-    getProducts();
-  }, [countdownTimeUp]);
+    getStores();
+  }, []);
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
 
@@ -82,9 +72,9 @@ const Product = () => {
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
         <StoreCard
-          data={productsdata}
+          storeId={storeId}
           storeinOperation={storeinOperation}
-          setCountdownTimeUp={setCountdownTimeUp}
+        
         />
       ) : (
         <StoreProductsComment productsComment={productsComment} />
