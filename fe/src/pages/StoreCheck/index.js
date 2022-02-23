@@ -16,8 +16,34 @@ import "./Storecheck.scss";
 
 const Storecheck = () => {
 
-  
-  
+  SelectgouvernoratHandler = (selectedOptions) => {
+    const gouvernorat = selectedOptions;
+    this.setState({ gouvernorat: gouvernorat.label });
+
+  };
+
+
+  SelectDelegationHandler = (selectedOptions) => {
+    const del = selectedOptions;
+    this.setState({ delegation: del.value.delegation });
+
+  };
+  SelectLocaliteHandler = (selectedOptions) => {
+    const localite = selectedOptions;
+    this.setState({ localite: localite.value.localite });
+
+  };
+  SelectCodePostalHandler = (selectedOptions) => {
+    const codePostal = selectedOptions;
+    this.setState({ codePostal: codePostal.value.codePostal });
+
+  };
+
+
+
+
+
+
   new TwCitySelector({
     el: ".city-selector",
     elCounty: ".county", // 在 el 裡查找 element
@@ -52,12 +78,12 @@ const Storecheck = () => {
     openClock: "",
     openMinute: "",
   })
-  
+
   const [closeTime, setCloseTime] = useState({
     closeClock: "",
     closeMinute: ""
   })
-  
+
   const [imageSrc, setImageSrc] = useState("");
   // -------- 處理表格改變 -------- //
 
@@ -86,7 +112,7 @@ const Storecheck = () => {
     setMember({ ...member, [e.target.name]: e.target.value });
   };
   // -------- 表單使用者資料變更開始 -------- //
-  
+
   // -------- 店家LOGO上傳開始 --------//
   const handleLogoChange = (e) => {
     console.log(e.target.value);
@@ -187,6 +213,7 @@ const Storecheck = () => {
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="name"
@@ -211,6 +238,7 @@ const Storecheck = () => {
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="email"
@@ -235,6 +263,7 @@ const Storecheck = () => {
                           placeholder="密碼"
                           value={member.password}
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="password"
@@ -260,6 +289,7 @@ const Storecheck = () => {
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="confirmpassword"
@@ -321,6 +351,7 @@ const Storecheck = () => {
                           value={member.storename}
                           maxLength="30"
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="phone"
@@ -346,6 +377,7 @@ const Storecheck = () => {
                           value={member.phone}
                           maxLength="10"
                           onChange={handleChange}
+                          required:true
                         />
                         <label
                           htmlFor="phone"
@@ -375,6 +407,7 @@ const Storecheck = () => {
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
+                          required:true
                         />
                       </div>
                       {/* -------- 營業登記證上傳 -------- */}
@@ -392,6 +425,7 @@ const Storecheck = () => {
                           id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
+                          required:true
                         />
                       </div>
 
@@ -449,6 +483,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleOpenTimeChange}
+                                  required:true
                                 />
                                 <label
                                   htmlFor="openHour"
@@ -473,6 +508,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleOpenTimeChange}
+                                  required:true
                                 />
                                 <label
                                   htmlFor="openMinute"
@@ -502,6 +538,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleCloseTimeChange}
+                                  required:true
                                 />
                                 <label
                                   htmlFor="closeHour"
@@ -527,6 +564,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleCloseTimeChange}
+                                  required:true
                                 />
                                 <label
                                   htmlFor="closeMinute"
