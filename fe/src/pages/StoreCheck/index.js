@@ -16,9 +16,8 @@ import "./Storecheck.scss";
 
 const Storecheck = () => {
 
-  const [imageSrc, setImageSrc] = useState("");
-
-
+  
+  
   new TwCitySelector({
     el: ".city-selector",
     elCounty: ".county", // 在 el 裡查找 element
@@ -53,12 +52,13 @@ const Storecheck = () => {
     openClock: "",
     openMinute: "",
   })
-
+  
   const [closeTime, setCloseTime] = useState({
     closeClock: "",
     closeMinute: ""
   })
-
+  
+  const [imageSrc, setImageSrc] = useState("");
   // -------- 處理表格改變 -------- //
 
   // -------- 表單營業日期變更開始 -------- //
@@ -86,7 +86,31 @@ const Storecheck = () => {
     setMember({ ...member, [e.target.name]: e.target.value });
   };
   // -------- 表單使用者資料變更開始 -------- //
+  
+  // -------- 店家LOGO上傳開始 --------//
+  const handleLogoChange = (e) => {
+    console.log(e.target.value);
+    const file = e.target.files[0]; // 抓取上傳的圖片
+    const reader = new FileReader(); // 讀取 input type="file" 的 file
+    reader.addEventListener(
+      "load",
+      function () {
+        // convert image file to base64 string
+        setImageSrc(reader.result);
+      },
+      false // false -> e.preventDefault() 阻擋預設行為
+    );
 
+    if (file) {
+      reader.readAsDataURL(file);
+      // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+    }
+    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    setMember({ ...member, [e.target.name]: e.target.files[0] });
+  };
+
+  // -------- 店家LOGO上傳結束 --------//
   // -------- 表單營業許可證上傳開始 --------//
   const handleLicenseChange = (e) => {
     console.log(e.target.value);
@@ -111,6 +135,8 @@ const Storecheck = () => {
   };
 
   // -------- 表單營業許可證上傳結束 --------//
+
+
 
   // -------- 表單送出開始 -------- //
   const handleSubmit = async (e) => {
@@ -335,6 +361,22 @@ const Storecheck = () => {
                     <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
                     <div className="col-lg-6 col-md-10 col-sm-10 col-10">
                       {/* -------- 店家LOGO上傳 -------- */}
+                      <label
+                        htmlFor="storeLoco"
+                        className="col-form-label input-label-title text-green p-0"
+                      >
+                        店家LOGO上傳
+                      </label>
+                      <div className="form-floating mb-3">
+                        <input
+                          name="storeLogo"
+                          type="file"
+                          className="form-control custom-input"
+                          id="storeLogo"
+                          placeholder=".jpg/.jpeg/.png 上限 2MB"
+                          onChange={handleLogoChange}
+                        />
+                      </div>
                       {/* -------- 營業登記證上傳 -------- */}
                       <label
                         htmlFor="formFile"
@@ -347,11 +389,14 @@ const Storecheck = () => {
                           name="storeLicence"
                           type="file"
                           className="form-control custom-input"
-                          id="storeLogo"
+                          id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
                         />
                       </div>
+
+
+
 
                       {/* ------- 營業星期 (複選) -------- */}
                       <label
@@ -391,8 +436,8 @@ const Storecheck = () => {
                         <div className="col-5">
                           <div className="row">
                             <div className="col-5">
-                                {/* 幾點 */}
-                                <div className="form-floating mb-3">
+                              {/* 幾點 */}
+                              <div className="form-floating">
                                 <input
                                   name="openHour"
                                   type="number"
@@ -401,82 +446,98 @@ const Storecheck = () => {
                                   placeholder="時"
                                   value={member.openHour}
                                   maxLength="2"
+                                  max={24}
+                                  min={0}
                                   onChange={handleOpenTimeChange}
                                 />
                                 <label
                                   htmlFor="openHour"
                                   className="floating-label  text-grey"
-                                >
+                                >時
                                 </label>
-                                </div>
+                              </div>
                             </div>
                             {/* 冒號 */}
-                            <div className="H4 col-1 time">:</div>
+                            <div className="H4 col-1 py-3 fs-2 time">:</div>
                             {/* 幾分 */}
                             <div className="col-5">
-                            <div className="form-floating mb-3">
-                              <input
-                                name="openMinute"
-                                type="number"
-                                className="form-control custom-input time"
-                                id="openMinute"
-                                placeholder=""
-                                value={member.openMinute}
-                                maxLength="2"
-                                onChange={handleOpenTimeChange}
-                              />
-                              <label
-                                htmlFor="openMinute"
-                                className="floating-label  text-grey"
-                              >
-                              </label>
+                              <div className="form-floating">
+                                <input
+                                  name="openMinute"
+                                  type="number"
+                                  className="form-control custom-input time"
+                                  id="openMinute"
+                                  placeholder="分"
+                                  value={member.openMinute}
+                                  maxLength="2"
+                                  max={60}
+                                  min={0}
+                                  onChange={handleOpenTimeChange}
+                                />
+                                <label
+                                  htmlFor="openMinute"
+                                  className="floating-label  text-grey"
+                                >
+                                  分
+                                </label>
                               </div>
                             </div>
                           </div>
                           {/* 到 */}
+                        </div>
+                        <div className="H4 col-1 py-3 fs-2 time" >~</div>
+                        {/* 幾點 */}
+                        <div className="col-5">
+                          <div className="row">
+                            <div className="col-5">
+                              <div className="form-floating">
+                                <input
+                                  name="closeHour"
+                                  type="number"
+                                  className="form-control custom-input time"
+                                  id="closeHour"
+                                  placeholder="時"
+                                  value={member.closeHour}
+                                  maxLength="2"
+                                  max={24}
+                                  min={0}
+                                  onChange={handleCloseTimeChange}
+                                />
+                                <label
+                                  htmlFor="closeHour"
+                                  className="floating-label  text-grey"
+                                >
+                                  時
+                                </label>
+                              </div>
+                            </div>
+                            {/* 冒號 */}
+                            <div className="H4 col-1 py-3 fs-2 time">:</div>
+                            {/* 幾分 */}
+                            <div className="col-5">
+                              <div className="form-floating">
+                                <input
+                                  name="closeMinute"
+                                  type="number"
+                                  className="form-control custom-input time"
+                                  id="closeMinute"
+                                  placeholder="分"
+                                  value={member.closeMinute}
+                                  maxLength="2"
+                                  max={60}
+                                  min={0}
+                                  onChange={handleCloseTimeChange}
+                                />
+                                <label
+                                  htmlFor="closeMinute"
+                                  className="floating-label  text-grey"
+                                >
+                                  分
+                                </label>
+                              </div>
+                            </div>
                           </div>
-                          <div className="H4">~</div>
-                          {/* 幾點 */}
-                          <div className="col-5">
-                          <div className="col-5">
-                            <input
-                              name="closeHour"
-                              type="number"
-                              className="form-control custom-input col-2"
-                              id="closeHour"
-                              placeholder=""
-                              value={member.closeHour}
-                              maxLength="2"
-                              onChange={handleCloseTimeChange}
-                            />
-                            <label
-                              htmlFor="closeHour"
-                              className="floating-label  text-grey"
-                            >
-                            </label>
-                          </div>
-                          {/* 冒號 */}
-                          <div className="H4 col-1">:</div>
-                          {/* 幾分 */}
-                          <div className="col-5">
-                            <input
-                              name="closeMinute"
-                              type="number"
-                              className="form-control custom-input col-3"
-                              id="closeMinute"
-                              placeholder=""
-                              value={member.closeMinute}
-                              maxLength="2"
-                              onChange={handleCloseTimeChange}
-                            />
-                            <label
-                              htmlFor="closeMinute"
-                              className="floating-label  text-grey"
-                            >
-
-                            </label>
-                          </div>
-                          </div>
+                        </div>
                       </div>
                       {/* -------- 營業時間設定結束 -------- */}
                       {/* -------- 註冊同意按鈕開始 -------- */}
