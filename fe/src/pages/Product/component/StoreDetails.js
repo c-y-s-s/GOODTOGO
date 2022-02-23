@@ -21,7 +21,13 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import "moment/min/locales";
 
-const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
+const StoreDetails = ({
+  storeId,
+  storeData,
+  setStoreInOperation,
+  setStoredatopen,
+  storedayopen,
+}) => {
   moment.locale("zh-tw");
 
   let timeInsecond = moment().format("LTS");
@@ -31,7 +37,6 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
     parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
-
 
   // 存店家所有評論資料
   const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
@@ -80,34 +85,34 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
   return (
     <div>
       {storeData.map((item) => {
-        
-          /* // 休息日調整格式 */
-        
+        //判斷今天店家有沒有休息
+        let closeDay = JSON.parse(item.close_day);
+        closeDay.forEach((item) => {
+          if (new Date().getDay() === item) {
+            setStoredatopen(true);
+          }
+        });
+        console.log("aaaaaaaaaa",storedayopen);
+        /* // 休息日調整格式 */
         let closeday = JSON.parse(item.close_day).join("、");
-       
-        
-          /* 電話號碼加上- */
-        
+        /* 電話號碼加上- */
         let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
 
-        
-          /* // !營業時間秒數 */
-        
+        /* // !營業時間秒數 */
+
         let storeOpenTimeSecond =
           parseInt(item.open_time[0] + item.open_time[1]) * 60 * 60 +
           parseInt(item.open_time[3] + item.open_time[4]) * 60 +
           parseInt(item.open_time[6] + item.open_time[7]);
 
-        
-          /* // !關店時間秒數 */
-        
+        /* // !關店時間秒數 */
+
         let storeCloseTimeSecond =
           parseInt(item.close_time[0] + item.close_time[1]) * 60 * 60 +
           parseInt(item.close_time[3] + item.close_time[4]) * 60 +
           parseInt(item.close_time[6] + item.close_time[7]);
-        
-          /*   // !判斷營業中或是非營業中 */
-        
+
+        /*   // !判斷營業中或是非營業中 */
 
         let inOperation = "";
         if (
@@ -120,7 +125,6 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
           inOperation = false;
           setStoreInOperation(false);
         }
-    
 
         return (
           <div key={uuidv4()}>
@@ -193,6 +197,8 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
                             休息中
                           </div>
                         )}
+
+                        
                       </div>
                     </div>
 

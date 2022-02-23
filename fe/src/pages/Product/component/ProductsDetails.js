@@ -1,4 +1,5 @@
 import { useState, useEffect, useLayoutEffect } from "react";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import ProductsDetailsComment from "./ProductsDetailsComment";
@@ -18,12 +19,14 @@ const ProductsDetails = ({
   storeinOperation,
   openProductsModaltimeEnd,
 }) => {
-
+  const { storeId } = useParams();
+  console.log(storeId);
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
 
+  // const [productcar,setProductArr] = useState([])
   useLayoutEffect(() => {
     let getProductId = async () => {
       //撈指定 ID 商品的評論
@@ -57,6 +60,11 @@ const ProductsDetails = ({
   function handleMinus() {
     setBuyamount(buyamount - 1);
   }
+
+  function handleProductsLocalStorage(data) {
+    alert("加入購物車成功");
+  }
+
   return (
     <div>
       <div
@@ -65,6 +73,7 @@ const ProductsDetails = ({
       ></div>
       {/* -------- 商品資訊上半部分 -------- */}
       {productModalData.map((data) => {
+        console.log(data);
         return (
           <div className="container products-details " key={data.id}>
             <div className="col-12 pt-4 products-details-data">
@@ -179,9 +188,21 @@ const ProductsDetails = ({
                         無法提供
                       </div>
                     ) : storeinOperation ? (
-                      <a href="#" className="btn btn-primary">
+                      <Link
+                        to={``}
+                        className="btn btn-primary"
+                        onClick={() => {
+                       
+                          // productarr.push(data);
+                          // console.log(productarr);
+                          // let products = JSON.stringify(data);
+                          // console.log(products);
+                          // alert("加入購物車成功");
+                          // localStorage.setItem("proaaducts", products);
+                        }}
+                      >
                         加入購物車
-                      </a>
+                      </Link>
                     ) : (
                       <div href="#" className="btn btn-primary close-buy-car">
                         無法提供

@@ -12,8 +12,9 @@ import moment from "moment";
 import "moment/min/locales";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
-const StoreCard = ({ storeId, storeinOperation }) => {
+const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
   moment.locale("zh-tw");
+
   // !計算當前時間秒數 hh:mm:ss
   let timeInsecond = moment().format("LTS");
 
@@ -32,8 +33,7 @@ const StoreCard = ({ storeId, storeinOperation }) => {
   // 存商家商品
   const [productsdata, setProducts] = useState([]);
 
-
-  // ! 開關
+  // ? 倒數計時及時開關
   const [countdownTimeUp, setCountdownTimeUp] = useState("");
 
   useEffect(() => {
@@ -44,26 +44,23 @@ const StoreCard = ({ storeId, storeinOperation }) => {
     getProducts();
   }, [countdownTimeUp]);
 
-
-  console.log("開關值 ->", countdownTimeUp);
-
-  // ! 時間到執行這個元件
+  // ? 時間到執行這個元件
   const Completionist = () => {
     setCountdownTimeUp(true);
     return <span>結束販售</span>;
   };
-
-  // ! 時間倒數套件
+  console.log(countdownTimeUp);
+  // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a Completionist complete
-      // ! 商品結束販售給開關true 
-      setCountdownTimeUp(true)
+      // ? 商品結束販售給開關true
+      setCountdownTimeUp(true);
       return <Completionist />;
     } else {
       //  Render 倒數時間
-      // ! 商品倒數中給 false 但是會一直重複跑導致往頁很慢
-         setCountdownTimeUp(false);
+      // ? 商品倒數中給 false 但是會一直重複跑導致往頁很慢
+      setCountdownTimeUp(false);
       return (
         <span>
           {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
@@ -92,10 +89,24 @@ const StoreCard = ({ storeId, storeinOperation }) => {
             // ! 商品結束販售時間 - 現在時間
             let timeEnd = itemTimeProductCloseSecond - timeInsecondResult;
 
-            //! 店家休息 false 就不倒數
-            storeinOperation
+            // ! 店家休息 false 就不倒數
+            // ! 如果日期是休息日
+            // ! timeEnd = 0
+            // ! 如果
+            {
+              /* storeinOperation
+              ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
+              : (timeEnd = 0); */
+            }
+            //營業日TRUE等於沒開
+            storeDayClose
+              ? (timeEnd = 0)
+              : storeinOperation
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
+
+            console.log("storeinOperation", storeinOperation);
+            console.log("timeEnd", timeEnd);
 
             //! 現在時間秒數要大於開始販售時間才是開始販售
             timeInsecondResult > itemTimeProductOpenSecond
@@ -129,7 +140,14 @@ const StoreCard = ({ storeId, storeinOperation }) => {
                     </div>
                     <div className="amount-text">
                       剩餘
-                      {storeinOperation === false
+                      {/* {storeinOperation === false
+                        ? 0
+                        : timeEnd <= 0
+                        ? 0
+                        : item.amount} */}
+                      {storeDayClose
+                        ? 0
+                        : storeinOperation === false
                         ? 0
                         : timeEnd <= 0
                         ? 0
@@ -138,7 +156,9 @@ const StoreCard = ({ storeId, storeinOperation }) => {
                   </div>
                   <div
                     className={`product-img ratio ratio-4x3 ${
-                      storeinOperation === false
+                      storeDayClose
+                        ? "close-active"
+                        : storeinOperation === false
                         ? "close-active"
                         : timeEnd <= 0 && "close-active"
                     }`}
