@@ -1,37 +1,63 @@
-import React, { useState } from "react";
-import axios from "axios";
-import { API_URL } from "../../../utils/config";
-import TwCitySelector from "tw-city-selector";
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import { API_URL } from '../../../utils/config'
+import TwCitySelector from 'tw-city-selector'
 
 const Table = () => {
   const [member, setMember] = useState({
-    name: "廖偉順",
-    email: "123@gmail.com",
-    password: "12345678",
-    confirmPassword: "12345678",
-    storeName: "麵包店",
-    storePhoneNumber: "0987654321",
-    storeAddress: "長江路124號",
-    logoImage: "",
-    businessLicense: "",
-  });
+    name: '廖偉順',
+    email: '123@gmail.com',
+    password: '12345678',
+    confirmPassword: '12345678',
+    storeName: '麵包店',
+    storePhoneNumber: '0987654321',
+    county: '',
+    district: '',
+    storeAddress: '長江路124號',
+    logoImage: '',
+    businessLicense: '',
+  })
+
+  const weekData = [
+    { name: 'businessWeekMon', value: 1 },
+    { name: 'businessWeekTue', value: 2 },
+    { name: 'businessWeekWed', value: 3 },
+    { name: 'businessWeekThu', value: 4 },
+    { name: 'businessWeekFri', value: 5 },
+    { name: 'businessWeekSat', value: 6 },
+    { name: 'businessWeekSun', value: 0 },
+  ]
+
+  const [weeks, setWeeks] = useState([])
+
+  useEffect(() => {
+    setWeeks(weekData)
+  }, [])
+
+  const weekChange = (e) => {
+    const { name, checked } = e.target
+    const tempWeek = weeks.map((week) =>
+      week.name === name ? { ...week, isChecked: checked } : week
+    )
+    setWeeks(tempWeek)
+  }
 
   //地址選擇器
   new TwCitySelector({
-    el: ".city-selector-standard-words",
-    elCounty: ".county", // 在 el 裡查找 element
-    elDistrict: ".district", // 在 el 裡查找 element
-    elZipcode: ".zipcode", // 在 el 裡查找 element
+    el: '.city-selector-standard-words',
+    elCounty: '.county', // 在 el 裡查找 element
+    elDistrict: '.district', // 在 el 裡查找 element
+    elZipcode: '.zipcode', // 在 el 裡查找 element
     standardWords: true, // 使用正體字 臺
-  });
+  })
 
   function handleChange(e) {
-    setMember({ ...member, [e.target.name]: e.target.value });
+    setMember({ ...member, [e.target.name]: e.target.value })
   }
 
   async function handleSubmit(e) {
     // 關掉原本預設的行為
-    e.preventDefault();
+    e.preventDefault()
 
     try {
       // 方法1: 這個沒有圖片上傳
@@ -39,19 +65,24 @@ const Table = () => {
       // console.log(response.data);
 
       // 方法2: 要圖片上傳要用 FormData
-      let formData = new FormData();
-      formData.append("email", member.email);
-      formData.append("name", member.name);
-      formData.append("password", member.password);
-      formData.append("confirmPassword", member.confirmPassword);
-      formData.append("storeName", member.storeName);
-      formData.append("storePhoneNumber", member.storePhoneNumber);
-      formData.append("storeAddress", member.storeAddress);
-      formData.append("logoImage", member.logoImage);
-      formData.append("businessLicense", member.businessLicense);
+      let formData = new FormData()
+      formData.append('email', member.email)
+      formData.append('name', member.name)
+      formData.append('password', member.password)
+      formData.append('confirmPassword', member.confirmPassword)
+      formData.append('storeName', member.storeName)
+      formData.append('storePhoneNumber', member.storePhoneNumber)
+      formData.append('county', member.county)
+      formData.append('district', member.district)
+      formData.append('storeAddress', member.storeAddress)
+      formData.append('logoImage', member.logoImage)
+      formData.append('businessLicense', member.businessLicense)
 
-      let response = await axios.post(`${API_URL}/storeRegister/register`, formData);
-      console.log(response.data);
+      let response = await axios.post(
+        `${API_URL}/storeRegister/register`,
+        formData
+      )
+      console.log(response.data)
     } catch (e) {
       // console.error("error", e.response.data);
       // console.error("測試註冊", ERR_MSG[e.response.data.code]);
@@ -166,8 +197,25 @@ const Table = () => {
               </label>
               <div className="input-group has-validation ">
                 <div className="input-group mb-3 city-selector-standard-words">
-                  <select className="form-select mx-1 text-muted county"></select>
-                  <select className="form-select mx-1 text-muted district"></select>
+                  <select
+                    className="form-select mx-1 text-muted county"
+                    id="county"
+                    name="county"
+                    // value={member.county}
+                    // onChange={handleChange}
+                    // value={member}
+                    // defaultValue=""
+                    // onChange={(e) => {
+                    //   setMember(e.target.value);
+                    // }}
+                  ></select>
+                  <select
+                    className="form-select mx-1 text-muted district"
+                    id="district"
+                    name="district"
+                    // value={member.district}
+                    // onChange={handleChange}
+                  ></select>
                 </div>
                 <input
                   className="form-control"
@@ -201,7 +249,7 @@ const Table = () => {
                   accept=".png, .jpg, .jpeg"
                   onChange={(e) => {
                     // 圖片儲存的方式不太一樣
-                    setMember({ ...member, logoImage: e.target.files[0] });
+                    setMember({ ...member, logoImage: e.target.files[0] })
                   }}
                 />
               </div>
@@ -228,7 +276,7 @@ const Table = () => {
                     setMember({
                       ...member,
                       businessLicense: e.target.files[0],
-                    });
+                    })
                   }}
                 />
               </div>
@@ -238,19 +286,28 @@ const Table = () => {
                 </label>
                 <div className="businessWeek-bg p-3">
                   <div className="d-flex justify-content-around">
-                    <div className="form-check form-check-inline">
-                      <input
-                        className="form-check-input aaa"
-                        type="checkbox"
-                        id="mon"
-                        value="1"
-                      />
-                    </div>
-                    <div className="form-check form-check-inline">
+                    {weeks.map((week) => (
+                      <div
+                        className="form-check form-check-inline"
+                        key={week.name}
+                      >
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="businessWeekMon"
+                          name={week.name}
+                          value={week.value}
+                          checked={week?.isChecked || false}
+                          onChange={weekChange}
+                        />
+                      </div>
+                    ))}
+                    {/* <div className="form-check form-check-inline">
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="tue"
+                        id="businessWeekTue"
+                        name="businessWeekTue"
                         value="2"
                       />
                     </div>
@@ -258,7 +315,8 @@ const Table = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="wed"
+                        id="businessWeekWed"
+                        name="businessWeekWed"
                         value="3"
                       />
                     </div>
@@ -266,7 +324,8 @@ const Table = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="thu"
+                        id="businessWeekThu"
+                        name="businessWeekThu"
                         value="4"
                       />
                     </div>
@@ -274,7 +333,8 @@ const Table = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="fri"
+                        id="businessWeekFri"
+                        name="businessWeekFri"
                         value="5"
                       />
                     </div>
@@ -282,7 +342,8 @@ const Table = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="sat"
+                        id="businessWeekSat"
+                        name="businessWeekSat"
                         value="6"
                       />
                     </div>
@@ -290,51 +351,52 @@ const Table = () => {
                       <input
                         className="form-check-input"
                         type="checkbox"
-                        id="sun"
+                        id="businessWeekSun"
+                        name="businessWeekSun"
                         value="0"
                       />
-                    </div>
+                    </div> */}
                   </div>
                   <div className="d-flex justify-content-around  mt-2 businessWeek-align">
                     <label
                       className="form-check-label  form-check-inline text-center"
-                      htmlFor="mon"
+                      htmlFor="businessWeekMon"
                     >
                       一
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="tue"
+                      htmlFor="businessWeekTue"
                     >
                       二
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="wed"
+                      htmlFor="businessWeekWed"
                     >
                       三
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="thu"
+                      htmlFor="businessWeekThu"
                     >
                       四
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="fri"
+                      htmlFor="businessWeekFri"
                     >
                       五
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="sat"
+                      htmlFor="businessWeekSat"
                     >
                       六
                     </label>
                     <label
                       className="form-check-label  form-check-inline"
-                      htmlFor="sun"
+                      htmlFor="businessWeekSun"
                     >
                       日
                     </label>
@@ -408,7 +470,7 @@ const Table = () => {
         </div>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default Table;
+export default Table
