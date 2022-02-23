@@ -45,3 +45,10 @@
   background: $color-green;
   color: $color-light;
 }
+
+.closeBtn{
+  position: absolute;
+  right: 0;
+  top:0;
+  transform: translate(7px, -7px);
+}

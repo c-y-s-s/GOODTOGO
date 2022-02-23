@@ -114,7 +114,7 @@ const Tables = () => {
             aria-hidden="true"
           >
             <div className="modal-dialog modal-dialog-centered modal-sm">
-              <div className="modal-content">
+              <div className="modal-content position-relative">
                 <div className="modal-header border-bottom mx-3">
                   <img
                     src={require(`../images/check.png`)}
@@ -131,7 +131,7 @@ const Tables = () => {
                   </div>
                   <button
                     type="button"
-                    className="btn-close"
+                    className="btn-close closeBtn"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
