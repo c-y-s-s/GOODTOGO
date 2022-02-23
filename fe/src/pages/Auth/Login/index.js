@@ -4,6 +4,7 @@ import { Routes, Route, Link, Navigate } from "react-router-dom";
 
 //-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 //-------- 串接API套件 --------
 import axios from "axios";
@@ -16,6 +17,23 @@ const Login = ({ auth }) => {
     password: "song12345",
   });
   const [isLogin, setIsLogin] = useState(false);
+  //制定錯誤訊息
+  const [fieldError, setFieldError] = useState({
+    email: "",
+    password: "",
+  });
+  // 切換看密碼開關
+  const [eye, setEye] = useState({
+    passwordEye: false,
+  });
+  // --------切換顯示/隱藏密碼 --------
+  function passwordShow() {
+    setEye(
+      eye.passwordEye
+        ? { ...eye, passwordEye: false }
+        : { ...eye, passwordEye: true }
+    );
+  }
   // -------- 處理input改變 --------
   const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
@@ -94,7 +112,8 @@ const Login = ({ auth }) => {
                     <div class="form-floating">
                       <input
                         name="password"
-                        type="password"
+                        type={eye.passwordEye ? "text" : "password"}
+                        autoComplete="off"
                         className="form-control"
                         id="floatingInput"
                         placeholder="密碼"
@@ -103,6 +122,13 @@ const Login = ({ auth }) => {
                         // minLength="3"
                         required
                       />
+                      <div onClick={passwordShow}>
+                        {eye.passwordEye ? (
+                          <FiEye className="eye" />
+                        ) : (
+                          <FiEyeOff className="eye" />
+                        )}
+                      </div>
 
                       <label
                         for="floatingInput"
@@ -114,8 +140,10 @@ const Login = ({ auth }) => {
                   </div>
 
                   {/* {fieldErrors.password !== "" && (
-            <div className="error text-end mb-3">{fieldErrors.password}</div>
-          )} */}
+                    <div className="error text-end mb-3">
+                      {fieldErrors.password}
+                    </div>
+                  )} */}
                 </div>
                 <div className="btn-group d-grid gap-3">
                   <button type="submit" className="btn submit-btn col-lg-12">
