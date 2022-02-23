@@ -130,6 +130,18 @@ const UserPassword = () => {
       // setErr(e.response.data.msg);
       // setErr({ ...err, confirmPassword: e.response.data.msg });
     }
+
+    // 清空
+    setPassword({
+      password: "",
+      newPassword: "",
+      confirmPassword: "",
+    });
+    setEye({
+      passwordEye: false,
+      newPasswordEye: false,
+      confirmPasswordEye: false,
+    });
   }
 
   return (
