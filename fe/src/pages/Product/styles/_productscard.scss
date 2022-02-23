@@ -59,9 +59,9 @@
             height: 100%;
             object-fit: cover;
             transition: all 0.75s ease;
-            &:hover {
-                transform: scale(1.15);
-            }
+            // &:hover {
+            //     transform: scale(1.15);
+            // }
         }
     }
     .close-active {
@@ -97,6 +97,9 @@
     &:hover {
         transform: translateY(-1.1rem);
         box-shadow: 0rem 1rem 1rem #ccc;
+    }
+    &:hover .cover-fit {
+        transform: scale(1.12);
     }
     // &:nth-child(4n + 5) {
     //     margin-left: 2.95rem;

@@ -26,21 +26,32 @@ const Product = () => {
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
   // 店家休息營業?
-  const [storeinOperation , setStoreInOperation] =useState("")
-  console.log(storeinOperation);
+  const [storeinOperation, setStoreInOperation] = useState("");
+  // 存倒數計時有沒有結束
+  const [countdownTimeUp, setCountdownTimeUp] = useState("");
+  // console.log("aaaaa",countdownTimeUp);
   //串接後端API
+  //倒數計時變 true 自動重抓一次 api
   useEffect(() => {
     let getProducts = async () => {
- 
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
 
       setProducts(productsResponse.data);
       setStoreData(storeResponse.data);
-
     };
     getProducts();
-  }, []);
+  }, [countdownTimeUp]);
+    useEffect(() => {
+    let getProducts = async () => {
+      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
+      let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
+
+      setProducts(productsResponse.data);
+      setStoreData(storeResponse.data);
+    };
+    getProducts();
+  }, [countdownTimeUp]);
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
 
@@ -70,7 +81,11 @@ const Product = () => {
       </div>
       {/* ------- 商品資訊 --------*/}
       {buttonToggle === "products" ? (
-        <StoreCard data={productsdata} storeinOperation={storeinOperation} />
+        <StoreCard
+          data={productsdata}
+          storeinOperation={storeinOperation}
+          setCountdownTimeUp={setCountdownTimeUp}
+        />
       ) : (
         <StoreProductsComment productsComment={productsComment} />
       )}

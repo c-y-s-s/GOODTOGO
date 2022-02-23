@@ -76,7 +76,7 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
   });
   // 店家評價總分除總筆數
   let storeStarAVG = (storeStarTotal / storeStarCount).toFixed(1);
-  console.log(storeData);
+
   return (
     <div>
       {storeData.map((item) => {
@@ -84,7 +84,7 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
           /* // 休息日調整格式 */
         
         let closeday = JSON.parse(item.close_day).join("、");
-        console.log(item.tel_no);
+       
         
           /* 電話號碼加上- */
         
@@ -120,7 +120,7 @@ const StoreDetails = ({ storeId, storeData, setStoreInOperation }) => {
           inOperation = false;
           setStoreInOperation(false);
         }
-        console.log(inOperation);
+    
 
         return (
           <div key={uuidv4()}>

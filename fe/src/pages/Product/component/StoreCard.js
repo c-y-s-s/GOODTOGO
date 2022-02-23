@@ -11,7 +11,7 @@ import moment from "moment";
 import "moment/min/locales";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
-const StoreCard = ({ data, storeinOperation }) => {
+const StoreCard = ({ data, storeinOperation, setCountdownTimeUp }) => {
   moment.locale("zh-tw");
   // !計算當前時間秒數 hh:mm:ss
   let timeInsecond = moment().format("LTS");
@@ -27,17 +27,19 @@ const StoreCard = ({ data, storeinOperation }) => {
   // 撈出按下商品卡片的 ID
   const [openProductsModaID, setOpenProductsModalID] = useState(0);
   // 存商品是否已結束販售
-  const [openProductsModaltimeEnd , setopenProductsModaltimeEnd] =useState(0);
+  const [openProductsModaltimeEnd, setopenProductsModaltimeEnd] = useState(0);
 
-  
   // 倒數套件樣式
   const Completionist = () => <span>結束販售</span>;
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a complete state
+ 
+      setCountdownTimeUp(completed);
       return <Completionist />;
     } else {
       // Render a countdown
+       setCountdownTimeUp(completed);
       return (
         <span>
           {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
@@ -75,6 +77,7 @@ const StoreCard = ({ data, storeinOperation }) => {
             timeInsecondResult > itemTimeProductOpenSecond
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
+
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
@@ -116,7 +119,6 @@ const StoreCard = ({ data, storeinOperation }) => {
                         : timeEnd <= 0 && "close-active"
                     }`}
                   >
-                    {console.log("AAAAAAAAAA", timeEnd)}
                     <img
                       className=" cover-fit"
                       src={require(`../../../images/products_img/${item.img}`)}
