@@ -14,10 +14,10 @@ const moment = require("moment");
 // 星期轉換為數字
 // 時間格式轉換
 moment.locale("zh-tw", {
-  weekdays: "7_1_2_3_4_5_5".split("_"),
+  weekdays: "7_1_2_3_4_5_6".split("_"),
   longDateFormat: {
     LT: "H:m", // 23:33
-    LTS: "H:m:s", // 23:33:45
+    LTS: "HH:mm:ss", // 23:33:45
   },
 });
 
@@ -284,7 +284,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
 // /api/member/like (get)
 router.get("/like", async (req, res, next) => {
   // 會員 id
-  // 取得 -> like 的店家 id、照片、名稱、營業開始時間、結束時間、未營業星期、店家類別
+  // 取得 -> like 的店家資訊 id、照片、名稱、營業開始時間、結束時間、未營業星期、店家類別
   let [userLikeStores] = await connection.execute(
     `SELECT user_like.id AS user_like_id, 
     stores.id AS storeId,
@@ -311,13 +311,14 @@ router.get("/like", async (req, res, next) => {
   // console.log("列出 喜愛店家們 storeId : ", likeStoreIds); // [3,5,2,...]
 
   // -------- 愛心計算 --------
+  // 取得 -> 所有店 store_id 各自愛心數量 likeTotal
   let [storeLikeCount] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
     FROM user_like
     GROUP BY store_id;`
   );
 
-  // console.log("喜愛店家們 的 愛心計算: ", storeLikeCount);
+  console.log("喜愛店家們 的 愛心計算 storeLikeCount: ", storeLikeCount);
 
   // -------- 星星計算 --------
   // 店家 storeId
@@ -335,7 +336,7 @@ router.get("/like", async (req, res, next) => {
   });
   // console.log("列出 喜愛店家們 的 所有商品們的 id: ", productIds);
 
-  // 計算 各店家 的 star 分數(各店各商品總分數平均)
+  // 計算 各店家 的 各全部商品 star 分數(各店各商品總分數平均)
   let [storeStarScore] = await connection.execute(
     // `SELECT count(id) AS count, products_id, store_id, SUM(star) ,
     // FROM products_comment
@@ -361,7 +362,58 @@ router.get("/like", async (req, res, next) => {
   );
   // console.log("店家評分相關資料: ", storeStarScore);
 
+  // -------- 餐點計算 --------
+  // 取得 -> 所有店 store_id 各自餐點數量 likeTotal
+  let [storeProductCount] = await connection.execute(
+    `SELECT store_id,
+    amount AS productAmount,
+    start_time AS startTime,
+    due_time AS dueTime
+    FROM products
+    WHERE store_id IN (${likeStoreIds.join(",")})
+    AND valid=1;`
+  );
+  // console.log("喜愛店家 所有 products : ", storeProductCount.length, "筆");
+  console.log("喜愛店家 所有 products : ", storeProductCount);
+
+  // 過濾時間 -> 總計各間店餐點剩餘 利用 map 每筆放入 storeProductCount
+  storeProductCount.map((product) => {
+    // -------- 時間 --------
+    // 格式化為數字
+    let currentTime = moment()
+      .format("LTS")
+      .split(":")
+      .slice(0, -1)
+      .concat(["00"])
+      .join(":");
+    let currentTime_number = Number(currentTime.split(":").join(""));
+    let startTime_number = Number(product.startTime.split(":").join(""));
+    let dueTime_number = Number(product.dueTime.split(":").join(""));
+    console.log(
+      "currentTime_number",
+      currentTime_number,
+      "startTime_number",
+      startTime_number,
+      "dueTime_number",
+      dueTime_number
+    );
+
+    if (
+      currentTime_number >= startTime_number &&
+      currentTime_number < dueTime_number &&
+      Object.values(product)[0] === product.store_id
+    ) {
+      product.productAmount += product.productAmount;
+      product.productCount = product.productAmount;
+    } else {
+      product.productAmount += 0;
+      product.productCount = product.productAmount;
+    }
+  });
+  console.log("convert", storeProductCount);
+
   // 將愛心、星星相關資料 利用 map 每筆放入 userLikeStores
+  // 判斷營業時間、剩餘餐點數量、圖片格式處理 利用 map 每筆放入 userLikeStores
   userLikeStores.map((item) => {
     // -------- 星星 --------
     // 找 storeStarScore 裡 store_id 對應的 userLikeStores 店家id (storeId)
@@ -412,41 +464,102 @@ router.get("/like", async (req, res, next) => {
       item.likeTotal = null;
     }
 
-    // 處理圖片
+    // -------- 圖片 --------
     // 新增讓前端讀取檔案路徑
     item.storeImg = "/static/uploads/stores/" + item.storeImg;
 
-    // 處理時間
-    // 格式化為 00:00:00
-    // item.openTime = item.openTime
-    //   .split(":")
-    //   .slice(0, -1)
-    //   .concat(["00"])
-    //   .join(":");
-    // item.closeTime = item.closeTime
-    //   .split(":")
-    //   .slice(0, -1)
-    //   .concat(["00"])
-    //   .join(":");
-    // 格式化為 00:00
+    // -------- 時間 --------
+    // [ Step 1 ] 判斷 item 的 closeDay 店休日
+    // -> 若休息 餐點剩餘也 = 0
+    let today = Number(moment().format("d"));
+    // console.log("今日星期 today", today);
+    let isToday = JSON.parse(Object.values(item)[6]);
+    // console.log("店休星期 isToday", isToday);
+
+    let find_closeDay = isToday.find((day) => {
+      return day === today;
+    });
+    // console.log("店休星期 = 今日星期 find", find);
+
+    // [ Step 2 ] 判斷 item 的 openTime closeTime 營業時間
+    // 格式化為 00:00:00 --- 要判斷有無開店用 (刪除毫秒補上00)
+    // 開店時間
+    let storeOpen = item.openTime
+      .split(":")
+      .slice(0, -1)
+      .concat(["00"])
+      .join(":");
+    let storeOpen_number = Number(storeOpen.split(":").join(""));
+    // 關店時間
+    let storeClose = item.closeTime
+      .split(":")
+      .slice(0, -1)
+      .concat(["00"])
+      .join(":");
+    let storeClose_number = Number(storeClose.split(":").join(""));
+    // 現在時間
+    // console.log(moment().format("LTS"));
+    let current = moment()
+      .format("LTS")
+      .split(":")
+      .slice(0, -1)
+      .concat(["00"])
+      .join(":");
+    let current_number = Number(current.split(":").join(""));
+    // console.log("storeOpen:", storeOpen, "storeClose:", storeClose);
+    // console.log(
+    //   "storeOpen_number:",
+    //   storeOpen_number,
+    //   "storeClose_number:",
+    //   storeClose_number,
+    //   "current_number",
+    //   current_number
+    // );
+
+    // [ Step 3 ] 比對 公休日、營業時間 -> 顯示 營業 非營業
+    // 有比對到 今日休息
+    while (true) {
+      if (find_closeDay) {
+        item.isToday = "休息中";
+        break;
+      }
+      if (current_number < storeOpen_number) {
+        item.isToday = "休息中";
+        break;
+      }
+      if (current_number >= storeClose_number) {
+        item.isToday = "休息中";
+        break;
+      }
+      // 沒比對到 今日營業
+      item.isToday = "營業中";
+      break;
+    }
+    // if (find_closeDay) {
+    //   item.isToday = "休息中";
+    // } else if (current_number < storeOpen_number) {
+    //   item.isToday = "休息中";
+    // } else if (current_number >= storeClose_number) {
+    //   item.isToday = "休息中";
+    // } else {
+    //   // 沒比對到 今日營業
+    //   item.isToday = "營業中";
+    // }
+
+    // 格式化為 00:00 --- 要顯示在卡片上的
     item.openTime = item.openTime.split(":").slice(0, -1).join(":");
     item.closeTime = item.closeTime.split(":").slice(0, -1).join(":");
+    // console.log(
+    //   "item.openTime:",
+    //   item.openTime,
+    //   "item.closeTime:",
+    //   item.closeTime
+    // );
 
-    // 處理店名
+    // -------- 主店名、分店名 --------
     let name = item.storeName.split(" ");
     item.storeName = name[0];
     item.storeBranchName = name[1];
-
-    // 判斷是否為休息日
-    // let today = moment().format("d"); // 2 (星期)
-
-    // let isToday = JSON.parse(Object.values(item)[6]);
-    // item.closeDay = isToday;
-    // let day = isToday.filter((d) => d === 2);
-
-    // let date1 = moment().format("LTS");
-    // let date3 = moment().format("LT");
-    // console.log(isToday);
   });
 
   // FIXME: 若沒有資料給前端會壞掉
