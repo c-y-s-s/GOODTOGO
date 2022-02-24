@@ -31,9 +31,12 @@ function App() {
   // 全域狀態
   // -------- 判斷登入與否 --------
   const [isLogin, setIsLogin] = useState(false);
+
+  // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
+  const [isModalTouch , setisModalTouch] = useState(true)
   return (
     <Router>
-      <Navbar auth={isLogin} />
+      {isModalTouch && <Navbar auth={isLogin} />}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
@@ -48,10 +51,13 @@ function App() {
           <Route path="all/:storeId" element={<Product />}></Route>
         </Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
-        <Route path="/store/:storeId/" element={<Product />}>
+        <Route
+          path="/store/:storeId/"
+          element={<Product setisModalTouch={setisModalTouch} />}
+        >
           <Route path=":currentPage" element={<Product />} />
         </Route>
-        
+
         <Route
           path="/productcomment/:storeId"
           element={<ProductComment />}

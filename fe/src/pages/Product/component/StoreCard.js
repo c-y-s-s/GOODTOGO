@@ -12,7 +12,12 @@ import moment from "moment";
 import "moment/min/locales";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
-const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
+const StoreCard = ({
+  storeId,
+  storeinOperation,
+  storeDayClose,
+  setisModalTouch,
+}) => {
   moment.locale("zh-tw");
 
   // !計算當前時間秒數 hh:mm:ss
@@ -55,12 +60,12 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
     if (completed) {
       // Render a Completionist complete
       // ? 商品結束販售給開關true
- setCountdownTimeUp(completed);
+      setCountdownTimeUp(completed);
       return <Completionist />;
     } else {
       //  Render 倒數時間
       // ? 商品倒數中給 false 但是會一直重複跑導致往頁很慢
-  setCountdownTimeUp(completed);
+      setCountdownTimeUp(completed);
       setCountdownTimeUp(completed);
       return (
         <span>
@@ -106,8 +111,6 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
 
-       
-
             //! 現在時間秒數要大於開始販售時間才是開始販售
             timeInsecondResult > itemTimeProductOpenSecond
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
@@ -115,16 +118,17 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
 
             return (
               <div
-                className="col-12 col-md-6 col-lg-3 product-card "
+                className="col-12 col-md-6 col-lg-3 product-card mt-5"
                 style={{ width: `18rem` }}
                 key={uuidv4()}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
                   setOpenProductsModal(true);
                   setopenProductsModaltimeEnd(timeEnd);
+                  setisModalTouch(false);
                 }}
               >
-                <div className="card m-0 ">
+                <div className="card m-0 px-2">
                   <div className="d-flex product-card-text">
                     <div className="time-text">
                       時間倒數
@@ -170,7 +174,7 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
                     />
                     {/* //!  資料庫時間 - 目前時間 得出秒數 + 上去套件倒數 */}
                   </div>
-                  <div className="card-body">
+                  <div className="card-body ">
                     <div className="">
                       <div className="card-title">{item.name}</div>
                       <div className="card-star ">
@@ -212,6 +216,7 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
             openProductsModaID={openProductsModaID}
             storeinOperation={storeinOperation}
             openProductsModaltimeEnd={openProductsModaltimeEnd}
+            setisModalTouch={setisModalTouch}
           />
         </div>
       )}

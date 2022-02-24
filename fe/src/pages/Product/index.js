@@ -13,13 +13,8 @@ import StoreProductsComment from "./component/Productscomment.js";
 import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
-const Product = () => {
-  const [error, setError] = useState(null);
-  //後端資料使用陣列格式，所以這邊給她空陣列
-  const [data, setData] = useState([]);
-  const [storeData, setStoreData] = useState([]);
-  const [productsComment, setproductsComment] = useState([]);
-  //取出網址上的 storeId 這邊的 storeId 是對應到 app.js 若要更改要同步更改
+const Product = ({ setisModalTouch }) => {
+  //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
   const [error, setError] = useState(null);
   // 存商家商品
@@ -40,7 +35,6 @@ const Product = () => {
   // console.log("index --------->",countdownTimeUp);
   //串接後端API
   //倒數計時變 true 自動重抓一次 api
-
 
   useEffect(() => {
     let getStores = async () => {
@@ -85,6 +79,7 @@ const Product = () => {
           storeId={storeId}
           storeinOperation={storeinOperation}
           storeTodayClose={storeTodayClose}
+          setisModalTouch={setisModalTouch}
         />
       ) : (
         <StoreProductsComment productsComment={productsComment} />
