@@ -105,8 +105,7 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
 
-            console.log("storeinOperation", storeinOperation);
-            console.log("timeEnd", timeEnd);
+       
 
             //! 現在時間秒數要大於開始販售時間才是開始販售
             timeInsecondResult > itemTimeProductOpenSecond
