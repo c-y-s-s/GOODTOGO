@@ -11,6 +11,13 @@
 # production
 /build
 
+# 隱藏google金鑰
+key.js
+
+#隱藏index.css , index.css.map
+/src/styles/index.css
+/src/styles/index.css.map
+
 # misc
 .DS_Store
 .env

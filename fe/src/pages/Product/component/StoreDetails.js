@@ -1,70 +1,259 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
+// -------- React Icon --------
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 
-const StoreDetails = ({ name, address, tel_no }) => {
+// -------- MUI  Rating--------
+import Rating from "@mui/material/Rating";
+import Stack from "@mui/material/Stack";
+// -------- google map -------
+// import { MAP_KEY } from "../../../key";
+import GoogleMapReact from "google-map-react";
+import MapPin from "./MapPin";
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
+// -------- Moment plugin --------
+import moment from "moment";
+import "moment/min/locales";
+
+const StoreDetails = ({
+  storeId,
+  storeData,
+  setStoreInOperation,
+  setStoreTodayClose,
+  storeTodayClose,
+}) => {
+  moment.locale("zh-tw");
+
+  let timeInsecond = moment().format("LTS");
+  // ! 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
+  //!目前時間總秒數
+  let timeInsecondResult =
+    parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
+    parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
+    parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
+
+  // 存店家所有評論資料
+  const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
+  // 店家經度
+  const [storeMapDataLat, setStoreMapDataLat] = useState([]);
+  // 店家緯度
+  const [storeMapDataLng, setStoreMapDataLng] = useState([]);
+
+  useEffect(() => {
+    let getStoreDetalis = async () => {
+      // 撈店家所有評論
+      let storeCommentTotalResponse = await axios.get(
+        `${API_URL}/storecommittotal/${storeId}`
+      );
+      // 撈店家經緯度
+      let storeMapDataReaponse = await axios.get(
+        `${API_URL}/storesmap/${storeId}`
+      );
+      setStoreCommentTotalData(storeCommentTotalResponse.data);
+      setStoreMapDataLat(storeMapDataReaponse.data[0].longitude);
+      setStoreMapDataLng(storeMapDataReaponse.data[0].latitude);
+    };
+    getStoreDetalis();
+  }, []);
+
+  // 地圖預設顯示地點
+  const defaultProps = {
+    center: {
+      lat: storeMapDataLat,
+      lng: storeMapDataLng,
+    },
+    zoom: 17,
+  };
+
+  // 計算店家評價總分
+  let storeStarTotal = 0;
+  // 評論總筆數
+  let storeStarCount = 0;
+  storeCommentTotalData.forEach((item) => {
+    storeStarTotal += item.star;
+    storeStarCount++;
+  });
+  // 店家評價總分除總筆數
+  let storeStarAVG = (storeStarTotal / storeStarCount).toFixed(1);
+
   return (
     <div>
-      <div className="container store-data">
-        <div className="row">
-          <div className="col-12 col-md-6 col-lg-4 pe-lg-3">
-            <div className="store-data-left">
-              <div className="store-data-left-outline">
-                <h1 className="store-data-left-name">{name}</h1>
-                <div className="d-flex mt-4 ">
-                  <p className="store-data-left-category">麵食</p>
-                  <p className="store-data-left-star">評價的部分</p>
-                  <div className="d-flex store-data-left-favorite">
-                    <div className="store-data-left-icon">
-                      <FaHeart />
+      {storeData.map((item) => {
+        //判斷今天店家有沒有休息
+        let closeworkDay = JSON.parse(item.close_day);
+        closeworkDay.forEach((item) => {
+          if (new Date().getDay() === item) {
+            setStoreTodayClose(true);
+          }
+        });
+        console.log("aaaaaaaaaaaaaa", storeTodayClose);
+        /* // 休息日調整格式 */
+        let closeday = JSON.parse(item.close_day).join("、");
+        /* 電話號碼加上- */
+        let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
+
+        /* // !營業時間秒數 */
+
+        let storeOpenTimeSecond =
+          parseInt(item.open_time[0] + item.open_time[1]) * 60 * 60 +
+          parseInt(item.open_time[3] + item.open_time[4]) * 60 +
+          parseInt(item.open_time[6] + item.open_time[7]);
+
+        /* // !關店時間秒數 */
+
+        let storeCloseTimeSecond =
+          parseInt(item.close_time[0] + item.close_time[1]) * 60 * 60 +
+          parseInt(item.close_time[3] + item.close_time[4]) * 60 +
+          parseInt(item.close_time[6] + item.close_time[7]);
+
+        /*   // !判斷營業中或是非營業中 */
+
+        let inOperation = "";
+        if (
+          timeInsecondResult > storeOpenTimeSecond &&
+          timeInsecondResult < storeCloseTimeSecond
+        ) {
+          inOperation = true;
+          setStoreInOperation(true);
+        } else {
+          inOperation = false;
+          setStoreInOperation(false);
+        }
+
+        return (
+          <div key={uuidv4()}>
+            <div>
+              <div className="container-fluid p-0">
+                <div className="storeLogo">
+                  <img
+                    className="w-100 storeLogoImg"
+                    src={require(`../../../images/store_img/${item.logo}`)}
+                    alt=""
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="container store-data">
+              <div className="row">
+                <div className="col-12 col-md-6 col-lg-4 pe-lg-3">
+                  <div className="store-data-left">
+                    <div className="store-data-left-outline py-1">
+                      <h1 className="store-data-left-name">{item.name}</h1>
+                      <div className="d-flex mt-4 align-items-center">
+                        <div className="store-data-left-category mb-1">
+                          {item.category}
+                        </div>
+                        <div className="store-data-left-star  d-flex ">
+                          <Stack spacing={1}>
+                            <Rating
+                              name="half-rating-read"
+                              defaultValue={storeStarAVG}
+                              precision={0.1}
+                              readOnly
+                            />
+                          </Stack>
+
+                          <div className="ps-2">{storeStarAVG}</div>
+                          <div className="ps-2">({storeStarCount})</div>
+                        </div>
+                        <div className="d-flex store-data-left-favorite pb-1">
+                          <div className="store-data-left-icon pb-1">
+                            <FaHeart />
+                          </div>
+                          <div className="store-data-left-favorite-num">33</div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="store-data-left-favorite-num">33</div>
+
+                    <div className="d-flex store-data-left-content">
+                      <div className="store-data-icon">
+                        <FaMapMarkerAlt />
+                      </div>
+                      <div>{item.address}</div>
+                    </div>
+
+                    <div className="d-flex store-data-left-content">
+                      <div className="store-data-icon">
+                        <FaClock />
+                      </div>
+                      <div className="d-flex workday">
+                        <div>星期 {closeday} 公休</div>
+                        <div className="work-time">
+                          {moment(item.open_time, "hh:mm:ss").format("LT")}-
+                          {moment(item.close_time, "hh:mm:ss").format("LT")}
+                        </div>
+
+                        {/* {inOperation ? (
+                          <div className="d-flex store-data-left-content-open">
+                            營業中
+                          </div>
+                        ) : (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        )} */}
+
+                        {/* 判斷公休日及營業時間區間 */}
+                        {storeTodayClose ? (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        ) : inOperation ? (
+                          <div className="d-flex store-data-left-content-open">
+                            營業中
+                          </div>
+                        ) : (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        )}
+                      </div>
+                     
+                    </div>
+
+                    <div className="d-flex store-data-left-content">
+                      <div className="store-data-icon">
+                        <FaPhoneAlt />
+                      </div>
+                      <div>{newTelNo}</div>
+                    </div>
+
+                    <div className="d-flex store-data-left-content">
+                      {/* <div className="store-data-icon">
+                        <FaExclamationCircle />
+                      </div> */}
+                      {/* <div>店家介紹 : 這欄考慮拿掉</div> */}
+                    </div>
+                  </div>
+                </div>
+                <div className="col-12 col-md-6 col-lg-8 h-100">
+                  <div className="store-map">
+                    <GoogleMapReact
+                      bootstrapURLKeys={{
+                        key: "",
+                      }}
+                      defaultCenter={defaultProps.center}
+                      defaultZoom={defaultProps.zoom}
+                    >
+                      <MapPin
+                        lat={storeMapDataLat}
+                        lng={storeMapDataLng}
+                        text={item.address}
+                      />
+                    </GoogleMapReact>
                   </div>
                 </div>
               </div>
-
-              <div className="d-flex store-data-left-content">
-                <div className="store-data-icon">
-                  <FaMapMarkerAlt />
-                </div>
-                <div>{address}</div>
-              </div>
-
-              <div className="d-flex store-data-left-content">
-                <div className="store-data-icon">
-                  <FaClock />
-                </div>
-                <div>周一至周六 08:00 - 21:00</div>
-                <div className="d-flex store-data-left-content-business">
-                  營業中
-                </div>
-              </div>
-
-              <div className="d-flex store-data-left-content">
-                <div className="store-data-icon">
-                  <FaPhoneAlt />
-                </div>
-                <div> 04-2326-0001</div>
-              </div>
-
-              <div className="d-flex store-data-left-content">
-                <div className="store-data-icon">
-                  <FaExclamationCircle />
-                </div>
-                <div>店家介紹 : Lorem ipsum, dolor sit amet consectetur</div>
-              </div>
             </div>
           </div>
-          <div className="col-12 col-md-6 col-lg-8 h-100">
-            <div className="store-map">
-              <p className="">google地圖</p>
-            </div>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </div>
   );
 };
