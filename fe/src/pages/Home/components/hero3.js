@@ -15,11 +15,13 @@ const hero3 = () => {
       <img src={Hero3Food} alt="food" className="pizza" />
       <div className="hero3-info-1 text-center">
         <Hero3Text className="hero3-info-1-text" />
-        台灣一天丟棄的廚餘量，可以堆 100 棟 101 大樓
-        <br />
-        依環保署統計，平均每人每年生產 150 公斤的廚餘
-        <br />
-        比中國大陸、日本、韓國平均多 20 ％
+        <div className="hero3-info-1-p">
+          台灣一天丟棄的廚餘量，可以堆 100 棟 101 大樓
+          <br />
+          依環保署統計，平均每人每年生產 150 公斤的廚餘
+          <br />
+          比中國大陸、日本、韓國平均多 20 ％
+        </div>
       </div>
       <div className="wave-bg"></div>
       <Hero3Tower className="hero3-tower" />

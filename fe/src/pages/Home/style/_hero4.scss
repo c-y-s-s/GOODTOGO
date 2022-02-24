@@ -35,6 +35,8 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        height: 205px;
+        justify-content: space-between;
         position: relative;
         top: -2rem;
         color: $color-dark-grey;

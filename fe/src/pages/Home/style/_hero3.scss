@@ -66,7 +66,7 @@
 }
 @media screen and (max-width: 540px) {
   .hero3 {
-    grid-template-rows: [row0]6.5rem [row1]33rem [row2]20rem [row3]20rem [row4]30rem [row5]35rem;
+    grid-template-rows: [row0]6.5rem [row1]33rem [row2]20rem [row3]20rem [row4]25rem [row5]35rem;
     .pizza {
       margin-top: 5rem;
       opacity: 0.5;
@@ -83,6 +83,10 @@
         width: 100vw;
         padding: 0 2rem;
       }
+      .hero3-info-1-p {
+        margin-top: 3rem;
+        font-size: $fz-md;
+      }
     }
     .hero3-tower {
       grid-area: 3/1/4/3;
@@ -95,10 +99,11 @@
       justify-self: start;
       align-self: flex-start;
       margin-top: 11rem;
+
       .hero3-info-2-text {
-        margin-left: 0.1rem;
         flex-direction: column;
         align-items: center;
+
         filter: drop-shadow(0.3rem 0.3rem 2px rgba(255, 255, 255, 0.877));
         .text-1 {
           width: 60%;
@@ -108,8 +113,10 @@
         }
       }
       .hero3-info-2-p {
+        margin: 10rem 4.6rem 0 5rem;
         width: fit-content;
-        padding: 6.5rem 10.5rem 6rem 3rem;
+        padding: 0;
+        font-size: $fz-lg;
       }
     }
     .wave-bg {
@@ -128,6 +135,7 @@
         width: 85%;
       }
       .hero3-info-3-p {
+        font-size: $fz-lg;
         padding: 1rem;
       }
     }

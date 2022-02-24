@@ -8,9 +8,9 @@ import { ReactComponent as Hero4Logo } from "../images/hero4Logo.svg";
 import { ReactComponent as Pointer1 } from "../images/hero4Point1.svg";
 import { ReactComponent as Pointer2 } from "../images/hero4Point2.svg";
 import { ReactComponent as Pointer3 } from "../images/hero4Point3.svg";
-import { ReactComponent as BoxImg1 } from "../images/hero4Box1.svg";
-import { ReactComponent as BoxImg2 } from "../images/hero4Box2.svg";
-import { ReactComponent as BoxImg3 } from "../images/hero4Img3.svg";
+import Hero1Img1 from "../images/hero4Img1.png";
+import Hero1Img2 from "../images/hero4Img2.png";
+import Hero1Img3 from "../images/hero4Img3.png";
 
 //-------- icons --------
 import { BiRightArrowAlt } from "react-icons/bi";
@@ -29,7 +29,7 @@ const hero4 = () => {
           <div className="box mb-lg-0 mb-5">
             <Pointer1 className="hero4-pointer" />
             <div className="box-info ">
-              <BoxImg1 />
+              <img src={Hero1Img1} alt="" />
               <div>
                 搜尋周邊
                 <br />
@@ -41,15 +41,15 @@ const hero4 = () => {
           <div className="box mb-lg-0 mb-5 mt-3">
             <Pointer2 className="hero4-pointer" />
             <div className="box-info">
-              <BoxImg2 />
-              <div>前往店家領取餐點</div>
+              <img src={Hero1Img2} alt="" />
+              <div className="">前往店家領取餐點</div>
             </div>
           </div>
           <div className="box mb-lg-0 mb-5 mt-3">
             <Pointer3 className="hero4-pointer" />
             <div className="box-info">
-              <BoxImg3 />
-              <div>救援美食成功</div>
+              <img src={Hero1Img3} alt="" />
+              <div className="">救援美食成功</div>
             </div>
           </div>
           <div className="col-lg-3 hero4-btn-group text-light flex-column d-flex align-items-center">
