@@ -50,6 +50,8 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
     return <span>結束販售</span>;
   };
 
+
+  // ! 卡片跳動bug尚未解決
   // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
