@@ -13,7 +13,7 @@ import StoreProductsComment from "./component/Productscomment.js";
 import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
-const Product = () => {
+const Product = ({ setisModalTouch }) => {
   //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
   const [error, setError] = useState(null);
@@ -29,13 +29,12 @@ const Product = () => {
   const [storeinOperation, setStoreInOperation] = useState("");
   // 店家星期休息營業?
   const [storeTodayClose, setStoreTodayClose] = useState("");
- 
+
   // 存倒數計時有沒有結束
   // const [countdownTimeUp, setCountdownTimeUp] = useState("");
   // console.log("index --------->",countdownTimeUp);
   //串接後端API
   //倒數計時變 true 自動重抓一次 api
-
 
   useEffect(() => {
     let getStores = async () => {
@@ -80,6 +79,7 @@ const Product = () => {
           storeId={storeId}
           storeinOperation={storeinOperation}
           storeTodayClose={storeTodayClose}
+          setisModalTouch={setisModalTouch}
         />
       ) : (
         <StoreProductsComment productsComment={productsComment} />

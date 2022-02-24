@@ -18,6 +18,7 @@ const ProductsDetails = ({
   openProductsModaID,
   storeinOperation,
   openProductsModaltimeEnd,
+  setisModalTouch,
 }) => {
   const { storeId } = useParams();
   console.log(storeId);
@@ -51,6 +52,7 @@ const ProductsDetails = ({
     productstarTotal / productModalCommentData.length
   ).toFixed(1);
 
+  
   // 購買數量計數器
   const [buyamount, setBuyamount] = useState(0);
   function handlePlus() {
@@ -88,7 +90,9 @@ const ProductsDetails = ({
                 {/* 關閉按鈕 */}
                 <button
                   className="products-close"
-                  onClick={() => setOpenProductsModal(false)}
+                  onClick={() => {
+                    setOpenProductsModal(false)
+                    setisModalTouch(true)}}
                 >
                   <FiX />
                 </button>
@@ -192,7 +196,6 @@ const ProductsDetails = ({
                         to={``}
                         className="btn btn-primary"
                         onClick={() => {
-                       
                           // productarr.push(data);
                           // console.log(productarr);
                           // let products = JSON.stringify(data);
