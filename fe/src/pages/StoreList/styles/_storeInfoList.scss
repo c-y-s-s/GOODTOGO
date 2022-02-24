@@ -130,16 +130,21 @@
         margin: 0.5rem;
         width: 2.4rem;
         height: 2.4rem;
-
         border: 1px solid transparent;
         border-radius: 50%;
+        background-color: transparent;
         color: $color-green;
         transition: 0.3s;
         text-decoration: none;
-        &:hover {
-          background-color: $color-light-green;
-          color: white;
-        }
+
+        // &:hover {
+        //   background-color: $color-light-green;
+        //   color: white;
+        // }
+      }
+      .active {
+        background-color: $color-green;
+        color: white;
       }
     }
   }
@@ -245,7 +250,6 @@
     }
     .store-info-list {
       margin: 2rem auto 0;
-
       grid-column-start: 2;
       grid-column-end: 8;
       grid-row-start: 5;
