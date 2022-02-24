@@ -121,7 +121,7 @@ const StoreCard = ({
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card mt-5"
-                style={{ width: `18rem` }}
+                style={{ width: `17.5rem` }}
                 key={uuidv4()}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
@@ -182,10 +182,11 @@ const StoreCard = ({
                       <div className="card-star ">
                         {item.score > 0 ? (
                           <div className="d-flex">
-                            <div>
+                            <div className="fs-1">
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
+                                  classNmae=""
                                   defaultValue={item.score}
                                   precision={0.1}
                                   readOnly
