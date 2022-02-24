@@ -45,6 +45,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="member/*" element={<MyAccount />}>
           <Route path=":userInfo" element={<MyAccount />}>
+            <Route path=":storeCategory" element={<MyAccount />} />
             <Route path=":status" element={<MyAccount />} />
           </Route>
         </Route>

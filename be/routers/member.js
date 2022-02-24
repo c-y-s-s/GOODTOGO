@@ -8,6 +8,18 @@ const { body, validationResult } = require("express-validator");
 const multer = require("multer");
 // bcrypt 雜湊密碼用
 const bcrypt = require("bcrypt");
+const moment = require("moment");
+
+// 自訂 較好對應資料庫
+// 星期轉換為數字
+// 時間格式轉換
+moment.locale("zh-tw", {
+  weekdays: "7_1_2_3_4_5_5".split("_"),
+  longDateFormat: {
+    LT: "H:m", // 23:33
+    LTS: "H:m:s", // 23:33:45
+  },
+});
 
 // TODO: 會員登入後 先到 auth 比對帳密 -> 登入成功 -> 回應前端(登入頁) session 資料
 // TODO: 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
@@ -159,6 +171,7 @@ router.post(
       });
     }
 
+    // FIXME: 未修改 email 一樣要能修改
     // 檢查 email 是不是已經註冊
     let [members] = await connection.execute(
       "SELECT * FROM users WHERE email=?",
@@ -270,22 +283,198 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
 // -------- 會員店家收藏清單 --------
 // /api/member/like (get)
 router.get("/like", async (req, res, next) => {
-  let [userLikeData] = await connection.execute(
-    "SELECT * FROM user_like WHERE user_id=?",
+  // 會員 id
+  // 取得 -> like 的店家 id、照片、名稱、營業開始時間、結束時間、未營業星期、店家類別
+  let [userLikeStores] = await connection.execute(
+    `SELECT user_like.id AS user_like_id, 
+    stores.id AS storeId,
+    stores.logo AS storeImg,
+    stores.name AS storeName,
+    stores.open_time AS openTime,
+    stores.close_time AS closeTime,
+    stores.close_day AS closeDay,
+    stores_category.category AS storeCate
+    FROM user_like
+    JOIN stores ON user_like.store_id = stores.id 
+    JOIN stores_category ON stores.stores_category_id = stores_category.id
+    WHERE user_id=?
+    ORDER BY user_like.id ASC;`,
     [req.session.member.id]
   );
-  console.log("db_users id: ", req.session.member.id);
-  console.log("取得 user Like Data: ", userLikeData);
+  // console.log("user_id: ", req.session.member.id);
+  // console.log("取得 喜愛店家 userLikeStores: ", userLikeStores);
 
-  // 打包資料給 res
-  // let userLike = {
-  //   name: userLikeData[0].name,
-  //   email: userLikeData[0].email,
-  //   phone: userLikeData[0].phone,
-  //   // photo: data[0].headshots,
-  //   photo: req.session.member.photo,
-  // };
-  res.json(userLikeData);
+  // 列出 喜愛店家們 storeId
+  // 用 map 取出 陣列裡面的{物件}值 每個物件值 陣列裡面的第 2 個 (storeId值)
+  // Object.values(item) 物件值 是個陣列 ["user_like.id值", "storeId值", "storeImg值"...]
+  let likeStoreIds = userLikeStores.map((item) => Object.values(item)[1]);
+  // console.log("列出 喜愛店家們 storeId : ", likeStoreIds); // [3,5,2,...]
+
+  // -------- 愛心計算 --------
+  let [storeLikeCount] = await connection.execute(
+    `SELECT store_id, count(id) AS likeTotal
+    FROM user_like
+    GROUP BY store_id;`
+  );
+
+  // console.log("喜愛店家們 的 愛心計算: ", storeLikeCount);
+
+  // -------- 星星計算 --------
+  // 店家 storeId
+  // 取得 -> 每間店有的商品們
+  let [storesProducts] = await connection.execute(
+    `SELECT * FROM products
+    WHERE store_id IN (${likeStoreIds.join(",")});`
+  );
+  // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts.length, "筆");
+  // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts);
+
+  // 列出 喜愛店家們 的 所有商品們的 id
+  let productIds = storesProducts.map((item) => {
+    return item.id;
+  });
+  // console.log("列出 喜愛店家們 的 所有商品們的 id: ", productIds);
+
+  // 計算 各店家 的 star 分數(各店各商品總分數平均)
+  let [storeStarScore] = await connection.execute(
+    // `SELECT count(id) AS count, products_id, store_id, SUM(star) ,
+    // FROM products_comment
+    // WHERE products_id IN (${productIds.join(",")})
+    // GROUP BY store_id;`
+
+    //   `SELECT count(id) AS count, products_id, store_id, SUM(star) ,round(SUM(star)/count(id),1)
+    //   FROM products_comment
+    //   WHERE products_id IN (7,  8,   9,  10,  11,  12,  13, 14, 15,
+    // 16, 17,  18,  25,  26,  27,  28, 29, 30,
+    // 49, 50,  51,  52,  53,  54,  73, 74, 75,
+    // 76, 77, 123, 124, 125, 126, 127)
+    //   GROUP BY store_id;`
+
+    `SELECT count(id) AS commentTotal,
+    store_id,
+    SUM(star),
+    round(SUM(star)/count(id),1) AS score
+    FROM products_comment
+    WHERE products_id IN (${productIds.join(",")})
+    GROUP BY store_id
+    ;`
+  );
+  // console.log("店家評分相關資料: ", storeStarScore);
+
+  // 將愛心、星星相關資料 利用 map 每筆放入 userLikeStores
+  userLikeStores.map((item) => {
+    // -------- 星星 --------
+    // 找 storeStarScore 裡 store_id 對應的 userLikeStores 店家id (storeId)
+    let comment = storeStarScore.find(
+      (starScore) => Object.values(starScore)[1] === Object.values(item)[1]
+    );
+    // console.log(
+    //   "找評論 store_id: ",
+    //   comment.store_id,
+    //   "星星分數: ",
+    //   comment.score,
+    //   "評論總數: ",
+    //   comment.commentTotal
+    // );
+    // console.log(comment);
+
+    // 若有比對到 就將 score、commentTotal 放進 userLikeStores
+    if (comment) {
+      item.starScore = comment.score;
+      item.commentTotal = comment.commentTotal;
+      // 將星星評論數值(comment.score) 放進 userLikeStores 並給 key (statScore)
+      // 將評論總數(comment.commentTotal) 放進 userLikeStores 並給 key (commentTotal)
+      // console.log("item.statScore: ", item.starScore);
+      // console.log("item.commentTotal: ", item.commentTotal);
+    } else {
+      // 沒有評分的就給空值
+      item.starScore = null;
+      item.commentTotal = null;
+    }
+
+    // -------- 愛心 --------
+    // 找 storeLikeCount 裡 store_id 對應的 userLikeStores 店家id (storeId)
+    let likes = storeLikeCount.find(
+      (likeCount) => Object.values(likeCount)[0] === Object.values(item)[1]
+    );
+    // console.log(
+    //   "找愛心 store_id: ",
+    //   likes.store_id,
+    //   "星星分數: ",
+    //   likes.likeTotal
+    // );
+
+    // 若有比對到 就將 likeTotal 放進 userLikeStores
+    if (likes) {
+      item.likeTotal = likes.likeTotal;
+    } else {
+      // 沒有like數的就給空值
+      item.likeTotal = null;
+    }
+
+    // 處理圖片
+    // 新增讓前端讀取檔案路徑
+    item.storeImg = "/static/uploads/stores/" + item.storeImg;
+
+    // 處理時間
+    // 格式化為 00:00:00
+    // item.openTime = item.openTime
+    //   .split(":")
+    //   .slice(0, -1)
+    //   .concat(["00"])
+    //   .join(":");
+    // item.closeTime = item.closeTime
+    //   .split(":")
+    //   .slice(0, -1)
+    //   .concat(["00"])
+    //   .join(":");
+    // 格式化為 00:00
+    item.openTime = item.openTime.split(":").slice(0, -1).join(":");
+    item.closeTime = item.closeTime.split(":").slice(0, -1).join(":");
+
+    // 處理店名
+    let name = item.storeName.split(" ");
+    item.storeName = name[0];
+    item.storeBranchName = name[1];
+
+    // 判斷是否為休息日
+    // let today = moment().format("d"); // 2 (星期)
+
+    // let isToday = JSON.parse(Object.values(item)[6]);
+    // item.closeDay = isToday;
+    // let day = isToday.filter((d) => d === 2);
+
+    // let date1 = moment().format("LTS");
+    // let date3 = moment().format("LT");
+    // console.log(isToday);
+  });
+
+  // FIXME: 若沒有資料給前端會壞掉
+
+  // 傳送使用者喜愛店家清單、喜愛店家 storeId 列表
+  res.json({ userLikeStores, likeStoreIds });
+});
+
+// -------- 會員移除收藏店家 --------
+// /api/member/like/remove (post)
+router.post("/like/remove", async (req, res, next) => {
+  // 沒有接收到資料
+  if (!req.body.removeStoreId) {
+    res.json({
+      code: 88001,
+      message: "會員移除收藏店家 失敗",
+    });
+  }
+  let [removeLikeStoreResult] = await connection.execute(
+    `DELETE FROM user_like WHERE user_id=? AND store_id=?;`,
+    [req.session.member.id, req.body.removeStoreId]
+  );
+
+  // console.log(req.body.removeStoreId);
+  console.log("刪除會員收藏資料結果: ", removeLikeStoreResult);
+  res.json({
+    message: "會員移除收藏店家 ok",
+  });
 });
 
 module.exports = router;

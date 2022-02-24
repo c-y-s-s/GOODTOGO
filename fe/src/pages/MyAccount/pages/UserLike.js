@@ -11,10 +11,12 @@ const UserLike = () => {
   const [likeStores, setLikeStores] = useState([]);
   // 會員喜愛店家 store_id 列表
   const [likeStoreIds, setLikeStoreIds] = useState([]);
+  // 店家類別
+  const [storeCategory, setStoreCatory] = useState([]);
 
   // 載入 使用者收藏店家清單
   useEffect(() => {
-    // http://localhost:3002/api/member/proile
+    // http://localhost:3002/api/member/like
     let getLike = async () => {
       let response = await axios.get(`${API_URL}/member/like`, {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
@@ -32,13 +34,21 @@ const UserLike = () => {
         "api/member/like(get) response.data.storeId: ",
         response.data.likeStoreIds
       );
+
+      // test 資料濾除
+      // console.log([...likeStoreIds].filter((v) => v !==5));
+      // let aaa = [1, 2, 3];
+      // console.log([...aaa].filter((v) => v !== Object.values({ item: 3 })[0]));
+      // let bbb = [{name: "ccc", id: 3},{name: "aaa", id: 4},{name: "dddd", id: 5}];
+      // console.log(
+      //   [...bbb].filter((v) => Object.values(v)[1] !== Object.values({ item: 5 })[0])
+      // );
     };
     getLike();
   }, []);
 
-
   async function handleRemoveLike(removeStoreId) {
-    // 要轉成物件
+    // 要轉成物件 POST 才有預檢(?)
     removeStoreId = { removeStoreId };
     try {
       // http://localhost:3002/api/member/like/remove (router.post)
@@ -46,12 +56,21 @@ const UserLike = () => {
         `${API_URL}/member/like/remove`,
         removeStoreId
       );
-      console.log(
-        `會員有移除 storeId ${removeStoreId} 的 like :`,
-        response.data
+      console.log("會員有移除 like :", response.data);
+
+      // 更新會員喜愛店家列表 (濾除取消收藏)
+      setLikeStores(
+        [...likeStores].filter(
+          (v) => Object.values(v)[1] !== Object.values(removeStoreId)[0]
+        )
+      );
+
+      // 更新會員喜愛店家 store_id 列表 (濾除取消收藏)Ｆ
+      setLikeStoreIds(
+        [...likeStoreIds].filter((v) => v !== Object.values(removeStoreId)[0])
       );
     } catch (e) {
-      console.error("res.error:", e.response.data);
+      console.error("res.error:", e.response);
     }
   }
 
@@ -87,6 +106,7 @@ const UserLike = () => {
           共 {likeStores.length} 筆
         </div>
         <div className="row">
+          {likeStores?<></>:(<div>沒有資料</div>)}
           {/* ------- store card 開始 -------- */}
           {likeStores.map((item) => {
             return (
@@ -157,7 +177,6 @@ const UserLike = () => {
                                 likeStoreIds.filter((v) => v !== item.storeId)
                                 // 符合條件留下 (比對 不是 storeId 的留下)
                               );
-                              setLikeStores()
                               //setFavAction({ action: 'remove', storeId: id })
                               handleRemoveLike(item.storeId);
                             } else {
