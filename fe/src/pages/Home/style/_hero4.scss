@@ -52,10 +52,24 @@
       .btn-box {
         border: 4px solid white;
         width: 238px;
-
+        .hero4-arrow {
+          font-size: 2rem;
+        }
         &:hover {
           color: $color-yellow;
           background-color: white;
+          .hero4-arrow {
+            animation: hero4-arrow 1s infinite linear;
+          }
+
+          @keyframes hero4-arrow {
+            0% {
+              transform: translateX(0.2rem);
+            }
+            100% {
+              transform: translateX(0.5rem);
+            }
+          }
         }
       }
     }

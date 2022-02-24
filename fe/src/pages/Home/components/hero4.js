@@ -42,14 +42,14 @@ const hero4 = () => {
             <Pointer2 className="hero4-pointer" />
             <div className="box-info">
               <img src={Hero1Img2} alt="" />
-              <div className="">前往店家領取餐點</div>
+              <div>前往店家領取餐點</div>
             </div>
           </div>
           <div className="box mb-lg-0 mb-5 mt-3">
             <Pointer3 className="hero4-pointer" />
             <div className="box-info">
               <img src={Hero1Img3} alt="" />
-              <div className="">救援美食成功</div>
+              <div>救援美食成功</div>
             </div>
           </div>
           <div className="col-lg-3 hero4-btn-group text-light flex-column d-flex align-items-center">
@@ -58,11 +58,11 @@ const hero4 = () => {
               探索您周邊的即期美食
             </p>
 
-            <div className="btn-box text-center align-items-center m-0">
-              立即前往
-              <BiRightArrowAlt />
+            <div className="btn-box text-center align-items-center m-0 d-flex align-items-center justify-content-center">
+              <div>立即前往</div>
+
+              <BiRightArrowAlt className="hero4-arrow" />
             </div>
-            {/* <Link to="" /> */}
           </div>
         </div>
       </div>
