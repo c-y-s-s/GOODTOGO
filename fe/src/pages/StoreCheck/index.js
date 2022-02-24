@@ -44,8 +44,6 @@ const Storecheck = () => {
     name: "",
     phone: "",
     storename: "",
-    picture: "",
-    county: "",
   });
 
   const [openTime, setOpenTime] = useState({
@@ -80,7 +78,7 @@ const Storecheck = () => {
     setMember({ ...member, ...{ closeTime } });
   };
 
-  // -------- 表單地區選擇開始 -------- //
+  // -------- 表單地區選擇與地址開始 -------- //
 
   const cityCountyData = CityCountyData;
 
@@ -91,7 +89,7 @@ const Storecheck = () => {
   // const availableCities = availableState?.states?.find((s) => s.name === selectedState);
 
 
-  // -------- 表單地區選擇結束 -------- //
+  // -------- 表單地區選擇與地址結束 -------- //
 
 
   // -------- 表單使用者資料變更開始 -------- //
@@ -200,7 +198,7 @@ const Storecheck = () => {
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="name"
@@ -225,7 +223,7 @@ const Storecheck = () => {
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="email"
@@ -250,7 +248,7 @@ const Storecheck = () => {
                           placeholder="密碼"
                           value={member.password}
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="password"
@@ -276,7 +274,7 @@ const Storecheck = () => {
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="confirmpassword"
@@ -313,40 +311,40 @@ const Storecheck = () => {
                           </select>
                         </div> */}
                         <div>
-        <label>City</label>
-        <select
-          placeholder="City"
-          value={selectedCity}
-          onChange={(e) => setSelectedCity(e.target.value)}
-        >
-          <option>--Choose City--</option>
-          {cityCountyData.map((value, key) => {
-            return (
-              <option value={value.CityName} key={key}>
-                {value.CityName}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+                          <label>City</label>
+                          <select
+                            placeholder="City"
+                            value={selectedCity}
+                            onChange={(e) => setSelectedCity(e.target.value)}
+                          >
+                            <option>--Choose City--</option>
+                            {cityCountyData.map((value, key) => {
+                              return (
+                                <option value={value.CityName} key={key}>
+                                  {value.CityName}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
 
-      <div>
-        <label>Area</label>
-        <select
-          placeholder="Area"
-          value={selectedArea}
-          onChange={(e) => setSelectedArea(e.target.value)}
-        >
-          <option>--Choose County--</option>
-          {availableArea?.AreaList.map((e, key) => {
-            return (
-              <option value={e.AreaName} key={key}>
-                {e.AreaName}
-              </option>
-            );
-          })}
-        </select>
-      </div>
+                        <div>
+                          <label>Area</label>
+                          <select
+                            placeholder="Area"
+                            value={selectedArea}
+                            onChange={(e) => setSelectedArea(e.target.value)}
+                          >
+                            <option>--Choose County--</option>
+                            {availableArea?.AreaList.map((e, key) => {
+                              return (
+                                <option value={e.AreaName} key={key}>
+                                  {e.AreaName}
+                                </option>
+                              );
+                            })}
+                          </select>
+                        </div>
                         {/* <div id="twzipcode"></div> */}
                         {/* <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
                           handleChangeCounty={this.handleChange}
@@ -369,7 +367,7 @@ const Storecheck = () => {
                           value={member.address}
                           maxLength="80"
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="address"
@@ -377,7 +375,7 @@ const Storecheck = () => {
                         >
                           請輸入詳細地址
                         </label>
-                        </div>
+                      </div>
                       {/* -------- 營業店家名稱 -------- */}
                       <label
                         htmlFor="storename"
@@ -395,7 +393,7 @@ const Storecheck = () => {
                           value={member.storename}
                           maxLength="30"
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="phone"
@@ -421,7 +419,7 @@ const Storecheck = () => {
                           value={member.phone}
                           maxLength="10"
                           onChange={handleChange}
-                          
+
                         />
                         <label
                           htmlFor="phone"
@@ -451,7 +449,7 @@ const Storecheck = () => {
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
-                          
+
                         />
                       </div>
                       {/* -------- 營業登記證上傳 -------- */}
@@ -469,11 +467,34 @@ const Storecheck = () => {
                           id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
-                          
+
                         />
                       </div>
 
-
+                      <label
+                        htmlFor="storeType"
+                        className="col-form-label input-label-title  text-green p-0"
+                      >
+                        商品類別
+                      </label>
+                      <div className="form-floating mb-3">
+                        <select
+                          name="storeType"
+                          className="form-control custom-input"
+                          id="storeType"
+                          placeholder="商品類別"
+                          value={member.storeType}
+                          onChange={handleChange}
+                        >
+                          <option value={member.storeType}>港式</option>
+                        </select>
+                        <label
+                          htmlFor="storeType"
+                          className="floating-label  text-grey"
+                        >
+                          好吃ㄉ蘇喜仔爭鮮
+                        </label>
+                      </div>
 
 
                       {/* ------- 營業星期 (複選) -------- */}
@@ -527,7 +548,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  
+
                                 />
                                 <label
                                   htmlFor="openHour"
@@ -552,7 +573,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  
+
                                 />
                                 <label
                                   htmlFor="openMinute"
@@ -582,7 +603,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  
+
                                 />
                                 <label
                                   htmlFor="closeHour"
@@ -608,7 +629,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  
+
                                 />
                                 <label
                                   htmlFor="closeMinute"
