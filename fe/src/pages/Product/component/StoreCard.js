@@ -170,7 +170,7 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
                     />
                     {/* //!  資料庫時間 - 目前時間 得出秒數 + 上去套件倒數 */}
                   </div>
-                  <div className="card-body ">
+                  <div className="card-body">
                     <div className="">
                       <div className="card-title">{item.name}</div>
                       <div className="card-star ">

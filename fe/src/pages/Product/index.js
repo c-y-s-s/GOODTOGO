@@ -14,7 +14,12 @@ import ProductsDetails from "./component/ProductsDetails";
 // -------- 引入元件區塊結束 --------
 
 const Product = () => {
-  //取出網址上的 storeId 這邊的 sroreId 是對應到 app.js 若要更改要同步更改
+  const [error, setError] = useState(null);
+  //後端資料使用陣列格式，所以這邊給她空陣列
+  const [data, setData] = useState([]);
+  const [storeData, setStoreData] = useState([]);
+  const [productsComment, setproductsComment] = useState([]);
+  //取出網址上的 storeId 這邊的 storeId 是對應到 app.js 若要更改要同步更改
   const { storeId } = useParams();
   const [error, setError] = useState(null);
   // 存商家商品
@@ -29,7 +34,7 @@ const Product = () => {
   const [storeinOperation, setStoreInOperation] = useState("");
   // 店家星期休息營業?
   const [storeTodayClose, setStoreTodayClose] = useState("");
- 
+
   // 存倒數計時有沒有結束
   // const [countdownTimeUp, setCountdownTimeUp] = useState("");
   // console.log("index --------->",countdownTimeUp);

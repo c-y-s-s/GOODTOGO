@@ -1,0 +1,41 @@
+.store-info-card {
+  overflow: hidden;
+  background-color: white;
+  width: 263px;
+  height: 359px;
+  border-radius: 0.4rem;
+  padding: 1.6rem 1rem;
+  border-top: 0.54rem solid $color-light-green;
+  border-bottom: 0.54rem solid $color-light-green;
+  transition: 0.38s;
+  position: relative;
+  flex-direction: column;
+  &:hover {
+    filter: drop-shadow(0.188rem 0.188rem 10px $color-dark-grey);
+  }
+
+  .info-img {
+    // width: 233px;
+    height: 162px;
+    background-color: gray;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+  .info-title {
+    // width: 233px;
+    .cate-tag {
+      text-align: center;
+      align-items: center;
+      padding: 0.1rem 0.4rem;
+      background-color: $color-light-grey;
+      border-radius: 12px;
+      width: fit-content;
+      height: fit-content;
+      font-size: $fz-ss-sm;
+      color: $color-dark-grey;
+    }
+  }
+}
