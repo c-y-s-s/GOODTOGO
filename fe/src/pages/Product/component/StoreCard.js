@@ -40,7 +40,7 @@ const StoreCard = ({
 
   // ? 倒數計時及時開關
   const [countdownTimeUp, setCountdownTimeUp] = useState("");
-  console.log("========>", countdownTimeUp);
+
   // 第二層
   useEffect(() => {
     let getProducts = async () => {
@@ -49,7 +49,7 @@ const StoreCard = ({
     };
     getProducts();
   }, [countdownTimeUp]);
-  console.log(countdownTimeUp);
+
   // ? 時間到執行這個元件
   const Completionist = () => {
     return <span>結束販售</span>;

@@ -3,6 +3,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import ProductsDetailsComment from "./ProductsDetailsComment";
+import { ERR_MSG } from "../../../utils/error";
 // -------- React icon --------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
@@ -21,12 +22,21 @@ const ProductsDetails = ({
   setisModalTouch,
 }) => {
   const { storeId } = useParams();
-  console.log(storeId);
+
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
-
+ 
+  // 存錯誤訊息
+  const [shoppingErrormsg,setshoopingErrormsg] =useState([]) 
+  console.log(shoppingErrormsg);
+  //存購物車商品內容
+  const [shoppingData, setShoppIngData] = useState({
+    products_id: openProductsModaID,
+    amount: "",
+  });
+  console.log("shoppingData ----->", shoppingData);
   // const [productcar,setProductArr] = useState([])
   useLayoutEffect(() => {
     let getProductId = async () => {
@@ -52,19 +62,35 @@ const ProductsDetails = ({
     productstarTotal / productModalCommentData.length
   ).toFixed(1);
 
-  
   // 購買數量計數器
   const [buyamount, setBuyamount] = useState(0);
-  function handlePlus() {
+  function handlePlus(e) {
     setBuyamount(buyamount + 1);
-  }
 
-  function handleMinus() {
+    setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
+    setshoopingErrormsg("")
+  }
+  function handleMinus(e) {
     setBuyamount(buyamount - 1);
+
+    setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
+    setshoopingErrormsg("")
   }
 
-  function handleProductsLocalStorage(data) {
-    alert("加入購物車成功");
+  async function handleAddShoppingCar(e) {
+    e.preventDefault();
+    try {
+      let response = await axios.post(
+        `${API_URL}/shop/shoppingcar`,
+        shoppingData
+      );
+      console.log(response.data);
+    } catch (e) {
+      //印出錯誤物件
+      // console.error(e.response)
+      //把錯誤的data訊息放進自己做的errors模組裡後端傳出來的code號對應模組裡的訊息
+      setshoopingErrormsg(ERR_MSG[e.response.data.code]);
+    }
   }
 
   return (
@@ -75,7 +101,6 @@ const ProductsDetails = ({
       ></div>
       {/* -------- 商品資訊上半部分 -------- */}
       {productModalData.map((data) => {
-        console.log(data);
         return (
           <div className="container products-details " key={data.id}>
             <div className="col-12 pt-4 products-details-data">
@@ -91,8 +116,9 @@ const ProductsDetails = ({
                 <button
                   className="products-close"
                   onClick={() => {
-                    setOpenProductsModal(false)
-                    setisModalTouch(true)}}
+                    setOpenProductsModal(false);
+                    setisModalTouch(true);
+                  }}
                 >
                   <FiX />
                 </button>
@@ -152,11 +178,12 @@ const ProductsDetails = ({
                             <button
                               className=" buy-num-minus equation"
                               onClick={handleMinus}
+                              id={`${data.id}`}
                             >
                               <FiMinusCircle />
                             </button>
                           ) : (
-                            <button className=" buy-num-minus equation">
+                            <button className=" buy-num-minus equation opacity-0">
                               <FiMinusCircle />
                             </button>
                           )}
@@ -170,11 +197,12 @@ const ProductsDetails = ({
                             <button
                               className=" buy-num-plus equation"
                               onClick={handlePlus}
+                              id={`${data.id}`}
                             >
                               <FiPlusCircle />
                             </button>
                           ) : (
-                            <button className=" buy-num-plus equation">
+                            <button className=" buy-num-plus equation opacity-0">
                               <FiPlusCircle />
                             </button>
                           )}
@@ -192,20 +220,21 @@ const ProductsDetails = ({
                         無法提供
                       </div>
                     ) : storeinOperation ? (
-                      <Link
-                        to={``}
+                      <button
                         className="btn btn-primary"
-                        onClick={() => {
+                        id={`${data.id}`}
+                        onClick={
+                          handleAddShoppingCar
                           // productarr.push(data);
                           // console.log(productarr);
                           // let products = JSON.stringify(data);
                           // console.log(products);
                           // alert("加入購物車成功");
                           // localStorage.setItem("proaaducts", products);
-                        }}
+                        }
                       >
-                        加入購物車
-                      </Link>
+                        {shoppingErrormsg ? shoppingErrormsg : "加入購物車"}
+                      </button>
                     ) : (
                       <div href="#" className="btn btn-primary close-buy-car">
                         無法提供
