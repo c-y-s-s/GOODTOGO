@@ -12,7 +12,7 @@ import { FaHeart } from "react-icons/fa";
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- google map -------
-import { MAP_KEY } from "../../../key";
+// import { MAP_KEY } from "../../../key";
 import GoogleMapReact from "google-map-react";
 import MapPin from "./MapPin";
 // -------- uuid --------
@@ -25,8 +25,8 @@ const StoreDetails = ({
   storeId,
   storeData,
   setStoreInOperation,
-  setStoredatopen,
-  storedayopen,
+  setStoreTodayClose,
+  storeTodayClose,
 }) => {
   moment.locale("zh-tw");
 
@@ -86,13 +86,13 @@ const StoreDetails = ({
     <div>
       {storeData.map((item) => {
         //判斷今天店家有沒有休息
-        let closeDay = JSON.parse(item.close_day);
-        closeDay.forEach((item) => {
+        let closeworkDay = JSON.parse(item.close_day);
+        closeworkDay.forEach((item) => {
           if (new Date().getDay() === item) {
-            setStoredatopen(true);
+            setStoreTodayClose(true);
           }
         });
-        console.log("aaaaaaaaaa",storedayopen);
+        console.log("aaaaaaaaaaaaaa", storeTodayClose);
         /* // 休息日調整格式 */
         let closeday = JSON.parse(item.close_day).join("、");
         /* 電話號碼加上- */
@@ -188,7 +188,23 @@ const StoreDetails = ({
                           {moment(item.open_time, "hh:mm:ss").format("LT")}-
                           {moment(item.close_time, "hh:mm:ss").format("LT")}
                         </div>
-                        {inOperation ? (
+
+                        {/* {inOperation ? (
+                          <div className="d-flex store-data-left-content-open">
+                            營業中
+                          </div>
+                        ) : (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        )} */}
+
+                        {/* 判斷公休日及營業時間區間 */}
+                        {storeTodayClose ? (
+                          <div className="d-flex store-data-left-content-close">
+                            休息中
+                          </div>
+                        ) : inOperation ? (
                           <div className="d-flex store-data-left-content-open">
                             營業中
                           </div>
@@ -197,9 +213,8 @@ const StoreDetails = ({
                             休息中
                           </div>
                         )}
-
-                        
                       </div>
+                     
                     </div>
 
                     <div className="d-flex store-data-left-content">
@@ -210,10 +225,10 @@ const StoreDetails = ({
                     </div>
 
                     <div className="d-flex store-data-left-content">
-                      <div className="store-data-icon">
+                      {/* <div className="store-data-icon">
                         <FaExclamationCircle />
-                      </div>
-                      <div>店家介紹 : 這欄考慮拿掉</div>
+                      </div> */}
+                      {/* <div>店家介紹 : 這欄考慮拿掉</div> */}
                     </div>
                   </div>
                 </div>

@@ -28,7 +28,7 @@ const Product = () => {
   // 店家時間休息營業?
   const [storeinOperation, setStoreInOperation] = useState("");
   // 店家星期休息營業?
-  const [storedayopen , setStoredatopen] = useState("")
+  const [storeTodayClose, setStoreTodayClose] = useState("");
  
   // 存倒數計時有沒有結束
   // const [countdownTimeUp, setCountdownTimeUp] = useState("");
@@ -55,8 +55,8 @@ const Product = () => {
         storeData={storeData}
         storeId={storeId}
         setStoreInOperation={setStoreInOperation}
-        setStoredatopen={setStoredatopen}
-        storedayopen={storedayopen}
+        setStoreTodayClose={setStoreTodayClose}
+        storeTodayClose={storeTodayClose}
       />
       {/* -------- 商家Logo、詳細資訊區塊結束 -------- */}
 
@@ -79,7 +79,7 @@ const Product = () => {
         <StoreCard
           storeId={storeId}
           storeinOperation={storeinOperation}
-          storedayopen={storedayopen}
+          storeTodayClose={storeTodayClose}
         />
       ) : (
         <StoreProductsComment productsComment={productsComment} />

@@ -35,7 +35,8 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
 
   // ? 倒數計時及時開關
   const [countdownTimeUp, setCountdownTimeUp] = useState("");
-
+  console.log("========>", countdownTimeUp);
+  // 第二層
   useEffect(() => {
     let getProducts = async () => {
       let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
@@ -43,24 +44,24 @@ const StoreCard = ({ storeId, storeinOperation, storeDayClose }) => {
     };
     getProducts();
   }, [countdownTimeUp]);
-
+  console.log(countdownTimeUp);
   // ? 時間到執行這個元件
   const Completionist = () => {
-    setCountdownTimeUp(true);
     return <span>結束販售</span>;
   };
-  console.log(countdownTimeUp);
+
   // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
       // Render a Completionist complete
       // ? 商品結束販售給開關true
-      setCountdownTimeUp(true);
+ setCountdownTimeUp(completed);
       return <Completionist />;
     } else {
       //  Render 倒數時間
       // ? 商品倒數中給 false 但是會一直重複跑導致往頁很慢
-      setCountdownTimeUp(false);
+  setCountdownTimeUp(completed);
+      setCountdownTimeUp(completed);
       return (
         <span>
           {zeroPad(hours)}:{zeroPad(minutes)}:{zeroPad(seconds)}
