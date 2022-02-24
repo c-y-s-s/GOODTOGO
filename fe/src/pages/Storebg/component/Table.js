@@ -1,8 +1,38 @@
-import React from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
+import { API_URL } from "../../../utils/config";
+
+
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
 
 const Table = () => {
+  const [data, setData] = useState("");
+
+  // -------- 用 session cookie 取使用者資料 --------
+  useEffect(() => {
+    // http://localhost:3002/api/member/proile
+    let setProducts = async () => {
+      let response = await axios.get(`${API_URL}/storebg/products`, {
+        withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
+      });
+      // response 是物件
+      // console.log("api/member/profile(get) response.data: ", response.data);
+      // console.log(
+      //   "api/storebg/products(get) response.data.logo: ",
+      //   response.data.logo
+      // );
+      console.log(
+        "api/storebg/products(get) response.data.name: ",
+        response.data.name
+      );
+      // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
+      // setLogo(response.data.logo);
+      // setStoreName(response.data.name);
+    };
+    setProducts();
+  }, []);
+
   return (
     <div>
       <table className="table background-storebg-data-right-content-table">
@@ -26,8 +56,8 @@ const Table = () => {
                 <img src={require(`../images/4.1.jpg`)} alt="" />
               </div>
             </td>
-            <td>肉鬆麵包</td>
-            <td>NT$45</td>
+            <td>{data.name}</td>
+            <td>NT${data.price}</td>
             <td>10</td>
             <td>1</td>
             <td>PM 6:30 ~ PM 8:30</td>
@@ -153,7 +183,10 @@ const Table = () => {
                       >
                         Close
                       </button> */}
-                      <button type="button" className="btn storebg-data-modal-green">
+                      <button
+                        type="button"
+                        className="btn storebg-data-modal-green"
+                      >
                         確定
                       </button>
                     </div>
