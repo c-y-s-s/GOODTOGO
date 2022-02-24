@@ -18,7 +18,7 @@ const Slider = () => {
   useEffect(() => {
     const lastIndex = displayImage.length;
     //如果slideIndex為-1（繼續往左按)，會回到slideIndex=3
-    if (slideIndex < 0) {
+    if (slideIndex <= 0) {
       setSlideIndex(lastIndex);
     }
     //如果slideIndex為4以上（繼續往右按)，會回到slideIndex=1
@@ -42,29 +42,29 @@ const Slider = () => {
   console.log(typeof slideIndex);
   console.log(slideIndex);
   // console.log("圖片的數量", displayImage.length); //長度跟陣列[1]都有值
-  const showSlide = () => {
-    for (let i = 0; i <= displayImage.length; i++) {
-      return (
-        <div key={uuidv4()} index={i}>
-          <img src={`${displayImage[i]}`} alt="" />
-        </div>
-      );
-    }
-  };
+  // const showSlide = () => {
+  //   for (let i = 0; i <= displayImage.length; i++) {
+  //     return (
+  //       <div key={uuidv4()} index={i}>
+  //         <img src={`${displayImage[i]}`} alt="" />
+  //       </div>
+  //     );
+  //   }
+  // };
 
   return (
     <>
       <div className="slider d-grid">
         <div className="slider-box text-center">
           <div className="wrapper d-flex">
-            {showSlide()}
-            {/* {displayImage.map((img, i) => {
-                return (
-                  <div key={uuidv4()} index={i}>
-                    <img src={`${img}`} alt="" />
-                  </div>
-                );
-              })} */}
+            {/* {showSlide()} */}
+            {displayImage.map((img, i) => {
+              return (
+                <div key={uuidv4()} index={i}>
+                  <img src={`${img}`} alt="" />
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="slider-point list-unstyled">
