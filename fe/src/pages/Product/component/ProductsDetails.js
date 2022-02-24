@@ -27,9 +27,9 @@ const ProductsDetails = ({
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
- 
+
   // 存錯誤訊息
-  const [shoppingErrormsg,setshoopingErrormsg] =useState([]) 
+  const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
   console.log(shoppingErrormsg);
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
@@ -63,18 +63,18 @@ const ProductsDetails = ({
   ).toFixed(1);
 
   // 購買數量計數器
-  const [buyamount, setBuyamount] = useState(0);
+  const [buyamount, setBuyamount] = useState(1);
   function handlePlus(e) {
     setBuyamount(buyamount + 1);
 
     setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
-    setshoopingErrormsg("")
+    setshoopingErrormsg("");
   }
   function handleMinus(e) {
     setBuyamount(buyamount - 1);
 
     setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
-    setshoopingErrormsg("")
+    setshoopingErrormsg("");
   }
 
   async function handleAddShoppingCar(e) {
@@ -163,7 +163,7 @@ const ProductsDetails = ({
                       <div className="d-flex justify-content-between pt-4">
                         <div>合計金額</div>
                         <div>
-                          餐點剩餘{" "}
+                          餐點剩餘
                           {storeinOperation === false ? 0 : data.amount}
                         </div>
                       </div>
@@ -174,7 +174,7 @@ const ProductsDetails = ({
                         </div>
                         <div className="d-flex buy-num">
                           {/* 減號 */}
-                          {buyamount > 0 ? (
+                          {buyamount > 1 ? (
                             <button
                               className=" buy-num-minus equation"
                               onClick={handleMinus}
@@ -233,7 +233,7 @@ const ProductsDetails = ({
                           // localStorage.setItem("proaaducts", products);
                         }
                       >
-                        {shoppingErrormsg ? shoppingErrormsg : "加入購物車"}
+                        加入購物車
                       </button>
                     ) : (
                       <div href="#" className="btn btn-primary close-buy-car">
