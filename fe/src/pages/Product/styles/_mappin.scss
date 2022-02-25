@@ -1,0 +1,48 @@
+.map-pin {
+    color: white;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    .map-container {
+        .map-pin-name {
+            color: white;
+            display: flex;
+            justify-content: center;
+            width: 15rem;
+            padding: 0.35rem;
+            font-size: $fz-md;
+            background: $color-green;
+            border-radius: 1rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: 0.25s;
+            font-weight: 900;
+            letter-spacing: 0.1rem;
+        }
+        .map-pin-icon {
+            color: $color-red;
+            font-size: 2.2rem;
+            transition: 0.3s;
+            width: 100%;
+            animation: TestMove2 1s infinite alternate;
+            position: relative;
+        }
+    }
+}
+.map-pin-icon:hover + .map-pin-name {
+    opacity: 1;
+}
+
+@keyframes TestMove2 {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -10px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}
