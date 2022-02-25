@@ -13,6 +13,9 @@ const ProductsData = ({ storeid }) => {
 
   const [productsAmountTotal, setProductsAmountTotal] = useState(3);
 
+  const [toggled, setToggled] = useState(false);
+  setToggled((toggled) => !toggled);
+
   function handleMinus(e) {
     setProductsAmountTotal(productsAmountTotal - 1);
   }
