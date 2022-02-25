@@ -23,8 +23,12 @@ const shoppingcart = () => {
               <div className="user-shopping-cart-data-title-category">麵食</div>
             </div>
 
-            <div className="user-shopping-cart-data-title-rwd">單價</div>
-            <div className="user-shopping-cart-data-title-rwd">數量</div>
+            <div className="user-shopping-cart-data-title-rwd user-shopping-cart-data-price">
+              單價
+            </div>
+            <div className="user-shopping-cart-data-title-rwd user-shopping-cart-data-amount">
+              數量
+            </div>
             <div className="d-flex  user-shopping-cart-data-title-rwd">
               <div className="mx-5 user-shopping-cart-data-title-rwd">小記</div>
               <div className="user-shopping-cart-data-title-rwd">刪除</div>
@@ -45,14 +49,22 @@ const shoppingcart = () => {
                 />
               </div>
               <div className="user-shopping-cart-products-data-name-rwd">
-                <div className="ms-4">鴨肉蓋飯</div>
+                <div className="user-shopping-cart-products-data-name-delete-rwd">
+                  <div className="user-shopping-cart-products-data-name">
+                    鴨肉蓋飯
+                  </div>
+                  <button className="user-shopping-cart-products-data-rwd-delete">
+                    <FiX />
+                  </button>
+                </div>
+
                 <div className="user-shopping-cart-products-data-price">
                   <span className="pe-2">$</span>111
                 </div>
               </div>
             </div>
 
-            <div class="d-flex align-items-center">
+            <div class="user-shopping-cart-products-data-calculate">
               <div className="d-flex user-shopping-cart-products-data-amount">
                 <div className="d-flex buy-num">
                   {/* 減號 */}
@@ -68,9 +80,13 @@ const shoppingcart = () => {
                 </div>
               </div>
 
-              <div className="d-flex">
-                <div className="user-shopping-cart-products-data-price-total">
-                  <span className="pe-2">$</span>120
+              <div className="d-flex user-shopping-cart-products-data-rwd-total">
+                <div className="user-shopping-cart-products-data-price-total d-flex">
+                  <div className="user-shopping-cart-products-data-price-total-chinese-title">
+                    小計:
+                  </div>
+                  <spab className="pe-2">$</spab>
+                  <div>120</div>
                 </div>
                 <div className="user-shopping-cart-products-data-delete">
                   <button>
