@@ -1,6 +1,6 @@
 .rec-content {
   height: 70vh;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: 1.2fr repeat(10, 1fr) 1.2fr;
   grid-template-rows: [row1-start] 8rem [row1-end] 19rem [third-line] auto [last-line];
   grid-template-areas:
     "header header header header header header header header header header"
@@ -23,14 +23,11 @@
   .rec-cards-holder {
     margin-top: 3rem;
     align-items: end;
-    grid-column-start: 2;
-    grid-column-end: 12;
-    grid-row-start: 2;
-    grid-row-end: 3.5;
-
+    grid-area: 2/2/4/12;
+    align-items: center;
+    padding-bottom: 10rem;
+    justify-content: space-between;
     z-index: 30;
-    // grid-row-start: 2;
-    // grid-row-end: 3;
   }
   .bottom-area {
     position: relative;

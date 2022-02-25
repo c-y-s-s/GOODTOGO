@@ -4,7 +4,7 @@
   }
 
   grid-template-columns: 1.2fr repeat(10, 1fr) 1.2fr;
-  grid-template-rows: [row1-start]8.9rem [row2-start]5rem [row3-start]5rem [row4-start]5rem [row5-start]5rem [row5-end]auto [row6-start]5rem [row7-start]3rem [third-line] 18rem [last-line];
+  grid-template-rows: [row1-start]8rem [row2-start]8rem [row3-start]5rem [row4-start]5rem [row5-start]5rem [row5-end]auto [row6-start]5rem [row7-start]3rem [third-line] 18rem [last-line];
   grid-template-areas:
     "header header header header header header"
     "main main main main main main"
@@ -25,6 +25,7 @@
       height: fit-content;
       width: fit-content;
       margin: auto;
+      padding-top: 3rem;
       padding-bottom: 0.8rem;
       border-bottom: 1px solid $color-grey;
     }
