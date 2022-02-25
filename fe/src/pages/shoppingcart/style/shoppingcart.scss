@@ -4,7 +4,7 @@
     color: #fff;
     padding: 1.55rem 0;
     font-size: $fz-xxxx-lg;
-    letter-spacing: $ls-lg;
+    letter-spacing: 1rem;
 }
 
 .user-shopping-cart {
@@ -52,10 +52,13 @@
                     object-fit: cover;
                     border-radius: 2px;
                 }
+                .user-shopping-cart-products-data-name-rwd {
+                    display: flex;
+                }
             }
 
             .user-shopping-cart-products-data-price {
-                margin-right: 0.5rem;
+                margin-left: 8rem;
             }
             .user-shopping-cart-products-data-amount {
                 .buy-num {
@@ -159,5 +162,36 @@
                 background-color: $color-green;
             }
         }
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .user-shopping-cart
+        .user-shopping-cart-data
+        .user-shopping-cart-products-data
+        .user-shopping-cart-products-data-price {
+        margin-left: 5.5rem;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .user-shopping-cart
+        .user-shopping-cart-data
+        .user-shopping-cart-products-data
+        .user-shopping-cart-products-data-price {
+        margin-left: 2.8rem;
+    }
+}
+@media screen and (max-width: 1000px) {
+    .user-shopping-cart-data-title {
+        .user-shopping-cart-data-title-rwd {
+            display: none;
+        }
+    }
+    .user-shopping-cart-products-data-name-rwd {
+        display: block;
+    }
+    .user-shopping-cart .user-shopping-cart-data .user-shopping-cart-products-data {
+        flex-wrap: wrap;
     }
 }

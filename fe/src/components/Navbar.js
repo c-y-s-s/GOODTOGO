@@ -20,7 +20,7 @@ const Navbar = ({ auth }) => {
           </Link>
         </div>
         <div className="sm-logo-left">
-          <Link to="/cart" className="sm-icon">
+          <Link to="/shoppingcart" className="sm-icon">
             <BsBag />
           </Link>
           <Hamburger
@@ -62,7 +62,7 @@ const Navbar = ({ auth }) => {
             </>
           )}
 
-          <Link to="/cart" className="nav-icon">
+          <Link to="/shoppingcart" className="nav-icon">
             <BsBag />
           </Link>
           <Link to="/map" className="nav-icon">

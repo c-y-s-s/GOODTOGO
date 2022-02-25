@@ -23,11 +23,11 @@ const shoppingcart = () => {
               <div className="user-shopping-cart-data-title-category">麵食</div>
             </div>
 
-            <div>單價</div>
-            <div>數量</div>
-            <div className="d-flex">
-              <div className="mx-5">小記</div>
-              <div>刪除</div>
+            <div className="user-shopping-cart-data-title-rwd">單價</div>
+            <div className="user-shopping-cart-data-title-rwd">數量</div>
+            <div className="d-flex  user-shopping-cart-data-title-rwd">
+              <div className="mx-5 user-shopping-cart-data-title-rwd">小記</div>
+              <div className="user-shopping-cart-data-title-rwd">刪除</div>
             </div>
           </div>
 
@@ -44,33 +44,39 @@ const shoppingcart = () => {
                   alt=""
                 />
               </div>
-              <div className="ms-4">鴨肉蓋飯</div>
+              <div className="user-shopping-cart-products-data-name-rwd">
+                <div className="ms-4">鴨肉蓋飯</div>
+                <div className="user-shopping-cart-products-data-price">
+                  <span className="pe-2">$</span>111
+                </div>
+              </div>
             </div>
-            <div className="user-shopping-cart-products-data-price">
-              <span className="pe-2">$</span>111
-            </div>
-            <div className="d-flex user-shopping-cart-products-data-amount">
-              <div className="d-flex buy-num">
-                {/* 減號 */}
-                <button className=" buy-num-minus equation">
-                  <FiMinusCircle className="icon" />
-                </button>
 
-                <div className=" buy-num-num ">2</div>
-                {/* 加號 */}
-                <button className=" buy-num-plus equation">
-                  <FiPlusCircle className="icon" />
-                </button>
+            <div class="d-flex align-items-center">
+              <div className="d-flex user-shopping-cart-products-data-amount">
+                <div className="d-flex buy-num">
+                  {/* 減號 */}
+                  <button className=" buy-num-minus equation">
+                    <FiMinusCircle className="icon" />
+                  </button>
+
+                  <div className=" buy-num-num ">2</div>
+                  {/* 加號 */}
+                  <button className=" buy-num-plus equation">
+                    <FiPlusCircle className="icon" />
+                  </button>
+                </div>
               </div>
-            </div>
-            <div className="d-flex">
-              <div className="user-shopping-cart-products-data-price-total">
-                <span className="pe-2">$</span>120
-              </div>
-              <div className="user-shopping-cart-products-data-delete">
-                <button>
-                  <FiX />
-                </button>
+
+              <div className="d-flex">
+                <div className="user-shopping-cart-products-data-price-total">
+                  <span className="pe-2">$</span>120
+                </div>
+                <div className="user-shopping-cart-products-data-delete">
+                  <button>
+                    <FiX />
+                  </button>
+                </div>
               </div>
             </div>
           </div>
