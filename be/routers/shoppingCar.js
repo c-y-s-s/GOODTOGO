@@ -15,8 +15,8 @@ router.post("/shoppingcar", async (req, res, next) => {
   }
 
    let [result] = await connection.execute(
-     "INSERT INTO shopping_cart (products_id,amount)VALUES(?,?)",
-     [req.body.products_id, req.body.amount]
+     "INSERT INTO shopping_cart (store_id,user_id,products_id,amount)VALUES(?,?,?,?)",
+     [req.body.store_id, req.body.user_id, req.body.products_id, req.body.amount]
    );
     
 
