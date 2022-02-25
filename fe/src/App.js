@@ -26,6 +26,7 @@ import Admin from "./pages/Admin/";
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
+import ShoppingCart from "./pages/shoppingcart/"
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
   // 全域狀態
@@ -62,6 +63,7 @@ function App() {
           path="/productcomment/:storeId"
           element={<ProductComment />}
         ></Route>
+        <Route path="/shoppingcart" element={<ShoppingCart />}></Route>
         <Route path="/map" element={<Map />}></Route>
 
         <Route path="/my_account/like-list" element={<UserLikeList />}></Route>

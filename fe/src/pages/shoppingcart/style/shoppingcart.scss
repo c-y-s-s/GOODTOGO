@@ -1,0 +1,163 @@
+.shopping-title {
+    background-color: $color-green;
+    text-align: center;
+    color: #fff;
+    padding: 1.55rem 0;
+    font-size: $fz-xxxx-lg;
+    letter-spacing: $ls-lg;
+}
+
+.user-shopping-cart {
+    margin-top: 2rem;
+    color: $color-dark-grey;
+    width: 500px;
+    .user-shopping-cart-data-title {
+        font-size: $fz-md;
+        padding: 1.6rem 0;
+        .store-icon {
+            color: $color-grey;
+            margin-bottom: 0.2rem;
+        }
+        .user-shopping-cart-data-title-name {
+            padding-left: 1rem;
+        }
+        .user-shopping-cart-data-title-category {
+            background-color: #eaeaea;
+            margin-left: 0.5rem;
+            padding: 0.15rem 0.55rem;
+            border-radius: 3rem;
+        }
+    }
+    .user-shopping-cart-data {
+        border: 1px solid $color-light-grey;
+        background: rgb(255, 255, 255);
+        padding: 0rem 2rem;
+        .user-shopping-cart-data-title {
+            justify-content: space-between;
+            align-items: center;
+        }
+        .user-shopping-cart-products-data {
+            margin-bottom: 1rem 0;
+            padding: 1.1rem 0;
+            border-top: 1px solid $color-light-grey;
+            border-bottom: 1px solid $color-light-grey;
+            align-items: center;
+            justify-content: space-between;
+            font-size: $fz-xx-lg;
+            .user-shopping-cart-products-data-name {
+                align-items: center;
+                .cover-photo {
+                    width: 6.4rem;
+                    height: 5.4rem;
+                    object-fit: cover;
+                    border-radius: 2px;
+                }
+            }
+
+            .user-shopping-cart-products-data-price {
+                margin-right: 0.5rem;
+            }
+            .user-shopping-cart-products-data-amount {
+                .buy-num {
+                    align-items: center;
+                    margin-right: 2.5rem;
+                    // 加減號
+                    .equation {
+                        background: #fff;
+                        border: none;
+                        color: $color-grey;
+                        font-size: 2rem;
+                        padding-bottom: 0.6rem;
+                        font-weight: "normal";
+                    }
+                    //減號
+                    .buy-num-minus {
+                        transition: 0.32s;
+                        .icon {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                        }
+                        &:hover {
+                            color: $color-green;
+                        }
+                    }
+                    //購買數量
+                    .buy-num-num {
+                        padding: 0px 0.95rem;
+                        color: $color-green;
+                        font-weight: $fw-black;
+                        font-size: $fz-xxxx-lg;
+                    }
+                    //加號
+                    .buy-num-plus {
+                        padding-right: 0;
+                        transition: 0.32s;
+                        .icon {
+                            width: 1.5rem;
+                            height: 1.5rem;
+                        }
+                        &:hover {
+                            color: $color-green;
+                        }
+                    }
+                }
+            }
+            .user-shopping-cart-products-data-price-total {
+                margin-right: 2.8rem;
+                color: $color-green;
+            }
+            .user-shopping-cart-products-data-delete {
+                button {
+                    background-color: rgba(0, 0, 0, 0);
+                    border: none;
+                    color: $color-grey;
+                    transition: 0.3s;
+                    &:hover {
+                        color: $color-dark-grey;
+                    }
+                }
+            }
+        }
+    }
+    .user-shopping-cart-data-payment {
+        margin-top: 2rem;
+        font-size: $fz-sm;
+        .user-shopping-cart-data-payment-method {
+            color: $color-green;
+            padding-left: 2rem;
+            .site {
+                input {
+                    margin-right: 0.45rem;
+                }
+            }
+            .credit-card {
+                margin-top: 1rem;
+                input {
+                    margin-right: 0.45rem;
+                }
+            }
+        }
+    }
+    .price_total {
+        font-size: 24/16 + rem;
+        color: $color-dark-yellow;
+        letter-spacing: $ls-md;
+        font-weight: $fw-black;
+        padding-left: 2rem;
+    }
+    .user-shopping-cart-data-checkout {
+        padding: 1rem 0;
+        text-align: end;
+
+        button {
+            border: none;
+            padding: 0.7rem 4rem;
+            background-color: $color-light-green;
+            color: white;
+            transition: 0.3s;
+            &:hover {
+                background-color: $color-green;
+            }
+        }
+    }
+}
