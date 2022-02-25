@@ -92,7 +92,7 @@ const StoreDetails = ({
             setStoreTodayClose(true);
           }
         });
-        console.log("aaaaaaaaaaaaaa", storeTodayClose);
+
         /* // 休息日調整格式 */
         let closeday = JSON.parse(item.close_day).join("、");
         /* 電話號碼加上- */

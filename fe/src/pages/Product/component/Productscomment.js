@@ -61,7 +61,7 @@ const StoreProductsComment = () => {
         setproductsComment(productsCommentResponse.data.data);
       } else if (productsCommitStarSortSwitch === true) {
         setproductsComment(productsCommentStarDescResponse.data.data);
-        console.log("aaaaaaaaaaaaa", productsCommitStarSortSwitch);
+      
       } else if (productsCommitStarSortSwitch === false) {
         setproductsComment(productsCommentStarAscResponse.data.data);
       } else if (productsCommitTimeSortSwitch === true) {

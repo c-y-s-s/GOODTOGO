@@ -55,17 +55,20 @@ let productsRouter = require("./routers/products");
 app.use("/api/products", productsRouter);
 // -------- 商品 RESTful API 列表 結束 --------
 
-// :TODO: -------- 商家評價排序由多至少 --------
+//  -------- 商家評價排序由多至少 --------
 let productsCommentStarDesc = require("./routers/productsCommentStarDesc");
 app.use("/api/productscommentstardesc", productsCommentStarDesc);
-// :TODO: -------- 商家評價排序由少置多 --------
+//  -------- 商家評價排序由少置多 --------
 let productsCommentStarAsc = require("./routers/productsCommentStarAsc");
 app.use("/api/productscommentstarasc", productsCommentStarAsc);
 
-// :TODO: -------- 商家評價留言時間由遠到近 --------
+//  -------- 商家評價留言時間由遠到近 --------
 let productsCommentTimeAsc = require("./routers/productsCommentTimeAsc");
 app.use("/api/productscommenttimeasc", productsCommentTimeAsc);
 
+//  ------- 購物車寫入 --------
+let shoopingCarRouter = require("./routers/shoppingCar");
+app.use("/api/shop", shoopingCarRouter);
 
 
 //  -------- 指定商品 RESTful API 列表 --------

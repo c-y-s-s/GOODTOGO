@@ -40,7 +40,7 @@ const StoreCard = ({
 
   // ? 倒數計時及時開關
   const [countdownTimeUp, setCountdownTimeUp] = useState("");
-  console.log("========>", countdownTimeUp);
+
   // 第二層
   useEffect(() => {
     let getProducts = async () => {
@@ -49,12 +49,14 @@ const StoreCard = ({
     };
     getProducts();
   }, [countdownTimeUp]);
-  console.log(countdownTimeUp);
+
   // ? 時間到執行這個元件
   const Completionist = () => {
     return <span>結束販售</span>;
   };
 
+
+  // ! 卡片跳動bug尚未解決
   // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -119,7 +121,7 @@ const StoreCard = ({
             return (
               <div
                 className="col-12 col-md-6 col-lg-3 product-card mt-5"
-                style={{ width: `18rem` }}
+                style={{ width: `17.5rem` }}
                 key={uuidv4()}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
@@ -180,10 +182,11 @@ const StoreCard = ({
                       <div className="card-star ">
                         {item.score > 0 ? (
                           <div className="d-flex">
-                            <div>
+                            <div className="fs-1">
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
+                                  classNmae=""
                                   defaultValue={item.score}
                                   precision={0.1}
                                   readOnly
