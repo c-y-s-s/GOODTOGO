@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import { AuthContext } from "./context/auth";
+import { AuthContext } from "./context/auth";
 import { API_URL } from "./utils/config";
 import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -33,63 +33,67 @@ import Admin from "./pages/Admin/";
 
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
-  // -------- 判斷登入與否 --------
-  const [isLogin, setIsLogin] = useState(false);
-  //
-  // const [loginMember, setLoginMember]
-  // useEffect(() => {
-  //   // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
-  //   const getMember = async () => {
-  //     try {
-  //       let result = await axios.get(`${API_URL}/member`, {
-  //         withCredentials: true,
-  //       });
-  //       setMember(result.data);
-  //     } catch (e) {
-  //       // 尚未登入過
-  //       // 401 也不會去 setMember
-  //     }
-  //   };
-  //   getMember();
-  // }, []);
+  // -------- 判斷登入與否 member有資料就是已登入 --------
+  const [member, setMember] = useState(null);
 
+  useEffect(() => {
+    // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
+    const getMember = async () => {
+      try {
+        let result = await axios.get(`${API_URL}/checkMember`, {
+          withCredentials: true,
+        });
+        setMember(result.data);
+      } catch (e) {}
+    };
+    getMember();
+  }, []);
+  console.log("member from App.js", member); //ok
   return (
-    <Router>
-      <Navbar auth={isLogin} />
-      <Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/auth" element={<Auth />} auth={isLogin}>
-          <Route path="login" element={<Login />} auth={isLogin}></Route>
-          <Route path="register" element={<Register />}></Route>
-          <Route path="reset" element={<Reset />}></Route>
-        </Route>
-        <Route path="/admin" element={<Admin />}></Route>
-        <Route path="/stores" element={<StoreList />}>
-          <Route path=":currentPage" element={<StoreList />}></Route>
-          <Route path="all/:storeId" element={<Product />}></Route>
-        </Route>
-        {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
+    <AuthContext.Provider value={{ member, setMember }}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/auth/*" element={<Auth />}>
+            <Route path="login" element={<Login />}></Route>
+            <Route path="register" element={<Register />}></Route>
+            <Route path="reset" element={<Reset />}></Route>
+          </Route>
+          <Route path="/admin" element={<Admin />}></Route>
+          <Route path="/stores" element={<StoreList />}>
+            {/* <Route path=":currentPage" element={<StoreList />} /> */}
+            <Route path="all/:storeId" element={<Product />} />
+          </Route>
+          {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
 
-        <Route
-          path="/productcomment/:storeId"
-          element={<ProductComment />}
-        ></Route>
-        <Route path="/map" element={<Map />}></Route>
+          <Route
+            path="/productcomment/:storeId"
+            element={<ProductComment />}
+          ></Route>
+          <Route path="/map" element={<Map />}></Route>
 
-        <Route path="/my_account/like-list" element={<UserLikeList />}></Route>
-        <Route path="/my_account/order" element={<UserOrderList />}></Route>
-        <Route path="/my_account/coupon" element={<UserCoupon />}></Route>
-        <Route path="/my_account/payment" element={<UserCreditCard />}></Route>
-        <Route path="/my_account" element={<MyAccount />}></Route>
-      </Routes>
+          <Route
+            path="/my_account/like-list"
+            element={<UserLikeList />}
+          ></Route>
+          <Route path="/my_account/order" element={<UserOrderList />}></Route>
+          <Route path="/my_account/coupon" element={<UserCoupon />}></Route>
+          <Route
+            path="/my_account/payment"
+            element={<UserCreditCard />}
+          ></Route>
+          <Route path="/my_account" element={<MyAccount />}></Route>
+        </Routes>
 
-      {/* <StoreList />
+        {/* <StoreList />
       <StoreCheck />
 
       <Product /> */}
-      <Footer />
-    </Router>
+        <Footer />
+      </Router>
+    </AuthContext.Provider>
   );
 }
 

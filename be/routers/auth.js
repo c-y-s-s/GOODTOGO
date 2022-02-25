@@ -20,7 +20,7 @@ const passwordRule = [
 // /api/auth/register
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);
-  //TODO: 確認格式是否正確
+  //*確認格式是否正確
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     let error = errors.array();
@@ -28,7 +28,7 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
     // return res.status(400).json({ code: "33001", msg: error[0].msg });
     return res.status(400).json({ errors: error });
   }
-  // //TODO:檢查 email 是不是已經註冊
+  //*檢查 email 是不是已經註冊
   let [members] = await connection.execute(
     "SELECT * FROM users WHERE email=?",
     [req.body.email]
@@ -40,10 +40,11 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
       msg: "這個 email 已經已經註冊過了",
     });
   }
-  //TODO:雜湊密碼
+  //*雜湊密碼
   let hashpassword = await argon2.hash(req.body.password);
-
-  //TODO:存入資料庫
+  let createdTime = Date.now();
+  console.log(createdTime);
+  //*存入資料庫
   let [result] = await connection.execute(
     "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
     [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
@@ -85,14 +86,19 @@ router.post("/login", async (req, res, next) => {
     name: user.name,
     photo: user.photo,
   };
-
+  console.log(returnUser);
   // 如果密碼比對成功，記錄在 session
   // 寫 session
   req.session.user = returnUser;
 
   res.json({
     code: "0",
+    msg: "登入成功",
     data: returnUser,
   });
+});
+router.get("/logout", (req, res, next) => {
+  req.session.user = null;
+  res.sendStatus(202);
 });
 module.exports = router;

@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 import Hamburger from "hamburger-react";
+import Popover from "./_popover";
 
 // -------- icons --------
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
+import { FiMapPin } from "react-icons/fi";
+
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
+import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
-const Navbar = ({ auth }) => {
+const Navbar = (props) => {
+  const { member, setMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -48,25 +52,12 @@ const Navbar = ({ auth }) => {
         </div>
 
         <div className="nav-icons">
-          {auth ? (
-            <>
-              <Link to="/my_account">
-                <div>圖</div>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/auth/login">
-                <BiUserCircle role="button" className="nav-icon" />
-              </Link>
-            </>
-          )}
-
+          <Popover />
           <Link to="/cart" className="nav-icon">
-            <BsBag />
+            <ShoppingBag />
           </Link>
           <Link to="/map" className="nav-icon">
-            <AiOutlineEnvironment />
+            <FiMapPin />
           </Link>
         </div>
       </div>
