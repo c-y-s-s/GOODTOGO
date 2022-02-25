@@ -71,11 +71,12 @@ const Tables = () => {
           </tfoot>
         </table>
         <div className="pt-1 pb-3 d-flex justify-content-end">
-          {/* <button type="button" className="btn credit-card px-5 me-5">
+          {/* 信用卡 按鈕 開始 */}
+          <button type="button" className="btn credit-card px-5 me-5">
             信 用 卡 付 款
           </button>
           <div className="d-inline me-3">
-            <img src={require(`../images/visa.png`)} alt="..."/>
+            <img src={require(`../images/visa.png`)} alt="..." />
           </div>
           <div className="d-inline d-flex align-items-center me-3">****</div>
           <div className="d-inline d-flex align-items-center me-3">****</div>
@@ -86,9 +87,11 @@ const Tables = () => {
             className="btn text-light px-5 complete-checkout"
           >
             完 成 結 帳
-          </button> */}
+          </button>
+          {/* 信用卡 按鈕 結束 */}
 
-          <button type="button" className="btn credit-card px-5 me-5">
+          {/* 現場取貨付款 按鈕 開始 */}
+          {/* <button type="button" className="btn credit-card px-5 me-5">
             現 場 取 貨 付 款
           </button>
           <button
@@ -96,15 +99,17 @@ const Tables = () => {
             className="btn text-light px-5 complete-checkout"
           >
             完 成 結 帳
-          </button>
+          </button> */}
+          {/* 現場取貨付款 按鈕 結束 */}
 
-          <button
+          {/* -------- 訂購成功 測試按鈕 開始 -------- */}
+          {/* <button
             type="button"
             className="btn btn-primary"
             data-bs-toggle="modal"
             data-bs-target="#successfullyOrdered"
           >
-            Launch demo modal
+            訂購成功 測試按鈕
           </button>
           <div
             className="modal fade"
@@ -115,23 +120,19 @@ const Tables = () => {
           >
             <div className="modal-dialog modal-dialog-centered modal-sm">
               <div className="modal-content position-relative">
-                <div className="modal-header border-bottom mx-3">
+                <div className="modal-header border-bottom mx-5">
                   <img
                     src={require(`../images/check.png`)}
                     alt="..."
-                    className="check-img me-3"
+                    className="check-img"
                   />
                   <div className="text-colors-g">
-                    {/* <h5 className="d-inline">訂購成功</h5> */}
-                    {/* <div className="aaa">訂購成功</div> */}
                     <h5>訂購成功</h5>
                     <h6>謝謝您替地球盡的每份力量</h6>
-                    {/* <div className="aaa">謝謝您替地球盡的每份力量</div> */}
-                    {/* <h6 className="aaa d-inline">謝謝您替地球盡的每份力量</h6> */}
                   </div>
                   <button
                     type="button"
-                    className="btn-close closeBtn"
+                    className="btn-close closeBtn rounded-circle"
                     data-bs-dismiss="modal"
                     aria-label="Close"
                   ></button>
@@ -141,7 +142,9 @@ const Tables = () => {
                     訂單時間: 2022-02-11 12:22:33
                   </div>
                   <div className="d-flex justify-content-center text-size my-2 ">
-                    <button className="order-bt border-0 px-5">訂單編號: XXXXXXX</button>
+                    <button className="order-bt border-0 px-5">
+                      訂單編號: XXXXXXX
+                    </button>
                   </div>
                   <div className="d-flex justify-content-center mb-1 text-size">
                     已傳送到您的電子信箱
@@ -177,7 +180,8 @@ const Tables = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
+          {/* -------- 訂購成功 測試按鈕 結束 -------- */}
         </div>
       </div>
     </div>

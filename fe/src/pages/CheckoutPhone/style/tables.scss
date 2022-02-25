@@ -1,35 +1,35 @@
-.product-category {
+.checkoutphone-product-category {
   background: $color-light-grey;
   font-size: smaller;
 }
 
-.product-image {
+.checkoutphone-product-image {
   max-width: 100px;
   height: 100%;
   object-fit: cover;
 }
 
-.credit-card {
-  color: $color-light-green;
-  border: 1px solid $color-light-green;
+.checkoutphone-credit-card {
+  color: $color-green;
+  border: 1px solid $color-green;
   &:hover {
-    color: $color-light-green;
+    color: $color-green;
   }
 }
 
-.complete-checkout {
+.checkoutphone-complete-checkout {
   background: $color-light-green;
 }
 
-.check-img {
+.checkoutphone-check-img {
   max-width: 40px;
 }
 
-.modal-sm {
+.checkoutphone-modal-sm {
   max-width: 370px;
 }
 
-.text-colors-g {
+.checkoutphone-text-colors-g {
   color: $color-green;
 }
 
@@ -47,7 +47,7 @@
 }
 
 // 結帳 model close btn css 設定
-.closeBtn {
+.checkoutphone-closeBtn {
   position: absolute;
   right: 0;
   top: 0;
