@@ -32,6 +32,8 @@ const ProductsData = ({ storeid }) => {
   }, []);
 
   console.log("aaaaa", specifyProductsData);
+  let total = 0;
+
   return (
     <div>
       {specifyProductsData.map((item) => {
@@ -76,7 +78,7 @@ const ProductsData = ({ storeid }) => {
                     <FiMinusCircle className="icon" />
                   </button>
 
-                  <div className=" buy-num-num ">{productsAmountTotal}</div>
+                  <div className=" buy-num-num ">{item.amount}</div>
                   {/* 加號 */}
                   <button
                     className=" buy-num-plus equation"
