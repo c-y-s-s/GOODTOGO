@@ -4,6 +4,32 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
 
+
+
+router.post("/shoppingcartotoaldelete", async (req, res, next) => {
+  console.log(req.body);
+  // TODO: 寫進資料庫
+  let [result] = await connection.execute(
+    `DELETE FROM shopping_cart WHERE id = ? `,
+    [req.body.id]
+  );
+  console.log(result);
+  res.json({ msg: "刪除成功" });
+});
+
+
+
+router.post("/shoppingcartotoal", async (req, res, next) => {
+  console.log(req.body);
+  // TODO: 寫進資料庫
+  let [result] = await connection.execute(
+    `UPDATE shopping_cart SET amount=? WHERE id = ?;`,
+    [req.body.amount,req.body.id]
+  );
+  console.log(result);
+  res.json({ msg: "ok" });
+});
+
 // 使用者所加入購物車所有商品店家(不重複)
 router.get("/shoppingstoredata/:userid", async (req, res, next) => {
   let [data, fields] = await connection.execute(
@@ -29,11 +55,12 @@ router.get("/shoppingcar/:userId/:storeid", async (req, res, next) => {
     c.category,
     d.name AS product_name,
     d.img,
-    d.price
+    d.price,
+    d.amount AS sale_amount
     FROM shopping_cart AS a 
     JOIN stores AS b ON b.id = a.store_id
     JOIN stores_category AS c ON c.id = b.stores_category_id
-     JOIN products AS d ON a.products_id = d.id
+    JOIN products AS d ON a.products_id = d.id
     WHERE a.user_id = ? AND a.store_id = ?`,
     [req.params.userId, req.params.storeid]
   );

@@ -8,16 +8,35 @@ import { FiPlusCircle } from "react-icons/fi";
 import { FiAlertCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
 import { v4 as uuidv4 } from "uuid";
+import { FormControlUnstyledContext } from "@mui/base";
 const ProductsData = ({ storeid }) => {
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
   const [productsAmountTotal, setProductsAmountTotal] = useState(3);
 
-  function handleMinus(e) {
-    setProductsAmountTotal(productsAmountTotal - 1);
-  }
-  function handlePlus(e) {
+  async function handleMinus(item) {
     setProductsAmountTotal(productsAmountTotal + 1);
+    // console.log(item);
+    let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
+    // console.log(response.data);
+  }
+
+  async function handlePlus(item) {
+    setProductsAmountTotal(productsAmountTotal + 1);
+    // console.log(item);
+    let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
+    // console.log(response.data);
+  }
+
+  async function handleDeleteProduct(item) {
+    //為刷新useEffect所設置
+    setProductsAmountTotal(productsAmountTotal + 1);
+    console.log(item);
+    let response = await axios.post(
+      `${API_URL}/shop/shoppingcartotoaldelete`,
+      item
+    );
+    // console.log(response.data);
   }
   // 撈使用者所有購物車資料裡面符合 storeid 的商品資料
   useEffect(() => {
@@ -29,10 +48,7 @@ const ProductsData = ({ storeid }) => {
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, []);
-
-  console.log("aaaaa", specifyProductsData);
-  let total = 0;
+  }, [productsAmountTotal]);
 
   return (
     <div>
@@ -55,7 +71,14 @@ const ProductsData = ({ storeid }) => {
                   <div className="user-shopping-cart-products-data-name">
                     {item.product_name}
                   </div>
-                  <button className="user-shopping-cart-products-data-rwd-delete">
+                  <button
+                    className="user-shopping-cart-products-data-rwd-delete"
+                    onClick={() => {
+                      handleDeleteProduct({
+                        id: item.id,
+                      });
+                    }}
+                  >
                     <FiX />
                   </button>
                 </div>
@@ -71,21 +94,44 @@ const ProductsData = ({ storeid }) => {
               <div className="d-flex user-shopping-cart-products-data-amount">
                 <div className="d-flex buy-num">
                   {/* 減號 */}
-                  <button
-                    className=" buy-num-minus equation"
-                    onClick={handleMinus}
-                  >
-                    <FiMinusCircle className="icon" />
-                  </button>
+                  {/* {console.log(item)} */}
+                  {item.amount > 1 ? (
+                    <button
+                      className=" buy-num-minus equation"
+                      onClick={() => {
+                        handlePlus({
+                          id: item.id,
+                          amount: item.amount - 1,
+                        });
+                      }}
+                    >
+                      <FiMinusCircle className="icon" />
+                    </button>
+                  ) : (
+                    <button className=" buy-num-minus equation">
+                      <FiMinusCircle className="icon" />
+                    </button>
+                  )}
 
                   <div className=" buy-num-num ">{item.amount}</div>
                   {/* 加號 */}
-                  <button
-                    className=" buy-num-plus equation"
-                    onClick={handlePlus}
-                  >
-                    <FiPlusCircle className="icon" />
-                  </button>
+                  {item.amount < item.sale_amount ? (
+                    <button
+                      className=" buy-num-plus equation"
+                      onClick={() => {
+                        handlePlus({
+                          id: item.id,
+                          amount: item.amount + 1,
+                        });
+                      }}
+                    >
+                      <FiPlusCircle className="icon" />
+                    </button>
+                  ) : (
+                    <button className=" buy-num-plus equation">
+                      <FiPlusCircle className="icon" />
+                    </button>
+                  )}
                 </div>
               </div>
 
@@ -98,7 +144,13 @@ const ProductsData = ({ storeid }) => {
                   <div>{item.price * item.amount}</div>
                 </div>
                 <div className="user-shopping-cart-products-data-delete">
-                  <button>
+                  <button
+                    onClick={() => {
+                      handleDeleteProduct({
+                        id: item.id,
+                      });
+                    }}
+                  >
                     <FiX />
                   </button>
                 </div>

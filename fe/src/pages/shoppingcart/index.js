@@ -29,7 +29,7 @@ const Shoppingcart = () => {
       <div className="container-fluid shopping-title">購物車</div>
       <div className="container user-shopping-cart  ">
         {shoppingCartData.map((item)=>{
-          console.log("item--->" ,item)
+         
           return (
             <div className="col-9 mx-auto user-shopping-cart-data" key={uuidv4()}>
               {/* 標頭 */}
