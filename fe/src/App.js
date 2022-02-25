@@ -20,6 +20,7 @@ import StoreProfileEditing from "./pages/StoreProfileEditing";
 import LatestNews from "./pages/LatestNews";
 import Activity from "./pages/Activity";
 import Checkout from "./pages/Checkout";
+import CheckoutPhone from "./pages/CheckoutPhone";
 import Coupon from "./pages/Coupon";
 import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
@@ -41,7 +42,7 @@ function App() {
  
   return (
     <Router>
-      <Navbar auth={auth} isAdmin={isAdmin} />
+      {/* <Navbar auth={auth} isAdmin={isAdmin} /> */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
@@ -54,6 +55,7 @@ function App() {
         <Route path="/latestnews" element={<LatestNews />}></Route>
         <Route path="/activity" element={<Activity />}></Route>
         <Route path="/checkout" element={<Checkout />}></Route>
+        <Route path="/checkoutphone" element={<CheckoutPhone />}></Route>
         <Route path="/coupon" element={<Coupon />}></Route>
         <Route path="/store" element={<Store />}></Route>
         {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
@@ -76,7 +78,7 @@ function App() {
       <StoreCheck />
 
       <Product /> */}
-      <Footer isAdmin={isAdmin} />
+      {/* <Footer isAdmin={isAdmin} /> */}
     </Router>
   );
 }
