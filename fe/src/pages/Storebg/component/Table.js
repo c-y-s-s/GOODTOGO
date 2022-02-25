@@ -7,7 +7,7 @@ import { API_URL } from "../../../utils/config";
 import { FiMoreVertical } from "react-icons/fi";
 
 const Table = () => {
-  const [data, setData] = useState("");
+  const [data, setData] = useState([]);
 
   // -------- 用 session cookie 取使用者資料 --------
   useEffect(() => {
@@ -57,7 +57,7 @@ const Table = () => {
               </div>
             </td>
             <td>{data.name}</td>
-            <td>NT${data.price}</td>
+            <td>NT$45</td>
             <td>10</td>
             <td>1</td>
             <td>PM 6:30 ~ PM 8:30</td>
