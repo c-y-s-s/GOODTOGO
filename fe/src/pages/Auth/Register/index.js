@@ -64,25 +64,29 @@ const Register = () => {
     let name = e.target.name;
     let value = e.target.value;
 
-    //自訂個欄位錯誤訊息
+    // -------- 自訂個欄位錯誤訊息 --------
+    //姓名欄位錯誤
     if (name === "name") {
       const updatedFieldErrors = {
         ...fieldErrors,
         name: "您希望我們怎麼稱呼您？",
       };
       setFieldErrors(updatedFieldErrors);
+      //email欄位錯誤
     } else if (name === "email") {
       const updatedFieldErrors = {
         ...fieldErrors,
         email: "email格式輸入錯誤",
       };
       setFieldErrors(updatedFieldErrors);
+      //密碼欄位錯誤
     } else if (name === "password") {
       const updatedFieldErrors = {
         ...fieldErrors,
         password: "密碼至少為6個字元",
       };
       setFieldErrors(updatedFieldErrors);
+      //手機欄位錯誤
     } else if ((name = "phone")) {
       const updatedFieldErrors = {
         ...fieldErrors,
@@ -100,7 +104,7 @@ const Register = () => {
       [e.target.name]: "",
     };
 
-    // 3. 設定回錯誤訊息狀態
+    // 設定回錯誤訊息狀態
     setFieldErrors(updatedFieldErrors);
   };
   // -------- 表單送出 --------

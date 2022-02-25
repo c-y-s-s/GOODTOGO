@@ -36,6 +36,18 @@
       top: -2rem;
       left: 10.35rem;
     }
+    .is-closed {
+      width: fit-content;
+      background-color: $color-grey;
+      color: white;
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      z-index: 1050;
+      align-self: flex-end;
+      position: relative;
+      top: -2rem;
+      left: 10.35rem;
+    }
   }
   .info-title {
     // width: 233px;

@@ -63,7 +63,7 @@ function App() {
           </Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/stores" element={<StoreList />}>
-            {/* <Route path=":currentPage" element={<StoreList />} /> */}
+            <Route path=":currentPage" element={<StoreList />} />
             <Route path="all/:storeId" element={<Product />} />
           </Route>
           {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
