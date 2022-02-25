@@ -66,10 +66,12 @@ app.use("/api/productscommentstarasc", productsCommentStarAsc);
 let productsCommentTimeAsc = require("./routers/productsCommentTimeAsc");
 app.use("/api/productscommenttimeasc", productsCommentTimeAsc);
 
-//  ------- 購物車寫入 --------
+//  -------- 購物車資料 --------
 let shoopingCarRouter = require("./routers/shoppingCar");
 app.use("/api/shop", shoopingCarRouter);
-
+// -------- 購物車商家資料 --------
+// let shoopingCarStoreRouter = require("./routers/shoppingCar");
+// app.use("/api/shop", shoopingCarStoreRouter);
 
 //  -------- 指定商品 RESTful API 列表 --------
 // 先分開寫 等會設定api變數之後寫再跟上面寫一起
