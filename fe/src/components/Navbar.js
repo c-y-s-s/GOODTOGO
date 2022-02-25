@@ -62,63 +62,6 @@ const Navbar = (props) => {
         </div>
       </div>
     </div>
-    //   <nav
-    //     className="navbar container-fluid
-    //  shadow justify-content-center"
-    //   >
-    //     <div className="nav d-flex text-center justify-content-between ">
-    //       <Link to="/">
-    //         <Logo className="navLogo mt-2" />
-    //       </Link>
-    //       <div className="d-flex justify-content-end col-sm-4 col-lg-1 sm-nav">
-    //         <Link to="/cart" className="sm-icon no-link text-green">
-    //           <BsBag />
-    //         </Link>
-    //         <Hamburger
-    //           className="hamburger"
-    //           toggled={isOpen}
-    //           toggle={setOpen}
-    //           size={22}
-    //           color="#668C4A"
-    //           rounded
-    //         />
-    //       </div>
-    //       <ul className="nav-links m-0">
-    //         <li className="nav-item">
-    //           <Link to="/about" className="navLink text-dark-grey">
-    //             了解我們
-    //           </Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link to="/joinus" className="navLink">
-    //             申請店家
-    //           </Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link to="/store" className="navLink ">
-    //             立即訂購
-    //           </Link>
-    //         </li>
-    //       </ul>
-    //       <ul className="nav-links m-0">
-    //         <li className="nav-icons">
-    // <Link to="/map" className="nav-icon">
-    //   <AiOutlineEnvironment />
-    // </Link>
-    //         </li>
-    //         <li className="nav-icons">
-    //           <Link to="/auth/login">
-    //             <BiUserCircle role="button" className="nav-icon" />
-    //           </Link>
-    //         </li>
-    //         <li className="nav-icons">
-    //           <Link to="/cart" className="nav-icon">
-    //             <BsBag />
-    //           </Link>
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   </nav>
   );
 };
 
