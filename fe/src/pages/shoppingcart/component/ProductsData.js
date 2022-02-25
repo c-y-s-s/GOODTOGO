@@ -9,7 +9,7 @@ import { FiAlertCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
 import { v4 as uuidv4 } from "uuid";
 import { FormControlUnstyledContext } from "@mui/base";
-const ProductsData = ({ storeid }) => {
+const ProductsData = ({ storeid, setDeleteLive, deleteLive }) => {
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
   const [productsAmountTotal, setProductsAmountTotal] = useState(3);
@@ -31,6 +31,7 @@ const ProductsData = ({ storeid }) => {
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
     setProductsAmountTotal(productsAmountTotal + 1);
+    setDeleteLive(!deleteLive);
     console.log(item);
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
@@ -99,7 +100,7 @@ const ProductsData = ({ storeid }) => {
                     <button
                       className=" buy-num-minus equation"
                       onClick={() => {
-                        handlePlus({
+                        handleMinus({
                           id: item.id,
                           amount: item.amount - 1,
                         });
