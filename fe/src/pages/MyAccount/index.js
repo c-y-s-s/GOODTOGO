@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { NavLink, Route, Routes, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../utils/config";
+// icon
 import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
-
+// 頁面
 import UserProfile from "./pages/UserProfile";
 import UserPassword from "./pages/UserPassword";
 import UserLike from "./pages/UserLike";
+import UserOrder from "./pages/UserOrder";
+import UserCoupon from "./pages/UserCoupon";
 
 // user 帶著 session 進入此頁
 
@@ -182,11 +185,10 @@ const MyAccount = () => {
             />
             <Route path="password" element={<UserPassword />} />
             <Route path="like" element={<UserLike />} />
-            {/* <Route path="payment" element={<Payment />} />
-            <Route path="password" element={<Password />} />
-            <Route path="like" element={<Like />} />
-            <Route path="order/*" element={<Order />} />
-            <Route path="coupon" element={<Coupon />} /> */}
+            <Route path="order" element={<UserOrder />}>
+              <Route path=":status" element={<UserOrder />} />
+            </Route>
+            <Route path="coupon" element={<UserCoupon />} />
           </Routes>
         </div>
       </div>

@@ -15,11 +15,6 @@ import StoreCheck from "./pages/StoreCheck";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
-// import UserLikeList from "./pages/MyAccount/UserLikeList";
-// import UserOrderList from "./pages/MyAccount/UserOrderList";
-// import UserCoupon from "./pages/MyAccount/UserCoupon";
-// import UserCreditCard from "./pages/MyAccount/UserCreditCard";
-// import UserPassword from "./pages/MyAccount/UserPassword";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment";
@@ -45,7 +40,6 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="member/*" element={<MyAccount />}>
           <Route path=":userInfo" element={<MyAccount />}>
-            <Route path=":storeCategory" element={<MyAccount />} />
             <Route path=":status" element={<MyAccount />} />
           </Route>
         </Route>

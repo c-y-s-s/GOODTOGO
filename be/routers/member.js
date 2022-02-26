@@ -317,8 +317,7 @@ router.get("/like", async (req, res, next) => {
     FROM user_like
     GROUP BY store_id;`
   );
-
-  console.log("喜愛店家們 的 愛心計算 storeLikeCount: ", storeLikeCount);
+  // console.log("喜愛店家們 的 愛心計算 storeLikeCount: ", storeLikeCount);
 
   // -------- 星星計算 --------
   // 店家 storeId
@@ -363,8 +362,8 @@ router.get("/like", async (req, res, next) => {
   // console.log("店家評分相關資料: ", storeStarScore);
 
   // -------- 餐點計算 --------
-  // 取得 -> 所有店 store_id 各自餐點數量 likeTotal
-  let [storeProductCount] = await connection.execute(
+  // [ Step1 ] 取得 -> 所有店 store_id 各自餐點數量
+  let [storeProducts] = await connection.execute(
     `SELECT store_id,
     amount AS productAmount,
     start_time AS startTime,
@@ -373,13 +372,17 @@ router.get("/like", async (req, res, next) => {
     WHERE store_id IN (${likeStoreIds.join(",")})
     AND valid=1;`
   );
-  // console.log("喜愛店家 所有 products : ", storeProductCount.length, "筆");
-  console.log("喜愛店家 所有 products : ", storeProductCount);
+  // console.log(
+  //   "喜愛店家 所有 products : ",
+  //   storeProductCount,
+  //   "總共",
+  //   storeProductCount.length,
+  //   "筆"
+  // );
 
-  // 過濾時間 -> 總計各間店餐點剩餘 利用 map 每筆放入 storeProductCount
-  storeProductCount.map((product) => {
-    // -------- 時間 --------
-    // 格式化為數字
+  // [ Step2 ] 過濾時間 -> 將餐點有符合現在時間的過濾出來
+  let storeProductAtTime = storeProducts.filter((product) => {
+    // 時間格式化 為數字
     let currentTime = moment()
       .format("LTS")
       .split(":")
@@ -389,28 +392,36 @@ router.get("/like", async (req, res, next) => {
     let currentTime_number = Number(currentTime.split(":").join(""));
     let startTime_number = Number(product.startTime.split(":").join(""));
     let dueTime_number = Number(product.dueTime.split(":").join(""));
-    console.log(
-      "currentTime_number",
-      currentTime_number,
-      "startTime_number",
-      startTime_number,
-      "dueTime_number",
-      dueTime_number
-    );
-
-    if (
+    return (
       currentTime_number >= startTime_number &&
-      currentTime_number < dueTime_number &&
-      Object.values(product)[0] === product.store_id
-    ) {
-      product.productAmount += product.productAmount;
-      product.productCount = product.productAmount;
-    } else {
-      product.productAmount += 0;
-      product.productCount = product.productAmount;
-    }
+      currentTime_number < dueTime_number
+    );
   });
-  console.log("convert", storeProductCount);
+  console.log(
+    "現在時間於 餐點時間內的",
+    storeProductAtTime,
+    "總共",
+    storeProductAtTime.length,
+    "筆"
+  );
+
+  // [ Step3 ] 計算數量 -> 總計各間店餐點剩餘 利用 map 每筆放入
+  // FIXME:
+  // storeProductAtTime.map((product) => {
+  //   let count = 
+  // });
+  // let storeProductAmount = storeProductAtTime.reduce(function (
+  //   accumulator,
+  //   currentValue
+  // ) {
+  //   let key = "store_id";
+  //   let find = likeStoreIds.find((v) => v === currentValue.store_id);
+  //   // let result = []
+  //   if (find) {
+  //     accumulator[key] = currentValue.store_id;
+  //     accumulator.productAmount += accumulator.productAmount;
+  //   }
+  // });
 
   // 將愛心、星星相關資料 利用 map 每筆放入 userLikeStores
   // 判斷營業時間、剩餘餐點數量、圖片格式處理 利用 map 每筆放入 userLikeStores
@@ -535,16 +546,6 @@ router.get("/like", async (req, res, next) => {
       item.isToday = "營業中";
       break;
     }
-    // if (find_closeDay) {
-    //   item.isToday = "休息中";
-    // } else if (current_number < storeOpen_number) {
-    //   item.isToday = "休息中";
-    // } else if (current_number >= storeClose_number) {
-    //   item.isToday = "休息中";
-    // } else {
-    //   // 沒比對到 今日營業
-    //   item.isToday = "營業中";
-    // }
 
     // 格式化為 00:00 --- 要顯示在卡片上的
     item.openTime = item.openTime.split(":").slice(0, -1).join(":");
@@ -562,10 +563,21 @@ router.get("/like", async (req, res, next) => {
     item.storeBranchName = name[1];
   });
 
+  // 店家類別列表
+  let [storeCategories] = await connection.execute(
+    `SELECT id AS categoryId,
+    category
+    FROM stores_category
+    WHERE valid=1;`
+  );
+  // 新增 "全部" 類別
+  storeCategories.unshift({ categoryId: 0, category: "全部" });
+  // console.log(storeCategories);
+
   // FIXME: 若沒有資料給前端會壞掉
 
   // 傳送使用者喜愛店家清單、喜愛店家 storeId 列表
-  res.json({ userLikeStores, likeStoreIds });
+  res.json({ userLikeStores, likeStoreIds, storeCategories });
 });
 
 // -------- 會員移除收藏店家 --------

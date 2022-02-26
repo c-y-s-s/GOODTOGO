@@ -73,6 +73,15 @@
 .c-green {
   color: $color-green;
 }
+.c-yellow {
+  color: $color-yellow;
+}
+.c-d-yellow {
+  color: $color-dark-yellow;
+}
+.b-yellow {
+  background-color: $color-yellow;
+}
 .c-grey {
   color: $color-grey;
 }
@@ -346,7 +355,9 @@
   transition: 0.5s;
   box-shadow: 0px 3px 6px lighten($color-light-grey, 10%);
   li {
-    padding: 8px 5px 8px 12px;
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    letter-spacing: $ls-lg;
     &:hover {
       background-color: $color-yellow;
       color: #fff;
@@ -497,6 +508,97 @@
 //   color: $color-light-red;
 //   transform: translateY(0.5px);
 // }
+
+// -------- 我的訂單頁 --------
+.order_Nav {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  li {
+    width: 100%;
+    text-align: center;
+  }
+}
+.order_Link {
+  background-color: lighten($color-light-grey, 15%);
+  color: $color-dark-grey;
+  padding: 18px;
+  display: block;
+  letter-spacing: $ls-lg;
+  border-bottom: 3px solid $color-light-grey;
+  &:hover {
+    color: $color-dark-grey;
+  }
+}
+
+.order_Link_Active {
+  color: $color-green;
+  border-bottom: 3px solid lighten($color-green, 5%);
+  &:hover {
+    background-color: lighten($color-light-grey, 13%);
+    color: $color-green;
+    border-bottom: 3px solid $color-green;
+  }
+}
+.order_Link_unActive {
+  &:hover {
+    background-color: lighten($color-light-grey, 13%);
+    color: $color-green;
+    border-bottom: 3px solid lighten($color-green, 5%);
+    // border-bottom: 3px solid $color-green;
+  }
+}
+.order_Num {
+  color: #fff;
+  padding: 0.5px 10px 2px 10px;
+  margin-left: 0.5rem;
+  border-radius: 50rem;
+  letter-spacing: 0;
+  font-size: $fz-md;
+  font-weight: $fw-bold;
+  background-color: $color-yellow;
+}
+
+// -------- 我的訂單頁 - 全部 --------
+.store_Icon {
+  color: $color-grey;
+  width: 20px;
+  height: 20px;
+  stroke-width: 0.3px;
+}
+.order_List {
+  padding: 2rem;
+}
+.order_Status_Info {
+  font-size: $fz-md;
+  letter-spacing: $ls-md;
+  div {
+    display: block;
+    margin-left: 1.5rem;
+  }
+}
+.order_Status_Button {
+  cursor: pointer;
+  padding: 6px 10px;
+  background-color: $color-yellow;
+  color: #fff;
+  border-radius: 5px;
+  transition: 0.2s;
+  &:hover {
+    background-color: darken($color-yellow, 10%);
+  }
+}
+.order_Store_Img {
+  height: 5rem;
+  width: 6.25rem;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.order_Amount {
+  font-size: 1.5rem;
+  color: $color-dark-yellow;
+  font-weight: $fw-bold;
+}
 
 // -------- RWD --------
 @media screen and (max-width: 1399px) {
