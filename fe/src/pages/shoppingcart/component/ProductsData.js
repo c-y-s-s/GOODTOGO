@@ -37,7 +37,7 @@ const ProductsData = ({
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
     setPriceTotal(!priceTotal);
-
+    setDeleteLive(!deleteLive);
     console.log(item);
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
