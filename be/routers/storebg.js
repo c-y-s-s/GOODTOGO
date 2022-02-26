@@ -139,23 +139,23 @@ router.get("/profile", async (req, res, next) => {
 // -------- 商品清單資料顯示 --------
 // /api/member/profile (get)
 router.get("/products", async (req, res, next) => {
-  let [data] = await connection.execute(
+  let [productsData] = await connection.execute(
     "SELECT * FROM products WHERE store_id = ?",
     [req.session.member.id]
   );
   console.log("db_stores id: ", req.session.member.id);
-  console.log("取得 stores: ", data[0].name);
+  console.log("取得 stores: ", productsData);
 
   // 打包資料給 res
-  let profile = {
-    name: data[0].name,
-    price: data[0].price,
+  // let profile = {
+  //   name: data[0].name,
+  //   price: data[0].price,
     // email: data[0].email,
     // logo: data[0].logo,
     // photo: data[0].headshots,
     // logo: req.session.member.logo,
-  };
-  res.json(profile);
+  // };
+  res.json(productsData);
 });
 
 // -------- 會員資料修改儲存 --------
