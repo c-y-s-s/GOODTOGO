@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+//雜湊密碼用
 const argon2 = require("argon2");
 const connection = require("../utils/db");
 

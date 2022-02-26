@@ -86,7 +86,6 @@ const Login = (props) => {
       });
       console.log("登入成功", response.data);
       setMember(response.data.data);
-      //!因為以下setAuth失敗所以console會出現錯誤訊息
       navigate("/");
     } catch (e) {
       // console.error("錯誤:", e.response.data);
