@@ -31,11 +31,13 @@ const ProductsData = ({
   async function handlePlus(item) {
     setProductsAmountTotal(!productsAmountTotal);
     setPriceTotal(!priceTotal);
+
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
 
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
+    setProductsAmountTotal(!productsAmountTotal);
     setPriceTotal(!priceTotal);
     setDeleteLive(!deleteLive);
     console.log(item);

@@ -15,6 +15,7 @@ const Shoppingcart = () => {
   const [deleteLive, setDeleteLive] = useState(true);
   // 總金額刷新開關
   const [priceTotal, setPriceTotal] = useState(true);
+  console.log(deleteLive)
   useEffect(() => {
     let getShoppingData = async () => {
       // 撈 user_id 所存入購物車的資料
