@@ -79,7 +79,7 @@ const RecomCard = (props) => {
         return (
           <div key={uuidv4()}>
             <Link to={`all/${item.id}`} className="no-link">
-              <div className="store-rec-card shadow d-flex align-items-center">
+              <div className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10">
                 <div className="info-img col-12">
                   <img
                     src={require(`../../../../images/store_img/${item.logo}`)}

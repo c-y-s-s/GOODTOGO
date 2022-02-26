@@ -1,17 +1,18 @@
 .rec-content {
-  height: 70vh;
-  grid-template-columns: 1.2fr repeat(10, 1fr) 1.2fr;
-  grid-template-rows: [row1-start] 8rem [row1-end] 19rem [third-line] auto [last-line];
+  height: 50vh;
+  grid-template-columns: 10% auto 10%;
+  grid-template-rows: [row1-start] 8rem [row1-end] auto [row3-start] 8rem [last-line];
   grid-template-areas:
-    "header header header header header header header header header header"
-    "main main main main main main  main main main main"
-    "footer footer footer footer footer footer footer footer footer footer";
+    "header header header "
+    "main main main "
+    "footer footer footer";
   .header {
     margin: auto;
-    margin-bottom: 0;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
     align-self: center;
     grid-column-start: 1;
-    grid-column-end: 13;
+    grid-column-end: 4;
     grid-row-start: 1;
     grid-row-end: 2;
     .title-box {
@@ -21,11 +22,15 @@
     }
   }
   .rec-cards-holder {
-    margin-top: 3rem;
-    align-items: end;
-    grid-area: 2/2/4/12;
+    grid-row-start: 2;
+    grid-row-end: 4;
+    grid-column-start: 2;
+    grid-column-end: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 2rem;
+    column-gap: 2rem;
     align-items: center;
-    padding-bottom: 10rem;
     justify-content: space-between;
     z-index: 30;
   }
@@ -34,7 +39,7 @@
     top: 0.3rem;
     background: $color-light-green;
     grid-column-start: 1;
-    grid-column-end: 13;
+    grid-column-end: 4;
     grid-row-start: 3;
     grid-row-end: 4;
   }
@@ -43,17 +48,17 @@
 // -------- 手機 RWD --------
 @media (max-width: 390px) {
   .rec-content {
-    height: 63vh;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: [row1-start] 15% [row1-end] auto [third-line] 15%[last-line];
+    height: fit-content;
+    grid-template-columns: 10% auto 10%;
+    grid-template-rows: [row1-start] 7% [row1-end] auto [third-line] 15%[last-line];
     grid-template-areas:
-      "header header header header header  header header header"
-      "main main main main main main main main "
-      "footer footer footer footer footer footer footer footer";
+      "header header header "
+      "main main main "
+      "footer footer footer ";
     .header {
       align-self: end;
-      grid-column-start: 3;
-      grid-column-end: 7;
+      grid-column-start: 1;
+      grid-column-end: 4;
       grid-row-start: 1;
       grid-row-end: 2;
       .title-box {
@@ -64,14 +69,15 @@
     .rec-cards-holder {
       margin: auto;
       grid-column-start: 2;
-      grid-column-end: 8;
+      grid-column-end: 3;
       grid-row: 2 / span 2;
       z-index: 30;
+      flex-direction: column;
     }
     .bottom-area {
       background: $color-light-green;
-      grid-column-start: -1;
-      grid-column-end: -9;
+      grid-column-start: 1;
+      grid-column-end: 4;
       grid-row-start: 3;
       grid-row-end: 4;
     }
