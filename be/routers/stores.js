@@ -23,7 +23,10 @@ router.get("/", async (req, res, next) => {
 
   // -------- 取得有分類的商家資料，並設定每頁幾個，第n頁的位移 --------
   let [data] = await connection.execute(
-    "SELECT * FROM stores_category JOIN stores ON stores_category.id = stores.stores_category_id LIMIT ? OFFSET?",
+    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
+    FROM stores AS a 
+    JOIN stores_category AS b ON a.stores_category_id = b.id
+    WHERE a.valid = 1 ORDER BY a.id LIMIT ? OFFSET ?`,
     [perPage, offset]
   );
   // -------- 愛心計算 --------
