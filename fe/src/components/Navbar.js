@@ -43,7 +43,13 @@ const Navbar = (props) => {
           <Link to="/joinus" className="nav-link">
             店家申請
           </Link>
-          <Link to="/stores" className="nav-link">
+          <Link
+            to="/stores"
+            className="nav-link"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
             立即訂購
           </Link>
           <Link to="/faq" className="nav-link">
