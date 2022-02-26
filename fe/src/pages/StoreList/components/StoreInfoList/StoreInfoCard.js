@@ -1,14 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { AiOutlineClockCircle } from "react-icons/ai";
 import { Rating } from "@mui/material";
+import { AiOutlineClockCircle } from "react-icons/ai";
 import { v4 as uuidv4 } from "uuid";
 import "moment/min/locales";
 const moment = require("moment");
 
 const StoreInfoCard = (props) => {
   moment.locale("zh-tw");
-  const { storeList } = props;
+  const { storeList, storeLikeCount } = props;
   return (
     <>
       {storeList.map((item) => {
@@ -27,7 +27,6 @@ const StoreInfoCard = (props) => {
           moment(item.close_time, "hh:mm:ss.000").format("HHmm")
         );
         //TODO 判斷星期幾，如果closeDay裡面有今天就是休息
-
         //?let today = Number(moment().format("d")); //5
         //*開發中的假時間
         let today = 5;
@@ -35,7 +34,6 @@ const StoreInfoCard = (props) => {
         if (closeDay.includes(today)) {
           console.log("hhh");
         }
-
         // -------- 處理沒有分店名的空白欄位 --------
         let space = "";
         {
@@ -50,6 +48,7 @@ const StoreInfoCard = (props) => {
         {
           /* console.log(space); */
         }
+        // -------- 處理評分星星 --------
 
         return (
           <div key={uuidv4()}>
@@ -82,9 +81,10 @@ const StoreInfoCard = (props) => {
                     {item.name.split(" ")[0]}
                     <br />
                     <span className="text-dark-grey detail-sm">
-                      {space === true ? item.name.split(" ")[1] : <br />}
-                      {/* 開發中才開啟  {item.close_day}*/}
+                      {space === true ? item.name.split(" ")[1] : <div />}
+                      {/* 開發中才開啟 */}
                       {item.close_day}
+                      {/* 實際不會用到 */}
                     </span>
                   </span>
 

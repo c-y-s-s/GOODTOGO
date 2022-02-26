@@ -15,7 +15,7 @@ const Recomm = () => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder d-grid">
+        <div className="rec-cards-holder d-flex">
           <RecomCard />
         </div>
 

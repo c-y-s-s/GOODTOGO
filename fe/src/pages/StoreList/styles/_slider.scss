@@ -1,6 +1,7 @@
 // -------- 最新消息幻燈片 --------
 .slider {
-  height: 730px;
+  width: 100vw;
+  height: 82vh;
   background-color: $color-yellow;
   align-items: center;
   grid-template-columns: 15.5% auto 15.5%;
@@ -17,7 +18,7 @@
     grid-row-end: 3;
     overflow: hidden;
     height: 478px;
-    width: 1000px;
+
     .wrapper {
       width: 3000px;
       position: relative;
