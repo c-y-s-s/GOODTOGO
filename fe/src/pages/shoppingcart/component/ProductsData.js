@@ -57,7 +57,7 @@ const ProductsData = ({
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, [productsAmountTotal]);
+  }, [productsAmountTotal, priceTotal]);
 
   return (
     <div>
