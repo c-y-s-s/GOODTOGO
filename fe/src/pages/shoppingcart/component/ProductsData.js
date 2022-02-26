@@ -18,18 +18,18 @@ const ProductsData = ({
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
   // 加減數量刷新api開關
-  const [productsAmountTotal, setProductsAmountTotal] = useState(true);
-
+  const [productsAmountTotal, setProductsAmountTotal] = useState(0);
+console.log(productsAmountTotal);
   async function handleMinus(item) {
     //點到就刷新 商品表 api
-    setProductsAmountTotal(!productsAmountTotal);
+    setProductsAmountTotal(productsAmountTotal+1);
     //點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
 
   async function handlePlus(item) {
-    setProductsAmountTotal(!productsAmountTotal);
+       setProductsAmountTotal(productsAmountTotal + 1);
     setPriceTotal(!priceTotal);
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
@@ -37,7 +37,7 @@ const ProductsData = ({
 
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
-    setProductsAmountTotal(!productsAmountTotal);
+    setProductsAmountTotal(productsAmountTotal + 1);
     setPriceTotal(!priceTotal);
     setDeleteLive(!deleteLive);
     console.log(item);
@@ -57,7 +57,7 @@ const ProductsData = ({
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, [productsAmountTotal, priceTotal]);
+  }, [productsAmountTotal, priceTotal, deleteLive]);
 
   return (
     <div>
@@ -65,7 +65,7 @@ const ProductsData = ({
         return (
           <div
             className="d-flex user-shopping-cart-products-data"
-            key={storeid + "-" + item.id}
+            key={uuidv4()}
           >
             <div className="d-flex user-shopping-cart-products-data-name">
               <div>
@@ -149,7 +149,7 @@ const ProductsData = ({
                   <div className="user-shopping-cart-products-data-price-total-chinese-title">
                     小計:
                   </div>
-                  <span className="pe-2">$</span>
+                  <span className="ps-2 pe-2">$</span>
                   <div>{item.price * item.amount}</div>
                 </div>
                 <div className="user-shopping-cart-products-data-delete">
