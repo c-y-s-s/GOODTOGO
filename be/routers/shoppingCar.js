@@ -33,13 +33,13 @@ router.post("/shoppingcartotoal", async (req, res, next) => {
 // 使用者所加入購物車所有商品店家(不重複)
 router.get("/shoppingstoredata/:userid", async (req, res, next) => {
   let [data, fields] = await connection.execute(
-    `SELECT DISTINCT store_id ,
-    b.name AS store_name,
-    c.category 
-    FROM shopping_cart AS a
-    JOIN stores AS b ON a.store_id = b.id
-    JOIN products_category AS c ON b.stores_category_id = c.id
-    WHERE user_id = ?`,
+    `SELECT shopping_cart.store_id,stores.name AS store_name,products_category.category,SUM(shopping_cart.amount*products.price)AS total
+FROM shopping_cart
+JOIN products ON products.id=shopping_cart.products_id
+JOIN stores ON shopping_cart.store_id = stores.id
+JOIN products_category ON products_category.id=stores.stores_category_id
+WHERE user_id =?
+GROUP BY store_id`,
     [req.params.userid]
   );
 

@@ -5,33 +5,39 @@ import { API_URL } from "../../../utils/config";
 // ------- reacticon ------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
-import { FiAlertCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
 import { v4 as uuidv4 } from "uuid";
-import { FormControlUnstyledContext } from "@mui/base";
-const ProductsData = ({ storeid, setDeleteLive, deleteLive }) => {
+
+const ProductsData = ({
+  storeid,
+  setDeleteLive,
+  deleteLive,
+  setPriceTotal,
+  priceTotal,
+}) => {
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
-  const [productsAmountTotal, setProductsAmountTotal] = useState(3);
+  // 加減數量刷新api開關
+  const [productsAmountTotal, setProductsAmountTotal] = useState(true);
 
   async function handleMinus(item) {
-    setProductsAmountTotal(productsAmountTotal + 1);
-    // console.log(item);
+    //點到就刷新 商品表 api
+    setProductsAmountTotal(!productsAmountTotal);
+    //點到就刷新 店家所有購物車 api
+    setPriceTotal(!priceTotal);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
-    // console.log(response.data);
   }
 
   async function handlePlus(item) {
-    setProductsAmountTotal(productsAmountTotal + 1);
-    // console.log(item);
+    setProductsAmountTotal(!productsAmountTotal);
+    setPriceTotal(!priceTotal);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
-    // console.log(response.data);
   }
 
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
-    setProductsAmountTotal(productsAmountTotal + 1);
-    setDeleteLive(!deleteLive);
+    setPriceTotal(!priceTotal);
+
     console.log(item);
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
@@ -57,7 +63,7 @@ const ProductsData = ({ storeid, setDeleteLive, deleteLive }) => {
         return (
           <div
             className="d-flex user-shopping-cart-products-data"
-            key={uuidv4()}
+            key={storeid + "-" + item.id}
           >
             <div className="d-flex user-shopping-cart-products-data-name">
               <div>

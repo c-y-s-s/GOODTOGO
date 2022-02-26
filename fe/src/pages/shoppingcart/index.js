@@ -1,7 +1,7 @@
 import { useState, useEffect, useLayoutEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
-import ProductsData from "./component/ProductsData"
+import ProductsData from "./component/ProductsData";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 // -------- react icon --------
@@ -9,21 +9,22 @@ import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
 
 const Shoppingcart = () => {
+  // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
-  //用來當作刪除到沒商品時即時刷新頁面
-  const [deleteLive,setDeleteLive] = useState(true)
-  // 撈購物車資料
+  // 刪除商品刷新頁面開關
+  const [deleteLive, setDeleteLive] = useState(true);
+  // 總金額刷新開關
+  const [priceTotal, setPriceTotal] = useState(true);
   useEffect(() => {
     let getShoppingData = async () => {
-      //撈指定 ID 商品的評論
+      // 撈 user_id 所存入購物車的資料
       let shoppingDataResponse = await axios.get(
         `${API_URL}/shop/shoppingstoredata/1`
       );
       setShoppingCartData(shoppingDataResponse.data);
     };
     getShoppingData();
-  }, [deleteLive]);
-  console.log(deleteLive);
+  }, [deleteLive, priceTotal]);
 
   return (
     <div>
@@ -31,11 +32,10 @@ const Shoppingcart = () => {
       <div className="container user-shopping-cart  ">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
-        
             return (
               <div
                 className="col-9 mx-auto user-shopping-cart-data"
-                key={uuidv4()}
+                key={item.store_id}
               >
                 {/* 標頭 */}
                 <div className="d-flex user-shopping-cart-data-title">
@@ -71,6 +71,8 @@ const Shoppingcart = () => {
                   storeid={item.store_id}
                   setDeleteLive={setDeleteLive}
                   deleteLive={deleteLive}
+                  setPriceTotal={setPriceTotal}
+                  priceTotal={priceTotal}
                 />
                 {/* 下排 */}
                 <div className="d-flex justify-content-between   user-shopping-cart-data-payment ">
@@ -100,16 +102,17 @@ const Shoppingcart = () => {
                   </div>
                   <div>
                     <div>
-                      訂單金額 : <span className="price_total">NT$360</span>
+                      訂單金額 :
+                      <span className="price_total">NT${item.total}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* 結帳 */}
                 <div className="user-shopping-cart-data-checkout">
-                  <button className="" onClick={()=>{
-            
-                  }}>去結帳</button>
+                  <button className="" onClick={() => {}}>
+                    去結帳
+                  </button>
                 </div>
               </div>
             );
