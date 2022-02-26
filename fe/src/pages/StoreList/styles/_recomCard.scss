@@ -1,10 +1,10 @@
-.rec-card {
+.store-rec-card {
   overflow: hidden;
   background-color: white;
   width: 263px;
   height: 359px;
   border-radius: 0.4rem;
-  padding: 0;
+  padding: 1.6rem 1rem;
   border-top: 0.54rem solid $color-yellow;
   border-bottom: 0.54rem solid $color-yellow;
   transition: 0.38s;
@@ -13,7 +13,54 @@
   &:hover {
     filter: drop-shadow(0.188rem 0.188rem 10px $color-dark-grey);
   }
-  .deco-top {
-    position: relative;
+
+  .info-img {
+    // width: 233px;
+    height: 162px;
+    background-color: gray;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: 1000;
+    }
+    .is-open {
+      width: fit-content;
+      background-color: $color-light-green;
+      color: white;
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      z-index: 1050;
+      align-self: flex-end;
+      position: relative;
+      top: -2rem;
+      left: 10.35rem;
+    }
+    .is-closed {
+      width: fit-content;
+      background-color: $color-grey;
+      color: white;
+      padding: 0.1rem 0.4rem;
+      border-radius: 5px;
+      z-index: 1050;
+      align-self: flex-end;
+      position: relative;
+      top: -2rem;
+      left: 10.35rem;
+    }
+  }
+  .info-title {
+    // width: 233px;
+    .cate-tag {
+      text-align: center;
+      align-items: center;
+      padding: 0.1rem 0.4rem;
+      background-color: $color-light-grey;
+      border-radius: 12px;
+      width: fit-content;
+      height: fit-content;
+      font-size: $fz-ss-sm;
+      color: $color-dark-grey;
+    }
   }
 }

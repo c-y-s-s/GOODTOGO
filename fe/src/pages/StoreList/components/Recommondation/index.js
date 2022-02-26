@@ -5,9 +5,9 @@ import RecomCard from "./RecomCard";
 const Recomm = () => {
   return (
     <>
-      <div className="rec-content d-grid">
+      <div className="rec-content">
         <div className="header text-center">
-          <div className="title-box">
+          <div className="title-box mt-5 mb-5 m-auto">
             <Star />
             <span className="ps-3 pe-3 text-dark-grey input-label-title">
               限時推薦
@@ -15,7 +15,7 @@ const Recomm = () => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder d-grid">
+        <div className="rec-cards-holder col-10 d-flex align-items-center m-auto">
           <RecomCard />
         </div>
 
