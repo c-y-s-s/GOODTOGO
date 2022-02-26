@@ -13,7 +13,8 @@ const SearchBar = (props) => {
           type="text"
           className="store-search"
           placeholder="熱門搜尋: 麵包"
-          onClick={() => {
+          onClick={(e) => {
+            e.preventDefault();
             setSearchOn(true);
           }}
         />

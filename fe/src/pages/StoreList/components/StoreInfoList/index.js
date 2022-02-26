@@ -50,17 +50,17 @@ const StoreInfoList = () => {
       let pagination = storeRes.data[2];
       let storeLikeCount = storeRes.data[3];
       //let storeKeywordRes = await axios.get(`${API_URL}/storeSearch?`);//keyword怎麼寫
-      let storeSearchRes = await axios.get(`${API_URL}/storeSearch`);
+      // let storeSearchRes = await axios.get(`${API_URL}/storeSearch`);
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
       setDisplayList(stores);
       setStoreLikeCount(storeLikeCount);
-      console.log("storeSearchRes", storeSearchRes.data);
-      console.log("storeRes", storeRes);
-      if (filterOn) {
-        setStoreList(storeSearchRes.data);
-      }
+      // console.log("storeSearchRes", storeSearchRes.data);
+      console.log("storeLikeCount", storeLikeCount);
+      // if (searchOn) {
+      //   setStoreList(storeSearchRes.data);
+      // }
     };
     getStore();
 
@@ -76,7 +76,7 @@ const StoreInfoList = () => {
           <button
             className={`page-links ${page === i ? "active" : ""} `}
             onClick={() => {
-              navigate(`${i}`);
+              navigate(`?page=${i}`);
               window.scrollTo(0, 1450);
             }}
           >
@@ -117,6 +117,7 @@ const StoreInfoList = () => {
   //   setDisplayList()
   // }
   console.log("fliterOn", filterOn);
+  console.log("SearchOn", searchOn);
 
   return (
     <div className="store-list d-grid">
@@ -134,8 +135,8 @@ const StoreInfoList = () => {
       </div>
       {/* 商家列表處理區 */}
       <div className="function-box">
-        <SearchBar setSearchOn={setSearchOn} />
-        <div className="col-lg-4 justify-content-between d-flex">
+        <SearchBar setSearchOn={setSearchOn} searchOn={searchOn} />
+        <div className="col-lg-4 justify-content-between d-flex flex-wrap">
           <FilterBar
             category={category}
             selectedCat={selectedCat}
@@ -167,7 +168,6 @@ const StoreInfoList = () => {
         />
       </ul>
       <div className="footer"></div>
-      <div className="footer-fix"></div>
     </div>
   );
 };

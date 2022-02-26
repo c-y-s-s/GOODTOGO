@@ -2,8 +2,9 @@
   .prefix {
     display: none;
   }
-  grid-template-columns: 10% auto 10%;
-  grid-template-rows: [row1-start]9rem [row2-start]5rem [row3-start]5rem [row4-start]5rem [row5-start]5rem [row5-end]auto [row6-start]5rem [row7-start]3rem [third-line] 18rem [last-line];
+  width: 100vw;
+  grid-template-columns: 10% 80% 10%;
+  grid-template-rows: [row1-start]12.5rem [row2-start]5rem [row3-start]5rem [row4-start]5rem [row5-start]5rem [row5-end]auto [row6-start]5rem [row7-start]3rem [third-line] 18rem [last-line];
   grid-template-areas:
     "header header header "
     "main main main"
@@ -11,7 +12,7 @@
   .header {
     background-image: url(../images/storelist_bg_2.svg);
     background-repeat: no-repeat;
-    background-size: cover;
+    // background-size: cover;
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row-start: 1;
@@ -154,8 +155,8 @@
 
   .footer {
     background-image: url(../images/storelist_bg_3.svg);
-    grid-column-start: -1;
-    grid-column-end: -13;
+    grid-column-start: 1;
+    grid-column-end: 4;
     grid-row-start: -1;
     grid-row-end: -2;
   }
