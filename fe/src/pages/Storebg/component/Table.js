@@ -8,7 +8,7 @@ import {
 
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
-
+import CheckModal from "./CheckModel";
 const Table = () => {
   // 店家商品列表
   const [productsData, setproductsData] = useState([]);
@@ -60,7 +60,7 @@ const Table = () => {
         <tbody>
           {productsData.map((item) => {
             return (
-              <tr key={item.storeId}>
+              <tr key={item.id}>
                 <td>
                   <div className="product-photo">
                     <img
@@ -94,44 +94,22 @@ const Table = () => {
                         : "storebg-data-red") + " btn rounded-pill"
                     }
                     data-bs-toggle="modal"
-                    data-bs-target="#takeDown"
+                    data-bs-target={"#takeDown" + item.id}
+                    // onClick={() => {
+                    //   alert(item.valid);
+                    // }}
                   >
                     {item.valid === 1 ? "上架中" : "下架中"}
                   </button>
                   <div
                     className="modal fade"
-                    id="takeDown"
+                    id={"takeDown" + item.id}
                     // tabindex="-1"
                     aria-labelledby="exampleModalLabel"
                     aria-hidden="true"
                   >
-                    <div className="modal-dialog modal-sm modal-dialog-centered">
-                      <div className="modal-content">
-                        <div className="modal-header">
-                          <button
-                            type="button"
-                            className="btn-close"
-                            data-bs-dismiss="modal"
-                            aria-label="Close"
-                          ></button>
-                        </div>
-                        <div className="modal-body mx-auto fw-bold">
-                          確定下架商品嗎?
-                        </div>
-                        <div className="modal-footer  mx-auto">
-                          {/* <button
-                        type="button"
-                        className="btn btn-secondary"
-                        data-bs-dismiss="modal"
-                      >
-                        Close
-                      </button> */}
-                          <button type="button" className="btn btn-danger">
-                            確定
-                          </button>
-                        </div>
-                      </div>
-                    </div>
+                    {/* //checkModal */}
+                    <CheckModal productValid={item.valid} productId={item.id} />
                   </div>
                 </td>
                 <td>

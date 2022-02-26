@@ -20,8 +20,8 @@ const PenCount = () => {
   
   return (
     <div>
-      <div className="d-flex justify-content-between my-3">
-        <div>第 1 ~ 8 筆</div>
+      <div className="d-flex justify-content-end my-3">
+        {/* <div>第 1 ~ 8 筆</div> */}
         <div className="text-end ">共{productsData.length}筆資料</div>
       </div>
     </div>
