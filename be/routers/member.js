@@ -45,7 +45,7 @@ router.use((req, res, next) => {
   // 有無 session
   if (req.session.member) {
     // 表示登入過
-    console.log("測試 has session");
+    // console.log("測試 has session");
     next(); // 這樣會跳出 router 到 server.js 繼續 next()???
   } else {
     // 表示尚未登入
@@ -322,10 +322,13 @@ router.get("/like", async (req, res, next) => {
   // -------- 星星計算 --------
   // 店家 storeId
   // 取得 -> 每間店有的商品們
+  // let storesProducts = [];
+  // if(likeStoreIds.length > 0) { }
   let [storesProducts] = await connection.execute(
     `SELECT * FROM products
     WHERE store_id IN (${likeStoreIds.join(",")});`
   );
+
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts.length, "筆");
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts);
 
@@ -397,34 +400,27 @@ router.get("/like", async (req, res, next) => {
       currentTime_number < dueTime_number
     );
   });
-  console.log(
-    "現在時間於 餐點時間內的",
-    storeProductAtTime,
-    "總共",
-    storeProductAtTime.length,
-    "筆"
-  );
+  // console.log(
+  //   "現在時間於 餐點時間內的",
+  //   storeProductAtTime,
+  //   "總共",
+  //   storeProductAtTime.length,
+  //   "筆"
+  // );
 
-  // [ Step3 ] 計算數量 -> 總計各間店餐點剩餘 利用 map 每筆放入
-  // FIXME:
-  // storeProductAtTime.map((product) => {
-  //   let count = 
-  // });
-  // let storeProductAmount = storeProductAtTime.reduce(function (
-  //   accumulator,
-  //   currentValue
-  // ) {
-  //   let key = "store_id";
-  //   let find = likeStoreIds.find((v) => v === currentValue.store_id);
-  //   // let result = []
-  //   if (find) {
-  //     accumulator[key] = currentValue.store_id;
-  //     accumulator.productAmount += accumulator.productAmount;
-  //   }
-  // });
+  // [ Step3 ] 計算數量 -> 總計各間店餐點剩餘總數
+  let storeProductAmount = storeProductAtTime.reduce((accumulator, curr) => {
+    if (!accumulator[curr.store_id]) {
+      accumulator[curr.store_id] = 0;
+    }
+    accumulator[curr.store_id] += curr.productAmount;
+    return accumulator;
+  }, {});
+  // console.log("各 store_id 餐點剩餘數量: ", storeProductAmount);
+  // {'3':5, '5':9, '9':16, '13':6, ...}
 
-  // 將愛心、星星相關資料 利用 map 每筆放入 userLikeStores
-  // 判斷營業時間、剩餘餐點數量、圖片格式處理 利用 map 每筆放入 userLikeStores
+  // 將愛心、星星 相關資料 利用 map 每筆放入 userLikeStores
+  // 判斷 營業時間、剩餘餐點數量、圖片格式處理 利用 map 每筆放入 userLikeStores
   userLikeStores.map((item) => {
     // -------- 星星 --------
     // 找 storeStarScore 裡 store_id 對應的 userLikeStores 店家id (storeId)
@@ -479,6 +475,24 @@ router.get("/like", async (req, res, next) => {
     // 新增讓前端讀取檔案路徑
     item.storeImg = "/static/uploads/stores/" + item.storeImg;
 
+    // -------- 餐點剩餘 --------
+    // 前面有計算先將符合現在時間的餐點篩選出來、加總
+    // console.log("各 store_id 餐點剩餘數量: ", storeProductAmount);
+    // {'3':15, '5':9, '9':16, '13':6, ...}
+    // 找 storeProductAmount 裡 key值(是字串) 對應的 userLikeStores 店家id (storeId)
+    let find = Object.keys(storeProductAmount).find(
+      (v) => v === Object.values(item)[1].toString() // 要.toString() 轉字串
+    );
+    // console.log("找key對應店家store_id:", find);
+    // 若有比對到 就將 key 對應的值 放進 userLikeStores
+    if (find) {
+      item.products = storeProductAmount[find]; // key 3 的值 "15" 放入
+      // console.log("將找到的 key 的值 放入item.products:", storeProductAmount[find]);
+    } else {
+      // 沒有 find 餐點數量為 0
+      item.products = 0;
+    }
+
     // -------- 時間 --------
     // [ Step 1 ] 判斷 item 的 closeDay 店休日
     // -> 若休息 餐點剩餘也 = 0
@@ -532,14 +546,17 @@ router.get("/like", async (req, res, next) => {
     while (true) {
       if (find_closeDay) {
         item.isToday = "休息中";
+        item.products = 0; // 休息 -> 餐點剩餘 0
         break;
       }
       if (current_number < storeOpen_number) {
         item.isToday = "休息中";
+        item.products = 0; // 休息 -> 餐點剩餘 0
         break;
       }
       if (current_number >= storeClose_number) {
         item.isToday = "休息中";
+        item.products = 0; // 休息 -> 餐點剩餘 0
         break;
       }
       // 沒比對到 今日營業
@@ -600,6 +617,47 @@ router.post("/like/remove", async (req, res, next) => {
   res.json({
     message: "會員移除收藏店家 ok",
   });
+});
+
+// -------- 我的訂單 ALL --------
+// /api/member/order (get)
+router.get("/order", async (req, res, next) => {
+  let [userOrder] = await connection.execute(
+    `SELECT A.id,
+    A.order_number,
+    A.store_id,
+    stores.name AS store_name,
+     A.status_id,
+     order_status.status,
+     A.order_time
+     FROM user_order AS A
+     JOIN order_status ON A.status_id = order_status.id
+     JOIN stores ON A.store_id = stores.id
+     WHERE A.user_id=1
+     ORDER BY A.id DESC;`,
+    [req.session.member.id]
+  );
+
+  let orderIds = userOrder.map((item) => {
+    return item.id;
+  });
+  // console.log(orderIds);
+
+  let [userOrderDetail] = await connection.execute(
+    `SELECT B.order_id,
+    B.product_id,B.amount,
+    products.name,
+    products.img,
+    products.price
+    FROM user_order_detail AS B
+    JOIN products ON products.id=B.product_id
+    WHERE B.order_id IN (${orderIds.join(",")})
+    ORDER BY B.order_id DESC;`
+  );
+
+  console.log("我的訂單 userOrder: ", userOrder);
+  console.log("我的訂單 userOrderDetail: ", userOrderDetail);
+  res.json({ userOrder, userOrderDetail });
 });
 
 module.exports = router;

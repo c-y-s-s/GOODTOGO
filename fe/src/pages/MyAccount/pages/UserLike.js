@@ -76,6 +76,8 @@ const UserLike = () => {
   async function handleRemoveLike(removeStoreId) {
     // 要轉成物件 POST 才有預檢(?)
     removeStoreId = { removeStoreId };
+    // removeStoreId = { removeStoreId: removeStoreId };
+
     try {
       // http://localhost:3002/api/member/like/remove (router.post)
       let response = await axios.post(
@@ -203,7 +205,7 @@ const UserLike = () => {
                             {item.openTime} - {item.closeTime}
                           </span>
                           <span className="fz-sm">餐點剩餘:&nbsp;</span>
-                          <span>14</span>
+                          <span>{item.products}</span>
                         </div>
                         {/* 分數相關 */}
                         <div className="d-flex align-items-center justify-content-between store_Score">
