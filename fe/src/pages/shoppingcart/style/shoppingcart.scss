@@ -184,7 +184,8 @@
         padding: 1rem 0;
         text-align: end;
         width: 100%;
-        button {
+        .checkout-button {
+            text-decoration: none;
             border: none;
             padding: 0.7rem 4rem;
             background-color: $color-light-green;

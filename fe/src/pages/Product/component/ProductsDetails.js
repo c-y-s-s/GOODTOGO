@@ -38,7 +38,7 @@ const ProductsDetails = ({
     products_id: openProductsModaID,
     amount: 1,
   });
-  console.log("shoppingData ----->", shoppingData);
+
   // const [productcar,setProductArr] = useState([])
   useLayoutEffect(() => {
     let getProductId = async () => {

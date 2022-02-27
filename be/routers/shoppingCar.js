@@ -4,8 +4,6 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
 
-
-
 router.post("/shoppingcartotoaldelete", async (req, res, next) => {
   console.log(req.body);
   // TODO: 寫進資料庫
@@ -17,14 +15,12 @@ router.post("/shoppingcartotoaldelete", async (req, res, next) => {
   res.json({ msg: "刪除成功" });
 });
 
-
-
 router.post("/shoppingcartotoal", async (req, res, next) => {
   console.log(req.body);
   // TODO: 寫進資料庫
   let [result] = await connection.execute(
     `UPDATE shopping_cart SET amount=? WHERE id = ?;`,
-    [req.body.amount,req.body.id]
+    [req.body.amount, req.body.id]
   );
   console.log(result);
   res.json({ msg: "ok" });
@@ -43,7 +39,7 @@ GROUP BY store_id`,
     [req.params.userid]
   );
 
-  res.json(data);
+  res.status(200).json(data);
 });
 
 // 使用者所加入購物車所有商品
@@ -65,7 +61,7 @@ router.get("/shoppingcar/:userId/:storeid", async (req, res, next) => {
     [req.params.userId, req.params.storeid]
   );
 
-  res.json(data);
+  res.status(200).json(data);
 });
 
 // 使用者所加入購物車所有商品
@@ -85,7 +81,7 @@ router.get("/shoppingcar/:userId/", async (req, res, next) => {
     [req.params.userId]
   );
 
-  res.json(data);
+  res.status(200).json(data);
 });
 
 // /api/auth/register 這邊是因為先寫前端所以網址就要設定前端所設定的

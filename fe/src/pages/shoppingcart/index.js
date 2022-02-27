@@ -8,14 +8,22 @@ import { ERR_MSG } from "../../utils/error";
 import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
 
-const Shoppingcart = () => {
+const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
   // 刪除商品刷新頁面開關
   const [deleteLive, setDeleteLive] = useState(true);
   // 總金額刷新開關
   const [priceTotal, setPriceTotal] = useState(true);
-  console.log(deleteLive);
+  // 付款方式
+  const [paymentData, setPatMentData] = useState(1);
+  // 存入所要結帳商家 ID 和 付款方式寫進資料庫
+  const [shoppingCheckData, setShoppingCheckData] = useState({
+    //!整合須改為目前登入者 id
+    userId: 1,
+    storeId: "",
+    paymentMethod: "",
+  });
   useEffect(() => {
     let getShoppingData = async () => {
       // 撈 user_id 所存入購物車的資料
@@ -83,21 +91,35 @@ const Shoppingcart = () => {
                       <div className="site">
                         <input
                           type="radio"
-                          id="huey"
+                          id="promptCash"
                           name="drone"
-                          value="huey"
+                          value="1"
+                          onClick={() => {
+                            setCheckoutData({
+                              ...checkoutData,
+                              paymentMethod: 1,
+                            });
+                          }}
+                          defaultChecked={paymentData === 1}
                         />
-                        <label for="huey">現場取貨付款</label>
+                        <label htmlFor="promptCash">現場取貨付款</label>
                       </div>
 
                       <div className="credit-card">
                         <input
                           type="radio"
-                          id="dewey"
+                          id="creditCard"
                           name="drone"
-                          value="dewey"
+                          value="2"
+                          onClick={() => {
+                            setCheckoutData({
+                              ...checkoutData,
+                              paymentMethod: 2,
+                            });
+                          }}
+                          defaultChecked={paymentData === 2}
                         />
-                        <label for="dewey">信用卡付款</label>
+                        <label htmlFor="creditCard">信用卡付款</label>
                       </div>
                     </div>
                   </div>
@@ -111,9 +133,18 @@ const Shoppingcart = () => {
 
                 {/* 結帳 */}
                 <div className="user-shopping-cart-data-checkout">
-                  <button className="" onClick={() => {}}>
+                  <Link
+                    to="/checkout"
+                    className="checkout-button"
+                    onClick={() => {
+                      setCheckoutData({
+                        ...checkoutData,
+                        storeId: item.store_id,
+                      });
+                    }}
+                  >
                     去結帳
-                  </button>
+                  </Link>
                 </div>
               </div>
             );

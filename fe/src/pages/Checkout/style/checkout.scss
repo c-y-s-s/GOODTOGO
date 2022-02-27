@@ -1,0 +1,131 @@
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border-style: none;
+    font-size: $fz-md;
+}
+
+.checkout-data {
+    border: 1px solid $color-light-grey;
+    border-radius: 0.2rem;
+    padding: 1.2rem 2rem 0 2rem;
+
+    //bootstrap5 table 預設粗度 700 設為 500
+    th {
+        font-weight: 500;
+    }
+    //標頭
+    .checkout-data-table {
+        color: $color-dark-grey;
+        letter-spacing: $ls-lg;
+        font-weight: 500;
+        .checkout-title {
+            border-bottom: none;
+            padding: 5rem 0;
+            tr {
+            }
+            .checkout-title-icon {
+                color: $color-light-grey;
+                margin-right: 0.8rem;
+            }
+            .checkout-title-storename {
+                font-size: $fz-md;
+            }
+            .checkout-title-category {
+                background-color: #eaeaea;
+                margin-left: 1rem;
+                padding: 0.15rem 0.65rem;
+                border-radius: 0.8rem;
+                font-size: $fz-s-sm;
+            }
+            .checkout-title-price {
+            }
+            .checkout-title-amount {
+            }
+            .checkout-title-total {
+            }
+        }
+    }
+    .checkout-data-products {
+        padding: 2rem 0;
+
+        tr {
+            border-top: 1px solid $color-light-grey;
+            border-bottom: 1px solid $color-light-grey;
+        }
+        .cover-photo {
+            width: 6.4rem;
+            height: 5.4rem;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+        .checkout-data-products-name {
+            padding-left: 1.25rem;
+            font-size: $fz-xx-lg;
+            letter-spacing: $ls-lg;
+        }
+        .checkout-data-products-price {
+            font-size: $fz-xx-lg;
+            letter-spacing: $ls-sm;
+        }
+        .checkout-data-products-amount {
+            font-size: $fz-xxxx-lg;
+            color: $color-green;
+        }
+        .checkout-data-products-total {
+            font-size: $fz-xx-lg;
+            color: $color-green;
+            letter-spacing: $ls-sm;
+        }
+        .order-total {
+            padding: 1.5rem 0;
+            font-size: $fz-sm;
+
+            .order-total-price {
+                margin-left: 2rem;
+                font-size: $fz-xxxx-lg;
+                color: $color-dark-yellow;
+                font-weight: $fw-bold;
+                padding-right: 0.35rem;
+                .order-total-price-NT {
+                }
+            }
+        }
+        .checkout-data-products-footer {
+            border-bottom: none;
+
+            .payment-method {
+                padding-top: 1.9rem;
+
+                div {
+                    color: $color-green;
+                    border: 2px solid $color-green;
+                    width: 10rem;
+                    text-align: center;
+                    padding: 0.5rem 0;
+                    font-size: $fz-lg;
+                    font-weight: 500;
+                }
+            }
+            .send-order {
+                text-align: end;
+                padding-top: 1.9rem;
+                div {
+                    display: flex;
+                    justify-content: end;
+
+                    .get-order {
+                        padding: 0.65rem 4rem;
+                        background: $color-light-green;
+                        color: white;
+                        font-size: $fz-lg;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}

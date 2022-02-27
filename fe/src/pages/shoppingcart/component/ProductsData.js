@@ -19,7 +19,7 @@ const ProductsData = ({
 
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
-console.log(productsAmountTotal);
+
   async function handleMinus(item) {
     //點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal+1);
@@ -34,13 +34,13 @@ console.log(productsAmountTotal);
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-
+  console.log("加減數量", productsAmountTotal);
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
     setProductsAmountTotal(productsAmountTotal + 1);
     setPriceTotal(!priceTotal);
     setDeleteLive(!deleteLive);
-    console.log(item);
+
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
       item
@@ -57,15 +57,16 @@ console.log(productsAmountTotal);
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, [productsAmountTotal, priceTotal, deleteLive]);
+  }, [productsAmountTotal, deleteLive]);
 
   return (
     <div>
       {specifyProductsData.map((item) => {
+ 
         return (
           <div
             className="d-flex user-shopping-cart-products-data"
-            key={uuidv4()}
+            key={item.id}
           >
             <div className="d-flex user-shopping-cart-products-data-name">
               <div>
@@ -103,7 +104,7 @@ console.log(productsAmountTotal);
               <div className="d-flex user-shopping-cart-products-data-amount">
                 <div className="d-flex buy-num">
                   {/* 減號 */}
-                  {/* {console.log(item)} */}
+
                   {item.amount > 1 ? (
                     <button
                       className=" buy-num-minus equation"
