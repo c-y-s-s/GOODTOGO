@@ -73,6 +73,10 @@ app.use("/api/shop", shoopingCarRouter);
 // let shoopingCarStoreRouter = require("./routers/shoppingCar");
 // app.use("/api/shop", shoopingCarStoreRouter);
 
+// -------- 購物車資料 --------
+let checkOutRouter = require("./routers/checkout");
+app.use("/api/checkout", checkOutRouter);
+
 //  -------- 指定商品 RESTful API 列表 --------
 // 先分開寫 等會設定api變數之後寫再跟上面寫一起
 let productRouter = require("./routers/productsModal");

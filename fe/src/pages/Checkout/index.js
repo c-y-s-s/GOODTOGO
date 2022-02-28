@@ -5,12 +5,51 @@ import axios from "axios";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 // -------- react icon --------
+
 import { FaStore } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
-const Checkout = ({ checkoutData }) => {
-  console.log("checkout ---> ", checkoutData.paymentMethod);
+// -------- Moment plugin --------
+import moment from "moment";
+import "moment/min/locales";
 
-  const [checkStoreData, setCheckStoreData] = useState([]);
+const Checkout = ({ checkoutData }) => {
+  moment.locale("zh-tw");
+
+  // !計算當前時間秒數 hh:mm:ss
+  let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
+  let orderNumber = moment().format("YYMMDDHHmmssss");
+
+  const [checkProductsData, setCheckProductsData] = useState([]);
+  console.log(checkoutData);
+  const [getOrderDetail, setGetOrderDetail] = useState({
+    userId: "1",
+    storeId: checkoutData.storeId,
+    statusId: "1",
+    orderTime: timeInsecond,
+    order_number: orderNumber,
+  });
+  console.log(checkProductsData);
+  useEffect(() => {
+    let getcheckProductsData = async () => {
+      //撈指定 ID 商品的評論
+      let checkProductsDataResponse = await axios.get(
+        `${API_URL}/checkout/${checkoutData.storeId}`
+      );
+      setCheckProductsData(checkProductsDataResponse.data);
+    };
+    getcheckProductsData();
+  }, []);
+
+  async function handleGetOrder(e) {
+    //阻止預設行為
+    e.preventDefault();
+    //引入 config 已經寫好的 api 網址才是好習慣
+    let response = await axios.post(
+      `${API_URL}/checkout/orderdetail`,
+      getOrderDetail
+    );
+    console.log(response.data);
+  }
   return (
     <div>
       <div className="container-fluid checkout-top-title">確認結帳</div>
@@ -22,8 +61,12 @@ const Checkout = ({ checkoutData }) => {
                 <th scope="col ">
                   <div className="d-flex pb-3 align-items-center ">
                     <FaStore className="checkout-title-icon" />
-                    <div className="checkout-title-storename ">額媽媽總店</div>
-                    <div className="checkout-title-category">麵食</div>
+                    <div className="checkout-title-storename ">
+                      {checkoutData.storeName}
+                    </div>
+                    <div className="checkout-title-category">
+                      {checkoutData.storeCategory}
+                    </div>
                   </div>
                 </th>
 
@@ -51,59 +94,67 @@ const Checkout = ({ checkoutData }) => {
             {/* // ! */}
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
-              <tr className="text-center">
-                <th scope="row" className="py-3">
-                  <div className="d-flex align-items-center">
-                    <div>
-                      <img
-                        className="cover-photo"
-                        src={require(`../../images/products_img/12bc6394-13cd-4426-a19b-2ad8a4c7479e.jpeg`)}
-                        alt=""
-                      />
-                    </div>
+              {checkProductsData.map((item) => {
+                console.log(item.products_id);
+                return (
+                  <tr className="text-center">
+                    <th scope="row" className="py-3">
+                      <div className="d-flex align-items-center">
+                        <div>
+                          <img
+                            className="cover-photo"
+                            src={require(`../../images/products_img/${item.img}`)}
+                            alt=""
+                          />
+                        </div>
 
-                    <div className="col-12">
-                      <div className="checkout-data-products-name d-md-flex">
-                        <div className="text-start ">麵包包包包</div>
+                        <div className="col-12">
+                          <div className="checkout-data-products-name d-md-flex">
+                            <div className="text-start ">
+                              {item.product_name}
+                            </div>
 
-                        {/* // md 以下出現區塊 */}
-                        <div className="checkout-data-products-price d-md-none  text-start pt-2">
-                          $ 60
+                            {/* // md 以下出現區塊 */}
+                            <div className="checkout-data-products-price d-md-none  text-start pt-2">
+                              $ {item.price}
+                            </div>
+                          </div>
+                          <div className="checkout-data-products-amount d-md-none d-flex align-items-center pt-2">
+                            <div className="checkout-data-products-md-style ">
+                              數量:
+                            </div>
+                            <div className="ps-2 checkout-data-products-md-style-amount">
+                              {item.amount}
+                            </div>
+                          </div>
+                          <div className="checkout-data-products-total d-md-none d-flex align-items-center pt-2">
+                            <div className="checkout-data-products-md-style ">
+                              小計:
+                            </div>
+                            <div className="ps-2 checkout-data-products-md-style-total">
+                              ${item.price * item.amount}
+                            </div>
+                          </div>
                         </div>
                       </div>
-                      <div className="checkout-data-products-amount d-md-none d-flex align-items-center pt-2">
-                        <div className="checkout-data-products-md-style ">
-                          數量:
-                        </div>
-                        <div className="ps-2 checkout-data-products-md-style-amount">
-                          2
-                        </div>
-                      </div>
-                      <div className="checkout-data-products-total d-md-none d-flex align-items-center pt-2">
-                        <div className="checkout-data-products-md-style ">
-                          小計:
-                        </div>
-                        <div className="ps-2 checkout-data-products-md-style-total">
-                          $120
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </th>
+                    </th>
 
-                <td
-                  className="py-3 checkout-data-products-price   checkout-data-products-md-none
+                    <td
+                      className="py-3 checkout-data-products-price   checkout-data-products-md-none
                 "
-                >
-                  $60
-                </td>
-                <td className="py-3 checkout-data-products-amount checkout-data-products-md-none">
-                  2
-                </td>
-                <td className="py-3 text-end checkout-data-products-total checkout-data-products-md-none">
-                  $120
-                </td>
-              </tr>
+                    >
+                      ${item.price}
+                    </td>
+                    <td className="py-3 checkout-data-products-amount checkout-data-products-md-none">
+                      {item.amount}
+                    </td>
+                    <td className="py-3 text-end checkout-data-products-total checkout-data-products-md-none">
+                      ${item.price * item.amount}
+                    </td>
+                  </tr>
+                );
+              })}
+
               {/* //? -------- 商品區塊結束 -------- */}
 
               {/* 付款金額 */}
@@ -111,7 +162,8 @@ const Checkout = ({ checkoutData }) => {
                 <td colSpan="4" className="text-md-end order-total  ">
                   付款金額 :
                   <span className="order-total-price">
-                    <span className="order-total-price-NT">NT$</span>360
+                    <span className="order-total-price-NT">NT$</span>
+                    {checkoutData.orderPriceTotal}
                   </span>
                 </td>
               </tr>
@@ -122,6 +174,11 @@ const Checkout = ({ checkoutData }) => {
                 <tr className="checkout-data-products-footer ">
                   <td colSpan="1" className="payment-method">
                     <div>現場付款</div>
+                  </td>
+                  <td colSpan="3" className="send-order">
+                    <button onClick={handleGetOrder}>
+                      <div className="get-order ">完成結帳</div>
+                    </button>
                   </td>
                 </tr>
               )}
@@ -140,7 +197,7 @@ const Checkout = ({ checkoutData }) => {
                     </div>
                   </td>
                   <td colSpan="3" className="send-order">
-                    <button>
+                    <button onClick={handleGetOrder}>
                       <div className="get-order ">完成結帳</div>
                     </button>
                   </td>
@@ -153,6 +210,9 @@ const Checkout = ({ checkoutData }) => {
                   <div className="payment-method-md">
                     <div className="payment-method ">現場付款</div>
                   </div>
+                  <button className="send-order-md" onClick={handleGetOrder}>
+                    完成結帳
+                  </button>
                 </div>
               )}
               {checkoutData.paymentMethod === "2" && (
@@ -166,7 +226,9 @@ const Checkout = ({ checkoutData }) => {
                   <div className="payment-method-card-number ps-3 pt-2">
                     ***** ***** ***** 6543
                   </div>
-                  <button className="send-order-md">完成結帳</button>
+                  <button className="send-order-md" onClick={handleGetOrder}>
+                    完成結帳
+                  </button>
                 </div>
               )}
             </tbody>
