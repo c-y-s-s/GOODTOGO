@@ -10,6 +10,7 @@ import { RiVisaLine } from "react-icons/ri";
 const Checkout = () => {
   return (
     <div>
+      <div className="container-fluid checkout-top-title">確認結帳</div>
       <div className="container">
         <div className="col-9  mx-auto checkout-data  ">
           <table class="table checkout-data-table able-dark table-borderless table align-middle table-sm">

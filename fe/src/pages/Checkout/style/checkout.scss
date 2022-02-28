@@ -7,12 +7,19 @@ tr {
     border-style: none;
     font-size: $fz-md;
 }
-
+.checkout-top-title {
+    background-color: $color-light-green;
+    text-align: center;
+    color: #fff;
+    padding: 1.55rem 0;
+    font-size: $fz-xxxx-lg;
+    letter-spacing: 1rem;
+}
 .checkout-data {
     border: 1px solid $color-light-grey;
     border-radius: 0.2rem;
     padding: 1.2rem 2rem 0 2rem;
-
+    margin-top: 2.2rem;
     //bootstrap5 table 預設粗度 700 設為 500
     th {
         font-weight: 500;
