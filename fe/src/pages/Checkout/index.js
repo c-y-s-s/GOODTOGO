@@ -24,7 +24,7 @@ const Checkout = ({ checkoutData }) => {
   const [orderMaxId, setOrderMaxId] = useState(0);
 
   const [OrderDetail, setOrderDetail] = useState({
-    id: orderMaxId,
+    id: "",
     userId: "1",
     storeId: checkoutData.storeId,
     statusId: "1",
@@ -56,6 +56,10 @@ const Checkout = ({ checkoutData }) => {
     let response = await axios.post(
       `${API_URL}/checkout/orderdetail`,
       OrderDetail
+    );
+    // ! 0301
+    let productsResponse = await axios.post(
+      `${API_URL}/checkout/userorderdetail`
     );
   }
   return (

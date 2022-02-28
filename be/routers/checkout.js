@@ -41,4 +41,17 @@ router.post("/orderdetail", async (req, res, next) => {
   res.json({ msg: "ok" });
 });
 
+//寫入商品資訊
+router.post("/userorderdetail", async (req, res, next) => {
+  let [result] = await connection.execute(
+    "INSERT INTO user_order_detail (order_id, product_id, amount) VALUES (?,?,?)",
+    [
+      req.body.id,
+      req.body.userId,
+      req.body.storeId,
+    ]
+  );
+  console.log(req.body);
+  res.json({ msg: "ok" });
+});
 module.exports = router;
