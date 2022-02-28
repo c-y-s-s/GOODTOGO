@@ -17,38 +17,46 @@ const Checkout = ({ checkoutData }) => {
 
   // !計算當前時間秒數 hh:mm:ss
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-  let orderNumber = moment().format("YYMMDDHHmmssss");
+  let orderNumber = moment().format("YYMMDDHHmmsss");
 
   const [checkProductsData, setCheckProductsData] = useState([]);
-  console.log(checkoutData);
-  const [getOrderDetail, setGetOrderDetail] = useState({
+  //取目前訂單最大值+1 寫進資料庫
+  const [orderMaxId, setOrderMaxId] = useState(0);
+
+  const [OrderDetail, setOrderDetail] = useState({
+    id: orderMaxId,
     userId: "1",
     storeId: checkoutData.storeId,
     statusId: "1",
+    paymentMethod: checkoutData.paymentMethod,
     orderTime: timeInsecond,
     order_number: orderNumber,
   });
-  console.log(checkProductsData);
+  console.log(OrderDetail);
+  // const [OrderProduct, setOrderProduct] = useState([]);
+
   useEffect(() => {
     let getcheckProductsData = async () => {
       //撈指定 ID 商品的評論
       let checkProductsDataResponse = await axios.get(
         `${API_URL}/checkout/${checkoutData.storeId}`
       );
+      let orderMaxIdResponse = await axios.get(
+        `${API_URL}/checkout/maxorderid`
+      );
       setCheckProductsData(checkProductsDataResponse.data);
+      setOrderMaxId(orderMaxIdResponse.data + 1);
+      setOrderDetail({ ...OrderDetail, id: orderMaxIdResponse.data + 1 });
     };
     getcheckProductsData();
   }, []);
 
-  async function handleGetOrder(e) {
-    //阻止預設行為
-    e.preventDefault();
+  async function handleGetOrder() {
     //引入 config 已經寫好的 api 網址才是好習慣
     let response = await axios.post(
       `${API_URL}/checkout/orderdetail`,
-      getOrderDetail
+      OrderDetail
     );
-    console.log(response.data);
   }
   return (
     <div>
@@ -95,9 +103,9 @@ const Checkout = ({ checkoutData }) => {
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
               {checkProductsData.map((item) => {
-                console.log(item.products_id);
+                console.log(item);
                 return (
-                  <tr className="text-center">
+                  <tr className="text-center" key={item.id}>
                     <th scope="row" className="py-3">
                       <div className="d-flex align-items-center">
                         <div>

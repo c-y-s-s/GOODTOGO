@@ -73,7 +73,7 @@ app.use("/api/shop", shoopingCarRouter);
 // let shoopingCarStoreRouter = require("./routers/shoppingCar");
 // app.use("/api/shop", shoopingCarStoreRouter);
 
-// -------- 購物車資料 --------
+// -------- 訂單資料 --------
 let checkOutRouter = require("./routers/checkout");
 app.use("/api/checkout", checkOutRouter);
 
