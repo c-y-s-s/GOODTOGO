@@ -185,7 +185,7 @@ const MyAccount = () => {
             />
             <Route path="password" element={<UserPassword />} />
             <Route path="like" element={<UserLike />} />
-            <Route path="order" element={<UserOrder />}>
+            <Route path="order/*" element={<UserOrder />}>
               <Route path=":status" element={<UserOrder />} />
             </Route>
             <Route path="coupon" element={<UserCoupon />} />

@@ -199,7 +199,7 @@ router.post(
 
     // -------- 儲存到資料庫 --------
     let [updateProfileResult] = await connection.execute(
-      "UPDATE users SET name=?, email=?, phone=?, headshots=? WHERE id=?",
+      `UPDATE users SET name=?, email=?, phone=?, headshots=? WHERE id=?;`,
       [
         req.body.name,
         req.body.email,
@@ -622,42 +622,180 @@ router.post("/like/remove", async (req, res, next) => {
 // -------- 我的訂單 ALL --------
 // /api/member/order (get)
 router.get("/order", async (req, res, next) => {
+  // 列出使用者的訂單
   let [userOrder] = await connection.execute(
     `SELECT A.id,
-    A.order_number,
     A.store_id,
     stores.name AS store_name,
-     A.status_id,
-     order_status.status,
-     A.order_time
-     FROM user_order AS A
-     JOIN order_status ON A.status_id = order_status.id
-     JOIN stores ON A.store_id = stores.id
-     WHERE A.user_id=1
-     ORDER BY A.id DESC;`,
+    category AS store_category,
+    order_status.id AS order_status_id,
+    order_status.status,
+    A.order_number,
+    A.order_time
+    FROM user_order AS A
+    JOIN order_status ON A.status_id = order_status.id
+    JOIN stores ON A.store_id = stores.id
+    JOIN stores_category ON stores.stores_category_id = stores_category.id
+    WHERE A.user_id=?  
+    ORDER BY A.id DESC;`,
     [req.session.member.id]
   );
+  // console.log("我的訂單 userOrder: ", userOrder);
 
+  // 列出訂單 id
   let orderIds = userOrder.map((item) => {
     return item.id;
   });
   // console.log(orderIds);
 
+  // 用 orderIds 取 訂單細節
   let [userOrderDetail] = await connection.execute(
     `SELECT B.order_id,
     B.product_id,B.amount,
-    products.name,
-    products.img,
-    products.price
-    FROM user_order_detail AS B
+    products.name AS product_name,
+    products.img,products.price
+    FROM user_order_detail B
     JOIN products ON products.id=B.product_id
     WHERE B.order_id IN (${orderIds.join(",")})
     ORDER BY B.order_id DESC;`
   );
+  // console.log("我的訂單 userOrderDetail: ", userOrderDetail);
 
-  console.log("我的訂單 userOrder: ", userOrder);
-  console.log("我的訂單 userOrderDetail: ", userOrderDetail);
-  res.json({ userOrder, userOrderDetail });
+  // 將 userOrder 的 id 提出來當 key
+  let userOrderMap = userOrder.reduce((accumulator, curr) => {
+    accumulator[curr.id] = curr;
+    return accumulator;
+  }, {});
+  // console.log("userOrderMap", userOrderMap);
+
+  // userOrderDetail map 時 利用 key(上面提出的id) 與 detail.order_id 對應
+  // 對應到之後 將該筆訂單的細節 push 到自組的 details 空陣列裡
+  userOrderDetail.map((detail) => {
+    // 處理圖片
+    // 將產品細節 img 新增讓前端讀取檔案路徑
+    detail.img = "/static/uploads/products_img/" + detail.img;
+
+    // 將購買產品細節 置入自建的 details 陣列裡
+    if (!userOrderMap[detail.order_id].details) {
+      userOrderMap[detail.order_id].details = [];
+    }
+    userOrderMap[detail.order_id].details.push(detail);
+
+    // 計算總金額
+    if (!userOrderMap[detail.order_id].totalAmount) {
+      userOrderMap[detail.order_id].totalAmount = 0;
+    }
+    userOrderMap[detail.order_id].totalAmount += detail.amount * detail.price;
+  });
+  // 觀察資料
+  // console.log("userOrderMap", userOrderMap);
+  // console.log("userOrder", userOrder);
+  // 物件 pass by reference , userOrder 也跟著被改變
+  // userOrderMap 會等同 userOrder
+
+  res.json(userOrder);
+});
+
+// -------- 我的訂單 Status=? --------
+// /api/member/order/status=? (get)
+router.get("/order/:status", async (req, res, next) => {
+  // console.log(req.params.status)
+  let status_num = req.params.status.split("=").pop();
+  // console.log(status_num)
+  // 列出使用者的訂單
+  let [userOrder] = await connection.execute(
+    `SELECT A.id,
+    A.store_id,
+    stores.name AS store_name,
+    category AS store_category,
+    order_status.id AS order_status_id,
+    order_status.status,
+    A.order_number,
+    A.order_time
+    FROM user_order AS A
+    JOIN order_status ON A.status_id = order_status.id
+    JOIN stores ON A.store_id = stores.id
+    JOIN stores_category ON stores.stores_category_id = stores_category.id
+    WHERE A.user_id=? AND order_status.id=?
+    ORDER BY A.id DESC;`,
+    [req.session.member.id, status_num]
+  );
+  // console.log("我的訂單 userOrder: ", userOrder);
+
+  // 列出訂單 id
+  let orderIds = userOrder.map((item) => {
+    return item.id;
+  });
+  // console.log(orderIds);
+
+  // 用 orderIds 取 訂單細節
+  let [userOrderDetail] = await connection.execute(
+    `SELECT B.order_id,
+    B.product_id,B.amount,
+    products.name AS product_name,
+    products.img,products.price
+    FROM user_order_detail B
+    JOIN products ON products.id=B.product_id
+    WHERE B.order_id IN (${orderIds.join(",")})
+    ORDER BY B.order_id DESC;`
+  );
+  // console.log("我的訂單 userOrderDetail: ", userOrderDetail);
+
+  // 將 userOrder 的 id 提出來當 key
+  let userOrderMap = userOrder.reduce((accumulator, curr) => {
+    accumulator[curr.id] = curr;
+    return accumulator;
+  }, {});
+  // console.log("userOrderMap", userOrderMap);
+
+  // userOrderDetail map 時 利用 key(上面提出的id) 與 detail.order_id 對應
+  // 對應到之後 將該筆訂單的細節 push 到自組的 details 空陣列裡
+  userOrderDetail.map((detail) => {
+    // 處理圖片
+    // 將產品細節 img 新增讓前端讀取檔案路徑
+    detail.img = "/static/uploads/products_img/" + detail.img;
+
+    // 將購買產品細節 置入自建的 details 陣列裡
+    if (!userOrderMap[detail.order_id].details) {
+      userOrderMap[detail.order_id].details = [];
+    }
+    userOrderMap[detail.order_id].details.push(detail);
+
+    // 計算總金額
+    if (!userOrderMap[detail.order_id].totalAmount) {
+      userOrderMap[detail.order_id].totalAmount = 0;
+    }
+    userOrderMap[detail.order_id].totalAmount += detail.amount * detail.price;
+  });
+  // 觀察資料
+  // console.log("userOrderMap", userOrderMap);
+  // console.log("userOrder", userOrder);
+  // 物件 pass by reference , userOrder 也跟著被改變
+  // userOrderMap 會等同 userOrder
+
+  res.json(userOrder);
+});
+
+// -------- 會員取消訂單 --------
+// /api/member/order/cancel (post)
+router.post("/order/cancel", async (req, res, next) => {
+  // 沒有接收到資料
+  if (!req.body.cancelOrder) {
+    res.json({
+      code: 88002,
+      message: "會員取消訂單 失敗",
+    });
+  }
+  let [cancelOrderResult] = await connection.execute(
+    `UPDATE user_order SET status_id=3 WHERE user_id=? AND id=?;`,
+    [req.session.member.id, req.body.cancelOrder]
+  );
+
+  console.log("req.body.cancelOrder: ", req.body.cancelOrder);
+  console.log("取消訂單資料結果: ", cancelOrderResult);
+  res.json({
+    message: "會員取消訂單 ok",
+  });
 });
 
 module.exports = router;

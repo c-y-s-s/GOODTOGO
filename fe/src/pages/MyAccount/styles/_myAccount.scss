@@ -73,6 +73,9 @@
 .c-green {
   color: $color-green;
 }
+.c-l-green {
+  color: $color-light-green;
+}
 .c-yellow {
   color: $color-yellow;
 }
@@ -558,7 +561,7 @@
   background-color: $color-yellow;
 }
 
-// -------- 我的訂單頁 - 全部 --------
+// -------- 我的訂單頁 - ALL --------
 .store_Icon {
   color: $color-grey;
   width: 20px;
@@ -571,21 +574,34 @@
 .order_Status_Info {
   font-size: $fz-md;
   letter-spacing: $ls-md;
-  div {
-    display: block;
-    margin-left: 1.5rem;
-  }
+}
+.space {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
 }
 .order_Status_Button {
   cursor: pointer;
   padding: 6px 10px;
-  background-color: $color-yellow;
   color: #fff;
   border-radius: 5px;
   transition: 0.2s;
+  margin-left: 1.5rem;
+}
+.order_cancel {
+  background-color: $color-yellow;
   &:hover {
     background-color: darken($color-yellow, 10%);
   }
+}
+.order_finish {
+  background-color: $color-light-green;
+  &:hover {
+    background-color: darken($color-light-green, 8%);
+  }
+}
+.comment_Icon {
+  width: 19px;
+  height: 19px;
 }
 .order_Store_Img {
   height: 5rem;
@@ -593,8 +609,11 @@
   border-radius: 3px;
   overflow: hidden;
 }
-
 .order_Amount {
+  width: 9rem;
+}
+
+.order_Amount_Total {
   font-size: 1.5rem;
   color: $color-dark-yellow;
   font-weight: $fw-bold;
@@ -621,6 +640,23 @@
   }
 }
 @media screen and (max-width: 576px) {
+  // 我的訂單頁
+  .order_Link {
+    font-size: $fz-sm;
+    padding: 18px 0px;
+    display: block;
+    letter-spacing: $ls-lg;
+  }
+  .order_Num {
+    padding: 0.5px 8px 2px 8px;
+    font-size: 12px;
+  }
+  // 我的訂單頁 ALL
+  .order_Amount {
+    width: 6rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: $ls-sm;
+  }
 }
 @media screen and (max-width: 375px) {
   // 更改密碼頁

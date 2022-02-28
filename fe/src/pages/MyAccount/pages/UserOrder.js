@@ -10,32 +10,7 @@ import UserOrderCancel from "./UserOrderCancel";
 
 const UserOrder = () => {
   let { status } = useParams();
-  // 載入 使用者收藏店家清單
-  useEffect(() => {
-    // http://localhost:3002/api/member/like
-    let getLike = async () => {
-      let response = await axios.get(`${API_URL}/member/like`, {
-        withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
-      });
-      console.log(
-        "api/member/like(get) response.data.userLikeStores: ",
-        response.data.userLikeStores
-      );
-      console.log(
-        "api/member/like(get) response.data.storeCategories: ",
-        response.data.storeCategories
-      );
-      console.log(
-        "api/member/like(get) response.data.likeStoreIds: ",
-        response.data.likeStoreIds
-      );
-      console.log(
-        "api/member/like(get) response.data.userLikeStores.storeCate: ",
-        response.data.userLikeStores.map((v) => v.storeCate)
-      );
-    };
-    getLike();
-  }, []);
+  const [stayNum, setStayNum] = useState();
 
   return (
     <>
@@ -63,7 +38,7 @@ const UserOrder = () => {
               to="/member/order/status=1"
             >
               待領取
-              <span className="order_Num">9</span>
+              <span className="order_Num">{stayNum}</span>
             </NavLink>
           </li>
           <li>
@@ -74,7 +49,7 @@ const UserOrder = () => {
               }
               to="/member/order/status=2"
             >
-              已完成
+              完成
             </NavLink>
           </li>
           <li>
@@ -90,8 +65,11 @@ const UserOrder = () => {
           </li>
         </ul>
         <Routes>
-          <Route path="/" element={<UserOrderAll />} />
-          <Route path="status=1" element={<UserOrderStay />} />
+          <Route path="/" element={<UserOrderAll setStayNum={setStayNum} />} />
+          <Route
+            path="status=1"
+            element={<UserOrderStay setStayNum={setStayNum} />}
+          />
           <Route path="status=2" element={<UserOrderFinish />} />
           <Route path="status=3" element={<UserOrderCancel />} />
         </Routes>
