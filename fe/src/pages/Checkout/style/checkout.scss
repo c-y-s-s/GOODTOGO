@@ -83,12 +83,13 @@ tr {
         .order-total {
             padding: 1.5rem 0;
             font-size: $fz-sm;
+            max-width: 100%;
 
             .order-total-price {
                 margin-left: 2rem;
                 font-size: $fz-xxxx-lg;
                 color: $color-dark-yellow;
-                font-weight: $fw-bold;
+                font-weight: 700;
                 padding-right: 0.35rem;
                 .order-total-price-NT {
                 }
@@ -99,7 +100,6 @@ tr {
 
             .payment-method {
                 padding-top: 1.9rem;
-
                 div {
                     color: $color-green;
                     border: 2px solid $color-green;
@@ -110,13 +110,33 @@ tr {
                     font-weight: 500;
                 }
             }
+            .payment-method-card {
+                padding-top: 1.9rem;
+
+                .payment-method-card-name {
+                    color: $color-green;
+                    border: 2px solid $color-green;
+                    width: 10rem;
+                    text-align: center;
+                    padding: 0.5rem 0;
+                    font-size: $fz-lg;
+                    font-weight: 500;
+                }
+                .payment-method-card-company {
+                    width: 3.5rem;
+                    height: 2.7rem;
+                    border: 2px solid $color-light-grey;
+                    color: #1434cb;
+                }
+                .payment-method-card-number {
+                }
+            }
             .send-order {
                 text-align: end;
                 padding-top: 1.9rem;
-                div {
-                    display: flex;
-                    justify-content: end;
-
+                button {
+                    border: none;
+                    background-color: white;
                     .get-order {
                         padding: 0.65rem 4rem;
                         background: $color-light-green;
@@ -126,6 +146,87 @@ tr {
                     }
                 }
             }
+        }
+    }
+}
+
+@media screen and(max-width : 767px) {
+    .checkout-data {
+        padding: 1.2rem 0.75rem;
+    }
+    .checkout-data .checkout-data-products .checkout-data-products-name {
+        font-size: $fz-lg;
+    }
+    .checkout-data .checkout-data-products .order-total .order-total-price {
+        margin-left: 1rem;
+    }
+
+    .checkout-data-products-footer {
+        display: none;
+    }
+    .checkout-title-none {
+        display: none;
+    }
+    .checkout-data-products-md-none {
+        display: none;
+    }
+    .checkout-data-products-md-style {
+        padding-left: 1.25rem;
+        font-size: $fz-md;
+    }
+    .checkout-data-products-md-style-amount {
+        font-size: $fz-xx-lg;
+    }
+    .checkout-data-products-md-style-total {
+        font-size: $fz-xx-lg;
+    }
+    .checkout-data-products-footer-md {
+        text-align: center;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .payment-method-md {
+            display: flex;
+            justify-content: center;
+            .payment-method {
+                color: $color-green;
+                border: 2px solid $color-green;
+                width: 10rem;
+                padding: 0.5rem 0;
+                font-size: $fz-lg;
+                font-weight: 500;
+            }
+        }
+        .send-order-md {
+            margin-top: 1.6rem;
+            text-align: center;
+            padding-top: 1.9rem;
+            border: none;
+            background-color: white;
+            padding: 0.65rem 4rem;
+            background: $color-light-green;
+            color: white;
+            font-size: $fz-lg;
+            font-weight: 500;
+        }
+
+        .payment-method-card-name {
+            color: $color-green;
+            border: 2px solid $color-green;
+            width: 10rem;
+            text-align: center;
+            padding: 0.5rem 0;
+            font-size: $fz-lg;
+            font-weight: 500;
+        }
+        .payment-method-card-company {
+            width: 3.5rem;
+            height: 2.7rem;
+            border: 2px solid $color-light-grey;
+            color: #1434cb;
+        }
+        .payment-method-card-number {
         }
     }
 }
