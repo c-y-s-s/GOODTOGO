@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useLayoutEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 // import CheckoutProducts from "./compoments/CheckoutProducts";
@@ -7,13 +7,16 @@ import { ERR_MSG } from "../../utils/error";
 // -------- react icon --------
 import { FaStore } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
-const Checkout = () => {
+const Checkout = ({ checkoutData }) => {
+  console.log("checkout ---> ", checkoutData.paymentMethod);
+
+  const [checkStoreData, setCheckStoreData] = useState([]);
   return (
     <div>
       <div className="container-fluid checkout-top-title">確認結帳</div>
       <div className="container">
         <div className="col-9  mx-auto checkout-data  ">
-          <table class="table checkout-data-table able-dark table-borderless table align-middle table-sm">
+          <table className="table checkout-data-table able-dark table-borderless table align-middle table-sm">
             <thead className="checkout-title ">
               <tr className="">
                 <th scope="col ">
@@ -105,58 +108,67 @@ const Checkout = () => {
 
               {/* 付款金額 */}
               <tr>
-                <td colspan="4" className="text-md-end order-total  ">
+                <td colSpan="4" className="text-md-end order-total  ">
                   付款金額 :
                   <span className="order-total-price">
-                    <sapn className="order-total-price-NT">NT$</sapn>360
+                    <span className="order-total-price-NT">NT$</span>360
                   </span>
                 </td>
               </tr>
 
               {/* //! 判斷付款方式顯示哪個區塊 */}
 
-              <tr className="checkout-data-products-footer ">
-                <td colspan="1" className="payment-method">
-                  <div>現場付款</div>
-                </td>
-
-                {/* //! 判斷付款方式顯示哪個區塊 */}
-                {/* <td
-                  colspan="1"
-                  className="d-flex payment-method-card align-items-center"
-                >
-                  <div className="payment-method-card-name">信用卡付款</div>
-                  <div className=" ps-3">
-                    <RiVisaLine className="payment-method-card-company" />
-                  </div>
-                  <div className="payment-method-card-number ps-3">
-                    ***** ***** ***** 6543
-                  </div>
-                </td>
-                <td colspan="3" className="send-order">
-                  <button>
-                    <div className="get-order ">完成結帳</div>
-                  </button>
-                </td> */}
-              </tr>
+              {checkoutData.paymentMethod === "1" && (
+                <tr className="checkout-data-products-footer ">
+                  <td colSpan="1" className="payment-method">
+                    <div>現場付款</div>
+                  </td>
+                </tr>
+              )}
+              {checkoutData.paymentMethod === "2" && (
+                <tr className="checkout-data-products-footer ">
+                  <td
+                    colSpan="1"
+                    className="d-flex payment-method-card align-items-center"
+                  >
+                    <div className="payment-method-card-name">信用卡付款</div>
+                    <div className=" ps-3">
+                      <RiVisaLine className="payment-method-card-company" />
+                    </div>
+                    <div className="payment-method-card-number ps-3">
+                      ***** ***** ***** 6543
+                    </div>
+                  </td>
+                  <td colSpan="3" className="send-order">
+                    <button>
+                      <div className="get-order ">完成結帳</div>
+                    </button>
+                  </td>
+                </tr>
+              )}
 
               {/* //平板以下出現區塊 */}
-              <div className=" checkout-data-products-footer-md d-md-none">
-                <div className="payment-method-md">
-                  <div className="payment-method ">現場付款</div>
+              {checkoutData.paymentMethod === "1" && (
+                <div className=" checkout-data-products-footer-md d-md-none">
+                  <div className="payment-method-md">
+                    <div className="payment-method ">現場付款</div>
+                  </div>
                 </div>
-
-                {/* <div className="payment-method-md">
-                  <div className="payment-method-card-name">信用卡付款</div>
+              )}
+              {checkoutData.paymentMethod === "2" && (
+                <div className=" checkout-data-products-footer-md d-md-none">
+                  <div className="payment-method-md">
+                    <div className="payment-method-card-name">信用卡付款</div>
+                  </div>
+                  <div className="pt-3">
+                    <RiVisaLine className="payment-method-card-company" />
+                  </div>
+                  <div className="payment-method-card-number ps-3 pt-2">
+                    ***** ***** ***** 6543
+                  </div>
+                  <button className="send-order-md">完成結帳</button>
                 </div>
-                <div className="pt-3">
-                  <RiVisaLine className="payment-method-card-company" />
-                </div>
-                <div className="payment-method-card-number ps-3 pt-2">
-                  ***** ***** ***** 6543
-                </div>
-                <button className="send-order-md">完成結帳</button>*/}
-              </div>
+              )}
             </tbody>
           </table>
         </div>

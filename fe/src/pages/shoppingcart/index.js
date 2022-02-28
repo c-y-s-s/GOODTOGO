@@ -97,7 +97,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                           onClick={() => {
                             setCheckoutData({
                               ...checkoutData,
-                              paymentMethod: 1,
+                              paymentMethod: "1",
                             });
                           }}
                           defaultChecked={paymentData === 1}
@@ -114,7 +114,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                           onClick={() => {
                             setCheckoutData({
                               ...checkoutData,
-                              paymentMethod: 2,
+                              paymentMethod: "2",
                             });
                           }}
                           defaultChecked={paymentData === 2}

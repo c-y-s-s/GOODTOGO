@@ -43,7 +43,6 @@ function App() {
     storeId: "",
     paymentMethod: "1",
   });
-  console.log("aaaaa",checkoutData);
   return (
     <Router>
       {isModalTouch && <Navbar auth={isLogin} />}
