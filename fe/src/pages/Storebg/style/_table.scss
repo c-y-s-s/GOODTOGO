@@ -9,20 +9,12 @@
         padding-left: 0.5rem;
         vertical-align: middle;
         font-size: $fz-sm;
-
-        // a {
-        //   text-decoration: none;
-        //   background-color: $color-light-red;
-        //   color: #fff;
-        //   padding: 0.4rem;
-        //   border-radius: 1rem;
-        // }
       }
     }
   }
 }
 
-.product-photo {
+.storebg-product-photo {
   width: 2.5rem;
   height: 2.5rem;
 
@@ -37,7 +29,7 @@
 .storebg-data-green {
   text-decoration: none;
   background-color: $color-light-green;
-  color: #fff;
+  color: $color-light;
   padding: 0.4rem;
   border-radius: 1rem;
   &:hover {
@@ -47,7 +39,7 @@
 .storebg-data-modal-green {
   text-decoration: none;
   background-color: $color-light-green;
-  color: #fff;
+  color: $color-light;
   // padding: 0.4rem;
   // border-radius: 1rem;
   &:hover {
@@ -58,7 +50,7 @@
 .storebg-data-red {
   text-decoration: none;
   background-color: $color-light-red;
-  color: #fff;
+  color: $color-light;
   padding: 0.4rem;
   border-radius: 1rem;
   outline: none;
@@ -67,10 +59,15 @@
   }
 }
 // bootstrap 彈出視窗 頁首 刪除水平線
-.modal-header {
+.storebg-modal-header {
   border-bottom: 0 none;
 }
 // bootstrap 彈出視窗 頁尾 刪除水平線
-.modal-footer {
+.storebg-modal-footer {
   border-top: 0 none;
+}
+
+.storebg-model-btn-green{
+  background: $color-light-green;
+  color: $color-light;
 }
