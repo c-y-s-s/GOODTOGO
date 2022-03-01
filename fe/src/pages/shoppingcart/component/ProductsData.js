@@ -6,7 +6,6 @@ import { API_URL } from "../../../utils/config";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-import { v4 as uuidv4 } from "uuid";
 
 const ProductsData = ({
   storeid,

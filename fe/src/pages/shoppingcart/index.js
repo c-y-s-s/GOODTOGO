@@ -3,7 +3,6 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import ProductsData from "./component/ProductsData";
 import { API_URL } from "../../utils/config";
-import { ERR_MSG } from "../../utils/error";
 // -------- react icon --------
 import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";

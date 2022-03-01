@@ -26,7 +26,7 @@ import Admin from "./pages/Admin/";
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
-import ShoppingCart from "./pages/shoppingcart/"
+import ShoppingCart from "./pages/shoppingcart"
 import CheckOut from "./pages/Checkout"
 // import Reset from "./pages/Auth/components/Reset";
 function App() {

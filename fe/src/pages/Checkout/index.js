@@ -19,10 +19,10 @@ const Checkout = ({ checkoutData }) => {
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   let orderNumber = moment().format("YYMMDDHHmmsss");
 
-  // !訂單詳細商品資訊
-  const [orderProductsDetail, setOrderProductsDetail] = useState({});
-
+  // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
+ 
+  // 後端訂單所需要資料
   const [OrderDetail, setOrderDetail] = useState({
     id: "",
     userId: "1",
@@ -32,17 +32,18 @@ const Checkout = ({ checkoutData }) => {
     orderTime: timeInsecond,
     order_number: orderNumber,
   });
-  let aaa = [];
+
+  // 將商品存成陣列寫進資料庫，因需跟訂單號一起寫入所以用此方法
+  let productsArr = [];
   checkProductsData.forEach((item) => {
     let obj = {
       orderId: OrderDetail.id,
       productsId: item.products_id,
       amount: item.amount,
     };
-    aaa.push(obj);
+    productsArr.push(obj);
   });
-  console.log("aaaa", aaa);
-  console.log("OrderDetail--->", OrderDetail);
+
 
   // const [OrderProduct, setOrderProduct] = useState([]);
 
@@ -52,6 +53,7 @@ const Checkout = ({ checkoutData }) => {
       let checkProductsDataResponse = await axios.get(
         `${API_URL}/checkout/${checkoutData.storeId}`
       );
+      // 訂單最大 id API
       let orderMaxIdResponse = await axios.get(
         `${API_URL}/checkout/maxorderid`
       );
@@ -62,15 +64,15 @@ const Checkout = ({ checkoutData }) => {
   }, []);
 
   async function handleGetOrder() {
-    //引入 config 已經寫好的 api 網址才是好習慣
+   
     let response = await axios.post(
       `${API_URL}/checkout/orderdetail`,
       OrderDetail
     );
-    // ! 0301
+
     let productsResponse = await axios.post(
       `${API_URL}/checkout/userorderdetail`,
-      aaa
+      productsArr
     );
   }
   return (
@@ -114,7 +116,7 @@ const Checkout = ({ checkoutData }) => {
               </tr>
             </thead>
 
-            {/* // ! */}
+   
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
               {checkProductsData.map((item) => {
