@@ -21,7 +21,7 @@ const Checkout = ({ checkoutData }) => {
 
   // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
- 
+
   // 後端訂單所需要資料
   const [OrderDetail, setOrderDetail] = useState({
     id: "",
@@ -44,9 +44,6 @@ const Checkout = ({ checkoutData }) => {
     productsArr.push(obj);
   });
 
-
-  // const [OrderProduct, setOrderProduct] = useState([]);
-
   useEffect(() => {
     let getcheckProductsData = async () => {
       //撈指定 ID 商品的評論
@@ -64,7 +61,6 @@ const Checkout = ({ checkoutData }) => {
   }, []);
 
   async function handleGetOrder() {
-   
     let response = await axios.post(
       `${API_URL}/checkout/orderdetail`,
       OrderDetail
@@ -116,7 +112,6 @@ const Checkout = ({ checkoutData }) => {
               </tr>
             </thead>
 
-   
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
               {checkProductsData.map((item) => {
@@ -260,6 +255,45 @@ const Checkout = ({ checkoutData }) => {
               )}
             </tbody>
           </table>
+        </div>
+      </div>
+
+      <div className="container-fluid mt-5 orede-modal-bgcolor">
+        <div className="col-10 col-sm-6 col-md-5 col-lg-3 mx-auto orede-modal">
+          <div className="card orede-modal-card">
+            <div className="card-body">
+              <div className="orede-modal-card-top">
+                <div className="orede-modal-card-top-icon">O</div>
+                <div className="orede-modal-card-top-text">
+                  <div>訂購成功</div>
+                  <div>謝謝您替地球盡的每份力量</div>
+                </div>
+              </div>
+
+              <div className="orede-modal-card-center-text">
+                <div>訂單時間</div>
+                <div>訂單編號</div>
+              </div>
+
+              <div className="order-modal-card-remind-text">
+                <div>已傳送到您的電子信箱</div>
+                <div>取餐時請 出示訂單編號 取餐</div>
+                <div>或可至 我的訂單 ， 待領取 頁面查看訂單編號</div>
+              </div>
+
+              <div className="order-modal-card-warn">
+                <div className="order-modal-card-warn-icon">O</div>
+                <div className="order-modal-card-warn-text">
+                  <div>請於當日店家營業結束前取餐，</div>
+                  <div> 逾時未取餐，帳號將停權一個月</div>
+                </div>
+              </div>
+              <Link to={`/stores`} className="orede-modal-buttom">
+                {" "}
+                回商家頁
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
     </div>
