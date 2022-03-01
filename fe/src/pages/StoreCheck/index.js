@@ -37,24 +37,11 @@ const Storecheck = () => {
     日: "flase"
   });
 
-  const [member, setMember] = useState({
-    email: "",
-    password: "",
-    confirmPassword: "",
-    name: "",
-    phone: "",
-    storename: "",
-  });
+  const [member, setMember] = useState("");
 
-  const [openTime, setOpenTime] = useState({
-    openClock: "",
-    openMinute: "",
-  })
+  const [openTime, setOpenTime] = useState("")
 
-  const [closeTime, setCloseTime] = useState({
-    closeClock: "",
-    closeMinute: ""
-  })
+  const [closeTime, setCloseTime] = useState("")
 
   const [imageSrc, setImageSrc] = useState("");
   // -------- 處理表格改變 -------- //
@@ -82,18 +69,22 @@ const Storecheck = () => {
 
   const cityCountyData = CityCountyData;
 
-  const [selectedCity, setSelectedCity] = React.useState();
-  const [selectedArea, setSelectedArea] = React.useState();
+  const [selectedCity, setSelectedCity] = useState("");
+  const [selectedArea, setSelectedArea] = useState("");
 
   const availableArea = cityCountyData.find((c) => c.CityName === selectedCity);
   // const availableCities = availableState?.states?.find((s) => s.name === selectedState);
 
-  const setSelectedCity = (e) => {
-    console.log(e.target.value);
-    set
+  const handleCityChange = (e) => {
+    console.log(e.target.value)
+    setSelectedCity(e.target.value)
+    setMember({ ...member, [e.target.name]: e.target.value });
   }
-
-
+  const handleAreaChange = (e) => {
+    console.log(e.target.value)
+    setSelectedArea(e.target.value)
+    setMember({ ...member, [e.target.name]: e.target.value });
+  }
   // -------- 表單地區選擇與地址結束 -------- //
 
 
@@ -108,14 +99,14 @@ const Storecheck = () => {
   const handleLogoChange = (e) => {
     console.log(e.target.value);
     const file = e.target.files[0]; // 抓取上傳的圖片
-    const reader = new FileReader(); // 讀取 input type="file" 的 file
+    const reader = new FileReader(); // 讀取 file
     reader.addEventListener(
       "load",
       function () {
         // convert image file to base64 string
         setImageSrc(reader.result);
       },
-      false // false -> e.preventDefault() 阻擋預設行為
+      false // false在這邊等同於 e.preventDefault()
     );
 
     if (file) {
@@ -123,7 +114,7 @@ const Storecheck = () => {
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    // console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     console.log(e.target.files[0]);
     setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
@@ -158,9 +149,27 @@ const Storecheck = () => {
   // -------- 表單送出開始 -------- //
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+// todo 修改資料表
     try {
-      let response = await axios.post(`${API_URL}/auth/register`, member);
+      let formData = new FormData();
+      formData.append("name",member.name);
+      formData.append("email",member.email);
+      formData.append("password",member.password);
+      formData.append("confirmPassword",member.confirmPassword);
+      formData.append("City",member.City);
+      formData.append("Area",member.Area);
+      formData.append("address",member.address);
+      formData.append("storeName",member.storeName);
+      formData.append("phone",member.phone);
+      formData.append("storeLogo",member.storeLogo);
+      formData.append("storeLicence",member.storeLicence);
+      formData.append("storeType",member.storeType);
+      formData.append("day",member.day);
+      formData.append("openTime",member.openTime);
+      formData.append("closeTime",member.closeTime);
+
+
+      let response = await axios.post(`${API_URL}/auth/register`, formData);
       console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
@@ -204,7 +213,7 @@ const Storecheck = () => {
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
-
+                          required
                         />
                         <label
                           htmlFor="name"
@@ -229,7 +238,7 @@ const Storecheck = () => {
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
-
+                          required
                         />
                         <label
                           htmlFor="email"
@@ -254,7 +263,7 @@ const Storecheck = () => {
                           placeholder="密碼"
                           value={member.password}
                           onChange={handleChange}
-
+                          required
                         />
                         <label
                           htmlFor="password"
@@ -280,7 +289,7 @@ const Storecheck = () => {
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
-
+                          required
                         />
                         <label
                           htmlFor="confirmpassword"
@@ -316,14 +325,15 @@ const Storecheck = () => {
                             <option value="3">Three</option>
                           </select>
                         </div> */}
-                        <div>
+                        <div className="col-6">
                           <label>City</label>
-                          <select
+                          <select className="form-control custom-input"
+                            name="City"
                             placeholder="City"
                             value={selectedCity}
-                            onChange={(e) => setSelectedCity(e.target.value) }
+                            onChange={handleCityChange}
                           >
-                            <option>--Choose City--</option>
+                            <option>選擇城市</option>
                             {cityCountyData.map((value, key) => {
                               return (
                                 <option value={value.CityName} key={key}>
@@ -334,12 +344,13 @@ const Storecheck = () => {
                           </select>
                         </div>
 
-                        <div>
-                          <label>Area</label>
-                          <select
+                        <div className="col-6">
+                          <label>選擇區域</label>
+                          <select className="form-control custom-input"
+                          name="Area"
                             placeholder="Area"
                             value={selectedArea}
-                            onChange={(e) => setSelectedArea(e.target.value)}
+                            onChange={handleAreaChange}
                           >
                             <option>--Choose County--</option>
                             {availableArea?.AreaList.map((e, key) => {
@@ -373,6 +384,7 @@ const Storecheck = () => {
                           value={member.address}
                           maxLength="80"
                           onChange={handleChange}
+                          required
 
                         />
                         <label
@@ -384,21 +396,22 @@ const Storecheck = () => {
                       </div>
                       {/* -------- 營業店家名稱 -------- */}
                       <label
-                        htmlFor="storename"
+                        htmlFor="storeName"
                         className="col-form-label input-label-title  text-green p-0"
                       >
                         營業店家名稱
                       </label>
                       <div className="form-floating mb-3">
                         <input
-                          name="storename"
+                          name="storeName"
                           type="text"
                           className="form-control custom-input"
-                          id="storename"
+                          id="storeName"
                           placeholder="營業店家名稱"
-                          value={member.storename}
+                          value={member.storeName}
                           maxLength="30"
                           onChange={handleChange}
+                          required
 
                         />
                         <label
@@ -425,6 +438,7 @@ const Storecheck = () => {
                           value={member.phone}
                           maxLength="10"
                           onChange={handleChange}
+                          required
 
                         />
                         <label
@@ -441,6 +455,7 @@ const Storecheck = () => {
                     <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
                     <div className="col-lg-6 col-md-10 col-sm-10 col-10">
                       {/* -------- 店家LOGO上傳 -------- */}
+                      {/* todo 修改上船扭樣式 */}
                       <label
                         htmlFor="storeLoco"
                         className="col-form-label input-label-title text-green p-0"
@@ -455,6 +470,7 @@ const Storecheck = () => {
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
+                          required
 
                         />
                       </div>
@@ -473,6 +489,7 @@ const Storecheck = () => {
                           id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
+                          required
 
                         />
                       </div>
@@ -491,6 +508,7 @@ const Storecheck = () => {
                           placeholder="商品類別"
                           value={member.storeType}
                           onChange={handleChange}
+                          required
                         >
                           <option value="1">港式</option>
                           <option value="2">中式</option>
@@ -522,7 +540,7 @@ const Storecheck = () => {
                       </label>
                       <div className="d-block mb-3 me-0 opendayCheck">
                         <div className="row mt-3 mb-3 ms-1 me-1">
-                          <input type="checkbox" id="mon" name="一" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="mon" name="一" value={[1]} className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="tue" name="二" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="wed" name="三" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="thu" name="四" className="col dayCheck" onChange={handleDayChange}></input>
@@ -564,6 +582,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleOpenTimeChange}
+                                  required
 
                                 />
                                 <label
@@ -589,6 +608,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleOpenTimeChange}
+                                  required
 
                                 />
                                 <label
@@ -619,6 +639,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleCloseTimeChange}
+                                  required
 
                                 />
                                 <label
@@ -645,6 +666,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleCloseTimeChange}
+                                  required
 
                                 />
                                 <label

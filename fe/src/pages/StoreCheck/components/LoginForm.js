@@ -86,11 +86,6 @@ const LoginForm = ({
           </button>
         </form>
         {/* -------- 表格結束 -------- */}
-        <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
-          <ImFacebook2 className="big-icon col-lg-2 " />
-          使用 Facebook 登入
-          <div className="col-lg-2"> </div>
-        </button>
       </div>
       <Link to="/Storereset" className="no-link">
         <p className="text-grey no-link m-0 mt-3">忘記密碼？</p>
