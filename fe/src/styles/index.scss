@@ -97,3 +97,118 @@ footer {
     box-sizing: border-box;
   }
 }
+// -------- 字體 --------
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
+
+// -------- color 顏色區 --------
+$color-green: #668c4a;
+$color-light-green: #a6bf4b;
+$color-light: #f2f0d5;
+$color-yellow: #f2c53d;
+$color-dark-yellow: #f9af08;
+$color-red: #9b1313;
+$color-light-red: #c80000;
+$color-grey: #b1b1ac;
+$color-light-grey: #d3d3d3;
+$color-dark-grey: #666666;
+$color-black: #262626;
+
+// -------- font-size 文字大小 --------
+$fz-ss-sm: 12 / 16 + rem; // 12px
+$fz-s-sm: 13 / 16 + rem; // 13px
+$fz-sm: 14 / 16 + rem; // 14px
+$fz-md: 15 / 16 + rem; // 15px
+$fz-lg: 1rem; // 16px
+$fz-x-lg: 17 / 16 + rem; // 17px
+$fz-xx-lg: 18 / 16 + rem; // 18px
+$fz-xxx-lg: 20 / 16 + rem; // 20px
+$fz-xxxx-lg: 22/16 + rem; //22px
+
+// -------- letter-spacing 文字間距 --------
+$ls-sm: 0.05rem; // 1px
+$ls-md: 0.1rem; // 1.5px
+$ls-lg: 0.15rem; // 2px
+
+// -------- font-weight 文字粗細 --------
+$fw-thin: 100;
+$fw-regular: 300; // regular
+$fw-medium: 400; // medium
+$fw-bold: 500; // bold
+$fw-black: 700; // black
+
+// -------- font-family 字體 --------
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+
+// -------- 高度 --------
+$navbar-height: 6.25rem;
+$footer-height: 15.063rem;
+
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-dark-grey {
+  color: $color-dark-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-xx-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
+.label-title-m {
+  font-size: $fz-xx-lg;
+}
+.detail-sm {
+  font-size: $fz-sm;
+}
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+$btn-border-radius: 2px;
+//-------- 頁首 --------
+// @import "./navbar";
+//-------- 頁尾 --------
+// @import "./footer";
+//-------- 首頁 --------
+// @import "../pages/Home/style/home.scss";
+//-------- [Auth] 登入、註冊、重設密碼 --------
+// @import "../pages/Auth/style/auth.scss";
+//-------- 會員中心 --------
+// @import "../pages/MyAccount/styles/myAccount.scss";
+//-------- 店家列表 --------
+// @import "../pages/StoreList/styles/StoreList.scss";
+// -------- 商品列表 --------
+// @import "../pages/Product/styles/product.scss";
+// -------- 管理員後台 --------
+// @import "../pages/Admin/style/admin.scss";
+// -------- MAP --------

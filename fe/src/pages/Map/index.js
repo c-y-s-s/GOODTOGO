@@ -3,7 +3,7 @@ import GoogleMapReact from "google-map-react";
 import "./MapStyle.scss";
 import { FiSearch } from "react-icons/fi";
 // import Mapfilter from "./Mapfilter.svg";
-import "../../styles/index.scss";
+
 // import PlaceDetails from './components/PlaceDetails';
 
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
