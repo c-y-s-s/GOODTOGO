@@ -59,7 +59,7 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          <Link to="/cart" className="nav-icon">
+          <Link to="/shoppingcart" className="nav-icon">
             <ShoppingBag />
           </Link>
           <Link to="/map" className="nav-icon">

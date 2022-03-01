@@ -65,7 +65,7 @@ const RecomCard = (props) => {
 
         return (
           <div key={item.id}>
-            <Link to={`all/${item.id}`} className="no-link">
+            <Link to={`/store/${item.id}`} className="no-link">
               <div className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10">
                 <div className="info-img col-12">
                   <img

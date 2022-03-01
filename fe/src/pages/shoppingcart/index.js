@@ -23,8 +23,8 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
     userId: 1,
     storeId: "",
     paymentMethod: "",
-    storeName:"",
-    storeCategory:""
+    storeName: "",
+    storeCategory: "",
   });
   useEffect(() => {
     let getShoppingData = async () => {
@@ -142,9 +142,9 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                       setCheckoutData({
                         ...checkoutData,
                         storeId: item.store_id,
-                        storeName:item.store_name,
-                        storeCategory:item.category,
-                        orderPriceTotal:item.total
+                        storeName: item.store_name,
+                        storeCategory: item.category,
+                        orderPriceTotal: item.total,
                       });
                     }}
                   >
