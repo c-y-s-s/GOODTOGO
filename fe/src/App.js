@@ -1,11 +1,7 @@
 import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./styles/index.scss";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
@@ -39,18 +35,26 @@ function App() {
   const [auth, setAuth] = useState(false);
   // 判斷後台不用頁首頁尾
   const [isAdmin, setIsAdmin] = useState(false);
- 
+
   return (
     <Router>
       {/* <Navbar auth={auth} isAdmin={isAdmin} /> */}
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/storebg"  element={<StoreBg setIsAdmin={setIsAdmin}/> }></Route>
-        <Route path="/newproduct" element={<NewProduct setIsAdmin={setIsAdmin}/>}></Route>
+        <Route path="/storebg" element={<StoreBg setIsAdmin={setIsAdmin} />}>
+          <Route
+            path=":currentPage"
+            element={<StoreBg setIsAdmin={setIsAdmin} />}
+          ></Route>
+        </Route>
+        <Route
+          path="/newproduct"
+          element={<NewProduct setIsAdmin={setIsAdmin} />}
+        ></Route>
         <Route
           path="/storeprofileediting"
-          element={<StoreProfileEditing setIsAdmin={setIsAdmin}/>}
+          element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}
         ></Route>
         <Route path="/latestnews" element={<LatestNews />}></Route>
         <Route path="/activity" element={<Activity />}></Route>
