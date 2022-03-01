@@ -1,4 +1,6 @@
 import React from "react";
+import { NavLink } from "react-router-dom";
+
 import { FiFilter } from "react-icons/fi";
 const Filtercontent = () => {
   return (
@@ -13,9 +15,13 @@ const Filtercontent = () => {
           <FiFilter />
           排序
         </button>
-        <button type="button" className="btn btn-warning mx-3 text-white rounded-pill">
-            新增商品
-          </button>
+        <NavLink
+          type="button"
+          className="btn btn-warning mx-3 text-white rounded-pill"
+          to="/newproduct"
+        >
+          新增商品
+        </NavLink>
         <ul className="dropdown-menu background-storebg-data-right-sort-options">
           <li>
             <a href="#/">價格高到低</a>
