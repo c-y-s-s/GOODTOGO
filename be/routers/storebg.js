@@ -16,20 +16,20 @@ const bcrypt = require("bcrypt");
 // TODO: router.use(checkLogin); // 最後要抽離成 middleware 引入
 router.use((req, res, next) => {
   // ----- 測試，假設已取得登入後的 session
-//   req.session.member = {
-//     id: member.id,
-//     name: member.name,
-//     photo: member.logo
-//   }
+  //   req.session.member = {
+  //     id: member.id,
+  //     name: member.name,
+  //     photo: member.logo
+  //   }
   req.session.member = {
-    id: 1,
+    id: 72,
     name: "添飯中式料理",
     // photo: "",
     logo: "/static/uploads/logo/test_logo.png",
   };
   // ----- 測試，假設已取得登入後的 session
 
-  console.log("routes", req.session.member);
+  console.log("測試傳入id,name,logo", req.session.member);
   // 有無 session
   if (req.session.member) {
     // 表示登入過
@@ -115,7 +115,7 @@ const updatePasswordRules = [
     .withMessage("新密碼、確認密碼欄位輸入不一致"),
 ];
 
-// -------- 會員資料顯示 --------
+// -------- 店家資料顯示 --------
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
   let [data] = await connection.execute(
@@ -138,7 +138,7 @@ router.get("/profile", async (req, res, next) => {
 
 // -------- 商品清單資料顯示 --------
 // /api/member/profile (get)
-router.get("/products", async (req, res, next) => {
+router.get("/productslist", async (req, res, next) => {
   let [productsData] = await connection.execute(
     "SELECT * FROM products WHERE store_id = ?",
     [req.session.member.id]
@@ -150,14 +150,60 @@ router.get("/products", async (req, res, next) => {
   // let profile = {
   //   name: data[0].name,
   //   price: data[0].price,
-    // email: data[0].email,
-    // logo: data[0].logo,
-    // photo: data[0].headshots,
-    // logo: req.session.member.logo,
+  // email: data[0].email,
+  // logo: data[0].logo,
+  // photo: data[0].headshots,
+  // logo: req.session.member.logo,
   // };
   res.json(productsData);
 });
 
+router.get("/pagination", async (req, res, next) => {
+  // req.params.stockId
+  // req.query.page <- 第幾頁
+  // /api/stock/:stockId?page=
+
+  // 取得目前在第幾頁
+  // 如果沒有設定 req.quyer.page，那就設成 1
+  let page = req.query.page || 1;
+  console.log("目前所在頁數：", page);
+
+  // 取得目前的總筆數
+  let [total] = await connection.execute(
+    "SELECT COUNT(*) AS total FROM products WHERE store_id=?",
+    [req.session.member.id]
+  );
+
+  console.log("總筆數：", total);
+  total = total[0].total; // total = 6
+
+  // 計算總共應該要有幾頁
+  const perPage = 3;
+  // lastPage: 總共有幾頁
+  const lastPage = Math.ceil(total / perPage);
+  // 計算 SQL 要用的 offset
+  let offset = (page - 1) * perPage;
+  // 取得資料
+  let [data] = await connection.execute(
+    "SELECT * FROM products WHERE store_id=? ORDER BY created_at LIMIT ? OFFSET ?",
+    [req.session.member.id, perPage, offset]
+  );
+  console.log("目前店家id", req.session.member.id);
+  console.log("因該有3筆", perPage);
+  console.log("33333333333", offset);
+
+  // // 取得資料
+  // let data = await stockModel.getPriceByCode(
+  //   req.params.stockId,
+  //   perPage,
+  //   offset
+  // );
+
+  // 準備要 response
+  res.json({
+    pagination: { total, perPage, page, lastPage },
+    data,
+  });});
 // -------- 會員資料修改儲存 --------
 // /api/member/profile/edit (post)
 router.post(
