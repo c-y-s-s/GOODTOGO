@@ -1,4 +1,5 @@
 // -------- input樣式 --------
+
 .label-group {
   .input-label-title {
     font-size: $fz-x-lg;
@@ -6,6 +7,19 @@
   .form-control {
     border-radius: 2px;
     border: 2px solid #ced4da;
+  }
+  .input-error {
+    border: 2px solid $color-red;
+  }
+  .error {
+    color: $color-red;
+  }
+  .eye {
+    color: $color-grey;
+    position: absolute;
+    top: 1.8rem;
+    right: 1rem;
+    font-size: large;
   }
 }
 .btn-group {
