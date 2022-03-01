@@ -10,7 +10,7 @@ const PenCount = () => {
   useEffect(() => {
     // http://localhost:3002/api/member/proile
     let setProducts = async () => {
-      let response = await axios.get(`${API_URL}/storebg/products`, {
+      let response = await axios.get(`${API_URL}/storebg/productslist`, {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
       });
       setproductsData(response.data);
