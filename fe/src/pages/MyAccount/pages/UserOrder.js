@@ -38,7 +38,9 @@ const UserOrder = () => {
               to="/member/order/status=1"
             >
               待領取
-              <span className="order_Num">{stayNum}</span>
+              {stayNum === 0 ? null : (
+                <span className="order_Num">{stayNum}</span>
+              )}
             </NavLink>
           </li>
           <li>

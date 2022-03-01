@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL, IMAGE_URL } from "../../../utils/config";
 import { BsShop } from "react-icons/bs";
 import { FiMessageCircle } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const UserOrderAll = (props) => {
   const [orderAll, setOrderAll] = useState([]);
@@ -18,9 +19,49 @@ const UserOrderAll = (props) => {
       let stayNum = response.data.filter((v) => Object.values(v)[4] === 1);
       console.log("stayNum: ", stayNum);
       props.setStayNum(stayNum.length);
+
+      // test
+      // console.log("test 更新待領取訂單", [
+      //   ...orderAll,
+      //   { id: Object.values({ cancelOrder: 12 })[0], order_status_id: 3 },
+      // ]);
+      // console.log(
+      //   "test 更新待領取訂單數量",
+      //   orderAll.filter((obj) => Object.values(obj)[4] === 1).length - 1
+      // );
     };
     getOrderAll();
-  }, []);
+  }, [props]);
+
+  async function handleCancelOrder(cancelOrder) {
+    // console.log("cancelOrder1: ", cancelOrder);
+    cancelOrder = { cancelOrder };
+    // console.log("cancelOrder2: ", cancelOrder);
+    // cancelOrder = { cancelOrder: cancelOrder };
+
+    try {
+      // http://localhost:3002/api/member/order/cancel (router.post)
+      let response = await axios.post(
+        `${API_URL}/member/order/cancel`,
+        cancelOrder
+      );
+      console.log("會員取消訂單 :", response.data);
+
+      // 更新待領取訂單
+      // 下面的 props 更新後 頁面重新 render 就會重新 api get -> 取消訂單 變為 已取消
+      // 所以這段不用
+      // setOrderAll([
+      //   ...orderAll,
+      //   { id: Object.values(cancelOrder)[0], order_status_id: 3 },
+      // ]);
+      // 更新待領取訂單數量
+      props.setStayNum(
+        orderAll.filter((obj) => Object.values(obj)[4] === 1).length - 1
+      );
+    } catch (e) {
+      console.error("res.error:", e.response);
+    }
+  }
 
   return (
     <>
@@ -66,7 +107,14 @@ const UserOrderAll = (props) => {
                     {item.status}
                   </div>
                   {item.status === "待領取" ? (
-                    <div className="order_Status_Button order_cancel">
+                    <div
+                      onClick={() => {
+                        // alert(item.id);
+                        // return;
+                        handleCancelOrder(item.id);
+                      }}
+                      className="order_Status_Button order_cancel"
+                    >
                       取消訂單
                     </div>
                   ) : item.status === "完成" ? (
