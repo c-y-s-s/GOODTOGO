@@ -43,6 +43,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
       <div className="container user-shopping-cart  ">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
+            console.log(item)
             return (
               <div
                 className="col-9 mx-auto user-shopping-cart-data"
@@ -93,8 +94,8 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                       <div className="site">
                         <input
                           type="radio"
-                          id="promptCash"
-                          name="drone"
+                          id={`promptCash${item.store_id}`}
+                          name={`drone${item.store_id}`}
                           value="1"
                           onClick={() => {
                             setCheckoutData({
@@ -104,14 +105,16 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                           }}
                           defaultChecked={paymentData === 1}
                         />
-                        <label htmlFor="promptCash">現場取貨付款</label>
+                        <label htmlFor={`promptCash${item.store_id}`}>
+                          現場取貨付款
+                        </label>
                       </div>
 
                       <div className="credit-card">
                         <input
                           type="radio"
-                          id="creditCard"
-                          name="drone"
+                          id={`creditCard${item.store_id}`}
+                          name={`drone${item.store_id}`}
                           value="2"
                           onClick={() => {
                             setCheckoutData({
@@ -121,7 +124,9 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                           }}
                           defaultChecked={paymentData === 2}
                         />
-                        <label htmlFor="creditCard">信用卡付款</label>
+                        <label htmlFor={`creditCard${item.store_id}`}>
+                          信用卡付款
+                        </label>
                       </div>
                     </div>
                   </div>
@@ -142,9 +147,9 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                       setCheckoutData({
                         ...checkoutData,
                         storeId: item.store_id,
-                        storeName:item.store_name,
-                        storeCategory:item.category,
-                        orderPriceTotal:item.total
+                        storeName: item.store_name,
+                        storeCategory: item.category,
+                        orderPriceTotal: item.total,
                       });
                     }}
                   >

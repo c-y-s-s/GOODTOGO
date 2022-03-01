@@ -67,7 +67,7 @@ let productsCommentTimeAsc = require("./routers/productsCommentTimeAsc");
 app.use("/api/productscommenttimeasc", productsCommentTimeAsc);
 
 //  -------- 購物車資料 --------
-let shoopingCarRouter = require("./routers/shoppingCar");
+let shoopingCarRouter = require("./routers/shoppingCart");
 app.use("/api/shop", shoopingCarRouter);
 // -------- 購物車商家資料 --------
 // let shoopingCarStoreRouter = require("./routers/shoppingCar");

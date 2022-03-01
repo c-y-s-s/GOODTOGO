@@ -15,14 +15,14 @@ import "moment/min/locales";
 const Checkout = ({ checkoutData }) => {
   moment.locale("zh-tw");
 
-  // !計算當前時間秒數 hh:mm:ss
+  // 計算當前時間
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   let orderNumber = moment().format("YYMMDDHHmmsss");
 
-  const [checkProductsData, setCheckProductsData] = useState([]);
-  //取目前訂單最大值+1 寫進資料庫
-  const [orderMaxId, setOrderMaxId] = useState(0);
+  // !訂單詳細商品資訊
+  const [orderProductsDetail, setOrderProductsDetail] = useState({});
 
+  const [checkProductsData, setCheckProductsData] = useState([]);
   const [OrderDetail, setOrderDetail] = useState({
     id: "",
     userId: "1",
@@ -32,7 +32,18 @@ const Checkout = ({ checkoutData }) => {
     orderTime: timeInsecond,
     order_number: orderNumber,
   });
-  console.log(OrderDetail);
+  let aaa = [];
+  checkProductsData.forEach((item) => {
+    let obj = {
+      orderId: OrderDetail.id,
+      productsId: item.products_id,
+      amount: item.amount,
+    };
+    aaa.push(obj);
+  });
+  console.log("aaaa", aaa);
+  console.log("OrderDetail--->", OrderDetail);
+
   // const [OrderProduct, setOrderProduct] = useState([]);
 
   useEffect(() => {
@@ -45,7 +56,6 @@ const Checkout = ({ checkoutData }) => {
         `${API_URL}/checkout/maxorderid`
       );
       setCheckProductsData(checkProductsDataResponse.data);
-      setOrderMaxId(orderMaxIdResponse.data + 1);
       setOrderDetail({ ...OrderDetail, id: orderMaxIdResponse.data + 1 });
     };
     getcheckProductsData();
@@ -59,7 +69,8 @@ const Checkout = ({ checkoutData }) => {
     );
     // ! 0301
     let productsResponse = await axios.post(
-      `${API_URL}/checkout/userorderdetail`
+      `${API_URL}/checkout/userorderdetail`,
+      aaa
     );
   }
   return (
@@ -107,63 +118,65 @@ const Checkout = ({ checkoutData }) => {
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
               {checkProductsData.map((item) => {
-                console.log(item);
+                console.log("item----", item);
                 return (
-                  <tr className="text-center" key={item.id}>
-                    <th scope="row" className="py-3">
-                      <div className="d-flex align-items-center">
-                        <div>
-                          <img
-                            className="cover-photo"
-                            src={require(`../../images/products_img/${item.img}`)}
-                            alt=""
-                          />
+                  <>
+                    <tr className="text-center" key={item.id}>
+                      <th scope="row" className="py-3">
+                        <div className="d-flex align-items-center">
+                          <div>
+                            <img
+                              className="cover-photo"
+                              src={require(`../../images/products_img/${item.img}`)}
+                              alt=""
+                            />
+                          </div>
+
+                          <div className="col-12">
+                            <div className="checkout-data-products-name d-md-flex">
+                              <div className="text-start ">
+                                {item.product_name}
+                              </div>
+
+                              {/* // md 以下出現區塊 */}
+                              <div className="checkout-data-products-price d-md-none  text-start pt-2">
+                                $ {item.price}
+                              </div>
+                            </div>
+                            <div className="checkout-data-products-amount d-md-none d-flex align-items-center pt-2">
+                              <div className="checkout-data-products-md-style ">
+                                數量:
+                              </div>
+                              <div className="ps-2 checkout-data-products-md-style-amount">
+                                {item.amount}
+                              </div>
+                            </div>
+                            <div className="checkout-data-products-total d-md-none d-flex align-items-center pt-2">
+                              <div className="checkout-data-products-md-style ">
+                                小計:
+                              </div>
+                              <div className="ps-2 checkout-data-products-md-style-total">
+                                ${item.price * item.amount}
+                              </div>
+                            </div>
+                          </div>
                         </div>
+                      </th>
 
-                        <div className="col-12">
-                          <div className="checkout-data-products-name d-md-flex">
-                            <div className="text-start ">
-                              {item.product_name}
-                            </div>
-
-                            {/* // md 以下出現區塊 */}
-                            <div className="checkout-data-products-price d-md-none  text-start pt-2">
-                              $ {item.price}
-                            </div>
-                          </div>
-                          <div className="checkout-data-products-amount d-md-none d-flex align-items-center pt-2">
-                            <div className="checkout-data-products-md-style ">
-                              數量:
-                            </div>
-                            <div className="ps-2 checkout-data-products-md-style-amount">
-                              {item.amount}
-                            </div>
-                          </div>
-                          <div className="checkout-data-products-total d-md-none d-flex align-items-center pt-2">
-                            <div className="checkout-data-products-md-style ">
-                              小計:
-                            </div>
-                            <div className="ps-2 checkout-data-products-md-style-total">
-                              ${item.price * item.amount}
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </th>
-
-                    <td
-                      className="py-3 checkout-data-products-price   checkout-data-products-md-none
+                      <td
+                        className="py-3 checkout-data-products-price   checkout-data-products-md-none
                 "
-                    >
-                      ${item.price}
-                    </td>
-                    <td className="py-3 checkout-data-products-amount checkout-data-products-md-none">
-                      {item.amount}
-                    </td>
-                    <td className="py-3 text-end checkout-data-products-total checkout-data-products-md-none">
-                      ${item.price * item.amount}
-                    </td>
-                  </tr>
+                      >
+                        ${item.price}
+                      </td>
+                      <td className="py-3 checkout-data-products-amount checkout-data-products-md-none">
+                        {item.amount}
+                      </td>
+                      <td className="py-3 text-end checkout-data-products-total checkout-data-products-md-none">
+                        ${item.price * item.amount}
+                      </td>
+                    </tr>
+                  </>
                 );
               })}
 

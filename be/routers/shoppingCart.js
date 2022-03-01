@@ -5,24 +5,24 @@ const router = express.Router();
 const connection = require("../utils/db");
 
 router.post("/shoppingcartotoaldelete", async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   // TODO: 寫進資料庫
   let [result] = await connection.execute(
     `DELETE FROM shopping_cart WHERE id = ? `,
     [req.body.id]
   );
-  console.log(result);
+  // console.log(result);
   res.json({ msg: "刪除成功" });
 });
 
 router.post("/shoppingcartotoal", async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   // TODO: 寫進資料庫
   let [result] = await connection.execute(
     `UPDATE shopping_cart SET amount=? WHERE id = ?;`,
     [req.body.amount, req.body.id]
   );
-  console.log(result);
+  // console.log(result);
   res.json({ msg: "ok" });
 });
 
@@ -89,8 +89,8 @@ router.post("/shoppingcar", async (req, res, next) => {
   //req.params 變數是在網址上
   //req.query ?xxx
   // body(form post) post用
-  console.log(req.body);
-  console.log(req.body.amount !== 0);
+  // console.log(req.body);
+  // console.log(req.body.amount !== 0);
   if (req.body.products_id === "" || req.body.amount <= 0) {
     return res.status(400).json({ code: "30001", msg: "ok" });
   }

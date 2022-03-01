@@ -34,7 +34,7 @@ const ProductsData = ({
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-  console.log("加減數量", productsAmountTotal);
+  // console.log("加減數量", productsAmountTotal);
   
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
