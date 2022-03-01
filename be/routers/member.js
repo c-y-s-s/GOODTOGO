@@ -7,7 +7,9 @@ const { body, validationResult } = require("express-validator");
 // multer 上傳圖片用
 const multer = require("multer");
 // bcrypt 雜湊密碼用
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
+const argon2 = require("argon2");
+// moment 時間
 const moment = require("moment");
 
 // 自訂 較好對應資料庫
@@ -37,7 +39,7 @@ router.use((req, res, next) => {
     id: 1,
     name: "林振軒",
     // photo: "",
-    photo: "/static/uploads/headshots/member-1645247983164.png",
+    photo: "/static/uploads/headshots/member-1646150271556.png",
   };
   // ----- 測試，假設已取得登入後的 session
 
@@ -137,6 +139,9 @@ router.get("/profile", async (req, res, next) => {
   console.log("db_users id: ", req.session.member.id);
   console.log("取得 user: ", data);
 
+  let [emails] = await connection.execute(`SELECT email FROM users;`);
+  console.log("取得 emails: ", emails);
+
   // 打包資料給 res
   let profile = {
     name: data[0].name,
@@ -145,7 +150,7 @@ router.get("/profile", async (req, res, next) => {
     // photo: data[0].headshots,
     photo: req.session.member.photo,
   };
-  res.json(profile);
+  res.json({ profile, emails });
 });
 
 // -------- 會員資料修改儲存 --------
@@ -171,16 +176,17 @@ router.post(
       });
     }
 
-    // FIXME: 未修改 email 一樣要能修改
-    // 檢查 email 是不是已經註冊
+    // 檢查 email 是不是非原本使用者、已經註冊
     let [members] = await connection.execute(
       "SELECT * FROM users WHERE email=?",
       [req.body.email]
       // req.body (form post 的物件 裡面的 email)
     );
-    console.log(members); // [] 空的 -> 沒有此email -> 可以註冊
-    if (members.length > 0) {
-      // 表示有查到此 email -> 註冊過了
+    // console.log("有沒有此 email", members); // [] 空的 -> 沒有此email -> 可以註冊
+    // console.log("有沒有此 email id", members[0].id);
+    // console.log("此使用者登入的 id", req.session.member.id);
+    if (members.length > 0 && members[0].id !== req.session.member.id) {
+      // 表示有查到此 email 且不是使用者原本的 email -> 註冊過了
       return res.status(400).send({
         // send? json?
         code: "33002",
@@ -249,7 +255,9 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   // 把會員資料從陣列中拿出來
   let userPassword = passwordResult[0];
   // 比對密碼
-  let result = await bcrypt.compare(req.body.password, userPassword.password);
+  let result = await argon2.verify(userPassword.password, req.body.password);
+  // argon2 的雜湊後的長密碼要寫前面去驗證
+  // let result = await bcrypt.compare(req.body.password, userPassword.password);
   if (!result) {
     // 如果比對失敗
     console.log("比對密碼結果失敗: ", result);
@@ -263,7 +271,8 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   // 再進行後續儲存
 
   // 雜湊 newPassword
-  let hashNewPassword = await bcrypt.hash(req.body.newPassword, 10);
+  let hashNewPassword = await argon2.hash(req.body.newPassword);
+  // let hashNewPassword = await bcrypt.hash(req.body.newPassword, 10);
   // 第二個參數是 saltRounds 是指把輸入的密碼再去加其他字母的次數 10就是加10次
 
   // -------- 儲存到資料庫 --------

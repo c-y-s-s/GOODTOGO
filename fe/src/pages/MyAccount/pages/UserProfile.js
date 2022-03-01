@@ -8,6 +8,10 @@ import { FiFolder } from "react-icons/fi";
 const UserProfile = (props) => {
   // console.log(props);
 
+  // const { member, setMember } = useAuth();
+
+  // 儲存載入的使用者資料，比對 email 用
+  const [userEmail, setUserEmail] = useState("");
   // input 欄位文字內容
   const [member, setMember] = useState({
     name: "",
@@ -16,12 +20,17 @@ const UserProfile = (props) => {
     photo: "",
   });
 
+  const [emails, setEmails] = useState([]);
+
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
-  // 錯誤訊息
-  const [err, setErr] = useState({});
-  // FIXME: 前後端錯誤訊息
+  // 錯誤訊息開關
+  const [err, setErr] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
 
   // -------- 顯示使用者資料 --------
   useEffect(() => {
@@ -31,8 +40,24 @@ const UserProfile = (props) => {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
       });
       // response 是物件
-      console.log("api/member/profile(get) response.data: ", response.data);
-      setMember(response.data);
+      console.log(
+        "api/member/profile(get) response.data.profile: ",
+        response.data.profile
+      );
+      console.log(
+        "api/member/profile(get) response.data.profile.email: ",
+        response.data.profile.email
+      );
+      console.log(
+        "api/member/profile(get) response.data.emails: ",
+        response.data.emails
+      );
+      // 登入者的資訊
+      setMember(response.data.profile);
+      // 登入者的 email 單獨存，判斷用
+      setUserEmail(response.data.profile.email);
+      // 所有的 email
+      setEmails(response.data.emails);
     };
     getUser();
   }, []);
@@ -40,6 +65,45 @@ const UserProfile = (props) => {
   // -------- 使用者修改資料 --------
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
+    console.log("handleChange", e.target.name);
+    e.target.name === "name"
+      ? regName(e)
+      : e.target.name === "email"
+      ? regEmail(e)
+      : regPhone(e);
+  }
+
+  function regName(e) {
+    console.log("regName", e.target.name);
+    const reName = /^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/;
+    reName.test(e.target.value)
+      ? setErr({ ...err, name: "" })
+      : setErr({ ...err, name: "姓名格式有誤，請輸入全 中文 / 英文" });
+  }
+  function regEmail(e) {
+    // console.log("regEmail", e.target.name);
+    const reEmail =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    reEmail.test(e.target.value)
+      ? setErr({ ...err, email: "" })
+      : setErr({ ...err, email: "輸入格式有誤 example@example.com" });
+
+    console.log(emails);
+    console.log(emails.find((v) => Object.values(v)[0] === e.target.value));
+    // console.log(userEmail);
+    if (
+      emails.find((v) => Object.values(v)[0] === e.target.value) &&
+      e.target.value !== userEmail
+    ) {
+      setErr({ ...err, email: "此電子信箱已有人使用" });
+    }
+  }
+  function regPhone(e) {
+    console.log("regPhone", e.target.name);
+    const rePhone = /^09\d{8}$/;
+    rePhone.test(e.target.value)
+      ? setErr({ ...err, phone: "" })
+      : setErr({ ...err, phone: "手機號碼 輸入格式有誤 09xxxxxxxx" });
   }
 
   // -------- 使用者預覽上傳圖片 --------
@@ -69,8 +133,6 @@ const UserProfile = (props) => {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    // TODO: 利用 refs 驗證欄位?
-
     try {
       let formData = new FormData(); // 物件
       formData.append("name", member.name);
@@ -85,16 +147,15 @@ const UserProfile = (props) => {
         `${API_URL}/member/profile/edit`,
         formData
       );
-      console.log("使用者有上傳資料: ",response.data);
+      console.log("使用者有上傳資料: ", response.data);
       // 更新資料於 index.js 姓名、頭貼(儲存後)
       props.setUserName(response.data.name);
       props.setHeadShot(response.data.photo);
-
     } catch (e) {
       // TODO: 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
       console.error("會員修改資料 error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
-      setErr(e.response.data.msg);
+      // setErr(e.response.data.msg);
     }
   }
 
@@ -122,14 +183,20 @@ const UserProfile = (props) => {
                     id="name"
                     type="text"
                     name="name"
-                    className="form-control form_Input"
+                    className={
+                      err.name
+                        ? "form-control form_Input border-danger"
+                        : "form-control form_Input"
+                    }
                     value={member.name}
                     placeholder="中文 / 英文姓名"
                     onChange={handleChange}
+                    onFocus={regName}
+                    onBlur={regName}
                   />
                 </div>
                 <div className="error text-danger text-end">
-                  {err.name ? err.name.msg : ""}
+                  {err.name ? err.name : ""}
                 </div>
               </div>
 
@@ -145,14 +212,20 @@ const UserProfile = (props) => {
                     id="email"
                     type="email"
                     name="email"
-                    className="form-control form_Input"
+                    className={
+                      err.email
+                        ? "form-control form_Input border-danger"
+                        : "form-control form_Input"
+                    }
                     value={member.email}
-                    placeholder="name@example.com"
+                    placeholder="abc@example.com"
                     onChange={handleChange}
+                    onFocus={regEmail}
+                    onBlur={regEmail}
                   />
                 </div>
                 <div className="error text-danger text-end">
-                  {err.email ? err.email.msg : ""}
+                  {err.email ? err.email : ""}
                 </div>
               </div>
               <div className="my-4">
@@ -167,13 +240,21 @@ const UserProfile = (props) => {
                     id="phone"
                     type="phone"
                     name="phone"
-                    className="form-control form_Input"
+                    className={
+                      err.phone
+                        ? "form-control form_Input border-danger"
+                        : "form-control form_Input"
+                    }
                     value={member.phone}
                     placeholder="09xxxxxxxx"
                     onChange={handleChange}
+                    onFocus={regPhone}
+                    onBlur={regPhone}
                   />
                 </div>
-                <div className="error text-danger text-end"></div>
+                <div className="error text-danger text-end">
+                  {err.phone ? err.phone : ""}
+                </div>
               </div>
 
               <div className="my-4">
@@ -205,6 +286,12 @@ const UserProfile = (props) => {
                     type="submit"
                     className="btn text-white btn_Submit"
                     onClick={handleSubmit}
+                    disabled={
+                      // 三欄位不為空 且 新密碼與確認密碼一致 才能按儲存鈕
+                      err.name === "" && err.email === "" && err.phone === ""
+                        ? false
+                        : true
+                    }
                   >
                     儲&emsp;存
                   </button>
