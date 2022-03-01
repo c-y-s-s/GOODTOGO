@@ -2,12 +2,13 @@ import React from "react";
 import { ReactComponent as Star } from "../../images/star.svg";
 import RecomCard from "./RecomCard";
 
-const Recomm = () => {
+const Recomm = (props) => {
+  const { totalHeart, productAmount } = props;
   return (
     <>
-      <div className="rec-content d-grid">
+      <div className="rec-content">
         <div className="header text-center">
-          <div className="title-box">
+          <div className="title-box mt-5 mb-5 m-auto">
             <Star />
             <span className="ps-3 pe-3 text-dark-grey input-label-title">
               限時推薦
@@ -15,8 +16,8 @@ const Recomm = () => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder d-grid">
-          <RecomCard />
+        <div className="rec-cards-holder col-10 d-flex align-items-center m-auto">
+          <RecomCard totalHeart={totalHeart} productAmount={productAmount} />
         </div>
 
         <div className="bottom-area"></div>

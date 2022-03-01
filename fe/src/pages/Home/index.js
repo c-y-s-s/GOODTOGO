@@ -8,7 +8,7 @@ import Hero5 from "./components/hero5";
 
 const Home = () => {
   return (
-    <div className="container-fluid p-0">
+    <div className="container-fluid p-0 m-0">
       <Hero1 />
       <Hero2 />
       <Hero3 />

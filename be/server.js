@@ -36,12 +36,20 @@ app.use(
   })
 );
 // -------- 會員註冊、登入API --------
+let checkMemberRouter = require("./routers/checkMember");
+app.use("/api/checkMember", checkMemberRouter);
+
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
 
 //  -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
 app.use("/api/stores", storesRouter);
+//推薦商家
+let storeRecommRouter = require("./routers/storeRecomm");
+app.use("/api/storeRecommRouter", storeRecommRouter);
+// let storeFilterRouter = require("./routers/storeFilter");
+// app.use("/api/storeFilter", storeFilterRouter);
 // -------- 商家 RESTful API 列表 結束 --------
 
 //  ------- 指定商家座標 RESTful API 列表 -------
