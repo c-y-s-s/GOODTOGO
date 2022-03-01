@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, Route, Routes, useParams } from "react-router-dom";
+import { Link, NavLink, Route, Routes, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../utils/config";
 // icon
@@ -10,6 +10,7 @@ import UserPassword from "./pages/UserPassword";
 import UserLike from "./pages/UserLike";
 import UserOrder from "./pages/UserOrder";
 import UserCoupon from "./pages/UserCoupon";
+import UserCreditCard from "./pages/UserCreditCard";
 
 // user 帶著 session 進入此頁
 
@@ -33,15 +34,15 @@ const MyAccount = () => {
       // console.log("api/member/profile(get) response.data: ", response.data);
       console.log(
         "api/member/profile(get) response.data.photo: ",
-        response.data.photo
+        response.data.profile.photo
       );
       console.log(
         "api/member/profile(get) response.data.name: ",
-        response.data.name
+        response.data.profile.name
       );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
-      setHeadShot(response.data.photo);
-      setUserName(response.data.name);
+      setHeadShot(response.data.profile.photo);
+      setUserName(response.data.profile.name);
     };
     getUser();
   }, []);
@@ -52,19 +53,21 @@ const MyAccount = () => {
         <div className="row">
           <div className="col-md-3 col-lg-2">
             {/* -------- 會員頭貼 -------- */}
-            <div className="user_Info d-flex align-items-center justify-content-center justify-content-md-start mb-5">
-              <div>
-                <div className="headShot">
-                  <img
-                    src={headShot ? IMAGE_URL + headShot : PROFILE_IMAGE_URL}
-                    // 顯示順序: 資料庫圖片 -> 預設圖片
-                    alt="head shot"
-                    className="cover-fit"
-                  />
+            <Link to="profile" className="text-decoration-none">
+              <div className="user_Info d-flex align-items-center justify-content-center justify-content-md-start mb-5">
+                <div>
+                  <div className="headShot">
+                    <img
+                      src={headShot ? IMAGE_URL + headShot : PROFILE_IMAGE_URL}
+                      // 顯示順序: 資料庫圖片 -> 預設圖片
+                      alt="head shot"
+                      className="cover-fit"
+                    />
+                  </div>
                 </div>
+                <p className="ms-3 ms-lg-4 mb-0 text-nowrap">{userName}</p>
               </div>
-              <p className="ms-3 ms-lg-4 mb-0 text-nowrap">{userName}</p>
-            </div>
+            </Link>
             {/* -------- 左方選單列開始 -------- */}
             <ul className="list-unstyled text-nowrap d-flex d-md-block align-items-start justify-content-around">
               <li>
@@ -183,6 +186,7 @@ const MyAccount = () => {
                 />
               }
             />
+            <Route path="payment" element={<UserCreditCard />} />
             <Route path="password" element={<UserPassword />} />
             <Route path="like" element={<UserLike />} />
             <Route path="order/*" element={<UserOrder />}>
