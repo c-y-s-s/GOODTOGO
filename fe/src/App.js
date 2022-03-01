@@ -13,7 +13,6 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
-import Store from "./pages/Store";
 import StoreCheck from "./pages/StoreCheck";
 //註冊登入
 import Auth from "./pages/Auth";
@@ -31,12 +30,22 @@ import StoreList from "./pages/StoreList";
 import Product from "./pages/Product";
 import ProductComment from "../src/pages/Productcomment";
 import Admin from "./pages/Admin/";
-
+import ShoppingCart from "./pages/shoppingcart/";
+import CheckOut from "./pages/Checkout";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
 
+  // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
+  const [isModalTouch, setisModalTouch] = useState(true);
+  // 結帳所需 data
+  const [checkoutData, setCheckoutData] = useState({
+    //!整合須改為目前登入者 id
+    userId: 1,
+    storeId: "",
+    paymentMethod: "1",
+  });
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {
@@ -53,7 +62,7 @@ function App() {
   return (
     <AuthContext.Provider value={{ loginMember, setLoginMember }}>
       <Router>
-        <Navbar />
+        {isModalTouch && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
@@ -67,6 +76,25 @@ function App() {
             <Route path="all/:storeId" element={<Product />} />
           </Route>
           {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
+          <Route
+            path="/store/:storeId/"
+            element={<Product setisModalTouch={setisModalTouch} />}
+          >
+            <Route path=":currentPage" element={<Product />} />
+          </Route>
+          <Route
+            path="/shoppingcart"
+            element={
+              <ShoppingCart
+                setCheckoutData={setCheckoutData}
+                checkoutData={checkoutData}
+              />
+            }
+          ></Route>
+          <Route
+            path="/checkout"
+            element={<CheckOut checkoutData={checkoutData} />}
+          ></Route>
 
           <Route
             path="/productcomment/:storeId"
