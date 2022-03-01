@@ -16,7 +16,7 @@ const Table = () => {
   useEffect(() => {
     // http://localhost:3002/api/member/proile
     let setProducts = async () => {
-      let response = await axios.get(`${API_URL}/storebg/products`, {
+      let response = await axios.get(`${API_URL}/storebg/productslist`, {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
       });
       setproductsData(response.data);
@@ -62,7 +62,7 @@ const Table = () => {
             return (
               <tr key={item.id}>
                 <td>
-                  <div className="product-photo">
+                  <div className="storebg-product-photo">
                     <img
                       src={
                         item.img
@@ -95,22 +95,11 @@ const Table = () => {
                     }
                     data-bs-toggle="modal"
                     data-bs-target={"#takeDown" + item.id}
-                    // onClick={() => {
-                    //   alert(item.valid);
-                    // }}
                   >
                     {item.valid === 1 ? "上架中" : "下架中"}
                   </button>
-                  <div
-                    className="modal fade"
-                    id={"takeDown" + item.id}
-                    // tabindex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    {/* //checkModal */}
-                    <CheckModal productValid={item.valid} productId={item.id} />
-                  </div>
+                  {/* //checkModal */}
+                  <CheckModal productValid={item.valid} productId={item.id} />
                 </td>
                 <td>
                   <button
