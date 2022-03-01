@@ -33,12 +33,12 @@ const ProductsDetails = ({
   console.log(shoppingErrormsg);
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
-    store_id:storeId,
-    user_id:1,
+    store_id: storeId,
+    user_id: 1,
     products_id: openProductsModaID,
     amount: 1,
   });
-  console.log("shoppingData ----->", shoppingData);
+
   // const [productcar,setProductArr] = useState([])
   useLayoutEffect(() => {
     let getProductId = async () => {

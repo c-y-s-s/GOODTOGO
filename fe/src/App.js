@@ -26,6 +26,8 @@ import Admin from "./pages/Admin/";
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
+import ShoppingCart from "./pages/shoppingcart/"
+import CheckOut from "./pages/Checkout"
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
   // 全域狀態
@@ -34,6 +36,13 @@ function App() {
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch , setisModalTouch] = useState(true)
+  // 結帳所需 data 
+  const [checkoutData, setCheckoutData] = useState({
+    //!整合須改為目前登入者 id
+    userId: 1,
+    storeId: "",
+    paymentMethod: "1",
+  });
   return (
     <Router>
       {isModalTouch && <Navbar auth={isLogin} />}
@@ -62,8 +71,21 @@ function App() {
           path="/productcomment/:storeId"
           element={<ProductComment />}
         ></Route>
-        <Route path="/map" element={<Map />}></Route>
+        <Route
+          path="/shoppingcart"
+          element={
+            <ShoppingCart
+              setCheckoutData={setCheckoutData}
+              checkoutData={checkoutData}
+            />
+          }
+        ></Route>
+        <Route
+          path="/checkout"
+          element={<CheckOut checkoutData={checkoutData} />}
+        ></Route>
 
+        <Route path="/map" element={<Map />}></Route>
         <Route path="/my_account/like-list" element={<UserLikeList />}></Route>
         <Route path="/my_account/order" element={<UserOrderList />}></Route>
         <Route path="/my_account/coupon" element={<UserCoupon />}></Route>
