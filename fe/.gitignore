@@ -7,7 +7,6 @@
 
 # testing
 /coverage
-
 # production
 /build
 # 隱藏google金鑰
