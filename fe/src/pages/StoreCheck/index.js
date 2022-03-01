@@ -88,6 +88,11 @@ const Storecheck = () => {
   const availableArea = cityCountyData.find((c) => c.CityName === selectedCity);
   // const availableCities = availableState?.states?.find((s) => s.name === selectedState);
 
+  const setSelectedCity = (e) => {
+    console.log(e.target.value);
+    set
+  }
+
 
   // -------- 表單地區選擇與地址結束 -------- //
 
@@ -118,7 +123,8 @@ const Storecheck = () => {
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    // console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    console.log(e.target.files[0]);
     setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
   // -------- 店家LOGO上傳結束 --------//
@@ -315,7 +321,7 @@ const Storecheck = () => {
                           <select
                             placeholder="City"
                             value={selectedCity}
-                            onChange={(e) => setSelectedCity(e.target.value)}
+                            onChange={(e) => setSelectedCity(e.target.value) }
                           >
                             <option>--Choose City--</option>
                             {cityCountyData.map((value, key) => {
@@ -486,7 +492,17 @@ const Storecheck = () => {
                           value={member.storeType}
                           onChange={handleChange}
                         >
-                          <option value={member.storeType}>港式</option>
+                          <option value="1">港式</option>
+                          <option value="2">中式</option>
+                          <option value="3">韓式</option>
+                          <option value="4">泰式</option>
+                          <option value="5">素食</option>
+                          <option value="6">西式</option>
+                          <option value="7">飲料</option>
+                          <option value="8">甜點</option>
+                          <option value="9">麵包</option>
+
+
                         </select>
                         <label
                           htmlFor="storeType"
@@ -676,13 +692,13 @@ const Storecheck = () => {
                     <hr className="col-lg-5" />或 <hr className="col-lg-5" />
                   </div>
                   {/* -------- Facebook 登入 -------- */}
-                  <button
+                  {/* <button
                     className="col-lg-12 btn-fb-login btn d-flex align-items-center text-center justify-content-center m-0 mb-3"
                   >
                     <ImFacebook2 className="big-icon col-lg-2" />
                     使用 Facebook 註冊
                     <div className="col-lg-2"> </div>
-                  </button>
+                  </button> */}
 
                   <p className=" input-label-title text-grey text-center m-0 mb-3">
                     已經註冊過您的店舖 ,

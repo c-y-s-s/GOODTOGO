@@ -6,12 +6,35 @@ require("dotenv").config();
 const path = require("path");
 // 引用 cors 套件解決瀏覽器同源問題
 const cors = require("cors");
+//引用express-session、session-file-store 來儲存資料
+const session = require("express-session");
+let FileStore = require("session-file-store")(session);
 
 let app = express();
 
-//使用 cors 設定的中間鍵，開放所有網域皆可連線
-app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+//要讓express認得json
+app.use(express.json());
 
+//使用 cors 設定的中間鍵，開放所有網域皆可連線
+// app.use(cors());
+app.use(
+  cors({
+    // 為了要讓 browser 在 CORS 的情況下還是幫我們送 cookie
+    origin: ["http://localhost:3000"],
+    credentials: true,
+  })
+);
+app.use(
+  session({
+    store: new FileStore({
+      path: path.join(__dirname, "..", "sessions"),
+    }),
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 
 
