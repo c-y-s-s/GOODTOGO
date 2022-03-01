@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../../../context/auth";
+import { FiHeart } from "react-icons/fi";
 
 //UI套件
 import { Rating } from "@mui/material";
@@ -16,6 +18,9 @@ const RecomCard = (props) => {
   moment.locale("zh-tw");
   const [displayList, setDisplayList] = useState([]);
   const [commentCount, setCommentCount] = useState([]);
+  const { totalHeart, productAmount } = props;
+  const { loginMember, setLoginMember } = useAuth();
+
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
@@ -38,28 +43,10 @@ const RecomCard = (props) => {
   return (
     <>
       {displayList.map((item) => {
-        //--------處理資料庫的時間格式--------
-        let openTime = moment(item.open_time, "hh:mm:ss.000").format("hh:mm");
-        let closeTime = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
-        //-------- 判斷目前是否營業中 --------
-        //TODO 判斷時間
-        //?let nowTime = Number(moment().format("HHmm")); // number 1830
-        //*開發中的假時間
-        let nowTime = 2131;
-        let checkOpenTime = Number(
-          moment(item.open_time, "hh:mm:ss.000").format("hhmm")
-        );
-        let checkCloseTime = Number(
-          moment(item.close_time, "hh:mm:ss.000").format("HHmm")
-        );
-        //TODO 判斷星期幾，如果closeDay裡面有今天就是休息
-        //?let today = Number(moment().format("d")); //5
-        //*開發中的假時間
-        let today = 5;
-        let closeDay = JSON.parse(item.close_day); //[3,5]
-        if (closeDay.includes(today)) {
-          console.log("hhh");
-        }
+        // -------- 取得該店家愛心總數量 --------
+        let likeCount = Object.values(totalHeart)[item.id - 1];
+        // -------- 取得該店家產品總數量 --------
+        let productCount = Object.values(productAmount)[item.id - 1];
         // -------- 處理沒有分店名的空白欄位 --------
         let space = "";
         {
@@ -77,7 +64,7 @@ const RecomCard = (props) => {
         // -------- 處理評分星星 --------
 
         return (
-          <div key={uuidv4()}>
+          <div key={item.id}>
             <Link to={`all/${item.id}`} className="no-link">
               <div className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10">
                 <div className="info-img col-12">
@@ -85,21 +72,12 @@ const RecomCard = (props) => {
                     src={require(`../../../../images/store_img/${item.logo}`)}
                     alt="logo"
                   />
-                  {/* //*判斷休息中：現在時間 早於 openHour || 晚於closeHour */}
                   <div
                     className={`${
-                      nowTime < checkOpenTime ||
-                      nowTime > checkCloseTime ||
-                      closeDay.includes(today)
-                        ? "is-closed"
-                        : "is-open"
+                      item.opState === false ? "is-closed" : "is-open"
                     }`}
                   >
-                    {nowTime < checkOpenTime ||
-                    nowTime > checkCloseTime ||
-                    closeDay.includes(today)
-                      ? "休息中"
-                      : "營業中"}
+                    {item.opState === false ? "休息中" : "營業中"}
                   </div>
                 </div>
                 <div className="info-title mt-3 d-flex justify-content-between col-12">
@@ -116,15 +94,41 @@ const RecomCard = (props) => {
                   <div className="cate-tag">{item.category}</div>
                 </div>
                 <div className="info-detail col-12 text-dark-grey detail-sm d-flex align-items-center justify-content-between flex-wrap mt-2">
-                  <div>
-                    <AiOutlineClockCircle className="mb-1" /> {openTime} -
-                    {closeTime}
+                  <div className="d-flex align-items-center">
+                    <AiOutlineClockCircle className="me-1" /> {item.open_time} -
+                    {item.close_time}
                   </div>
-                  <span className="text-dark-grey">剩餘餐點：14</span>
+                  <span className="text-dark-grey">
+                    剩餘餐點：{productCount}
+                  </span>
                   <hr className="col-12 mt-2 mb-2" />
                   <Rating name="read-only" value={1} readOnly />
 
-                  <span> heart </span>
+                  {/* //*愛心:有登入顯示愛心框可以收藏; 沒登入就只能看到實體愛心 */}
+                  <div className="d-flex align-items-center">
+                    {loginMember !== null ? (
+                      <>
+                        <FiHeart
+                          role="button"
+                          className="store_Like_unActive"
+                          onClick={(e) => {}}
+                        />
+                        <div className="ms-2">
+                          {likeCount > 0 ? likeCount : 0}
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <FiHeart
+                          className="store_Like_Active_view"
+                          onClick={(e) => {}}
+                        />
+                        <div className="ms-2">
+                          {likeCount > 0 ? likeCount : 0}
+                        </div>
+                      </>
+                    )}
+                  </div>
                 </div>
               </div>
             </Link>

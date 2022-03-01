@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+const moment = require("moment");
+moment.locale("zh-tw");
 
-//有分頁的店家列表api: api/stores/
+//*有分頁的店家列表: api/stores/
 router.get("/", async (req, res, next) => {
   // -------- 取得目前在第幾頁 --------
   // 如果沒有設定 req.quyer.page，那就設成 1
@@ -29,30 +31,264 @@ router.get("/", async (req, res, next) => {
     WHERE a.valid = 1 ORDER BY a.id LIMIT ? OFFSET ?`,
     [perPage, offset]
   );
-  // -------- 愛心計算 --------
+  // -------- 營業時間判斷＆處理 --------
+  data.map((item) => {
+    //*[step 1] 轉換卡面顯示的時間格式 => 00:00 (24小時制)
+    item.open_time = moment(item.open_time, "hh:mm:ss.000").format("hh:mm");
+    item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
+    //*[step 2] 判斷目前是否營業中
+    //TODO 判斷 a.現在時間
+    //?let nowTime = Number(moment().format("HHmm"));
+    //開發中的假時間
+    let nowTime = 2131;
+    //把營業時間轉為數字 09:30 -> 930
+    let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
+    let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
+    //今天星期？
+    let today = Number(moment().format("d")); //今天星期：1
+    //休息時間轉為數字
+    let closeDay = JSON.parse(item.close_day); //[3,5]
+    //let opState = item.opState;
+    //TODO 判斷休息與否：a.現在時間 早於 storeOpen || 晚於storeClosed || closeDay裡面有今天就是休息
+    if (
+      nowTime < storeOpen ||
+      nowTime > storeClosed ||
+      closeDay.includes(today)
+    ) {
+      item.opState = false; //false=休息中
+    } else {
+      item.opState = true; //true=營業中
+    }
+    // console.log("storeOpen", storeOpen);
+    // console.log("storeClose", storeClosed);
+    // console.log("closeDay", closeDay);
+    // console.log("opState", item.opState);
+  });
+  // -------- 計算餐點剩餘數量 --------
+  let [storeProducts] = await connection.execute(
+    `SELECT store_id,
+    amount,
+    start_time,
+    due_time
+    FROM products
+    WHERE valid=1;`
+  );
+  let productAmout = storeProducts.reduce((accu, current) => {
+    // console.log("accu", accu);
+    // console.log("current", current);
+    if (!accu[current.store_id]) {
+      accu[current.store_id] = 0;
+    }
+    accu[current.store_id] += current.amount;
+    return accu;
+  }, {});
+  // console.log("productAmout", productAmout);
+  // -------- 愛心計算 (tbd)--------
   // 取得 -> 所有店 store_id 各自愛心數量 likeTotal
   let [storeLikeCount] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
     FROM user_like
     GROUP BY store_id;`
   );
-
-  console.log("喜愛店家們 的 愛心計算 storeLikeCount: ", storeLikeCount);
-
+  let likeCount = storeLikeCount.reduce((accu, current) => {
+    // console.log("accu", accu);
+    // console.log("current", current);
+    if (!accu[current.store_id]) {
+      accu[current.store_id] = 0;
+    }
+    accu[current.store_id] += current.likeTotal;
+    return accu;
+  }, {});
+  console.log("likeCount", likeCount);
+  // console.log("喜愛店家們 的 愛心計算 storeLikeCount: ", storeLikeCount);
   // -------- 取得商家分類 --------
   let [category] = await connection.execute("SELECT * FROM stores_category");
+  // -------- 整理分頁資訊回傳的資料 --------
+  //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
+  let pagination = { total, perPage, page, lastPage };
+  //console.log("有分頁無過濾的data", data);
+  //回傳：有分頁的商家列表，商家種類，分頁資訊，收藏愛心
+  res.json([data, category, pagination, likeCount, productAmout]);
+});
+//*搜尋店家列表:  api/stores/search
+router.get("/search", async (req, res, next) => {
+  let keyword = req.query.keyword;
+  // 分頁：每頁幾筆資料
+  const perPage = 16;
+  // 目前頁數：如果沒有設定 req.quyer.page，那就設成 1
+  let page = req.query.page || 1;
+  // 計算 SQL 要用的 offset
+  let offset = (page - 1) * perPage;
+  //fetch 符合keyword的店名
+  let [searchedStores] = await connection.execute(
+    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
+    FROM stores AS a
+    JOIN stores_category AS b ON a.stores_category_id = b.id
+    WHERE a.name LIKE ? LIMIT ? OFFSET ? `,
+    [`%${keyword}%`, perPage, offset]
+  );
+  //-------- 計算搜尋筆數 & 分頁--------
+  // 總共搜尋到幾筆
+  let total = searchedStores.length;
+  // lastPage: 總共有幾頁
+  const lastPage = Math.ceil(total / perPage);
+  // -------- 營業時間判斷＆處理 --------
+  searchedStores.map((item) => {
+    //*[step 1] 轉換卡面顯示的時間格式 => 00:00 (24小時制)
+    item.open_time = moment(item.open_time, "hh:mm:ss.000").format("hh:mm");
+    item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
+    //*[step 2] 判斷目前是否營業中
+    //TODO 判斷 a.現在時間
+    //?let nowTime = Number(moment().format("HHmm"));
+    //開發中的假時間
+    let nowTime = 2131;
+    //把營業時間轉為數字 09:30 -> 930
+    let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
+    let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
+    //今天星期？
+    let today = Number(moment().format("d")); //今天星期：1
+    //休息時間轉為數字
+    let closeDay = JSON.parse(item.close_day); //[3,5]
+    //let opState = item.opState;
+    //TODO 判斷休息與否：a.現在時間 早於 storeOpen || 晚於storeClosed || closeDay裡面有今天就是休息
+    if (
+      nowTime < storeOpen ||
+      nowTime > storeClosed ||
+      closeDay.includes(today)
+    ) {
+      item.opState = false; //false=休息中
+    } else {
+      item.opState = true; //true=營業中
+    }
+    console.log("search: storeOpen", storeOpen);
+    console.log("search: storeClose", storeClosed);
+    console.log("search: closeDay", closeDay);
+    console.log("search: opState", item.opState);
+  });
 
   // -------- 整理分頁資訊回傳的資料 --------
   //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
   let pagination = { total, perPage, page, lastPage };
+  console.log("keyword", keyword);
+  res.json([searchedStores, pagination]);
+});
+//*過濾-類別的店家列表:  api/stores/filter/c
+router.get("/filter/c", async (req, res, next) => {
+  let category = req.query.category;
+  // 分頁：每頁幾筆資料
+  const perPage = 16;
+  // 目前頁數：如果沒有設定 req.quyer.page，那就設成 1
+  let page = req.query.page || 1;
+  // 計算 SQL 要用的 offset
+  let offset = (page - 1) * perPage;
+  //fetch 符合keyword的店名
+  let [filteredStores] = await connection.execute(
+    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
+    FROM stores AS a
+    JOIN stores_category AS b ON a.stores_category_id = b.id
+    WHERE b.category LIKE ? LIMIT ? OFFSET ? `,
+    [`%${category}%`, perPage, offset]
+  );
+  //-------- 計算搜尋筆數 & 分頁--------
+  // 總共搜尋到幾筆
+  let total = filteredStores.length;
+  // lastPage: 總共有幾頁
+  const lastPage = Math.ceil(total / perPage);
+  // -------- 營業時間判斷＆處理 --------
+  filteredStores.map((item) => {
+    //*[step 1] 轉換卡面顯示的時間格式 => 00:00 (24小時制)
+    item.open_time = moment(item.open_time, "hh:mm:ss.000").format("hh:mm");
+    item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
+    //*[step 2] 判斷目前是否營業中
+    //TODO 判斷 a.現在時間
+    //?let nowTime = Number(moment().format("HHmm"));
+    //開發中的假時間
+    let nowTime = 2131;
+    //把營業時間轉為數字 09:30 -> 930
+    let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
+    let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
+    //今天星期？
+    let today = Number(moment().format("d")); //今天星期：1
+    //休息時間轉為數字
+    let closeDay = JSON.parse(item.close_day); //[3,5]
+    //let opState = item.opState;
+    //TODO 判斷休息與否：a.現在時間 早於 storeOpen || 晚於storeClosed || closeDay裡面有今天就是休息
+    if (
+      nowTime < storeOpen ||
+      nowTime > storeClosed ||
+      closeDay.includes(today)
+    ) {
+      item.opState = false; //false=休息中
+    } else {
+      item.opState = true; //true=營業中
+    }
+    // console.log("filter: storeOpen", storeOpen);
+    // console.log("filter: storeClose", storeClosed);
+    // console.log("filter: closeDay", closeDay);
+    // console.log("filter: opState", item.opState);
+  });
 
-  //console.log("category", category);
-  //console.log("pagination", pagination);
-  console.log("data", data);
-  // console.log(mostCommentedStores);
+  // -------- 整理分頁資訊回傳的資料 --------
+  //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
+  let pagination = { total, perPage, page, lastPage };
+  res.json([filteredStores, pagination]);
+});
+//*過濾-營業時間的店家列表: api/stores/filter/op
+router.get("/filter/op", async (req, res, next) => {
+  // let isOpen = req.query.op;
+  let isOpen = JSON.parse(req.query.op);
+  // 目前頁數：如果沒有設定 req.quyer.page，那就設成 1
+  // let page = req.query.page || 1;
+  // // 分頁：每頁幾筆資料
+  // const perPage = 16;
+  // // 計算 SQL 要用的 offset
+  // let offset = (page - 1) * perPage;
+  let [allStores] = await connection.execute(
+    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
+        FROM stores AS a
+        JOIN stores_category AS b ON a.stores_category_id = b.id`
+  );
+  // -------- 營業時間判斷＆處理 --------
+  allStores.map((item) => {
+    //*[step 1] 轉換卡面顯示的時間格式 => 00:00 (24小時制)
+    item.open_time = moment(item.open_time, "hh:mm:ss.000").format("hh:mm");
+    item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
+    //*[step 2] 判斷目前是否營業中
+    //TODO 判斷 a.現在時間
+    //?let nowTime = Number(moment().format("HHmm"));
+    //開發中的假時間
+    let nowTime = 2131;
+    //把營業時間轉為數字 09:30 -> 930
+    let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
+    let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
+    //今天星期？
+    let today = Number(moment().format("d")); //今天星期：1
+    //休息時間轉為數字
+    let closeDay = JSON.parse(item.close_day); //[3,5]
+    //let opState = item.opState;
+    //TODO 判斷休息與否：a.現在時間 早於 storeOpen || 晚於storeClosed || closeDay裡面有今天就是休息
+    if (
+      nowTime < storeOpen ||
+      nowTime > storeClosed ||
+      closeDay.includes(today)
+    ) {
+      item.opState = false; //false=休息中
+    } else {
+      item.opState = true; //true=營業中
+    }
+    // console.log("filter: opState", item.opState);
+  });
+  //處理需要的資料
+  let opResult = allStores.filter((item) => item.opState === isOpen);
 
-  //回傳：有分頁的商家列表，商家種類，分頁資訊，收藏愛心
-  res.json([data, category, pagination, storeLikeCount]);
+  //-------- 計算搜尋筆數 & 分頁--------
+  // // 總共搜尋到幾筆
+  // let total = opResult.length;
+  // // lastPage: 總共有幾頁
+  // const lastPage = Math.ceil(total / perPage);
+  // console.log("isOpen", isOpen);
+  // console.log("opResult", opResult);
+  res.json(opResult);
 });
 
 // -------- 撈出對應商家 ID 詳細資訊 --------

@@ -12,7 +12,7 @@ import { ReactComponent as Logo } from "../images/navLogo.svg";
 import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 const Navbar = (props) => {
-  const { member, setMember } = useAuth();
+  const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
 
   return (

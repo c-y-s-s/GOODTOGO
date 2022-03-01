@@ -35,7 +35,7 @@ import Admin from "./pages/Admin/";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
-  const [member, setMember] = useState(null);
+  const [loginMember, setLoginMember] = useState(null);
 
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
@@ -44,14 +44,14 @@ function App() {
         let result = await axios.get(`${API_URL}/checkMember`, {
           withCredentials: true,
         });
-        setMember(result.data);
+        setLoginMember(result.data);
       } catch (e) {}
     };
     getMember();
   }, []);
-  console.log("member from App.js", member); //ok
+  console.log("member from App.js", loginMember); //ok
   return (
-    <AuthContext.Provider value={{ member, setMember }}>
+    <AuthContext.Provider value={{ loginMember, setLoginMember }}>
       <Router>
         <Navbar />
         <Routes>
@@ -64,11 +64,6 @@ function App() {
           </Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/stores" element={<StoreList />}>
-            <Route path=":currentPage" element={<StoreList />} />
-            <Route path="search?=" element={<StoreList />}>
-              <Route path=":keyword" element={<StoreList />} />
-            </Route>
-
             <Route path="all/:storeId" element={<Product />} />
           </Route>
           {/* 店家商品頁，店家點進來顯示店家所賣商品 */}

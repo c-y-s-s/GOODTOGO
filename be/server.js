@@ -45,14 +45,11 @@ app.use("/api/auth", authRouter);
 // :TODO: -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
 app.use("/api/stores", storesRouter);
-// 搜尋商家
-let storeSearch = require("./routers/storeSearch");
-app.use("/api/storeSearch", storeSearch);
 //推薦商家
 let storeRecommRouter = require("./routers/storeRecomm");
 app.use("/api/storeRecommRouter", storeRecommRouter);
-let storeFilterRouter = require("./routers/storeFilter");
-app.use("/api/storeFilter", storeFilterRouter);
+// let storeFilterRouter = require("./routers/storeFilter");
+// app.use("/api/storeFilter", storeFilterRouter);
 // -------- 商家 RESTful API 列表 結束 --------
 
 // :TODO: -------- 商品 RESTful API 列表 --------

@@ -6,7 +6,7 @@ import axios from "axios";
 import { API_URL } from "../../../../utils/config";
 //引用元件
 import StoreInfoCard from "./StoreInfoCard";
-//篩選功能
+//篩選功能元件
 import FilterBar from "../FilterBar";
 import SearchBar from "../SearchBar";
 import Rating from "../Rating";
@@ -16,57 +16,117 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 //uuid
 import { v4 as uuidv4 } from "uuid";
 
-const StoreInfoList = () => {
-  //有分頁的商家列表
+const StoreInfoList = (props) => {
+  const { setTotalHeart, setProductAmount } = props;
+  //顯示的商家列表
   const [storeList, setStoreList] = useState([]);
+  //全部類別
+  const [category, setCategory] = useState([]);
+  //剩餘餐點數量
+  const [amount, setAmount] = useState([]);
   //收藏愛心
   const [storeLikeCount, setStoreLikeCount] = useState([]);
-  //處理後要顯示的列表
-  const [displayList, setDisplayList] = useState([]);
-  //類別篩選
-  const [category, setCategory] = useState([]);
+  //總共幾筆資料
+  const [total, setTotal] = useState([]);
+  //*搜尋-開關
+  const [searchSwitch, setSearchSwitch] = useState(false);
+  //搜尋-關鍵字
+  const [keyword, setKeyword] = useState("");
+  //*filter類別-開關
+  const [categorySwitch, setCategorySwitch] = useState(false);
+  //filter類別-顯示
   const [selectedCat, setSelectedCat] = useState("");
-  //過濾開關
-  const [filterOn, setFilterOn] = useState(false);
-  //搜尋開關
-  const [searchOn, setSearchOn] = useState(false);
+  //*filter營業中-開關
+  const [opSwitch, setOpSwitch] = useState(false);
+  //filter營業中-顯示
+  const [opState, setOpState] = useState("");
 
   // -------- 分頁處理 --------
   //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
-  const { currentPage } = useParams();
-  // -------- 搜尋處理 --------
-  const { keyword } = useParams();
-
+  // const { currentPage } = useParams();
+  const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  let page = parseInt(currentPage, 10) || 1;
-  console.log("currentPage", currentPage, page);
-  //後端API：有類別＋有分頁的店家資訊 API(差星星跟愛心)
+
   useEffect(() => {
+    // console.log("page effect", page);
+    //*有分頁的全部店家api:  api/stores/
     let getStore = async () => {
-      //有分頁的 API
       let storeRes = await axios.get(`${API_URL}/stores?page=${page}`);
       let stores = storeRes.data[0];
       let category = storeRes.data[1];
       let pagination = storeRes.data[2];
       let storeLikeCount = storeRes.data[3];
-      //let storeKeywordRes = await axios.get(`${API_URL}/storeSearch?`);//keyword怎麼寫
-      // let storeSearchRes = await axios.get(`${API_URL}/storeSearch`);
+      let productAmount = storeRes.data[4];
+
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
-      setDisplayList(stores);
       setStoreLikeCount(storeLikeCount);
-      // console.log("storeSearchRes", storeSearchRes.data);
-      console.log("storeLikeCount", storeLikeCount);
-      // if (searchOn) {
-      //   setStoreList(storeSearchRes.data);
-      // }
+      setTotal(pagination.total);
+      setAmount(productAmount);
+      //子女元件資料互傳
+      setTotalHeart(storeLikeCount);
+      setProductAmount(productAmount);
     };
-    getStore();
+    //*搜尋店家列表api:  api/stores/search
+    let getSearch = async () => {
+      let storeSearchRes = await axios.get(
+        `${API_URL}/stores/search?page=${page}&keyword=${keyword.trim()}`
+      );
+      console.log(storeSearchRes);
+      setStoreList(storeSearchRes.data[0]);
+      setTotal(storeSearchRes.data[1].total);
+      setLastPage(storeSearchRes.data[1].lastPage);
+    };
+    //*過濾-類別的店家列表api:  api/stores/filter/c
+    let getCategoryStore = async () => {
+      let categoryStoreRes = await axios.get(
+        `${API_URL}/stores/filter/c?page=${page}&category=${selectedCat}`
+      );
+      setStoreList(categoryStoreRes.data[0]);
+      setTotal(categoryStoreRes.data[1].total);
+      setLastPage(categoryStoreRes.data[1].lastPage);
+      // console.log("categoryStoreRes.data", categoryStoreRes);
+    };
+    //*過濾-營業時間的店家列表api: api/stores/filter/op
+    let getOpStateStore = async () => {
+      let opStateRes = await axios.get(
+        `${API_URL}/stores/filter/op?page=${page}&op=${opState}`
+      );
+      // console.log("opStateRes", opStateRes.data);
+      setStoreList(opStateRes.data);
+      setTotal(opStateRes.data.length);
+      setLastPage(1);
 
+      // setTotal(opStateRes.data[1].total);
+      // setLastPage(opStateRes.data[1].lastPage);
+    };
+    //*顯示清單條件
+    if (keyword.trim().length > 0 && page === 1) {
+      setSearchSwitch(true);
+      getSearch();
+    } else if (selectedCat !== "" && page === 1) {
+      setSearchSwitch(false);
+      getCategoryStore();
+      setPage(1);
+    } else if (opState !== "") {
+      setPage(1);
+      getOpStateStore();
+    } else {
+      getStore();
+    }
     // window.scrollTo(2000, 2000);
-  }, [page]);
-  //計算頁面總數量並顯示頁碼，該頁碼
+  }, [
+    page,
+    searchSwitch,
+    //opSwitch,
+    categorySwitch,
+    keyword,
+    selectedCat,
+    opState,
+  ]);
+
+  //*計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
   const getPages = () => {
     let pages = [];
@@ -77,7 +137,8 @@ const StoreInfoList = () => {
             className={`page-links ${page === i ? "active" : ""} `}
             onClick={() => {
               navigate(`?page=${i}`);
-              window.scrollTo(0, 1450);
+              // window.scrollTo(0, 1450);
+              setPage(i);
             }}
           >
             {i}
@@ -87,37 +148,13 @@ const StoreInfoList = () => {
     }
     return pages;
   };
-
-  //-------- 處理搜尋欄位 --------
-  //取出網址上的 keyword 這邊的 keyword是對應到 app.js -> search=?:keyword 若要更改要同步更改
-  //const { keyword } = useParams();
-
-  // const handleSearch = (storeList, searchWord) => {
-  //   let newList = [...storeList];
-
-  //   if (searchWord.length) {
-  //     newList = storeList.filter((storeList) => {
-  //       return storeList.name.includes(searchWord);
-  //     });
-  //   }
-
-  //   return newList;
-  // };
-
-  // //當function-box資料有更動時
-  // useEffect(() => {
-  //   let newList = [];
-  //   newList = handleSearch(storeList, searchWord);
-  //   setDisplayList(newList);
-  // }, [searchWord, storeList]);
-  //過濾開關
-  // if ((filterOn = "")) {
-  //   setDisplayList(storeList);
-  // }else{
-  //   setDisplayList()
-  // }
-  console.log("fliterOn", filterOn);
-  console.log("SearchOn", searchOn);
+  // console.log("storeLikeCount", storeLikeCount);
+  // console.log("searchSwitch", searchSwitch);
+  // console.log("selected category", selectedCat);
+  // console.log("storeList", storeList);
+  // console.log("open hour", opState);
+  // console.log("keyword", keyword);
+  // console.log("opSwitch", opSwitch);
 
   return (
     <div className="store-list d-grid">
@@ -135,35 +172,51 @@ const StoreInfoList = () => {
       </div>
       {/* 商家列表處理區 */}
       <div className="function-box">
-        <SearchBar setSearchOn={setSearchOn} searchOn={searchOn} />
-        <div className="col-lg-4 justify-content-between d-flex flex-wrap">
+        <SearchBar
+          setSearchSwitch={setSearchSwitch}
+          keyword={keyword}
+          setKeyword={setKeyword}
+        />
+        <div className="col-lg-3 justify-content-between d-flex flex-wrap">
           <FilterBar
+            setOpSwitch={setOpSwitch}
+            setCategorySwitch={setCategorySwitch}
             category={category}
             selectedCat={selectedCat}
             setSelectedCat={setSelectedCat}
+            setOpState={setOpState}
+            setKeyword={setKeyword}
+            opState={opState}
           />
         </div>
         <Rating />
       </div>
+      <div className="total-count">總共 {total} 筆</div>
       {/* 商家列表顯示區 */}
+
       <div className="store-info-list">
-        <StoreInfoCard storeList={storeList} storeLikeCount={storeLikeCount} />
+        <StoreInfoCard
+          storeList={storeList}
+          storeLikeCount={storeLikeCount}
+          amount={amount}
+        />
       </div>
       <ul className="pages p-0 align-items-center d-flex">
         <IoIosArrowBack
           role="button"
           className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
           onClick={() => {
-            navigate(`${page - 1}`);
+            navigate(`?page=${page - 1}`);
+            setPage(page - 1);
           }}
         />
-
         {getPages()}
         <IoIosArrowForward
           role="button"
           className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
           onClick={() => {
-            navigate(`${page + 1}`);
+            navigate(`?page=${page + 1}`);
+            setPage(page + 1);
           }}
         />
       </ul>

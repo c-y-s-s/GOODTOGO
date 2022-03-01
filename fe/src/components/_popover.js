@@ -8,7 +8,7 @@ import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import Swal from "sweetalert2";
 
 const _popover = () => {
-  const { member, setMember } = useAuth();
+  const { loginMember, setLoginMember } = useAuth();
   const swal = Swal.mixin({
     customClass: {
       confirmButton: " btn confirmbtn ms-2 me-2",
@@ -30,7 +30,7 @@ const _popover = () => {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              setMember(null);
+              setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
             } else if (
               /* Read more about handling dismissals below */
@@ -88,7 +88,7 @@ const _popover = () => {
     <>
       <Popover
         placement="bottom"
-        content={member ? loggedin : notLoggedin}
+        content={loginMember ? loggedin : notLoggedin}
         // trigger="click"
       >
         <UserIcon className="nav-icon mt-1" />

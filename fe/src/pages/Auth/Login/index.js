@@ -14,7 +14,7 @@ import { ERR_MSG } from "../../../utils/error";
 
 const Login = (props) => {
   //登入後存入會員資料給全域使用
-  const { member, setMember } = useAuth();
+  const { loginMember, setLoginMember } = useAuth();
   // 從App傳來的登入狀態
   //預設個欄位的值為空（開發中所以有先給值）
   const [loginUser, setLoginUser] = useState({
@@ -85,7 +85,7 @@ const Login = (props) => {
         withCredentials: true,
       });
       console.log("登入成功", response.data);
-      setMember(response.data.data);
+      setLoginMember(response.data.data);
       navigate("/");
     } catch (e) {
       // console.error("錯誤:", e.response.data);
@@ -93,7 +93,7 @@ const Login = (props) => {
     }
   };
 
-  console.log("member from Login.js", member);
+  console.log("member from Login.js", loginMember);
 
   return (
     <div className="container-fluid login-bg">
