@@ -33,6 +33,15 @@ const UserOrderAll = (props) => {
     getOrderAll();
   }, [props]);
 
+  // sweet alert
+  const sweetAlert = Swal.mixin({
+    customClass: {
+      confirmButton: "btn confirmBtn mx-2 my-3",
+      cancelButton: "btn cancelBtn mx-2 my-3",
+    },
+    buttonsStyling: false,
+  });
+
   async function handleCancelOrder(cancelOrder) {
     // console.log("cancelOrder1: ", cancelOrder);
     cancelOrder = { cancelOrder };
@@ -110,8 +119,35 @@ const UserOrderAll = (props) => {
                     <div
                       onClick={() => {
                         // alert(item.id);
-                        // return;
-                        handleCancelOrder(item.id);
+                        sweetAlert
+                          .fire({
+                            title: "確定取消訂單?",
+                            // text: "You won't be able to revert this!",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: "確定取消訂單",
+                            cancelButtonText: "不取消",
+                            reverseButtons: true,
+                          })
+                          .then((result) => {
+                            if (result.isConfirmed) {
+                              handleCancelOrder(item.id);
+                              sweetAlert.fire(
+                                "取消訂單成功!",
+                                "您的訂單已取消，可至 我的訂單 > 已取消 查看",
+                                "success"
+                              );
+                            } else if (
+                              /* Read more about handling dismissals below */
+                              result.dismiss === Swal.DismissReason.cancel
+                            ) {
+                              sweetAlert.fire(
+                                "不取消訂單",
+                                "返回 我的訂單 頁面",
+                                "error"
+                              );
+                            }
+                          });
                       }}
                       className="order_Status_Button order_cancel"
                     >

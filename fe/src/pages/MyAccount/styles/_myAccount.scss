@@ -92,6 +92,38 @@
   color: $color-light-grey;
 }
 
+// -------- sweet alert --------
+
+.confirmBtn {
+  letter-spacing: $ls-sm;
+  background-color: $color-light-green;
+  color: #fff;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    color: #fff;
+    background-color: darken($color-light-green, 8%);
+  }
+}
+.cancelBtn {
+  letter-spacing: $ls-sm;
+  background-color: $color-grey;
+  color: #fff;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    color: #fff;
+    background-color: darken($color-grey, 8%);
+  }
+}
+
+.alert_Title {
+  color: $color-dark-grey;
+  letter-spacing: $ls-lg;
+}
+
 // -------- 會員頭貼 --------
 .user_Info {
   .headShot {
