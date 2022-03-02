@@ -25,6 +25,7 @@ router.use((req, res, next) => {
     id: 1,
     name: "添飯中式料理",
     // photo: "",
+    store_id:1,
     logo: "/static/uploads/logo/test_logo.png",
   };
   // ----- 測試，假設已取得登入後的 session
@@ -146,29 +147,9 @@ router.get("/productslist", async (req, res, next) => {
   console.log("db_stores id: ", req.session.member.id);
   console.log("取得 stores: ", productsData);
 
-  // 打包資料給 res
-  // let profile = {
-  //   name: data[0].name,
-  //   price: data[0].price,
-  // email: data[0].email,
-  // logo: data[0].logo,
-  // photo: data[0].headshots,
-  // logo: req.session.member.logo,
-  // };
-  res.json(productsData);
-});
-
-router.get("/pagination", async (req, res, next) => {
-  // req.params.stockId
-  // req.query.page <- 第幾頁
-  // /api/stock/:stockId?page=
-
-  // 取得目前在第幾頁
-  // 如果沒有設定 req.quyer.page，那就設成 1
   let page = req.query.page || 1;
   console.log("目前所在頁數：", page);
 
-  // 取得目前的總筆數
   let [total] = await connection.execute(
     "SELECT COUNT(*) AS total FROM products WHERE store_id=?",
     [req.session.member.id]
@@ -189,22 +170,15 @@ router.get("/pagination", async (req, res, next) => {
     [req.session.member.id, perPage, offset]
   );
   console.log("目前店家id", req.session.member.id);
-  console.log("因該有3筆", perPage);
-  console.log("33333333333", offset);
+  console.log("目前一頁有幾筆", perPage);
+  console.log("offsetoffsetoffset3", offset);
+  // -------- 整理分頁資訊回傳的資料 --------
+  //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
+  let pagination = { total, perPage, page, lastPage };
 
-  // // 取得資料
-  // let data = await stockModel.getPriceByCode(
-  //   req.params.stockId,
-  //   perPage,
-  //   offset
-  // );
-
-  // 準備要 response
-  res.json({
-    pagination: { total, perPage, page, lastPage },
-    data,
-  });
+  res.json([productsData, pagination]);
 });
+
 // -------- 會員資料修改儲存 --------
 // /api/member/profile/edit (post)
 router.post(
@@ -393,6 +367,24 @@ router.get("/like", async (req, res, next) => {
   //   photo: req.session.member.photo,
   // };
   res.json(userLikeData);
+});
+
+// /api/auth/register
+router.post("/newproduct", async (req, res, next) => {
+  console.log(req.body);
+  //*存入資料庫
+  let [result] = await connection.execute(
+    "INSERT INTO products (name, description, amount, price, valid) VALUES (?,?,?,?,?)",
+    [
+      req.body.productName,
+      req.body.productDescription,
+      req.body.amountOfGoods,
+      req.body.commodityPrice,
+      "1",
+    ]
+  );
+  console.log(result);
+  res.json({ message: "ok" });
 });
 
 module.exports = router;
