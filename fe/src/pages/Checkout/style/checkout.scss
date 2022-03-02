@@ -32,27 +32,30 @@ tr {
         .checkout-title {
             border-bottom: none;
             padding: 5rem 0;
-            tr {
-            }
-            .checkout-title-icon {
-                color: $color-light-grey;
-                margin-right: 0.8rem;
-            }
-            .checkout-title-storename {
-                font-size: $fz-md;
-            }
-            .checkout-title-category {
-                background-color: #eaeaea;
-                margin-left: 1rem;
-                padding: 0.15rem 0.65rem;
-                border-radius: 0.8rem;
-                font-size: $fz-s-sm;
-            }
-            .checkout-title-price {
-            }
-            .checkout-title-amount {
-            }
-            .checkout-title-total {
+            .checkout-title-text {
+                padding-bottom: 1.5rem;
+                tr {
+                }
+                .checkout-title-icon {
+                    color: $color-light-grey;
+                    margin-right: 0.8rem;
+                }
+                .checkout-title-storename {
+                    font-size: $fz-md;
+                }
+                .checkout-title-category {
+                    background-color: #eaeaea;
+                    margin-left: 1rem;
+                    padding: 0.15rem 0.65rem;
+                    border-radius: 0.8rem;
+                    font-size: $fz-s-sm;
+                }
+                .checkout-title-price {
+                }
+                .checkout-title-amount {
+                }
+                .checkout-title-total {
+                }
             }
         }
     }
@@ -150,6 +153,11 @@ tr {
                         color: white;
                         font-size: $fz-lg;
                         font-weight: 500;
+                        width: 200px;
+                        transition: 0.3s;
+                        &:hover {
+                            background-color: $color-green;
+                        }
                     }
                 }
             }
@@ -157,6 +165,33 @@ tr {
     }
 }
 
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .checkout-data {
+        .checkout-data-table {
+            .checkout-title {
+                .checkout-title-text {
+                    padding-bottom: 0.58rem;
+                }
+                .checkout-title-storename {
+                    padding-right: 1.4rem;
+                }
+                .checkout-title-category {
+                    width: 4.1rem;
+                    margin-left: 0;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .send-order {
+        button {
+            .get-order {
+                width: 200px;
+            }
+        }
+    }
+}
 @media screen and (max-width: 767px) {
     .checkout-data {
         padding: 1.2rem 0.75rem;
@@ -237,6 +272,19 @@ tr {
         }
     }
 }
+
+@media screen and (max-width: 413px) {
+    .checkout-data {
+        .checkout-data-table {
+            .checkout-title {
+                .checkout-title-category {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+// Modal
 .order-modal-bgcolor {
     background-color: rgba(44, 44, 44, 0.137);
     display: flex;
@@ -347,6 +395,52 @@ tr {
                 transition: 0.3s;
                 &:hover {
                     background-color: $color-green;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .order-modal {
+        .order-modal-card {
+            width: 314px;
+            .order-modal-card-top {
+                width: 95%;
+            }
+
+            .order-modal-card-center-text {
+                div:nth-child(2) {
+                    width: 87%;
+                    margin: auto;
+                    color: white;
+                    padding: 0.25rem 0.15rem;
+                    letter-spacing: $ls-md;
+                    margin-top: 0.55rem;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .order-modal {
+        .order-modal-card {
+            width: 314px;
+            .order-modal-card-top {
+                width: 95%;
+            }
+
+            .order-modal-card-center-text {
+                div:nth-child(2) {
+                    width: 87%;
+                    margin: auto;
+                    color: white;
+                    padding: 0.25rem 0.15rem;
+                    letter-spacing: $ls-md;
+                    margin-top: 0.55rem;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
                 }
             }
         }
