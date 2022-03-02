@@ -5,22 +5,30 @@ import {
   IMAGE_URL,
   STORE_PRODUCT_IMAGE_URL,
 } from "../../../utils/config";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams, useNavigate } from "react-router-dom";
 
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
+// 光箱
 import CheckModal from "./CheckModel";
+
 const Table = () => {
   // 店家商品列表
   const [productsData, setproductsData] = useState([]);
+  const { currentPage } = useParams();
+
+  // 總共有 lastPage 這麼多頁
+  // const [data, setData] = useState([]);
+  const [lastPage, setLastPage] = useState(1);
+  let page = parseInt(currentPage, 10) || 1;
+  // const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
+  console.log("currentPage", currentPage, page);
 
   useEffect(() => {
-    // http://localhost:3002/api/member/proile
     let setProducts = async () => {
-      let response = await axios.get(`${API_URL}/storebg/productslist`, {
-        withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
-      });
-      setproductsData(response.data);
+      let response = await axios.get(`${API_URL}/storebg/productslist`);
+      let productsList = response.data[0];
+      setproductsData(productsList);
 
       console.log(
         "api/storebg/products(get) response.data.storeProductsData: ",
@@ -33,9 +41,56 @@ const Table = () => {
     };
     setProducts();
   }, []);
+  useEffect(() => {
+    let getPrices = async () => {
+      let response = await axios.get(
+        `${API_URL}/storebg/productslist?page=${page}`
+      );
+      let productsListPage = response.data[1];
+
+      setLastPage(productsListPage.lastPage);
+      // console.log("response.data.data", response.data.data);
+      // setLastPage(response.data.pagination.lastPage);
+    };
+    getPrices();
+  }, [page]);
+
+  //計算頁面總數量並顯示頁碼，該頁碼
+  let navigate = useNavigate();
+  const getPages = () => {
+    let pages = [];
+    for (let i = 1; i <= lastPage; i++) {
+      pages.push(
+        <li
+          style={{
+            display: "inline-block",
+            margin: "2px",
+            backgroundColor: page === i ? "#00d1b2" : "",
+            borderColor: page === i ? "#00d1b2" : "#dbdbdb",
+            color: page === i ? "#fff" : "#363636",
+            borderWidth: "1px",
+            width: "28px",
+            height: "28px",
+            borderRadius: "3px",
+            textAlign: "center",
+          }}
+          key={i}
+          onClick={() => {
+            // setPage(i);
+            navigate(`?page=${i}`);
+          }}
+        >
+          {i}
+        </li>
+      );
+    }
+    return pages;
+  };
 
   return (
     <div>
+      <ul>{getPages()}</ul>
+
       <table className="table background-storebg-data-right-content-table">
         <thead>
           <tr>
