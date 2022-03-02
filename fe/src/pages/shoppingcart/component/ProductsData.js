@@ -6,7 +6,6 @@ import { API_URL } from "../../../utils/config";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-import { v4 as uuidv4 } from "uuid";
 
 const ProductsData = ({
   storeid,
@@ -34,7 +33,7 @@ const ProductsData = ({
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-  console.log("加減數量", productsAmountTotal);
+  // console.log("加減數量", productsAmountTotal);
   
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置

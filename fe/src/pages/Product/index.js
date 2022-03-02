@@ -8,9 +8,9 @@ import StoreLogo from "./component/StoreLogo";
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
 import Storebutton from "./component/StoreButton";
-import StoreCard from "./component/StoreCard";
+import StoreCard from "./component/ProductsCard";
 import StoreProductsComment from "./component/Productscomment.js";
-import ProductsDetails from "./component/ProductsDetails";
+import ProductsDetails from "./component/ProductsCard";
 // -------- 引入元件區塊結束 --------
 
 const Product = ({ setisModalTouch }) => {
