@@ -204,7 +204,7 @@ const StoreInfoList = (props) => {
             amount={amount}
           />
         </div>
-        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-between m-auto mt-lg-4 mb-lg-2 mt-4">
+        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-4 mb-lg-2 mt-4">
           <IoIosArrowBack
             role="button"
             className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
