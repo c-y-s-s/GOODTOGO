@@ -1,49 +1,5 @@
 // -------- navbar --------
-// .navbar {
-//   background-color: white;
-//   height: $navbar-height;
-//   font-size: $fz-lg;
 
-//   .sm-icon {
-//     display: none;
-//   }
-//   .nav {
-//     width: 80vw;
-//     // margin: 0 150px;
-//     padding: 0;
-
-//     .nav-links {
-//       display: flex;
-//       text-decoration: none;
-//       list-style-type: none;
-//       .navLogo {
-//         height: 2.5rem;
-//         margin: 0 88px 0 0;
-//       }
-//       .nav-item {
-//         align-items: center;
-//         justify-content: center;
-//         // height: 23px;
-//         // padding: 0;
-//         .navLink {
-//           color: $color-dark-grey;
-//           margin-right: 3.125rem;
-//           text-decoration: none;
-//           justify-content: center;
-//         }
-//       }
-//       .nav-icons {
-//         // margin: 1rem;
-//         // color: $color-dark-grey;
-//         .nav-icon {
-//           color: $color-dark-grey;
-//           margin-left: 2rem;
-//           font-size: $fz-xxx-lg;
-//         }
-//       }
-//     }
-//   }
-// }
 // .hamburger-react {
 //   display: none;
 // }
@@ -76,6 +32,7 @@
 //   }
 // }
 .navbar {
+  z-index: 1010;
   height: 10vw;
   background-color: rgba(255, 255, 255, 0.884);
   display: grid;
@@ -108,14 +65,47 @@
     }
   }
   .nav-icons {
-    width: 10%;
+    width: 14%;
     display: flex;
     justify-content: space-between;
-    .nav-icon {
+    align-items: center;
+  }
+  .nav-icon {
+    color: $color-grey;
+    font-size: $fz-xxx-lg;
+  }
+}
+.nav-popover {
+  padding: 0;
+  .popover-item {
+    padding: 0.5rem 1rem;
+    .nav-popover-link {
+      text-decoration: none;
       color: $color-dark-grey;
-      font-size: $fz-xx-lg;
+      font-size: $fz-lg;
+    }
+    &:hover {
+      background-color: $color-grey;
+      .nav-popover-link {
+        color: white;
+      }
     }
   }
+}
+.confirmbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-red;
+  color: white;
+
+  border-radius: 2px;
+}
+.cancelbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-green;
+  color: white;
+  border-radius: 2px;
 }
 @media (max-width: 540px) {
   .navbar {

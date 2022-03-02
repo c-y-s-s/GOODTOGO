@@ -1,14 +1,18 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
 import Hamburger from "hamburger-react";
+import Popover from "./_popover";
 
 // -------- icons --------
-import { AiOutlineEnvironment } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
+import { FiMapPin } from "react-icons/fi";
+
 import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
+import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
-const Navbar = ({ auth }) => {
+const Navbar = (props) => {
+  const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
 
   return (
@@ -39,7 +43,13 @@ const Navbar = ({ auth }) => {
           <Link to="/joinus" className="nav-link">
             店家申請
           </Link>
-          <Link to="/stores" className="nav-link">
+          <Link
+            to="/stores"
+            className="nav-link"
+            onClick={() => {
+              window.scrollTo(0, 0);
+            }}
+          >
             立即訂購
           </Link>
           <Link to="/faq" className="nav-link">
@@ -48,86 +58,16 @@ const Navbar = ({ auth }) => {
         </div>
 
         <div className="nav-icons">
-          {auth ? (
-            <>
-              <Link to="/my_account">
-                <div>圖</div>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link to="/auth/login">
-                <BiUserCircle role="button" className="nav-icon" />
-              </Link>
-            </>
-          )}
-
+          <Popover />
           <Link to="/shoppingcart" className="nav-icon">
-            <BsBag />
+            <ShoppingBag />
           </Link>
           <Link to="/map" className="nav-icon">
-            <AiOutlineEnvironment />
+            <FiMapPin />
           </Link>
         </div>
       </div>
     </div>
-    //   <nav
-    //     className="navbar container-fluid
-    //  shadow justify-content-center"
-    //   >
-    //     <div className="nav d-flex text-center justify-content-between ">
-    //       <Link to="/">
-    //         <Logo className="navLogo mt-2" />
-    //       </Link>
-    //       <div className="d-flex justify-content-end col-sm-4 col-lg-1 sm-nav">
-    //         <Link to="/cart" className="sm-icon no-link text-green">
-    //           <BsBag />
-    //         </Link>
-    //         <Hamburger
-    //           className="hamburger"
-    //           toggled={isOpen}
-    //           toggle={setOpen}
-    //           size={22}
-    //           color="#668C4A"
-    //           rounded
-    //         />
-    //       </div>
-    //       <ul className="nav-links m-0">
-    //         <li className="nav-item">
-    //           <Link to="/about" className="navLink text-dark-grey">
-    //             了解我們
-    //           </Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link to="/joinus" className="navLink">
-    //             申請店家
-    //           </Link>
-    //         </li>
-    //         <li className="nav-item">
-    //           <Link to="/store" className="navLink ">
-    //             立即訂購
-    //           </Link>
-    //         </li>
-    //       </ul>
-    //       <ul className="nav-links m-0">
-    //         <li className="nav-icons">
-    // <Link to="/map" className="nav-icon">
-    //   <AiOutlineEnvironment />
-    // </Link>
-    //         </li>
-    //         <li className="nav-icons">
-    //           <Link to="/auth/login">
-    //             <BiUserCircle role="button" className="nav-icon" />
-    //           </Link>
-    //         </li>
-    //         <li className="nav-icons">
-    //           <Link to="/cart" className="nav-icon">
-    //             <BsBag />
-    //           </Link>
-    //         </li>
-    //       </ul>
-    //     </div>
-    //   </nav>
   );
 };
 
