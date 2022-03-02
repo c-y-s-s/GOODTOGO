@@ -57,6 +57,16 @@ const UserPassword = () => {
     // 使用者正在輸入 欄位, 值 -> 同步(O)
     // console.log(e.target.name, e.target.value);
 
+    // if (e.type === "keypress") {
+
+    // }
+    // 正在輸入，清空錯誤訊息
+    // setErr({
+    //   password: "",
+    //   newPassword: "",
+    //   confirmPassword: "",
+    // });
+
     // 儲存表單的值
     setPassword({ ...password, [e.target.name]: e.target.value });
 
@@ -89,6 +99,7 @@ const UserPassword = () => {
         e.target.name === "password" &&
         password.newPassword !== password.confirmPassword)
     ) {
+      setErr({ ...err, password: "" });
       setErr({ ...err, confirmPassword: "新的密碼 與 確認新密碼 輸入不一致" });
     } else {
       setErr({ ...err, confirmPassword: "" });
@@ -124,24 +135,24 @@ const UserPassword = () => {
       // http://localhost:3002/api/member/password (router.post)
       let response = await axios.post(`${API_URL}/member/password`, password);
       console.log("會員有更改密碼: ", response.data);
+      // 清空
+      setPassword({
+        password: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+      setEye({
+        passwordEye: false,
+        newPasswordEye: false,
+        confirmPasswordEye: false,
+      });
     } catch (e) {
       console.error("會員更改密碼 error: ", ERR_MSG[e.response.data.code]);
+      setErr({ ...err, password: `${ERR_MSG[e.response.data.code]}` });
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);
       // setErr({ ...err, confirmPassword: e.response.data.msg });
     }
-
-    // 清空
-    setPassword({
-      password: "",
-      newPassword: "",
-      confirmPassword: "",
-    });
-    setEye({
-      passwordEye: false,
-      newPasswordEye: false,
-      confirmPasswordEye: false,
-    });
   }
 
   return (
@@ -168,7 +179,11 @@ const UserPassword = () => {
                     id="password"
                     type={eye.passwordEye ? "text" : "password"}
                     name="password"
-                    className="form-control form_Input form_Input_Password form_Input_SmallSize"
+                    className={
+                      err.password
+                        ? "form-control form_Input form_Input_Password form_Input_SmallSize border-danger"
+                        : "form-control form_Input form_Input_Password form_Input_SmallSize"
+                    }
                     value={password.password}
                     placeholder="請輸入目前登入的密碼"
                     autoComplete="off"
@@ -182,7 +197,9 @@ const UserPassword = () => {
                     )}
                   </div>
                 </div>
-                <div className="error text-danger text-end"></div>
+                <div className="error text-danger text-end">
+                  {err.password ? err.password : ""}
+                </div>
               </div>
 
               <div className="my-4">
@@ -264,7 +281,8 @@ const UserPassword = () => {
                       password.password !== "" &&
                       password.newPassword !== "" &&
                       password.confirmPassword !== "" &&
-                      password.newPassword === password.confirmPassword
+                      password.newPassword === password.confirmPassword &&
+                      err.password === ""
                         ? false
                         : true
                     }

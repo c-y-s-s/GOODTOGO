@@ -807,4 +807,44 @@ router.post("/order/cancel", async (req, res, next) => {
   });
 });
 
+// test
+// router.get("/order/count/aaa", async (req, res, next) => {
+//   let [likeResult] = await connection.execute(
+//     `SELECT store_id, count(id) AS likeTotal
+//     FROM user_like
+//     GROUP BY store_id
+//     ORDER BY likeTotal DESC;`
+//   );
+
+//   let [storeResult] = await connection.execute(
+//     `SELECT a.id,
+//     a.name,
+//     a.logo,
+//     a.open_time,
+//     a.close_time,
+//     a.close_day,
+//     a.stores_category_id
+//     FROM stores AS a
+//     WHERE a.valid = 1;`
+//   );
+
+//   storeResult.map((item) => {
+//     let setZero = likeResult.find(
+//       (v) => Object.values(v)[0] === Object.values(item)[0]
+//     );
+//     if (setZero) {
+//       item.like = setZero.likeTotal;
+//     } else {
+//       item.like = 0;
+//     }
+//   });
+
+//   storeResult.sort(function(a, b) {
+//     // boolean false == 0; true == 1
+//     return b.like - a.like;
+// });
+//   console.log("storeResult數量", storeResult.length);
+//   res.json({ storeResult, likeResult });
+// });
+
 module.exports = router;
