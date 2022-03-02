@@ -5,6 +5,7 @@ import {
   IMAGE_URL,
   STORE_PRODUCT_IMAGE_URL,
 } from "../../../utils/config";
+import { NavLink } from "react-router-dom";
 
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
@@ -98,6 +99,7 @@ const Table = () => {
                   >
                     {item.valid === 1 ? "上架中" : "下架中"}
                   </button>
+
                   {/* //checkModal */}
                   <CheckModal productValid={item.valid} productId={item.id} />
                 </td>
@@ -111,12 +113,33 @@ const Table = () => {
                     <FiMoreVertical />
                   </button>
                   <ul className="dropdown-menu background-storebg-data-right-sort-options ">
-                    <li>
-                      <a href="#/">編輯</a>
-                    </li>
-                    <li>
-                      <a href="#/">刪除</a>
-                    </li>
+                    <div className="navLink-g-color">
+                      <NavLink
+                        type="button"
+                        to="/newproduct"
+                        className={"navLink-g-color"}
+                      >
+                        編輯
+                      </NavLink>
+                    </div>
+
+                    <div className="navLink-r-color">
+                      {/* <NavLink
+                        type="button"
+                        to="/newproduct"
+                        className={"navLink-r-color"}
+                      >
+                        刪除
+                      </NavLink> */}
+                      <button
+                        type="button"
+                        className="navLink-r-color"
+                        data-bs-toggle="modal"
+                        data-bs-target={"#takeRemove" + item.id}
+                      >
+                        刪除
+                      </button>
+                    </div>
                   </ul>
                 </td>
               </tr>

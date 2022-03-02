@@ -2,15 +2,45 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
+import Swal from "sweetalert2";
 
 const CheckModel = ({ productValid, productId }) => {
   // 上下架 修改按鈕
   async function handleSubmit(e) {
     e.preventDefault();
+
+    let productValidId = { productValid, productId };
+    console.log("aaa", productValidId);
+
     try {
       // http://localhost:3002/api/member/password (router.post)
-      let response = await axios.post(`${API_URL}/storebg/productslistvalid`);
-      console.log("會員有更改密碼: ", response.data);
+      let response = await axios.post(
+        `${API_URL}/storebg/productslistvalid`,
+        productValidId
+      );
+      console.log("上下架訊息 ", response.data);
+    } catch (e) {
+      console.error("valid error: ", ERR_MSG[e.response.data.code]);
+      console.error("res.error:", e.response.data);
+      // setErr(e.response.data.msg);
+      // setErr({ ...err, confirmPassword: e.response.data.msg });
+    }
+  }
+
+  
+  async function removeSubmit(e) {
+    e.preventDefault();
+
+    let productValidId = { productValid, productId };
+    console.log("aaa", productValidId);
+
+    try {
+      // http://localhost:3002/api/member/password (router.post)
+      let response = await axios.post(
+        `${API_URL}/storebg/productslistvalid`,
+        productValidId
+      );
+      console.log("上下架訊息 ", response.data);
     } catch (e) {
       console.error("valid error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
@@ -50,8 +80,39 @@ const CheckModel = ({ productValid, productId }) => {
                     : "storebg-model-btn-green") + " btn"
                 }
                 onClick={handleSubmit}
+                data-bs-dismiss="modal"
               >
                 確定
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="modal fade"
+        id={"takeRemove" + productId}
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div className="modal-dialog modal-sm modal-dialog-centered">
+          <div className="modal-content">
+            <div className="modal-footer storebg-modal-header">
+              <button
+                type="button"
+                className="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div className="modal-body mx-auto fw-bold">確定刪除該刪品? </div>
+            <div className="modal-footer storebg-modal-footer  mx-auto">
+              <button
+                type="submit"
+                className="btn btn-danger"
+                onClick={removeSubmit}
+                data-bs-dismiss="modal"
+              >
+                刪除
               </button>
             </div>
           </div>

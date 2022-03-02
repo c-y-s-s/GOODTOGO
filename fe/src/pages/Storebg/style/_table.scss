@@ -67,7 +67,27 @@
   border-top: 0 none;
 }
 
-.storebg-model-btn-green{
+.storebg-model-btn-green {
   background: $color-light-green;
   color: $color-light;
+}
+
+.navLink-g-color {
+  color: $color-light-green;
+  text-decoration: none;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+.navLink-r-color {
+  color: $color-light-red;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  background: white;
+  &:hover {
+    color: $color-light-red;
+  }
 }
