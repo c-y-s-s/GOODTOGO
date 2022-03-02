@@ -141,7 +141,7 @@ const UserLike = () => {
           <div className="page_Title_Category_Hover position-relative">
             <div className="page_Title_Category d-flex justify-content-center justify-content-md-start align-items-center">
               <span className="page_Title_Text">
-                {showCate!=="全部店家" ? showCate+"店家" : "全部店家"}
+                {showCate !== "全部店家" ? showCate + "店家" : "全部店家"}
               </span>
               {/* <span className="page_Title_Text">&nbsp;&nbsp;店&nbsp;家</span> */}
               <FiChevronDown className="ms-1 page_Title_Arrow" />
@@ -235,7 +235,11 @@ const UserLike = () => {
                               <h4 className="store_Title my-3">
                                 {item.storeName}
                                 <span className="d-block fz-sm mt-2 ls-md">
-                                  {item.storeBranchName}
+                                  {item.storeBranchName ? (
+                                    item.storeBranchName
+                                  ) : (
+                                    <span>&emsp;</span>
+                                  )}
                                 </span>
                               </h4>
 

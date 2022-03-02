@@ -52,20 +52,14 @@ const UserPassword = () => {
     );
   }
 
+  // function handleClear(e) {
+  //   setErr({ ...err, password: "" });
+  // }
+
   // -------- 使用者修改密碼 --------
   function handleChange(e) {
     // 使用者正在輸入 欄位, 值 -> 同步(O)
     // console.log(e.target.name, e.target.value);
-
-    // if (e.type === "keypress") {
-
-    // }
-    // 正在輸入，清空錯誤訊息
-    // setErr({
-    //   password: "",
-    //   newPassword: "",
-    //   confirmPassword: "",
-    // });
 
     // 儲存表單的值
     setPassword({ ...password, [e.target.name]: e.target.value });
@@ -99,10 +93,13 @@ const UserPassword = () => {
         e.target.name === "password" &&
         password.newPassword !== password.confirmPassword)
     ) {
-      setErr({ ...err, password: "" });
-      setErr({ ...err, confirmPassword: "新的密碼 與 確認新密碼 輸入不一致" });
+      setErr({
+        ...err,
+        confirmPassword: "新的密碼 與 確認新密碼 輸入不一致",
+        password: "",
+      });
     } else {
-      setErr({ ...err, confirmPassword: "" });
+      setErr({ ...err, confirmPassword: "", password: "" });
     }
   }
 
@@ -148,7 +145,7 @@ const UserPassword = () => {
       });
     } catch (e) {
       console.error("會員更改密碼 error: ", ERR_MSG[e.response.data.code]);
-      setErr({ ...err, password: `${ERR_MSG[e.response.data.code]}` });
+      setErr({ ...err, password: ERR_MSG[e.response.data.code] });
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);
       // setErr({ ...err, confirmPassword: e.response.data.msg });

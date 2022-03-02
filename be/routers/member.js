@@ -807,7 +807,7 @@ router.post("/order/cancel", async (req, res, next) => {
   });
 });
 
-// test
+// -------- test 所有店家資訊 依愛心排序 --------
 // router.get("/order/count/aaa", async (req, res, next) => {
 //   let [likeResult] = await connection.execute(
 //     `SELECT store_id, count(id) AS likeTotal
@@ -828,23 +828,42 @@ router.post("/order/cancel", async (req, res, next) => {
 //     WHERE a.valid = 1;`
 //   );
 
+//   let [starResult] = await connection.execute(
+//     `SELECT
+//     store_id,
+//     round(SUM(star)/count(id),1) AS score
+//     FROM products_comment
+//     GROUP BY store_id;`
+//   );
+
 //   storeResult.map((item) => {
-//     let setZero = likeResult.find(
+//     // 放入 愛心
+//     let setLike = likeResult.find(
 //       (v) => Object.values(v)[0] === Object.values(item)[0]
 //     );
-//     if (setZero) {
-//       item.like = setZero.likeTotal;
+//     if (setLike) {
+//       item.like = setLike.likeTotal;
 //     } else {
 //       item.like = 0;
 //     }
+
+//     // 放入星星
+//     let setStar = starResult.find(
+//       (v) => Object.values(v)[0] === Object.values(item)[0]
+//     );
+//     if (setStar) {
+//       item.star = setStar.score;
+//     } else {
+//       item.star = 0;
+//     }
 //   });
 
-//   storeResult.sort(function(a, b) {
+//   storeResult.sort(function (a, b) {
 //     // boolean false == 0; true == 1
 //     return b.like - a.like;
-// });
+//   });
 //   console.log("storeResult數量", storeResult.length);
-//   res.json({ storeResult, likeResult });
+//   res.json(storeResult);
 // });
 
 module.exports = router;

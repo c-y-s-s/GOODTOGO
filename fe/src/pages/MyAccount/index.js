@@ -3,13 +3,13 @@ import { Link, NavLink, Route, Routes, useParams } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../utils/config";
 // icon
-import { FiUser, FiClipboard, FiGift } from "react-icons/fi";
+import { FiUser, FiClipboard, FiHeart } from "react-icons/fi";
 // 頁面
 import UserProfile from "./pages/UserProfile";
 import UserPassword from "./pages/UserPassword";
 import UserLike from "./pages/UserLike";
 import UserOrder from "./pages/UserOrder";
-import UserCoupon from "./pages/UserCoupon";
+// import UserCoupon from "./pages/UserCoupon";
 import UserCreditCard from "./pages/UserCreditCard";
 
 // user 帶著 session 進入此頁
@@ -128,7 +128,7 @@ const MyAccount = () => {
                         更改密碼
                       </NavLink>
                     </li>
-                    <li className="mb-2">
+                    {/* <li className="mb-2">
                       <NavLink
                         className={({ isActive }) =>
                           "menu_Text text-decoration-none" +
@@ -140,7 +140,7 @@ const MyAccount = () => {
                       >
                         店家收藏清單
                       </NavLink>
-                    </li>
+                    </li> */}
                   </ul>
                 </div>
                 {/* -------- 我的帳戶選單結束 -------- */}
@@ -159,7 +159,7 @@ const MyAccount = () => {
                   <span className="menu_Title">我的訂單</span>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   className={({ isActive }) =>
                     "d-flex align-items-center mb-3 text-decoration-none" +
@@ -171,6 +171,20 @@ const MyAccount = () => {
                     <FiGift className="menu_Icon d-flex" />
                   </div>
                   <span className="menu_Title">優惠券</span>
+                </NavLink>
+              </li> */}
+              <li>
+                <NavLink
+                  className={({ isActive }) =>
+                    "d-flex align-items-center mb-3 text-decoration-none" +
+                    (isActive ? " menu_Title_Active" : " menu_Title_unActive")
+                  }
+                  to="/member/like"
+                >
+                  <div>
+                    <FiHeart className="menu_Icon d-flex" />
+                  </div>
+                  <span className="menu_Title">收藏店家</span>
                 </NavLink>
               </li>
             </ul>
@@ -188,11 +202,12 @@ const MyAccount = () => {
             />
             <Route path="payment" element={<UserCreditCard />} />
             <Route path="password" element={<UserPassword />} />
-            <Route path="like" element={<UserLike />} />
+            {/* <Route path="like" element={<UserLike />} /> */}
             <Route path="order/*" element={<UserOrder />}>
               <Route path=":status" element={<UserOrder />} />
             </Route>
-            <Route path="coupon" element={<UserCoupon />} />
+            <Route path="like" element={<UserLike />} />
+            {/* <Route path="coupon" element={<UserCoupon />} /> */}
           </Routes>
         </div>
       </div>
