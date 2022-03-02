@@ -31,7 +31,7 @@ const Storebg = ({ setIsAdmin }) => {
               {/* -------- 表格 資料主要呈現區塊開始 -------- */}
               <Table />
               {/* -------- 分頁區塊開始 --------*/}
-              <Pagination />
+              {/* <Pagination /> */}
             </div>
           </div>
         </div>
