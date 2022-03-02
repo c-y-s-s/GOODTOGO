@@ -138,7 +138,7 @@ const UserLike = () => {
           <div className="page_Title d-flex justify-content-center justify-content-md-start">
             店家收藏清單
           </div>
-          <div className="page_Title_Category_Hover">
+          <div className="page_Title_Category_Hover position-relative">
             <div className="page_Title_Category d-flex justify-content-center justify-content-md-start align-items-center">
               <span className="page_Title_Text">
                 {showCate!=="全部店家" ? showCate+"店家" : "全部店家"}

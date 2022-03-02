@@ -227,7 +227,7 @@
 }
 
 // -------- 欄位 --------
-.form_Input {
+.form-control.form_Input {
   border-radius: 2px;
   height: 2.5rem;
   padding-bottom: 0.45rem;
@@ -238,7 +238,7 @@
   }
 }
 
-.form_Input::placeholder {
+.form-control.form_Input::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
   color: lighten($color-grey, 8%);
   font-size: $fz-sm;
@@ -247,8 +247,8 @@
   opacity: 1; /* Firefox */
 }
 
-.form_Input:disabled,
-.form_Input[readonly] {
+.form-control.form_Input:disabled,
+.form-control.form_Input[readonly] {
   background-color: lighten($color-green, 50%);
   color: $color-dark-grey;
   letter-spacing: -0.3rem;
@@ -256,12 +256,12 @@
 
 // -------- 按鈕 --------
 
-.btn_Other {
+.btn.btn_Other {
   @include btn_OutLine($fz-sm, $color-green);
   transition: 0.07s;
 }
 
-.btn_Submit {
+.btn.btn_Submit {
   font-size: $fz-sm;
   width: 60%;
   background-color: $color-green;
@@ -289,7 +289,7 @@
   }
 }
 
-.btn_Upload {
+.btn.btn_Upload {
   @include btn_Block($fz-sm, $color-green);
   input {
     display: none;
@@ -380,7 +380,7 @@
 }
 
 .page_Title_Category_List {
-  top: 160px;
+  top: 12px;
   font-size: $fz-sm;
   color: lighten($color-dark-grey, 8%);
   width: 6.6rem;
@@ -431,7 +431,7 @@
   }
 }
 
-.store_Status_Open {
+.badge.store_Status_Open {
   width: 60px;
   height: 26px;
   color: #fff;
@@ -448,7 +448,7 @@
   transform: translate(-50%, -50%);
   z-index: 5;
 }
-.store_Status_Close {
+.badge.store_Status_Close {
   width: 60px;
   height: 26px;
   color: #fff;
@@ -670,10 +670,6 @@
   }
 }
 @media screen and (max-width: 767px) {
-  // 店家收藏清單頁
-  .page_Title_Category_List {
-    top: 504px;
-  }
 }
 @media screen and (max-width: 576px) {
   // 我的訂單頁

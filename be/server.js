@@ -8,7 +8,7 @@ const path = require("path");
 const cors = require("cors");
 //引用express-session、session-file-store 來儲存資料
 const session = require("express-session");
-let FileStore = require("session-file-store")(session);
+// let FileStore = require("session-file-store")(session);
 
 let app = express();
 

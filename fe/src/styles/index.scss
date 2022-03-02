@@ -118,7 +118,7 @@ $btn-border-radius: 2px;
 //-------- [Auth] 登入、註冊、重設密碼 --------
 @import "../pages/Auth/style/auth.scss";
 //-------- 會員中心 --------
-// @import "../pages/MyAccount/styles/myAccount.scss";
+@import "../pages/MyAccount/styles/_myAccount.scss";
 //-------- 店家列表 --------
 @import "../pages/StoreList/styles/StoreList.scss";
 // -------- 商品列表 --------
