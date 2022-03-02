@@ -9,7 +9,7 @@ const SearchBar = (props) => {
   const { setSearchSwitch, keyword, setKeyword } = props;
 
   return (
-    <div className="search-box col-lg-3 col-12 col-md-4 col-sm-5">
+    <div className="search-box col-lg-3 col-12 col-md-4 col-sm-5 mt-4 justify-content-evenly">
       <form
         method="get"
         onSubmit={(e) => {

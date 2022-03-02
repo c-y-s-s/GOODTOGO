@@ -8,7 +8,7 @@ const Recomm = (props) => {
     <>
       <div className="rec-content">
         <div className="header text-center">
-          <div className="title-box mt-5 mb-5 m-auto">
+          <div className="title-box mt-lg-5 mb-lg-1 m-auto">
             <Star />
             <span className="ps-3 pe-3 text-dark-grey input-label-title">
               限時推薦
@@ -16,7 +16,7 @@ const Recomm = (props) => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder col-10 d-flex align-items-center m-auto">
+        <div className="rec-cards-holder col-lg-10 col-9 d-flex align-items-center m-auto">
           <RecomCard totalHeart={totalHeart} productAmount={productAmount} />
         </div>
 

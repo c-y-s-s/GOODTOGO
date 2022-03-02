@@ -290,7 +290,64 @@ router.get("/filter/op", async (req, res, next) => {
   // console.log("opResult", opResult);
   res.json(opResult);
 });
+//*排序-
+router.get("/order/count/aaa", async (req, res, next) => {
+  let [likeResult] = await connection.execute(
+    `SELECT store_id, count(id) AS likeTotal
+    FROM user_like
+    GROUP BY store_id
+    ORDER BY likeTotal DESC;`
+  );
 
+  let [storeResult] = await connection.execute(
+    `SELECT a.id,
+    a.name,
+    a.logo,
+    a.open_time,
+    a.close_time,
+    a.close_day,
+    a.stores_category_id
+    FROM stores AS a
+    WHERE a.valid = 1;`
+  );
+
+  let [starResult] = await connection.execute(
+    `SELECT
+    store_id,
+    round(SUM(star)/count(id),1) AS score
+    FROM products_comment
+    GROUP BY store_id;`
+  );
+
+  storeResult.map((item) => {
+    // 放入 愛心
+    let setLike = likeResult.find(
+      (v) => Object.values(v)[0] === Object.values(item)[0]
+    );
+    if (setLike) {
+      item.like = setLike.likeTotal;
+    } else {
+      item.like = 0;
+    }
+
+    // 放入星星
+    let setStar = starResult.find(
+      (v) => Object.values(v)[0] === Object.values(item)[0]
+    );
+    if (setStar) {
+      item.star = setStar.score;
+    } else {
+      item.star = 0;
+    }
+  });
+
+  storeResult.sort(function (a, b) {
+    // boolean false == 0; true == 1
+    return b.like - a.like;
+  });
+  console.log("storeResult數量", storeResult.length);
+  res.json(storeResult);
+});
 
 router.get("/", async (req, res, next) => {
   let [data, fields] = await connection.execute(
@@ -300,14 +357,12 @@ router.get("/", async (req, res, next) => {
   res.json(data);
 });
 
-
-
 // -------- 撈出對應商家 ID 詳細資訊 --------
 router.get("/:storeId", async (req, res, next) => {
   let [data, fields] = await connection.execute(
-    "SELECT a.* , b.category FROM stores AS a JOIN products_category AS b ON b.id = a.stores_category_id WHERE a.id = ?", [
-    req.params.storeId,
-  ]);
+    "SELECT a.* , b.category FROM stores AS a JOIN products_category AS b ON b.id = a.stores_category_id WHERE a.id = ?",
+    [req.params.storeId]
+  );
   res.json(data);
 });
 // ------- 結束 --------

@@ -157,69 +157,73 @@ const StoreInfoList = (props) => {
   // console.log("opSwitch", opSwitch);
 
   return (
-    <div className="store-list d-grid">
+    <div className="store-list">
       <div className="prefix"></div>
       <div className="header"></div>
-      {/* 標題 */}
-      <div className="title align-self-end text-center">
-        <div className="title-box mb-2">
-          <Star />
-          <span className="ps-3 pe-3 text-dark-grey input-label-title">
-            探索美食
-          </span>
-          <Star />
+      <div className="store-list-content col-lg-10 col-9 m-auto">
+        {/* 標題 */}
+        <div className="title align-self-end text-center col-12  mb-lg-3">
+          <div className="title-box mb-2">
+            <Star />
+            <span className="ps-3 pe-3 text-dark-grey input-label-title">
+              探索美食
+            </span>
+            <Star />
+          </div>
         </div>
-      </div>
-      {/* 商家列表處理區 */}
-      <div className="function-box">
-        <SearchBar
-          setSearchSwitch={setSearchSwitch}
-          keyword={keyword}
-          setKeyword={setKeyword}
-        />
-        <div className="col-lg-3 justify-content-between d-flex flex-wrap">
-          <FilterBar
-            setOpSwitch={setOpSwitch}
-            setCategorySwitch={setCategorySwitch}
-            category={category}
-            selectedCat={selectedCat}
-            setSelectedCat={setSelectedCat}
-            setOpState={setOpState}
+        {/* 商家列表處理區 */}
+        <div className="function-box d-flex flex-wrap">
+          <SearchBar
+            setSearchSwitch={setSearchSwitch}
+            keyword={keyword}
             setKeyword={setKeyword}
-            opState={opState}
+          />
+          <div className="col-lg-3 col-12 justify-content-lg-between d-flex flex-wrap justify-content-evenly mt-3">
+            <FilterBar
+              setOpSwitch={setOpSwitch}
+              setCategorySwitch={setCategorySwitch}
+              category={category}
+              selectedCat={selectedCat}
+              setSelectedCat={setSelectedCat}
+              setOpState={setOpState}
+              setKeyword={setKeyword}
+              opState={opState}
+            />
+          </div>
+          <Rating />
+        </div>
+        <div className="total-count col-lg-12 col-12 text-center mt-lg-3 mb-lg-2 text-lg-end">
+          總共 {total} 筆
+        </div>
+        {/* 商家列表顯示區 */}
+
+        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-12 mt-3 ">
+          <StoreInfoCard
+            storeList={storeList}
+            storeLikeCount={storeLikeCount}
+            amount={amount}
           />
         </div>
-        <Rating />
+        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-between m-auto mt-lg-4 mb-lg-2 mt-4">
+          <IoIosArrowBack
+            role="button"
+            className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
+            onClick={() => {
+              navigate(`?page=${page - 1}`);
+              setPage(page - 1);
+            }}
+          />
+          {getPages()}
+          <IoIosArrowForward
+            role="button"
+            className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
+            onClick={() => {
+              navigate(`?page=${page + 1}`);
+              setPage(page + 1);
+            }}
+          />
+        </ul>
       </div>
-      <div className="total-count">總共 {total} 筆</div>
-      {/* 商家列表顯示區 */}
-
-      <div className="store-info-list">
-        <StoreInfoCard
-          storeList={storeList}
-          storeLikeCount={storeLikeCount}
-          amount={amount}
-        />
-      </div>
-      <ul className="pages p-0 align-items-center d-flex">
-        <IoIosArrowBack
-          role="button"
-          className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
-          onClick={() => {
-            navigate(`?page=${page - 1}`);
-            setPage(page - 1);
-          }}
-        />
-        {getPages()}
-        <IoIosArrowForward
-          role="button"
-          className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
-          onClick={() => {
-            navigate(`?page=${page + 1}`);
-            setPage(page + 1);
-          }}
-        />
-      </ul>
       <div className="footer"></div>
     </div>
   );

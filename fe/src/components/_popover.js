@@ -60,20 +60,20 @@ const _popover = () => {
   const loggedin = (
     <div className="nav-popover">
       <div className="popover-item text-center">
-        <Link to="/my_account" className="nav-popover-link">
+        <Link to="/member" className="nav-popover-link">
           會員中心
         </Link>
       </div>
       <div className="popover-item text-center">
-        <Link to="＃" className="nav-popover-link">
+        <Link to="/member/order" className="nav-popover-link">
           我的訂單
         </Link>
       </div>
-      <div className="popover-item text-center">
-        <Link to="＃" className="nav-popover-link">
+      {/* <div className="popover-item text-center">
+        <Link to="#" className="nav-popover-link">
           優惠券
         </Link>
-      </div>
+      </div> */}
       <div className="popover-item text-center">
         {/* <Link to="auth/logout" className="nav-popover-link">
           登出

@@ -100,11 +100,12 @@ const Slider = () => {
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide="prev"
             >
-              <span
-                class="carousel-control-prev-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Previous</span>
+              <div className="controller-left">
+                <span
+                  class="carousel-control-prev-icon"
+                  aria-hidden="true"
+                ></span>
+              </div>
             </button>
             <button
               class="carousel-control-next"
@@ -112,11 +113,12 @@ const Slider = () => {
               data-bs-target="#carouselExampleIndicators"
               data-bs-slide="next"
             >
-              <span
-                class="carousel-control-next-icon"
-                aria-hidden="true"
-              ></span>
-              <span class="visually-hidden">Next</span>
+              <div className="controller-right">
+                <span
+                  class="carousel-control-next-icon"
+                  aria-hidden="true"
+                ></span>
+              </div>
             </button>
           </div>
         </div>
