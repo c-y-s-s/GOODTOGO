@@ -58,7 +58,6 @@ const TopNav = () => {
 
           <div className="px-3 ">
             <a href="#/" className="icon icon-border">
-              <FiBell />
             </a>
           </div>
           <div className="username">{storeName}</div>
