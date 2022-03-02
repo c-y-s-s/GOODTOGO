@@ -17,7 +17,6 @@ const Pagination = () => {
   const { currentPage } = useParams();
   
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
-  //會跳三次
   console.log("currentPage", currentPage, page);
 
   useEffect(() => {
@@ -75,6 +74,7 @@ const Pagination = () => {
               <span aria-hidden="true">&lt;</span>
             </a>
           </li>
+
           <li className="page-item">
             <a className="page-link" href="#/">
               1
