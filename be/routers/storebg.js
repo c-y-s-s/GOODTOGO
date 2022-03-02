@@ -22,7 +22,7 @@ router.use((req, res, next) => {
   //     photo: member.logo
   //   }
   req.session.member = {
-    id: 72,
+    id: 1,
     name: "添飯中式料理",
     // photo: "",
     logo: "/static/uploads/logo/test_logo.png",
@@ -203,7 +203,8 @@ router.get("/pagination", async (req, res, next) => {
   res.json({
     pagination: { total, perPage, page, lastPage },
     data,
-  });});
+  });
+});
 // -------- 會員資料修改儲存 --------
 // /api/member/profile/edit (post)
 router.post(
@@ -332,6 +333,44 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   // console.log("req.body: ", req.body);
   res.json({
     message: "儲存修改密碼 ok",
+  });
+});
+// -------- 會員密碼修改儲存 --------
+// /api/member/password (post)
+router.post("/productslistvalid", async (req, res, next) => {
+  console.log("ddddd", req.body);
+
+  // 檢查 req.body.password 密碼是否正確，正確才能改新密碼
+  if (req.body.productValid === 1) {
+    let [validResult] = await connection.execute(
+      `UPDATE products SET valid=0 WHERE store_id=? AND id=?;`,
+      [req.session.member.id, req.body.productId]
+    );
+  } else {
+    let [validResult] = await connection.execute(
+      `UPDATE products SET valid=1 WHERE store_id=? AND id=?;`,
+      [req.session.member.id, req.body.productId]
+    );
+  }
+  // 把會員資料從陣列中拿出來
+  // let userPassword = passwordResult[0];
+  console.log("11111111111111++++++++++++++", req.session.member.id);
+  console.log("000000++++++++++++++", req.session.member);
+  console.log("2222222++++++++++++++", req.body.productId);
+  // 寫到這 先測試 是否能比對密碼成功(用前台送出表單測試)
+  // 再進行後續儲存
+
+  // // -------- 儲存到資料庫 --------
+  // let [updatePasswordResult] = await connection.execute(
+  //   `UPDATE users SET password=? WHERE id=?;`,
+  //   [hashNewPassword, req.session.member.id]
+  // );
+  // console.log(updatePasswordResult);
+
+  // 寫內容前先測試能不能得到 req
+  // console.log("req.body: ", req.body);
+  res.json({
+    message: "儲存成功 ok",
   });
 });
 
