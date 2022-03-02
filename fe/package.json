@@ -23,8 +23,10 @@
     "react-router": "^6.2.1",
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
-    "react-twzipcode": "^3.0.0",
+    "react-spinners": "^0.11.0",
     "sass": "^1.49.0",
+    "sweetalert2": "^11.4.4",
+    "react-twzipcode": "^3.0.0",
     "tw-city-selector": "^2.1.1",
     "uuid": "^8.3.2",
     "web-vitals": "^2.1.4"
