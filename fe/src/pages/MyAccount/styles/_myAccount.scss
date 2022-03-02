@@ -1,0 +1,698 @@
+// -------- 外框線按鈕 模組 --------
+@mixin btn_OutLine($fz-sm, $color-green) {
+  font-size: $fz-sm;
+  color: $color-green;
+  border-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  letter-spacing: $ls-sm;
+  height: 2.5rem;
+  padding-left: 15px;
+  padding-right: 15px;
+  &:hover {
+    background-color: $color-green;
+    border-color: $color-green;
+    color: white;
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// -------- 實心按鈕 模組 --------
+@mixin btn_Block($fz-sm, $color-green) {
+  font-size: $fz-sm;
+  width: 60%;
+  background-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  height: 2.5rem;
+  &:hover {
+    background-color: lighten($color-green, 8%);
+    border-color: lighten($color-green, 8%);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// -------- 共用 class --------
+.cover-fit {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+// 文字大小
+.fz-sm {
+  font-size: $fz-sm;
+}
+.fz-md {
+  font-size: $fz-md;
+}
+.fz-lg {
+  font-size: $fz-lg;
+}
+.fz-x-lg {
+  font-size: $fz-x-lg;
+}
+.fz-xx-lg {
+  font-size: $fz-xx-lg;
+}
+// 文字間距
+.ls-sm {
+  letter-spacing: $ls-sm;
+}
+.ls-md {
+  letter-spacing: $ls-md;
+}
+.ls-lg {
+  letter-spacing: $ls-lg;
+}
+
+// 顏色
+.c-green {
+  color: $color-green;
+}
+.c-l-green {
+  color: $color-light-green;
+}
+.c-yellow {
+  color: $color-yellow;
+}
+.c-d-yellow {
+  color: $color-dark-yellow;
+}
+.b-yellow {
+  background-color: $color-yellow;
+}
+.c-grey {
+  color: $color-grey;
+}
+.c-l-grey {
+  color: $color-light-grey;
+}
+
+// -------- sweet alert --------
+
+.confirmBtn {
+  letter-spacing: $ls-sm;
+  background-color: $color-light-green;
+  color: #fff;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    color: #fff;
+    background-color: darken($color-light-green, 8%);
+  }
+}
+.cancelBtn {
+  letter-spacing: $ls-sm;
+  background-color: $color-grey;
+  color: #fff;
+  &:focus {
+    box-shadow: none;
+  }
+  &:hover {
+    color: #fff;
+    background-color: darken($color-grey, 8%);
+  }
+}
+
+.alert_Title {
+  color: $color-dark-grey;
+  letter-spacing: $ls-lg;
+}
+
+// -------- 會員頭貼 --------
+.user_Info {
+  .headShot {
+    height: 5rem;
+    width: 5rem;
+    border: 1px solid $color-light-grey;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  p {
+    font-size: $fz-xx-lg;
+    letter-spacing: $ls-lg;
+    color: $color-grey;
+  }
+}
+
+// -------- 左方選單列 --------
+.menu_Icon {
+  color: $color-green;
+  width: 20px;
+  height: 20px;
+}
+
+.menu_Title {
+  font-size: $fz-lg;
+  letter-spacing: $ls-md;
+  padding-left: 0.7rem;
+  color: $color-green;
+}
+
+.menu_Title_Active {
+  .menu_Icon,
+  .menu_Title {
+    color: $color-dark-yellow;
+  }
+}
+
+.menu_Title_unActive {
+  &:hover {
+    .menu_Icon,
+    .menu_Title {
+      color: $color-dark-yellow;
+    }
+  }
+}
+
+.menu_Open {
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: auto;
+  opacity: 1;
+}
+
+.menu_Close {
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  // display: none;
+}
+
+.menu_Text {
+  font-size: $fz-md;
+  letter-spacing: $ls-md;
+  padding-left: 1.9rem;
+  color: $color-dark-grey;
+}
+
+.menu_Text_Active {
+  color: $color-dark-yellow;
+  &:hover {
+    color: $color-dark-yellow;
+  }
+}
+
+.menu_Text_unActive {
+  &:hover {
+    color: $color-dark-yellow;
+  }
+}
+
+// -------- member 相關頁面標題 --------
+.page_Title {
+  font-size: $fz-xx-lg;
+  letter-spacing: $ls-lg;
+}
+
+// -------- 會員資料表單 --------
+.form_Text {
+  div {
+    label {
+      letter-spacing: $ls-md;
+      color: lighten($color-dark-grey, 20%);
+    }
+  }
+}
+
+.error {
+  height: 10px;
+  font-size: $fz-sm;
+  letter-spacing: $ls-sm;
+}
+
+// -------- 欄位 --------
+.form-control.form_Input {
+  border-radius: 2px;
+  height: 2.5rem;
+  padding-bottom: 0.45rem;
+  letter-spacing: $ls-md;
+  &:focus {
+    box-shadow: none;
+    border-color: $color-green;
+  }
+}
+
+.form-control.form_Input::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: lighten($color-grey, 8%);
+  font-size: $fz-sm;
+  margin: 0;
+  letter-spacing: $ls-md;
+  opacity: 1; /* Firefox */
+}
+
+.form-control.form_Input:disabled,
+.form-control.form_Input[readonly] {
+  background-color: lighten($color-green, 50%);
+  color: $color-dark-grey;
+  letter-spacing: -0.3rem;
+}
+
+// -------- 按鈕 --------
+
+.btn.btn_Other {
+  @include btn_OutLine($fz-sm, $color-green);
+  transition: 0.07s;
+}
+
+.btn.btn_Submit {
+  font-size: $fz-sm;
+  width: 60%;
+  background-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  height: 2.5rem;
+  &:hover {
+    background-color: lighten($color-green, 8%);
+    border-color: lighten($color-green, 8%);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+// -------- 上傳大頭照 --------
+.user_Upload_Img {
+  .headShot {
+    height: 10rem;
+    width: 10rem;
+    border: 1px solid $color-light-grey;
+    border-radius: 50%;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+}
+
+.btn.btn_Upload {
+  @include btn_Block($fz-sm, $color-green);
+  input {
+    display: none;
+  }
+  .menu_Icon {
+    color: white;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// -------- 更改密碼頁 --------
+.form_Input_Password[type="password"] {
+  letter-spacing: -0.25rem;
+  padding-left: 10px;
+}
+.form_Input_Password[type="text"] {
+  padding: 14px;
+  // padding-bottom: 17px;
+  // padding-left: 17px;
+  letter-spacing: 0.15rem;
+}
+.form_Input_Password[type="password"]::placeholder {
+  padding-left: 5px;
+  box-sizing: border-box;
+}
+.form_Input_Password[type="text"]::placeholder {
+  padding-left: 1px;
+  box-sizing: content-box;
+}
+
+.eye_Open {
+  color: $color-green;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+.eye_Close {
+  color: $color-grey;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+// -------- 店家收藏清單頁 --------
+.page_Title_Category {
+  font-size: $fz-xx-lg;
+  letter-spacing: $ls-lg;
+  color: $color-green;
+  position: relative;
+  cursor: pointer;
+  transition: 0.3s;
+  &::after {
+    content: "";
+    position: absolute;
+    top: 31px;
+    width: 0%;
+    border-bottom: 4px solid $color-yellow;
+    transition: 0.5s;
+    // left: 50%; // 線條從中間開始動畫
+  }
+}
+.page_Title_Category_Hover {
+  &:hover {
+    .page_Title_Category {
+      &::after {
+        width: 100%;
+        left: 0;
+      }
+    }
+    .page_Title_Category_List {
+      // opacity: 1;
+      display: block;
+    }
+  }
+}
+.page_Title_Text {
+  width: 81.6px;
+  text-align: center;
+}
+
+.page_Title_Arrow {
+  color: $color-green;
+  width: 20px;
+  height: 20px;
+  stroke-width: 2.5px;
+  margin-top: 4px;
+}
+
+.page_Title_Category_List {
+  top: 12px;
+  font-size: $fz-sm;
+  color: lighten($color-dark-grey, 8%);
+  width: 6.6rem;
+  padding: 8px 0px 8px 0px;
+  background-color: #fff;
+  letter-spacing: $ls-md;
+  cursor: pointer;
+  z-index: 8;
+  // opacity: 0;
+  display: none;
+  transition: 0.5s;
+  box-shadow: 0px 3px 6px lighten($color-light-grey, 10%);
+  li {
+    padding: 10px 0px 10px 0px;
+    text-align: center;
+    letter-spacing: $ls-lg;
+    &:hover {
+      background-color: $color-yellow;
+      color: #fff;
+    }
+  }
+}
+
+.card_Link {
+  color: $color-dark-grey;
+  &:hover {
+    color: $color-dark-grey;
+  }
+}
+.store_Card {
+  width: 17.5rem;
+  height: 22rem;
+  border-radius: 5px;
+  border-top: solid 8px $color-light-green;
+  border-bottom: solid 8px $color-light-green;
+  background-color: #fff;
+  box-shadow: 0px 3px 10px lighten($color-light-grey, 5%);
+  overflow: hidden;
+  transition: 0.3s;
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 7px 10px lighten($color-light-grey, 0%);
+    .store_Img {
+      img {
+        transform: scale(1.12) translateY(-8px);
+      }
+    }
+  }
+}
+
+.badge.store_Status_Open {
+  width: 60px;
+  height: 26px;
+  color: #fff;
+  font-size: $fz-sm;
+  background-color: $color-light-green;
+  text-align: center;
+  font-weight: $fw-medium;
+  text-shadow: 0px 0.5px $color-grey;
+  letter-spacing: $ls-sm;
+  padding-left: 8px;
+  line-height: 16px;
+  right: 7px;
+  top: 160px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+.badge.store_Status_Close {
+  width: 60px;
+  height: 26px;
+  color: #fff;
+  font-size: $fz-sm;
+  background-color: lighten($color-grey, 10%);
+  text-align: center;
+  font-weight: $fw-medium;
+  text-shadow: 0px 0.5px $color-grey;
+  letter-spacing: $ls-sm;
+  padding-left: 8px;
+  line-height: 16px;
+  right: 7px;
+  top: 160px;
+  transform: translate(-50%, -50%);
+  z-index: 5;
+}
+
+.store_Img {
+  height: 10rem;
+  overflow: hidden;
+  img {
+    transition: 0.4s;
+  }
+}
+.store_Title {
+  font-size: $fz-xx-lg;
+  letter-spacing: $ls-lg;
+  font-weight: $fw-medium;
+}
+.store_Category {
+  background-color: lighten($color-light-grey, 10%);
+  font-size: $fz-sm;
+  letter-spacing: $ls-sm;
+  padding: 2px 12px;
+  transform: translateY(0.5px);
+  span {
+    display: block;
+  }
+}
+.store_Info {
+  font-weight: $fw-medium;
+  letter-spacing: $ls-sm;
+  font-size: $fz-md;
+  border-bottom: 1px solid $color-grey;
+  padding-bottom: 5px;
+}
+.store_Clock {
+  width: 16px;
+  height: 16px;
+  transform: translateY(0.8px);
+}
+.store_Score {
+  margin: 12px 0;
+  span.store_Star {
+    font-size: 22px;
+    color: $color-yellow;
+  }
+}
+
+// 實心愛心 -> 空心愛心
+.store_Like_Active {
+  width: 19px;
+  height: 19px;
+  fill: $color-light-red;
+  color: $color-light-red;
+  transform: translateY(0.5px);
+  transition: 0.3s;
+  &:hover {
+    transform: scale(1.2);
+    fill: none;
+  }
+}
+.store_Like_unActive {
+  width: 19px;
+  height: 19px;
+  color: $color-light-red;
+  transform: translateY(0.5px);
+}
+
+// 空心愛心 -> 實心愛心
+// .store_Like_Active {
+//   width: 19px;
+//   height: 19px;
+//   color: $color-light-red;
+//   transform: translateY(0.5px);
+//   transition: 0.3s;
+//   &:hover {
+//     transform: scale(1.2);
+//     fill: $color-light-red;
+//   }
+// }
+// .store_Like_unActive {
+//   width: 19px;
+//   height: 19px;
+//   fill: $color-light-red;
+//   color: $color-light-red;
+//   transform: translateY(0.5px);
+// }
+
+// -------- 我的訂單頁 --------
+.order_Nav {
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  li {
+    width: 100%;
+    text-align: center;
+  }
+}
+.order_Link {
+  background-color: lighten($color-light-grey, 15%);
+  color: $color-dark-grey;
+  padding: 18px;
+  display: block;
+  letter-spacing: $ls-lg;
+  border-bottom: 3px solid $color-light-grey;
+  &:hover {
+    color: $color-dark-grey;
+  }
+}
+
+.order_Link_Active {
+  color: $color-green;
+  border-bottom: 3px solid lighten($color-green, 5%);
+  &:hover {
+    background-color: lighten($color-light-grey, 13%);
+    color: $color-green;
+    border-bottom: 3px solid $color-green;
+  }
+}
+.order_Link_unActive {
+  &:hover {
+    background-color: lighten($color-light-grey, 13%);
+    color: $color-green;
+    border-bottom: 3px solid lighten($color-green, 5%);
+    // border-bottom: 3px solid $color-green;
+  }
+}
+.order_Num {
+  color: #fff;
+  padding: 0.5px 10px 2px 10px;
+  margin-left: 0.5rem;
+  border-radius: 50rem;
+  letter-spacing: 0;
+  font-size: $fz-md;
+  font-weight: $fw-bold;
+  background-color: $color-yellow;
+}
+
+// -------- 我的訂單頁 - ALL --------
+.store_Icon {
+  color: $color-grey;
+  width: 20px;
+  height: 20px;
+  stroke-width: 0.3px;
+}
+.order_List {
+  padding: 2rem;
+}
+.order_Status_Info {
+  font-size: $fz-md;
+  letter-spacing: $ls-md;
+}
+.space {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.order_Status_Button {
+  cursor: pointer;
+  padding: 6px 10px;
+  color: #fff;
+  border-radius: 5px;
+  transition: 0.2s;
+  margin-left: 1.5rem;
+}
+.order_cancel {
+  background-color: $color-yellow;
+  &:hover {
+    background-color: darken($color-yellow, 10%);
+  }
+}
+.order_finish {
+  background-color: $color-light-green;
+  &:hover {
+    background-color: darken($color-light-green, 8%);
+  }
+}
+.comment_Icon {
+  width: 19px;
+  height: 19px;
+}
+.order_Store_Img {
+  height: 5rem;
+  width: 6.25rem;
+  border-radius: 3px;
+  overflow: hidden;
+}
+.order_Amount {
+  width: 9rem;
+}
+
+.order_Amount_Total {
+  font-size: 1.5rem;
+  color: $color-dark-yellow;
+  font-weight: $fw-bold;
+}
+
+// -------- RWD --------
+@media screen and (max-width: 1399px) {
+}
+@media screen and (max-width: 1199px) {
+}
+@media screen and (max-width: 991px) {
+  // 會員資料修改頁
+  .user_Upload_Img {
+    .headShot {
+      height: 8rem;
+      width: 8rem;
+    }
+  }
+}
+@media screen and (max-width: 767px) {
+}
+@media screen and (max-width: 576px) {
+  // 我的訂單頁
+  .order_Link {
+    font-size: $fz-sm;
+    padding: 18px 0px;
+    display: block;
+    letter-spacing: $ls-lg;
+  }
+  .order_Num {
+    padding: 0.5px 8px 2px 8px;
+    font-size: 12px;
+  }
+  // 我的訂單頁 ALL
+  .order_Amount {
+    width: 6rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: $ls-sm;
+  }
+}
+@media screen and (max-width: 375px) {
+  // 更改密碼頁
+  .form_Input_SmallSize {
+    margin-left: 1.3rem;
+  }
+}

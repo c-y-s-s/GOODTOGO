@@ -7,8 +7,8 @@ const Footer = () => {
     <footer className="container-fluid">
       <div className="row justify-content-center">
         <div className="col-lg-10 col-sm-9 footer-content">
-          <div className="footer-top row justify-content-between">
-            <div className="col-lg-auto col-sm-12">
+          <div className="footer-top row justify-content-center">
+            <div className="col-lg-auto col-sm-12 col-12 text-center me-1">
               <Logo className="" />
             </div>
             <div className="p-3 col-lg-3 offset-lg-1  text-center">
@@ -16,7 +16,7 @@ const Footer = () => {
               <br />
               <span>Email: service@goodtogo.com</span>
             </div>
-            <div className="col-lg-3 row row-col-3 link-groups justify-content-between gx-3">
+            <div className="col-lg-3 row row-col-3 link-groups justify-content-between gx-3 col-12">
               <Link to="/" className="col-auto footer-link ">
                 回到首頁
               </Link>
@@ -52,7 +52,7 @@ const Footer = () => {
             <div className="col-md-6 offset-md-3 text-center ">
               Copyright © 2022 Good To Go - All Rights Reserved.
             </div>
-            <div className="text-end  col-lg-3">
+            <div className="footer-sign-info col-lg-3 col-12">
               本網站僅為練習製作網站之用
               <br />
               如有侵權敬請告知 (02) 6631-6588

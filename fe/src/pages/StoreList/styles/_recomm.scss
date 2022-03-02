@@ -1,19 +1,8 @@
 .rec-content {
-  height: 70vh;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: [row1-start] 8rem [row1-end] 19rem [third-line] auto [last-line];
-  grid-template-areas:
-    "header header header header header header header header header header"
-    "main main main main main main  main main main main"
-    "footer footer footer footer footer footer footer footer footer footer";
+  // height: fit-content;
   .header {
-    margin: auto;
-    margin-bottom: 0;
-    align-self: center;
-    grid-column-start: 1;
-    grid-column-end: 13;
-    grid-row-start: 1;
-    grid-row-end: 2;
+    padding-top: 1rem;
+    align-items: center;
     .title-box {
       padding-bottom: 1rem;
       width: fit-content;
@@ -21,44 +10,32 @@
     }
   }
   .rec-cards-holder {
-    margin-top: 3rem;
-    align-items: end;
-    grid-column-start: 2;
-    grid-column-end: 12;
-    grid-row-start: 2;
-    grid-row-end: 3.5;
-
-    z-index: 30;
-    // grid-row-start: 2;
-    // grid-row-end: 3;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1001;
+    position: relative;
+    top: 4rem;
   }
   .bottom-area {
     position: relative;
-    top: 0.3rem;
-    background: $color-light-green;
-    grid-column-start: 1;
-    grid-column-end: 13;
-    grid-row-start: 3;
-    grid-row-end: 4;
+    height: 10rem;
+    background-color: $color-light-green;
+    position: relative;
+    z-index: 1000;
   }
 }
 
 // -------- 手機 RWD --------
 @media (max-width: 390px) {
   .rec-content {
-    height: 63vh;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: [row1-start] 15% [row1-end] auto [third-line] 15%[last-line];
-    grid-template-areas:
-      "header header header header header  header header header"
-      "main main main main main main main main "
-      "footer footer footer footer footer footer footer footer";
+    // height: fit-content;
     .header {
       align-self: end;
-      grid-column-start: 3;
-      grid-column-end: 7;
-      grid-row-start: 1;
-      grid-row-end: 2;
+      margin-top: 1rem;
       .title-box {
         border-bottom: 1px solid $color-grey;
         padding-bottom: 0.5rem;
@@ -66,17 +43,14 @@
     }
     .rec-cards-holder {
       margin: auto;
-      grid-column-start: 2;
-      grid-column-end: 8;
-      grid-row: 2 / span 2;
-      z-index: 30;
+      flex-direction: column;
+      position: relative;
+      top: 2rem;
     }
     .bottom-area {
-      background: $color-light-green;
-      grid-column-start: -1;
-      grid-column-end: -9;
-      grid-row-start: 3;
-      grid-row-end: 4;
+      height: 7rem;
+      background-color: $color-light-green;
+      position: relative;
     }
   }
 }

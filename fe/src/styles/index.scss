@@ -42,13 +42,15 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #root {
-  width: 100vw;
-  //寫這個我的後台會不見餒
-  // overflow: hidden;
   font-family: $font-family;
   color: $color-dark-grey;
   font-size: $fz-lg;
   font-weight: $fw-medium;
+  @media screen and (min-width: 1400px) {
+    .container {
+      max-width: 1140px;
+    }
+  }
   //錨點平滑移動
   scroll-behavior: smooth;
 }
@@ -116,7 +118,7 @@ $btn-border-radius: 2px;
 //-------- [Auth] 登入、註冊、重設密碼 --------
 @import "../pages/Auth/style/auth.scss";
 //-------- 會員中心 --------
-// @import "../pages/MyAccount/styles/myAccount.scss";
+@import "../pages/MyAccount/styles/_myAccount.scss";
 //-------- 店家列表 --------
 @import "../pages/StoreList/styles/StoreList.scss";
 // -------- 商品列表 --------
