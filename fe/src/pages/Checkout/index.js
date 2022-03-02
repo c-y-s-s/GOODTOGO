@@ -258,7 +258,7 @@ const Checkout = ({ checkoutData }) => {
         </div>
       </div>
 
-      <div className="container-fluid mt-5 orede-modal-bgcolor">
+      {/* <div className="container-fluid mt-5 orede-modal-bgcolor">
         <div className="col-10 col-sm-6 col-md-5 col-lg-3 mx-auto orede-modal">
           <div className="card orede-modal-card">
             <div className="card-body">
@@ -268,7 +268,7 @@ const Checkout = ({ checkoutData }) => {
                   <div>訂購成功</div>
                   <div>謝謝您替地球盡的每份力量</div>
                 </div>
-              </div>
+              </div>                                                                             
 
               <div className="orede-modal-card-center-text">
                 <div>訂單時間</div>
@@ -295,7 +295,7 @@ const Checkout = ({ checkoutData }) => {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
