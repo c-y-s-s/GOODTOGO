@@ -250,23 +250,78 @@ tr {
 }
 .orede-modal {
     .orede-modal-card {
+        width: 436px;
+        border-top: 0.625rem solid $color-yellow;
+        border-bottom: 0.625rem solid $color-yellow;
         .orede-modal-card-top {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.2rem;
+            align-items: center;
+            border-bottom: 1px solid $color-light-grey;
+            width: 85%;
+            align-items: center;
+            margin: auto;
+            padding: 1.5rem 0;
             .orede-modal-card-top-icon {
+                padding-right: 0.8rem;
+
+                .orede-modal-card-top-icon-style {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    color: $color-dark-yellow;
+                }
             }
             .orede-modal-card-top-text {
+                div:nth-child(1) {
+                    font-size: 26/16 + rem;
+                }
             }
         }
         .orede-modal-card-center-text {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            text-align: center;
+            font-size: $fz-md;
         }
         .order-modal-card-remind-text {
+            text-align: center;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid $color-light-grey;
+            width: 85%;
+            margin: auto;
+            font-size: $fz-md;
         }
+
         .order-modal-card-warn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding-top: 1.5rem;
             .order-modal-card-warn-icon {
+                padding-right: 0.8rem;
+
+                .order-modal-card-warn-iconstyle {
+                    width: 1.7rem;
+                    height: 1.7rem;
+                }
             }
             .order-modal-card-warn-text {
+                font-size: $fz-md;
+                color: $color-yellow;
             }
         }
         .orede-modal-buttom {
+            padding-top: 2.2rem;
+            text-align: center;
+            a {
+                text-decoration: none;
+                background-color: $color-light-green;
+                padding: 0.5rem 1.25rem;
+                border-radius: 0.25rem;
+                color: white;
+            }
         }
     }
 }

@@ -7,7 +7,7 @@ router.get("/", async (req, res, next) => {
   // 取得目前在第幾頁
   // 如果沒有設定 req.quyer.page，那就設成 1
   let page = req.query.page || 1;
-  console.log("目前在第幾頁", page);
+  // console.log("目前在第幾頁", page);
   // TODO: 商家總筆數
   let [total] = await connection.execute(
     "SELECT COUNT(*) AS total FROM stores WHERE valid=1"

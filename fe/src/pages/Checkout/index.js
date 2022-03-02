@@ -5,23 +5,21 @@ import axios from "axios";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 // -------- react icon --------
-
+import { BsCheck2Circle } from "react-icons/bs";
 import { FaStore } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
+import { BsFillExclamationCircleFill } from "react-icons/bs";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
 
 const Checkout = ({ checkoutData }) => {
   moment.locale("zh-tw");
-
-  // 計算當前時間
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   let orderNumber = moment().format("YYMMDDHHmmsss");
-
   // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
-
+  const [orderCheckSwitch, setOrderCheckSwitch] = useState(false);
   // 後端訂單所需要資料
   const [OrderDetail, setOrderDetail] = useState({
     id: "",
@@ -29,13 +27,14 @@ const Checkout = ({ checkoutData }) => {
     storeId: checkoutData.storeId,
     statusId: "1",
     paymentMethod: checkoutData.paymentMethod,
-    orderTime: timeInsecond,
-    order_number: orderNumber,
+    orderTime: "",
+    order_number: "",
   });
-
+  console.log(OrderDetail);
   // 將商品存成陣列寫進資料庫，因需跟訂單號一起寫入所以用此方法
   let productsArr = [];
   checkProductsData.forEach((item) => {
+    console.log(item);
     let obj = {
       orderId: OrderDetail.id,
       productsId: item.products_id,
@@ -61,15 +60,28 @@ const Checkout = ({ checkoutData }) => {
   }, []);
 
   async function handleGetOrder() {
-    let response = await axios.post(
-      `${API_URL}/checkout/orderdetail`,
-      OrderDetail
-    );
+    // 計算當前時間
+
+    timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
+    orderNumber = moment().format("YYMMDDHHmmsss");
+
+    // setOrderDetail({
+    //   ...OrderDetail,
+    //   orderTime: timeInsecond,
+    //   order_number: orderNumber,
+    // });
+
+    let response = await axios.post(`${API_URL}/checkout/orderdetail`, {
+      ...OrderDetail,
+      orderTime: timeInsecond,
+      order_number: orderNumber,
+    });
 
     let productsResponse = await axios.post(
       `${API_URL}/checkout/userorderdetail`,
       productsArr
     );
+    setOrderCheckSwitch(true);
   }
   return (
     <div>
@@ -115,7 +127,6 @@ const Checkout = ({ checkoutData }) => {
             <tbody className="checkout-data-products">
               {/* //? -------- 商品區塊開始 -------- */}
               {checkProductsData.map((item) => {
-                console.log("item----", item);
                 return (
                   <>
                     <tr className="text-center" key={item.id}>
@@ -257,45 +268,49 @@ const Checkout = ({ checkoutData }) => {
           </table>
         </div>
       </div>
-
-      {/* <div className="container-fluid mt-5 orede-modal-bgcolor">
-        <div className="col-10 col-sm-6 col-md-5 col-lg-3 mx-auto orede-modal">
-          <div className="card orede-modal-card">
-            <div className="card-body">
-              <div className="orede-modal-card-top">
-                <div className="orede-modal-card-top-icon">O</div>
-                <div className="orede-modal-card-top-text">
-                  <div>訂購成功</div>
-                  <div>謝謝您替地球盡的每份力量</div>
+      {orderCheckSwitch && (
+        <div className="container-fluid mt-5 orede-modal-bgcolor">
+          <div className=" mx-auto orede-modal">
+            <div className="card orede-modal-card">
+              <div className="card-body  ">
+                <div className="orede-modal-card-top">
+                  <div className="orede-modal-card-top-icon">
+                    <BsCheck2Circle className="orede-modal-card-top-icon-style" />
+                  </div>
+                  <div className="orede-modal-card-top-text">
+                    <div>訂購成功</div>
+                    <div>謝謝您替地球盡的每份力量</div>
+                  </div>
                 </div>
-              </div>                                                                             
 
-              <div className="orede-modal-card-center-text">
-                <div>訂單時間</div>
-                <div>訂單編號</div>
-              </div>
+                <div className="orede-modal-card-center-text">
+                  <div>訂單時間:{timeInsecond}</div>
+                  <div>訂單編號:{orderNumber}</div>
+                </div>
 
-              <div className="order-modal-card-remind-text">
-                <div>已傳送到您的電子信箱</div>
-                <div>取餐時請 出示訂單編號 取餐</div>
-                <div>或可至 我的訂單 ， 待領取 頁面查看訂單編號</div>
-              </div>
+                <div className="order-modal-card-remind-text">
+                  <div>已傳送到您的電子信箱</div>
+                  <div>取餐時請 出示訂單編號 取餐</div>
+                  <div>或可至 我的訂單 ， 待領取 頁面查看訂單編號</div>
+                </div>
 
-              <div className="order-modal-card-warn">
-                <div className="order-modal-card-warn-icon">O</div>
-                <div className="order-modal-card-warn-text">
-                  <div>請於當日店家營業結束前取餐，</div>
-                  <div> 逾時未取餐，帳號將停權一個月</div>
+                <div className="order-modal-card-warn">
+                  <div className="order-modal-card-warn-icon">
+                    <BsFillExclamationCircleFill className="order-modal-card-warn-iconstyle" />
+                  </div>
+                  <div className="order-modal-card-warn-text">
+                    <div>請於當日店家營業結束前取餐，</div>
+                    <div> 逾時未取餐，帳號將停權一個月</div>
+                  </div>
+                </div>
+                <div className="orede-modal-buttom">
+                  <Link to={`/stores`}>確定</Link>
                 </div>
               </div>
-              <Link to={`/stores`} className="orede-modal-buttom">
-                {" "}
-                回商家頁
-              </Link>
             </div>
           </div>
         </div>
-      </div> */}
+      )}
     </div>
   );
 };
