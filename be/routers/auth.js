@@ -17,6 +17,7 @@ const passwordRule = [
     .withMessage("兩次輸入的密碼不相同"),
 ];
 
+
 // /api/auth/register
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);
@@ -52,10 +53,10 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   res.json({ message: "ok" });
 });
 
-// /api/auth/register
+// /api/auth/storeCheck
 router.post("/storeCheck", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);
-  //TODO: 確認格式是否正確
+  //check if req is valid
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     let error = errors.array();
@@ -63,25 +64,27 @@ router.post("/storeCheck", emailRule, passwordRule, async (req, res, next) => {
     // return res.status(400).json({ code: "33001", msg: error[0].msg });
     return res.status(400).json({ errors: error });
   }
-  // //TODO:檢查 email 是不是已經註冊
-  let [members] = await connection.execute(
-    "SELECT * FROM users WHERE email=?",
+  // check if mail is registered
+    let [stores] = await connection.execute(
+    "SELECT * FROM stores WHERE email=?",
     [req.body.email]
   );
-  console.log(members);
-  if (members.length > 0) {
+  console.log(stores);
+  if (stores.length > 0) {
     return res.status(400).send({
       code: "33002",
       msg: "這個 email 已經已經註冊過了",
     });
   }
-  //TODO:雜湊密碼
+
+  // hash password
+
   let hashpassword = await argon2.hash(req.body.password);
 
-  //TODO:存入資料庫
   let [result] = await connection.execute(
-    "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
-    [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
+    // todo 修改checkbox and open time input
+  "INSERT INTO stores (bossname, name, email, account, tel_no, password,valid) VALUES (?,?,?,?,?,?,?)",
+    [req.body.name, req.body.storeName, req.body.email, req.body.email, req.body.storephone, hashpassword, "1"]
   );
   console.log(result);
   res.json({ message: "ok" });
@@ -89,6 +92,7 @@ router.post("/storeCheck", emailRule, passwordRule, async (req, res, next) => {
 
 
 // -------- 登入 --------
+
 // /api/auth/login
 router.post("/login", async (req, res, next) => {
   //TODO: 確認帳號是否存在
@@ -131,4 +135,46 @@ router.post("/login", async (req, res, next) => {
     data: returnUser,
   });
 });
+
+// -------- 商家登入 --------
+
+// /api/auth/storeLogin
+router.post("/storeLogin", async (req, res, next) => {
+  //to confirm if the mail exists
+  let [stores] = await connection.execute("SELECT * FROM stores WHERE email=?", [
+    req.body.email,
+  ]);
+  console.log(stores);
+  if (stores.length === 0) {
+    //mail not fount
+    return res.status(404).send({
+      code: "33003",
+      msg: "尚未註冊",
+    });
+  }
+  let store = stores[0];
+
+  let result = await argon2.verify(store.password, req.body.password);
+  if (!result) {
+    //password not match
+    return res.status(400).send({
+      code: "33005",
+      msg: "帳號或密碼錯誤",
+    });
+  }
+  let returnStore = {
+    id: store.id,
+    name: store.name,
+  };
+// session
+  req.session.store = returnStore;
+
+  res.json({
+    code: "0",
+    msg:"後端登入成功",
+    data: returnStore,
+  });
+});
+
+
 module.exports = router;

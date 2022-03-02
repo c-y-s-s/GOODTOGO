@@ -1,18 +1,15 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { ImFacebook2 } from "react-icons/im";
+// import { ImFacebook2 } from "react-icons/im";
 import axios from "axios";
-import TWzipcode from "react-twzipcode";
+// import TWzipcode from "react-twzipcode";
 
 import { ReactComponent as Logo } from "../../images/logo-face.svg";
-import TwCitySelector from "tw-city-selector";
+// import TwCitySelector from "tw-city-selector";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 import "./Storecheck.scss";
 import CityCountyData from "./components/CityCountyData.json";
-
-
-
 
 
 const Storecheck = () => {
@@ -48,8 +45,8 @@ const Storecheck = () => {
 
   // -------- 表單營業日期變更開始 -------- //
   const handleDayChange = (e) => {
-    console.log(e.target.checked);
-    setDay({ ...day, [e.target.name]: e.target.checked });
+    console.log(e.target.value);
+    setDay({ ...day, [e.target.name]: e.target.value });
     setMember({ ...member, ...{ day } });
   };
   // -------- 表單營業日期變更結束 -------- //
@@ -116,7 +113,7 @@ const Storecheck = () => {
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
     console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     console.log(e.target.files[0]);
-    setMember({ ...member, [e.target.name]: e.target.files[0] });
+    // setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
   // -------- 店家LOGO上傳結束 --------//
   // -------- 表單營業許可證上傳開始 --------//
@@ -139,7 +136,7 @@ const Storecheck = () => {
     }
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
     console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
-    setMember({ ...member, [e.target.name]: e.target.files[0] });
+    // setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
 
   // -------- 表單營業許可證上傳結束 --------//
@@ -161,15 +158,15 @@ const Storecheck = () => {
       formData.append("address",member.address);
       formData.append("storeName",member.storeName);
       formData.append("phone",member.phone);
-      formData.append("storeLogo",member.storeLogo);
-      formData.append("storeLicence",member.storeLicence);
+      // formData.append("storeLogo",member.storeLogo);
+      // formData.append("storeLicence",member.storeLicence);
       formData.append("storeType",member.storeType);
       formData.append("day",member.day);
       formData.append("openTime",member.openTime);
       formData.append("closeTime",member.closeTime);
 
 
-      let response = await axios.post(`${API_URL}/auth/register`, formData);
+      let response = await axios.post(`${API_URL}/auth/storeCheck`, member);
       console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
@@ -510,6 +507,7 @@ const Storecheck = () => {
                           onChange={handleChange}
                           required
                         >
+                          <option>--請選擇商品分類--</option>
                           <option value="1">港式</option>
                           <option value="2">中式</option>
                           <option value="3">韓式</option>

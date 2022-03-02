@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(
   cors({
     // 為了要讓 browser 在 CORS 的情況下還是幫我們送 cookie
-    origin: ["http://localhost:3000"],
+    origin: ["http://localhost:3000","http://localhost:3003"],
     credentials: true,
   })
 );
@@ -30,7 +30,7 @@ app.use(
     store: new FileStore({
       path: path.join(__dirname, "..", "sessions"),
     }),
-    secret: process.env.SESSION_SECRET,
+    secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
   })
@@ -47,6 +47,14 @@ app.use("/api/stores", storesRouter);
 let productsRouter = require("./routers/products");
 app.use("/api/products", productsRouter);
 // -------- 商品 RESTful API 列表 結束 --------
+
+// -------- 商家登入 RESTful API 列表 -------- //
+
+let authRouter = require("./routers/auth");
+app.use("/api/auth", authRouter);
+
+let checkStoreRouter = require("./routers/checkStore");
+app.use("api/checkStore",checkStoreRouter );
 
 // :TODO: -------- 商品評論 RESTful API 列表 --------
 let productsCommitRouter = require("./routers/productsCommit");

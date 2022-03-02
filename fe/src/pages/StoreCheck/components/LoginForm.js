@@ -65,7 +65,7 @@ const LoginForm = ({
               className="form-control custom-input"
               id="floatingInput"
               placeholder="密碼"
-              value={fields.password}
+              value={loginSeller.password}
               onChange={onFieldChange}
               minLength="3"
               required
@@ -87,7 +87,7 @@ const LoginForm = ({
         </form>
         {/* -------- 表格結束 -------- */}
       </div>
-      <Link to="/Storereset" className="no-link">
+      <Link to="/StoreReset" className="no-link col-3">
         <p className="text-grey no-link m-0 mt-3">忘記密碼？</p>
       </Link>
 
@@ -95,7 +95,7 @@ const LoginForm = ({
 
       <p className="text-grey  m-0">
         尚未加入GOODTOGO？
-        <Link to="/Storecheck" className="no-link">
+        <Link to="/StoreCheck" className="no-link">
           <span className="text-yellow  ">立即註冊</span>
         </Link>
       </p>
