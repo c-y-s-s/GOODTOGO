@@ -269,29 +269,44 @@ const Checkout = ({ checkoutData }) => {
         </div>
       </div>
       {orderCheckSwitch && (
-        <div className="container-fluid mt-5 orede-modal-bgcolor">
-          <div className=" mx-auto orede-modal">
-            <div className="card orede-modal-card">
+        <div className="container-fluid mt-5 order-modal-bgcolor">
+          <div className=" mx-auto order-modal">
+            <div className="card order-modal-card">
               <div className="card-body  ">
-                <div className="orede-modal-card-top">
-                  <div className="orede-modal-card-top-icon">
-                    <BsCheck2Circle className="orede-modal-card-top-icon-style" />
+                <div className="order-modal-card-top">
+                  <div className="order-modal-card-top-icon">
+                    <BsCheck2Circle className="order-modal-card-top-icon-style" />
                   </div>
-                  <div className="orede-modal-card-top-text">
+                  <div className="order-modal-card-top-text">
                     <div>訂購成功</div>
                     <div>謝謝您替地球盡的每份力量</div>
                   </div>
                 </div>
 
-                <div className="orede-modal-card-center-text">
-                  <div>訂單時間:{timeInsecond}</div>
-                  <div>訂單編號:{orderNumber}</div>
+                <div className="order-modal-card-center-text">
+                  <div>訂單時間 : {timeInsecond}</div>
+                  <div>訂單編號 : {orderNumber}</div>
                 </div>
 
                 <div className="order-modal-card-remind-text">
                   <div>已傳送到您的電子信箱</div>
-                  <div>取餐時請 出示訂單編號 取餐</div>
-                  <div>或可至 我的訂單 ， 待領取 頁面查看訂單編號</div>
+                  <div>
+                    取餐時請
+                    <span style={{ color: `#668C4A` }}> 出示訂單編號</span> 取餐
+                  </div>
+                  <div>
+                    或可至
+                    <span
+                      style={{
+                        color: `#668C4A`,
+                        paddingLeft: `0.2rem`,
+                        paddingRight: `0.2rem`,
+                      }}
+                    >
+                      我的訂單 &gt; 待領取
+                    </span>
+                    頁面查看訂單編號
+                  </div>
                 </div>
 
                 <div className="order-modal-card-warn">
@@ -303,7 +318,7 @@ const Checkout = ({ checkoutData }) => {
                     <div> 逾時未取餐，帳號將停權一個月</div>
                   </div>
                 </div>
-                <div className="orede-modal-buttom">
+                <div className="order-modal-buttom">
                   <Link to={`/stores`}>確定</Link>
                 </div>
               </div>
