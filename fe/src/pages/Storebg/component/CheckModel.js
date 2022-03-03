@@ -1,16 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 
-const CheckModel = ({ productValid, productId }) => {
+const CheckModel = ({ productValid, productId, setModalSwitch }) => {
   // 上下架 修改按鈕
   async function handleSubmit(e) {
     e.preventDefault();
 
     let productValidId = { productValid, productId };
     console.log("aaa", productValidId);
-
+    setModalSwitch(productValidId);
     try {
       // http://localhost:3002/api/member/password (router.post)
       let response = await axios.post(
@@ -26,27 +26,26 @@ const CheckModel = ({ productValid, productId }) => {
     }
   }
 
-  
-  async function removeSubmit(e) {
-    e.preventDefault();
+  // async function removeSubmit(e) {
+  //   e.preventDefault();
 
-    let productValidId = { productValid, productId };
-    console.log("aaa", productValidId);
+  //   let productValidId = { productValid, productId };
+  //   console.log("aaa", productValidId);
 
-    try {
-      // http://localhost:3002/api/member/password (router.post)
-      let response = await axios.post(
-        `${API_URL}/storebg/productslistvalid`,
-        productValidId
-      );
-      console.log("上下架訊息 ", response.data);
-    } catch (e) {
-      console.error("valid error: ", ERR_MSG[e.response.data.code]);
-      console.error("res.error:", e.response.data);
-      // setErr(e.response.data.msg);
-      // setErr({ ...err, confirmPassword: e.response.data.msg });
-    }
-  }
+  //   try {
+  //     // http://localhost:3002/api/member/password (router.post)
+  //     let response = await axios.post(
+  //       `${API_URL}/storebg/productslistvalid`,
+  //       productValidId
+  //     );
+  //     console.log("上下架訊息 ", response.data);
+  //   } catch (e) {
+  //     console.error("valid error: ", ERR_MSG[e.response.data.code]);
+  //     console.error("res.error:", e.response.data);
+  //     // setErr(e.response.data.msg);
+  //     // setErr({ ...err, confirmPassword: e.response.data.msg });
+  //   }
+  // }
   return (
     <div>
       <div
@@ -108,7 +107,7 @@ const CheckModel = ({ productValid, productId }) => {
               <button
                 type="submit"
                 className="btn btn-danger"
-                onClick={removeSubmit}
+                // onClick={removeSubmit}
                 data-bs-dismiss="modal"
               >
                 刪除
