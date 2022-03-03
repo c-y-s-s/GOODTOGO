@@ -36,10 +36,10 @@ router.use((req, res, next) => {
   //   photo: member.photo
   // }
   req.session.member = {
-    id: 2,
-    name: "王嘉雯",
+    id: 1,
+    name: "林振宣",
     // photo: "",
-    photo: "/static/uploads/headshots/member-1646235995063.png",
+    photo: "/static/uploads/headshots/member-1646150271556.png",
   };
   // ----- 測試，假設已取得登入後的 session
 
