@@ -1,15 +1,11 @@
 .store-list {
-  .prefix {
-    display: none;
-  }
   width: 100vw;
-
   .header {
     background-image: url(../images/storelist_bg_2.svg);
-    background-size: cover;
+    background-size: contain;
     background-repeat: no-repeat;
-    width: 100vw;
     height: 12rem;
+    width: 100vw;
     position: relative;
     top: -1px;
   }
@@ -138,7 +134,6 @@
       }
     }
   }
-
   .footer {
     background-image: url(../images/storelist_bg_3.svg);
     background-size: cover;
@@ -155,11 +150,7 @@
     .header {
       background-image: url(../images/storelist_bg_2.svg);
       background-repeat: no-repeat;
-      width: 100vw;
       height: 4rem;
-      background-size: 100%;
-      position: relative;
-      top: -1px;
     }
     .title {
       align-items: center;
