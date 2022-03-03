@@ -23,7 +23,7 @@ const OrderModal = ({ timeInsecond, orderNumber, OrderDetail }) => {
               <div className="order-modal-card-center-text">
                 <div>訂單時間 : {timeInsecond}</div>
                 <div>
-                  訂單編號  {orderNumber + OrderDetail.id + OrderDetail.userId}
+                  訂單編號 :  {orderNumber + OrderDetail.id + OrderDetail.userId}
                 </div>
               </div>
 

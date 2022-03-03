@@ -18,7 +18,6 @@ export const OrderPaymentMethod = ({
   checkoutData,
   setOrderCheckSwitch,
 }) => {
-
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -34,16 +33,11 @@ export const OrderPaymentMethod = ({
     };
     productsArr.push(obj);
   });
-  console.log(
-    "aaaaaaaaaaaaa",
-    orderNumber + OrderDetail.id + OrderDetail.userId
-  );
 
   async function handleGetOrder() {
-    
     // 寫入按下送出訂單哪一刻的時間
     timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-    orderNumber = moment().format("YYMMDDHHmmsss");
+    orderNumber = moment().format("YYMMDDHHmmss");
     let response = await axios.post(`${API_URL}/checkout/orderdetail`, {
       ...OrderDetail,
       orderTime: timeInsecond,

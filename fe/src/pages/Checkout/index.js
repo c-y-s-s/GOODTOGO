@@ -19,7 +19,7 @@ const Checkout = ({ checkoutData }) => {
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-  let orderNumber = moment().format("YYMMDDHHmmsss");
+  let orderNumber = moment().format("YYMMDDHHmmss");
 
   // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
