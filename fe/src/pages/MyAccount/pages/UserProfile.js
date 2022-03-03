@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 import { FiFolder } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const UserProfile = (props) => {
   // console.log(props);
@@ -81,7 +82,8 @@ const UserProfile = (props) => {
       : setErr({ ...err, name: "姓名格式有誤，請輸入全 中文 / 英文" });
   }
   function regEmail(e) {
-    // console.log("regEmail", e.target.name);
+    console.log("regEmail", e.target.name);
+    console.log("regEmail", e.target.value);
     const reEmail =
       /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     reEmail.test(e.target.value)
@@ -148,6 +150,16 @@ const UserProfile = (props) => {
         formData
       );
       console.log("使用者有上傳資料: ", response.data);
+
+      // sweet alert
+      Swal.fire({
+        // position: 'top-end',
+        icon: "success",
+        title: "資料儲存成功",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       // 更新資料於 index.js 姓名、頭貼(儲存後)
       props.setUserName(response.data.name);
       props.setHeadShot(response.data.photo);
