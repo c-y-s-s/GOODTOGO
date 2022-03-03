@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 
 import LeftNav from "./component/LeftNav";
-import TopNav from "./component/TopNav";
+import TopNav from "../Storebg/component/TopNav";
 import Table from "./component/Table";
 const Newproduct = ({ setIsAdmin }) => {
   // 判斷頁首頁尾
