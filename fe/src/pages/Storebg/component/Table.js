@@ -16,6 +16,8 @@ const Table = () => {
   // 店家商品列表
   const [productsData, setproductsData] = useState([]);
   const { currentPage } = useParams();
+  //按下上架刷新 API
+  const [modalSwitch, setModalSwitch] = useState("");
 
   // 總共有 lastPage 這麼多頁
   // const [data, setData] = useState([]);
@@ -46,7 +48,7 @@ const Table = () => {
       let response = await axios.get(
         `${API_URL}/storebg/productslist?page=${page}`
       );
-      
+
       let productsListPage = response.data[0];
       console.log("productsListPage", productsListPage);
       // let productsList = response.data[1];
@@ -60,7 +62,7 @@ const Table = () => {
       // setLastPage(response.data.pagination.lastPage);
     };
     getPrices();
-  }, [page]);
+  }, [page, modalSwitch]);
 
   //計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
@@ -163,7 +165,11 @@ const Table = () => {
                   </button>
 
                   {/* //checkModal */}
-                  <CheckModal productValid={item.valid} productId={item.id} />
+                  <CheckModal
+                    productValid={item.valid}
+                    productId={item.id}
+                    setModalSwitch={setModalSwitch}
+                  />
                 </td>
                 <td>
                   <button
@@ -178,7 +184,7 @@ const Table = () => {
                     <div className="navLink-g-color">
                       <NavLink
                         type="button"
-                        to="/newproduct"
+                        to={`/productedit/${item.id}`}
                         className={"navLink-g-color"}
                       >
                         編輯
