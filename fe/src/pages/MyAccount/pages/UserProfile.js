@@ -21,6 +21,7 @@ const UserProfile = (props) => {
     photo: "",
   });
 
+  // 所有的 email，比對 email 用
   const [emails, setEmails] = useState([]);
 
   // input 上傳的圖片物件(二進位檔)
@@ -74,6 +75,7 @@ const UserProfile = (props) => {
       : regPhone(e);
   }
 
+  // -------- 驗證資料 --------
   function regName(e) {
     console.log("regName", e.target.name);
     const reName = /^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/;

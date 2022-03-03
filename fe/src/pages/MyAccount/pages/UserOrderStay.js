@@ -74,27 +74,6 @@ const UserOrderStay = (props) => {
       props.orders[findIndex].status_id = 3;
       props.setOrders(props.orders);
       console.log("Order Stay - reNewOrder", props.orders);
-      // 更新使用者訂單紀錄，判斷各訂單頁有無資料用
-      // props.setOrders([
-      //   ...props.orders,
-      //   { id: cancelOrder.cancelOrder, status_id: 3 },
-      // ]);
-      // console.log("reNewOrder", [
-      //   ...props.orders,
-      //   { id: cancelOrder.cancelOrder, status_id: 3 },
-      // ]);
-      // (X) -> 錯誤寫法，這樣訂單紀錄總數少一筆
-      // props.setOrders(
-      //   props.orders.filter(
-      //     (v) => Object.values(v)[0] !== cancelOrder.cancelOrder
-      //   )
-      // );
-      // console.log(
-      //   "filter",
-      //   props.orders.filter(
-      //     (v) => Object.values(v)[0] !== cancelOrder.cancelOrder
-      //   )
-      // );
     } catch (e) {
       console.error("res.error:", e.response);
     }

@@ -24,7 +24,7 @@ const MyAccount = () => {
   const [userName, setUserName] = useState("");
 
   // 儲存 會員有無喜愛店家、訂單
-  const [likeStoreIds, setLikeStoreIds] = useState([]);
+  const [likes, setLikes] = useState([]);
   const [orders, setOrders] = useState([]);
 
   // -------- 用 session cookie 取使用者資料 --------
@@ -45,18 +45,18 @@ const MyAccount = () => {
         response.data.profile.name
       );
       console.log(
-        "api/member/profile(get) response.data.likeStoreIds: ",
-        response.data.likeStoreIds
+        "api/member/profile(get) response.data.likes: ",
+        response.data.likes
       );
       console.log(
-        "api/member/profile(get) response.data.orderIds: ",
+        "api/member/profile(get) response.data.orders: ",
         response.data.orders
       );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
       setHeadShot(response.data.profile.photo);
       setUserName(response.data.profile.name);
       // 存 喜愛店家、訂單 判斷其他頁面是否有資料可呈現
-      setLikeStoreIds(response.data.likeStoreIds);
+      setLikes(response.data.likes);
       setOrders(response.data.orders);
     };
     getUser();
@@ -226,7 +226,7 @@ const MyAccount = () => {
             </Route>
             <Route
               path="like"
-              element={<UserLike likeStoreIds={likeStoreIds} />}
+              element={<UserLike likes={likes} setLikes={setLikes} />}
             />
             {/* <Route path="coupon" element={<UserCoupon />} /> */}
           </Routes>

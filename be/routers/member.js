@@ -82,7 +82,7 @@ const storage = multer.diskStorage({
   },
   // 設定儲存的檔名
   filename: function (req, file, cb) {
-    console.log("multer-filename: ", file);
+    // console.log("multer-filename: ", file);
     // 抓使用者上傳的檔名 file.originalname
     // 取用副檔名 ext
     const ext = file.originalname.split(".").pop();
@@ -97,7 +97,7 @@ const uploader = multer({
   storage: storage, // 上面的 storage 圖片儲存資訊
   // 過濾 圖片類型
   fileFilter: function (req, file, cb) {
-    console.log("file.mimetype: ", file.mimetype);
+    // console.log("file.mimetype: ", file.mimetype);
     if (
       file.mimetype !== "image/jpeg" &&
       file.mimetype !== "image/jpg" &&
@@ -142,7 +142,7 @@ router.get("/profile", async (req, res, next) => {
   let [emails] = await connection.execute(`SELECT email FROM users;`);
   console.log("取得 emails: ", emails);
 
-  let [likeStoreIds] = await connection.execute(
+  let [likes] = await connection.execute(
     `SELECT store_id FROM user_like WHERE user_id=?;`,
     [req.session.member.id]
   );
@@ -154,8 +154,8 @@ router.get("/profile", async (req, res, next) => {
     [req.session.member.id]
   );
 
-  console.log(likeStoreIds.length);
-  console.log(orders.length);
+  // console.log(likes.length);
+  // console.log(orders.length);
   // 打包資料給 res
   let profile = {
     name: data[0].name,
@@ -164,7 +164,7 @@ router.get("/profile", async (req, res, next) => {
     // photo: data[0].headshots,
     photo: req.session.member.photo,
   };
-  res.json({ profile, emails, likeStoreIds, orders });
+  res.json({ profile, emails, likes, orders });
 });
 
 // -------- 會員資料修改儲存 --------
@@ -182,7 +182,7 @@ router.post(
       // 驗證結果有問題
       let error = validateResult.mapped();
       // 錯誤驗證結果轉為 array / mapped 方便取得錯誤結果
-      console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
+      // console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
       // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
       return res.status(400).json({
         code: "66001",
@@ -211,11 +211,11 @@ router.post(
     // 到這邊表示前面沒錯誤了 (所有資料驗證ok、email尚未被註冊)
 
     // 處理圖片
-    console.log("前端送來、multer中間件處理過 req.file: ", req.file);
+    // console.log("前端送來、multer中間件處理過 req.file: ", req.file);
     let filename = req.file
       ? "/static/uploads/headshots/" + req.file.filename
       : req.session.member.photo;
-    console.log("加上路徑的 filename: ", filename);
+    // console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
     let [updateProfileResult] = await connection.execute(
@@ -228,7 +228,7 @@ router.post(
         req.session.member.id,
       ]
     );
-    console.log(updateProfileResult);
+    // console.log(updateProfileResult);
 
     // 寫內容前先測試能不能得到 req
     // console.log("req.body: ", req.body);
@@ -250,7 +250,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
     // validateResult 不是空的 (表示驗證結果有問題)
     let error = validateResult.array();
     // 把錯誤驗證結果變成 array 方便我們取得錯誤結果
-    console.log("password validateResult(error): ", error);
+    // console.log("password validateResult(error): ", error);
     // 測試錯誤訊息是否會出現
     // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
     // 錯誤訊息作為 res 傳回給前端 (後端處理自訂給前端)
@@ -274,7 +274,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   // let result = await bcrypt.compare(req.body.password, userPassword.password);
   if (!result) {
     // 如果比對失敗
-    console.log("比對密碼結果失敗: ", result);
+    // console.log("比對密碼結果失敗: ", result);
     return res.status(400).send({
       code: "33004",
       msg: "會員密碼驗證錯誤",
@@ -294,7 +294,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
     `UPDATE users SET password=? WHERE id=?;`,
     [hashNewPassword, req.session.member.id]
   );
-  console.log(updatePasswordResult);
+  // console.log(updatePasswordResult);
 
   // 寫內容前先測試能不能得到 req
   // console.log("req.body: ", req.body);
