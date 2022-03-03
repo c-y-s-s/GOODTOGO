@@ -93,7 +93,7 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     {productsUpdate.map((item)=>{
     
       return(
-        <form className="container">
+        <form className="container" key={item.id}>
         <div className="row">
           <div className="col">
             <div className="mb-3">
@@ -204,7 +204,7 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                 商品圖片
               </label>
               <div className="text-center">
-                <img
+                {/* <img
                   // src="https://fakeimg.pl/400x400/"
                   src={
                     imageSrc
@@ -214,8 +214,18 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                       : PROFILE_IMAGE_URL
                   }
                   alt="product img"
-                  className="rounded"
-                />
+                  className="rounded "
+                /> */}
+                {/* <img
+                      className="cover-photo"
+                      src={require(`../../../images/products_img/${item.img}`)}
+                      alt=""
+                    /> */}
+                <img
+                      className="cover-photo"
+                      src={require(`../../../../../be/public/uploads/products/${item.img}`)}
+                      alt=""
+                    />
               </div>
               <input
                 className="mt-3 form-control"
