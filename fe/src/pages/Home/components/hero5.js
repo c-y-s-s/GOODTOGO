@@ -8,7 +8,7 @@ import { ReactComponent as Hero5Num2 } from "../images/hero5Num2.svg";
 const hero5 = () => {
   return (
     <div className="hero5 container-fluid hero5-bg m-auto p-0">
-      <div className="hero5-main-content text-center">
+      <div className="hero5-main-content  text-center">
         <Hero5Text className="col-lg-10 mt-lg-5 mb-lg-5 col-12 hero5-text" />
         <Hero5TextSm className="hero5-text-sm" />
         <div className="hero5-static d-flex flex-wrap col-lg-10 align-items-center m-auto justify-content-around">
