@@ -22,6 +22,10 @@
         z-index: 3;
         font-weight: 540;
         height: 100vh;
+
+        .products-details-data-card {
+            width: 25rem;
+        }
         // -------- 商品上半部 --------
         .product-logo {
             height: 10rem;
@@ -49,11 +53,12 @@
             border-bottom: 0;
             border-radius: 0.4rem 0.4rem 0 0;
             .card-body {
-                padding: 0 1.5rem;
+                padding: 0 1.87rem;
                 //商品名稱
                 .card-title {
                     font-size: $fz-xxx-lg;
                     letter-spacing: $ls-md;
+                    color: $color-dark-grey;
                 }
                 .card-value {
                     border-bottom: 1px solid #b1b1ac;
@@ -76,6 +81,7 @@
                         color: $color-green;
                         font-size: 1.5rem;
                         height: 2.65rem;
+                        font-weight: $fw-medium;
                     }
                 }
                 //商品數量
@@ -171,9 +177,11 @@
                 .product-users-comment-filter {
                     .product-users-comment-filter-star {
                         color: $color-green;
+                        font-size: $fz-sm;
                     }
                     .product-users-comment-filter-time {
                         color: $color-green;
+                        font-size: $fz-sm;
                     }
                     .product-users-comment-filter-icon {
                         border: none;
@@ -201,13 +209,14 @@
                     border-bottom: 1px solid $color-green;
                     padding-bottom: 2rem;
                     &:last-child {
-                        margin-bottom: 3.2rem;
+                        margin-bottom: 0.25rem;
                     }
                     .product-users-comment-userdata {
                         flex: 1 0 0;
                         //用戶名稱
                         .product-users-comment-userdata-name {
                             letter-spacing: $ls-md;
+                            font-size: $fz-md;
                         }
                         //留言時間
                         .product-users-comment-userdata-time {
@@ -243,7 +252,7 @@
                         }
                         //用戶評論
                         .product-users-comment-userdata-text {
-                            font-size: $fz-md;
+                            font-size: $fz-s-sm;
                             padding-top: 1rem;
                             font-weight: $fw-medium;
                         }
@@ -277,6 +286,26 @@
         transform: translateY(-10%);
     }
 }
+
+.expand-comment {
+    text-align: center;
+    transition: 0.3s;
+    .expand-comment-btn {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size: $fz-xx-lg;
+        padding: 1rem 0;
+        .expand-comment-btn-icon {
+            animation: TestMove3 2s infinite alternate;
+            margin: 0 0.25rem;
+        }
+    }
+    &:hover {
+        background-color: $color-light-green;
+        color: white;
+    }
+}
+
 @media screen and (max-width: 1920px) {
     .product-users-comment-gotop {
         font-size: 2.7rem;
@@ -291,6 +320,13 @@
         left: 65%;
         top: 90%;
     }
+    .products-details {
+        .products-details-data {
+            .products-details-data-card {
+                width: 22rem;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 390px) {
@@ -298,5 +334,17 @@
         font-size: 2.5rem;
         left: 76%;
         top: 90%;
+    }
+}
+
+@keyframes TestMove3 {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -5px);
+    }
+    100% {
+        transform: translate(0px, 0px);
     }
 }

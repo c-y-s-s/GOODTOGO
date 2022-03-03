@@ -106,7 +106,7 @@ const ProductsDetails = ({
         return (
           <div className="container products-details " key={data.id}>
             <div className="col-12 pt-4 products-details-data">
-              <div className="card mx-auto" style={{ width: `22rem` }}>
+              <div className="card products-details-data-card mx-auto">
                 <div className="product-logo">
                   <img
                     className=""
@@ -126,13 +126,12 @@ const ProductsDetails = ({
                 </button>
                 <div className="card-body py-4">
                   <h5 className="card-title">{data.name}</h5>
-                  <div className="d-flex justify-content-between card-value">
+                  <div className="d-flex justify-content-between card-value align-items-center">
                     {/* 評價的地方 */}
 
                     {productstarTotal ? (
                       <div className="card-star d-flex">
                         <div>
-                          {/* {console.log(productstarTotalAVG)} */}
                           <Stack spacing={2}>
                             <Rating
                               name="half-rating-read"
@@ -150,9 +149,9 @@ const ProductsDetails = ({
 
                     <div className="card-price">NT$ {data.price}</div>
                   </div>
-                  <p className="card-text mb-0">{data.description}</p>
-                  <div className=" card-text d-flex align-items-center">
-                    <div className="fialert-circle">
+                  <p className="card-text mb-0 fw-normal">{data.description}</p>
+                  <div className=" card-text d-flex align-items-center fw-normal">
+                    <div className="fialert-circle ">
                       <FiAlertCircle />
                     </div>
                     本商品不附帶免洗餐具
@@ -162,10 +161,10 @@ const ProductsDetails = ({
                     ""
                   ) : storeinOperation ? (
                     <div>
-                      <div className="d-flex justify-content-between pt-4">
-                        <div>合計金額</div>
-                        <div>
-                          餐點剩餘
+                      <div className="d-flex justify-content-between pt-4 fw-normal">
+                        <div clas>合計金額</div>
+                        <div className="">
+                          <span className="pe-2">餐點剩餘</span>
                           {storeinOperation === false ? 0 : data.amount}
                         </div>
                       </div>
