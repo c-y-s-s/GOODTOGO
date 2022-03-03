@@ -20,35 +20,42 @@ const Table = () => {
   // 總共有 lastPage 這麼多頁
   // const [data, setData] = useState([]);
   const [lastPage, setLastPage] = useState(1);
-  let page = parseInt(currentPage, 10) || 1;
-  // const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
+  // let page = parseInt(currentPage, 10) || 1;
+  const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
   console.log("currentPage", currentPage, page);
 
-  useEffect(() => {
-    let setProducts = async () => {
-      let response = await axios.get(`${API_URL}/storebg/productslist`);
-      let productsList = response.data[0];
-      setproductsData(productsList);
+  // useEffect(() => {
+  //   let setProducts = async () => {
+  //     let response = await axios.get(`${API_URL}/storebg/productslist`);
+  //     let productsList = response.data[0];
+  //     setproductsData(productsList);
 
-      console.log(
-        "api/storebg/products(get) response.data.storeProductsData: ",
-        response.data
-      );
-      console.log(
-        "api/storebg/products(get) response.data.storeProductsData: ",
-        response.data[0].img
-      );
-    };
-    setProducts();
-  }, []);
+  //     console.log(
+  //       "api/storebg/products(get) response.data.storeProductsData: ",
+  //       response.data
+  //     );
+  //     console.log(
+  //       "api/storebg/products(get) response.data.storeProductsData: ",
+  //       response.data[0].img
+  //     );
+  //   };
+  //   setProducts();
+  // }, []);
   useEffect(() => {
     let getPrices = async () => {
       let response = await axios.get(
         `${API_URL}/storebg/productslist?page=${page}`
       );
-      let productsListPage = response.data[1];
+      
+      let productsListPage = response.data[0];
+      console.log("productsListPage", productsListPage);
+      // let productsList = response.data[1];
+      // console.log("productsList", productsList);
+      let productsPagination = response.data[2];
+      console.log("productsPagination", productsPagination);
 
-      setLastPage(productsListPage.lastPage);
+      setproductsData(productsListPage);
+      setLastPage(productsPagination.lastPage);
       // console.log("response.data.data", response.data.data);
       // setLastPage(response.data.pagination.lastPage);
     };
@@ -75,9 +82,9 @@ const Table = () => {
             textAlign: "center",
           }}
           key={i}
-          onClick={() => {
-            // setPage(i);
-            navigate(`?page=${i}`);
+          onClick={(e) => {
+            setPage(i);
+            navigate(`${i}`);
           }}
         >
           {i}

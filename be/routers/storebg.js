@@ -176,7 +176,10 @@ router.get("/productslist", async (req, res, next) => {
   //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
   let pagination = { total, perPage, page, lastPage };
 
-  res.json([productsData, pagination]);
+  console.log("data", data);
+
+
+  res.json([data,productsData, pagination]);
 });
 
 // -------- 會員資料修改儲存 --------
