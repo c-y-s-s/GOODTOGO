@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
-import Swal from "sweetalert2";
 
 const CheckModel = ({ productValid, productId }) => {
   // 上下架 修改按鈕
