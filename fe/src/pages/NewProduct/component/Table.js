@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
+import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
 
 import axios from "axios";
-import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
-
+import moment from "moment";
+import "moment/min/locales";
 const Table = () => {
+// 抓出目前時間格式
+let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
+   const [productsUpdate,setProductsUpdate] = useState([])
+   console.log(productsUpdate)
+   const { productId } = useParams();
   //預設個欄位的值為空（開發中所以有先給值）
   const [product, setProduct] = useState({
     // productName: "奶茶",
@@ -16,15 +23,21 @@ const Table = () => {
     // salesTimeStartss: "10",
     // salesTimeEndmm: "10",
     // salesTimeEndss: "10",
+    storeId:"1",
     productName: "",
     productDescription: "",
     amountOfGoods: "",
     commodityPrice: "",
-    salesTimeStartmm: "",
-    salesTimeStartss: "",
-    salesTimeEndmm: "",
-    salesTimeEndss: "",
+    img: "",
+    salesTimeStart: "",
+    salesTimeEnd: "",
+    createdAt:timeInsecond
   });
+
+  console.log("product---->",product)
+  // input 上傳的圖片物件(二進位檔)
+  const [imageSrc, setImageSrc] = useState("");
+
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
@@ -33,13 +46,48 @@ const Table = () => {
     e.preventDefault();
 
     try {
-      let response = await axios.post(`${API_URL}/storebg/newproduct`, product);
+      let response = await axios.post(`${API_URL}/storebgaddproduct/newproduct`, product);
       console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);
     }
   };
+
+  // -------- 使用者預覽上傳圖片 --------
+  const handleOnPreview = (e) => {
+    const file = e.target.files[0]; // 抓取上傳的圖片
+    const reader = new FileReader(); // 讀取 input type="file" 的 file
+    reader.addEventListener(
+      "load",
+      function () {
+        // convert image file to base64 string
+        setImageSrc(reader.result);
+      },
+      false // false -> e.preventDefault() 阻擋預設行為
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+      // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+    }
+    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    setProduct({ ...product, [e.target.name]: e.target.files[0] });
+  };
+
+  // http://localhost:3002/api/products/productsdifferent/1
+
+
+  
+  // 抓符合網址上 product ID 的 API
+  useEffect(() => {
+    const getProducts = async () => {
+        let result = await axios.get(`${API_URL}/products/productsdifferent/${productId}`)
+        setProductsUpdate(result.data);
+      } ;
+    getProducts();
+  }, []);
   return (
     <div>
       <form className="container">
@@ -122,16 +170,17 @@ const Table = () => {
               </label>
               <div className="col">
                 <input
+                type="time"
                   className="form-control"
-                  id="salesTimeStartmm"
-                  name="salesTimeStartmm"
-                  value={product.salesTimeStartmm}
+                  id="salesTimeStart"
+                  name="salesTimeStart"
+                  value={product.salesTimeStart}
                   onChange={handleChange}
                   required
                 />
-              </div>
+        </div>
               ：
-              <div className="col">
+              {/* <div className="col">
                 <input
                   className="form-control"
                   id="salesTimeStartss"
@@ -140,9 +189,9 @@ const Table = () => {
                   onChange={handleChange}
                   required
                 />
-              </div>
+              </div> */}
               ～
-              <div className="col">
+              {/* <div className="col">
                 <input
                   className="form-control"
                   id="salesTimeEndmm"
@@ -152,13 +201,14 @@ const Table = () => {
                   required
                 />
               </div>
-              ：
+              ： */}
               <div className="col">
                 <input
+                  type="time"
                   className="form-control"
-                  id="salesTimeEndss"
-                  name="salesTimeEndss"
-                  value={product.salesTimeEndss}
+                  id="salesTimeEnd"
+                  name="salesTimeEnd"
+                  value={product.salesTimeEnd}
                   onChange={handleChange}
                   required
                 />
@@ -175,16 +225,24 @@ const Table = () => {
               </label>
               <div className="text-center">
                 <img
-                  src="https://fakeimg.pl/400x400/"
+                  // src="https://fakeimg.pl/400x400/"
+                  src={
+                    imageSrc
+                      ? imageSrc
+                      : product.img
+                      ? IMAGE_URL + product.img
+                      : PROFILE_IMAGE_URL
+                  }
+                  alt="product img"
                   className="rounded"
-                  alt="..."
                 />
               </div>
               <input
                 className="mt-3 form-control"
                 type="file"
                 id="formFile"
-                required
+                accept=".jpg,.jpeg,.png"
+                onChange={handleOnPreview}
               />
             </div>
           </div>
@@ -192,7 +250,11 @@ const Table = () => {
         <div className="row  mt-3">
           <div className="col-3"></div>
 
-          <NavLink type="button" className="col-2 btn btn-lg cancel-bg" to="/storebg">
+          <NavLink
+            type="button"
+            className="col-2 btn btn-lg cancel-bg"
+            to="/storebg"
+          >
             取消
           </NavLink>
 
