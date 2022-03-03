@@ -1,16 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { Link, NavLink, Routes, Route, useParams } from "react-router-dom";
-import axios from "axios";
-import { API_URL, IMAGE_URL, ERR_MSG } from "../../../utils/config";
+import React, { useState } from "react";
+import { NavLink, Routes, Route, useParams } from "react-router-dom";
 
 import UserOrderAll from "./UserOrderAll";
 import UserOrderStay from "./UserOrderStay";
 import UserOrderFinish from "./UserOrderFinish";
 import UserOrderCancel from "./UserOrderCancel";
 
-const UserOrder = () => {
+const UserOrder = (props) => {
   let { status } = useParams();
-  const [stayNum, setStayNum] = useState();
+  const [stayNum, setStayNum] = useState(0);
+
+  console.log("Order - stayNum", stayNum);
+  console.log("Order - props.orders", props.orders);
+  console.log("Order - props.orders.length", props.orders.length);
 
   return (
     <>
@@ -67,13 +69,34 @@ const UserOrder = () => {
           </li>
         </ul>
         <Routes>
-          <Route path="/" element={<UserOrderAll setStayNum={setStayNum} />} />
+          <Route
+            path="/"
+            element={
+              <UserOrderAll
+                setStayNum={setStayNum}
+                orders={props.orders}
+                setOrders={props.setOrders}
+              />
+            }
+          />
           <Route
             path="status=1"
-            element={<UserOrderStay setStayNum={setStayNum} />}
+            element={
+              <UserOrderStay
+                setStayNum={setStayNum}
+                orders={props.orders}
+                setOrders={props.setOrders}
+              />
+            }
           />
-          <Route path="status=2" element={<UserOrderFinish />} />
-          <Route path="status=3" element={<UserOrderCancel />} />
+          <Route
+            path="status=2"
+            element={<UserOrderFinish orders={props.orders} />}
+          />
+          <Route
+            path="status=3"
+            element={<UserOrderCancel orders={props.orders} />}
+          />
         </Routes>
       </div>
     </>

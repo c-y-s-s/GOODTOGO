@@ -23,6 +23,10 @@ const MyAccount = () => {
   const [headShot, setHeadShot] = useState("");
   const [userName, setUserName] = useState("");
 
+  // 儲存 會員有無喜愛店家、訂單
+  const [likeStoreIds, setLikeStoreIds] = useState([]);
+  const [orders, setOrders] = useState([]);
+
   // -------- 用 session cookie 取使用者資料 --------
   useEffect(() => {
     // http://localhost:3002/api/member/proile
@@ -33,16 +37,27 @@ const MyAccount = () => {
       // response 是物件
       // console.log("api/member/profile(get) response.data: ", response.data);
       console.log(
-        "api/member/profile(get) response.data.photo: ",
+        "api/member/profile(get) response.data.profile.photo: ",
         response.data.profile.photo
       );
       console.log(
-        "api/member/profile(get) response.data.name: ",
+        "api/member/profile(get) response.data.profile.name: ",
         response.data.profile.name
+      );
+      console.log(
+        "api/member/profile(get) response.data.likeStoreIds: ",
+        response.data.likeStoreIds
+      );
+      console.log(
+        "api/member/profile(get) response.data.orderIds: ",
+        response.data.orders
       );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
       setHeadShot(response.data.profile.photo);
       setUserName(response.data.profile.name);
+      // 存 喜愛店家、訂單 判斷其他頁面是否有資料可呈現
+      setLikeStoreIds(response.data.likeStoreIds);
+      setOrders(response.data.orders);
     };
     getUser();
   }, []);
@@ -203,10 +218,16 @@ const MyAccount = () => {
             <Route path="payment" element={<UserCreditCard />} />
             <Route path="password" element={<UserPassword />} />
             {/* <Route path="like" element={<UserLike />} /> */}
-            <Route path="order/*" element={<UserOrder />}>
+            <Route
+              path="order/*"
+              element={<UserOrder orders={orders} setOrders={setOrders} />}
+            >
               <Route path=":status" element={<UserOrder />} />
             </Route>
-            <Route path="like" element={<UserLike />} />
+            <Route
+              path="like"
+              element={<UserLike likeStoreIds={likeStoreIds} />}
+            />
             {/* <Route path="coupon" element={<UserCoupon />} /> */}
           </Routes>
         </div>

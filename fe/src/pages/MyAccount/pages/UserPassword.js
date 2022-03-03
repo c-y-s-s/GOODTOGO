@@ -239,7 +239,7 @@ const UserPassword = () => {
                         : "form-control form_Input form_Input_Password form_Input_SmallSize"
                     }
                     value={password.newPassword}
-                    placeholder="設定新密碼"
+                    placeholder="設定新密碼，密碼長度 6-16 字"
                     autoComplete="off"
                     onChange={handleChange}
                     onKeyDown={regPassword}

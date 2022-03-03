@@ -36,10 +36,10 @@ router.use((req, res, next) => {
   //   photo: member.photo
   // }
   req.session.member = {
-    id: 1,
-    name: "林振軒",
+    id: 2,
+    name: "王嘉雯",
     // photo: "",
-    photo: "/static/uploads/headshots/member-1646150271556.png",
+    photo: "/static/uploads/headshots/member-1646235995063.png",
   };
   // ----- 測試，假設已取得登入後的 session
 
@@ -133,7 +133,7 @@ const updatePasswordRules = [
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
   let [data] = await connection.execute(
-    "SELECT name, email, phone FROM users WHERE id=?",
+    `SELECT name, email, phone FROM users WHERE id=?;`,
     [req.session.member.id]
   );
   console.log("db_users id: ", req.session.member.id);
@@ -142,6 +142,20 @@ router.get("/profile", async (req, res, next) => {
   let [emails] = await connection.execute(`SELECT email FROM users;`);
   console.log("取得 emails: ", emails);
 
+  let [likeStoreIds] = await connection.execute(
+    `SELECT store_id FROM user_like WHERE user_id=?;`,
+    [req.session.member.id]
+  );
+  let [orders] = await connection.execute(
+    `SELECT id,
+    status_id
+    FROM user_order
+    WHERE user_id=?;`,
+    [req.session.member.id]
+  );
+
+  console.log(likeStoreIds.length);
+  console.log(orders.length);
   // 打包資料給 res
   let profile = {
     name: data[0].name,
@@ -150,7 +164,7 @@ router.get("/profile", async (req, res, next) => {
     // photo: data[0].headshots,
     photo: req.session.member.photo,
   };
-  res.json({ profile, emails });
+  res.json({ profile, emails, likeStoreIds, orders });
 });
 
 // -------- 會員資料修改儲存 --------
@@ -332,12 +346,11 @@ router.get("/like", async (req, res, next) => {
   // 店家 storeId
   // 取得 -> 每間店有的商品們
   // let storesProducts = [];
-  // if(likeStoreIds.length > 0) { }
+  // if (likeStoreIds.length > 0) {}
   let [storesProducts] = await connection.execute(
     `SELECT * FROM products
     WHERE store_id IN (${likeStoreIds.join(",")});`
   );
-
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts.length, "筆");
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts);
 
