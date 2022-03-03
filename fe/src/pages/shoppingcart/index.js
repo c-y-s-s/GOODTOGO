@@ -22,8 +22,8 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
     userId: 1,
     storeId: "",
     paymentMethod: "",
-    storeName:"",
-    storeCategory:""
+    storeName: "",
+    storeCategory: "",
   });
   useEffect(() => {
     let getShoppingData = async () => {
@@ -39,10 +39,10 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
   return (
     <div>
       <div className="container-fluid shopping-title">購物車</div>
-      <div className="container user-shopping-cart  ">
+      <div className="container user-shopping-cart">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
-            console.log(item)
+            console.log(item);
             return (
               <div
                 className="col-9 mx-auto user-shopping-cart-data"

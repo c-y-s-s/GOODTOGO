@@ -1,18 +1,22 @@
 // -------- hero4 --------
-
 .hero4 {
+  position: relative;
   height: fit-content;
   background-color: $color-yellow;
   .hero4-top {
     margin: auto;
-    padding: 3rem 0 3rem;
+    padding-top: 3rem;
+    .hero4-title {
+      width: fit-content;
+    }
   }
   .hero4-bottom {
     height: fit-content;
+    @include hero-text-sm;
     .box {
       background: $color-light;
       height: 279px;
-      width: 251px;
+      // width: 251px;
       border-radius: 20%;
       &:hover {
         .hero4-pointer {
@@ -44,7 +48,7 @@
     }
     .hero4-btn-group {
       height: max-content;
-      font-size: $fz-xxxx-lg;
+      @include hero-text-md;
       color: white;
       height: 279px;
       align-content: space-around;
@@ -68,6 +72,89 @@
             }
             100% {
               transform: translateX(0.5rem);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// -------- 手機RWD --------
+@media screen and (max-width: 390px) {
+  .hero4 {
+    position: relative;
+    height: fit-content;
+    background-color: $color-yellow;
+    .hero4-top {
+      margin: auto;
+      padding-top: 3rem;
+      .hero4-title {
+        width: fit-content;
+      }
+    }
+    .hero4-bottom {
+      height: fit-content;
+      @include hero-text-sm;
+      .box {
+        background: $color-light;
+        height: 279px;
+        // width: 251px;
+        border-radius: 20%;
+        &:hover {
+          .hero4-pointer {
+            animation: pointer-move 1s infinite linear;
+          }
+        }
+        .hero4-pointer {
+          position: relative;
+          top: -2.5rem;
+        }
+        @keyframes pointer-move {
+          0% {
+            transform: translateY(-0.2rem);
+          }
+          100% {
+            transform: translateY(-0.8rem);
+          }
+        }
+        .box-info {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          height: 205px;
+          justify-content: space-between;
+          position: relative;
+          top: -2rem;
+          color: $color-dark-grey;
+        }
+      }
+      .hero4-btn-group {
+        height: max-content;
+        @include hero-text-sm;
+        color: white;
+        height: 279px;
+        align-content: space-around;
+        justify-content: space-around;
+        .btn-box {
+          border: 4px solid white;
+          width: 238px;
+          .hero4-arrow {
+            font-size: 2rem;
+          }
+          &:hover {
+            color: $color-yellow;
+            background-color: white;
+            .hero4-arrow {
+              animation: hero4-arrow 1s infinite linear;
+            }
+
+            @keyframes hero4-arrow {
+              0% {
+                transform: translateX(0.2rem);
+              }
+              100% {
+                transform: translateX(0.5rem);
+              }
             }
           }
         }

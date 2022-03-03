@@ -37,12 +37,10 @@ const Navbar = (props) => {
           <div className="side-menu"></div>
         </div>
         <div className="nav-links">
-          <Link to="/about" className="nav-link">
+          {/* <Link to="/about" className="nav-link">
             關於我們
-          </Link>
-          <Link to="/joinus" className="nav-link">
-            店家申請
-          </Link>
+          </Link> */}
+
           <Link
             to="/stores"
             className="nav-link"
@@ -52,9 +50,12 @@ const Navbar = (props) => {
           >
             立即訂購
           </Link>
-          <Link to="/faq" className="nav-link">
-            常見問題
+          <Link to="/joinus" className="nav-link">
+            店家申請
           </Link>
+          {/* <Link to="/faq" className="nav-link">
+            常見問題
+          </Link> */}
         </div>
 
         <div className="nav-icons">

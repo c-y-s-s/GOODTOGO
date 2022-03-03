@@ -7,7 +7,7 @@ const Footer = () => {
     <footer className="container-fluid">
       <div className="row justify-content-center">
         <div className="col-lg-10 col-sm-9 footer-content">
-          <div className="footer-top row justify-content-center">
+          <div className="footer-top row justify-content-between">
             <div className="col-lg-auto col-sm-12 col-12 text-center me-1">
               <Logo className="" />
             </div>
@@ -16,7 +16,7 @@ const Footer = () => {
               <br />
               <span>Email: service@goodtogo.com</span>
             </div>
-            <div className="col-lg-3 row row-col-3 link-groups justify-content-between gx-3 col-12">
+            <div className="col-lg-3 row row-col-3 link-groups justify-content-between gx-3 col-12 ">
               <Link to="/" className="col-auto footer-link ">
                 回到首頁
               </Link>
@@ -27,22 +27,22 @@ const Footer = () => {
                 我的帳戶
               </Link>
               {/* TODO:點下去會先去登入頁 */}
-              <Link to="/" className="footer-link col-auto">
+              {/* <Link to="/" className="footer-link col-auto">
                 領取優惠
-              </Link>
+              </Link> */}
 
-              <Link to="/about" className="footer-link col-auto">
+              {/* <Link to="/about" className="footer-link col-auto">
                 了解我們
-              </Link>
-              <Link to="#" className="footer-link col-auto">
+              </Link> */}
+              {/* <Link to="#" className="footer-link col-auto">
                 常見問題
-              </Link>
-              <Link to="#" className="footer-link col-auto">
+              </Link> */}
+              <Link to="/stores" className="footer-link col-auto">
                 搜尋店家
               </Link>
-              <Link to="#" className="footer-link col-auto">
+              {/* <Link to="#" className="footer-link col-auto">
                 聯絡我們
-              </Link>
+              </Link> */}
             </div>
           </div>
           <div className="split col-lg-12"></div>
