@@ -17,7 +17,7 @@ router.get("/", async (req, res, next) => {
   // console.log("全部筆數", total); // [ { total: 76 } ]
   total = total[0].total;
   // 計算總共應該要有幾頁
-  const perPage = 16;
+  const perPage = 15;
   // lastPage: 總共有幾頁
   const lastPage = Math.ceil(total / perPage);
   // 計算 SQL 要用的 offset
@@ -114,7 +114,7 @@ router.get("/", async (req, res, next) => {
 router.get("/search", async (req, res, next) => {
   let keyword = req.query.keyword;
   // 分頁：每頁幾筆資料
-  const perPage = 16;
+  const perPage = 15;
   // 目前頁數：如果沒有設定 req.quyer.page，那就設成 1
   let page = req.query.page || 1;
   // 計算 SQL 要用的 offset
@@ -176,7 +176,7 @@ router.get("/search", async (req, res, next) => {
 router.get("/filter/c", async (req, res, next) => {
   let category = req.query.category;
   // 分頁：每頁幾筆資料
-  const perPage = 16;
+  const perPage = 15;
   // 目前頁數：如果沒有設定 req.quyer.page，那就設成 1
   let page = req.query.page || 1;
   // 計算 SQL 要用的 offset

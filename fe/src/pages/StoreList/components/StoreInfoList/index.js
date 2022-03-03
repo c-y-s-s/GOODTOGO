@@ -172,7 +172,7 @@ const StoreInfoList = (props) => {
           </div>
         </div>
         {/* 商家列表處理區 */}
-        <div className="function-box d-flex flex-wrap">
+        <div className="function-box d-flex flex-wrap mt-lg-5">
           <SearchBar
             setSearchSwitch={setSearchSwitch}
             keyword={keyword}
@@ -192,19 +192,19 @@ const StoreInfoList = (props) => {
           </div>
           <Rating />
         </div>
-        <div className="total-count col-lg-12 col-12 text-center mt-lg-3 mb-lg-2 text-lg-end">
+        <div className="total-count col-lg-12 col-12 text-center  mt-lg-5 mb-lg-2 text-lg-end">
           總共 {total} 筆
         </div>
         {/* 商家列表顯示區 */}
 
-        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-12 mt-3 ">
+        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-12 mt-lg-5 ">
           <StoreInfoCard
             storeList={storeList}
             storeLikeCount={storeLikeCount}
             amount={amount}
           />
         </div>
-        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-4 mb-lg-2 mt-4">
+        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
           <IoIosArrowBack
             role="button"
             className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}

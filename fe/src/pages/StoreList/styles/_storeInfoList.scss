@@ -6,9 +6,10 @@
 
   .header {
     background-image: url(../images/storelist_bg_2.svg);
+    background-size: cover;
     background-repeat: no-repeat;
     width: 100vw;
-    height: 10rem;
+    height: 12rem;
     position: relative;
     top: -1px;
   }
@@ -140,8 +141,9 @@
 
   .footer {
     background-image: url(../images/storelist_bg_3.svg);
+    background-size: cover;
     width: 100vw;
-    height: 10rem;
+    height: 15rem;
   }
 }
 @media screen and (max-width: 390px) {
@@ -284,7 +286,7 @@
 
     .footer {
       background-image: url(../images/storelist_bg_3.svg);
-      background-size: 100%;
+      background-size: cover;
       width: 100vw;
       height: 5rem;
       background-repeat: no-repeat;

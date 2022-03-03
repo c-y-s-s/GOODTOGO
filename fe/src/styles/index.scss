@@ -98,7 +98,7 @@ $footer-height: 15.063rem;
   filter: drop-shadow(0.3rem 0.3rem 2px rgba(255, 255, 255, 0.877));
 }
 @mixin drop-shadow-dark {
-  filter: drop-shadow(0.188rem 0.188rem 2px rgba(112, 108, 108, 0.541));
+  filter: drop-shadow(0.188rem 0.188rem 10px rgba(112, 108, 108, 0.541));
 }
 .text-light {
   color: white;
