@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Hamburger from "hamburger-react";
 import Popover from "./_popover";
+import Sh from "./sh";
 
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
@@ -59,9 +60,13 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          <Link to="/shoppingcart" className="nav-icon">
-            <ShoppingBag />
-          </Link>
+
+          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
+            <div className="shopping-cart-number">1</div>
+            <ShoppingBag className="shopping-cart-icon" />
+            <div className="shopping-cart-products">1</div>
+          </Link> */}
+          <Sh />
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>

@@ -1,9 +1,9 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import { useState, useLayoutEffect } from "react";
+import { useParams } from "react-router-dom";
 import { API_URL } from "../../../utils/config";
-import ProductsDetailsComment from "./ProductsDetailsComment";
 import { ERR_MSG } from "../../../utils/error";
+import axios from "axios";
+import ProductsDetailsComment from "./ProductsDetailsComment";
 // -------- React icon --------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
@@ -12,8 +12,9 @@ import { FiX } from "react-icons/fi";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
 // -------- 商品光箱 --------
+import Swal from "sweetalert2";
+
 const ProductsDetails = ({
   setOpenProductsModal,
   openProductsModaID,
@@ -81,12 +82,21 @@ const ProductsDetails = ({
 
   async function handleAddShoppingCar(e) {
     e.preventDefault();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "加入購物車成功",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     try {
       let response = await axios.post(
         `${API_URL}/shop/shoppingcar`,
         shoppingData
       );
       console.log(response.data);
+      setOpenProductsModal(false);
+       setisModalTouch(true);
     } catch (e) {
       //印出錯誤物件
       // console.error(e.response)
@@ -224,15 +234,7 @@ const ProductsDetails = ({
                       <button
                         className="btn btn-primary"
                         id={`${data.id}`}
-                        onClick={
-                          handleAddShoppingCar
-                          // productarr.push(data);
-                          // console.log(productarr);
-                          // let products = JSON.stringify(data);
-                          // console.log(products);
-                          // alert("加入購物車成功");
-                          // localStorage.setItem("proaaducts", products);
-                        }
+                        onClick={handleAddShoppingCar}
                       >
                         加入購物車
                       </button>
