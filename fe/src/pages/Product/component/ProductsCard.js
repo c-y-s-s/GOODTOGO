@@ -80,7 +80,7 @@ const StoreCard = ({
   return (
     <div>
       <div className="container">
-        <div className="row cards">
+        <div className="row cards ">
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
 
           {productsdata.map((item) => {
@@ -120,8 +120,8 @@ const StoreCard = ({
 
             return (
               <div
-                className="col-12 col-md-6 col-lg-3 product-card mt-5"
-                style={{ width: `17.5rem` }}
+                className="col-12 col-md-6 col-lg-3 product-card"
+                style={{ width: `15.9rem` }}
                 key={uuidv4()}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
@@ -177,7 +177,7 @@ const StoreCard = ({
                     {/* //!  資料庫時間 - 目前時間 得出秒數 + 上去套件倒數 */}
                   </div>
                   <div className="card-body ">
-                    <div className="">
+                    <div className="px-2">
                       <div className="card-title">{item.name}</div>
                       <div className="card-star ">
                         {item.score > 0 ? (
@@ -200,7 +200,7 @@ const StoreCard = ({
                           "商品沒有評價"
                         )}
                       </div>
-                      <div className="card-text pt-2">{item.description}</div>
+                      <div className="card-text">{item.description}</div>
                     </div>
 
                     <div className="text-end "> NT$ {item.price}</div>

@@ -57,7 +57,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                     <div className="user-shopping-cart-data-title-name">
                       {item.store_name}
                     </div>
-                    <div className="user-shopping-cart-data-title-category">
+                    <div className="user-shopping-cart-data-title-category ">
                       {item.category}
                     </div>
                   </div>
@@ -70,7 +70,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                   </div>
                   <div className="d-flex  user-shopping-cart-data-title-rwd">
                     <div className="mx-5 user-shopping-cart-data-title-rwd">
-                      小記
+                      小計
                     </div>
                     <div className="user-shopping-cart-data-title-rwd">
                       刪除
