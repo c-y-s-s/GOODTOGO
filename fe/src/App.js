@@ -12,6 +12,7 @@ import About from "./pages/About";
 import Store from "./pages/Store";
 import StoreBg from "./pages/Storebg";
 import NewProduct from "./pages/NewProduct";
+import ProductEdit from "./pages/ProductEdit";
 import StoreProfileEditing from "./pages/StoreProfileEditing";
 import LatestNews from "./pages/LatestNews";
 import Activity from "./pages/Activity";
@@ -51,6 +52,10 @@ function App() {
         <Route
           path="/newproduct"
           element={<NewProduct setIsAdmin={setIsAdmin} />}
+        ></Route>
+        <Route
+          path="/productedit/:productId/"
+          element={<ProductEdit setIsAdmin={setIsAdmin} />}
         ></Route>
         <Route
           path="/storeprofileediting"
