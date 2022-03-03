@@ -37,7 +37,7 @@ router.use((req, res, next) => {
   // }
   req.session.member = {
     id: 1,
-    name: "林振軒",
+    name: "林振宣",
     // photo: "",
     photo: "/static/uploads/headshots/member-1646150271556.png",
   };
@@ -82,7 +82,7 @@ const storage = multer.diskStorage({
   },
   // 設定儲存的檔名
   filename: function (req, file, cb) {
-    console.log("multer-filename: ", file);
+    // console.log("multer-filename: ", file);
     // 抓使用者上傳的檔名 file.originalname
     // 取用副檔名 ext
     const ext = file.originalname.split(".").pop();
@@ -97,7 +97,7 @@ const uploader = multer({
   storage: storage, // 上面的 storage 圖片儲存資訊
   // 過濾 圖片類型
   fileFilter: function (req, file, cb) {
-    console.log("file.mimetype: ", file.mimetype);
+    // console.log("file.mimetype: ", file.mimetype);
     if (
       file.mimetype !== "image/jpeg" &&
       file.mimetype !== "image/jpg" &&
@@ -133,7 +133,7 @@ const updatePasswordRules = [
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
   let [data] = await connection.execute(
-    "SELECT name, email, phone FROM users WHERE id=?",
+    `SELECT name, email, phone FROM users WHERE id=?;`,
     [req.session.member.id]
   );
   console.log("db_users id: ", req.session.member.id);
@@ -142,6 +142,20 @@ router.get("/profile", async (req, res, next) => {
   let [emails] = await connection.execute(`SELECT email FROM users;`);
   console.log("取得 emails: ", emails);
 
+  let [likes] = await connection.execute(
+    `SELECT store_id FROM user_like WHERE user_id=?;`,
+    [req.session.member.id]
+  );
+  let [orders] = await connection.execute(
+    `SELECT id,
+    status_id
+    FROM user_order
+    WHERE user_id=?;`,
+    [req.session.member.id]
+  );
+
+  // console.log(likes.length);
+  // console.log(orders.length);
   // 打包資料給 res
   let profile = {
     name: data[0].name,
@@ -150,7 +164,7 @@ router.get("/profile", async (req, res, next) => {
     // photo: data[0].headshots,
     photo: req.session.member.photo,
   };
-  res.json({ profile, emails });
+  res.json({ profile, emails, likes, orders });
 });
 
 // -------- 會員資料修改儲存 --------
@@ -168,7 +182,7 @@ router.post(
       // 驗證結果有問題
       let error = validateResult.mapped();
       // 錯誤驗證結果轉為 array / mapped 方便取得錯誤結果
-      console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
+      // console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
       // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
       return res.status(400).json({
         code: "66001",
@@ -197,11 +211,11 @@ router.post(
     // 到這邊表示前面沒錯誤了 (所有資料驗證ok、email尚未被註冊)
 
     // 處理圖片
-    console.log("前端送來、multer中間件處理過 req.file: ", req.file);
+    // console.log("前端送來、multer中間件處理過 req.file: ", req.file);
     let filename = req.file
       ? "/static/uploads/headshots/" + req.file.filename
       : req.session.member.photo;
-    console.log("加上路徑的 filename: ", filename);
+    // console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
     let [updateProfileResult] = await connection.execute(
@@ -214,7 +228,7 @@ router.post(
         req.session.member.id,
       ]
     );
-    console.log(updateProfileResult);
+    // console.log(updateProfileResult);
 
     // 寫內容前先測試能不能得到 req
     // console.log("req.body: ", req.body);
@@ -236,7 +250,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
     // validateResult 不是空的 (表示驗證結果有問題)
     let error = validateResult.array();
     // 把錯誤驗證結果變成 array 方便我們取得錯誤結果
-    console.log("password validateResult(error): ", error);
+    // console.log("password validateResult(error): ", error);
     // 測試錯誤訊息是否會出現
     // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
     // 錯誤訊息作為 res 傳回給前端 (後端處理自訂給前端)
@@ -260,7 +274,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
   // let result = await bcrypt.compare(req.body.password, userPassword.password);
   if (!result) {
     // 如果比對失敗
-    console.log("比對密碼結果失敗: ", result);
+    // console.log("比對密碼結果失敗: ", result);
     return res.status(400).send({
       code: "33004",
       msg: "會員密碼驗證錯誤",
@@ -280,7 +294,7 @@ router.post("/password", updatePasswordRules, async (req, res, next) => {
     `UPDATE users SET password=? WHERE id=?;`,
     [hashNewPassword, req.session.member.id]
   );
-  console.log(updatePasswordResult);
+  // console.log(updatePasswordResult);
 
   // 寫內容前先測試能不能得到 req
   // console.log("req.body: ", req.body);
@@ -332,12 +346,11 @@ router.get("/like", async (req, res, next) => {
   // 店家 storeId
   // 取得 -> 每間店有的商品們
   // let storesProducts = [];
-  // if(likeStoreIds.length > 0) { }
+  // if (likeStoreIds.length > 0) {}
   let [storesProducts] = await connection.execute(
     `SELECT * FROM products
     WHERE store_id IN (${likeStoreIds.join(",")});`
   );
-
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts.length, "筆");
   // console.log("喜愛店家們 的 所有商品們 資料 :", storesProducts);
 
@@ -807,7 +820,7 @@ router.post("/order/cancel", async (req, res, next) => {
   });
 });
 
-// test
+// -------- test 所有店家資訊 依愛心排序 --------
 // router.get("/order/count/aaa", async (req, res, next) => {
 //   let [likeResult] = await connection.execute(
 //     `SELECT store_id, count(id) AS likeTotal
@@ -828,23 +841,42 @@ router.post("/order/cancel", async (req, res, next) => {
 //     WHERE a.valid = 1;`
 //   );
 
+//   let [starResult] = await connection.execute(
+//     `SELECT
+//     store_id,
+//     round(SUM(star)/count(id),1) AS score
+//     FROM products_comment
+//     GROUP BY store_id;`
+//   );
+
 //   storeResult.map((item) => {
-//     let setZero = likeResult.find(
+//     // 放入 愛心
+//     let setLike = likeResult.find(
 //       (v) => Object.values(v)[0] === Object.values(item)[0]
 //     );
-//     if (setZero) {
-//       item.like = setZero.likeTotal;
+//     if (setLike) {
+//       item.like = setLike.likeTotal;
 //     } else {
 //       item.like = 0;
 //     }
+
+//     // 放入星星
+//     let setStar = starResult.find(
+//       (v) => Object.values(v)[0] === Object.values(item)[0]
+//     );
+//     if (setStar) {
+//       item.star = setStar.score;
+//     } else {
+//       item.star = 0;
+//     }
 //   });
 
-//   storeResult.sort(function(a, b) {
+//   storeResult.sort(function (a, b) {
 //     // boolean false == 0; true == 1
 //     return b.like - a.like;
-// });
+//   });
 //   console.log("storeResult數量", storeResult.length);
-//   res.json({ storeResult, likeResult });
+//   res.json(storeResult);
 // });
 
 module.exports = router;
