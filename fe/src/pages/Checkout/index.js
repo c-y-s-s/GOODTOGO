@@ -126,7 +126,11 @@ const Checkout = ({ checkoutData }) => {
       </div>
       {/* -------- 光箱區塊 -------- */}
       {orderCheckSwitch && (
-        <OrderModal timeInsecond={timeInsecond} orderNumber={orderNumber} />
+        <OrderModal
+          timeInsecond={timeInsecond}
+          orderNumber={orderNumber}
+          OrderDetail={OrderDetail}
+        />
       )}
     </div>
   );

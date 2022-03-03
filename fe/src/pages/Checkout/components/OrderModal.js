@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsCheck2Circle } from "react-icons/bs";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
-const OrderModal = ({ timeInsecond, orderNumber }) => {
+const OrderModal = ({ timeInsecond, orderNumber, OrderDetail }) => {
+  console.log(OrderDetail);
   return (
     <div>
       <div className="container-fluid mt-5 order-modal-bgcolor">
@@ -21,7 +22,9 @@ const OrderModal = ({ timeInsecond, orderNumber }) => {
 
               <div className="order-modal-card-center-text">
                 <div>訂單時間 : {timeInsecond}</div>
-                <div>訂單編號 : {orderNumber}</div>
+                <div>
+                  訂單編號  {orderNumber + OrderDetail.id + OrderDetail.userId}
+                </div>
               </div>
 
               <div className="order-modal-card-remind-text">
