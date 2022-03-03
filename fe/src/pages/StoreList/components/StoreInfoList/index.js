@@ -18,28 +18,32 @@ import { v4 as uuidv4 } from "uuid";
 
 const StoreInfoList = (props) => {
   const { setTotalHeart, setProductAmount } = props;
-  //顯示的商家列表
+  //*儲存-顯示的商家列表
   const [storeList, setStoreList] = useState([]);
-  //全部類別
+  //*儲存-全部類別
   const [category, setCategory] = useState([]);
-  //剩餘餐點數量
+  //*儲存-剩餘餐點數量
   const [amount, setAmount] = useState([]);
-  //收藏愛心
+  //*儲存-收藏愛心
   const [storeLikeCount, setStoreLikeCount] = useState([]);
+  //*儲存-星星
+  const [stars, setStars] = useState([]);
   //總共幾筆資料
   const [total, setTotal] = useState([]);
   //*搜尋-開關
   const [searchSwitch, setSearchSwitch] = useState(false);
   //搜尋-關鍵字
   const [keyword, setKeyword] = useState("");
-  //*filter類別-開關
-  const [categorySwitch, setCategorySwitch] = useState(false);
   //filter類別-顯示
   const [selectedCat, setSelectedCat] = useState("");
   //*filter營業中-開關
   const [opSwitch, setOpSwitch] = useState(false);
   //filter營業中-顯示
   const [opState, setOpState] = useState("");
+  //*Rating排序 - 收藏開關
+  const [ratingHeartOn, setRatingHeartOn] = useState("");
+  //*Rating排序 - 評論開關
+  const [ratingCommentOn, setRatingCommentOn] = useState("");
 
   // -------- 分頁處理 --------
   //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
@@ -57,13 +61,14 @@ const StoreInfoList = (props) => {
       let pagination = storeRes.data[2];
       let storeLikeCount = storeRes.data[3];
       let productAmount = storeRes.data[4];
-
+      let stars = storeRes.data[5];
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
       setStoreLikeCount(storeLikeCount);
       setTotal(pagination.total);
       setAmount(productAmount);
+      setStars(stars);
       //子女元件資料互傳
       setTotalHeart(storeLikeCount);
       setProductAmount(productAmount);
@@ -86,7 +91,6 @@ const StoreInfoList = (props) => {
       setStoreList(categoryStoreRes.data[0]);
       setTotal(categoryStoreRes.data[1].total);
       setLastPage(categoryStoreRes.data[1].lastPage);
-      // console.log("categoryStoreRes.data", categoryStoreRes);
     };
     //*過濾-營業時間的店家列表api: api/stores/filter/op
     let getOpStateStore = async () => {
@@ -97,34 +101,49 @@ const StoreInfoList = (props) => {
       setStoreList(opStateRes.data);
       setTotal(opStateRes.data.length);
       setLastPage(1);
-
-      // setTotal(opStateRes.data[1].total);
-      // setLastPage(opStateRes.data[1].lastPage);
+    };
+    //*排序-營業時間的店家列表api: api/stores/rating/heart
+    let getRatingByHeart = async () => {
+      let ratingRes = await axios.get(`${API_URL}/stores/rating/heart`);
+      console.log("ratingRes", ratingRes);
+      setStoreList(ratingRes.data);
+      setTotal(ratingRes.data.length);
+      setLastPage(1);
+    };
+    //*排序-營業時間的店家列表api: api/stores/rating/comment
+    let getRatingByComment = async () => {
+      let ratingRes = await axios.get(`${API_URL}/stores/rating/comment`);
+      console.log("ratingRes", ratingRes);
+      setStoreList(ratingRes.data);
+      setTotal(ratingRes.data.length);
+      setLastPage(1);
     };
     //*顯示清單條件
     if (keyword.trim().length > 0 && page === 1) {
       setSearchSwitch(true);
+      setRatingHeartOn(false);
       getSearch();
     } else if (selectedCat !== "" && page === 1) {
       setSearchSwitch(false);
+      setRatingHeartOn(false);
       getCategoryStore();
       setPage(1);
     } else if (opState !== "") {
+      setRatingHeartOn(false);
       setPage(1);
       getOpStateStore();
+    } else if (ratingHeartOn === true) {
+      setPage(1);
+      getRatingByHeart();
+    } else if (ratingCommentOn === true) {
+      setRatingHeartOn(false);
+      setPage(1);
+      getRatingByComment();
     } else {
       getStore();
     }
     // window.scrollTo(2000, 2000);
-  }, [
-    page,
-    searchSwitch,
-    //opSwitch,
-    categorySwitch,
-    keyword,
-    selectedCat,
-    opState,
-  ]);
+  }, [page, searchSwitch, keyword, selectedCat, opState, ratingHeartOn]);
 
   //*計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
@@ -148,17 +167,17 @@ const StoreInfoList = (props) => {
     }
     return pages;
   };
-  // console.log("storeLikeCount", storeLikeCount);
+  console.log("storeLikeCount", storeLikeCount);
   // console.log("searchSwitch", searchSwitch);
   // console.log("selected category", selectedCat);
   // console.log("storeList", storeList);
   // console.log("open hour", opState);
   // console.log("keyword", keyword);
-  // console.log("opSwitch", opSwitch);
+  console.log("CR", ratingCommentOn);
 
   return (
     <div className="store-list">
-      <div className="prefix"></div>
+      {/* <div className="prefix"></div> */}
       <div className="header"></div>
       <div className="store-list-content col-lg-10 col-9 m-auto">
         {/* 標題 */}
@@ -181,7 +200,6 @@ const StoreInfoList = (props) => {
           <div className="col-lg-3 col-12 justify-content-lg-between d-flex flex-wrap justify-content-evenly mt-3">
             <FilterBar
               setOpSwitch={setOpSwitch}
-              setCategorySwitch={setCategorySwitch}
               category={category}
               selectedCat={selectedCat}
               setSelectedCat={setSelectedCat}
@@ -190,7 +208,13 @@ const StoreInfoList = (props) => {
               opState={opState}
             />
           </div>
-          <Rating />
+          <Rating
+            setRatingHeartOn={setRatingHeartOn}
+            setKeyword={setKeyword}
+            setOpState={setOpState}
+            setSelectedCat={setSelectedCat}
+            setRatingCommentOn={setRatingCommentOn}
+          />
         </div>
         <div className="total-count col-lg-12 col-12 text-center  mt-lg-5 mb-lg-2 text-lg-end">
           總共 {total} 筆
@@ -202,6 +226,7 @@ const StoreInfoList = (props) => {
             storeList={storeList}
             storeLikeCount={storeLikeCount}
             amount={amount}
+            stars={stars}
           />
         </div>
         <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">

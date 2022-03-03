@@ -16,7 +16,7 @@ const Recomm = (props) => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder col-lg-10 col-9 d-flex align-items-center m-auto">
+        <div className="rec-cards-holder col-lg-10 col-9 d-flex align-items-center m-auto flex-wrap">
           <RecomCard totalHeart={totalHeart} productAmount={productAmount} />
         </div>
 

@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
     FROM stores AS a 
     JOIN stores_category AS b ON a.stores_category_id = b.id
     JOIN products_comment AS c ON a.id = c.store_id 
-    WHERE a.valid = 1 ORDER BY c.star DESC LIMIT 4`
+    WHERE a.valid = 1 ORDER BY c.star DESC LIMIT 5`
   );
   // -------- 營業時間判斷＆處理 --------
   data.map((item) => {
