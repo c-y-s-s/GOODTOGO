@@ -1,9 +1,9 @@
 // -------- hero 1 --------
 .hero1 {
   padding: 0;
-  height: 85vh;
+  height: 82vh;
   background-image: url(../images/hero1.svg);
-  background-size: cover;
+  // background-size: cover;
   align-items: center;
   grid-template-columns: 8.5rem auto 8.5rem;
   grid-template-rows: [row1-start] 6.5rem[row1-end]20rem [third-line] auto [last-line];

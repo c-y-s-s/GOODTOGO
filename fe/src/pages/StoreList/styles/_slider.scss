@@ -1,142 +1,78 @@
 // -------- 最新消息幻燈片 --------
 .slider {
-  height: 712px;
+  width: 100vw;
   background-color: $color-yellow;
   align-items: center;
-  grid-template-columns: 15.5% auto 15.5%;
-  grid-template-rows: [row1-start] 18.5% [row1-end] auto [third-line] 18.5% [last-line];
-  grid-template-areas:
-    "header header header "
-    "main main main "
-    "footer footer footer ";
+
   .slider-box {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    img {
-      object-fit: cover;
-      width: 95%;
+    padding: 6rem 10rem;
+    overflow: hidden;
+  }
+
+  .controller-left {
+    position: absolute;
+    left: -6rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: transparent;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.534);
     }
   }
-  .controller {
-    //左右控制箭頭
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 3;
-    margin: auto;
-    .arrow-bg {
-      border-radius: 50%;
-      width: 4rem;
-      height: 4rem;
-      background-color: transparent;
-      transition: 0.4s;
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.623);
-      }
-      .arrow-btn {
-        font-size: 4rem;
-        color: rgba(0, 0, 0, 0.479);
-        transition: 0.4s;
-        &:hover {
-          color: black;
-        }
-      }
-    }
-    &:nth-last-child(1) {
-      grid-column-start: 3;
-      grid-column-end: 4;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      margin: auto;
+  .controller-right {
+    position: absolute;
+    left: 15rem;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 50%;
+    background-color: transparent;
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.534);
     }
   }
-  .slider-point {
-    // 點點進度條
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 4;
-    display: flex;
-    margin: auto;
-    li {
-      margin: 1rem;
-      background-color: rgba(255, 255, 255, 0.623);
-      width: 1rem;
-      height: 1rem;
-      border-radius: 50%;
-    }
+  .carousel-indicators {
+    position: absolute;
+    top: 37rem;
   }
 }
-@media screen and(max-width: 540px) {
+
+@media screen and(max-width: 390px) {
   .slider {
-    height: 32.8vh;
-    grid-template-columns: 10% auto 10%;
-    grid-template-rows: [row1-start] 15.5% [row1-end] auto [third-line] 15.5% [last-line];
-    grid-template-areas:
-      "header header header "
-      "main main main "
-      "footer footer footer ";
+    width: 100vw;
+    background-color: $color-yellow;
+    align-items: center;
+
     .slider-box {
-      grid-column-start: 1;
-      grid-column-end: 4;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      img {
-        object-fit: cover;
-        width: 100%;
+      padding: 3rem 0;
+      overflow: hidden;
+    }
+
+    .controller-left {
+      position: absolute;
+      left: 0.5rem;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      background-color: transparent;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.534);
       }
     }
-    .controller {
-      //左右控制箭頭
-      grid-column-start: 1;
-      grid-column-end: 2;
-      grid-row-start: 2;
-      grid-row-end: 3;
-      margin: auto;
-      .arrow-bg {
-        border-radius: 50%;
-        width: 2rem;
-        height: 2rem;
-        background-color: transparent;
-        transition: 0.4s;
-        &:hover {
-          background-color: rgba(255, 255, 255, 0.623);
-        }
-        .arrow-btn {
-          align-self: baseline;
-          font-size: 2rem;
-          color: rgba(0, 0, 0, 0.479);
-          transition: 0.4s;
-          &:hover {
-            color: black;
-          }
-        }
-      }
-      &:nth-last-child(1) {
-        grid-column-start: 3;
-        grid-column-end: 4;
-        grid-row-start: 2;
-        grid-row-end: 3;
-        margin: auto;
+    .controller-right {
+      position: absolute;
+      left: 1rem;
+      height: 2rem;
+      width: 2rem;
+      border-radius: 50%;
+      background-color: transparent;
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.534);
       }
     }
-    .slider-point {
-      // 點點進度條
-      grid-column-start: 2;
-      grid-column-end: 3;
-      grid-row-start: 3;
-      grid-row-end: 4;
-      display: flex;
-      margin: auto;
-      li {
-        margin: 1rem;
-        background-color: rgba(255, 255, 255, 0.623);
-        width: 0.3rem;
-        height: 0.3rem;
-        border-radius: 50%;
-      }
+    .carousel-indicators {
+      position: absolute;
+      top: 12rem;
     }
   }
 }

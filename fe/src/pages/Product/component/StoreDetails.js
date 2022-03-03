@@ -146,7 +146,7 @@ const StoreDetails = ({
                     <div className="store-data-left-outline py-1">
                       <h1 className="store-data-left-name">{item.name}</h1>
                       <div className="d-flex mt-4 align-items-center">
-                        <div className="store-data-left-category mb-1">
+                        <div className="store-data-left-category ">
                           {item.category}
                         </div>
                         <div className="store-data-left-star  d-flex ">
@@ -163,8 +163,8 @@ const StoreDetails = ({
                           <div className="ps-2">({storeStarCount})</div>
                         </div>
                         <div className="d-flex store-data-left-favorite pb-1">
-                          <div className="store-data-left-icon pb-1">
-                            <FaHeart />
+                          <div className="store-data-left-icon ">
+                            <FaHeart className="pb-1"/>
                           </div>
                           <div className="store-data-left-favorite-num">33</div>
                         </div>
@@ -214,7 +214,6 @@ const StoreDetails = ({
                           </div>
                         )}
                       </div>
-                     
                     </div>
 
                     <div className="d-flex store-data-left-content">

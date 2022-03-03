@@ -9,21 +9,23 @@
             .store-data-left-name {
                 font-size: 1.75rem;
                 font-weight: 500;
+                color: $color-dark-grey;
             }
             .store-data-left-category {
                 background-color: #eaeaea;
                 padding: 0.1rem 0.75rem;
                 border-radius: 1rem;
                 font-size: $fz-sm;
+                font-weight: 500;
             }
             .store-data-left-star {
-                margin-left: 2.3rem;
+                margin-left: 1rem;
             }
             .store-data-left-favorite {
                 font-size: $fz-xx-lg;
 
                 .store-data-left-icon {
-                    margin: 0 0.5rem 0 2.5rem;
+                    margin: 0 0.5rem 0 1.25rem;
                     color: $color-light-red;
                 }
                 .store-data-left-favorite-num {

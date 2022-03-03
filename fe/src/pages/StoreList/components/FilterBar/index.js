@@ -1,16 +1,21 @@
 import React from "react";
 
 const FilterBar = (props) => {
-  const { category, selectedCat, setSelectedCat } = props;
+  const {
+    category,
+    selectedCat,
+    setSelectedCat,
+    setOpState,
+    opState,
+    setCategorySwitch,
+    setOpSwitch,
+    setKeyword,
+  } = props;
   return (
     <>
-      {/* 篩選區域 */}
+      {/* -------- 篩選區域 -------- */}
 
-      <div className="store-select-outline">
-        <select className="store-select">
-          <option value="">所有店家</option>
-        </select>
-      </div>
+      {/* 店家類別 */}
       <div className="store-select-outline">
         <select
           name="store-type"
@@ -19,6 +24,8 @@ const FilterBar = (props) => {
           value={selectedCat}
           onChange={(e) => {
             setSelectedCat(e.target.value);
+            setKeyword("");
+            setOpState("");
           }}
         >
           <option value="">店家類別</option>
@@ -31,9 +38,21 @@ const FilterBar = (props) => {
           })}
         </select>
       </div>
+      {/* 所有店家 */}
       <div className="store-select-outline">
-        <select className="store-select">
-          <option value="">地區</option>
+        <select
+          name="op"
+          className="store-select"
+          value={opState}
+          onChange={(e) => {
+            setOpState(e.target.value);
+            setKeyword("");
+            setSelectedCat("");
+          }}
+        >
+          <option value="">所有店家</option>
+          <option value="true">營業中</option>
+          <option value="false">休息中</option>
         </select>
       </div>
     </>

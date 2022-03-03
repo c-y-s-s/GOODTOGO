@@ -12,8 +12,7 @@
 .user-shopping-cart {
     margin-top: 2.2rem;
     color: $color-dark-grey;
-    //! 最後要檢查一下這個寬度有沒有用沒用要拿掉
-    width: 500px;
+
     .user-shopping-cart-data-title {
         font-size: $fz-md;
         padding: 1.6rem 0;
@@ -23,12 +22,14 @@
         }
         .user-shopping-cart-data-title-name {
             padding-left: 1rem;
+            letter-spacing: 1.5px;
         }
         .user-shopping-cart-data-title-category {
             background-color: #eaeaea;
             margin-left: 0.5rem;
-            padding: 0.15rem 0.55rem;
-            border-radius: 3rem;
+            padding: 0.1rem 0.55rem;
+            border-radius: 1.5rem;
+            font-size: $fz-s-sm;
         }
     }
     .user-shopping-cart-data {
@@ -49,6 +50,8 @@
             font-size: $fz-xx-lg;
             .user-shopping-cart-products-data-name {
                 align-items: center;
+                letter-spacing: 1.5px;
+                font-weight: 500;
                 .cover-photo {
                     width: 6.4rem;
                     height: 5.4rem;
@@ -81,11 +84,12 @@
                 align-items: center;
             }
             .user-shopping-cart-products-data-price {
-                margin-left: 10.5rem;
+                margin-left: 7.8rem;
+                letter-spacing: 1px;
             }
 
             .user-shopping-cart-products-data-amount {
-                margin-right: 8rem;
+                margin-right: 4.5rem;
                 .buy-num {
                     align-items: center;
                     margin-right: 1.2rem;
@@ -137,6 +141,7 @@
                 color: $color-green;
                 max-width: 1rem;
                 margin-right: 5rem;
+                font-weight: 500;
                 .user-shopping-cart-products-data-price-total-chinese-title {
                     display: none;
                 }
@@ -209,7 +214,7 @@
         .user-shopping-cart-data
         .user-shopping-cart-products-data
         .user-shopping-cart-products-data-amount {
-        margin-right: 5.4rem;
+        margin-right: 5rem;
     }
 }
 
@@ -385,6 +390,9 @@
         .user-shopping-cart-products-data
         .user-shopping-cart-products-data-amount {
         margin-left: 0;
+    }
+    .user-shopping-cart .user-shopping-cart-data-title .user-shopping-cart-data-title-category {
+        display: none;
     }
 }
 

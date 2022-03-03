@@ -66,7 +66,7 @@ router.use((req, res, next) => {
 // 檢查要 update 的資料是否符合格式 中間件
 // express-validator {body} 驗證
 const updateProfileRules = [
-  // FIXME: 前後端錯誤訊息
+  //前後端錯誤訊息
   body("name").contains().withMessage("姓名 請填寫正確格式"),
   body("email").isEmail().withMessage("電子信箱 請填寫正確格式"),
   body("phone").isNumeric().withMessage("電話號碼 請填寫正確格式"), //.isMobilePhone()
