@@ -25,7 +25,7 @@ router.use((req, res, next) => {
     id: 1,
     name: "添飯中式料理",
     // photo: "",
-    store_id:1,
+    store_id: 1,
     logo: "/static/uploads/logo/test_logo.png",
   };
   // ----- 測試，假設已取得登入後的 session
@@ -103,19 +103,6 @@ const uploader = multer({
   },
 });
 
-// 檢查 新密碼 確認密碼 是否一致 中間件
-// express-validator {body} 驗證
-const updatePasswordRules = [
-  body("confirmPassword")
-    .custom((value, { req }) => {
-      // confirmPassword value
-      // 傳入兩個值 value, { req } (文件這樣寫的)
-      return value === req.body.newPassword; // true or false
-      // confirmPassword value === req.body.newPassword
-    })
-    .withMessage("新密碼、確認密碼欄位輸入不一致"),
-];
-
 // -------- 店家資料顯示 --------
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
@@ -166,7 +153,7 @@ router.get("/productslist", async (req, res, next) => {
   let offset = (page - 1) * perPage;
   // 取得資料
   let [data] = await connection.execute(
-    "SELECT * FROM products WHERE store_id=? ORDER BY created_at LIMIT ? OFFSET ?",
+    "SELECT * FROM products WHERE store_id=? ORDER BY created_at DESC LIMIT ? OFFSET ?",
     [req.session.member.id, perPage, offset]
   );
   console.log("目前店家id", req.session.member.id);
@@ -178,141 +165,10 @@ router.get("/productslist", async (req, res, next) => {
 
   console.log("data", data);
 
-
-  res.json([data,productsData, pagination]);
+  res.json([data, productsData, pagination]);
 });
 
-// -------- 會員資料修改儲存 --------
-// /api/member/profile/edit (post)
-router.post(
-  "/profile/edit",
-  uploader.single("photo"),
-  // 只傳一張 single // fieldname: photo 表單欄位名稱
-  updateProfileRules, // 驗證更新資料中間件
-
-  async (req, res, next) => {
-    // express-validator 驗證結果 回傳錯誤訊息
-    const validateResult = validationResult(req);
-    if (!validateResult.isEmpty()) {
-      // 驗證結果有問題
-      let error = validateResult.mapped();
-      // 錯誤驗證結果轉為 array / mapped 方便取得錯誤結果
-      console.log("profile validateResult(error): ", error); // 測試錯誤訊息是否會出現
-      // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
-      return res.status(400).json({
-        code: "66001",
-        msg: error,
-      });
-    }
-
-    // 檢查 email 是不是已經註冊
-    let [members] = await connection.execute(
-      "SELECT * FROM users WHERE email=?",
-      [req.body.email]
-      // req.body (form post 的物件 裡面的 email)
-    );
-    console.log(members); // [] 空的 -> 沒有此email -> 可以註冊
-    if (members.length > 0) {
-      // 表示有查到此 email -> 註冊過了
-      return res.status(400).send({
-        // send? json?
-        code: "33002",
-        msg: "這個 email 已經註冊過了",
-      });
-    }
-
-    // 到這邊表示前面沒錯誤了 (所有資料驗證ok、email尚未被註冊)
-
-    // 處理圖片
-    console.log("前端送來、multer中間件處理過 req.file: ", req.file);
-    let filename = req.file
-      ? "/static/uploads/headshots/" + req.file.filename
-      : req.session.member.photo;
-    console.log("加上路徑的 filename: ", filename);
-
-    // -------- 儲存到資料庫 --------
-    let [updateProfileResult] = await connection.execute(
-      "UPDATE users SET name=?, email=?, phone=?, headshots=? WHERE id=?",
-      [
-        req.body.name,
-        req.body.email,
-        req.body.phone,
-        filename,
-        req.session.member.id,
-      ]
-    );
-    console.log(updateProfileResult);
-
-    // 寫內容前先測試能不能得到 req
-    // console.log("req.body: ", req.body);
-    res.json({
-      name: req.body.name,
-      photo: filename,
-      message: "儲存修改資料 ok",
-    });
-  }
-);
-
-// -------- 會員密碼修改儲存 --------
-// /api/member/password (post)
-router.post("/password", updatePasswordRules, async (req, res, next) => {
-  // 拿到 updatePasswordRules 驗證的結果
-  // express-validator {validationResult}
-  const validateResult = validationResult(req);
-  if (!validateResult.isEmpty()) {
-    // validateResult 不是空的 (表示驗證結果有問題)
-    let error = validateResult.array();
-    // 把錯誤驗證結果變成 array 方便我們取得錯誤結果
-    console.log("password validateResult(error): ", error);
-    // 測試錯誤訊息是否會出現
-    // 陣列-> [ { value: '...', msg: '...(withMessage的錯誤訊息)', param: '...', location: 'body' } ]
-    // 錯誤訊息作為 res 傳回給前端 (後端處理自訂給前端)
-    return res.status(400).json({
-      code: "33003",
-      msg: error[0].msg,
-      // 根據上面測試錯誤的話 回傳的結構 知道驗證完若沒通過的withMessage訊息會在 error[0].msg 裡
-    });
-  }
-
-  // 檢查 req.body.password 密碼是否正確，正確才能改新密碼
-  let [passwordResult] = await connection.execute(
-    `SELECT password FROM users WHERE id=?;`,
-    [req.session.member.id]
-  );
-  // 把會員資料從陣列中拿出來
-  let userPassword = passwordResult[0];
-  // 比對密碼
-  let result = await bcrypt.compare(req.body.password, userPassword.password);
-  if (!result) {
-    // 如果比對失敗
-    console.log("比對密碼結果失敗: ", result);
-    return res.status(400).send({
-      code: "33004",
-      msg: "會員密碼驗證錯誤",
-    });
-  }
-
-  // 寫到這 先測試 是否能比對密碼成功(用前台送出表單測試)
-  // 再進行後續儲存
-
-  // 雜湊 newPassword
-  let hashNewPassword = await bcrypt.hash(req.body.newPassword, 10);
-  // 第二個參數是 saltRounds 是指把輸入的密碼再去加其他字母的次數 10就是加10次
-
-  // -------- 儲存到資料庫 --------
-  let [updatePasswordResult] = await connection.execute(
-    `UPDATE users SET password=? WHERE id=?;`,
-    [hashNewPassword, req.session.member.id]
-  );
-  console.log(updatePasswordResult);
-
-  // 寫內容前先測試能不能得到 req
-  // console.log("req.body: ", req.body);
-  res.json({
-    message: "儲存修改密碼 ok",
-  });
-});
-// -------- 會員密碼修改儲存 --------
+// -------- 上下架修改儲存 --------
 // /api/member/password (post)
 router.post("/productslistvalid", async (req, res, next) => {
   console.log("ddddd", req.body);
@@ -351,28 +207,7 @@ router.post("/productslistvalid", async (req, res, next) => {
   });
 });
 
-// -------- 會員店家收藏清單 --------
-// /api/member/like (get)
-router.get("/like", async (req, res, next) => {
-  let [userLikeData] = await connection.execute(
-    "SELECT * FROM user_like WHERE user_id=?",
-    [req.session.member.id]
-  );
-  console.log("db_users id: ", req.session.member.id);
-  console.log("取得 user Like Data: ", userLikeData);
-
-  // 打包資料給 res
-  // let userLike = {
-  //   name: userLikeData[0].name,
-  //   email: userLikeData[0].email,
-  //   phone: userLikeData[0].phone,
-  //   // photo: data[0].headshots,
-  //   photo: req.session.member.photo,
-  // };
-  res.json(userLikeData);
-});
-
-// /api/auth/register
+// 新增商品
 router.post("/newproduct", async (req, res, next) => {
   console.log(req.body);
   //*存入資料庫
