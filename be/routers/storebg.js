@@ -225,4 +225,19 @@ router.post("/newproduct", async (req, res, next) => {
   res.json({ message: "ok" });
 });
 
+// -------- 會員移除收藏店家 --------
+// /api/member/like/remove (post)
+router.post("/remove", async (req, res, next) => {
+  let [removeProductIndex] = await connection.execute(
+    `DELETE FROM products WHERE store_id=? AND id=?;`,
+    [req.session.member.id, req.body.productId]
+  );
+
+  // console.log(req.body.removeStoreId);
+  console.log("刪除會員收藏資料結果: ", removeProductIndex);
+  res.json({
+    message: "會員移除收藏店家 ok",
+  });
+});
+
 module.exports = router;

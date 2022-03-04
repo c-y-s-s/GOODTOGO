@@ -9,7 +9,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
     e.preventDefault();
 
     let productValidId = { productValid, productId };
-    console.log("aaa", productValidId);
+    console.log("productValidId 111", productValidId);
     setModalSwitch(productValidId);
     try {
       // http://localhost:3002/api/member/password (router.post)
@@ -26,26 +26,24 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
     }
   }
 
-  // async function removeSubmit(e) {
-  //   e.preventDefault();
+  async function removeSubmit(e) {
+    e.preventDefault();
 
-  //   let productValidId = { productValid, productId };
-  //   console.log("aaa", productValidId);
+    let productValidId = { productValid, productId };
+    console.log("productValidId 222", productValidId);
+    setModalSwitch(productValidId);
 
-  //   try {
-  //     // http://localhost:3002/api/member/password (router.post)
-  //     let response = await axios.post(
-  //       `${API_URL}/storebg/productslistvalid`,
-  //       productValidId
-  //     );
-  //     console.log("上下架訊息 ", response.data);
-  //   } catch (e) {
-  //     console.error("valid error: ", ERR_MSG[e.response.data.code]);
-  //     console.error("res.error:", e.response.data);
-  //     // setErr(e.response.data.msg);
-  //     // setErr({ ...err, confirmPassword: e.response.data.msg });
-  //   }
-  // }
+    try {
+      let response = await axios.post(
+        `${API_URL}/storebg/remove`,
+        productValidId
+      );
+      console.log("刪除訊息 ", response.data);
+    } catch (e) {
+      console.error("valid error: ", ERR_MSG[e.response.data.code]);
+      console.error("res.error:", e.response.data);
+    }
+  }
   return (
     <div>
       <div
@@ -107,7 +105,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
               <button
                 type="submit"
                 className="btn btn-danger"
-                // onClick={removeSubmit}
+                onClick={removeSubmit}
                 data-bs-dismiss="modal"
               >
                 刪除
