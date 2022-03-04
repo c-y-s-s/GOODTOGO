@@ -23,9 +23,11 @@ const MyAccount = () => {
   const [headShot, setHeadShot] = useState("");
   const [userName, setUserName] = useState("");
 
-  // 儲存 會員有無喜愛店家、訂單
+  // 儲存 會員有無喜愛店家、訂單 (判斷是否執行api)
   const [likes, setLikes] = useState([]);
+  // [ {store_id:2}, {store_id:3} ]
   const [orders, setOrders] = useState([]);
+  //[ {id: 6, status_id: 1}, {id: 8, status_id: 2} ]
 
   // -------- 用 session cookie 取使用者資料 --------
   useEffect(() => {
@@ -220,9 +222,9 @@ const MyAccount = () => {
             {/* <Route path="like" element={<UserLike />} /> */}
             <Route
               path="order/*"
-              element={<UserOrder orders={orders} setOrders={setOrders} />}
+              element={<UserOrder orders={orders} setOrders={setOrders}/>}
             >
-              <Route path=":status" element={<UserOrder />} />
+              <Route path=":status" element={<UserOrder orders={orders} setOrders={setOrders} />} />
             </Route>
             <Route
               path="like"
