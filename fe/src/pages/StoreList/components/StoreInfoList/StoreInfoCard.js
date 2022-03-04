@@ -42,7 +42,7 @@ const StoreInfoCard = (props) => {
 
           return (
             <div key={item.id}>
-              <Link to={`all/${item.id}`} className="no-link">
+              <Link to={`/store/${item.id}`} className="no-link">
                 <div className="store-info-card shadow d-flex align-items-center">
                   <div className="info-img col-12">
                     <img
