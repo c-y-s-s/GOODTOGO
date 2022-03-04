@@ -89,7 +89,10 @@ const UserLike = (props) => {
       // http://localhost:3002/api/member/like/remove (router.post)
       let response = await axios.post(
         `${API_URL}/member/like/remove`,
-        removeStoreId
+        removeStoreId,
+        {
+          withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
+        }
       );
       console.log("會員有移除 like :", response.data);
 

@@ -11,10 +11,11 @@ import UserLike from "./pages/UserLike";
 import UserOrder from "./pages/UserOrder";
 // import UserCoupon from "./pages/UserCoupon";
 import UserCreditCard from "./pages/UserCreditCard";
+import Navbar from "../../components/Navbar"
 
 // user 帶著 session 進入此頁
 
-const MyAccount = () => {
+const MyAccount = (props) => {
   let { userInfo } = useParams();
   // console.log(userInfo);
 
@@ -28,6 +29,8 @@ const MyAccount = () => {
   // [ {store_id:2}, {store_id:3} ]
   const [orders, setOrders] = useState([]);
   //[ {id: 6, status_id: 1}, {id: 8, status_id: 2} ]
+
+  // 
 
   // -------- 用 session cookie 取使用者資料 --------
   useEffect(() => {
@@ -66,6 +69,7 @@ const MyAccount = () => {
 
   return (
     <div>
+      {/* <Navbar /> */}
       <div className="container my-5">
         <div className="row">
           <div className="col-md-3 col-lg-2">
@@ -217,14 +221,22 @@ const MyAccount = () => {
                 />
               }
             />
-            <Route path="payment" element={<UserCreditCard />} />
+            <Route
+              path="payment"
+              element={
+                <UserCreditCard setisModalTouch={props.setisModalTouch}  />
+              }
+            />
             <Route path="password" element={<UserPassword />} />
             {/* <Route path="like" element={<UserLike />} /> */}
             <Route
               path="order/*"
-              element={<UserOrder orders={orders} setOrders={setOrders}/>}
+              element={<UserOrder orders={orders} setOrders={setOrders} />}
             >
-              <Route path=":status" element={<UserOrder orders={orders} setOrders={setOrders} />} />
+              <Route
+                path=":status"
+                element={<UserOrder orders={orders} setOrders={setOrders} />}
+              />
             </Route>
             <Route
               path="like"
