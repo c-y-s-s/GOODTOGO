@@ -4,6 +4,7 @@ import { useAuth } from "../context/auth";
 import Popover from "./_popover";
 import MenuToggle from "./_menuToggle";
 
+
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
@@ -55,6 +56,7 @@ const Navbar = (props) => {
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
           </Link>
+
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>
