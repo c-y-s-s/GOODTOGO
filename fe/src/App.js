@@ -8,6 +8,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./styles/index.scss";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
+// -------- import pages --------
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
@@ -20,7 +21,6 @@ import Auth from "./pages/Auth";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
-import ProductComment from "../src/pages/Productcomment";
 import Admin from "./pages/Admin/";
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
@@ -91,10 +91,7 @@ function App() {
             element={<CheckOut checkoutData={checkoutData} />}
           ></Route>
 
-          <Route
-            path="/productcomment/:storeId"
-            element={<ProductComment />}
-          ></Route>
+  
           <Route path="/map" element={<Map />}></Route>
 
           <Route path="member/*" element={<MyAccount />}>

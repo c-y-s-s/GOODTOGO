@@ -21,20 +21,21 @@
         height: 100%;
         //上排文字
         .product-card-text {
-            padding: 1.25rem 0 0.75rem 0;
+            padding: 1.25rem 0.45rem 0.75rem 0.45rem;
             letter-spacing: 0.16rem;
             justify-content: space-between;
             //時間倒數
             .time-text {
                 font-size: 0.88rem;
+
                 .count-down-one-hour span {
                     padding-left: 0.45rem;
+
                     font-size: 1rem;
                     font-weight: 500;
                     color: $color-light-red;
                 }
                 span {
-                    padding-left: 0.45rem;
                     font-size: 1rem;
                     color: $color-green;
                     font-weight: 500;
@@ -88,6 +89,15 @@
             margin-left: -0.2rem;
             margin-top: 0.45rem;
             margin-bottom: 0.45rem;
+
+            .card-star-number {
+                font-size: $fz-sm;
+                letter-spacing: 0.5px;
+            }
+            .card-star-count {
+                font-size: $fz-sm;
+                letter-spacing: 0.5px;
+            }
         }
         .card-text {
             font-size: $fz-s-sm;
@@ -98,7 +108,9 @@
             font-size: 1.2rem;
         }
     }
-
+    .product-card-price {
+        font-weight: 500;
+    }
     // 卡片動畫
     &:hover {
         transform: translateY(-1.1rem);

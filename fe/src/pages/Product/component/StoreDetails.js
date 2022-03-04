@@ -30,6 +30,7 @@ const StoreDetails = ({
 }) => {
   moment.locale("zh-tw");
 
+
   let timeInsecond = moment().format("LTS");
   // ! 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
   //!目前時間總秒數
@@ -44,7 +45,9 @@ const StoreDetails = ({
   const [storeMapDataLat, setStoreMapDataLat] = useState([]);
   // 店家緯度
   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
-
+  // 店家評論總數
+  const [storeLikeData,setStoreLikeData]=useState([]) 
+  console.log("=======",storeLikeData);
   useEffect(() => {
     let getStoreDetalis = async () => {
       // 撈店家所有評論
@@ -55,9 +58,14 @@ const StoreDetails = ({
       let storeMapDataReaponse = await axios.get(
         `${API_URL}/storesmap/${storeId}`
       );
+      //店家愛心總數
+        let storeLikeDataReaponse = await axios.get(
+          `${API_URL}/products/storelike/${storeId}`
+        );
       setStoreCommentTotalData(storeCommentTotalResponse.data);
       setStoreMapDataLat(storeMapDataReaponse.data[0].longitude);
       setStoreMapDataLng(storeMapDataReaponse.data[0].latitude);
+      setStoreLikeData(storeLikeDataReaponse.data[0].storeLikeTotal);
     };
     getStoreDetalis();
   }, []);
@@ -164,9 +172,11 @@ const StoreDetails = ({
                         </div>
                         <div className="d-flex store-data-left-favorite pb-1">
                           <div className="store-data-left-icon ">
-                            <FaHeart className="pb-1"/>
+                            <FaHeart className="pb-1" />
                           </div>
-                          <div className="store-data-left-favorite-num">33</div>
+                          <div className="store-data-left-favorite-num">
+                            {storeLikeData}
+                          </div>
                         </div>
                       </div>
                     </div>
