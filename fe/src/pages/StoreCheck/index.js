@@ -24,14 +24,68 @@ const Storecheck = () => {
   // -------- checkbox 同意條款 --------
   const [agree, setAgree] = useState(true);
 
+
+  // -------- 營業日期勾選功能開始 --------
+  // 建立日期與對應的值的物件
+  // const dayObject = [
+  //   {
+  //   day:"一", isOpen:[1]
+  // },
+  //   {
+  //   day:"二", isOpen:[2]
+  // },
+  //   {
+  //   day:"三", isOpen:[3]
+  // },
+  //   {
+  //   day:"四", isOpen:[4]
+  // },
+  //   {
+  //   day:"五", isOpen:[5]
+  // },
+  //   {
+  //   day:"六", isOpen:[6]
+  // },
+  //   {
+  //   day:"七", isOpen:[7]
+  // }
+  // ]
+// 設定日期checkbox選擇預設false
+  // const [checkedState, setCheckedState] = useState(
+  //   new Array(dayObject.length).fill(false)
+  // );
+
+  // 宣告營業日
+  // const [openDay, setOpenDay] = useState("");
+
+  // const handleOnChange = (position) => {
+  //   const updatedCheckedState = checkedState.map((item, index) =>
+  //     index === position ? !item : item
+  //   );
+  //   setCheckedState(updatedCheckedState);
+
+  //   const daysSelected = updatedCheckedState.reduce(
+  //     (sum, currentState, index, openDay) => {
+  //       if (currentState === true) {
+  //         return openDay + dayObject[index].isOpen;
+  //       }
+  //       return openDay;
+  //     },
+  //   );
+  //   setOpenDay(daysSelected);
+  //   setMember({ ...member, ...{ openDay } });
+  // };
+
+
+
   const [day, setDay] = useState({
-    一: "false",
-    二: "false",
-    三: "false",
-    四: "false",
-    五: "false",
-    六: "false",
-    日: "flase"
+    // 一: "false",
+    // 二: "false",
+    // 三: "false",
+    // 四: "false",
+    // 五: "false",
+    // 六: "false",
+    // 日: "false"
   });
 
   const [member, setMember] = useState("");
@@ -46,6 +100,7 @@ const Storecheck = () => {
   // -------- 表單營業日期變更開始 -------- //
   const handleDayChange = (e) => {
     console.log(e.target.value);
+    
     setDay({ ...day, [e.target.name]: e.target.value });
     setMember({ ...member, ...{ day } });
   };
@@ -166,12 +221,15 @@ const Storecheck = () => {
       formData.append("closeTime",member.closeTime);
 
 
-      let response = await axios.post(`${API_URL}/auth/storeCheck`, member);
+      // let response = await axios.post(`${API_URL}/auth/storeCheck`, member);
+      let response = await axios.post(`${API_URL}/auth/storeCheck`);
+
       console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);
     }
+    
   };
   // -------- 表單送出結束 -------- //
 
@@ -210,7 +268,7 @@ const Storecheck = () => {
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
-                          required
+                          //required
                         />
                         <label
                           htmlFor="name"
@@ -235,7 +293,7 @@ const Storecheck = () => {
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
-                          required
+                          //required
                         />
                         <label
                           htmlFor="email"
@@ -260,7 +318,7 @@ const Storecheck = () => {
                           placeholder="密碼"
                           value={member.password}
                           onChange={handleChange}
-                          required
+                          //required
                         />
                         <label
                           htmlFor="password"
@@ -286,7 +344,7 @@ const Storecheck = () => {
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
-                          required
+                          //required
                         />
                         <label
                           htmlFor="confirmpassword"
@@ -381,7 +439,7 @@ const Storecheck = () => {
                           value={member.address}
                           maxLength="80"
                           onChange={handleChange}
-                          required
+                          //required
 
                         />
                         <label
@@ -408,7 +466,7 @@ const Storecheck = () => {
                           value={member.storeName}
                           maxLength="30"
                           onChange={handleChange}
-                          required
+                          //required
 
                         />
                         <label
@@ -435,7 +493,7 @@ const Storecheck = () => {
                           value={member.phone}
                           maxLength="10"
                           onChange={handleChange}
-                          required
+                          //required
 
                         />
                         <label
@@ -467,7 +525,7 @@ const Storecheck = () => {
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
-                          required
+                          //required
 
                         />
                       </div>
@@ -486,7 +544,7 @@ const Storecheck = () => {
                           id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
-                          required
+                          //required
 
                         />
                       </div>
@@ -505,7 +563,7 @@ const Storecheck = () => {
                           placeholder="商品類別"
                           value={member.storeType}
                           onChange={handleChange}
-                          required
+                          //required
                         >
                           <option>--請選擇商品分類--</option>
                           <option value="1">港式</option>
@@ -538,7 +596,19 @@ const Storecheck = () => {
                       </label>
                       <div className="d-block mb-3 me-0 opendayCheck">
                         <div className="row mt-3 mb-3 ms-1 me-1">
-                          <input type="checkbox" id="mon" name="一" value={[1]} className="col dayCheck" onChange={handleDayChange}></input>
+                          {/* {dayObject.map(({ day, isOpen }, index) => {
+                            return (
+                              <input key={index}
+                                type="checkbox"
+                                id={`custom-checkbox-${index}`}
+                                name={day}
+                                value={day}
+                                checked={checkedState[index]}
+                                onChange={() => handleOnChange(index)}
+                              />
+                            );
+                          })} */}
+                          <input type="checkbox" id="mon" name="一" value={member.day} className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="tue" name="二" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="wed" name="三" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="thu" name="四" className="col dayCheck" onChange={handleDayChange}></input>
@@ -580,7 +650,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  required
+                                  //required
 
                                 />
                                 <label
@@ -606,7 +676,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  required
+                                  //required
 
                                 />
                                 <label
@@ -637,7 +707,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  required
+                                  //required
 
                                 />
                                 <label
@@ -664,7 +734,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  required
+                                  //required
 
                                 />
                                 <label
