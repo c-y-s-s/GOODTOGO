@@ -95,12 +95,14 @@ const Storecheck = () => {
   const [closeTime, setCloseTime] = useState("")
 
   const [imageSrc, setImageSrc] = useState("");
+
+  const [ address, setAddress ] = useState("");
   // -------- 處理表格改變 -------- //
 
   // -------- 表單營業日期變更開始 -------- //
   const handleDayChange = (e) => {
     console.log(e.target.value);
-    
+
     setDay({ ...day, [e.target.name]: e.target.value });
     setMember({ ...member, ...{ day } });
   };
@@ -136,6 +138,12 @@ const Storecheck = () => {
     console.log(e.target.value)
     setSelectedArea(e.target.value)
     setMember({ ...member, [e.target.name]: e.target.value });
+  }
+
+  const handleAddressChange = (e) =>{
+    console.log(e.target.value)
+    setAddress(e.target.value)
+    setMember({...member, [e.target.name]: e.target.value});
   }
   // -------- 表單地區選擇與地址結束 -------- //
 
@@ -208,9 +216,9 @@ const Storecheck = () => {
       formData.append("email",member.email);
       formData.append("password",member.password);
       formData.append("confirmPassword",member.confirmPassword);
-      formData.append("City",member.City);
-      formData.append("Area",member.Area);
-      formData.append("address",member.address);
+      // formData.append("City",member.City);
+      // formData.append("Area",member.Area);
+      formData.append("address",member.City+member.Area+member.address);
       formData.append("storeName",member.storeName);
       formData.append("phone",member.phone);
       // formData.append("storeLogo",member.storeLogo);
@@ -222,7 +230,7 @@ const Storecheck = () => {
 
 
       // let response = await axios.post(`${API_URL}/auth/storeCheck`, member);
-      let response = await axios.post(`${API_URL}/auth/storeCheck`);
+      let response = await axios.post(`${API_URL}/auth/storeCheck`, formData);
 
       console.log(response.data);
     } catch (e) {
@@ -436,9 +444,9 @@ const Storecheck = () => {
                           className="form-control custom-input"
                           id="address"
                           placeholder="請輸入詳細地址"
-                          value={member.address}
+                          value={address}
                           maxLength="80"
-                          onChange={handleChange}
+                          onChange={handleAddressChange}
                           //required
 
                         />
