@@ -34,6 +34,9 @@ function App() {
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
+  // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
+  const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
+    useState(0);
   // 結帳所需 data
   const [checkoutData, setCheckoutData] = useState({
     //!整合須改為目前登入者 id
@@ -57,7 +60,12 @@ function App() {
   return (
     <AuthContext.Provider value={{ loginMember, setLoginMember }}>
       <Router>
-        {isModalTouch && <Navbar />}
+        {isModalTouch && (
+          <Navbar
+            setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+            navshoppingDeleteParameter={navshoppingDeleteParameter}
+          />
+        )}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
@@ -83,6 +91,7 @@ function App() {
               <ShoppingCart
                 setCheckoutData={setCheckoutData}
                 checkoutData={checkoutData}
+                navshoppingDeleteParameter={navshoppingDeleteParameter}
               />
             }
           ></Route>
@@ -91,7 +100,6 @@ function App() {
             element={<CheckOut checkoutData={checkoutData} />}
           ></Route>
 
-  
           <Route path="/map" element={<Map />}></Route>
 
           <Route path="member/*" element={<MyAccount />}>

@@ -13,6 +13,7 @@ const ProductsData = ({
   deleteLive,
   setPriceTotal,
   priceTotal,
+  navshoppingDeleteParameter,
 }) => {
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
@@ -21,20 +22,20 @@ const ProductsData = ({
 
   async function handleMinus(item) {
     //點到就刷新 商品表 api
-    setProductsAmountTotal(productsAmountTotal+1);
+    setProductsAmountTotal(productsAmountTotal + 1);
     //點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
 
   async function handlePlus(item) {
-       setProductsAmountTotal(productsAmountTotal + 1);
+    setProductsAmountTotal(productsAmountTotal + 1);
     setPriceTotal(!priceTotal);
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
   // console.log("加減數量", productsAmountTotal);
-  
+
   async function handleDeleteProduct(item) {
     //為刷新useEffect所設置
     setProductsAmountTotal(productsAmountTotal + 1);
@@ -57,12 +58,11 @@ const ProductsData = ({
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, [productsAmountTotal, deleteLive]);
+  }, [productsAmountTotal, deleteLive, navshoppingDeleteParameter]);
 
   return (
     <div>
       {specifyProductsData.map((item) => {
- 
         return (
           <div
             className="d-flex user-shopping-cart-products-data"

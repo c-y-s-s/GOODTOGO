@@ -7,7 +7,11 @@ import { API_URL } from "../../utils/config";
 import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
 import { ReactComponent as JumpIcon }  from "../../images/editor-0.9s-215px.gif";
-const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
+const Shoppingcart = ({
+  setCheckoutData,
+  checkoutData,
+  navshoppingDeleteParameter,
+}) => {
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
   // 刪除商品刷新頁面開關
@@ -22,8 +26,8 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
     userId: 1,
     storeId: "",
     paymentMethod: "",
-    storeName:"",
-    storeCategory:""
+    storeName: "",
+    storeCategory: "",
   });
   useEffect(() => {
     let getShoppingData = async () => {
@@ -34,7 +38,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
       setShoppingCartData(shoppingDataResponse.data);
     };
     getShoppingData();
-  }, [deleteLive, priceTotal]);
+  }, [deleteLive, priceTotal, navshoppingDeleteParameter]);
 
   return (
     <div>
@@ -84,6 +88,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                   deleteLive={deleteLive}
                   setPriceTotal={setPriceTotal}
                   priceTotal={priceTotal}
+                  navshoppingDeleteParameter={navshoppingDeleteParameter}
                 />
                 {/* 下排 */}
                 <div className="d-flex justify-content-between   user-shopping-cart-data-payment ">
@@ -160,12 +165,8 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
           })
         ) : (
           <div>
-            <img
-              src={require(`../../images/editor-0.9s-215px.gif`)}
-            />
-            <div>
-              購物車沒有商品
-            </div>
+            <img src={require(`../../images/editor-0.9s-215px.gif`)} />
+            <div>購物車沒有商品</div>
           </div>
         )}
       </div>

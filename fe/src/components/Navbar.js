@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Hamburger from "hamburger-react";
 import Popover from "./_popover";
-import Sh from "./sh";
+import NavShoppingCart from "./NavShoppingCart";
 
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
@@ -15,7 +15,9 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
-
+  console.log(props);
+  // 購物車總筆數
+  const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState("");
   return (
     <div className="container-fluid navbar justify-content-center sticky-top">
       <div className="nav-content">
@@ -67,8 +69,16 @@ const Navbar = (props) => {
             <div className="shopping-cart-products">1</div>
           </Link> */}
           <Link to="/shoppingcart" className="nav-icon">
-          <div className="shopping-cart-icon-total-page">1</div>
-            <Sh />
+            <div className="shopping-cart-icon-total-page">
+              {shoppingCartTotalPages}
+            </div>
+            <NavShoppingCart
+              setShoppingCartTotalPages={setShoppingCartTotalPages}
+              setNavShoppingDeleteParameter={
+                props.setNavShoppingDeleteParameter
+              }
+              navshoppingDeleteParameter={props.navshoppingDeleteParameter}
+            />
           </Link>
 
           <Link to="/map" className="nav-icon">
