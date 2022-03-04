@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import GoogleMapReact from "google-map-react";
 import StoreForMap from "./components/StoreForMap";
 import Map from "./components/Map";
 import { HiOutlineSearch } from "react-icons/hi";
