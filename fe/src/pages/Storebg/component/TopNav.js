@@ -45,7 +45,7 @@ const TopNav = () => {
       <nav className="background-storebg-data-right-nav">
         <div className="background-storebg-data-right-nav-title">商品清單</div>
         <div className="background-storebg-data-right-nav-content">
-          <form action="">
+          {/* <form action="">
             <div className="d-flex">
               <div>
                 <a href="#/" className="me-3 icon">
@@ -54,12 +54,12 @@ const TopNav = () => {
               </div>
               <input type="text rounded-3" />
             </div>
-          </form>
+          </form> */}
 
-          <div className="px-3 ">
+          {/* <div className="px-3 ">
             <a href="#/" className="icon icon-border">
             </a>
-          </div>
+          </div> */}
           <div className="username">{storeName}</div>
           <div className="user-photo">
             <img
