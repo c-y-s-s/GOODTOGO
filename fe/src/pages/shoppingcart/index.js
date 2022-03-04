@@ -6,7 +6,7 @@ import { API_URL } from "../../utils/config";
 // -------- react icon --------
 import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
-
+import { ReactComponent as JumpIcon }  from "../../images/editor-0.9s-215px.gif";
 const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
@@ -42,7 +42,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
       <div className="container user-shopping-cart  ">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
-            console.log(item)
+            console.log(item);
             return (
               <div
                 className="col-9 mx-auto user-shopping-cart-data"
@@ -159,7 +159,14 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
             );
           })
         ) : (
-          <div>可以加入沒商品時的畫面</div>
+          <div>
+            <img
+              src={require(`../../images/editor-0.9s-215px.gif`)}
+            />
+            <div>
+              購物車沒有商品
+            </div>
+          </div>
         )}
       </div>
     </div>
