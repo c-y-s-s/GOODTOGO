@@ -34,3 +34,9 @@ textarea {
 .cancel-bg{
   background: $color-light-grey;
 }
+
+.cover-product{
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}

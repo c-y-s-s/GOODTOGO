@@ -91,3 +91,15 @@
     color: $color-light-red;
   }
 }
+
+.background-storebg-data-right-content-pages {
+  ul {
+    .pages {
+      color: $color-green;
+    }
+    .active {
+      background: $color-light-green;
+      color: white;
+    }
+  }
+}
