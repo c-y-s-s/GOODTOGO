@@ -31,6 +31,12 @@ textarea {
 }
 
 // 取消按鈕顏色
-.cancel-bg{
+.cancel-bg {
   background: $color-light-grey;
+}
+
+.cover-newproduct {
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
 }
