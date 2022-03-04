@@ -61,7 +61,10 @@ const UserOrderAll = (props) => {
       // http://localhost:3002/api/member/order/cancel (router.post)
       let response = await axios.post(
         `${API_URL}/member/order/cancel`,
-        cancelOrder
+        cancelOrder,
+        {
+          withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
+        }
       );
       console.log("會員取消訂單 :", response.data);
 

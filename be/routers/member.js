@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const connection = require("../utils/db");
+const { checkLogin } = require("../middleware/checkLogin");
 const path = require("path");
 // express-validator 驗證
 const { body, validationResult } = require("express-validator");
@@ -27,7 +28,7 @@ moment.locale("zh-tw", {
 // 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
 
 // -------- 驗證是否已登入 中間件 --------
-// TODO: router.use(checkLogin); // 最後要抽離成 middleware 引入
+router.use(checkLogin); // 最後要抽離成 middleware 引入
 router.use((req, res, next) => {
   // ----- 測試，假設已取得登入後的 session
   // req.session.member = {
@@ -35,27 +36,28 @@ router.use((req, res, next) => {
   //   name: member.name,
   //   photo: member.photo
   // }
-  req.session.member = {
-    id: 2,
-    name: "王嘉雯",
-    // photo: "",
-    photo: "/static/uploads/headshots/member-1646235995063.png",
-  };
+  // req.session.member = {
+  //   id: 2,
+  //   name: "王嘉雯",
+  //   // photo: "",
+  //   photo: "/static/uploads/headshots/member-1646235995063.png",
+  // };
   // ----- 測試，假設已取得登入後的 session
 
-  console.log("routes", req.session.member);
+  console.log("req.session.member", req.session.member);
+  next();
   // 有無 session
-  if (req.session.member) {
-    // 表示登入過
-    // console.log("測試 has session");
-    next(); // 這樣會跳出 router 到 server.js 繼續 next()???
-  } else {
-    // 表示尚未登入
-    res.status(400).json({
-      code: "99001",
-      msg: "會員未登入",
-    });
-  }
+  // if (req.session.member) {
+  //   // 表示登入過
+  //   // console.log("測試 has session");
+  //   next(); // 這樣會跳出 router 到 server.js 繼續 next()???
+  // } else {
+  //   // 表示尚未登入
+  //   res.status(400).json({
+  //     code: "99001",
+  //     msg: "會員未登入",
+  //   });
+  // }
 
   // 到這裡，表示 req.session.member 一定有資料
   // next(); // 往下走讓 其他頁撈資料
@@ -133,7 +135,13 @@ const updatePasswordRules = [
 // /api/member/profile (get)
 router.get("/profile", async (req, res, next) => {
   let [data] = await connection.execute(
-    `SELECT name, email, phone FROM users WHERE id=?;`,
+    `SELECT
+    name,
+    email,
+    phone,
+    headshots
+    FROM users
+    WHERE id=?;`,
     [req.session.member.id]
   );
   console.log("db_users id: ", req.session.member.id);
@@ -161,8 +169,8 @@ router.get("/profile", async (req, res, next) => {
     name: data[0].name,
     email: data[0].email,
     phone: data[0].phone,
-    // photo: data[0].headshots,
-    photo: req.session.member.photo,
+    photo: data[0].headshots,
+    // photo: req.session.member.photo,
   };
   res.json({ profile, emails, likes, orders });
 });
@@ -228,6 +236,16 @@ router.post(
         req.session.member.id,
       ]
     );
+    // 整理需要的資料
+    let returnUser = {
+      ...req.session.member,
+      name: req.body.name,
+      photo: filename,
+    };
+    console.log("returnUser", returnUser);
+    // 如果密碼比對成功，記錄在 session
+    // 寫 session
+    req.session.member = returnUser;
     // console.log(updateProfileResult);
 
     // 寫內容前先測試能不能得到 req

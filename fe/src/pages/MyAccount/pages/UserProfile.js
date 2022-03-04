@@ -149,7 +149,8 @@ const UserProfile = (props) => {
       // http://localhost:3002/api/member/profile/edit (router.post)
       let response = await axios.post(
         `${API_URL}/member/profile/edit`,
-        formData
+        formData,
+        { withCredentials: true }
       );
       console.log("使用者有上傳資料: ", response.data);
 

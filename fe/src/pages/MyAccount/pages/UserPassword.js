@@ -142,7 +142,9 @@ const UserPassword = () => {
 
     try {
       // http://localhost:3002/api/member/password (router.post)
-      let response = await axios.post(`${API_URL}/member/password`, password);
+      let response = await axios.post(`${API_URL}/member/password`, password, {
+        withCredentials: true,
+      });
       console.log("會員有更改密碼: ", response.data);
 
       // sweet alert

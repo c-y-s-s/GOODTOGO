@@ -150,12 +150,12 @@ router.post("/login", async (req, res, next) => {
   let returnUser = {
     id: user.id,
     name: user.name,
-    photo: user.photo,
+    photo: user.photo ? user.photo : "",
   };
   console.log(returnUser);
   // 如果密碼比對成功，記錄在 session
   // 寫 session
-  req.session.user = returnUser;
+  req.session.member = returnUser;
 
   res.json({
     code: "0",
@@ -164,7 +164,7 @@ router.post("/login", async (req, res, next) => {
   });
 });
 router.get("/logout", (req, res, next) => {
-  req.session.user = null;
+  req.session.member = null;
   res.sendStatus(202);
 });
 module.exports = router;
