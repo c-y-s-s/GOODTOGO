@@ -66,7 +66,11 @@ const Navbar = (props) => {
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
           </Link> */}
-          <Sh />
+          <Link to="/shoppingcart" className="nav-icon">
+          <div className="shopping-cart-icon-total-page">1</div>
+            <Sh />
+          </Link>
+
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>

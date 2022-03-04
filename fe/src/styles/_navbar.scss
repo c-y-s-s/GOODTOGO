@@ -102,6 +102,18 @@
   .nav-icon {
     color: $color-grey;
     font-size: $fz-xxx-lg;
+    position: relative;
+    .shopping-cart-icon-total-page {
+      position: absolute;
+      background: $color-yellow;
+      color: white;
+      font-size: 10px;
+      width: 21px;
+      height: 21px;
+      border-radius: 50%;
+      z-index: 1021;
+      left: 10px;
+    }
   }
 }
 .nav-popover {

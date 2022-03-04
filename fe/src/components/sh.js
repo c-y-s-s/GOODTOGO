@@ -11,50 +11,68 @@ const _popover = () => {
   const { loginMember, setLoginMember } = useAuth(true);
 
   const click = () => {
-    return (
-      <>
-
-      </>
-    );
+    return <></>;
   };
 
-  const notLoggedin = (
-    <div className="nav-popover">
-      
-    </div>
-  );
-  const loggedin = (
-    <div className="nav-popover">
-      <div className="popover-item text-center">
-        <Link to="/member" className="nav-popover-link">
-          會員中心
-        </Link>
-      </div>
-      <div className="popover-item text-center">
-        <Link to="/member/order" className="nav-popover-link">
-          我的訂單
-        </Link>
-      </div>
-      {/* <div className="popover-item text-center">
-        <Link to="#" className="nav-popover-link">
-          優惠券
-        </Link>
-      </div> */}
-      <div className="popover-item text-center">
-        {/* <Link to="auth/logout" className="nav-popover-link">
-          登出
-        </Link> */}
-        <div onClick={click} className="nav-popover-link">
-          登出
+  const notLoggedin = <div className="nav-popover"></div>;
+
+  const shoppingList = (
+    <div>
+      <div className="nav-shopping-cart">
+        <div className="nav-shopping-cart-products">
+          <div className="nav-shopping-cart-products-img">圖片</div>
+          <div className="nav-shopping-cart-products-text">
+            <div className="d-flex justify-content-between">
+              <div className="nav-shopping-cart-products-text-name">
+                鴨肉蓋飯
+              </div>
+              <button className="nav-shopping-cart-products-text-delete">
+                X
+              </button>
+            </div>
+            <div className="d-flex justify-content-between w-100">
+              <div className="nav-shopping-cart-products-text-amount">1 X</div>
+              <div className="nav-shopping-cart-products-text-price">
+                NT $ 60
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+      <div className="nav-shopping-cart">
+        <div className="nav-shopping-cart-products">
+          <div className="nav-shopping-cart-products-img">圖片</div>
+          <div className="nav-shopping-cart-products-text">
+            <div className="d-flex justify-content-between">
+              <div className="nav-shopping-cart-products-text-name">
+                鴨肉蓋飯
+              </div>
+              <button className="nav-shopping-cart-products-text-delete">
+                X
+              </button>
+            </div>
+            <div className="d-flex justify-content-between w-100">
+              <div className="nav-shopping-cart-products-text-amount">1 X</div>
+              <div className="nav-shopping-cart-products-text-price">
+                NT $ 60
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="nav-shopping-cart-gopage">
+        <Link to="/shoppingcart" className="nav-shopping-cart-gopage-button">
+          查看購物車
+        </Link>
       </div>
     </div>
   );
   return (
     <>
       <Popover
-        placement="bottom"
-        content={loginMember ? loggedin : notLoggedin}
+        placement="bottomRight"
+        // content={loginMember ? loggedin : notLoggedin}
+        content={shoppingList}
         // trigger="click"
       >
         <ShoppingBag className="nav-icon mt-1" />
