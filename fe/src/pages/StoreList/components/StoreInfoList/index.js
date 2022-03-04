@@ -17,7 +17,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 
 const StoreInfoList = (props) => {
-  const { setTotalHeart, setProductAmount } = props;
+  const { setTotalHeart, setProductAmount, setTotalStar } = props;
   //*儲存-顯示的商家列表
   const [storeList, setStoreList] = useState([]);
   //*儲存-全部類別
@@ -27,7 +27,7 @@ const StoreInfoList = (props) => {
   //*儲存-收藏愛心
   const [storeLikeCount, setStoreLikeCount] = useState([]);
   //*儲存-星星
-  const [stars, setStars] = useState([]);
+  const [storeStarsCount, setStoreStarsCount] = useState([]);
   //總共幾筆資料
   const [total, setTotal] = useState([]);
   //*搜尋-開關
@@ -61,17 +61,19 @@ const StoreInfoList = (props) => {
       let pagination = storeRes.data[2];
       let storeLikeCount = storeRes.data[3];
       let productAmount = storeRes.data[4];
-      let stars = storeRes.data[5];
+      let storeStarsCount = storeRes.data[5];
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
       setStoreLikeCount(storeLikeCount);
+      setStoreStarsCount(storeStarsCount);
       setTotal(pagination.total);
       setAmount(productAmount);
-      setStars(stars);
       //子女元件資料互傳
       setTotalHeart(storeLikeCount);
+      setTotalStar(storeStarsCount);
       setProductAmount(productAmount);
+      // console.log("愛心", storeLikeCount);
     };
     //*搜尋店家列表api:  api/stores/search
     let getSearch = async () => {
@@ -143,7 +145,15 @@ const StoreInfoList = (props) => {
       getStore();
     }
     // window.scrollTo(2000, 2000);
-  }, [page, searchSwitch, keyword, selectedCat, opState, ratingHeartOn]);
+  }, [
+    page,
+    searchSwitch,
+    keyword,
+    selectedCat,
+    opState,
+    ratingHeartOn,
+    ratingCommentOn,
+  ]);
 
   //*計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
@@ -167,13 +177,12 @@ const StoreInfoList = (props) => {
     }
     return pages;
   };
-  console.log("storeLikeCount", storeLikeCount);
+
   // console.log("searchSwitch", searchSwitch);
   // console.log("selected category", selectedCat);
   // console.log("storeList", storeList);
   // console.log("open hour", opState);
   // console.log("keyword", keyword);
-  console.log("CR", ratingCommentOn);
 
   return (
     <div className="store-list">
@@ -191,7 +200,7 @@ const StoreInfoList = (props) => {
           </div>
         </div>
         {/* 商家列表處理區 */}
-        <div className="function-box d-flex flex-wrap mt-lg-5">
+        <div className="function-box d-flex flex-wrap mt-lg-5 col-lg-10 m-auto">
           <SearchBar
             setSearchSwitch={setSearchSwitch}
             keyword={keyword}
@@ -216,17 +225,17 @@ const StoreInfoList = (props) => {
             setRatingCommentOn={setRatingCommentOn}
           />
         </div>
-        <div className="total-count col-lg-12 col-12 text-center  mt-lg-5 mb-lg-2 text-lg-end">
+        <div className="total-count col-lg-10 col-12 text-center  mt-lg-5 mb-lg-2 text-lg-end m-auto">
           總共 {total} 筆
         </div>
         {/* 商家列表顯示區 */}
 
-        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-12 mt-lg-5 ">
+        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-10 mt-lg-5 ">
           <StoreInfoCard
             storeList={storeList}
             storeLikeCount={storeLikeCount}
             amount={amount}
-            stars={stars}
+            storeStarsCount={storeStarsCount}
           />
         </div>
         <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">

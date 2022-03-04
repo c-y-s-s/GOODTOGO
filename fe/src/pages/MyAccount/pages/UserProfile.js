@@ -4,6 +4,7 @@ import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 import { FiFolder } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 const UserProfile = (props) => {
   // console.log(props);
@@ -20,6 +21,7 @@ const UserProfile = (props) => {
     photo: "",
   });
 
+  // 所有的 email，比對 email 用
   const [emails, setEmails] = useState([]);
 
   // input 上傳的圖片物件(二進位檔)
@@ -73,6 +75,7 @@ const UserProfile = (props) => {
       : regPhone(e);
   }
 
+  // -------- 驗證資料 --------
   function regName(e) {
     console.log("regName", e.target.name);
     const reName = /^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/;
@@ -81,7 +84,8 @@ const UserProfile = (props) => {
       : setErr({ ...err, name: "姓名格式有誤，請輸入全 中文 / 英文" });
   }
   function regEmail(e) {
-    // console.log("regEmail", e.target.name);
+    console.log("regEmail", e.target.name);
+    console.log("regEmail", e.target.value);
     const reEmail =
       /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     reEmail.test(e.target.value)
@@ -148,11 +152,21 @@ const UserProfile = (props) => {
         formData
       );
       console.log("使用者有上傳資料: ", response.data);
+
+      // sweet alert
+      Swal.fire({
+        // position: 'top-end',
+        icon: "success",
+        title: "資料儲存成功",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       // 更新資料於 index.js 姓名、頭貼(儲存後)
       props.setUserName(response.data.name);
       props.setHeadShot(response.data.photo);
     } catch (e) {
-      // TODO: 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
+      // 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
       console.error("會員修改資料 error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);

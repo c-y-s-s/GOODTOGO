@@ -3,7 +3,6 @@
   z-index: 1010;
   height: 8vw;
   background-color: rgba(255, 255, 255, 0.884);
-  display: grid;
   margin: auto;
   .nav-content {
     width: 80vw;
@@ -37,6 +36,35 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .shopping-cart {
+      position: relative;
+      .shopping-cart-number {
+        background-color: $color-dark-yellow;
+        font-size: 8px;
+        color: #fff;
+        border-radius: 50%;
+        padding: 0.1rem 0.5rem;
+        position: absolute;
+        left: 8px;
+        &:hover + .shopping-cart-products {
+          opacity: 1;
+        }
+      }
+      .shopping-cart-icon:hover + .shopping-cart-products {
+        opacity: 1;
+      }
+      .shopping-cart-products {
+        opacity: 0;
+        position: absolute;
+        border: 1px solid black;
+        width: 339px;
+        height: 200px;
+        right: -1rem;
+        bottom: -14rem;
+        background-color: white;
+        transition: 0.3s;
+      }
+    }
   }
   .nav-icon {
     color: $color-grey;
@@ -75,12 +103,32 @@
   color: white;
   border-radius: 2px;
 }
-@media (max-width: 540px) {
+
+// .nav-toggle-menu {
+//   padding: 2rem;
+//   .popover-item {
+//     padding: 0.5rem 1rem;
+//     .nav-popover-link {
+//       text-decoration: none;
+//       color: $color-dark-grey;
+//       font-size: $fz-lg;
+//     }
+//     &:hover {
+//       background-color: $color-grey;
+//       .nav-popover-link {
+//         color: white;
+//       }
+//     }
+//   }
+// }
+@media (max-width: 390px) {
   .navbar {
     height: 10vh;
+    background-color: white;
     .nav-content {
+      height: fit-content;
       width: 90vw;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       align-items: center;
       .nav-logo {
         height: 3vh;
@@ -88,14 +136,12 @@
       .sm-logo-left {
         display: flex;
         align-items: center;
-
+        .menu-toggle {
+        }
         .sm-icon {
           padding-bottom: 0.4rem;
           color: $color-dark-grey;
           font-size: $fz-x-lg;
-        }
-        .side-menu {
-          display: block;
         }
       }
       .nav-links {

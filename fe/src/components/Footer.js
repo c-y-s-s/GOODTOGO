@@ -23,7 +23,7 @@ const Footer = () => {
               <Link to="/store_check" className="footer-link col-auto">
                 申請店家
               </Link>
-              <Link to="/my_account" className="footer-link col-auto">
+              <Link to="/member/profile" className="footer-link col-auto">
                 我的帳戶
               </Link>
               {/* TODO:點下去會先去登入頁 */}

@@ -10,7 +10,7 @@ const moment = require("moment");
 
 const StoreInfoCard = (props) => {
   moment.locale("zh-tw");
-  const { storeList, storeLikeCount, amount, stars } = props;
+  const { storeList, storeLikeCount, amount, storeStarsCount } = props;
   const { loginMember } = useAuth();
 
   if (storeList.length === 0) {
@@ -26,7 +26,7 @@ const StoreInfoCard = (props) => {
           // -------- 取得該店家產品總數量 --------
           let productAmount = Object.values(amount)[item.id - 1];
           // -------- 取得該店家星星總數量 --------
-          let startCount = Object.values(stars)[item.id - 1];
+          let starCount = Object.values(storeStarsCount)[item.id - 1];
 
           // -------- 處理沒有分店名的空白欄位 --------
           let space = "";
@@ -45,9 +45,20 @@ const StoreInfoCard = (props) => {
           // -------- 處理評分星星 --------
 
           return (
+<<<<<<< HEAD
+            <div
+            // key={item.id}
+            >
+              <Link to={`/store/${item.id}`} className="no-link">
+                <div
+                  key={item.id}
+                  className="store-info-card shadow d-flex align-items-center"
+                >
+=======
             <div key={item.id}>
-              <Link to={`all/${item.id}`} className="no-link">
+              <Link to={`/store/${item.id}`} className="no-link">
                 <div className="store-info-card shadow d-flex align-items-center">
+>>>>>>> test_release
                   <div className="info-img col-12">
                     <img
                       src={require(`../../../../images/store_img/${item.logo}`)}
@@ -89,11 +100,12 @@ const StoreInfoCard = (props) => {
                     <div className="d-flex align-items-center justify-content-center">
                       <Rating
                         name="read-only"
-                        value={startCount}
+                        value={Number(starCount)}
                         readOnly
                         className="me-1"
+                        precision={0.1}
                       />{" "}
-                      ({startCount})
+                      ({starCount})
                     </div>
                     {/* //*愛心:有登入顯示愛心框可以收藏; 沒登入就只能看到實體愛心 */}
                     <div className="d-flex align-items-center">

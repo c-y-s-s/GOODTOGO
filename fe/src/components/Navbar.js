@@ -1,45 +1,35 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
-import Hamburger from "hamburger-react";
 import Popover from "./_popover";
+import MenuToggle from "./_menuToggle";
 
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
-
-import { BsBag } from "react-icons/bs";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();
-  const [isOpen, setOpen] = useState(false);
 
   return (
-    <div className="container-fluid navbar justify-content-center sticky-top">
+    <div className="container-fluid navbar justify-content-center sticky-top shadow">
       <div className="nav-content">
         <div>
           <Link to="/">
             <Logo className="nav-logo" />
           </Link>
         </div>
-        <div className="sm-logo-left">
+        <div className="sm-logo-left align-items-center">
           <Link to="/shoppingcart" className="sm-icon">
-            <BsBag />
+            <ShoppingBag />
           </Link>
-          <Hamburger
-            toggled={isOpen}
-            toggle={setOpen}
-            size={22}
-            color="#668C4A"
-            rounded
-          />
-          <div className="side-menu"></div>
+          <MenuToggle />
         </div>
         <div className="nav-links">
-          {/* <Link to="/about" className="nav-link">
+          <Link to="/about" className="nav-link">
             關於我們
-          </Link> */}
+          </Link>
 
           <Link
             to="/stores"
@@ -60,9 +50,13 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          <Link to="/shoppingcart" className="nav-icon">
-            <ShoppingBag />
-          </Link>
+
+          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
+            <div className="shopping-cart-number">1</div>
+            <ShoppingBag className="shopping-cart-icon" />
+            <div className="shopping-cart-products">1</div>
+          </Link> */}
+
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>

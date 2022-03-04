@@ -94,7 +94,7 @@
 
 // -------- sweet alert --------
 
-.confirmBtn {
+.btn.confirmBtn {
   letter-spacing: $ls-sm;
   background-color: $color-light-green;
   color: #fff;
@@ -106,7 +106,7 @@
     background-color: darken($color-light-green, 8%);
   }
 }
-.cancelBtn {
+.btn.cancelBtn {
   letter-spacing: $ls-sm;
   background-color: $color-grey;
   color: #fff;
@@ -117,11 +117,6 @@
     color: #fff;
     background-color: darken($color-grey, 8%);
   }
-}
-
-.alert_Title {
-  color: $color-dark-grey;
-  letter-spacing: $ls-lg;
 }
 
 // -------- 會員頭貼 --------
@@ -299,6 +294,36 @@
     width: 18px;
     height: 18px;
   }
+}
+
+// -------- 信用卡資訊頁 --------
+.btn.btn_Credit {
+  font-size: $fz-sm;
+  width: 6rem;
+  background-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  height: 2.5rem;
+  &:hover {
+    background-color: lighten($color-green, 8%);
+    border-color: lighten($color-green, 8%);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+.credit_Text {
+  letter-spacing: $ls-md;
+  color: lighten($color-dark-grey, 20%);
+}
+.credit_Num {
+  letter-spacing: 6px;
+}
+.credit_bg {
+  background-color: aquamarine;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
 }
 
 // -------- 更改密碼頁 --------

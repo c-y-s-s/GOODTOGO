@@ -3,6 +3,7 @@ import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 // TODO: 密碼格式錯誤判斷
 // TODO: 密碼後台驗證失敗 res 錯誤訊息呈現於 alert
@@ -52,23 +53,18 @@ const UserPassword = () => {
     );
   }
 
+  // function handleClear(e) {
+  //   setErr({ ...err, password: "" });
+  // }
+
   // -------- 使用者修改密碼 --------
   function handleChange(e) {
     // 使用者正在輸入 欄位, 值 -> 同步(O)
     // console.log(e.target.name, e.target.value);
 
-    // if (e.type === "keypress") {
-
-    // }
-    // 正在輸入，清空錯誤訊息
-    // setErr({
-    //   password: "",
-    //   newPassword: "",
-    //   confirmPassword: "",
-    // });
-
     // 儲存表單的值
     setPassword({ ...password, [e.target.name]: e.target.value });
+    e.target.name === "newPassword" && regPassword(e);
 
     // setPassword 不同步
     // console.log("newPassword: ", password.newPassword);
@@ -99,10 +95,13 @@ const UserPassword = () => {
         e.target.name === "password" &&
         password.newPassword !== password.confirmPassword)
     ) {
-      setErr({ ...err, password: "" });
-      setErr({ ...err, confirmPassword: "新的密碼 與 確認新密碼 輸入不一致" });
+      setErr({
+        ...err,
+        confirmPassword: "新的密碼 與 確認新密碼 輸入不一致",
+        password: "",
+      });
     } else {
-      setErr({ ...err, confirmPassword: "" });
+      setErr({ ...err, confirmPassword: "", password: "" });
     }
   }
 
@@ -114,6 +113,16 @@ const UserPassword = () => {
   //     : setErr({ ...err, confirmPassword: "確認密碼與新密碼 輸入不一致" });
   //   console.log("err2: ", err);
   // }
+
+  function regPassword(e) {
+    console.log("regPassword", e.target.value);
+    // 最短6位，最長16位 {6,16} // 可以包含小寫大母 [a-z] 和大寫字母 [A-Z]
+    // 可以包含數字 [0-9]  // 可以包含下劃線 [ _ ] 和減號 [ – ]
+    const rePassword = /^[\w_-]{6,16}$/;
+    rePassword.test(e.target.value)
+      ? setErr({ ...err, newPassword: "" })
+      : setErr({ ...err, newPassword: "密碼長度需 6-16 字" });
+  }
 
   // -------- 修改會員密碼 進資料庫 --------
   // 發 http request 到後端 -> axios
@@ -135,6 +144,16 @@ const UserPassword = () => {
       // http://localhost:3002/api/member/password (router.post)
       let response = await axios.post(`${API_URL}/member/password`, password);
       console.log("會員有更改密碼: ", response.data);
+
+      // sweet alert
+      Swal.fire({
+        // position: 'top-end',
+        icon: "success",
+        title: "密碼更改成功",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+
       // 清空
       setPassword({
         password: "",
@@ -148,7 +167,7 @@ const UserPassword = () => {
       });
     } catch (e) {
       console.error("會員更改密碼 error: ", ERR_MSG[e.response.data.code]);
-      setErr({ ...err, password: `${ERR_MSG[e.response.data.code]}` });
+      setErr({ ...err, password: ERR_MSG[e.response.data.code] });
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);
       // setErr({ ...err, confirmPassword: e.response.data.msg });
@@ -215,14 +234,18 @@ const UserPassword = () => {
                     type={eye.newPasswordEye ? "text" : "password"}
                     name="newPassword"
                     className={
-                      err.confirmPassword
+                      err.confirmPassword || err.newPassword
                         ? "form-control form_Input form_Input_Password form_Input_SmallSize border-danger"
                         : "form-control form_Input form_Input_Password form_Input_SmallSize"
                     }
                     value={password.newPassword}
-                    placeholder="設定新密碼"
+                    placeholder="設定新密碼，密碼長度 6-16 字"
                     autoComplete="off"
                     onChange={handleChange}
+                    onKeyDown={regPassword}
+                    onKeyUp={regPassword}
+                    // onFocus={regPassword}
+                    onBlur={regPassword}
                   />
                   <div onClick={newPasswordShow}>
                     {eye.newPasswordEye ? (
@@ -232,7 +255,9 @@ const UserPassword = () => {
                     )}
                   </div>
                 </div>
-                <div className="error text-danger text-end"></div>
+                <div className="error text-danger text-end">
+                  {err.newPassword ? err.newPassword : ""}
+                </div>
               </div>
               <div className="my-4">
                 <div className="d-flex align-items-center text-nowrap position-relative">

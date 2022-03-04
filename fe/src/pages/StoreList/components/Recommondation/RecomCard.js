@@ -18,16 +18,15 @@ const RecomCard = (props) => {
   moment.locale("zh-tw");
   const [displayList, setDisplayList] = useState([]);
   const [commentCount, setCommentCount] = useState([]);
-  const { totalHeart, productAmount } = props;
+  const { totalHeart, productAmount, totalStar } = props;
   const { loginMember, setLoginMember } = useAuth();
 
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
-
       let recommStores = recommRes.data[0];
       setDisplayList(recommStores);
-      setCommentCount();
+
       // 計算指定商品的評論平均分數
       let productstarTotal = 0;
       // productModalCommentData.forEach((item) => {
@@ -47,6 +46,9 @@ const RecomCard = (props) => {
         let likeCount = Object.values(totalHeart)[item.id - 1];
         // -------- 取得該店家產品總數量 --------
         let productCount = Object.values(productAmount)[item.id - 1];
+        // -------- 取得該店家星星總數量 --------
+        let starCount = Object.values(totalStar)[item.id - 1];
+        console.log("sssss", starCount);
         // -------- 處理沒有分店名的空白欄位 --------
         let space = "";
         {
@@ -102,8 +104,15 @@ const RecomCard = (props) => {
                     剩餘餐點：{productCount}
                   </span>
                   <hr className="col-12 mt-2 mb-2" />
-                  <Rating name="read-only" value={1} readOnly />
-
+                  <div className="d-flex align-items-center justify-content-center">
+                    <Rating
+                      name="read-only"
+                      value={starCount}
+                      readOnly
+                      precision={0.1}
+                    />
+                    {starCount}
+                  </div>
                   {/* //*愛心:有登入顯示愛心框可以收藏; 沒登入就只能看到實體愛心 */}
                   <div className="d-flex align-items-center">
                     {loginMember !== null ? (

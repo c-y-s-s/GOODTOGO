@@ -1,9 +1,9 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
-import axios from "axios";
+import { useState, useLayoutEffect } from "react";
+import { useParams } from "react-router-dom";
 import { API_URL } from "../../../utils/config";
-import ProductsDetailsComment from "./ProductsDetailsComment";
 import { ERR_MSG } from "../../../utils/error";
+import axios from "axios";
+import ProductsDetailsComment from "./ProductsDetailsComment";
 // -------- React icon --------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
@@ -12,8 +12,9 @@ import { FiX } from "react-icons/fi";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-
 // -------- 商品光箱 --------
+import Swal from "sweetalert2";
+
 const ProductsDetails = ({
   setOpenProductsModal,
   openProductsModaID,
@@ -81,12 +82,21 @@ const ProductsDetails = ({
 
   async function handleAddShoppingCar(e) {
     e.preventDefault();
+    Swal.fire({
+      position: "center",
+      icon: "success",
+      title: "加入購物車成功",
+      showConfirmButton: false,
+      timer: 1500,
+    });
     try {
       let response = await axios.post(
         `${API_URL}/shop/shoppingcar`,
         shoppingData
       );
       console.log(response.data);
+      setOpenProductsModal(false);
+       setisModalTouch(true);
     } catch (e) {
       //印出錯誤物件
       // console.error(e.response)
@@ -106,7 +116,7 @@ const ProductsDetails = ({
         return (
           <div className="container products-details " key={data.id}>
             <div className="col-12 pt-4 products-details-data">
-              <div className="card mx-auto" style={{ width: `22rem` }}>
+              <div className="card products-details-data-card mx-auto">
                 <div className="product-logo">
                   <img
                     className=""
@@ -126,13 +136,12 @@ const ProductsDetails = ({
                 </button>
                 <div className="card-body py-4">
                   <h5 className="card-title">{data.name}</h5>
-                  <div className="d-flex justify-content-between card-value">
+                  <div className="d-flex justify-content-between card-value align-items-center">
                     {/* 評價的地方 */}
 
                     {productstarTotal ? (
                       <div className="card-star d-flex">
                         <div>
-                          {/* {console.log(productstarTotalAVG)} */}
                           <Stack spacing={2}>
                             <Rating
                               name="half-rating-read"
@@ -150,9 +159,9 @@ const ProductsDetails = ({
 
                     <div className="card-price">NT$ {data.price}</div>
                   </div>
-                  <p className="card-text mb-0">{data.description}</p>
-                  <div className=" card-text d-flex align-items-center">
-                    <div className="fialert-circle">
+                  <p className="card-text mb-0 fw-normal">{data.description}</p>
+                  <div className=" card-text d-flex align-items-center fw-normal">
+                    <div className="fialert-circle ">
                       <FiAlertCircle />
                     </div>
                     本商品不附帶免洗餐具
@@ -162,10 +171,10 @@ const ProductsDetails = ({
                     ""
                   ) : storeinOperation ? (
                     <div>
-                      <div className="d-flex justify-content-between pt-4">
-                        <div>合計金額</div>
-                        <div>
-                          餐點剩餘
+                      <div className="d-flex justify-content-between pt-4 fw-normal">
+                        <div clas>合計金額</div>
+                        <div className="">
+                          <span className="pe-2">餐點剩餘</span>
                           {storeinOperation === false ? 0 : data.amount}
                         </div>
                       </div>
@@ -225,15 +234,7 @@ const ProductsDetails = ({
                       <button
                         className="btn btn-primary"
                         id={`${data.id}`}
-                        onClick={
-                          handleAddShoppingCar
-                          // productarr.push(data);
-                          // console.log(productarr);
-                          // let products = JSON.stringify(data);
-                          // console.log(products);
-                          // alert("加入購物車成功");
-                          // localStorage.setItem("proaaducts", products);
-                        }
+                        onClick={handleAddShoppingCar}
                       >
                         加入購物車
                       </button>

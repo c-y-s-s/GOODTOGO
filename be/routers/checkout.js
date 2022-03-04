@@ -27,7 +27,7 @@ WHERE a.store_id = ?`,
 router.post("/orderdetail", async (req, res, next) => {
   // 寫入訂單資訊
   let [result] = await connection.execute(
-    "INSERT INTO user_order (id,user_id, status_id, store_id,payment_method, order_time , order_number) VALUES (?,?,?,?,?,?,?)",
+    "INSERT INTO user_order (id,user_id, status_id, store_id,payment_method, order_time , order_number,coupon_id) VALUES (?,?,?,?,?,?,?,0)",
     [
       req.body.id,
       req.body.userId,

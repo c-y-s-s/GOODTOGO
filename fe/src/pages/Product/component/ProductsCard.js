@@ -55,7 +55,6 @@ const StoreCard = ({
     return <span>結束販售</span>;
   };
 
-
   // ! 卡片跳動bug尚未解決
   // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
@@ -135,7 +134,9 @@ const StoreCard = ({
                     <div className="time-text">
                       時間倒數
                       <span
-                        className={`${timeEnd < 3600 && "count-down-one-hour"}`}
+                        className={`${
+                          timeEnd < 3600 && "count-down-one-hour"
+                        } ps-1`}
                       >
                         <Countdown
                           date={Date.now() + timeEnd * 1000}
@@ -182,7 +183,7 @@ const StoreCard = ({
                       <div className="card-star ">
                         {item.score > 0 ? (
                           <div className="d-flex">
-                            <div className="fs-1">
+                            <div>
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
@@ -194,7 +195,12 @@ const StoreCard = ({
                               </Stack>
                             </div>
 
-                            <div className="ms-2">{item.score}</div>
+                            <div className="card-star-number ms-1">
+                              {item.score}
+                            </div>
+                            <div className="card-star-count ms-1">
+                              ({item.count})
+                            </div>
                           </div>
                         ) : (
                           "商品沒有評價"
@@ -203,7 +209,9 @@ const StoreCard = ({
                       <div className="card-text">{item.description}</div>
                     </div>
 
-                    <div className="text-end "> NT$ {item.price}</div>
+                    <div className="text-end pe-2 product-card-price">
+                      NT$ {item.price}
+                    </div>
                   </div>
                 </div>
               </div>

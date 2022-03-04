@@ -21,7 +21,7 @@ export const OrderPaymentMethod = ({
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-  let orderNumber = moment().format("YYMMDDHHmmsss");
+  let orderNumber = moment().format("YYMMDDHHmmss");
 
   // 將商品存成陣列寫進資料庫，因需跟訂單號一起寫入所以用此方法
   let productsArr = [];
@@ -35,15 +35,13 @@ export const OrderPaymentMethod = ({
   });
 
   async function handleGetOrder() {
-    
     // 寫入按下送出訂單哪一刻的時間
     timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-    orderNumber = moment().format("YYMMDDHHmmsss");
-
+    orderNumber = moment().format("YYMMDDHHmmss");
     let response = await axios.post(`${API_URL}/checkout/orderdetail`, {
       ...OrderDetail,
       orderTime: timeInsecond,
-      order_number: orderNumber,
+      order_number: orderNumber + OrderDetail.id + OrderDetail.userId,
     });
 
     let productsResponse = await axios.post(
