@@ -8,6 +8,7 @@ import "antd/dist/antd.css";
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 //alert套件
 import Swal from "sweetalert2";
+import { IMAGE_URL } from "../utils/config";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
@@ -35,7 +36,8 @@ const _popover = () => {
             if (result.isConfirmed) {
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
-              navigate("/").scrollTo(0, 0);
+              navigate("/");
+              window.scrollTo(0, 0);
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -94,7 +96,11 @@ const _popover = () => {
         content={loginMember ? loggedin : notLoggedin}
         // trigger="click"
       >
-        <UserIcon className="nav-icon mt-1" />
+        {loginMember ? (
+          <img src={IMAGE_URL + loginMember.photo} alt="profile" />
+        ) : (
+          <UserIcon className="nav-icon mt-1" />
+        )}
       </Popover>
     </>
   );
