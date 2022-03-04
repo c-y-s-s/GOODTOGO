@@ -1,41 +1,8 @@
 // -------- navbar --------
-
-// .hamburger-react {
-//   display: none;
-// }
-// .sm-nav {
-//   display: none;
-// }
-// @media (max-width: 540px) {
-//   .navbar {
-//     display: flex;
-//     margin: auto;
-
-//     .nav {
-//       width: 95vw;
-//       margin: 1.5rem auto 0.5rem;
-//       justify-content: space-between;
-//     }
-//     .navbar-nav {
-//       display: none;
-//     }
-//     .hamburger-react {
-//       display: block;
-//       color: $color-green;
-//     }
-//     .sm-icon {
-//       display: inline-block;
-//       width: fit-content;
-//       font-size: 1.5rem;
-//       margin-top: 3px;
-//     }
-//   }
-// }
 .navbar {
   z-index: 1010;
-  height: 10vw;
+  height: 8vw;
   background-color: rgba(255, 255, 255, 0.884);
-  display: grid;
   margin: auto;
   .nav-content {
     width: 80vw;
@@ -136,12 +103,32 @@
   color: white;
   border-radius: 2px;
 }
-@media (max-width: 540px) {
+
+// .nav-toggle-menu {
+//   padding: 2rem;
+//   .popover-item {
+//     padding: 0.5rem 1rem;
+//     .nav-popover-link {
+//       text-decoration: none;
+//       color: $color-dark-grey;
+//       font-size: $fz-lg;
+//     }
+//     &:hover {
+//       background-color: $color-grey;
+//       .nav-popover-link {
+//         color: white;
+//       }
+//     }
+//   }
+// }
+@media (max-width: 390px) {
   .navbar {
     height: 10vh;
+    background-color: white;
     .nav-content {
+      height: fit-content;
       width: 90vw;
-      margin-top: 1.5rem;
+      margin-top: 1rem;
       align-items: center;
       .nav-logo {
         height: 3vh;
@@ -149,14 +136,12 @@
       .sm-logo-left {
         display: flex;
         align-items: center;
-
+        .menu-toggle {
+        }
         .sm-icon {
           padding-bottom: 0.4rem;
           color: $color-dark-grey;
           font-size: $fz-x-lg;
-        }
-        .side-menu {
-          display: block;
         }
       }
       .nav-links {

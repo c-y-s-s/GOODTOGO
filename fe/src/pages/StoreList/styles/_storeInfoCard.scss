@@ -11,7 +11,7 @@
   position: relative;
   flex-direction: column;
   &:hover {
-    filter: drop-shadow(0.188rem 0.188rem 10px $color-dark-grey);
+    @include drop-shadow-dark;
   }
 
   .info-img {

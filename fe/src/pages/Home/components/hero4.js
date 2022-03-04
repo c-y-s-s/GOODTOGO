@@ -1,7 +1,6 @@
 import React from "react";
 
 // -------- svg圖檔 --------
-
 import { ReactComponent as Hero4Text1 } from "../images/hero4Text1.svg";
 import { ReactComponent as Hero4Text2 } from "../images/hero4Text2.svg";
 import { ReactComponent as Hero4Logo } from "../images/hero4Logo.svg";
@@ -19,14 +18,14 @@ const hero4 = () => {
   return (
     <div className="hero4 pt-5 pb-5">
       <div className="container-fluid p-0 m-0 ">
-        <div className="hero4-top">
-          <div className=" row hero4-title m-lg-0 me-1 ms-1 align-items-center justify-content-center ">
-            <Hero4Text1 className="me-lg-4 me-0 p-2 p-lg-0" />
-            <Hero4Text2 />
+        <div className="hero4-top m-auto">
+          <div className="d-flex flex-wrap flex-column hero4-title align-items-center justify-content-center m-auto">
+            <Hero4Text1 className="" width="30vw" height="1%" />
+            <Hero4Text2 className="" width="40vw" height="1%" />
           </div>
         </div>
         <div className="row col-10 hero4-bottom justify-content-around pt-5 m-auto mt-lg-5 mt-2 pb-5  align-items-center">
-          <div className="box mb-lg-0 mb-5">
+          <div className="box mb-lg-0 mb-5 col-lg-2">
             <Pointer1 className="hero4-pointer" />
             <div className="box-info ">
               <img src={Hero1Img1} alt="" />
@@ -38,14 +37,14 @@ const hero4 = () => {
             </div>
           </div>
 
-          <div className="box mb-lg-0 mb-5 mt-3">
+          <div className="box mb-lg-0 mb-5 mt-3 col-lg-2">
             <Pointer2 className="hero4-pointer" />
             <div className="box-info">
               <img src={Hero1Img2} alt="" />
               <div>前往店家領取餐點</div>
             </div>
           </div>
-          <div className="box mb-lg-0 mb-5 mt-3">
+          <div className="box mb-lg-0 mb-5 mt-3 col-lg-2">
             <Pointer3 className="hero4-pointer" />
             <div className="box-info">
               <img src={Hero1Img3} alt="" />

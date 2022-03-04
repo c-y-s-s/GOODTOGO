@@ -1,12 +1,13 @@
 // -------- hero 1 --------
 .hero1 {
   padding: 0;
-  height: 82vh;
+  height: 65rem;
   background-image: url(../images/hero1.svg);
-  // background-size: cover;
+  background-size: cover;
+  background-repeat: no-repeat;
   align-items: center;
   grid-template-columns: 8.5rem auto 8.5rem;
-  grid-template-rows: [row1-start] 6.5rem[row1-end]20rem [third-line] auto [last-line];
+  grid-template-rows: [row1-start] 15%[row1-end]40% [third-line] auto [last-line];
   grid-template-areas:
     "header header header "
     "main main main "
@@ -17,25 +18,36 @@
     grid-column-end: 3;
     grid-row-start: 2;
     grid-row-end: 3;
-    width: fit-content;
-    .hero1-text {
-      width: 100%;
-    }
-    .hero1-btn-arrow {
-      margin-bottom: 2.5rem;
-    }
-    &:hover {
+    height: fit-content;
+    // height: 100%;
+    // width: 100%;
+    //object-fit: cover;
+    a {
+      height: 30vh;
+      .hero1-text {
+        // width: 100%;
+      }
       .hero1-btn-arrow {
-        animation: btn-go 0.9s infinite linear;
+        position: relative;
+        left: -5rem;
+        // top: -8rem;
+      }
+      &:hover {
+        .hero1-btn-arrow {
+          animation: btn-go 0.9s infinite linear;
+        }
+      }
+      @keyframes btn-go {
+        0% {
+        }
+        100% {
+          transform: translateX(1rem);
+        }
       }
     }
-    @keyframes btn-go {
-      0% {
-      }
-      100% {
-        transform: translateX(1rem);
-      }
-    }
+  }
+  .hero1-sm-btn {
+    display: none;
   }
 }
 // -------- 平板 RWD --------
@@ -52,12 +64,36 @@
 // -------- 手機 RWD --------
 @media screen and (max-width: 390px) {
   .hero1 {
+    padding: 0;
+    height: 40rem;
+    background-size: cover;
+    background-repeat: no-repeat;
+    align-items: center;
     background-position: center;
-    grid-template-columns: 3rem auto 3rem;
-    grid-template-rows: [row1-start] 6.5rem[row1-end]20rem [third-line] auto [last-line];
+    grid-template-columns: 2% auto 2%;
+    grid-template-rows: [row1-start] 15%[row1-end]60% [third-line] auto [last-line];
     grid-template-areas:
       "header header header "
       "main main main "
       "footer footer footer";
+    .hero1-btn {
+      display: none;
+    }
+    .hero1-sm-btn {
+      display: block;
+      grid-area: 2/2/3/3;
+      align-self: flex-start;
+      filter: drop-shadow(0.188rem 0.188rem 5px $color-dark-grey);
+      .btn-sm-arrow {
+        animation: btn-go 0.9s infinite linear;
+      }
+      @keyframes btn-go {
+        0% {
+        }
+        100% {
+          transform: translateX(1rem);
+        }
+      }
+    }
   }
 }

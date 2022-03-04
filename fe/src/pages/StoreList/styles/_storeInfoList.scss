@@ -1,14 +1,11 @@
 .store-list {
-  .prefix {
-    display: none;
-  }
   width: 100vw;
-
   .header {
     background-image: url(../images/storelist_bg_2.svg);
+    background-size: contain;
     background-repeat: no-repeat;
+    height: 12rem;
     width: 100vw;
-    height: 10rem;
     position: relative;
     top: -1px;
   }
@@ -137,11 +134,11 @@
       }
     }
   }
-
   .footer {
     background-image: url(../images/storelist_bg_3.svg);
+    background-size: cover;
     width: 100vw;
-    height: 10rem;
+    height: 15rem;
   }
 }
 @media screen and (max-width: 390px) {
@@ -153,11 +150,7 @@
     .header {
       background-image: url(../images/storelist_bg_2.svg);
       background-repeat: no-repeat;
-      width: 100vw;
       height: 4rem;
-      background-size: 100%;
-      position: relative;
-      top: -1px;
     }
     .title {
       align-items: center;
@@ -284,7 +277,7 @@
 
     .footer {
       background-image: url(../images/storelist_bg_3.svg);
-      background-size: 100%;
+      background-size: cover;
       width: 100vw;
       height: 5rem;
       background-repeat: no-repeat;

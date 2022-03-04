@@ -13,7 +13,7 @@ const hero2 = () => {
         className="hero2-trash"
       />
 
-      <div className="hero2-info hero-text-sm">
+      <div className="hero2-info align-self-center">
         據聯合國環境署統計
         <br />
         <Hero2Text className="hero2-text" />

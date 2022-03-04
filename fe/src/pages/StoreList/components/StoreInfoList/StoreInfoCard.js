@@ -10,8 +10,9 @@ const moment = require("moment");
 
 const StoreInfoCard = (props) => {
   moment.locale("zh-tw");
-  const { storeList, storeLikeCount, amount } = props;
+  const { storeList, storeLikeCount, amount, storeStarsCount } = props;
   const { loginMember } = useAuth();
+
   if (storeList.length === 0) {
     return (
       <div className="text-grey">很抱歉，沒有相關的資料，請在嘗試一次</div>
@@ -24,6 +25,9 @@ const StoreInfoCard = (props) => {
           let likeCount = Object.values(storeLikeCount)[item.id - 1];
           // -------- 取得該店家產品總數量 --------
           let productAmount = Object.values(amount)[item.id - 1];
+          // -------- 取得該店家星星總數量 --------
+          let starCount = Object.values(storeStarsCount)[item.id - 1];
+
           // -------- 處理沒有分店名的空白欄位 --------
           let space = "";
           {
@@ -41,9 +45,12 @@ const StoreInfoCard = (props) => {
           // -------- 處理評分星星 --------
 
           return (
-            <div key={item.id}>
+            <div>
               <Link to={`/store/${item.id}`} className="no-link">
-                <div className="store-info-card shadow d-flex align-items-center">
+                <div
+                  key={item.id}
+                  className="store-info-card shadow d-flex align-items-center"
+                >
                   <div className="info-img col-12">
                     <img
                       src={require(`../../../../images/store_img/${item.logo}`)}
@@ -82,8 +89,16 @@ const StoreInfoCard = (props) => {
                     </span>
                     <hr className="col-12 mt-2 mb-2" />
                     {/* //*星星 */}
-                    <Rating name="read-only" value={1} readOnly />
-                    {/* <span>Rating</span> */}
+                    <div className="d-flex align-items-center justify-content-center">
+                      <Rating
+                        name="read-only"
+                        value={Number(starCount)}
+                        readOnly
+                        className="me-1"
+                        precision={0.1}
+                      />{" "}
+                      ({starCount})
+                    </div>
                     {/* //*愛心:有登入顯示愛心框可以收藏; 沒登入就只能看到實體愛心 */}
                     <div className="d-flex align-items-center">
                       {loginMember !== null ? (

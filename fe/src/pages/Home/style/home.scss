@@ -1,12 +1,23 @@
-.hero-text-sm {
+@mixin hero-text-sm {
   font-size: 1.25rem;
   line-height: 2.5rem;
   letter-spacing: 0.125rem;
 }
+@mixin hero-text-md {
+  font-size: 1.87rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.15rem;
+}
+@mixin hero-text-ssm {
+  font-size: 1rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.125rem;
+}
 
-.drop-shadow {
-  -webkit-filter: drop-shadow(0.188rem 0.188rem 0.125rem $color-dark-grey);
-  filter: drop-shadow(0.188rem 0.188rem 2px $color-dark-grey);
+@mixin hero-text-lg {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.15rem;
 }
 
 // -------- hero 1 --------

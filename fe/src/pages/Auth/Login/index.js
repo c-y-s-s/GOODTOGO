@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
+import FacebookLogin from "@greatsumini/react-facebook-login";
 
 //-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
@@ -11,6 +12,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
+// require("dotenv").config();
 
 const Login = (props) => {
   //登入後存入會員資料給全域使用
@@ -92,7 +94,17 @@ const Login = (props) => {
       console.error("測試登入", ERR_MSG);
     }
   };
-
+  //傳fb token到後端
+  const handleFBLogin = async (response) => {
+    try {
+      let fb_response = await axios.get(
+        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`
+      );
+      console.log("fb login test response", fb_response);
+    } catch (e) {
+      console.error("測試fb登入", ERR_MSG);
+    }
+  };
   console.log("member from Login.js", loginMember);
 
   return (
@@ -203,11 +215,19 @@ const Login = (props) => {
                   <button type="submit" className="btn submit-btn col-lg-12">
                     登入
                   </button>
-                  <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
+                  {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
                     <ImFacebook2 className="fb-icon col-lg-2 " />
                     使用 Facebook 登入
                     <div className="col-lg-2"> </div>
-                  </button>
+                  </button> */}
+                  <FacebookLogin
+                    appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
+                    fields="name,email,picture"
+                    scope="public_profile, email"
+                    onSuccess={handleFBLogin}
+                  >
+                    <ImFacebook2 className="fb-icon col-lg-2 " />
+                  </FacebookLogin>
                 </div>
 
                 {/* -------- 表格結束 -------- */}

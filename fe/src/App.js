@@ -67,9 +67,7 @@ function App() {
             <Route path="reset" element={<Reset />}></Route>
           </Route>
           <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/stores" element={<StoreList />}>
-            <Route path="all/:storeId" element={<Product />} />
-          </Route>
+          <Route path="/stores" element={<StoreList />} />
           {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
           <Route
             path="/store/:storeId/"
@@ -80,10 +78,14 @@ function App() {
           <Route
             path="/shoppingcart"
             element={
-              <ShoppingCart
-                setCheckoutData={setCheckoutData}
-                checkoutData={checkoutData}
-              />
+              loginMember ? (
+                <ShoppingCart
+                  setCheckoutData={setCheckoutData}
+                  checkoutData={checkoutData}
+                />
+              ) : (
+                <Login />
+              )
             }
           ></Route>
           <Route

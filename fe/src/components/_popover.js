@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../context/auth";
+//引用antd popover
 import { Popover } from "antd";
 import "antd/dist/antd.css";
-import { useAuth } from "../context/auth";
 //引用icon
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
+//alert套件
 import Swal from "sweetalert2";
 
 const _popover = () => {
@@ -42,7 +44,6 @@ const _popover = () => {
       </>
     );
   };
-
   const notLoggedin = (
     <div className="nav-popover">
       <div className="popover-item text-center">
