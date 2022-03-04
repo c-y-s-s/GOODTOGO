@@ -88,7 +88,9 @@ const Storecheck = () => {
     // 日: "false"
   });
 
-  const [member, setMember] = useState("");
+  const [member, setMember] = useState({
+    storeLogo:""
+  });
 
   const [openTime, setOpenTime] = useState("")
 
@@ -110,13 +112,19 @@ const Storecheck = () => {
 
   const handleOpenTimeChange = (e) => {
     console.log(e.target.value);
+    if(e.target.value.length === 1){
+      e.target.value = "0" + e.target.value;
+    }
     setOpenTime({ ...openTime, [e.target.name]: e.target.value });
-    setMember({ ...member, ...{ openTime } });
+    // setMember({ ...member, ...{ openTime } });
   };
   const handleCloseTimeChange = (e) => {
     console.log(e.target.value);
+    if(e.target.value.length === 1){
+      e.target.value = "0" + e.target.value;
+    }
     setCloseTime({ ...closeTime, [e.target.name]: e.target.value });
-    setMember({ ...member, ...{ closeTime } });
+    // setMember({ ...member, ...{ closeTime } });
   };
 
   // -------- 表單地區選擇與地址開始 -------- //
@@ -163,7 +171,7 @@ const Storecheck = () => {
     reader.addEventListener(
       "load",
       function () {
-        // convert image file to base64 string
+    //     // convert image file to base64 string
         setImageSrc(reader.result);
       },
       false // false在這邊等同於 e.preventDefault()
@@ -176,7 +184,7 @@ const Storecheck = () => {
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
     console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     console.log(e.target.files[0]);
-    // setMember({ ...member, [e.target.name]: e.target.files[0] });
+    setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
   // -------- 店家LOGO上傳結束 --------//
   // -------- 表單營業許可證上傳開始 --------//
@@ -221,16 +229,16 @@ const Storecheck = () => {
       formData.append("address",member.City+member.Area+member.address);
       formData.append("storeName",member.storeName);
       formData.append("phone",member.phone);
-      // formData.append("storeLogo",member.storeLogo);
+      formData.append("storeLogo",member.storeLogo);
       // formData.append("storeLicence",member.storeLicence);
       formData.append("storeType",member.storeType);
       formData.append("day",member.day);
-      formData.append("openTime",member.openTime);
-      formData.append("closeTime",member.closeTime);
+      formData.append("openTime",openTime.openHour+`:`+openTime.openMinute+`:`+`00.000000`);
+      formData.append("closeTime",closeTime.closeHour+`:`+closeTime.closeMinute+`:`+`00.000000`);
 
 
-      // let response = await axios.post(`${API_URL}/auth/storeCheck`, member);
-      let response = await axios.post(`${API_URL}/auth/storeCheck`, formData);
+      // let response = await axios.post(`${API_URL}/storeCheck/storeCheck`, member);
+      let response = await axios.post(`${API_URL}/storeCheck/storeCheck`, formData);
 
       console.log(response.data);
     } catch (e) {
@@ -493,10 +501,10 @@ const Storecheck = () => {
                       </label>
                       <div className="form-floating mb-3">
                         <input
-                          name="storephone"
+                          name="phone"
                           type="phone"
                           className="form-control custom-input"
-                          id="storephone"
+                          id="phone"
                           placeholder="name@example.com"
                           value={member.phone}
                           maxLength="10"

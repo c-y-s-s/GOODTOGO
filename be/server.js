@@ -53,6 +53,9 @@ app.use("/api/products", productsRouter);
 let authRouter = require("./routers/auth");
 app.use("/api/auth", authRouter);
 
+let storeCheckRouter = require("./routers/storeCheck")
+app.use("/api/storeCheck", storeCheckRouter);
+
 let checkStoreRouter = require("./routers/checkStore");
 app.use("api/checkStore",checkStoreRouter );
 

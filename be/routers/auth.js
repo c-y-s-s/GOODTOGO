@@ -54,41 +54,41 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
 });
 
 // /api/auth/storeCheck
-router.post("/storeCheck", emailRule, passwordRule, async (req, res, next) => {
-  console.log(req.body);
-  //check if req is valid
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    let error = errors.array();
-    console.log("validation:", error);
-    // return res.status(400).json({ code: "33001", msg: error[0].msg });
-    return res.status(400).json({ errors: error });
-  }
-  // check if mail is registered
-    let [stores] = await connection.execute(
-    "SELECT * FROM stores WHERE email=?",
-    [req.body.email]
-  );
-  console.log(stores);
-  if (stores.length > 0) {
-    return res.status(400).send({
-      code: "33002",
-      msg: "這個 email 已經已經註冊過了",
-    });
-  }
+// router.post("/storeCheck", emailRule, passwordRule, async (req, res, next) => {
+//   console.log(req.body);
+//   //check if req is valid
+//   const errors = validationResult(req);
+//   if (!errors.isEmpty()) {
+//     let error = errors.array();
+//     console.log("validation:", error);
+//     // return res.status(400).json({ code: "33001", msg: error[0].msg });
+//     return res.status(400).json({ errors: error });
+//   }
+//   // check if mail is registered
+//     let [stores] = await connection.execute(
+//     "SELECT * FROM stores WHERE email=?",
+//     [req.body.email]
+//   );
+//   console.log(stores);
+//   if (stores.length > 0) {
+//     return res.status(400).send({
+//       code: "33002",
+//       msg: "這個 email 已經已經註冊過了",
+//     });
+//   }
 
-  // hash password
+//   // hash password
 
-  let hashpassword = await argon2.hash(req.body.password);
+//   let hashpassword = await argon2.hash(req.body.password);
 
-  let [result] = await connection.execute(
-    // todo 修改checkbox and open time input
-  "INSERT INTO stores (bossname, name, email, account, tel_no, password,valid) VALUES (?,?,?,?,?,?,?)",
-    [req.body.name, req.body.storeName, req.body.email, req.body.email, req.body.storephone, hashpassword, "1"]
-  );
-  console.log(result);
-  res.json({ message: "ok" });
-});
+//   let [result] = await connection.execute(
+//     // todo 修改checkbox and open time input
+//   "INSERT INTO stores (bossname, name, email, account, tel_no, password,valid) VALUES (?,?,?,?,?,?,?)",
+//     [req.body.name, req.body.storeName, req.body.email, req.body.email, req.body.storephone, hashpassword, "1"]
+//   );
+//   console.log(result);
+//   res.json({ message: "ok" });
+// });
 
 
 // -------- 登入 --------
@@ -139,42 +139,42 @@ router.post("/login", async (req, res, next) => {
 // -------- 商家登入 --------
 
 // /api/auth/storeLogin
-router.post("/storeLogin", async (req, res, next) => {
-  //to confirm if the mail exists
-  let [stores] = await connection.execute("SELECT * FROM stores WHERE email=?", [
-    req.body.email,
-  ]);
-  console.log(stores);
-  if (stores.length === 0) {
-    //mail not fount
-    return res.status(404).send({
-      code: "33003",
-      msg: "尚未註冊",
-    });
-  }
-  let store = stores[0];
+// router.post("/storeLogin", async (req, res, next) => {
+//   //to confirm if the mail exists
+//   let [stores] = await connection.execute("SELECT * FROM stores WHERE email=?", [
+//     req.body.email,
+//   ]);
+//   console.log(stores);
+//   if (stores.length === 0) {
+//     //mail not fount
+//     return res.status(404).send({
+//       code: "33003",
+//       msg: "尚未註冊",
+//     });
+//   }
+//   let store = stores[0];
 
-  let result = await argon2.verify(store.password, req.body.password);
-  if (!result) {
-    //password not match
-    return res.status(400).send({
-      code: "33005",
-      msg: "帳號或密碼錯誤",
-    });
-  }
-  let returnStore = {
-    id: store.id,
-    name: store.name,
-  };
-// session
-  req.session.store = returnStore;
+//   let result = await argon2.verify(store.password, req.body.password);
+//   if (!result) {
+//     //password not match
+//     return res.status(400).send({
+//       code: "33005",
+//       msg: "帳號或密碼錯誤",
+//     });
+//   }
+//   let returnStore = {
+//     id: store.id,
+//     name: store.name,
+//   };
+// // session
+//   req.session.store = returnStore;
 
-  res.json({
-    code: "0",
-    msg:"後端登入成功",
-    data: returnStore,
-  });
-});
+//   res.json({
+//     code: "0",
+//     msg:"後端登入成功",
+//     data: returnStore,
+//   });
+// });
 
 
 module.exports = router;
