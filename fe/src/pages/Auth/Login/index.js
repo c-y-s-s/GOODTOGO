@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
+import Swal from "sweetalert2";
 import FacebookLogin from "@greatsumini/react-facebook-login";
+import Ads from "../../../images/ads/ads2.jpg";
 
 //-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
@@ -17,6 +19,37 @@ import { ERR_MSG } from "../../../utils/error";
 const Login = (props) => {
   //登入後存入會員資料給全域使用
   const { loginMember, setLoginMember } = useAuth();
+  const swal = Swal.mixin({
+    customClass: {
+      confirmButton: "btn round-btn-green ms-2 me-2",
+      popup: "popup",
+      closeButton: "close-btn-ads",
+    },
+    buttonsStyling: false,
+  });
+  const loginSuccessAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            position: "center",
+            imageUrl: `${Ads}`,
+            imageWidth: "512px",
+            imageHeight: "650px",
+            background: "transparent",
+            confirmButtonText: "立馬搶救即期美食 GO!",
+            showConfirmButton: true,
+            showCloseButton: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("/store/1");
+            }
+          })}
+      </>
+    );
+  };
+
   // 從App傳來的登入狀態
   //預設個欄位的值為空（開發中所以有先給值）
   const [loginUser, setLoginUser] = useState({
@@ -88,6 +121,7 @@ const Login = (props) => {
       });
       console.log("登入成功", response.data);
       setLoginMember(response.data.data);
+      loginSuccessAlert();
       navigate("/");
     } catch (e) {
       // console.error("錯誤:", e.response.data);

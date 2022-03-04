@@ -22,40 +22,40 @@ const passwordRule = [
 //api/auth/facebook
 router.get("/facebook/token", async (req, res, next) => {});
 // /api/auth/register
-// router.post("/register", emailRule, passwordRule, async (req, res, next) => {
-//   console.log(req.body);
-//   //*確認格式是否正確
-//   const errors = validationResult(req);
-//   if (!errors.isEmpty()) {
-//     let error = errors.array();
-//     console.log("validation:", error);
-//     // return res.status(400).json({ code: "33001", msg: error[0].msg });
-//     return res.status(400).json({ errors: error });
-//   }
-//   //*檢查 email 是不是已經註冊
-//   let [members] = await connection.execute(
-//     "SELECT * FROM users WHERE email=?",
-//     [req.body.email]
-//   );
-//   console.log(members);
-//   if (members.length > 0) {
-//     return res.status(400).send({
-//       code: "33002",
-//       msg: "這個 email 已經已經註冊過了",
-//     });
-//   }
-//   //*雜湊密碼
-//   let hashpassword = await argon2.hash(req.body.password);
-//   let createdTime = Date.now();
-//   console.log(createdTime);
-//   //*存入資料庫
-//   let [result] = await connection.execute(
-//     "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
-//     [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
-//   );
-//   console.log(result);
-//   res.json({ message: "ok" });
-// });
+router.post("/register", emailRule, passwordRule, async (req, res, next) => {
+  console.log(req.body);
+  //*確認格式是否正確
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    let error = errors.array();
+    console.log("validation:", error);
+    // return res.status(400).json({ code: "33001", msg: error[0].msg });
+    return res.status(400).json({ errors: error });
+  }
+  //*檢查 email 是不是已經註冊
+  let [members] = await connection.execute(
+    "SELECT * FROM users WHERE email=?",
+    [req.body.email]
+  );
+  console.log(members);
+  if (members.length > 0) {
+    return res.status(400).send({
+      code: "33002",
+      msg: "這個 email 已經已經註冊過了",
+    });
+  }
+  //*雜湊密碼
+  let hashpassword = await argon2.hash(req.body.password);
+  let createdTime = Date.now();
+  console.log(createdTime);
+  //*存入資料庫
+  let [result] = await connection.execute(
+    "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
+    [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
+  );
+  console.log(result);
+  res.json({ message: "ok" });
+});
 //Login with Google
 // passport.use(
 //   new GoogleStrategy(
