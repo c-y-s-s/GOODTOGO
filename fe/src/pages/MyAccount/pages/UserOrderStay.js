@@ -10,10 +10,15 @@ const UserOrderStay = (props) => {
   const { status } = useParams();
   const [orderStay, setOrderStay] = useState([]);
 
+  // index 傳過來 用於判斷是否有資料呈現 (執行api)
   let orderStayCount = props.orders.filter((v) => Object.values(v)[1] === 1);
-  console.log("Order Stay - props.orders", props.orders);
-  console.log("Order Stay - orderStayCount", orderStayCount);
-  console.log("Order Stay - orderStayCount.length", orderStayCount.length);
+  // console.log("OrderStay - props.orders", props.orders);
+  // console.log("OrderStay - orderStayCount", orderStayCount);
+  // console.log("OrderStay - orderStayCount.length", orderStayCount.length);
+
+  // useEffect(()=>{
+  //   console.log("iii",props.orders.filter((v) => Object.values(v)[1] === 1))
+  // },[props.orders])
 
   // 載入 使用者收藏店家清單
   useEffect(() => {
@@ -29,6 +34,8 @@ const UserOrderStay = (props) => {
           response.data
         );
         setOrderStay(response.data);
+
+        // 更新 待領取數量 顯示待領取 badge 數字用
         props.setStayNum(response.data.length);
       };
       getOrderStay();
@@ -64,16 +71,23 @@ const UserOrderStay = (props) => {
           (v) => Object.values(v)[0] !== Object.values(cancelOrder)[0]
         )
       );
-      // 更新待領取訂單數量
+      // 更新 待領取數量 顯示待領取 badge 數字用
       props.setStayNum(orderStay.length - 1);
-      // 更新使用者訂單紀錄，判斷各訂單頁有無資料用
+
+      // 更新 props.orders (將待領取1 -> 取消3)
+      // index 傳過來 用於判斷是否有資料可呈現 (執行api)
+      // !!!!! 會更動到 props 要用複製的 [...XXX]
+      // let data = props.orders;
+      let data = [...props.orders];
       let findIndex = props.orders.findIndex(
         (v) => Object.values(v)[0] === cancelOrder.cancelOrder
       );
-      console.log("Order Stay - findIndex", findIndex);
-      props.orders[findIndex].status_id = 3;
-      props.setOrders(props.orders);
-      console.log("Order Stay - reNewOrder", props.orders);
+      // console.log("OrderStay - findIndex", findIndex);
+      data[findIndex].status_id = 3;
+      props.setOrders(data);
+      // console.log("OrderStay - data",data)
+      // orderStayCount.length -= 1;
+      // console.log("orderStayCount.length -= 1", orderStayCount.length);
     } catch (e) {
       console.error("res.error:", e.response);
     }

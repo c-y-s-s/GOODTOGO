@@ -23,8 +23,8 @@ moment.locale("zh-tw", {
   },
 });
 
-// TODO: 會員登入後 先到 auth 比對帳密 -> 登入成功 -> 回應前端(登入頁) session 資料
-// TODO: 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
+// 會員登入後 先到 auth 比對帳密 -> 登入成功 -> 回應前端(登入頁) session 資料
+// 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
 
 // -------- 驗證是否已登入 中間件 --------
 // TODO: router.use(checkLogin); // 最後要抽離成 middleware 引入
@@ -36,10 +36,10 @@ router.use((req, res, next) => {
   //   photo: member.photo
   // }
   req.session.member = {
-    id: 1,
-    name: "林振宣",
+    id: 2,
+    name: "王嘉雯",
     // photo: "",
-    photo: "/static/uploads/headshots/member-1646150271556.png",
+    photo: "/static/uploads/headshots/member-1646235995063.png",
   };
   // ----- 測試，假設已取得登入後的 session
 

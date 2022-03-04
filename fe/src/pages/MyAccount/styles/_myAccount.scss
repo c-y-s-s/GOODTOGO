@@ -296,6 +296,36 @@
   }
 }
 
+// -------- 信用卡資訊頁 --------
+.btn.btn_Credit {
+  font-size: $fz-sm;
+  width: 6rem;
+  background-color: $color-green;
+  border-color: $color-green;
+  border-radius: 2px;
+  height: 2.5rem;
+  &:hover {
+    background-color: lighten($color-green, 8%);
+    border-color: lighten($color-green, 8%);
+  }
+  &:focus {
+    box-shadow: none;
+  }
+}
+.credit_Text {
+  letter-spacing: $ls-md;
+  color: lighten($color-dark-grey, 20%);
+}
+.credit_Num {
+  letter-spacing: 6px;
+}
+.credit_bg {
+  background-color: aquamarine;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+}
+
 // -------- 更改密碼頁 --------
 .form_Input_Password[type="password"] {
   letter-spacing: -0.25rem;
