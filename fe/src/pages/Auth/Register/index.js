@@ -20,7 +20,7 @@ const Register = () => {
     },
     buttonsStyling: false,
   });
-  const loginSuccessAlert = () => {
+  const registrationSuccessAlert = () => {
     return (
       <>
         {swal
@@ -153,7 +153,7 @@ const Register = () => {
       let response = await axios.post(`${API_URL}/auth/register`, user);
       console.log(response.data);
       navigate("/login");
-      loginSuccessAlert();
+      registrationSuccessAlert();
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);

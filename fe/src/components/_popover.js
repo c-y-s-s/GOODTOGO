@@ -35,7 +35,7 @@ const _popover = () => {
             if (result.isConfirmed) {
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
-              navigate("/");
+              navigate("/").scrollTo(0, 0);
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel

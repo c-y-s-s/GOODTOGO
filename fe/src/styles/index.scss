@@ -36,7 +36,53 @@ $fw-regular: 300; // regular
 $fw-medium: 400; // medium
 $fw-bold: 500; // bold
 $fw-black: 700; // black
-
+//Swal
+.popup {
+  width: 100px;
+  height: 170px;
+}
+.round {
+  border-radius: 16px;
+}
+.confirmbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-red;
+  color: white;
+  border-radius: 2px;
+}
+.cancelbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-green;
+  color: white;
+  border-radius: 2px;
+}
+.round-btn-green {
+  width: fit-content;
+  height: fit-content;
+  background-color: white;
+  color: $color-green;
+  border: 8px solid $color-dark-yellow;
+  border-radius: 30px;
+  position: relative;
+  top: -5rem;
+  &:hover {
+    background-color: $color-dark-yellow;
+    color: white;
+  }
+}
+.no-bg {
+  background-color: transparent;
+}
+.close-btn-ads {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.336);
+  position: relative;
+  top: 2rem;
+}
 // -------- font-family 字體 --------
 $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
