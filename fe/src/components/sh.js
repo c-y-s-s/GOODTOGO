@@ -20,16 +20,7 @@ const _popover = () => {
 
   const notLoggedin = (
     <div className="nav-popover">
-      <div className="popover-item text-center">
-        <Link to="/auth/login" className="nav-popover-link no-link">
-          會員登入
-        </Link>
-      </div>
-      <div className="popover-item text-center">
-        <Link to="＃" className="nav-popover-link">
-          店家登入
-        </Link>
-      </div>
+      
     </div>
   );
   const loggedin = (

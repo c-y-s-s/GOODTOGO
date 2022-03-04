@@ -60,10 +60,10 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
   }
 
   return (
-    <div>
+    <div className="">
       {/* // 判斷有無資料 */}
       {productModalCommentData.length ? (
-        <div className="product-users-comment">
+        <div className="product-users-comment ">
           {/* <a href="#product-top" className="product-users-comment-gotop">
             <FiArrowUpCircle />
           </a> */}
