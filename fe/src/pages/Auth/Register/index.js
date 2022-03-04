@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
@@ -10,8 +10,34 @@ import axios from "axios";
 import { API_URL } from "../../../utils/config";
 // import useAuth from "../../src/hooks/authForm.js";
 import { ERR_MSG } from "../../../utils/error";
+import Swal from "sweetalert2";
 
 const Register = () => {
+  const navigate = useNavigate();
+  const swal = Swal.mixin({
+    customClass: {
+      confirmButton: " btn cancelbtn ms-2 me-2",
+    },
+    buttonsStyling: false,
+  });
+  const loginSuccessAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            text: "註冊成功",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "立即登入",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("/auth/login");
+            }
+          })}
+      </>
+    );
+  };
   //預設個欄位的值為空（開發中所以有先給值）
   const [user, setUser] = useState({
     email: "song@test.com",
@@ -126,6 +152,8 @@ const Register = () => {
     try {
       let response = await axios.post(`${API_URL}/auth/register`, user);
       console.log(response.data);
+      navigate("/login");
+      loginSuccessAlert();
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);
