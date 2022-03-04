@@ -1,0 +1,85 @@
+//-------- 商家資料 -------
+.store-data {
+    margin-top: 4rem;
+    color: $color-dark-grey;
+
+    .store-data-left {
+        .store-data-left-outline {
+            border-bottom: 1px solid $color-grey;
+            .store-data-left-name {
+                font-size: 1.75rem;
+                font-weight: 500;
+                color: $color-dark-grey;
+            }
+            .store-data-left-category {
+                background-color: #eaeaea;
+                padding: 0.1rem 0.75rem;
+                border-radius: 1rem;
+                font-size: $fz-sm;
+                font-weight: 500;
+            }
+            .store-data-left-star {
+                margin-left: 1rem;
+            }
+            .store-data-left-favorite {
+                font-size: $fz-xx-lg;
+
+                .store-data-left-icon {
+                    margin: 0 0.5rem 0 1.25rem;
+                    color: $color-light-red;
+                }
+                .store-data-left-favorite-num {
+                }
+            }
+        }
+
+        .store-data-left-content {
+            margin-top: 1.1rem;
+            font-size: $fz-xx-lg;
+            display: flex;
+            .store-data-icon {
+                color: $color-light-green;
+                padding-right: 1rem;
+
+                font-size: 1.15rem;
+            }
+            .workday {
+                width: 100%;
+                align-items: center;
+                .work-time {
+                    margin-left: 1.2rem;
+                    letter-spacing: $ls-sm;
+                }
+                .store-data-left-content-open {
+                    background-color: $color-light-green;
+                    color: white;
+                    border-radius: 0.5rem;
+                    padding: 0.3rem 0.6rem;
+                    margin-left: 1rem;
+                    font-size: $fz-sm;
+                }
+                .store-data-left-content-close {
+                    background-color: $color-grey;
+                    color: white;
+                    border-radius: 0.5rem;
+                    padding: 0.3rem 0.6rem;
+                    margin-left: 1rem;
+                    font-size: $fz-sm;
+                }
+            }
+
+            &:nth-child(4) {
+                align-items: flex-start;
+            }
+        }
+    }
+    //-------- 商家資料結束 -------
+
+    //-------- 地圖 -------
+    .store-map {
+        // width: 665px;
+        // height: 286px;
+        height: 270px;
+    }
+}
+//-------- 地圖結束 -------

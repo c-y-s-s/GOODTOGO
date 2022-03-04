@@ -1,0 +1,159 @@
+// -------- navbar --------
+.navbar {
+  z-index: 1010;
+  height: 8vw;
+  background-color: rgba(255, 255, 255, 0.884);
+  margin: auto;
+  .nav-content {
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+  }
+  .nav-logo {
+    width: 100%;
+  }
+  .sm-logo-left {
+    display: none;
+  }
+  .side-menu {
+    display: none;
+  }
+  .nav-links {
+    width: 55%;
+    display: flex;
+    justify-content: space-evenly;
+
+    .nav-link {
+      text-decoration: none;
+      color: $color-dark-grey;
+      font-size: $fz-x-lg;
+    }
+  }
+  .nav-icons {
+    width: 14%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .shopping-cart {
+      position: relative;
+      .shopping-cart-number {
+        background-color: $color-dark-yellow;
+        font-size: 8px;
+        color: #fff;
+        border-radius: 50%;
+        padding: 0.1rem 0.5rem;
+        position: absolute;
+        left: 8px;
+        &:hover + .shopping-cart-products {
+          opacity: 1;
+        }
+      }
+      .shopping-cart-icon:hover + .shopping-cart-products {
+        opacity: 1;
+      }
+      .shopping-cart-products {
+        opacity: 0;
+        position: absolute;
+        border: 1px solid black;
+        width: 339px;
+        height: 200px;
+        right: -1rem;
+        bottom: -14rem;
+        background-color: white;
+        transition: 0.3s;
+      }
+    }
+  }
+  .nav-icon {
+    color: $color-grey;
+    font-size: $fz-xxx-lg;
+  }
+}
+.nav-popover {
+  padding: 0;
+  .popover-item {
+    padding: 0.5rem 1rem;
+    .nav-popover-link {
+      text-decoration: none;
+      color: $color-dark-grey;
+      font-size: $fz-lg;
+    }
+    &:hover {
+      background-color: $color-grey;
+      .nav-popover-link {
+        color: white;
+      }
+    }
+  }
+}
+.confirmbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-red;
+  color: white;
+
+  border-radius: 2px;
+}
+.cancelbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-green;
+  color: white;
+  border-radius: 2px;
+}
+
+// .nav-toggle-menu {
+//   padding: 2rem;
+//   .popover-item {
+//     padding: 0.5rem 1rem;
+//     .nav-popover-link {
+//       text-decoration: none;
+//       color: $color-dark-grey;
+//       font-size: $fz-lg;
+//     }
+//     &:hover {
+//       background-color: $color-grey;
+//       .nav-popover-link {
+//         color: white;
+//       }
+//     }
+//   }
+// }
+@media (max-width: 390px) {
+  .navbar {
+    height: 10vh;
+    background-color: white;
+    .nav-content {
+      height: fit-content;
+      width: 90vw;
+      margin-top: 1rem;
+      align-items: center;
+      .nav-logo {
+        height: 3vh;
+      }
+      .sm-logo-left {
+        display: flex;
+        align-items: center;
+        .menu-toggle {
+        }
+        .sm-icon {
+          padding-bottom: 0.4rem;
+          color: $color-dark-grey;
+          font-size: $fz-x-lg;
+        }
+      }
+      .nav-links {
+        display: none;
+        // display: block;
+        .nav-links {
+          font-size: $fz-s-sm;
+        }
+      }
+      .nav-icons {
+        display: none;
+      }
+    }
+  }
+}

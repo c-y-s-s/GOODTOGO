@@ -1,0 +1,350 @@
+.black-background {
+    background-color: rgba(10, 8, 8, 0.3);
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+}
+// -------- 商品光箱 --------
+.products-details {
+    .products-details-data {
+        scroll-behavior: smooth;
+        overflow-y: auto;
+        position: fixed;
+        top: 0%;
+        left: 0%;
+        width: 100%;
+        height: 100%;
+        z-index: 3;
+        font-weight: 540;
+        height: 100vh;
+
+        .products-details-data-card {
+            width: 25rem;
+        }
+        // -------- 商品上半部 --------
+        .product-logo {
+            height: 10rem;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+        .products-close {
+            position: absolute;
+            left: 89%;
+            top: 0%;
+            font-size: 1.5rem;
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            color: #fff;
+        }
+        .card {
+            border-top: 0.5rem solid $color-yellow;
+            border-right: 0;
+            border-left: 0;
+            border-bottom: 0;
+            border-radius: 0.4rem 0.4rem 0 0;
+            .card-body {
+                padding: 0 1.87rem;
+                //商品名稱
+                .card-title {
+                    font-size: $fz-xxx-lg;
+                    letter-spacing: $ls-md;
+                    color: $color-dark-grey;
+                }
+                .card-value {
+                    border-bottom: 1px solid #b1b1ac;
+                    padding-bottom: 0.45rem;
+                    //商品評價
+                    .card-star {
+                    }
+                    //商品價格
+                    .card-price {
+                        font-size: $fz-xxx-lg;
+                    }
+                }
+                //商品描述
+                .card-text {
+                    padding-top: 0.6rem;
+                    font-size: $fz-md;
+                    letter-spacing: 0.035rem;
+                    .fialert-circle {
+                        padding-right: 0.75rem;
+                        color: $color-green;
+                        font-size: 1.5rem;
+                        height: 2.65rem;
+                        font-weight: $fw-medium;
+                    }
+                }
+                //商品數量
+                .card-amount {
+                    border-bottom: 1px solid #b1b1ac;
+
+                    padding-bottom: 0.3rem;
+                    align-items: center;
+                    .card-total-price {
+                        font-size: 1.625rem;
+                        font-weight: $fw-black;
+                        color: $color-green;
+                    }
+                    .buy-num {
+                        align-items: center;
+                        // 加減號
+                        .equation {
+                            background: #fff;
+                            border: none;
+                            color: $color-grey;
+                            font-size: 2rem;
+                            padding-bottom: 0.6rem;
+                            font-weight: "normal";
+                        }
+                        //減號
+                        .buy-num-minus {
+                            transition: 0.32s;
+                            &:hover {
+                                color: $color-green;
+                            }
+                        }
+                        //購買數量
+                        .buy-num-num {
+                            padding: 0px 0.95rem;
+                            color: $color-green;
+                            font-weight: $fw-black;
+                            font-size: $fz-xxxx-lg;
+                        }
+                        //加號
+                        .buy-num-plus {
+                            padding-right: 0;
+                            transition: 0.32s;
+                            &:hover {
+                                color: $color-green;
+                            }
+                        }
+                    }
+                }
+            }
+            //加入購物車按鈕
+            .product-buy-car {
+                padding-top: 1.2rem;
+
+                button {
+                    padding: 0.85rem 3.2rem;
+                    border-radius: 2rem;
+                    font-size: $fz-xxx-lg;
+                    letter-spacing: $ls-lg;
+                    background-color: $color-light-green;
+                    border: none;
+                    transition: 0.3s;
+                    &:hover {
+                        background-color: $color-green;
+                    }
+                }
+                .close-buy-car {
+                    cursor: not-allowed;
+                    padding: 0.85rem 3.2rem;
+                    border-radius: 2rem;
+                    font-size: $fz-xxx-lg;
+                    letter-spacing: $ls-lg;
+                    background-color: $color-light-grey;
+                    border: none;
+                    transition: 0.3s;
+                    &:hover {
+                        background-color: $color-dark-grey;
+                    }
+                }
+            }
+            //下面裝飾線
+            .decorative {
+                border-bottom: 0.54rem solid #f2c53d;
+            }
+            // -------- 商品上半部結束 --------
+
+            // -------- 評論下半部 --------
+            .product-users-comment {
+                scroll-behavior: smooth;
+                padding: 0 1.7rem;
+                //箭頭錨點
+
+                //用戶圖片
+                .product-users-comment-filter {
+                    .product-users-comment-filter-star {
+                        color: $color-green;
+                        font-size: $fz-sm;
+                    }
+                    .product-users-comment-filter-time {
+                        color: $color-green;
+                        font-size: $fz-sm;
+                    }
+                    .product-users-comment-filter-icon {
+                        border: none;
+                        background-color: rgba(0, 0, 0, 0);
+                        transition: 0.3s;
+                        color: $color-grey;
+                        &:hover {
+                            color: $color-green;
+                        }
+                    }
+                }
+
+                .product-users-comment-photo {
+                    width: 3.8rem;
+                    height: 3.8rem;
+
+                    .cover-photo {
+                        width: 100%;
+                        height: 100%;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+                .product-users-comment-data {
+                    border-bottom: 1px solid $color-green;
+                    padding-bottom: 2rem;
+                    &:last-child {
+                        margin-bottom: 0.25rem;
+                    }
+                    .product-users-comment-userdata {
+                        flex: 1 0 0;
+                        //用戶名稱
+                        .product-users-comment-userdata-name {
+                            letter-spacing: $ls-md;
+                            font-size: $fz-md;
+                        }
+                        //留言時間
+                        .product-users-comment-userdata-time {
+                            font-size: $fz-sm;
+                            color: $color-grey;
+                            font-weight: $fw-medium;
+                            flex: 0 0 1;
+                            align-items: center;
+                            letter-spacing: -0.5px;
+                            .user-data-report {
+                                color: $color-grey;
+                                font-weight: $fw-medium;
+                                border: none;
+                                background-color: rgba(0, 0, 0, 0);
+                            }
+                            .dropdown-menu {
+                                padding-left: 0.3rem;
+                                background-color: rgba(0, 0, 0, 0);
+                                min-width: 3rem;
+                                a {
+                                    text-decoration: none;
+                                    color: $color-black;
+                                    transition: 0.3s;
+                                    &:hover {
+                                        color: $color-light-red;
+                                    }
+                                }
+                            }
+                        }
+                        //用戶給的評價
+                        .product-users-comment-userdata-star {
+                            padding-top: 1rem;
+                        }
+                        //用戶評論
+                        .product-users-comment-userdata-text {
+                            font-size: $fz-s-sm;
+                            padding-top: 1rem;
+                            font-weight: $fw-medium;
+                        }
+                    }
+                }
+            }
+            // -------- 顧客評論結束 --------
+        }
+    }
+}
+
+.nothing-product-comment {
+    padding: 3rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: $fz-xx-lg;
+}
+.product-users-comment-gotop {
+    font-size: 2.8rem;
+    color: $color-green;
+    position: fixed;
+    opacity: 0.5;
+    left: 65%;
+    top: 90%;
+    bottom: 7.5%;
+    transition: 0.3s;
+    &:hover {
+        color: $color-green;
+        opacity: 1;
+        transform: translateY(-10%);
+    }
+}
+
+.expand-comment {
+    text-align: center;
+    transition: 0.3s;
+    .expand-comment-btn {
+        border: none;
+        background-color: rgba(0, 0, 0, 0);
+        font-size: $fz-xx-lg;
+        padding: 1rem 0;
+        .expand-comment-btn-icon {
+            animation: TestMove3 2s infinite alternate;
+            margin: 0 0.25rem;
+        }
+    }
+    &:hover {
+        background-color: $color-light-green;
+        color: white;
+    }
+}
+
+@media screen and (max-width: 1920px) {
+    .product-users-comment-gotop {
+        font-size: 2.7rem;
+        left: 55%;
+        top: 90%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .product-users-comment-gotop {
+        font-size: 2.5rem;
+        left: 65%;
+        top: 90%;
+    }
+    .products-details {
+        .products-details-data {
+            .products-details-data-card {
+                width: 22rem;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 390px) {
+    .product-users-comment-gotop {
+        font-size: 2.5rem;
+        left: 76%;
+        top: 90%;
+    }
+}
+
+@keyframes TestMove3 {
+    0% {
+        transform: translate(0px, 0px);
+    }
+    50% {
+        transform: translate(0px, -5px);
+    }
+    100% {
+        transform: translate(0px, 0px);
+    }
+}

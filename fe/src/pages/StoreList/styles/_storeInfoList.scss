@@ -1,0 +1,286 @@
+.store-list {
+  width: 100vw;
+  .header {
+    background-image: url(../images/storelist_bg_2.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 12rem;
+    width: 100vw;
+    position: relative;
+    top: -1px;
+  }
+  .title {
+    align-items: center;
+    .title-box {
+      height: fit-content;
+      width: fit-content;
+      margin: auto;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid $color-grey;
+    }
+  }
+  .function-box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: end;
+    .search-box {
+      border-radius: 2px;
+      border: 1.5px solid $color-green;
+      padding: 0.3rem;
+      color: $color-green;
+      .store-search {
+        margin-left: 0.5rem;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .btn-round {
+      border: 1px solid $color-green;
+      border-radius: 18.26px;
+      color: $color-green;
+      transition: 0.3s;
+      &:hover {
+        background-color: $color-green;
+        color: white;
+      }
+    }
+    .store-select-outline {
+      width: fit-content;
+      height: fit-content;
+
+      &:hover {
+        transform: scaleX(1);
+        transition: all 0.3s ease-in-out 0s;
+        border-bottom: 0.3rem solid $color-dark-yellow;
+      }
+      .store-select {
+        font-size: $fz-xx-lg;
+        padding: 0.2em 0;
+        // box-sizing: border-box;
+        border-radius: 0;
+        border: 1px solid transparent;
+        color: $color-green;
+        transition: 0.3s;
+      }
+    }
+  }
+  .total-count {
+    align-self: flex-end;
+    justify-self: end;
+    color: $color-dark-grey;
+  }
+  .store-info-list {
+    margin: auto;
+    display: grid;
+    row-gap: 2rem;
+    column-gap: 2rem;
+  }
+  .pages {
+    display: flex;
+    margin: auto;
+    list-style-type: none;
+    text-decoration: none;
+
+    align-items: center;
+    .page-arrow {
+      font-size: 1.5rem;
+      color: $color-grey;
+      margin-bottom: 0.3rem;
+      &:nth-child(1):hover {
+        animation: page-arrow-prev 0.9s infinite linear;
+        color: $color-green;
+      }
+      &:nth-last-child(1):hover {
+        animation: page-arrow-next 0.9s infinite linear;
+        color: $color-green;
+      }
+      @keyframes page-arrow-next {
+        0% {
+        }
+        100% {
+          transform: translateX(1rem);
+        }
+      }
+      @keyframes page-arrow-prev {
+        0% {
+        }
+        100% {
+          transform: translateX(-1rem);
+        }
+      }
+    }
+    .page-li {
+      .page-links {
+        margin: 0.5rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        background-color: transparent;
+        color: $color-green;
+        transition: 0.3s;
+        text-decoration: none;
+
+        // &:hover {
+        //   background-color: $color-light-green;
+        //   color: white;
+        // }
+      }
+      .active {
+        background-color: $color-green;
+        color: white;
+      }
+    }
+  }
+  .footer {
+    background-image: url(../images/storelist_bg_3.svg);
+    background-size: cover;
+    width: 100vw;
+    height: 15rem;
+  }
+}
+@media screen and (max-width: 390px) {
+  .store-list {
+    .prefix {
+      display: none;
+    }
+    width: 100vw;
+    .header {
+      background-image: url(../images/storelist_bg_2.svg);
+      background-repeat: no-repeat;
+      height: 4rem;
+    }
+    .title {
+      align-items: center;
+      .title-box {
+        height: fit-content;
+        width: fit-content;
+        margin: auto;
+        padding-bottom: 0.8rem;
+        border-bottom: 1px solid $color-grey;
+      }
+    }
+    .function-box {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      align-self: end;
+      .search-box {
+        border-radius: 2px;
+        border: 1.5px solid $color-green;
+        padding: 0.3rem;
+        color: $color-green;
+        .store-search {
+          margin-left: 0.5rem;
+          border: none;
+          outline: none;
+        }
+      }
+
+      .btn-round {
+        border: 1px solid $color-green;
+        border-radius: 18.26px;
+        color: $color-green;
+        transition: 0.3s;
+        &:hover {
+          background-color: $color-green;
+          color: white;
+        }
+      }
+      .store-select-outline {
+        width: fit-content;
+        height: fit-content;
+
+        &:hover {
+          transform: scaleX(1);
+          transition: all 0.3s ease-in-out 0s;
+          border-bottom: 0.3rem solid $color-dark-yellow;
+        }
+        .store-select {
+          font-size: $fz-xx-lg;
+          padding: 0.2em 0;
+          // box-sizing: border-box;
+          border-radius: 0;
+          border: 1px solid transparent;
+          color: $color-green;
+          transition: 0.3s;
+        }
+      }
+    }
+    .total-count {
+      display: none;
+      align-self: flex-end;
+      justify-self: end;
+      color: $color-dark-grey;
+    }
+    .store-info-list {
+      margin: auto;
+      display: grid;
+      row-gap: 2rem;
+      column-gap: 2rem;
+    }
+    .pages {
+      display: flex;
+      margin: auto;
+      list-style-type: none;
+      text-decoration: none;
+
+      align-items: center;
+      .page-arrow {
+        font-size: 1.5rem;
+        color: $color-grey;
+        margin-bottom: 0.3rem;
+        &:nth-child(1):hover {
+          animation: page-arrow-prev 0.9s infinite linear;
+          color: $color-green;
+        }
+        &:nth-last-child(1):hover {
+          animation: page-arrow-next 0.9s infinite linear;
+          color: $color-green;
+        }
+        @keyframes page-arrow-next {
+          0% {
+          }
+          100% {
+            transform: translateX(1rem);
+          }
+        }
+        @keyframes page-arrow-prev {
+          0% {
+          }
+          100% {
+            transform: translateX(-1rem);
+          }
+        }
+      }
+      .page-li {
+        .page-links {
+          margin: 0.5rem;
+          width: 2rem;
+          height: 2rem;
+          border: 1px solid transparent;
+          border-radius: 50%;
+          background-color: transparent;
+          color: $color-green;
+          transition: 0.3s;
+          text-decoration: none;
+          font-size: small;
+        }
+        .active {
+          background-color: $color-green;
+          color: white;
+        }
+      }
+    }
+
+    .footer {
+      background-image: url(../images/storelist_bg_3.svg);
+      background-size: cover;
+      width: 100vw;
+      height: 5rem;
+      background-repeat: no-repeat;
+    }
+  }
+}
