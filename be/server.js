@@ -12,9 +12,6 @@ let app = express();
 //使用 cors 設定的中間鍵，開放所有網域皆可連線
 app.use(cors());
 
-
-
-
 // :TODO: -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
 app.use("/api/stores", storesRouter);
@@ -29,6 +26,9 @@ app.use("/api/products", productsRouter);
 let memberRouter = require("./routers/member");
 app.use("/api/users", memberRouter);
 // -------- 會員 RESTful API 列表 --------
+// -------- MAP --------
+let sfmRouter = require("./routers/sfm");
+app.use("api/sfm", sfmRouter);
 
 // 404
 app.use((req, res, next) => {
