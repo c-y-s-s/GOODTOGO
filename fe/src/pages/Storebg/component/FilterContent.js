@@ -24,16 +24,20 @@ const Filtercontent = () => {
         </NavLink>
         <ul className="dropdown-menu background-storebg-data-right-sort-options">
           <li>
-            <a href="#/">價格高到低</a>
+            {/* <a href="#/">價格高到低</a> */}
+            <button>價格高到低</button>
           </li>
           <li>
-            <a href="#/">價格低到高</a>
+            {/* <a href="#/">價格低到高</a> */}
+            <button>價格低到高</button>
           </li>
           <li>
-            <a href="#/">數量多到少</a>
+            {/* <a href="#/">數量多到少</a> */}
+            <button>數量多到少</button>
           </li>
           <li>
-            <a href="#/">數量少到多</a>
+            {/* <a href="#/">數量少到多</a> */}
+            <button>數量少到多</button>
           </li>
         </ul>
       </div>
