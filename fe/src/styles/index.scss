@@ -37,6 +37,11 @@ $fw-medium: 400; // medium
 $fw-bold: 500; // bold
 $fw-black: 700; // black
 
+// -------- font-family 字體 --------
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
+
 #root {
   font-family: $font-family;
   color: $color-dark-grey;
