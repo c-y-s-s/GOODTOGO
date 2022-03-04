@@ -1,4 +1,4 @@
-import React, { useState ,useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
@@ -8,11 +8,11 @@ import { ERR_MSG } from "../../../utils/error";
 import moment from "moment";
 import "moment/min/locales";
 const Table = () => {
-// 抓出目前時間格式
-let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
-   const [productsUpdate,setProductsUpdate] = useState([])
-   console.log(productsUpdate)
-   const { productId } = useParams();
+  // 抓出目前時間格式
+  let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
+  const [productsUpdate, setProductsUpdate] = useState([]);
+  console.log(productsUpdate);
+  const { productId } = useParams();
   //預設個欄位的值為空（開發中所以有先給值）
   const [product, setProduct] = useState({
     // productName: "奶茶",
@@ -23,7 +23,7 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     // salesTimeStartss: "10",
     // salesTimeEndmm: "10",
     // salesTimeEndss: "10",
-    storeId:"1",
+    storeId: "1",
     productName: "",
     productDescription: "",
     amountOfGoods: "",
@@ -31,12 +31,15 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     img: "",
     salesTimeStart: "",
     salesTimeEnd: "",
-    createdAt:timeInsecond
+    createdAt: timeInsecond,
   });
 
-  console.log("product---->",product)
+  console.log("product---->", product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
+
+  //類別-顯示
+  const [selectedProduct, setSelectedProduct] = useState("");
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
@@ -46,7 +49,10 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     e.preventDefault();
 
     try {
-      let response = await axios.post(`${API_URL}/storebgaddproduct/newproduct`, product);
+      let response = await axios.post(
+        `${API_URL}/storebgaddproduct/newproduct`,
+        product
+      );
       console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
@@ -78,14 +84,23 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
 
   // http://localhost:3002/api/products/productsdifferent/1
 
-
-  
   // 抓符合網址上 product ID 的 API
   useEffect(() => {
     const getProducts = async () => {
-        let result = await axios.get(`${API_URL}/products/productsdifferent/${productId}`)
-        setProductsUpdate(result.data);
-      } ;
+      let result = await axios.get(
+        `${API_URL}/products/productsdifferent/${productId}`
+      );
+      let selectedProductResponse = await axios.get(
+        `${API_URL}/selectedProductList`
+      );
+      let selectedProductListData = selectedProductResponse.data;
+      setSelectedProduct(selectedProductListData);
+      console.log(
+        selectedProductListData,
+        "selectedProductResponseselectedProductResponseselectedProductResponse"
+      );
+      setProductsUpdate(result.data);
+    };
     getProducts();
   }, []);
   return (
@@ -164,13 +179,13 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                 <div className="invalid-feedback">請輸入商品價格.</div>
               </div>
             </div>
-            <div className="row align-items-center">
+            <div className="row align-items-center mb-3">
               <label htmlFor="salesTime" className="form-label fw-bold">
                 販售時間
               </label>
               <div className="col">
                 <input
-                type="time"
+                  type="time"
                   className="form-control"
                   id="salesTimeStart"
                   name="salesTimeStart"
@@ -178,30 +193,8 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                   onChange={handleChange}
                   required
                 />
-        </div>
-              ：
-              {/* <div className="col">
-                <input
-                  className="form-control"
-                  id="salesTimeStartss"
-                  name="salesTimeStartss"
-                  value={product.salesTimeStartss}
-                  onChange={handleChange}
-                  required
-                />
-              </div> */}
-              ～
-              {/* <div className="col">
-                <input
-                  className="form-control"
-                  id="salesTimeEndmm"
-                  name="salesTimeEndmm"
-                  value={product.salesTimeEndmm}
-                  onChange={handleChange}
-                  required
-                />
               </div>
-              ： */}
+              ：
               <div className="col">
                 <input
                   type="time"
@@ -214,6 +207,16 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                 />
               </div>
             </div>
+            <select className="form-select" aria-label="Default select example">
+              <option value="">商品類別</option>
+              {/* {selectedProduct.map(() => {
+                return (
+                  <option value={category}>
+                    {category}
+                  </option>
+                );
+              })} */}
+            </select>
           </div>
           <div className="col d-flex justify-content-center">
             <div className="mb-3">
@@ -234,7 +237,7 @@ let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
                       : PROFILE_IMAGE_URL
                   }
                   alt="product img"
-                  className="rounded"
+                  className="rounded cover-newproduct"
                 />
               </div>
               <input
