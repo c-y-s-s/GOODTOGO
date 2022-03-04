@@ -50,13 +50,11 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-
-          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
+          <Link to="/shoppingcart" className="nav-icon shopping-cart">
             <div className="shopping-cart-number">1</div>
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
-          </Link> */}
-
+          </Link>
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>

@@ -45,7 +45,6 @@ const StoreInfoCard = (props) => {
           // -------- 處理評分星星 --------
 
           return (
-<<<<<<< HEAD
             <div
             // key={item.id}
             >
@@ -54,11 +53,6 @@ const StoreInfoCard = (props) => {
                   key={item.id}
                   className="store-info-card shadow d-flex align-items-center"
                 >
-=======
-            <div key={item.id}>
-              <Link to={`/store/${item.id}`} className="no-link">
-                <div className="store-info-card shadow d-flex align-items-center">
->>>>>>> test_release
                   <div className="info-img col-12">
                     <img
                       src={require(`../../../../images/store_img/${item.logo}`)}

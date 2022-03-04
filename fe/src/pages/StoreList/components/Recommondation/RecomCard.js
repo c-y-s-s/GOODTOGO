@@ -66,9 +66,12 @@ const RecomCard = (props) => {
         // -------- 處理評分星星 --------
 
         return (
-          <div key={item.id}>
-            <Link to={`all/${item.id}`} className="no-link">
-              <div className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10">
+          <div>
+            <Link to={`/store/${item.id}`} className="no-link">
+              <div
+                className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10"
+                key={item.id}
+              >
                 <div className="info-img col-12">
                   <img
                     src={require(`../../../../images/store_img/${item.logo}`)}
