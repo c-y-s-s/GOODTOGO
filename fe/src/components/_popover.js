@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/auth";
 //引用antd popover
 import { Popover } from "antd";
@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
+  const navigate = useNavigate();
   const swal = Swal.mixin({
     customClass: {
       confirmButton: " btn confirmbtn ms-2 me-2",
@@ -34,6 +35,7 @@ const _popover = () => {
             if (result.isConfirmed) {
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
+              navigate("/");
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
