@@ -9,12 +9,15 @@ import { NavLink, useParams, useNavigate } from "react-router-dom";
 
 // FillMore icon
 import { FiMoreVertical } from "react-icons/fi";
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 // 光箱
 import CheckModal from "./CheckModel";
 
 const Table = () => {
   // 店家商品列表
   const [productsData, setproductsData] = useState([]);
+  // 取得頁數
   const { currentPage } = useParams();
   //按下上架刷新 API
   const [modalSwitch, setModalSwitch] = useState("");
@@ -26,28 +29,28 @@ const Table = () => {
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
   console.log("currentPage", currentPage, page);
 
-  // useEffect(() => {
-  //   let setProducts = async () => {
-  //     let response = await axios.get(`${API_URL}/storebg/productslist`);
-  //     let productsList = response.data[0];
-  //     setproductsData(productsList);
-
-  //     console.log(
-  //       "api/storebg/products(get) response.data.storeProductsData: ",
-  //       response.data
-  //     );
-  //     console.log(
-  //       "api/storebg/products(get) response.data.storeProductsData: ",
-  //       response.data[0].img
-  //     );
-  //   };
-  //   setProducts();
-  // }, []);
   useEffect(() => {
     let getPrices = async () => {
+      // 預設 created_at DESC
       let response = await axios.get(
         `${API_URL}/storebg/productslist?page=${page}`
       );
+      // 價錢 DESC
+      // let productsPriceDescResponse = await axios.get(
+      //   `${API_URL}/storebg/productspricedesc?page=${page}`
+      // );
+      // // 價錢 ASC
+      // let productsPriceAscResponse = await axios.get(
+      //   `${API_URL}/storebg/productspriceasc?page=${page}`
+      // );
+      // // 數量 DESC
+      // let productsAmountDescResponse = await axios.get(
+      //   `${API_URL}/storebg/productsamountdesc?page=${page}`
+      // );
+      // // 數量 ASC
+      // let productsAmountAscResponse = await axios.get(
+      //   `${API_URL}/storebg/productsamountasc?page=${page}`
+      // );
 
       let productsListPage = response.data[0];
       console.log("productsListPage", productsListPage);
@@ -66,40 +69,27 @@ const Table = () => {
 
   //計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
-  const getPages = () => {
-    let pages = [];
-    for (let i = 1; i <= lastPage; i++) {
-      pages.push(
-        <li
-          style={{
-            display: "inline-block",
-            margin: "2px",
-            backgroundColor: page === i ? "#00d1b2" : "",
-            borderColor: page === i ? "#00d1b2" : "#dbdbdb",
-            color: page === i ? "#fff" : "#363636",
-            borderWidth: "1px",
-            width: "28px",
-            height: "28px",
-            borderRadius: "3px",
-            textAlign: "center",
-          }}
-          key={i}
+  // const getPages = () => {
+  let pages = [];
+  for (let i = 1; i <= lastPage; i++) {
+    pages.push(
+      <li className="page-item" key={uuidv4()}>
+        <a
+          href=" "
+          className={`page-link pages ${page === i ? "active" : ""}`}
           onClick={(e) => {
             setPage(i);
             navigate(`${i}`);
           }}
         >
           {i}
-        </li>
-      );
-    }
-    return pages;
-  };
+        </a>
+      </li>
+    );
+  }
 
   return (
     <div>
-      <ul>{getPages()}</ul>
-
       <table className="table background-storebg-data-right-content-table">
         <thead>
           <tr>
@@ -125,7 +115,7 @@ const Table = () => {
         <tbody>
           {productsData.map((item) => {
             return (
-              <tr key={item.id}>
+              <tr key={uuidv4()}>
                 <td>
                   <div className="storebg-product-photo">
                     <img
@@ -146,8 +136,6 @@ const Table = () => {
                   {item.start_time} ~ {item.due_time}
                 </td>
                 <td>
-                  {/* Feb 01,2022
-                    <div className="ps-3 ">6:30 pm</div> */}
                   {item.created_at}
                 </td>
                 <td className="text-center">
@@ -215,6 +203,34 @@ const Table = () => {
           })}
         </tbody>
       </table>
+      {/* <ul>{getPages()}</ul> */}
+      <nav
+        aria-label="Page navigation example m-auto "
+        className="background-storebg-data-right-content-pages"
+      >
+        <ul className="pagination justify-content-center">
+          {/* <li className="page-item">
+            <a className="page-link" href="#/" aria-label="Previous">
+              <span aria-hidden="true">&lt;</span>
+            </a>
+          </li> */}
+
+          {/* <li className="page-item"> */}
+          {/* <a className="page-link" href="#/"> */}
+          {/* <div> */}
+          {pages.map((item) => {
+            return item;
+          })}
+          {/* </div> */}
+          {/* </a> */}
+          {/* </li> */}
+          {/* <li className="page-item">
+            <a className="page-link" href="#/" aria-label="Next">
+              <span aria-hidden="true">&gt;</span>
+            </a>
+          </li> */}
+        </ul>
+      </nav>
     </div>
   );
 };
