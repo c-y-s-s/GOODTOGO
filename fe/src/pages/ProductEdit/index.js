@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 
-import LeftNav from "./component/LeftNav";
+import LeftNav from "../Storebg/component/LeftNav";
 import TopNav from "../Storebg/component/TopNav";
 import Table from "./component/Table";
 const Newproduct = ({ setIsAdmin }) => {

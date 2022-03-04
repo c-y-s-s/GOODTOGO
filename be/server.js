@@ -91,6 +91,9 @@ app.use("/api/selectedproductlist", selectedProductList);
 // -------- 商家後台寫入資料 --------
 let storeBgAddProduct = require("./routers/storeBgAddProduct");
 app.use("/api/storebgaddproduct", storeBgAddProduct);
+// -------- 商家後台編輯寫入資料 --------
+let storeBgEditProduct = require("./routers/storeBgEditProduct");
+app.use("/api/storebgeditproduct", storeBgEditProduct);
 
 // 404
 app.use((req, res, next) => {

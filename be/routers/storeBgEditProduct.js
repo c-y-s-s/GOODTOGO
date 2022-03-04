@@ -5,7 +5,7 @@ const connection = require("../utils/db");
 // multer 上傳圖片用
 const multer = require("multer");
 
-router.post("/newproduct", async (req, res, next) => {
+router.post("/productedit", async (req, res, next) => {
   console.log(req.body);
   // 設定上傳圖片儲存資訊 (資料夾、檔名)
   const storage = multer.diskStorage({
@@ -56,20 +56,18 @@ router.post("/newproduct", async (req, res, next) => {
 
   //*存入資料庫
   let [result] = await connection.execute(
-    `INSERT INTO products (store_id,
-      category_id,
-      name,
-      img,
-      price,
-      amount,
-      description,
-      start_time,
-      due_time,
-      created_at,
-      valid) 
-      VALUES (?,?,?,?,?,?,?,?,?,?,?)`,
+    `UPDATE products SET
+      category_id=?,
+      name=?,
+      img=?,
+      price=?,
+      amount=?,
+      description=?,
+      start_time=?,
+      due_time=?,
+      created_at=?
+      WHERE id=?;`,
     [
-      req.body.storeId,
       req.body.productSelected,
       req.body.productName,
       req.body.productImg,
@@ -79,7 +77,7 @@ router.post("/newproduct", async (req, res, next) => {
       req.body.salesTimeStart,
       req.body.salesTimeEnd,
       req.body.createdAt,
-      "1",
+      req.body.storeId,
     ]
   );
   console.log(result);

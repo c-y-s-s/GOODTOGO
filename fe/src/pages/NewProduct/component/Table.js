@@ -1,63 +1,43 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, navigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
+import Swal from "sweetalert2";
 
 import axios from "axios";
 import { ERR_MSG } from "../../../utils/error";
 import moment from "moment";
 import "moment/min/locales";
+
 const Table = () => {
   // 抓出目前時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   const [productsUpdate, setProductsUpdate] = useState([]);
-  console.log(productsUpdate);
+
+  let navigate = useNavigate();
+  // console.log(productsUpdate);
   const { productId } = useParams();
-  //預設個欄位的值為空（開發中所以有先給值）
   const [product, setProduct] = useState({
-    // productName: "奶茶",
-    // productDescription: "測試用商品描述",
-    // amountOfGoods: "10",
-    // commodityPrice: "100",
-    // salesTimeStartmm: "10",
-    // salesTimeStartss: "10",
-    // salesTimeEndmm: "10",
-    // salesTimeEndss: "10",
     storeId: "1",
     productName: "",
     productDescription: "",
     amountOfGoods: "",
     commodityPrice: "",
-    img: "",
+    productImg: "",
     salesTimeStart: "",
     salesTimeEnd: "",
+    productSelected: "",
     createdAt: timeInsecond,
   });
-
   console.log("product---->", product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
   //類別-顯示
-  const [selectedProduct, setSelectedProduct] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState([]);
 
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
-  };
-  // -------- 表單送出 --------
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      let response = await axios.post(
-        `${API_URL}/storebgaddproduct/newproduct`,
-        product
-      );
-      console.log(response.data);
-    } catch (e) {
-      // console.error("錯誤:", e.response.data);
-      console.error(ERR_MSG[e.response.data].code);
-    }
   };
 
   // -------- 使用者預覽上傳圖片 --------
@@ -82,7 +62,33 @@ const Table = () => {
     setProduct({ ...product, [e.target.name]: e.target.files[0] });
   };
 
-  // http://localhost:3002/api/products/productsdifferent/1
+  // -------- 表單送出 --------
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      let formData = new FormData(); // 物件
+      formData.append("img", product.productImg ? product.productImg : "");
+
+      let response = await axios.post(
+        `${API_URL}/storebgaddproduct/newproduct`,
+        product
+      );
+      console.log("上傳商品資料: ", response.data);
+      // sweet alert
+      Swal.fire({
+        icon: "success",
+        title: "資料儲存成功",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+      // setProductsUpdate(response.data.img);
+    } catch (e) {
+      // console.error("錯誤:", e.response.data);
+      console.error(ERR_MSG[e.response.data].code);
+    }
+    navigate(`/storebg`);
+  };
 
   // 抓符合網址上 product ID 的 API
   useEffect(() => {
@@ -145,6 +151,7 @@ const Table = () => {
                 商品數量
               </label>
               <input
+                type="number"
                 className="form-control"
                 id="amountOfGoods"
                 name="amountOfGoods"
@@ -166,7 +173,7 @@ const Table = () => {
                   NT$
                 </span>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="commodityPrice"
                   name="commodityPrice"
@@ -207,15 +214,22 @@ const Table = () => {
                 />
               </div>
             </div>
-            <select className="form-select" aria-label="Default select example">
+            <select
+              className="form-select"
+              aria-label="Default select example"
+              id="productSelected"
+              name="productSelected"
+              value={product.productSelected}
+              onChange={handleChange}
+            >
               <option value="">商品類別</option>
-              {/* {selectedProduct.map(() => {
+              {selectedProduct.map((index) => {
                 return (
-                  <option value={category}>
-                    {category}
+                  <option key={index.id} value={index.id}>
+                    {index.category}
                   </option>
                 );
-              })} */}
+              })}
             </select>
           </div>
           <div className="col d-flex justify-content-center">
@@ -243,7 +257,8 @@ const Table = () => {
               <input
                 className="mt-3 form-control"
                 type="file"
-                id="formFile"
+                id="productImg"
+                name="productImg"
                 accept=".jpg,.jpeg,.png"
                 onChange={handleOnPreview}
               />

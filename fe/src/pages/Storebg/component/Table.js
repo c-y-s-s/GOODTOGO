@@ -135,9 +135,7 @@ const Table = () => {
                 <td>
                   {item.start_time} ~ {item.due_time}
                 </td>
-                <td>
-                  {item.created_at}
-                </td>
+                <td>{item.created_at}</td>
                 <td className="text-center">
                   <button
                     type="button"
@@ -174,19 +172,12 @@ const Table = () => {
                         type="button"
                         to={`/productedit/${item.id}`}
                         className={"navLink-g-color"}
+                        // productsData={productsData}
                       >
                         編輯
                       </NavLink>
                     </div>
-
                     <div className="navLink-r-color">
-                      {/* <NavLink
-                        type="button"
-                        to="/newproduct"
-                        className={"navLink-r-color"}
-                      >
-                        刪除
-                      </NavLink> */}
                       <button
                         type="button"
                         className="navLink-r-color"

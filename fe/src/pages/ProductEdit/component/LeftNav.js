@@ -1,40 +1,66 @@
 import React from "react";
 import { ReactComponent as Logo } from "../../../images/logo.svg";
+import { NavLink } from "react-router-dom";
 import icon1 from "../images/Vector3.png";
 
 const DataLeftNav = () => {
   return (
     <div>
-      <div className="vh-100 background-newproduct-data-left ">
+      <div className="vh-100 background-storebg-data-left ">
         {/* -------- 左邊欄位區塊開始 --------*/}
-        <div className="background-newproduct-data-left-nav sticky-top">
-          <div className="background-newproduct-data-left-nav-logo">
+        <div className="background-storebg-data-left-nav sticky-top">
+          <div className="background-storebg-data-left-nav-logo">
             <Logo />
           </div>
           <ul>
-            <li className="">
+            {/* <li className="">
               <a href="#/">
                 <img src={icon1} style={icon1.logo} alt="fireSpot" />
                 商家資料編輯
               </a>
-            </li>
-            <li className="">
-              <a href="#/" className="">
-                <img src={icon1} style={icon1.logo} alt="fireSpot" />
+            </li> */}
+
+            <li>
+              <NavLink
+                className={({ isActive }) => (isActive ? "ms-3" : "")}
+                to="/storebg"
+              >
+                <img
+                  src={icon1}
+                  className="ms-2"
+                  style={icon1.logo}
+                  alt="fireSpot"
+                />
                 商品清單
-              </a>
+              </NavLink>
             </li>
-            <li className="active">
-              <a href="#/" className="">
-                <img src={icon1} style={icon1.logo} alt="fireSpot" />
+            <li>
+              <NavLink
+                className={({ isActive }) => (isActive ? "ms-3" : "")}
+                to="/newproduct"
+              >
+                <img
+                  src={icon1}
+                  className="ms-2"
+                  style={icon1.logo}
+                  alt="fireSpot"
+                />
                 商品新增
-              </a>
+              </NavLink>
             </li>
-            <li className="">
-              <a href="#/" className="">
-                <img src={icon1} style={icon1.logo} alt="fireSpot" />
+            <li>
+              <NavLink
+                className={({ isActive }) => (isActive ? "ms-3" : "")}
+                to="/productedit"
+              >
+                <img
+                  src={icon1}
+                  className="ms-2"
+                  style={icon1.logo}
+                  alt="fireSpot"
+                />
                 商品資料編輯
-              </a>
+              </NavLink>
             </li>
           </ul>
         </div>

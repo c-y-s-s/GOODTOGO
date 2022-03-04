@@ -99,7 +99,7 @@ const uploader = multer({
   // 過濾 檔案尺寸
   limits: {
     // 1K: 1024 bytes
-    fileSize: 200 * 1024, // 限制 < 200K
+    fileSize: 2000 * 1024, // 限制 < 200K
   },
 });
 
@@ -205,24 +205,6 @@ router.post("/productslistvalid", async (req, res, next) => {
   res.json({
     message: "儲存成功 ok",
   });
-});
-
-// 新增商品
-router.post("/newproduct", async (req, res, next) => {
-  console.log(req.body);
-  //*存入資料庫
-  let [result] = await connection.execute(
-    "INSERT INTO products (name, description, amount, price, valid) VALUES (?,?,?,?,?)",
-    [
-      req.body.productName,
-      req.body.productDescription,
-      req.body.amountOfGoods,
-      req.body.commodityPrice,
-      "1",
-    ]
-  );
-  console.log(result);
-  res.json({ message: "ok" });
 });
 
 // -------- 會員移除收藏店家 --------

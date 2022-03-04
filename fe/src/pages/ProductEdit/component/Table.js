@@ -11,9 +11,10 @@ const Table = () => {
   // 抓出目前時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   const [productsUpdate, setProductsUpdate] = useState([]);
-  console.log(productsUpdate);
+
   const { productId } = useParams();
   //預設個欄位的值為空（開發中所以有先給值）
+  // 要 post 到後端的物件
   const [product, setProduct] = useState({
     // productName: "奶茶",
     // productDescription: "測試用商品描述",
@@ -33,7 +34,7 @@ const Table = () => {
     salesTimeEnd: "",
     createdAt: timeInsecond,
   });
-
+  console.log(product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
@@ -46,16 +47,36 @@ const Table = () => {
 
     try {
       let response = await axios.post(
-        `${API_URL}/storebgaddproduct/newproduct`,
+        `${API_URL}/storebgeditproduct/productedit`,
         product
       );
-      console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);
     }
   };
-
+  // 抓符合網址上 product ID 的 API
+  useEffect(() => {
+    const getProducts = async () => {
+      let result = await axios.get(
+        `${API_URL}/products/productsdifferent/${productId}`
+      );
+      setProductsUpdate(result.data);
+      // console.log("aaaaaaaaaaaaaaaaaaaaaa",result.data);
+      setProduct({
+        ...product,
+        productName: result.data[0].name,
+        productDescription: result.data[0].description,
+        amountOfGoods: result.data[0].amount,
+        commodityPrice: result.data[0].price,
+        img: result.data[0].img,
+        salesTimeStart: result.data[0].start_time,
+        salesTimeEnd: result.data[0].due_time,
+        createdAt: result.data[0].created_at,
+      });
+    };
+    getProducts();
+  }, []);
   // -------- 使用者預覽上傳圖片 --------
   const handleOnPreview = (e) => {
     const file = e.target.files[0]; // 抓取上傳的圖片
@@ -73,142 +94,135 @@ const Table = () => {
       reader.readAsDataURL(file);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    // console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    // console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     setProduct({ ...product, [e.target.name]: e.target.files[0] });
   };
 
   // http://localhost:3002/api/products/productsdifferent/1
 
-  // 抓符合網址上 product ID 的 API
-  useEffect(() => {
-    const getProducts = async () => {
-      let result = await axios.get(
-        `${API_URL}/products/productsdifferent/${productId}`
-      );
-      setProductsUpdate(result.data);
-    };
-    getProducts();
-  }, []);
+  // productsUpdate.forEach((item) => {
+  //   console.log("aaaaaaaa",item)
+  //   setProduct({
+  //     ...product,
+  //     amountOfGoods: item.amount,
+
+  //   })
+  // })
   return (
     <div>
-      {productsUpdate.map((item) => {
-        return (
-          <form className="container" key={item.id}>
-            <div className="row">
-              <div className="col">
-                <div className="mb-3">
-                  <label htmlFor="productName" className="form-label fw-bold">
-                    商品名稱
-                  </label>
-                  <input
-                    className="form-control"
-                    id="productName"
-                    name="productName"
-                    placeholder="請輸入商品名稱"
-                    value={item.name}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="productDescription"
-                    className="form-label fw-bold"
-                  >
-                    商品描述
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="productDescription"
-                    name="productDescription"
-                    rows="3"
-                    placeholder="請輸入商品描述"
-                    value={item.description}
-                    onChange={handleChange}
-                    required
-                  ></textarea>
-                </div>
-                <div className="mb-3">
-                  <label htmlFor="amountOfGoods" className="form-label fw-bold">
-                    商品數量
-                  </label>
-                  <input
-                    className="form-control"
-                    id="amountOfGoods"
-                    name="amountOfGoods"
-                    placeholder="請輸入商品數量"
-                    value={item.amount}
-                    onChange={handleChange}
-                    required
-                  />
-                </div>
-                <div className="mb-3">
-                  <label
-                    htmlFor="commodityPrice"
-                    className="form-label fw-bold"
-                  >
-                    商品價格
-                  </label>
-                  <div className="input-group has-validation">
-                    <span
-                      className="input-group-text newproduct-data-modal-green"
-                      id="inputGroupPrepend"
-                    >
-                      NT$
-                    </span>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="commodityPrice"
-                      name="commodityPrice"
-                      aria-describedby="inputGroupPrepend"
-                      placeholder="請輸入商品價格"
-                      value={item.price}
-                      onChange={handleChange}
-                      required
-                    />
-                    <div className="invalid-feedback">請輸入商品價格.</div>
-                  </div>
-                </div>
-                <div className="row align-items-center">
-                  <label htmlFor="salesTime" className="form-label fw-bold">
-                    販售時間
-                  </label>
-                  <div className="col">
-                    <input
-                      type="time"
-                      className="form-control"
-                      id="salesTimeStart"
-                      name="salesTimeStart"
-                      value={item.start_time}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                  <div className="col">
-                    <input
-                      type="time"
-                      className="form-control"
-                      id="salesTimeEnd"
-                      name="salesTimeEnd"
-                      value={item.due_time}
-                      onChange={handleChange}
-                      required
-                    />
-                  </div>
-                </div>
+      <form className="container">
+        <div className="row">
+          <div className="col">
+            <div className="mb-3">
+              <label htmlFor="productName" className="form-label fw-bold">
+                商品名稱
+              </label>
+              <input
+                className="form-control"
+                id="productName"
+                name="productName"
+                placeholder="請輸入商品名稱"
+                value={product.productName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label
+                htmlFor="productDescription"
+                className="form-label fw-bold"
+              >
+                商品描述
+              </label>
+              <textarea
+                className="form-control"
+                id="productDescription"
+                name="productDescription"
+                rows="3"
+                placeholder="請輸入商品描述"
+                value={product.productDescription}
+                onChange={handleChange}
+                required
+              ></textarea>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="amountOfGoods" className="form-label fw-bold">
+                商品數量
+              </label>
+              <input
+                className="form-control"
+                id="amountOfGoods"
+                name="amountOfGoods"
+                placeholder="請輸入商品數量"
+                value={product.amountOfGoods}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="commodityPrice" className="form-label fw-bold">
+                商品價格
+              </label>
+              <div className="input-group has-validation">
+                <span
+                  className="input-group-text newproduct-data-modal-green"
+                  id="inputGroupPrepend"
+                >
+                  NT$
+                </span>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="commodityPrice"
+                  name="commodityPrice"
+                  aria-describedby="inputGroupPrepend"
+                  placeholder="請輸入商品價格"
+                  value={product.commodityPrice}
+                  onChange={handleChange}
+                  required
+                />
+                <div className="invalid-feedback">請輸入商品價格.</div>
               </div>
-              <div className="col d-flex justify-content-center">
-                <div className="mb-3">
-                  <label
-                    htmlFor="formFile"
-                    className="form-label d-flex justify-content-center fw-bold"
-                  >
-                    商品圖片
-                  </label>
-                  <div className="text-center">
-                    {/* <img
+            </div>
+            <div className="row align-items-center">
+              <label htmlFor="salesTime" className="form-label fw-bold">
+                販售時間
+              </label>
+              <div className="col">
+                <input
+                  type="time"
+                  className="form-control"
+                  id="salesTimeStart"
+                  name="salesTimeStart"
+                  value={product.salesTimeStart}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="col">
+                <input
+                  type="time"
+                  className="form-control"
+                  id="salesTimeEnd"
+                  name="salesTimeEnd"
+                  value={product.salesTimeEnd}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+          </div>
+          <div className="col d-flex justify-content-center">
+            <div className="mb-3">
+              <label
+                htmlFor="formFile"
+                className="form-label d-flex justify-content-center fw-bold"
+              >
+                商品圖片
+              </label>
+              <div className="text-center">
+                {/* <img
                   // src="https://fakeimg.pl/400x400/"
                   src={
                     imageSrc
@@ -220,46 +234,44 @@ const Table = () => {
                   alt="product img"
                   className="rounded "
                 /> */}
-                    <img
-                      className="cover-product"
-                      src={require(`../../../../../be/public/uploads/products/${item.img}`)}
-                      alt=""
-                    />
-                  </div>
-                  <input
-                    className="mt-3 form-control"
-                    type="file"
-                    id="formFile"
-                    accept=".jpg,.jpeg,.png"
-                    onChange={handleOnPreview}
-                  />
-                </div>
+                {/* <img
+                  className="cover-product"
+                  src={require(`../../../../../be/public/uploads/products/${product.img}`)}
+                  alt=""
+                /> */}
               </div>
+              <input
+                className="mt-3 form-control"
+                type="file"
+                id="formFile"
+                accept=".jpg,.jpeg,.png"
+                onChange={handleOnPreview}
+              />
             </div>
-            <div className="row  mt-3">
-              <div className="col-3"></div>
+          </div>
+        </div>
+        <div className="row  mt-3">
+          <div className="col-3"></div>
 
-              <NavLink
-                type="button"
-                className="col-2 btn btn-lg cancel-bg"
-                to="/storebg"
-              >
-                取消
-              </NavLink>
+          <NavLink
+            type="button"
+            className="col-2 btn btn-lg cancel-bg"
+            to="/storebg"
+          >
+            取消
+          </NavLink>
 
-              <div className="col-1"></div>
-              <div className="col-1"></div>
-              <button
-                type="submit"
-                className="col-2 btn btn-warning btn-lg "
-                onClick={handleSubmit}
-              >
-                上架
-              </button>
-            </div>
-          </form>
-        );
-      })}
+          <div className="col-1"></div>
+          <div className="col-1"></div>
+          <button
+            type="submit"
+            className="col-2 btn btn-warning btn-lg "
+            onClick={handleSubmit}
+          >
+            上架
+          </button>
+        </div>
+      </form>
     </div>
   );
 };
