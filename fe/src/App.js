@@ -91,10 +91,12 @@ function App() {
             element={<CheckOut checkoutData={checkoutData} />}
           ></Route>
 
-  
           <Route path="/map" element={<Map />}></Route>
 
-          <Route path="member/*" element={<MyAccount />}>
+          <Route
+            path="member/*"
+            element={<MyAccount setisModalTouch={setisModalTouch} />}
+          >
             <Route path=":userInfo" element={<MyAccount />}>
               <Route path=":status" element={<MyAccount />} />
             </Route>

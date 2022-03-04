@@ -60,7 +60,7 @@ const _popover = () => {
   const loggedin = (
     <div className="nav-popover">
       <div className="popover-item text-center">
-        <Link to="/member" className="nav-popover-link">
+        <Link to="/member/profile" className="nav-popover-link">
           會員中心
         </Link>
       </div>
