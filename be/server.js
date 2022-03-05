@@ -11,7 +11,8 @@ const session = require("express-session");
 // let FileStore = require("session-file-store")(session);
 // const cookieSession = require("cookie-session");
 const passport = require("passport");
-require("./config/passport")(passport);
+// FIXME: 這段開了會壞掉 - 先註解起來
+// require("./config/passport")(passport);
 
 let app = express();
 app.use(express.urlencoded({ extended: true }));

@@ -51,11 +51,12 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          <Link to="/shoppingcart" className="nav-icon shopping-cart">
+          {/* FIXME: 這連結會影響信用卡按鈕，先註解起來 */}
+          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
             <div className="shopping-cart-number">1</div>
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
-          </Link>
+          </Link> */}
 
           <Link to="/map" className="nav-icon">
             <FiMapPin />
