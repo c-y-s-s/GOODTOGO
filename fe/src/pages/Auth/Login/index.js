@@ -32,7 +32,7 @@ const Login = (props) => {
       <>
         {swal
           .fire({
-            position: "center",
+            position: "top",
             imageUrl: `${Ads}`,
             imageWidth: "512px",
             imageHeight: "650px",
