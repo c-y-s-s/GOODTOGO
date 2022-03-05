@@ -198,11 +198,7 @@
   width: 100%;
 }
 
-.navbar .sm-logo-left {
-  display: none;
-}
-
-.navbar .side-menu {
+.navbar .sm-menu-toggle {
   display: none;
 }
 
@@ -307,6 +303,7 @@
 
 @media (max-width: 390px) {
   .navbar {
+    width: 100vw;
     height: 10vh;
     background-color: white;
   }
@@ -323,7 +320,7 @@
   .navbar .nav-content .nav-logo {
     height: 3vh;
   }
-  .navbar .nav-content .sm-logo-left {
+  .navbar .nav-content .sm-menu-toggle {
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -331,7 +328,10 @@
         -ms-flex-align: center;
             align-items: center;
   }
-  .navbar .nav-content .sm-logo-left .sm-icon {
+  .navbar .nav-content .sm-menu-toggle .nav-toggle-menu {
+    display: block;
+  }
+  .navbar .nav-content .sm-menu-toggle .sm-icon {
     padding-bottom: 0.4rem;
     color: #666666;
     font-size: 1.0625rem;
@@ -1595,7 +1595,8 @@ footer .footer-content .footer-bottom .footer-sign-info {
 .login-bg {
   margin: auto;
   background: #f2c53d;
-  padding: 4rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
 
 .login-bg .content {

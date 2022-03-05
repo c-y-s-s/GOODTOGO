@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/auth";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router";
 //alert套件
 import Swal from "sweetalert2";
 //引用antd popover
@@ -15,6 +16,7 @@ import { ReactComponent as StoreIcon } from "../images/store-icon.svg";
 const _menuToggle = () => {
   const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
+  const navigate = useNavigate();
   console.log("me open", isOpen);
   //antd menu
   const { SubMenu } = Menu;
@@ -42,6 +44,8 @@ const _menuToggle = () => {
             if (result.isConfirmed) {
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
+              navigate("/");
+              window.scrollTo(0, 0);
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -105,7 +109,6 @@ const _menuToggle = () => {
       <Menu mode="horizontal" triggerSubMenuAction="click">
         <SubMenu
           className="p-0 justify-self-end"
-          key="SubMenu"
           icon={
             <Hamburger
               toggled={isOpen}
@@ -117,10 +120,6 @@ const _menuToggle = () => {
           }
         >
           {loginMember ? loggedin : notLoggedin}
-          {/* <Menu.ItemGroup title="Item 1">
-            <Menu.Item key="setting:1">Option 1</Menu.Item>
-            <Menu.Item key="setting:2">Option 2</Menu.Item>
-          </Menu.ItemGroup> */}
         </SubMenu>
       </Menu>
     </>

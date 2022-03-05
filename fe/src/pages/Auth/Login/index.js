@@ -169,19 +169,19 @@ const Login = (props) => {
 
   return (
     <div className="container-fluid login-bg">
-      <div className="col-lg-4 col-sm-10 m-0 p-0 m-auto">
+      <div className="col-lg-4 col-12 m-0 p-0 m-auto">
         <div className="content text-center m-auto">
-          <div className="col-lg-10 col-md-8 col-sm-12 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
+          <div className="col-lg-10 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
             <>
               <div className="h4 text-dark-grey">會員登入</div>
               {/* -------- 表格開始 -------- */}
               <form
-                className="needs-validation col-lg-10 col-md-6 col-sm-12 col-10"
+                className="col-lg-12 col-md-6 col-10 p-0"
                 onSubmit={handleSubmit}
                 onInvalid={handleFormInvalid}
                 onChange={handleFormChange}
               >
-                <div className="label-group d-flex flex-column ">
+                <div className="label-group d-flex flex-column">
                   {/* email */}
                   <div className="text-start mt-3 mb-1">
                     <label

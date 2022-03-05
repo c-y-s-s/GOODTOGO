@@ -18,12 +18,14 @@ const Navbar = (props) => {
             <Logo className="nav-logo" />
           </Link>
         </div>
-        <div className="sm-logo-left align-items-center">
+        {/* RWD專用漢堡menu start */}
+        <div className="sm-menu-toggle align-items-center ">
           <Link to="/shoppingcart" className="sm-icon">
             <ShoppingBag />
           </Link>
           <MenuToggle />
         </div>
+        {/* RWD專用漢堡menu end */}
         <div className="nav-links">
           <Link to="/about" className="nav-link">
             關於我們
@@ -53,7 +55,6 @@ const Navbar = (props) => {
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
           </Link>
-
           <Link to="/map" className="nav-icon">
             <FiMapPin />
           </Link>
