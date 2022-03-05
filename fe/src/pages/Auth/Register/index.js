@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 //-------- 引用icon --------
@@ -60,6 +60,17 @@ const Register = () => {
     passwordEye: false,
     confirmPasswordEye: false,
   });
+  // 所有的 email，比對 email 用
+  const [emails, setEmails] = useState([]);
+  //讀取所有已註冊過的email
+  useEffect(() => {
+    let getEmails = async () => {
+      let res = await axios.get(`${API_URL}/auth/login/check`);
+      setEmails(res.data);
+      // console.log("all", res.data);
+    };
+    getEmails();
+  }, []);
   // --------切換顯示/隱藏密碼 --------
   //眼睛for密碼
   function passwordShow() {
@@ -91,6 +102,7 @@ const Register = () => {
     let value = e.target.value;
 
     // -------- 自訂個欄位錯誤訊息 --------
+
     //姓名欄位錯誤
     if (name === "name") {
       const updatedFieldErrors = {
@@ -99,14 +111,16 @@ const Register = () => {
       };
       setFieldErrors(updatedFieldErrors);
       //email欄位錯誤
-    } else if (name === "email") {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        email: "email格式輸入錯誤",
-      };
-      setFieldErrors(updatedFieldErrors);
-      //密碼欄位錯誤
-    } else if (name === "password") {
+    }
+    // else if (name === "email") {
+    //   const updatedFieldErrors = {
+    //     ...fieldErrors,
+    //     email: "email格式輸入錯誤",
+    //   };
+    //   setFieldErrors(updatedFieldErrors);
+    //   //密碼欄位錯誤
+    // }
+    else if (name === "password") {
       const updatedFieldErrors = {
         ...fieldErrors,
         password: "密碼至少為6個字元",
@@ -120,6 +134,31 @@ const Register = () => {
       };
       setFieldErrors(updatedFieldErrors);
     }
+  };
+  //檢查email是否已註冊過
+  const regEmail = (e) => {
+    console.log("regE.name", e.target.name);
+    console.log("regE.value", e.target.value);
+    const reEmail =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    if (!reEmail.test(e.target.value)) {
+      setFieldErrors({
+        ...fieldErrors,
+        email: "輸入格式有誤 example@example.com",
+      });
+    } else if (emails.find((v) => Object.values(v)[0] !== e.target.value)) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        email: "這個電子郵件已經有人使用",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
+    // } else {
+    //   setFieldErrors({
+    //     ...fieldErrors,
+    //     email: "輸入格式有誤 example@example.com",
+    //   });
+    // }
   };
   // 當整個表單有更動時會觸發
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
@@ -225,6 +264,7 @@ const Register = () => {
                         id="email"
                         placeholder="email"
                         onChange={handleChange}
+                        onBlur={regEmail}
                         required
                       />
                       <label

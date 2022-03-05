@@ -39,7 +39,7 @@ $fw-black: 700; // black
 //Swal
 .popup {
   width: 100px;
-  height: 170px;
+  height: 75%;
 }
 .round {
   border-radius: 16px;
@@ -59,19 +59,45 @@ $fw-black: 700; // black
   border-radius: 2px;
 }
 .round-btn-green {
+  display: inline-block;
   width: fit-content;
   height: fit-content;
-  background-color: white;
-  color: $color-green;
-  border: 8px solid $color-dark-yellow;
+  padding: 0.5rem 1rem;
+  background-color: $color-light-green;
+  color: white;
+  font-size: larger;
+  border: 3px solid $color-green;
   border-radius: 30px;
   position: relative;
-  top: -5rem;
+  top: -3rem;
+  &:after {
+    content: "";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: $color-yellow;
+    border-radius: 50%;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: relative;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color-yellow, 15%);
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
   &:hover {
-    background-color: $color-dark-yellow;
     color: white;
+    background-color: $color-green;
+    &:before {
+      width: 100%;
+    }
   }
 }
+
 .no-bg {
   background-color: transparent;
 }

@@ -1,5 +1,5 @@
 // -------- login 功能 --------
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
 import Swal from "sweetalert2";
@@ -9,16 +9,19 @@ import Ads from "../../../images/ads/ads2.jpg";
 //-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import { ReactComponent as Arrow } from "../images/hero1-sm-arrow.svg";
 
 //-------- 串接API套件 --------
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
+
 // require("dotenv").config();
 
 const Login = (props) => {
   //登入後存入會員資料給全域使用
   const { loginMember, setLoginMember } = useAuth();
+
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -32,12 +35,11 @@ const Login = (props) => {
       <>
         {swal
           .fire({
-            position: "top",
             imageUrl: `${Ads}`,
             imageWidth: "512px",
             imageHeight: "650px",
             background: "transparent",
-            confirmButtonText: "立馬搶救即期美食 GO!",
+            confirmButtonText: `<div>立馬搶救即期美食 GO!</div>`,
             showConfirmButton: true,
             showCloseButton: true,
           })
@@ -50,11 +52,12 @@ const Login = (props) => {
     );
   };
 
-  // 從App傳來的登入狀態
-  //預設個欄位的值為空（開發中所以有先給值）
+  // 所有的 email，比對 email 用
+  const [emails, setEmails] = useState([]);
+  //預設個欄位的值為空
   const [loginUser, setLoginUser] = useState({
-    email: "echo@test.com",
-    password: "0000000000",
+    email: "",
+    password: "",
   });
   //制定錯誤訊息，預設為沒有錯誤訊息
   const [fieldErrors, setFieldErrors] = useState({
@@ -65,6 +68,15 @@ const Login = (props) => {
   const [eye, setEye] = useState({
     passwordEye: false,
   });
+  //讀取所有已註冊過的email
+  useEffect(() => {
+    let getEmails = async () => {
+      let res = await axios.get(`${API_URL}/auth/login/check`);
+      setEmails(res.data);
+      // console.log("all", res.data);
+    };
+    getEmails();
+  }, []);
   // --------切換顯示/隱藏密碼 --------
   function passwordShow() {
     setEye(
@@ -77,21 +89,24 @@ const Login = (props) => {
   const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
+  //驗證email是否存在
+
   // -------- 當表單檢查有不合法的訊息時會呼叫 --------
   const handleFormInvalid = (e) => {
     // 阻擋form的預設送出行為(錯誤泡泡訊息)
     e.preventDefault();
-
     let name = e.target.name;
     //email欄位錯誤
-    if (name === "email") {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        email: "email格式輸入錯誤",
-      };
-      setFieldErrors(updatedFieldErrors);
-      //密碼欄位錯誤
-    } else if (name === "password") {
+    // if (name === "email") {
+    //   regEmail(e);
+    //   const updatedFieldErrors = {
+    //     ...fieldErrors,
+    //     email: "email格式輸入錯誤",
+    //   };
+    //   setFieldErrors(updatedFieldErrors);
+    //   //密碼欄位錯誤
+    // } else
+    if (name === "password") {
       const updatedFieldErrors = {
         ...fieldErrors,
         password: "密碼至少為6個字元",
@@ -99,6 +114,32 @@ const Login = (props) => {
       setFieldErrors(updatedFieldErrors);
     }
   };
+
+  const regEmail = (e) => {
+    console.log("regE.name", e.target.name);
+    console.log("regE.value", e.target.value);
+    const reEmail =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    if (!reEmail.test(e.target.value)) {
+      setFieldErrors({
+        ...fieldErrors,
+        email: "輸入格式有誤 example@example.com",
+      });
+    } else if (emails.find((v) => Object.values(v)[0] !== e.target.value)) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        email: "這個帳號不存在",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
+    // } else {
+    //   setFieldErrors({
+    //     ...fieldErrors,
+    //     email: "輸入格式有誤 example@example.com",
+    //   });
+    // }
+  };
+
   // -------- 當整個表單有更動時會觸發 --------
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
   const handleFormChange = (e) => {
@@ -128,8 +169,8 @@ const Login = (props) => {
       console.error("測試登入", ERR_MSG);
     }
   };
-  //傳fb token到後端
 
+  //傳fb token到後端
   const handleFBLogin = async (response) => {
     try {
       let fb_response = await axios.get(
@@ -186,6 +227,8 @@ const Login = (props) => {
                         placeholder="帳號"
                         value={loginUser.email}
                         onChange={handleChange}
+                        // onFocus={regEmail}
+                        onBlur={regEmail}
                         required
                       />
                       <label
@@ -204,6 +247,7 @@ const Login = (props) => {
                   </div>
 
                   {/* password */}
+
                   <div className=" text-start mt-2 mb-4">
                     <label
                       htmlfor=""
@@ -271,7 +315,7 @@ const Login = (props) => {
                     <div className="col-lg-2"> </div>
                   </button> */}
                   {/* //*facebook登入 */}
-                  <FacebookLogin
+                  {/* <FacebookLogin
                     className="btn btn-fb-login d-flex align-items-center text-center justify-content-evenly"
                     style={{
                       backgroundColor: "#4267b2",
@@ -284,7 +328,7 @@ const Login = (props) => {
                   >
                     <ImFacebook2 className="fb-icon col-lg-2 " />
                     使用 Facebook 登入
-                  </FacebookLogin>
+                  </FacebookLogin> */}
                 </div>
 
                 {/* -------- 表格結束 -------- */}
