@@ -29,8 +29,9 @@ router.get("/info", async (req, res, next) => {
     c.longitude AS lng,
     c.latitude AS lat
     FROM stores AS a
-    JOIN stores_category AS b ON b.id=a.stores_category_id
-    JOIN map AS c ON c.store_id = a.id
+    JOIN stores_category AS b 
+    ON a.stores_category_id = b.id
+    JOIN map AS c ON a.id = c.store_id 
     WHERE a.valid = 1;`
   );
 

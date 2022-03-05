@@ -14,12 +14,10 @@
   .nav-logo {
     width: 100%;
   }
-  .sm-logo-left {
+  .sm-menu-toggle {
     display: none;
   }
-  .side-menu {
-    display: none;
-  }
+
   .nav-links {
     width: 55%;
     display: flex;
@@ -36,6 +34,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    .navbar-profile-pic {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
     .shopping-cart {
       position: relative;
       .shopping-cart-number {
@@ -66,6 +70,7 @@
       }
     }
   }
+
   .nav-icon {
     color: $color-grey;
     font-size: $fz-xxx-lg;
@@ -88,41 +93,10 @@
     }
   }
 }
-.confirmbtn {
-  width: fit-content;
-  height: fit-content;
-  background-color: $color-red;
-  color: white;
 
-  border-radius: 2px;
-}
-.cancelbtn {
-  width: fit-content;
-  height: fit-content;
-  background-color: $color-green;
-  color: white;
-  border-radius: 2px;
-}
-
-// .nav-toggle-menu {
-//   padding: 2rem;
-//   .popover-item {
-//     padding: 0.5rem 1rem;
-//     .nav-popover-link {
-//       text-decoration: none;
-//       color: $color-dark-grey;
-//       font-size: $fz-lg;
-//     }
-//     &:hover {
-//       background-color: $color-grey;
-//       .nav-popover-link {
-//         color: white;
-//       }
-//     }
-//   }
-// }
 @media (max-width: 390px) {
   .navbar {
+    width: 100vw;
     height: 10vh;
     background-color: white;
     .nav-content {
@@ -133,10 +107,11 @@
       .nav-logo {
         height: 3vh;
       }
-      .sm-logo-left {
+      .sm-menu-toggle {
         display: flex;
         align-items: center;
-        .menu-toggle {
+        .nav-toggle-menu {
+          display: block;
         }
         .sm-icon {
           padding-bottom: 0.4rem;
