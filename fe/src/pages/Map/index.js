@@ -19,18 +19,18 @@ const MapPage = () => {
   };
   useEffect(() => {
     let getStores = async () => {
-      let storesRes = await axios.get(`${API_URL}/map/location`);
+      let storesRes = await axios.get(`${API_URL}/map/info`);
       // let stores = storesRes.data[0];
       // let category = storesRes.data[1];
       // let storeLikeCount = storesRes.data[3];
       // let productAmount = storesRes.data[4];
       // let storeStarsCount = storesRes.data[5];
       // setCategory(category);
-      console.log("cat", storesRes);
+      console.log("cat", storesRes.data);
     };
     getStores();
   }, []);
-  console.log(category);
+
   return (
     <div className="container-fluid map-bg d-flex p-0">
       <div className="map-wrapper col-lg-8">

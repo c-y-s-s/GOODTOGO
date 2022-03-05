@@ -1,10 +1,10 @@
 import React from "react";
-import { GoLocation } from "react-icons/go";
+import { ReactComponent as Pin } from "../images/pin_map.svg";
 
 const LocationPin = ({ text }) => {
   return (
     <div className="pin">
-      <GoLocation className="pin-icon" />
+      <Pin className="pin-icon" />
       <p className="pin-text">{text}</p>
     </div>
   );
