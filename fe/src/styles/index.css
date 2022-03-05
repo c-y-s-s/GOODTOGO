@@ -3052,6 +3052,8 @@ footer .footer-content .footer-bottom .footer-sign-info {
 .products-comment .product-comment .user-data .user-data-name {
   letter-spacing: 0.1rem;
   font-size: 1.125rem;
+  color: #666666;
+  font-weight: 500;
 }
 
 .products-comment .product-comment .user-data .user-data-comment-time {
@@ -3169,8 +3171,8 @@ footer .footer-content .footer-bottom .footer-sign-info {
 .products-comment .products-comment-pagination .active {
   border-radius: 50%;
   margin: 2rem 0.8rem;
-  width: 10rem;
-  height: 10rem;
+  width: 9rem;
+  height: 9rem;
   background: #a6bf4b;
   color: white;
 }
@@ -3178,7 +3180,6 @@ footer .footer-content .footer-bottom .footer-sign-info {
 @media screen and (max-width: 768px) {
   .products-comment .product-comment .user-comment {
     padding-right: 0;
-    font-weight: 100;
   }
   .products-comment .product-comment .product-photo {
     display: none;
@@ -4154,6 +4155,16 @@ footer .footer-content .footer-bottom .footer-sign-info {
   background-color: #668c4a;
 }
 
+.user-shopping-cart .shopping-cart-nothing-products {
+  text-align: center;
+}
+
+.user-shopping-cart .shopping-cart-nothing-products .shopping-cart-nothing-products-text {
+  font-size: 1.5rem;
+  letter-spacing: 7px;
+  color: #b1b1ac;
+}
+
 @media screen and (max-width: 1400px) {
   .user-shopping-cart
 .user-shopping-cart-data
@@ -4871,7 +4882,6 @@ tr {
 .nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-img {
   width: 150px;
   height: 68px;
-  border: 1px solid black;
 }
 
 .nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-text {
@@ -4899,6 +4909,20 @@ tr {
 .nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-text .nav-shopping-cart-products-text-delete {
   background-color: rgba(0, 0, 0, 0);
   border: none;
+  color: #f9af08;
+  font-size: 1.1rem;
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-text .nav-shopping-cart-products-text-delete:hover {
+  color: #f2c53d;
+}
+
+.nav-shopping-cart-nothing-products-text {
+  padding-top: 2.5rem;
+  text-align: center;
+  letter-spacing: 3px;
 }
 
 .nav-shopping-cart-gopage {

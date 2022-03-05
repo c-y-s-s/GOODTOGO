@@ -27,8 +27,17 @@ const Navbar = (props) => {
           </Link>
         </div>
         <div className="sm-logo-left">
-          <Link to="/shoppingcart" className="sm-icon">
-            <BsBag />
+          <Link to="/shoppingcart" className="nav-icon">
+            <div className="shopping-cart-icon-total-page">
+              {shoppingCartTotalPages}
+            </div>
+            <NavShoppingCart
+              setShoppingCartTotalPages={setShoppingCartTotalPages}
+              setNavShoppingDeleteParameter={
+                props.setNavShoppingDeleteParameter
+              }
+              navshoppingDeleteParameter={props.navshoppingDeleteParameter}
+            />
           </Link>
           <Hamburger
             toggled={isOpen}
@@ -36,6 +45,7 @@ const Navbar = (props) => {
             size={22}
             color="#668C4A"
             rounded
+            className="ps-2"
           />
           <div className="side-menu"></div>
         </div>
@@ -68,6 +78,8 @@ const Navbar = (props) => {
             <ShoppingBag className="shopping-cart-icon" />
             <div className="shopping-cart-products">1</div>
           </Link> */}
+
+          {/* 連結至 nav 以及 nav 下滑區塊 */}
           <Link to="/shoppingcart" className="nav-icon">
             <div className="shopping-cart-icon-total-page">
               {shoppingCartTotalPages}
