@@ -8,6 +8,7 @@ router.get("/location", async (req, res, next) => {
   let [location] = await connection.execute(
     `SELECT longitude AS lng, latitude AS lat, store_id FROM map `
   );
+  let [category] = await connection.execute("SELECT * FROM stores_category");
   let [likeResult] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
     FROM user_like
@@ -104,6 +105,6 @@ router.get("/location", async (req, res, next) => {
   let western = storeResult.filter((v) => Object.values(v)[6] === "西式");
   console.log("thaiFood", thaiFood);
 
-  res.json(location);
+  res.json([location, category]);
 });
 module.exports = router;
