@@ -34,6 +34,7 @@ function App() {
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
+  console.log(isModalTouch);
   // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
   const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
     useState(0);

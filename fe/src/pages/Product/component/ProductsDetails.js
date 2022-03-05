@@ -79,7 +79,18 @@ const ProductsDetails = ({
     setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
     setshoopingErrormsg("");
   }
+  function handleBackgroundDelete(e) {
+    // e.target.id === "products-details-data" ?
+    let backgroundId = e.target.id;
 
+    if (backgroundId === "products-details-data") {
+      setOpenProductsModal(false);
+      setisModalTouch(true);
+    }else{
+        setOpenProductsModal(true);
+        setisModalTouch(false);
+    }
+  }
   async function handleAddShoppingCar(e) {
     e.preventDefault();
     Swal.fire({
@@ -107,15 +118,16 @@ const ProductsDetails = ({
 
   return (
     <div>
-      <div
-        className="black-background"
-        onClick={() => setOpenProductsModal(false)}
-      ></div>
+      <div className="black-background"></div>
       {/* -------- 商品資訊上半部分 -------- */}
       {productModalData.map((data) => {
         return (
           <div className="container products-details " key={data.id}>
-            <div className="col-12 pt-2 products-details-data ">
+            <div
+              className="col-12 pt-2 products-details-data "
+              id="products-details-data"
+              onClick={handleBackgroundDelete}
+            >
               <div className="card products-details-data-card mx-auto">
                 <div className="">
                   <div className="product-logo">
@@ -128,7 +140,7 @@ const ProductsDetails = ({
                   {/* 關閉按鈕 */}
                   <button
                     className="products-close"
-                    onClick={() => {
+                    onClick={(e) => {
                       setOpenProductsModal(false);
                       setisModalTouch(true);
                     }}
@@ -175,7 +187,7 @@ const ProductsDetails = ({
                     ) : storeinOperation ? (
                       <div>
                         <div className="d-flex justify-content-between pt-4 fw-normal">
-                          <div clas>合計金額</div>
+                          <div>合計金額</div>
                           <div className="">
                             <span className="pe-2">餐點剩餘</span>
                             {storeinOperation === false ? 0 : data.amount}
