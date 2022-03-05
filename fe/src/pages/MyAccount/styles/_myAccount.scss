@@ -119,10 +119,10 @@
   }
 }
 
-// index
-// .set_Height {
-//   height: 144px;
-// }
+// -------- index --------
+.set_Height {
+  height: 115.195px;
+}
 
 // -------- 會員頭貼 --------
 .user_Info {
@@ -324,16 +324,54 @@
 .credit_Num {
   letter-spacing: 6px;
 }
-.credit_bg {
+.credit_Bg {
   background-color: black;
   opacity: 0.5;
   width: 100vw;
   height: 100vh;
-  // transform: translate(-50%, -50%);
   left: 0;
   top: 0;
   z-index: 10;
   position: fixed;
+}
+.credit_Box {
+  background-color: #fff;
+  width: 480px;
+  height: 560px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  position: fixed;
+  z-index: 15;
+  border-radius: 5px;
+  border-top: 10px solid $color-yellow;
+  border-bottom: 10px solid $color-yellow;
+}
+.credit_Close_Btn {
+  display: block;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background-color: $color-light-green;
+  position: absolute;
+  right: 0;
+  top: -5px;
+  transform: translate(50%, -50%);
+  transition: 0.2s;
+  cursor: pointer;
+  &:hover {
+    background-color: darken($color-light-green, 5%);
+  }
+}
+.credit_Close_Btn_X {
+  color: #fff;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
 }
 
 // -------- 更改密碼頁 --------
