@@ -15,15 +15,12 @@ const NavShoppingCart = ({
 }) => {
   const { loginMember, setLoginMember } = useAuth(true);
   const [navshoppingCartData, setNavShoppingCartData] = useState([]);
-  // 用來當作刪除刷新 api 的元素
 
   const click = () => {
     return <></>;
   };
-  console.log(navshoppingCartData);
-  //   http://localhost:3002/api/shop/shoppingcar/1
-  //   http://localhost:3002/api/shop/shoppingcartotoaldelete/
 
+  // 抓出使用者購物車商品
   useEffect(() => {
     let getShoppingData = async () => {
       let ShoppingDataResponse = await axios.get(
@@ -34,7 +31,8 @@ const NavShoppingCart = ({
     };
     getShoppingData();
   }, [navshoppingDeleteParameter]);
-console.log("aaaaaaa", navshoppingDeleteParameter);
+
+  // 寫入刪除商品
   async function handleDeleteNavShoppingCartData(item) {
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
@@ -43,48 +41,54 @@ console.log("aaaaaaa", navshoppingDeleteParameter);
     setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
   }
 
-  //   const notLoggedin = <div className="nav-popover"></div>;
+    const notLoggedin = <div className="nav-popover">尚未登入帳號</div>;
 
   const shoppingList = (
     <div>
-      {navshoppingCartData.map((item) => {
-        return (
-          <div className="nav-shopping-cart" key={item.products_id}>
-            <div className="nav-shopping-cart-products">
-              <img
-                src={require(`../images/products_img/${item.img}`)}
-                alt=""
-                className="nav-shopping-cart-products-img"
-              />
-              <div className="nav-shopping-cart-products-text">
-                <div className="d-flex justify-content-between">
-                  <div className="nav-shopping-cart-products-text-name">
-                    {item.product_name}
+      {navshoppingCartData.length > 0 ? (
+        navshoppingCartData.map((item) => {
+          return (
+            <div className="nav-shopping-cart" key={item.products_id}>
+              <div className="nav-shopping-cart-products">
+                <img
+                  src={require(`../images/products_img/${item.img}`)}
+                  alt=""
+                  className="nav-shopping-cart-products-img"
+                />
+                <div className="nav-shopping-cart-products-text">
+                  <div className="d-flex justify-content-between">
+                    <div className="nav-shopping-cart-products-text-name">
+                      {item.product_name}
+                    </div>
+                    <button
+                      className="nav-shopping-cart-products-text-delete"
+                      onClick={() => {
+                        handleDeleteNavShoppingCartData({
+                          id: item.id,
+                        });
+                      }}
+                    >
+                      X
+                    </button>
                   </div>
-                  <button
-                    className="nav-shopping-cart-products-text-delete"
-                    onClick={() => {
-                      handleDeleteNavShoppingCartData({
-                        id: item.id,
-                      });
-                    }}
-                  >
-                    X
-                  </button>
-                </div>
-                <div className="d-flex justify-content-between w-100">
-                  <div className="nav-shopping-cart-products-text-amount">
-                    {item.amount} X
-                  </div>
-                  <div className="nav-shopping-cart-products-text-price">
-                    NT $ 60
+                  <div className="d-flex justify-content-between w-100">
+                    <div className="nav-shopping-cart-products-text-amount">
+                      {item.amount} X
+                    </div>
+                    <div className="nav-shopping-cart-products-text-price">
+                      NT $ 60
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })
+      ) : (
+        <div className="nav-shopping-cart-nothing-products-text">
+          購物車沒有商品
+        </div>
+      )}
 
       <div className="nav-shopping-cart-gopage">
         <Link to="/shoppingcart" className="nav-shopping-cart-gopage-button">
@@ -97,9 +101,11 @@ console.log("aaaaaaa", navshoppingDeleteParameter);
     <>
       <Popover
         placement="bottomRight"
-        // content={loginMember ? loggedin : notLoggedin}
-        content={shoppingList}
-        // trigger="click"
+        // content={loginMember ? shoppingList : notLoggedin}
+        content={shoppingList }
+        // content={shoppingList}
+        trigger="click"
+        // trigger={loginMember && "click" }
       >
         <ShoppingBag className="nav-icon mt-1" />
       </Popover>

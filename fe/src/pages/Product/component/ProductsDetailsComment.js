@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const ProductsDetailsComment = ({ productModalCommentData }) => {
   let data = productModalCommentData;
-  console.log(productModalCommentData);
+  // console.log(productModalCommentData);
   let commentDatatowTwoPieces = [];
 
   // 評價排序開關

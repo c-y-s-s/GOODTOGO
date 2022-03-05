@@ -11,6 +11,7 @@ const Shoppingcart = ({
   setCheckoutData,
   checkoutData,
   navshoppingDeleteParameter,
+  setNavShoppingDeleteParameter,
 }) => {
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
@@ -88,6 +89,7 @@ const Shoppingcart = ({
                   deleteLive={deleteLive}
                   setPriceTotal={setPriceTotal}
                   priceTotal={priceTotal}
+                  setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
                   navshoppingDeleteParameter={navshoppingDeleteParameter}
                 />
                 {/* 下排 */}
@@ -164,9 +166,11 @@ const Shoppingcart = ({
             );
           })
         ) : (
-          <div>
+          <div className="shopping-cart-nothing-products">
             <img src={require(`../../images/editor-0.9s-215px.gif`)} />
-            <div>購物車沒有商品</div>
+            <div className="shopping-cart-nothing-products-text">
+              購物車沒有商品
+            </div>
           </div>
         )}
       </div>

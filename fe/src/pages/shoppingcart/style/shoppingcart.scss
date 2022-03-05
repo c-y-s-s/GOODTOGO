@@ -201,6 +201,14 @@
             }
         }
     }
+    .shopping-cart-nothing-products {
+        text-align: center;
+        .shopping-cart-nothing-products-text {
+            font-size: 1.5rem;
+            letter-spacing: 7px;
+            color: $color-grey;
+        }
+    }
 }
 
 @media screen and (max-width: 1400px) {

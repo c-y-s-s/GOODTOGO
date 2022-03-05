@@ -37,6 +37,8 @@ function App() {
   // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
   const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
     useState(0);
+  // 用來頁面購物車與導覽列購物車同步加減數量的state
+  const [shoppingNumPost, setShoppingNumPost] = useState(0);
   // 結帳所需 data
   const [checkoutData, setCheckoutData] = useState({
     //!整合須改為目前登入者 id
@@ -56,7 +58,7 @@ function App() {
     };
     getMember();
   }, []);
-  console.log("member from App.js", loginMember); //ok
+  // console.log("member from App.js", loginMember); //ok
   return (
     <AuthContext.Provider value={{ loginMember, setLoginMember }}>
       <Router>
@@ -91,13 +93,20 @@ function App() {
               <ShoppingCart
                 setCheckoutData={setCheckoutData}
                 checkoutData={checkoutData}
+                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
                 navshoppingDeleteParameter={navshoppingDeleteParameter}
               />
             }
           ></Route>
           <Route
             path="/checkout"
-            element={<CheckOut checkoutData={checkoutData} />}
+            element={
+              <CheckOut
+                checkoutData={checkoutData}
+                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                navshoppingDeleteParameter={navshoppingDeleteParameter}
+              />
+            }
           ></Route>
 
           <Route path="/map" element={<Map />}></Route>

@@ -17,6 +17,8 @@ export const OrderPaymentMethod = ({
   OrderDetail,
   checkoutData,
   setOrderCheckSwitch,
+  setNavShoppingDeleteParameter,
+  navshoppingDeleteParameter,
 }) => {
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
@@ -38,6 +40,7 @@ export const OrderPaymentMethod = ({
     // 寫入按下送出訂單哪一刻的時間
     timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     orderNumber = moment().format("YYMMDDHHmmss");
+
     let response = await axios.post(`${API_URL}/checkout/orderdetail`, {
       ...OrderDetail,
       orderTime: timeInsecond,
@@ -48,6 +51,7 @@ export const OrderPaymentMethod = ({
       `${API_URL}/checkout/userorderdetail`,
       productsArr
     );
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter+1);
     setOrderCheckSwitch(true);
   }
   return (

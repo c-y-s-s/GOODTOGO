@@ -15,7 +15,11 @@ import { RiVisaLine } from "react-icons/ri";
 import moment from "moment";
 import "moment/min/locales";
 
-const Checkout = ({ checkoutData }) => {
+const Checkout = ({
+  checkoutData,
+  setNavShoppingDeleteParameter,
+  navshoppingDeleteParameter,
+}) => {
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -119,6 +123,8 @@ const Checkout = ({ checkoutData }) => {
                 OrderDetail={OrderDetail}
                 checkoutData={checkoutData}
                 setOrderCheckSwitch={setOrderCheckSwitch}
+                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                navshoppingDeleteParameter={navshoppingDeleteParameter}
               />
             </tbody>
           </table>

@@ -13,40 +13,49 @@ const ProductsData = ({
   deleteLive,
   setPriceTotal,
   priceTotal,
+  setNavShoppingDeleteParameter,
   navshoppingDeleteParameter,
 }) => {
+  
+  //存目前登入使用者的購物車資料
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
 
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
+
 
   async function handleMinus(item) {
     //點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal + 1);
     //點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 由 app.js 傳進來為了刷新導覽列購物車同步所設置
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-
   async function handlePlus(item) {
+    // 點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal + 1);
+    // 點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 由 app.js 傳進來為了刷新導覽列購物車同步所設置
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-  // console.log("加減數量", productsAmountTotal);
 
   async function handleDeleteProduct(item) {
-    //為刷新useEffect所設置
+    // 點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal + 1);
+    // 點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 點刪除就刷新購物車 api
     setDeleteLive(!deleteLive);
-
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
       item
     );
-    // console.log(response.data);
   }
   // 撈使用者所有購物車資料裡面符合 storeid 的商品資料
   useEffect(() => {

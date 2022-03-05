@@ -31,7 +31,7 @@ const ProductsDetails = ({
 
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
-  console.log(shoppingErrormsg);
+  // console.log(shoppingErrormsg);
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
     store_id: storeId,
@@ -94,7 +94,7 @@ const ProductsDetails = ({
         `${API_URL}/shop/shoppingcar`,
         shoppingData
       );
-      console.log(response.data);
+      // console.log(response.data);
       setOpenProductsModal(false);
       setisModalTouch(true);
     } catch (e) {

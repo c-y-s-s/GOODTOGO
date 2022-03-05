@@ -17,7 +17,7 @@ const Navbar = (props) => {
   const [isOpen, setOpen] = useState(false);
   console.log(props);
   // 購物車總筆數
-  const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState("");
+  const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
   return (
     <div className="container-fluid navbar justify-content-center sticky-top">
       <div className="nav-content">

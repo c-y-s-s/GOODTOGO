@@ -47,7 +47,7 @@ const StoreDetails = ({
   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
   // 店家評論總數
   const [storeLikeData,setStoreLikeData]=useState([]) 
-  console.log("=======",storeLikeData);
+  // console.log("=======",storeLikeData);
   useEffect(() => {
     let getStoreDetalis = async () => {
       // 撈店家所有評論
