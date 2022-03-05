@@ -31,7 +31,6 @@
       font-size: x-large;
     }
     .map-store-card {
-      border: 1px solid white;
       .store-info-card {
         overflow: hidden;
         background-color: white;
@@ -47,7 +46,6 @@
         &:hover {
           @include drop-shadow-dark;
         }
-
         .info-img {
           // width: 233px;
           height: 162px;
@@ -79,7 +77,7 @@
             z-index: 1009;
             align-self: flex-end;
             position: relative;
-            top: -2rem;
+            top: -1.2rem;
             left: 10.35rem;
           }
         }

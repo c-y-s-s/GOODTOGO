@@ -18,7 +18,7 @@ app.use(express.urlencoded({ extended: true }));
 //要讓express認得json
 app.use(express.json());
 
-app.use;
+// app.use;
 //使用 cors 設定的中間鍵，開放所有網域皆可連線
 // app.use(cors()); // 全開
 // 跨源 cookie 要設定 可接收的請求來源(前端)
@@ -89,8 +89,8 @@ let storesMapRouter = require("./routers/storemap");
 app.use("/api/storesmap", storesMapRouter);
 //  ------- 指定商家座標 RESTful API 結束 -------
 // -------- MAP --------
-let sfmRouter = require("./routers/sfm");
-app.use("api/sfm", sfmRouter);
+let mapRouter = require("./routers/map");
+app.use("/api/map", mapRouter);
 
 // -------- 商品 RESTful API 列表 --------
 let productsRouter = require("./routers/products");

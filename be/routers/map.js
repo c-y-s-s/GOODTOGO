@@ -4,7 +4,10 @@ const connection = require("../utils/db");
 const moment = require("moment");
 moment.locale("zh-tw");
 
-router.get("/", async (req, res, next) => {
+router.get("/location", async (req, res, next) => {
+  let [location] = await connection.execute(
+    `SELECT longitude AS lng, latitude AS lat, store_id FROM map `
+  );
   let [likeResult] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
     FROM user_like
@@ -19,9 +22,12 @@ router.get("/", async (req, res, next) => {
     a.open_time,
     a.close_time,
     a.close_day,
-    b.category
+    b.category,
+    c.longitude AS lng,
+    c.latitude AS lat
     FROM stores AS a
     JOIN stores_category AS b ON b.id=a.stores_category_id
+    JOIN map AS c ON c.store_id = a.id
     WHERE a.valid = 1;`
   );
 
@@ -55,10 +61,10 @@ router.get("/", async (req, res, next) => {
     }
   });
 
-  storeResult.sort(function (a, b) {
-    // boolean false == 0; true == 1
-    return b.star - a.star;
-  });
+  // storeResult.sort(function (a, b) {
+  //   // boolean false == 0; true == 1
+  //   return b.star - a.star;
+  // });
 
   storeResult.map((item) => {
     //*[step 1] 轉換卡面顯示的時間格式 => 00:00 (24小時制)
@@ -87,8 +93,16 @@ router.get("/", async (req, res, next) => {
     } else {
       item.opState = true; //true=營業中
     }
-    // console.log("filter: opState", item.opState);
+    //   // console.log("filter: opState", item.opState);
   });
-  console.log("storeResult數量", storeResult);
-  res.json(storeResult);
+  // console.log("storeResult數量", storeResult);
+  let openStore = storeResult.filter((v) => Object.values(v)[9] === true);
+  let closedStore = storeResult.filter((v) => Object.values(v)[9] === false);
+  let thaiFood = storeResult.filter((v) => Object.values(v)[6] === "泰式");
+  let vegan = storeResult.filter((v) => Object.values(v)[6] === "蔬食");
+  let western = storeResult.filter((v) => Object.values(v)[6] === "西式");
+  console.log("thaiFood", thaiFood);
+
+  res.json(location);
 });
+module.exports = router;

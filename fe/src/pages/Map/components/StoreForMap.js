@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FiHeart } from "react-icons/fi";
+import { Rating } from "@mui/material";
 
 const StoreForMap = () => {
   return (
@@ -11,7 +12,7 @@ const StoreForMap = () => {
           <div className="info-img col-12">
             <img src="" alt="logo" />
             {/* --->營業中標籤 */}
-            休息中
+            <div className="is-closed">休息中</div>
             {/* <div
               className={`${item.opState === false ? "is-closed" : "is-open"}`}
             >
@@ -22,13 +23,13 @@ const StoreForMap = () => {
           {/* --->店名 */}
           <div className="info-title mt-3 d-flex justify-content-between col-12">
             <span className="text-dark-grey input-label-title">
+              店名
               <br />
               {/* --->分店名 */}
-              <span className="text-dark-grey detail-sm"></span>
+              <span className="text-dark-grey detail-sm">分店</span>
               {/*分店名<--- */}
             </span>
             {/* 店名 <--- */}
-
             <div className="cate-tag">港式</div>
           </div>
           <div className="info-detail col-12 text-dark-grey detail-sm d-flex align-items-center justify-content-between flex-wrap mt-2">
@@ -42,19 +43,19 @@ const StoreForMap = () => {
             <hr className="col-12 mt-2 mb-2" />
             {/* //*星星 */}
             <div className="d-flex align-items-center justify-content-center">
-              {/* <Rating
+              <Rating
                 name="read-only"
                 value={1}
                 readOnly
                 className="me-1"
                 precision={0.1}
-              />{" "} */}
-              星星 (1)
+              />{" "}
+              (1)
             </div>
 
             <div className="d-flex align-items-center">
               <FiHeart className="store_Like_Active_view" />
-              <div className="ms-2">愛心數量</div>
+              <div className="ms-2">4</div>
 
               {/* <FiHeart
               className="store_Like_unActive"
@@ -70,5 +71,4 @@ const StoreForMap = () => {
     </div>
   );
 };
-
 export default StoreForMap;

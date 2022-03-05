@@ -19,7 +19,7 @@ const MapPage = () => {
   };
   useEffect(() => {
     let getStores = async () => {
-      let storesRes = await axios.get(`${API_URL}/sfm`);
+      let storesRes = await axios.get(`${API_URL}/map/location`);
       // let stores = storesRes.data[0];
       // let category = storesRes.data[1];
       // let storeLikeCount = storesRes.data[3];
