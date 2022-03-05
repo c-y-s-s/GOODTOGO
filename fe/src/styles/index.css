@@ -2720,6 +2720,24 @@ footer .footer-content .footer-bottom .footer-sign-info {
   color: #666666;
 }
 
+.store-data .store-data-left .store-data-left-outline .store-data-left-content-open {
+  background-color: #a6bf4b;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  margin-left: 1rem;
+  font-size: 0.875rem;
+}
+
+.store-data .store-data-left .store-data-left-outline .store-data-left-content-close {
+  background-color: #b1b1ac;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  margin-left: 1rem;
+  font-size: 0.875rem;
+}
+
 .store-data .store-data-left .store-data-left-outline .store-data-left-category {
   background-color: #eaeaea;
   padding: 0.1rem 0.75rem;
@@ -2767,24 +2785,6 @@ footer .footer-content .footer-bottom .footer-sign-info {
   letter-spacing: 0.05rem;
 }
 
-.store-data .store-data-left .store-data-left-content .workday .store-data-left-content-open {
-  background-color: #a6bf4b;
-  color: white;
-  border-radius: 0.5rem;
-  padding: 0.3rem 0.6rem;
-  margin-left: 1rem;
-  font-size: 0.875rem;
-}
-
-.store-data .store-data-left .store-data-left-content .workday .store-data-left-content-close {
-  background-color: #b1b1ac;
-  color: white;
-  border-radius: 0.5rem;
-  padding: 0.3rem 0.6rem;
-  margin-left: 1rem;
-  font-size: 0.875rem;
-}
-
 .store-data .store-data-left .store-data-left-content:nth-child(4) {
   -webkit-box-align: start;
       -ms-flex-align: start;
@@ -2793,6 +2793,15 @@ footer .footer-content .footer-bottom .footer-sign-info {
 
 .store-data .store-map {
   height: 270px;
+}
+
+@media screen and (max-width: 390px) {
+  .store-data .store-data-left .store-data-left-content .workday .work-time {
+    margin-left: 1rem;
+  }
+  .store-data .store-data-left .store-data-left-content .workday .store-data-left-content-close {
+    display: none;
+  }
 }
 
 .canopy ul {
@@ -4882,6 +4891,9 @@ tr {
 .nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-img {
   width: 150px;
   height: 68px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 0.15rem;
 }
 
 .nav-shopping-cart .nav-shopping-cart-products .nav-shopping-cart-products-text {
@@ -4923,6 +4935,7 @@ tr {
   padding-top: 2.5rem;
   text-align: center;
   letter-spacing: 3px;
+  color: #666666;
 }
 
 .nav-shopping-cart-gopage {

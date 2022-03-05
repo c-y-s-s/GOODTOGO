@@ -104,7 +104,7 @@ const NavShoppingCart = ({
         // content={loginMember ? shoppingList : notLoggedin}
         content={shoppingList }
         // content={shoppingList}
-        trigger="click"
+        // trigger="click"
         // trigger={loginMember && "click" }
       >
         <ShoppingBag className="nav-icon mt-1" />
