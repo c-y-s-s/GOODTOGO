@@ -1,0 +1,149 @@
+// -------- 商品卡片 --------
+.product-card {
+    border: none;
+    padding: 0;
+    margin-top: 4.95rem;
+    box-shadow: 0rem 0rem 1rem #ccc;
+    border-top: 0.54rem solid $color-yellow;
+    border-bottom: 0.54rem solid $color-yellow;
+    border-radius: 0.4rem;
+    transition: 0.38s;
+    margin: 1.5rem 0.95rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    // card 上下底線
+    .card {
+        border-bottom: 0.8rem;
+        border: none;
+        padding: 0 1.35rem;
+        height: 100%;
+        //上排文字
+        .product-card-text {
+            padding: 1.25rem 0.45rem 0.75rem 0.45rem;
+            letter-spacing: 0.16rem;
+            justify-content: space-between;
+            //時間倒數
+            .time-text {
+                font-size: 0.88rem;
+
+                .count-down-one-hour span {
+                    padding-left: 0.45rem;
+
+                    font-size: 1rem;
+                    font-weight: 500;
+                    color: $color-light-red;
+                }
+                span {
+                    font-size: 1rem;
+                    color: $color-green;
+                    font-weight: 500;
+                }
+            }
+            //剩餘
+            .amount-text {
+                border-radius: 1rem;
+                background-color: #eaeaea;
+                padding: 0.125rem 0.5rem;
+                font-size: $fz-s-sm;
+            }
+            // 倒數計時剩一小樣式
+        }
+    }
+    // 圖片限制大小置中
+
+    .product-img {
+        overflow: hidden;
+        width: 223px;
+        height: 162px;
+        margin: auto;
+        .cover-fit {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.75s ease;
+            // &:hover {
+            //     transform: scale(1.15);
+            // }
+        }
+    }
+    .close-active {
+        opacity: 0.4;
+    }
+    // 卡片樣式
+    .card-body {
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        .card-title {
+            padding-top: 0.85rem;
+            font-size: $fz-xx-lg;
+            letter-spacing: 0.125rem;
+            margin: 0;
+            font-weight: 500;
+        }
+        .card-star {
+            letter-spacing: 0.22rem;
+            margin-left: -0.2rem;
+            margin-top: 0.45rem;
+            margin-bottom: 0.45rem;
+
+            .card-star-number {
+                font-size: $fz-sm;
+                letter-spacing: 0.5px;
+            }
+            .card-star-count {
+                font-size: $fz-sm;
+                letter-spacing: 0.5px;
+            }
+        }
+        .card-text {
+            font-size: $fz-s-sm;
+        }
+
+        .text-end {
+            padding-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+    }
+    .product-card-price {
+        font-weight: 500;
+    }
+    // 卡片動畫
+    &:hover {
+        transform: translateY(-1.1rem);
+        box-shadow: 0rem 1rem 1rem #ccc;
+    }
+    &:hover .cover-fit {
+        transform: scale(1.12);
+    }
+
+    // &:nth-child(-n + 5) {
+    //     margin-top: 0rem;
+    // }
+}
+// -------- 商品卡片結束 --------
+
+// -------- 商品卡片 RWD 樣式 --------
+@media screen and (max-width: 1400px) {
+    .cards {
+        justify-content: center;
+    }
+    //     .product-card:nth-child(-n + 5) {
+    //         margin-top: 0rem;
+    //     }
+}
+
+@media screen and (max-width: 767px) {
+    //     .store-map {
+    //         margin-top: 1.8rem;
+    //     }
+    // .product-card {
+    //     margin-top: 0rem;
+    // }
+    //     .product-card:nth-child(1) {
+    //         margin-top: 0;
+    //     }
+}

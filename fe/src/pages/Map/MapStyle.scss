@@ -1,108 +1,107 @@
-@import "../../styles/index.scss";
-.container-fluid {
-    padding: 0px;
-}
-*:focus {
-    outline: none;
-}
-.mapContainer {
-    height: 75vh;
-    padding: 0px;
-}
-.paper {
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 100px;
-}
-.markerContainer{
-    position: absolute;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    &:hover{z-index: 2};
-}
-.pointer{
-    cursor:pointer;
-}
-.formControl{
-min-width : 120;
-margin-bottom: 30px;
-}
-.list{
-    height: 20vh;
-    overflow: auto;
-    padding: 0px;    
-    background: #668c4a;
-}
+// @import "../../styles/index.scss";
+// .container-fluid {
+//     padding: 0px;
+// }
+// *:focus {
+//     outline: none;
+// }
+// .mapContainer {
+//     height: 75vh;
+//     padding: 0px;
+// }
+// .paper {
+//     padding: 10px;
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     width: 100px;
+// }
+// .markerContainer{
+//     position: absolute;
+//     transform: translate(-50%, -50%);
+//     z-index: 1;
+//     &:hover{z-index: 2};
+// }
+// .pointer{
+//     cursor:pointer;
+// }
+// .formControl{
+// min-width : 120;
+// margin-bottom: 30px;
+// }
+// .list{
+//     height: 20vh;
+//     overflow: auto;
+//     padding: 0px;
+//     background: #668c4a;
+// }
 
-.selector{
-    margin: 33.5px;
-}
-.searchIcon{
-    background: #FFFFFF;
-    border-top-color: $color-green;
-    border-bottom-color: $color-green;
-    border-left-color: $color-green;
-    border-right-color: rgba($color: #FFFFFF, $alpha: 1);
-    width: 40px;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-}
-.searchInput{
-    padding-top: 0.5em;
-    padding-bottom: 0.5em;
-    height: 40px;
-    top: 12.5px;
-    border-top-color: $color-green;
-    border-bottom-color: $color-green;
-    border-right-color: $color-green;
-    border-left-color: rgba($color: #FFFFFF, $alpha: 1);
-    border-style: solid;
-}
-.mSearchContainer{
-    display: flex;
-    align-items: center ;
-    justify-content: center ;
-    height: 65px;
-    background: $color-green;
-}
-.searchContainer{
-background: $color-green;
-display: flex;
-align-items: center ;
-justify-content: center ;
-height: 75vh;
-text-align: center;
-font-family: Noto Sans TC;
-font-style: normal;
-font-weight: 500;
-font-size: 18px;
-line-height: 26px;
-/* identical to box height */
-letter-spacing: 2px;
-color: #FFFFFF;
-.input-group {
-    .searchInput{
-width : 80%;
-}
-}
-}
-.form-select{
-    width:254px;
-}
+// .selector{
+//     margin: 33.5px;
+// }
+// .searchIcon{
+//     background: #FFFFFF;
+//     border-top-color: $color-green;
+//     border-bottom-color: $color-green;
+//     border-left-color: $color-green;
+//     border-right-color: rgba($color: #FFFFFF, $alpha: 1);
+//     width: 40px;
+//     border-top-left-radius: 0;
+//     border-bottom-left-radius: 0;
+// }
+// .searchInput{
+//     padding-top: 0.5em;
+//     padding-bottom: 0.5em;
+//     height: 40px;
+//     top: 12.5px;
+//     border-top-color: $color-green;
+//     border-bottom-color: $color-green;
+//     border-right-color: $color-green;
+//     border-left-color: rgba($color: #FFFFFF, $alpha: 1);
+//     border-style: solid;
+// }
+// .mSearchContainer{
+//     display: flex;
+//     align-items: center ;
+//     justify-content: center ;
+//     height: 65px;
+//     background: $color-green;
+// }
+// .searchContainer{
+// background: $color-green;
+// display: flex;
+// align-items: center ;
+// justify-content: center ;
+// height: 75vh;
+// text-align: center;
+// font-family: Noto Sans TC;
+// font-style: normal;
+// font-weight: 500;
+// font-size: 18px;
+// line-height: 26px;
+// /* identical to box height */
+// letter-spacing: 2px;
+// color: #FFFFFF;
+// .input-group {
+//     .searchInput{
+// width : 80%;
+// }
+// }
+// }
+// .form-select{
+//     width:254px;
+// }
 
-.input-group{
-min-width: 300px;
-display: flex;
-align-items: center ;
-justify-content: center ;
+// .input-group{
+// min-width: 300px;
+// display: flex;
+// align-items: center ;
+// justify-content: center ;
 
-
-}
-.filterBtn{
-    width: 40px;
-    height: 40px;
-    border-color:rgba(0,0,0,0);
-    background:rgba($color: #FFFFFF, $alpha: 0);
-}
+// }
+// .filterBtn{
+//     width: 40px;
+//     height: 40px;
+//     border-color:rgba(0,0,0,0);
+//     background:rgba($color: #FFFFFF, $alpha: 0);
+// }

@@ -1,0 +1,102 @@
+.map-bg {
+  background-color: $color-green;
+  .map-wrapper {
+    // height: 85vh;
+    border: 2px solid red;
+    .google-map {
+      height: 85vh;
+      z-index: 1005;
+    }
+    .map-search {
+      position: absolute;
+      right: 45rem;
+      top: 12rem;
+      border: 3px solid $color-green;
+      z-index: 1010;
+      .map-search-icon {
+        color: $color-green;
+        font-size: xx-large;
+      }
+      .search-bar {
+        width: 24rem;
+        height: 3rem;
+        border-color: transparent;
+      }
+    }
+  }
+  .map-side-bar {
+    padding: 4rem 0 10rem;
+    .map-title {
+      color: white;
+      font-size: x-large;
+    }
+    .map-store-card {
+      .store-info-card {
+        overflow: hidden;
+        background-color: white;
+        width: 263px;
+        height: 359px;
+        border-radius: 0.4rem;
+        padding: 1.6rem 1rem;
+        border-top: 0.54rem solid $color-light-green;
+        border-bottom: 0.54rem solid $color-light-green;
+        transition: 0.38s;
+        position: relative;
+        flex-direction: column;
+        &:hover {
+          @include drop-shadow-dark;
+        }
+
+        .info-img {
+          // width: 233px;
+          height: 162px;
+          background-color: gray;
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: 1000;
+          }
+          .is-open {
+            width: fit-content;
+            background-color: $color-light-green;
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 5px;
+            z-index: 1009;
+            align-self: flex-end;
+            position: relative;
+            top: -2rem;
+            left: 10.35rem;
+          }
+          .is-closed {
+            width: fit-content;
+            background-color: $color-grey;
+            color: white;
+            padding: 0.1rem 0.4rem;
+            border-radius: 5px;
+            z-index: 1009;
+            align-self: flex-end;
+            position: relative;
+            top: -1.2rem;
+            left: 10.35rem;
+          }
+        }
+        .info-title {
+          // width: 233px;
+          .cate-tag {
+            text-align: center;
+            align-items: center;
+            padding: 0.1rem 0.4rem;
+            background-color: $color-light-grey;
+            border-radius: 12px;
+            width: fit-content;
+            height: fit-content;
+            font-size: $fz-ss-sm;
+            color: $color-dark-grey;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+.rec-content {
+  // height: fit-content;
+  .header {
+    padding-top: 1rem;
+    align-items: center;
+    .title-box {
+      padding-bottom: 1rem;
+      width: fit-content;
+      border-bottom: 1px solid $color-grey;
+    }
+  }
+  .rec-cards-holder {
+    // display: grid;
+    // grid-template-columns: 1fr 1fr 1fr 1fr;
+    row-gap: 2rem;
+    column-gap: 2rem;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 1001;
+    position: relative;
+    top: 4rem;
+  }
+  .bottom-area {
+    position: relative;
+    height: 10rem;
+    background-color: $color-light-green;
+    position: relative;
+    z-index: 1000;
+  }
+}
+
+// -------- 手機 RWD --------
+@media (max-width: 390px) {
+  .rec-content {
+    // height: fit-content;
+    .header {
+      align-self: end;
+      margin-top: 1rem;
+      .title-box {
+        border-bottom: 1px solid $color-grey;
+        padding-bottom: 0.5rem;
+      }
+    }
+    .rec-cards-holder {
+      margin: auto;
+      flex-direction: column;
+      position: relative;
+      top: 2rem;
+    }
+    .bottom-area {
+      height: 7rem;
+      background-color: $color-light-green;
+      position: relative;
+    }
+  }
+}

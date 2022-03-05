@@ -1,0 +1,32 @@
+@mixin hero-text-sm {
+  font-size: 1.25rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.125rem;
+}
+@mixin hero-text-md {
+  font-size: 1.87rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.15rem;
+}
+@mixin hero-text-ssm {
+  font-size: 1rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.125rem;
+}
+
+@mixin hero-text-lg {
+  font-size: 2.5rem;
+  line-height: 3.5rem;
+  letter-spacing: 0.15rem;
+}
+
+// -------- hero 1 --------
+@import "./_hero1.scss";
+// -------- hero 2 --------
+@import "./_hero2.scss";
+// -------- hero 3 --------
+@import "./_hero3.scss";
+// -------- hero 4 --------
+@import "./_hero4.scss";
+// -------- hero 5 --------
+@import "./_hero5.scss";

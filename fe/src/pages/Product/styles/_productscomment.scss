@@ -1,0 +1,197 @@
+// -------- 商品評論 --------
+
+.products-comment {
+    margin-top: 3.7rem;
+
+    //篩選區塊
+    .product-users-comment-filter {
+        .product-users-comment-filter-star {
+            color: $color-green;
+        }
+        .product-users-comment-filter-time {
+            color: $color-green;
+        }
+        .product-users-comment-filter-icon {
+            border: none;
+            background-color: rgba(0, 0, 0, 0);
+            transition: 0.3s;
+            color: $color-grey;
+            &:hover {
+                color: $color-green;
+            }
+        }
+    }
+    // 區塊置中
+    //設定寬度 75% 是因為 RWD 要變成 100%
+    .products-comment-total {
+        width: 75%;
+        margin: auto;
+    }
+    .product-comment {
+        border-bottom: 1px solid $color-green;
+        padding-bottom: 1.05rem;
+        width: 75%;
+        margin: auto;
+
+        .user-data {
+            // -------- 用戶照片 --------
+            .user-photo {
+                width: 4.1rem;
+                height: 4.1rem;
+                .cover-photo {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+
+            .user-data-name {
+                letter-spacing: $ls-md;
+                font-size: $fz-xx-lg;
+            }
+            // -------- 留言時間 --------
+            .user-data-comment-time {
+                font-size: $fz-ss-sm;
+                color: $color-grey;
+                font-weight: $fw-medium;
+            }
+            // -------- 檢舉按鈕 --------
+            .user-data-report {
+                color: $color-grey;
+                font-weight: $fw-medium;
+                border: none;
+                background-color: rgba(0, 0, 0, 0);
+            }
+            .dropdown-menu {
+                padding-left: 0.3rem;
+                background-color: rgba(0, 0, 0, 0);
+                min-width: 3rem;
+                a {
+                    text-decoration: none;
+                    color: $color-black;
+                    transition: 0.3s;
+                    &:hover {
+                        color: $color-light-red;
+                    }
+                }
+            }
+            .product-data {
+                padding-right: 1.92rem;
+                padding-top: 0.5rem;
+                // -------- 商品名稱 --------
+                .product-data-name {
+                    color: $color-grey;
+                    letter-spacing: $ls-md;
+                }
+                // -------- 商品圖片 --------
+                .product-photo {
+                    width: 6.5rem;
+                    height: 5rem;
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+        // -------- 用戶評論 --------
+        .user-comment {
+            padding-right: 3.5rem;
+            font-size: $fz-md;
+            letter-spacing: $ls-md;
+            color: $color-dark-grey;
+        }
+    }
+    .products-comment-pagination {
+        display: flex;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        color: $color-green;
+        margin-top: 2rem;
+        .pages-icon {
+            padding-bottom: 0.5rem;
+            .comment-page-arrow {
+                font-size: 1.8rem;
+                margin: 0rem 1rem;
+                color: $color-green;
+            }
+            .page-opcity {
+                opacity: 0;
+            }
+        }
+        .pages {
+            color: $color-green;
+            text-decoration: none;
+            border: none;
+            width: 1.5rem;
+            height: 1.5rem;
+            padding: 0.25rem 0.8rem;
+            margin: 5rem 0.8rem;
+            border-radius: 0.8rem 0rem 0.8rem;
+            background-color: rgba(0, 0, 0, 0);
+            transition: 0.3s;
+            font-size: 1.2rem;
+            &:hover {
+                border-radius: 50%;
+                margin: 2rem 0.8rem;
+                width: 10rem;
+                height: 10rem;
+                background: $color-light-green;
+                color: white;
+            }
+        }
+        .active {
+            border-radius: 50%;
+            margin: 2rem 0.8rem;
+            width: 10rem;
+            height: 10rem;
+            background: $color-light-green;
+            color: white;
+        }
+    }
+}
+
+// -------- 平板 RWD --------
+@media screen and (max-width: 768px) {
+    .products-comment {
+        .product-comment {
+            .user-comment {
+                padding-right: 0;
+                font-weight: 100;
+            }
+            .product-photo {
+                display: none;
+            }
+        }
+    }
+}
+
+// -------- 手機 RWD --------
+@media screen and (max-width: 390px) {
+    .products-comment {
+        .products-comment-total {
+            width: 100%;
+        }
+        .product-comment {
+            .user-comment {
+            }
+
+            .product-data-name {
+                display: none;
+            }
+        }
+    }
+    .products-comment {
+        .product-comment {
+            width: 100%;
+            .user-data {
+                .product-data {
+                    padding: 0;
+                }
+            }
+        }
+    }
+}
