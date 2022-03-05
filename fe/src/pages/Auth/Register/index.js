@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-//-------- 引用icon --------
 import { ImFacebook2 } from "react-icons/im";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-//後端套件
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
-// import useAuth from "../../src/hooks/authForm.js";
 import { ERR_MSG } from "../../../utils/error";
+
 import Swal from "sweetalert2";
 
 const Register = () => {
@@ -38,15 +36,15 @@ const Register = () => {
       </>
     );
   };
-  //預設個欄位的值為空（開發中所以有先給值）
+  //  --------預設個欄位的值為空（開發中所以有先給值 --------
   const [user, setUser] = useState({
-    email: "song@test.com",
-    password: "song12345",
-    confirmPassword: "song12345",
-    name: "song",
+    email: "shrek@test.com",
+    password: "",
+    confirmPassword: "",
+    name: "",
     phone: "0911122233",
   });
-  //制定錯誤訊息，預設為沒有錯誤訊息
+  // -------- 制定錯誤訊息，預設為沒有錯誤訊息 --------
   const [fieldErrors, setFieldErrors] = useState({
     name: "",
     email: "",
@@ -55,24 +53,26 @@ const Register = () => {
     phone: "",
   });
 
-  // -------- 切換看密碼開關 --------
+  // -------- 切換密碼眼睛開關 --------
   const [eye, setEye] = useState({
     passwordEye: false,
     confirmPasswordEye: false,
   });
-  // 所有的 email，比對 email 用
+  // -------- 存取所有的 email，比對用 --------
   const [emails, setEmails] = useState([]);
-  //讀取所有已註冊過的email
+  // -------- 存取所有的 phone，比對用 --------
+  const [phones, setPhones] = useState([]);
+  // -------- 從後端撈所有已註冊過的email, phone --------
   useEffect(() => {
-    let getEmails = async () => {
-      let res = await axios.get(`${API_URL}/auth/login/check`);
-      setEmails(res.data);
+    let getInfo = async () => {
+      let res = await axios.get(`${API_URL}/auth/check`);
+      setEmails(res.data[0]);
+      setPhones(res.data[1]);
       // console.log("all", res.data);
     };
-    getEmails();
+    getInfo();
   }, []);
-  // --------切換顯示/隱藏密碼 --------
-  //眼睛for密碼
+  // --------眼睛：切換顯示/隱藏密碼函式--------
   function passwordShow() {
     setEye(
       eye.passwordEye
@@ -80,7 +80,6 @@ const Register = () => {
         : { ...eye, passwordEye: true }
     );
   }
-  //眼睛for確認密碼
   function confirmPasswordShow() {
     setEye(
       eye.confirmPasswordEye
@@ -99,43 +98,20 @@ const Register = () => {
     // 阻擋form的預設送出行為(錯誤泡泡訊息和method="get")
     e.preventDefault();
     let name = e.target.name;
-    let value = e.target.value;
-
     // -------- 自訂個欄位錯誤訊息 --------
-
-    //姓名欄位錯誤
     if (name === "name") {
-      const updatedFieldErrors = {
+      setFieldErrors({
         ...fieldErrors,
         name: "您希望我們怎麼稱呼您？",
-      };
-      setFieldErrors(updatedFieldErrors);
-      //email欄位錯誤
-    }
-    // else if (name === "email") {
-    //   const updatedFieldErrors = {
-    //     ...fieldErrors,
-    //     email: "email格式輸入錯誤",
-    //   };
-    //   setFieldErrors(updatedFieldErrors);
-    //   //密碼欄位錯誤
-    // }
-    else if (name === "password") {
-      const updatedFieldErrors = {
+      });
+    } else if (name === "password") {
+      setFieldErrors({
         ...fieldErrors,
         password: "密碼至少為6個字元",
-      };
-      setFieldErrors(updatedFieldErrors);
-      //手機欄位錯誤
-    } else if ((name = "phone")) {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        phone: "手機號碼為10位數字",
-      };
-      setFieldErrors(updatedFieldErrors);
+      });
     }
   };
-  //檢查email是否已註冊過
+  // -------- 檢查email是否已註冊過 和格式函示--------
   const regEmail = (e) => {
     console.log("regE.name", e.target.name);
     console.log("regE.value", e.target.value);
@@ -147,21 +123,29 @@ const Register = () => {
         email: "輸入格式有誤 example@example.com",
       });
     } else if (emails.find((v) => Object.values(v)[0] !== e.target.value)) {
-      const updatedFieldErrors = {
+      setFieldErrors({
         ...fieldErrors,
         email: "這個電子郵件已經有人使用",
-      };
-      setFieldErrors(updatedFieldErrors);
+      });
     }
-    // } else {
-    //   setFieldErrors({
-    //     ...fieldErrors,
-    //     email: "輸入格式有誤 example@example.com",
-    //   });
-    // }
   };
-  // 當整個表單有更動時會觸發
-  // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
+  //-------- 檢查phone是否已註冊過 和格式函示--------
+  const regPhone = (e) => {
+    console.log("regPhone", e.target.name);
+    const rePhone = /^09\d{8}$/;
+    if (!rePhone.test(e.target.value)) {
+      setFieldErrors({
+        ...fieldErrors,
+        phone: "手機號碼 輸入格式有誤 09xxxxxxxx",
+      });
+    } else if (phones.find((v) => Object.values(v)[0] === e.target.value)) {
+      setFieldErrors({
+        ...fieldErrors,
+        phone: "此手機號碼已經有人使用",
+      });
+    }
+  };
+  //  -------- (更正某個有錯誤的欄位)，onfocus會清空  --------
   const handleFormChange = (e) => {
     // 清空某個欄位錯誤訊息
     const updatedFieldErrors = {
@@ -381,6 +365,7 @@ const Register = () => {
                         minLength="10"
                         maxLength="10"
                         onChange={handleChange}
+                        onBlur={regPhone}
                         required
                       />
                       <label

@@ -22,9 +22,10 @@ const passwordRule = [
 //*api/auth/facebook
 router.get("/facebook/token", async (req, res, next) => {});
 //* 註冊：api/auth/register
-router.get("/login/check", async (req, res, next) => {
-  let [allUsers] = await connection.execute("SELECT email FROM users");
-  res.json(allUsers);
+router.get("/check", async (req, res, next) => {
+  let [allEmails] = await connection.execute("SELECT email FROM users");
+  let [allPhones] = await connection.execute("SELECT phone FROM users");
+  res.json([allEmails, allPhones]);
 });
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);

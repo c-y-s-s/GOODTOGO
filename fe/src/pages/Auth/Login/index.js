@@ -1,27 +1,22 @@
-// -------- login 功能 --------
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
 import Swal from "sweetalert2";
-import FacebookLogin from "@greatsumini/react-facebook-login";
+// import FacebookLogin from "@greatsumini/react-facebook-login";
 import Ads from "../../../images/ads/ads2.jpg";
 
-//-------- 引用icon --------
-import { ImFacebook2 } from "react-icons/im";
+// import { ImFacebook2 } from "react-icons/im";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-import { ReactComponent as Arrow } from "../images/hero1-sm-arrow.svg";
 
-//-------- 串接API套件 --------
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 
-// require("dotenv").config();
-
 const Login = (props) => {
-  //登入後存入會員資料給全域使用
+  let navigate = useNavigate();
+  // -------- 登入後存入會員資料給全域使用 --------
   const { loginMember, setLoginMember } = useAuth();
-
+  //-------- swal樣式 --------
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -30,6 +25,7 @@ const Login = (props) => {
     },
     buttonsStyling: false,
   });
+  //-------- swal視窗呼叫函式 --------
   const loginSuccessAlert = () => {
     return (
       <>
@@ -51,8 +47,7 @@ const Login = (props) => {
       </>
     );
   };
-
-  // 所有的 email，比對 email 用
+  // -------- 存取所有的 email，比對用 --------
   const [emails, setEmails] = useState([]);
   //預設個欄位的值為空
   const [loginUser, setLoginUser] = useState({
@@ -64,18 +59,17 @@ const Login = (props) => {
     email: "",
     password: "",
   });
-  // 切換看密碼開關
+  // -------- 切換密碼顯示、隱藏開關 --------
   const [eye, setEye] = useState({
     passwordEye: false,
   });
-  //讀取所有已註冊過的email
+  // -------- 讀取所有已註冊過的email和電話 --------
   useEffect(() => {
-    let getEmails = async () => {
-      let res = await axios.get(`${API_URL}/auth/login/check`);
-      setEmails(res.data);
-      // console.log("all", res.data);
+    let getInfo = async () => {
+      let res = await axios.get(`${API_URL}/auth/check`);
+      setEmails(res.data[0]);
     };
-    getEmails();
+    getInfo();
   }, []);
   // --------切換顯示/隱藏密碼 --------
   function passwordShow() {
@@ -89,23 +83,11 @@ const Login = (props) => {
   const handleChange = (e) => {
     setLoginUser({ ...loginUser, [e.target.name]: e.target.value });
   };
-  //驗證email是否存在
-
   // -------- 當表單檢查有不合法的訊息時會呼叫 --------
   const handleFormInvalid = (e) => {
     // 阻擋form的預設送出行為(錯誤泡泡訊息)
     e.preventDefault();
     let name = e.target.name;
-    //email欄位錯誤
-    // if (name === "email") {
-    //   regEmail(e);
-    //   const updatedFieldErrors = {
-    //     ...fieldErrors,
-    //     email: "email格式輸入錯誤",
-    //   };
-    //   setFieldErrors(updatedFieldErrors);
-    //   //密碼欄位錯誤
-    // } else
     if (name === "password") {
       const updatedFieldErrors = {
         ...fieldErrors,
@@ -114,6 +96,7 @@ const Login = (props) => {
       setFieldErrors(updatedFieldErrors);
     }
   };
+  // -------- 驗證email格式以及是否已註冊過 --------
 
   const regEmail = (e) => {
     console.log("regE.name", e.target.name);
@@ -132,12 +115,6 @@ const Login = (props) => {
       };
       setFieldErrors(updatedFieldErrors);
     }
-    // } else {
-    //   setFieldErrors({
-    //     ...fieldErrors,
-    //     email: "輸入格式有誤 example@example.com",
-    //   });
-    // }
   };
 
   // -------- 當整個表單有更動時會觸發 --------
@@ -151,7 +128,6 @@ const Login = (props) => {
     // 設定回錯誤訊息狀態
     setFieldErrors(updatedFieldErrors);
   };
-  let navigate = useNavigate();
   // -------- 表單提交 --------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -169,7 +145,6 @@ const Login = (props) => {
       console.error("測試登入", ERR_MSG);
     }
   };
-
   //傳fb token到後端
   const handleFBLogin = async (response) => {
     try {
@@ -200,7 +175,6 @@ const Login = (props) => {
             <>
               <div className="h4 text-dark-grey">會員登入</div>
               {/* -------- 表格開始 -------- */}
-
               <form
                 className="needs-validation col-lg-10 col-md-6 col-sm-12 col-10"
                 onSubmit={handleSubmit}
