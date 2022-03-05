@@ -32,7 +32,7 @@ const Login = (props) => {
       <>
         {swal
           .fire({
-            position: "center",
+            position: "top",
             imageUrl: `${Ads}`,
             imageWidth: "512px",
             imageHeight: "650px",
@@ -129,12 +129,22 @@ const Login = (props) => {
     }
   };
   //傳fb token到後端
+
   const handleFBLogin = async (response) => {
     try {
       let fb_response = await axios.get(
-        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`
+        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`,
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       );
-      console.log("fb login test response", fb_response);
+      console.log("fb login test response", fb_response.data);
+      if (fb_response.data.id) {
+        setLoginMember(fb_response.data.id);
+      }
     } catch (e) {
       console.error("測試fb登入", ERR_MSG);
     }
@@ -246,7 +256,13 @@ const Login = (props) => {
                   )} */}
                 </div>
                 <div className="btn-group d-grid gap-3">
-                  <button type="submit" className="btn submit-btn col-lg-12">
+                  <button
+                    type="submit"
+                    className="btn submit-btn col-lg-12"
+                    style={{
+                      borderRadius: "2px",
+                    }}
+                  >
                     登入
                   </button>
                   {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
@@ -254,13 +270,20 @@ const Login = (props) => {
                     使用 Facebook 登入
                     <div className="col-lg-2"> </div>
                   </button> */}
+                  {/* //*facebook登入 */}
                   <FacebookLogin
+                    className="btn btn-fb-login d-flex align-items-center text-center justify-content-evenly"
+                    style={{
+                      backgroundColor: "#4267b2",
+                      borderRadius: "2px",
+                    }}
                     appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
                     fields="name,email,picture"
                     scope="public_profile, email"
                     onSuccess={handleFBLogin}
                   >
                     <ImFacebook2 className="fb-icon col-lg-2 " />
+                    使用 Facebook 登入
                   </FacebookLogin>
                 </div>
 

@@ -4,15 +4,12 @@ import { useAuth } from "../context/auth";
 import Popover from "./_popover";
 import MenuToggle from "./_menuToggle";
 
-
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 const Navbar = (props) => {
-  const { loginMember, setLoginMember } = useAuth();
-
   return (
     <div className="container-fluid navbar justify-content-center sticky-top shadow">
       <div className="nav-content">

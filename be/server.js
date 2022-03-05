@@ -88,6 +88,9 @@ app.use("/api/storeRecommRouter", storeRecommRouter);
 let storesMapRouter = require("./routers/storemap");
 app.use("/api/storesmap", storesMapRouter);
 //  ------- 指定商家座標 RESTful API 結束 -------
+// -------- MAP --------
+let mapRouter = require("./routers/map");
+app.use("/api/map", mapRouter);
 
 // -------- 商品 RESTful API 列表 --------
 let productsRouter = require("./routers/products");
@@ -137,9 +140,6 @@ app.use("/api/productscommit", productsCommentRouter);
 let productsDesignateCommitRouter = require("./routers/productsModalCommit");
 app.use("/api/productsdesignatecommit", productsDesignateCommitRouter);
 // -------- 指定商品評論 RESTful API 列表 結束 --------
-
-//
-
 //  -------- 會員 RESTful API 列表 --------
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);

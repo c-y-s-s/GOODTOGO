@@ -19,9 +19,9 @@ const passwordRule = [
     })
     .withMessage("兩次輸入的密碼不相同"),
 ];
-//api/auth/facebook
+//*api/auth/facebook
 router.get("/facebook/token", async (req, res, next) => {});
-// /api/auth/register
+//* 註冊：api/auth/register
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);
   //*確認格式是否正確
@@ -150,7 +150,7 @@ router.post("/login", async (req, res, next) => {
   let returnUser = {
     id: user.id,
     name: user.name,
-    photo: user.photo ? user.photo : "",
+    headshots: user.headshots ? user.headshots : "",
   };
   console.log(returnUser);
   // 如果密碼比對成功，記錄在 session

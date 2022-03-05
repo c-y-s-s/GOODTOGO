@@ -102,7 +102,7 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
   scroll-behavior: smooth;
 }
 
-//------echo
+// -------- 高度 --------
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
@@ -182,3 +182,5 @@ $btn-border-radius: 2px;
 @import "../pages/shoppingcart/style/shoppingcart.scss";
 // ------- 結帳頁 --------
 @import "../pages/Checkout/style/checkout.scss";
+// -------- MAP --------
+@import "../pages/Map/styles/map.scss";

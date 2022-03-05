@@ -97,7 +97,11 @@ const _popover = () => {
         // trigger="click"
       >
         {loginMember ? (
-          <img src={IMAGE_URL + loginMember.photo} alt="profile" />
+          <img
+            className="navbar-profile-pic"
+            src={IMAGE_URL + loginMember.headshots}
+            alt="profile"
+          />
         ) : (
           <UserIcon className="nav-icon mt-1" />
         )}
