@@ -13,16 +13,24 @@ import axios from "axios";
 import { API_URL } from "../../utils/config";
 
 const MapPage = () => {
-  const [filterOp, setFilterOp] = useState();
+  //儲存脞有店家資料
+  const [storeList, setStoreList] = useState([]);
+  //要顯示到map上的店家
+  const [displayStoreList, setDisplayStoreList] = useState([]);
+  //儲存所有分類
   const [category, setCategory] = useState();
+  //下拉式選單顯示選到的
   const [showCategory, setShowCategory] = useState("全部店家");
-  const [filterCategory, setFilterCategory] = useState();
-  const [storeLocation, setStoreLocation] = useState();
-  const [keyword, setKeyword] = useState();
-  const [storeList, setStoreList] = useState();
+  const [showIsOpen, setShowIsOpen] = useState("營業中店家");
+  //下拉式表單開關
   const [cateListShowSwitch, setcateListShowSwitch] = useState(false);
   const [opListShowSwitch, setOpListShowSwitch] = useState(false);
-  const [showIsOpen, setShowIsOpen] = useState("營業中店家");
+  //儲存輸入關鍵字
+  const [keyword, setKeyword] = useState("");
+
+  const [filterOp, setFilterOp] = useState();
+  const [filterCategory, setFilterCategory] = useState();
+  const [storeLocation, setStoreLocation] = useState();
 
   // const location = {
   //   address: "320桃園市中壢區新生路二段421號",
@@ -76,7 +84,7 @@ const MapPage = () => {
           <HiOutlineAdjustments className="toggle-controller me-2" />
         </div>
         <div className="google-map col-lg-12">
-          <Map storeList={storeList} zoomLevel={20} />
+          <Map displayStoreList={displayStoreList} zoomLevel={12} />
         </div>
       </div>
       <div className="map-side-bar col-lg-4 text-center d-flex flex-column">
@@ -104,6 +112,7 @@ const MapPage = () => {
             {opListShowSwitch ? (
               <>
                 <li
+                  role="button"
                   className="cate-option"
                   onClick={() => {
                     setShowIsOpen("營業中店家");
@@ -112,6 +121,7 @@ const MapPage = () => {
                   營業中店家
                 </li>
                 <li
+                  role="button"
                   className="cate-option"
                   onClick={() => {
                     setShowIsOpen("休息中店家");
@@ -155,10 +165,11 @@ const MapPage = () => {
                 return (
                   <>
                     <li
+                      role="button"
                       className="cate-option"
                       onClick={() => {
                         setShowCategory(c.category);
-                        setStoreList(
+                        setDisplayStoreList(
                           [...storeList].filter(
                             (v) => v.category === c.category
                           )

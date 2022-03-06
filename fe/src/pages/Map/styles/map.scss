@@ -1,11 +1,12 @@
 .map-bg {
   background-color: $color-green;
   display: flex;
+  height: 677px;
   .map-wrapper {
     // height: 85vh;
     border: 2px solid red;
     .google-map {
-      height: 85vh;
+      height: 677px;
       z-index: 1005;
       .pin-icon {
         &:hover {
@@ -35,8 +36,8 @@
     }
     .map-search {
       position: absolute;
-      right: 45rem;
-      top: 12rem;
+      right: 32rem;
+      top: 9rem;
       border: 3px solid $color-green;
       z-index: 1010;
       background-color: white;
@@ -45,15 +46,15 @@
       }
       .map-search-icon {
         color: $color-green;
-        font-size: xx-large;
+        font-size: x-large;
       }
       .search-bar {
-        width: 24rem;
+        width: 20rem;
         height: 3rem;
         margin-left: 0.5rem;
         border: none;
         outline: none;
-        font-size: x-large;
+        font-size: large;
       }
     }
   }

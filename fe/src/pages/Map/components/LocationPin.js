@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { GoLocation } from "react-icons/go";
 import { ReactComponent as Pin } from "../images/pin_map.svg";
 
-const LocationPin = ({ text }) => {
+const LocationPin = (props) => {
+  const { text } = props;
   return (
     <div className="pin d-flex flex-column align-items-center">
       <p className="pin-text d-flex flex-column align-items-center">
