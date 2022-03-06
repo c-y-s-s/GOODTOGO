@@ -27,7 +27,7 @@ const Table = () => {
   const [lastPage, setLastPage] = useState(1);
   // let page = parseInt(currentPage, 10) || 1;
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
-  console.log("currentPage", currentPage, page);
+  // console.log("currentPage", currentPage, page);
 
   useEffect(() => {
     let getPrices = async () => {
@@ -53,11 +53,11 @@ const Table = () => {
       // );
 
       let productsListPage = response.data[0];
-      console.log("productsListPage", productsListPage);
+      // console.log("productsListPage", productsListPage);
       // let productsList = response.data[1];
       // console.log("productsList", productsList);
       let productsPagination = response.data[2];
-      console.log("productsPagination", productsPagination);
+      // console.log("productsPagination", productsPagination);
 
       setproductsData(productsListPage);
       setLastPage(productsPagination.lastPage);
@@ -121,7 +121,7 @@ const Table = () => {
                     <img
                       src={
                         item.img
-                          ? IMAGE_URL + "/static/uploads/products/" + item.img
+                          ? IMAGE_URL + item.img
                           : STORE_PRODUCT_IMAGE_URL
                       }
                       alt=""

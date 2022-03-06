@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate, navigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { NavLink } from "react-router-dom";
-import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
+import {
+  API_URL,
+  IMAGE_URL,
+  STORE_PRODUCT_IMAGE_URL,
+} from "../../../utils/config";
 import Swal from "sweetalert2";
 
 import axios from "axios";
@@ -14,28 +18,29 @@ const Table = () => {
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   const [productsUpdate, setProductsUpdate] = useState([]);
 
+  //類別-顯示
+  const [selectedProduct, setSelectedProduct] = useState([]);
+
   let navigate = useNavigate();
   // console.log(productsUpdate);
   const { productId } = useParams();
   const [product, setProduct] = useState({
     storeId: "1",
+    productSelected: "",
     productName: "",
-    productDescription: "",
-    amountOfGoods: "",
-    commodityPrice: "",
     productImg: "",
+    commodityPrice: "",
+    amountOfGoods: "",
+    productDescription: "",
     salesTimeStart: "",
     salesTimeEnd: "",
-    productSelected: "",
     createdAt: timeInsecond,
   });
   console.log("product---->", product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
-  //類別-顯示
-  const [selectedProduct, setSelectedProduct] = useState([]);
-
+  // -------- 使用者修改資料 --------
   const handleChange = (e) => {
     setProduct({ ...product, [e.target.name]: e.target.value });
   };
@@ -68,11 +73,25 @@ const Table = () => {
 
     try {
       let formData = new FormData(); // 物件
+      formData.append("store_id", product.storeId);
+      formData.append("category_id", product.productSelected);
+      formData.append("name", product.productName);
       formData.append("img", product.productImg ? product.productImg : "");
+      formData.append("price", product.commodityPrice);
+      formData.append("amount", product.amountOfGoods);
+      formData.append("description", product.productDescription);
+      formData.append("start_time", product.salesTimeStart);
+      formData.append("due_time", product.salesTimeEnd);
+      formData.append("created_at", product.createdAt);
+
+      for (var pair of formData.entries()) {
+        console.log(pair);
+      }
 
       let response = await axios.post(
         `${API_URL}/storebgaddproduct/newproduct`,
-        product
+        formData,
+        { withCredentials: true }
       );
       console.log("上傳商品資料: ", response.data);
       // sweet alert
@@ -82,7 +101,6 @@ const Table = () => {
         showConfirmButton: false,
         timer: 1500,
       });
-      // setProductsUpdate(response.data.img);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);
@@ -101,10 +119,6 @@ const Table = () => {
       );
       let selectedProductListData = selectedProductResponse.data;
       setSelectedProduct(selectedProductListData);
-      console.log(
-        selectedProductListData,
-        "selectedProductResponseselectedProductResponseselectedProductResponse"
-      );
       setProductsUpdate(result.data);
     };
     getProducts();
@@ -242,13 +256,12 @@ const Table = () => {
               </label>
               <div className="text-center">
                 <img
-                  // src="https://fakeimg.pl/400x400/"
                   src={
                     imageSrc
                       ? imageSrc
-                      : product.img
-                      ? IMAGE_URL + product.img
-                      : PROFILE_IMAGE_URL
+                      : product.productImg
+                      ? IMAGE_URL + product.productImg
+                      : STORE_PRODUCT_IMAGE_URL
                   }
                   alt="product img"
                   className="rounded cover-newproduct"
