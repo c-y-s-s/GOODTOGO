@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link , useNavigate} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import { ImFacebook2 } from "react-icons/im";
 import axios from "axios";
 // import TWzipcode from "react-twzipcode";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 import { ReactComponent as Logo } from "../../images/logo-face.svg";
 // import TwCitySelector from "tw-city-selector";
@@ -41,20 +42,20 @@ const Storecheck = () => {
     );
   };
 
+  const [member, setMember] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
     phone: "",
-    City: "",
-    Area: "",
-    address:"",
-    storeType:"",
-    openHour:"",
-    openMinute:"",
-    closeHour:"",
-    closeMinute:""
+    address: "",
+    storeType: "",
+    openHour: "",
+    openMinute: "",
+    closeHour: "",
+    closeMinute: "",
+    storeName:""
   });
 
   const [eye, setEye] = useState({
@@ -108,7 +109,7 @@ const Storecheck = () => {
   //   day:"七", isOpen:[7]
   // }
   // ]
-// 設定日期checkbox選擇預設false
+  // 設定日期checkbox選擇預設false
   // const [checkedState, setCheckedState] = useState(
   //   new Array(dayObject.length).fill(false)
   // );
@@ -163,62 +164,50 @@ const Storecheck = () => {
       };
       setFieldErrors(updatedFieldErrors);
       //手機欄位錯誤
-    } else if ((name = "phone")) {
+    } else if (name === "phone") {
       const updatedFieldErrors = {
         ...fieldErrors,
         phone: "手機號碼為10位數字",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if (name = "City") {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        City: "請選擇城市",
-      };
-      setFieldErrors(updatedFieldErrors);
-    } else if ((name = "Area")) {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        Area: "請選擇區域",
-      };
-      setFieldErrors(updatedFieldErrors);
-    } else if ((name = "address")) {
+    } else if (name === "address") {
       const updatedFieldErrors = {
         ...fieldErrors,
         address: "請輸入地址",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if ((name = "storeName")) {
+    } else if (name === "storeName") {
       const updatedFieldErrors = {
         ...fieldErrors,
         storeName: "請輸入名稱",
       };
       setFieldErrors(updatedFieldErrors);
     }
-    else if ((name = "storeType")) {
+    else if (name === "storeType") {
       const updatedFieldErrors = {
         ...fieldErrors,
         storeType: "請選擇類型",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if ((name = "openHour")) {
+    } else if ((name === "openHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
         openHour: "請填入時間",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if ((name = "openMinute")) {
+    } else if ((name === "openMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
         openMinute: "請填入時間",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if ((name = "closeHour")) {
+    } else if ((name === "closeHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
         closeHour: "請填入時間",
       };
       setFieldErrors(updatedFieldErrors);
-    } else if ((name = "cloeMinute")) {
+    } else if ((name === "closeMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
         closeMinute: "請填入時間",
@@ -249,15 +238,14 @@ const Storecheck = () => {
     // 日: "false"
   });
 
-  const [member, setMember] = useState();
 
-  const [openTime, setOpenTime] = useState("")
+  const [openTime, setOpenTime] = useState()
 
-  const [closeTime, setCloseTime] = useState("")
+  const [closeTime, setCloseTime] = useState()
 
-  const [imageSrc, setImageSrc] = useState("");
+  const [imageSrc, setImageSrc] = useState();
 
-  const [ address, setAddress ] = useState("");
+  const [address, setAddress] = useState();
 
   // -------- 表單營業日期變更開始 -------- //
   const handleDayChange = (e) => {
@@ -270,7 +258,7 @@ const Storecheck = () => {
 
   const handleOpenTimeChange = (e) => {
     console.log(e.target.value);
-    if(e.target.value.length === 1){
+    if (e.target.value.length === 1) {
       e.target.value = "0" + e.target.value;
     }
     setOpenTime({ ...openTime, [e.target.name]: e.target.value });
@@ -278,7 +266,7 @@ const Storecheck = () => {
   };
   const handleCloseTimeChange = (e) => {
     console.log(e.target.value);
-    if(e.target.value.length === 1){
+    if (e.target.value.length === 1) {
       e.target.value = "0" + e.target.value;
     }
     setCloseTime({ ...closeTime, [e.target.name]: e.target.value });
@@ -306,10 +294,10 @@ const Storecheck = () => {
     setMember({ ...member, [e.target.name]: e.target.value });
   }
 
-  const handleAddressChange = (e) =>{
+  const handleAddressChange = (e) => {
     console.log(e.target.value)
     setAddress(e.target.value)
-    setMember({...member, [e.target.name]: e.target.value});
+    setMember({ ...member, [e.target.name]: e.target.value });
   }
   // -------- 表單地區選擇與地址結束 -------- //
 
@@ -329,7 +317,7 @@ const Storecheck = () => {
     reader.addEventListener(
       "load",
       function () {
-    //     // convert image file to base64 string
+        //     // convert image file to base64 string
         setImageSrc(reader.result);
       },
       false // e.preventDefault()
@@ -382,24 +370,24 @@ const Storecheck = () => {
       //設定錯誤訊息回到錯誤訊息狀態
       setFieldErrors(updatedFieldErrors);
     }
-// todo 修改資料表
+    // todo 修改資料表
     try {
       let formData = new FormData();
-      formData.append("name",member.name);
-      formData.append("email",member.email);
-      formData.append("password",member.password);
-      formData.append("confirmPassword",member.confirmPassword);
+      formData.append("name", member.name);
+      formData.append("email", member.email);
+      formData.append("password", member.password);
+      formData.append("confirmPassword", member.confirmPassword);
       // formData.append("City",member.City);
       // formData.append("Area",member.Area);
-      formData.append("address",member.City+member.Area+member.address);
-      formData.append("storeName",member.storeName);
-      formData.append("phone",member.phone);
-      formData.append("storeLogo",member.storeLogo);
-      formData.append("storeLicence",member.storeLicence);
-      formData.append("storeType",member.storeType);
-      formData.append("day",member.day);
-      formData.append("openTime",openTime.openHour+`:`+openTime.openMinute+`:`+`00.000000`);
-      formData.append("closeTime",closeTime.closeHour+`:`+closeTime.closeMinute+`:`+`00.000000`);
+      formData.append("address", member.City + member.Area + member.address);
+      formData.append("storeName", member.storeName);
+      formData.append("phone", member.phone);
+      formData.append("storeLogo", member.storeLogo);
+      formData.append("storeLicence", member.storeLicence);
+      formData.append("storeType", member.storeType);
+      formData.append("day", member.day);
+      formData.append("openTime", openTime.openHour + `:` + openTime.openMinute + `:` + `00.000000`);
+      formData.append("closeTime", closeTime.closeHour + `:` + closeTime.closeMinute + `:` + `00.000000`);
 
 
       // let response = await axios.post(`${API_URL}/storeCheck/storeCheck`, member);
@@ -433,7 +421,7 @@ const Storecheck = () => {
                     onSubmit={handleSubmit}
                     onInvalid={handleFormInvalid}
                     onChange={handleFormChange}
-                    >
+                  >
                     <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
                     <div className="col-lg-6 col-md-10 col-sm-10 col-10">
                       {/* -------- 姓名 -------- */}
@@ -448,9 +436,8 @@ const Storecheck = () => {
                           name="name"
                           value={member.name}
                           type="text"
-                          className={`form-control custom-input ${
-                            fieldErrors.name !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.name !== "" && "input-error"
+                            }`}
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
@@ -463,8 +450,8 @@ const Storecheck = () => {
                           請填入中文 / 英文姓名
                         </label>
                         {fieldErrors.name !== "" && (
-                        <div className="error text-end">{fieldErrors.name}</div>
-                      )}
+                          <div className="error text-end">{fieldErrors.name}</div>
+                        )}
                       </div>
                       {/* -------- 電子郵件 -------- */}
                       <label
@@ -478,9 +465,8 @@ const Storecheck = () => {
                           name="email"
                           value={member.email}
                           type="email"
-                          className={`form-control custom-input ${
-                            fieldErrors.email !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.email !== "" && "input-error"
+                            }`}
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
@@ -493,10 +479,10 @@ const Storecheck = () => {
                           請填入電子信箱
                         </label>
                         {fieldErrors.email !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.email}
+                          <div className="error text-end">
+                            {fieldErrors.email}
                           </div>
-                      )}
+                        )}
                       </div>
                       {/* -------- 密碼 -------- */}
                       <label
@@ -509,9 +495,8 @@ const Storecheck = () => {
                         <input
                           name="password"
                           type={eye.passwordEye ? "text" : "password"}
-                          className={`form-control custom-input ${
-                            fieldErrors.password !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.password !== "" && "input-error"
+                            }`}
                           id="password"
                           placeholder="密碼"
                           value={member.password}
@@ -520,23 +505,23 @@ const Storecheck = () => {
                           required
                         />
                         <div onClick={passwordShow}>
-                        {eye.passwordEye ? (
-                          <FiEye className="eye" />
-                        ) : (
-                          <FiEyeOff className="eye" />
-                        )}
-                      </div>
+                          {eye.passwordEye ? (
+                            <FiEye className="eye" />
+                          ) : (
+                            <FiEyeOff className="eye" />
+                          )}
+                        </div>
                         <label
                           htmlFor="password"
                           className="floating-label text-grey"
                         >
-                          請設定密碼(須包含最少一個大、小寫英文字母與數字)
+                          請設定密碼
                         </label>
                         {fieldErrors.password !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.password}
-                        </div>
-                      )}
+                          <div className="error text-end">
+                            {fieldErrors.password}
+                          </div>
+                        )}
                       </div>
 
                       {/* -------- 密碼確認 -------- */}
@@ -550,22 +535,21 @@ const Storecheck = () => {
                         <input
                           name="confirmPassword"
                           type={eye.confirmPasswordEye ? "text" : "password"}
-                          className={`form-control custom-input ${
-                            fieldErrors.confirmPassword !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.confirmPassword !== "" && "input-error"
+                            }`}
                           id="confirmpassword"
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
                           required
                         />
-                         <div onClick={confirmPasswordShow}>
-                        {eye.confirmPasswordEye ? (
-                          <FiEye className="eye" />
-                        ) : (
-                          <FiEyeOff className="eye" />
-                        )}
-                      </div>
+                        <div onClick={confirmPasswordShow}>
+                          {eye.confirmPasswordEye ? (
+                            <FiEye className="eye" />
+                          ) : (
+                            <FiEyeOff className="eye" />
+                          )}
+                        </div>
                         <label
                           htmlFor="confirmpassword"
                           className="floating-label text-grey"
@@ -573,10 +557,10 @@ const Storecheck = () => {
                           請再次輸入密碼確認
                         </label>
                         {fieldErrors.confirmPassword !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.confirmPassword}
-                        </div>
-                      )}
+                          <div className="error text-end">
+                            {fieldErrors.confirmPassword}
+                          </div>
+                        )}
                       </div>
                       {/* -------- 地址資料 -------- */}
                       <div className="row">
@@ -607,9 +591,8 @@ const Storecheck = () => {
                         </div> */}
                         <div className="col-6">
                           <label>City</label>
-                          <select className={`form-control custom-input ${
-                          fieldErrors.City !== "" && "input-error"
-                        }`}
+                          <select className={`form-control custom-input ${fieldErrors.City !== "" && "input-error"
+                            }`}
                             name="City"
                             placeholder="City"
                             value={selectedCity}
@@ -625,18 +608,17 @@ const Storecheck = () => {
                             })}
                           </select>
                           {fieldErrors.City !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.City}
-                        </div>
-                      )}
+                            <div className="error text-end">
+                              {fieldErrors.City}
+                            </div>
+                          )}
                         </div>
 
                         <div className="col-6">
                           <label>選擇區域</label>
-                          <select className={`form-control custom-input ${
-                          fieldErrors.Area !== "" && "input-error"
-                        }`}
-                          name="Area"
+                          <select className={`form-control custom-input ${fieldErrors.Area !== "" && "input-error"
+                            }`}
+                            name="Area"
                             placeholder="Area"
                             value={selectedArea}
                             onChange={handleAreaChange}
@@ -651,10 +633,10 @@ const Storecheck = () => {
                             })}
                           </select>
                           {fieldErrors.Area !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.Area}
-                        </div>
-                      )}
+                            <div className="error text-end">
+                              {fieldErrors.Area}
+                            </div>
+                          )}
                         </div>
                         {/* <div id="twzipcode"></div> */}
                         {/* <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
@@ -672,11 +654,10 @@ const Storecheck = () => {
                         <input
                           name="address"
                           type="text"
-                          className={`form-control custom-input ${
-                            fieldErrors.address !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.address !== "" && "input-error"
+                            }`}
                           id="address"
-                          placeholder="請輸入詳細地址"
+                          placeholder="address"
                           value={address}
                           maxLength="80"
                           onChange={handleAddressChange}
@@ -689,10 +670,10 @@ const Storecheck = () => {
                           請輸入詳細地址
                         </label>
                         {fieldErrors.address !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.address}
-                        </div>
-                      )}
+                          <div className="error text-end">
+                            {fieldErrors.address}
+                          </div>
+                        )}
                       </div>
                       {/* -------- 營業店家名稱 -------- */}
                       <label
@@ -705,15 +686,14 @@ const Storecheck = () => {
                         <input
                           name="storeName"
                           type="text"
-                          className={`form-control custom-input ${
-                            fieldErrors.storeName !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.storeName !== "" && "input-error"
+                            }`}
                           id="storeName"
                           placeholder="營業店家名稱"
                           value={member.storeName}
                           maxLength="30"
                           onChange={handleChange}
-                          //required
+                        required
 
                         />
                         <label
@@ -723,14 +703,14 @@ const Storecheck = () => {
                           請輸入營業商店名稱
                         </label>
                         {fieldErrors.storeName !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.storeName}
-                        </div>
-                      )}
+                          <div className="error text-end">
+                            {fieldErrors.storeName}
+                          </div>
+                        )}
                       </div>
                       {/* -------- 營業店家電話 -------- */}
                       <label
-                        htmlFor="storephone"
+                        htmlFor="phone"
                         className="col-form-label input-label-title  text-green p-0"
                       >
                         營業店家電話
@@ -739,9 +719,8 @@ const Storecheck = () => {
                         <input
                           name="phone"
                           type="phone"
-                          className={`form-control custom-input ${
-                            fieldErrors.phone !== "" && "input-error"
-                          }`}
+                          className={`form-control custom-input ${fieldErrors.phone !== "" && "input-error"
+                            }`}
                           id="phone"
                           placeholder="name@example.com"
                           value={member.phone}
@@ -756,10 +735,10 @@ const Storecheck = () => {
                           09XXXXXXXX
                         </label>
                         {fieldErrors.phone !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.phone}
-                        </div>
-                      )}
+                          <div className="error text-end">
+                            {fieldErrors.phone}
+                          </div>
+                        )}
                       </div>
                       {/* -------- 使用者同意條款 -------- */}
 
@@ -823,7 +802,6 @@ const Storecheck = () => {
                           onChange={handleChange}
                           required
                         >
-                          <option>--請選擇商品分類--</option>
                           <option value="1">港式</option>
                           <option value="2">中式</option>
                           <option value="3">韓式</option>
@@ -833,8 +811,6 @@ const Storecheck = () => {
                           <option value="7">飲料</option>
                           <option value="8">甜點</option>
                           <option value="9">麵包</option>
-
-
                         </select>
                         <label
                           htmlFor="storeType"
@@ -886,7 +862,7 @@ const Storecheck = () => {
                       </div>
                       {/* -------- 營業時間設定開始 -------- */}
                       <label
-                        htmlFor="openHour1"
+                        htmlFor="openHour"
                         className="col-form-label input-label-title  text-green p-0"
                       >
                         營業時間
@@ -900,9 +876,8 @@ const Storecheck = () => {
                                 <input
                                   name="openHour"
                                   type="number"
-                                  className={`form-control custom-input time ${
-                                    fieldErrors.openHour !== "" && "input-error"
-                                  }`}
+                                  className={`form-control custom-input time ${fieldErrors.openHour !== "" && "input-error"
+                                    }`}
                                   id="openHour"
                                   placeholder="時"
                                   value={member.openHour}
@@ -919,10 +894,10 @@ const Storecheck = () => {
                                 >時
                                 </label>
                                 {fieldErrors.openHour !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.openHour}
-                        </div>
-                      )}
+                                  <div className="error text-end">
+                                    {fieldErrors.openHour}
+                                  </div>
+                                )}
                               </div>
                             </div>
                             {/* 冒號 */}
@@ -933,9 +908,8 @@ const Storecheck = () => {
                                 <input
                                   name="openMinute"
                                   type="number"
-                                  className={`form-control custom-input time ${
-                                    fieldErrors.openMinute !== "" && "input-error"
-                                  }`}
+                                  className={`form-control custom-input time ${fieldErrors.openMinute !== "" && "input-error"
+                                    }`}
                                   id="openMinute"
                                   placeholder="分"
                                   value={member.openMinute}
@@ -953,10 +927,10 @@ const Storecheck = () => {
                                   分
                                 </label>
                                 {fieldErrors.openMinute !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.openMinute}
-                        </div>
-                      )}
+                                  <div className="error text-end">
+                                    {fieldErrors.openMinute}
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>
@@ -971,9 +945,8 @@ const Storecheck = () => {
                                 <input
                                   name="closeHour"
                                   type="number"
-                                  className={`form-control custom-input time ${
-                                    fieldErrors.closeHour !== "" && "input-error"
-                                  }`}
+                                  className={`form-control custom-input time ${fieldErrors.closeHour !== "" && "input-error"
+                                    }`}
                                   id="closeHour"
                                   placeholder="時"
                                   value={member.closeHour}
@@ -990,10 +963,10 @@ const Storecheck = () => {
                                   時
                                 </label>
                                 {fieldErrors.closeHour !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.closeHour}
-                        </div>
-                      )}
+                                  <div className="error text-end">
+                                    {fieldErrors.closeHour}
+                                  </div>
+                                )}
                               </div>
                             </div>
                             {/* 冒號 */}
@@ -1004,9 +977,8 @@ const Storecheck = () => {
                                 <input
                                   name="closeMinute"
                                   type="number"
-                                  className={`form-control custom-input time ${
-                                    fieldErrors.closeMinute !== "" && "input-error"
-                                  }`}
+                                  className={`form-control custom-input time ${fieldErrors.closeMinute !== "" && "input-error"
+                                    }`}
                                   id="closeMinute"
                                   placeholder="分"
                                   value={member.closeMinute}
@@ -1023,10 +995,10 @@ const Storecheck = () => {
                                   分
                                 </label>
                                 {fieldErrors.closeMinute !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.closeMinute}
-                        </div>
-                      )}
+                                  <div className="error text-end">
+                                    {fieldErrors.closeMinute}
+                                  </div>
+                                )}
                               </div>
                             </div>
                           </div>

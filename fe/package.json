@@ -17,6 +17,7 @@
     "react-scripts": "5.0.0",
     "react-twzipcode": "^3.0.0",
     "sass": "^1.49.0",
+    "sweetalert2": "^11.4.4",
     "tw-city-selector": "^2.1.1",
     "web-vitals": "^2.1.4"
   },
