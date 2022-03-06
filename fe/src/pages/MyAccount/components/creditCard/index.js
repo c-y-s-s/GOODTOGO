@@ -1,5 +1,9 @@
 import React from "react";
 import Card from "react-credit-cards";
+import axios from "axios";
+import { API_URL } from "../../../../utils/config";
+// import { ERR_MSG } from "../../../../utils/error";
+import Swal from "sweetalert2";
 
 // import SupportedCards from "./Cards";
 
@@ -56,9 +60,63 @@ export default class CreditCard extends React.Component {
         acc[d.name] = d.value;
         return acc;
       }, {});
+    // this.setState({ formData });
+    // this.form.reset();
+    console.log(formData)
 
-    this.setState({ formData });
-    this.form.reset();
+    let updateCreditCard = async () => {
+      try {
+        let data = { ...formData };
+        let cardNumber = { number: data.number };
+        // console.log("cardNumber", cardNumber);
+
+        // http://localhost:3002/api/member/payment/edit (router.post)
+        let response = await axios.post(
+          `${API_URL}/member/payment/edit`,
+          cardNumber,
+          {
+            withCredentials: true,
+          }
+        );
+        console.log("使用者有更新信用卡: ", response.data);
+        this.props.setCreditNum(response.data.fourNum);
+
+        // sweet alert
+        Swal.fire({
+          // position: 'top-end',
+          icon: "success",
+          title: "資料儲存成功",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        // 清除表單資料
+        this.form.reset();
+        this.setState({
+          number: "",
+          name: "",
+          expiry: "",
+          cvc: "",
+          issuer: "",
+          focused: "",
+          formData: null,
+        });
+
+        // 關閉燈箱 (與 sweet alert 一起關閉)
+        setTimeout(() => {
+          // this.props.setisModalTouch(true);
+          // this.props.setOpenCreditHeight(false);
+          // this.props.setOpenCredit(false);
+          // 可直接傳遞 handleClose 函式
+          this.props.handleClose();
+        }, 1500);
+      } catch (e) {
+        // console.error("會員修改信用卡 error: ", ERR_MSG[e.response.data.code]);
+        console.error("res.error:", e.response.data);
+        // setErr(e.response.data.msg);
+      }
+    };
+    updateCreditCard();
   };
 
   render() {
@@ -67,8 +125,6 @@ export default class CreditCard extends React.Component {
     return (
       <div key="Payment">
         <div className="App-payment">
-          <h1>React Credit Cards</h1>
-          <h4>Beautiful credit cards for your payment forms</h4>
           <Card
             number={number}
             name={name}
@@ -78,37 +134,37 @@ export default class CreditCard extends React.Component {
             callback={this.handleCallback}
           />
           <form ref={(c) => (this.form = c)} onSubmit={this.handleSubmit}>
-            <div className="form-group">
+            <div className="form-group mt-4">
               <input
                 type="tel"
                 name="number"
-                className="form-control"
-                placeholder="Card Number"
+                className="form-control form_Input my-3"
+                placeholder="請輸入信用卡號碼"
                 pattern="[\d| ]{16,22}"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
-              <small>E.g.: 49..., 51..., 36..., 37...</small>
+              {/* <small>E.g.: 49..., 51..., 36..., 37...</small> */}
             </div>
             <div className="form-group">
               <input
                 type="text"
                 name="name"
-                className="form-control"
-                placeholder="Name"
+                className="form-control form_Input my-3"
+                placeholder="持卡人姓名"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
             </div>
-            <div className="row">
+            <div className="row my-3">
               <div className="col-6">
                 <input
                   type="tel"
                   name="expiry"
-                  className="form-control"
-                  placeholder="Valid Thru"
+                  className="form-control form_Input"
+                  placeholder="有效期限 月/年"
                   pattern="\d\d/\d\d"
                   required
                   onChange={this.handleInputChange}
@@ -119,8 +175,8 @@ export default class CreditCard extends React.Component {
                 <input
                   type="tel"
                   name="cvc"
-                  className="form-control"
-                  placeholder="CVC"
+                  className="form-control form_Input"
+                  placeholder="驗證碼 CVC"
                   pattern="\d{3,4}"
                   required
                   onChange={this.handleInputChange}
@@ -129,8 +185,21 @@ export default class CreditCard extends React.Component {
               </div>
             </div>
             <input type="hidden" name="issuer" value={issuer} />
-            <div className="form-actions">
-              <button className="btn btn-primary btn-block">PAY</button>
+            <div className="form-actions text-center">
+              <button
+                className="btn text-white btn_Credit"
+                disabled={
+                  // 三欄位不為空 才能按儲存鈕
+                  this.state.number === "" ||
+                  this.state.name === "" ||
+                  this.state.expiry === "" ||
+                  this.state.cvc === ""
+                    ? true
+                    : false
+                }
+              >
+                儲&emsp;存
+              </button>
             </div>
           </form>
           {/* {formData && (

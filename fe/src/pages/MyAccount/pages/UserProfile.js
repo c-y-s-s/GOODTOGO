@@ -130,6 +130,7 @@ const UserProfile = (props) => {
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
     console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     setMember({ ...member, [e.target.name]: e.target.files[0] });
+    // member.photo
   };
 
   // -------- 修改會員資料進資料庫 --------
@@ -302,7 +303,7 @@ const UserProfile = (props) => {
                     className="btn text-white btn_Submit"
                     onClick={handleSubmit}
                     disabled={
-                      // 三欄位不為空 且 新密碼與確認密碼一致 才能按儲存鈕
+                      // 三欄位不為空 才能按儲存鈕
                       err.name === "" && err.email === "" && err.phone === ""
                         ? false
                         : true

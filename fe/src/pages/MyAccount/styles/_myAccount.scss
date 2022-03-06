@@ -121,7 +121,7 @@
 
 // -------- index --------
 .set_Height {
-  height: 115.195px;
+  height: 101.594px;
 }
 
 // -------- 會員頭貼 --------
@@ -232,6 +232,7 @@
   height: 2.5rem;
   padding-bottom: 0.45rem;
   letter-spacing: $ls-md;
+  color: $color-dark-grey;
   &:focus {
     box-shadow: none;
     border-color: $color-green;
@@ -746,6 +747,16 @@ h4.store_Title {
 @media screen and (max-width: 767px) {
 }
 @media screen and (max-width: 576px) {
+  // 信用卡資訊頁
+  .credit_Box {
+    width: 340px;
+    height: 560px;
+  }
+  .credit_Close_Btn {
+    width: 35px;
+    height: 35px;
+  }
+
   // 我的訂單頁
   .order_Link {
     font-size: $fz-sm;
