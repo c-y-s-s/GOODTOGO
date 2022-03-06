@@ -55,9 +55,9 @@ router.post("/productedit", uploader.single("img"), async (req, res, next) => {
   let filename = req.file
     ? "/static/uploads/products/" + req.file.filename
     : req.body.img;
-  console.log("req.file", req.file);
-  console.log("加上路徑的 filename: ", filename);
-  console.log("req.file.filename", req.file.filename);
+  // console.log("req.file", req.file);
+  // console.log("加上路徑的 filename: ", filename);
+  // console.log("req.file.filename", req.file.filename);
 
   //*存入資料庫
   let [result] = await connection.execute(
