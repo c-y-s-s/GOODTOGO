@@ -230,7 +230,7 @@ const StoreInfoList = (props) => {
         </div>
         {/* 商家列表顯示區 */}
 
-        <div className="store-info-list d-flex flex-wrap justify-content-lg-between justify-content-center col-10 mt-lg-5 ">
+        <div className="store-info-list d-flex flex-wrap justify-content-lg-start justify-content-center col-10 mt-lg-5 g-2">
           <StoreInfoCard
             storeList={storeList}
             storeLikeCount={storeLikeCount}

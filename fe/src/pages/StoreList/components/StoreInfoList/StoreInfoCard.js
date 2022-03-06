@@ -45,7 +45,7 @@ const StoreInfoCard = (props) => {
           // -------- 處理評分星星 --------
 
           return (
-            <div>
+            <div className="me-lg-2 ms-lg-2">
               <Link to={`/store/${item.id}`} className="no-link">
                 <div
                   key={item.id}

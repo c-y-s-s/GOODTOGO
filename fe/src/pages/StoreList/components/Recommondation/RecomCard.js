@@ -99,7 +99,7 @@ const RecomCard = (props) => {
                   <div className="d-flex align-items-center justify-content-center">
                     <Rating
                       name="read-only"
-                      value={starCount}
+                      value={Number(starCount)}
                       readOnly
                       precision={0.1}
                     />
