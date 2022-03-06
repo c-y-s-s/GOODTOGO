@@ -15,12 +15,15 @@ const Map = (props) => {
     locationArr.push({
       //storeId在右邊顯示小卡片可能會用到
       // storeID:i.id,
-      name: i.name,
       lng: i.lat,
       lat: i.lng,
+      name: i.name.split(" ")[0],
+      open_time: i.open_time,
+      close_time: i.close_time,
+      amount: i.amount,
     });
   });
-
+  console.log("sss", displayStoreList);
   const location = {
     address: "320桃園市中壢區新生路二段421號",
     lat: 24.985128,
@@ -51,7 +54,7 @@ const Map = (props) => {
               className="location-pin"
               lat={location.lat}
               lng={location.lng}
-              text={location.name}
+              name={location.name}
             />
 
             {/* // !用傳進來的資料map,只是為了得到他的index長度,實際上裡面的資料是用上面處理好的 */}
@@ -63,6 +66,9 @@ const Map = (props) => {
                   lat={locationArr[index].lat}
                   lng={locationArr[index].lng}
                   name={locationArr[index].name}
+                  open_time={locationArr[index].open_time}
+                  close_time={locationArr[index].close_time}
+                  amount={locationArr[index].amount}
                   setClickStoreId={props.setClickStoreId}
                 />
               );
