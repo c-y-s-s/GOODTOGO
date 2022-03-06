@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate} from "react-router-dom";
 // import { ImFacebook2 } from "react-icons/im";
 import axios from "axios";
 // import TWzipcode from "react-twzipcode";
@@ -10,16 +10,74 @@ import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 import "./Storecheck.scss";
 import CityCountyData from "./components/CityCountyData.json";
+import Swal from "sweetalert2";
 
 
 const Storecheck = () => {
 
+  const navigate = useNavigate();
+  const swal = Swal.mixin({
+    customClass: {
+      confirmButton: " btn cancelbtn ms-2 me-2",
+    },
+    buttonsStyling: false,
+  });
+  const registrationSuccessAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            text: "註冊成功",
+            icon: "success",
+            showCancelButton: false,
+            confirmButtonText: "立即登入",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("/storeLogin");
+            }
+          })}
+      </>
+    );
+  };
 
-  // new TwCitySelector({
-  //   el: ".city-selector",
-  //   elCounty: ".county", // 在 el 裡查找 element
-  //   elDistrict: ".district", // 在 el 裡查找 element
-  // });
+  const [fieldErrors, setFieldErrors] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+    phone: "",
+    City: "",
+    Area: "",
+    address:"",
+    storeType:"",
+    openHour:"",
+    openMinute:"",
+    closeHour:"",
+    closeMinute:""
+  });
+
+  const [eye, setEye] = useState({
+    passwordEye: false,
+    confirmPasswordEye: false,
+  });
+  // --------切換顯示/隱藏密碼 --------
+  //眼睛for密碼
+  function passwordShow() {
+    setEye(
+      eye.passwordEye
+        ? { ...eye, passwordEye: false }
+        : { ...eye, passwordEye: true }
+    );
+  }
+  //眼睛for確認密碼
+  function confirmPasswordShow() {
+    setEye(
+      eye.confirmPasswordEye
+        ? { ...eye, confirmPasswordEye: false }
+        : { ...eye, confirmPasswordEye: true }
+    );
+  }
 
   // -------- checkbox 同意條款 --------
   const [agree, setAgree] = useState(true);
@@ -76,7 +134,110 @@ const Storecheck = () => {
   //   setMember({ ...member, ...{ openDay } });
   // };
 
+  const handleFormInvalid = (e) => {
+    // 阻擋form的預設送出行為(錯誤泡泡訊息和method="get")
+    e.preventDefault();
+    let name = e.target.name;
+    let value = e.target.value;
 
+    // -------- 自訂個欄位錯誤訊息 --------
+    //姓名欄位錯誤
+    if (name === "name") {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        name: "您希望我們怎麼稱呼您？",
+      };
+      setFieldErrors(updatedFieldErrors);
+      //email欄位錯誤
+    } else if (name === "email") {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        email: "email格式輸入錯誤",
+      };
+      setFieldErrors(updatedFieldErrors);
+      //密碼欄位錯誤
+    } else if (name === "password") {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        password: "密碼至少為6個字元",
+      };
+      setFieldErrors(updatedFieldErrors);
+      //手機欄位錯誤
+    } else if ((name = "phone")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        phone: "手機號碼為10位數字",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if (name = "City") {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        City: "請選擇城市",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "Area")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        Area: "請選擇區域",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "address")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        address: "請輸入地址",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "storeName")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        storeName: "請輸入名稱",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
+    else if ((name = "storeType")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        storeType: "請選擇類型",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "openHour")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        openHour: "請填入時間",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "openMinute")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        openMinute: "請填入時間",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "closeHour")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        closeHour: "請填入時間",
+      };
+      setFieldErrors(updatedFieldErrors);
+    } else if ((name = "cloeMinute")) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        closeMinute: "請填入時間",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
+  };
+  // 當整個表單有更動時會觸發
+  // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
+  const handleFormChange = (e) => {
+    // 清空某個欄位錯誤訊息
+    const updatedFieldErrors = {
+      ...fieldErrors,
+      [e.target.name]: "",
+    };
+
+    // 設定回錯誤訊息狀態
+    setFieldErrors(updatedFieldErrors);
+  };
 
   const [day, setDay] = useState({
     // 一: "false",
@@ -88,9 +249,7 @@ const Storecheck = () => {
     // 日: "false"
   });
 
-  const [member, setMember] = useState({
-    storeLogo:""
-  });
+  const [member, setMember] = useState();
 
   const [openTime, setOpenTime] = useState("")
 
@@ -99,7 +258,6 @@ const Storecheck = () => {
   const [imageSrc, setImageSrc] = useState("");
 
   const [ address, setAddress ] = useState("");
-  // -------- 處理表格改變 -------- //
 
   // -------- 表單營業日期變更開始 -------- //
   const handleDayChange = (e) => {
@@ -181,8 +339,7 @@ const Storecheck = () => {
       reader.readAsDataURL(file1);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file1.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file1); // e.target.files[0]
+    console.log("商家註冊LOGO", file1.name); // e.target.files[0].name
     console.log(e.target.files[0]);
     setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
@@ -204,8 +361,7 @@ const Storecheck = () => {
     if (file2) {
       reader.readAsDataURL(file2);
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file2.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file2); // e.target.files[0]
+    console.log("商家營業許可", file2.name); // e.target.files[0].name
     setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
 
@@ -216,6 +372,16 @@ const Storecheck = () => {
   // -------- 表單送出開始 -------- //
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (member.password !== member.confirmPassword) {
+      //設定錯誤的訊息
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        password: "密碼 與 確認密碼 欄位輸入不一致",
+        confirmPassword: "密碼 與 確認密碼 欄位輸入不一致",
+      };
+      //設定錯誤訊息回到錯誤訊息狀態
+      setFieldErrors(updatedFieldErrors);
+    }
 // todo 修改資料表
     try {
       let formData = new FormData();
@@ -240,11 +406,11 @@ const Storecheck = () => {
       let response = await axios.post(`${API_URL}/storeCheck/storeCheck`, formData);
 
       console.log(response.data);
-      
+      navigate("/storeLogin");
+      registrationSuccessAlert();
     } catch (e) {
-      console.error("錯誤:", e.response.data);
+      console.error(ERR_MSG[e.response.data].code);
     }
-    
   };
   // -------- 表單送出結束 -------- //
 
@@ -264,7 +430,10 @@ const Storecheck = () => {
                 {/* -------- 註冊資料開始 -------- */}
                 <div className="label-group d-flex text-start flex-column justify-content-evenly gy-2">
                   <form className="d-flex row"
-                    onSubmit={handleSubmit}>
+                    onSubmit={handleSubmit}
+                    onInvalid={handleFormInvalid}
+                    onChange={handleFormChange}
+                    >
                     <div className="d-block d-sm-block d-md-block d-lg-none d-xl-none d-xxl-none col-1"></div>
                     <div className="col-lg-6 col-md-10 col-sm-10 col-10">
                       {/* -------- 姓名 -------- */}
@@ -279,11 +448,13 @@ const Storecheck = () => {
                           name="name"
                           value={member.name}
                           type="text"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${
+                            fieldErrors.name !== "" && "input-error"
+                          }`}
                           id="name"
                           placeholder="請填入中文 / 英文姓名"
                           onChange={handleChange}
-                          //required
+                          required
                         />
                         <label
                           htmlFor="name"
@@ -291,6 +462,9 @@ const Storecheck = () => {
                         >
                           請填入中文 / 英文姓名
                         </label>
+                        {fieldErrors.name !== "" && (
+                        <div className="error text-end">{fieldErrors.name}</div>
+                      )}
                       </div>
                       {/* -------- 電子郵件 -------- */}
                       <label
@@ -304,11 +478,13 @@ const Storecheck = () => {
                           name="email"
                           value={member.email}
                           type="email"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${
+                            fieldErrors.email !== "" && "input-error"
+                          }`}
                           id="email"
                           placeholder="email"
                           onChange={handleChange}
-                          //required
+                          required
                         />
                         <label
                           htmlFor="email"
@@ -316,6 +492,11 @@ const Storecheck = () => {
                         >
                           請填入電子信箱
                         </label>
+                        {fieldErrors.email !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.email}
+                          </div>
+                      )}
                       </div>
                       {/* -------- 密碼 -------- */}
                       <label
@@ -327,20 +508,35 @@ const Storecheck = () => {
                       <div className="form-floating mb-3">
                         <input
                           name="password"
-                          type="password"
-                          className="form-control custom-input"
+                          type={eye.passwordEye ? "text" : "password"}
+                          className={`form-control custom-input ${
+                            fieldErrors.password !== "" && "input-error"
+                          }`}
                           id="password"
                           placeholder="密碼"
                           value={member.password}
                           onChange={handleChange}
-                          //required
+                          minLength="6"
+                          required
                         />
+                        <div onClick={passwordShow}>
+                        {eye.passwordEye ? (
+                          <FiEye className="eye" />
+                        ) : (
+                          <FiEyeOff className="eye" />
+                        )}
+                      </div>
                         <label
                           htmlFor="password"
                           className="floating-label text-grey"
                         >
                           請設定密碼(須包含最少一個大、小寫英文字母與數字)
                         </label>
+                        {fieldErrors.password !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.password}
+                        </div>
+                      )}
                       </div>
 
                       {/* -------- 密碼確認 -------- */}
@@ -353,20 +549,34 @@ const Storecheck = () => {
                       <div className="form-floating mb-3">
                         <input
                           name="confirmPassword"
-                          type="password"
-                          className="form-control custom-input"
+                          type={eye.confirmPasswordEye ? "text" : "password"}
+                          className={`form-control custom-input ${
+                            fieldErrors.confirmPassword !== "" && "input-error"
+                          }`}
                           id="confirmpassword"
                           placeholder="請再次輸入密碼"
                           value={member.confirmPassword}
                           onChange={handleChange}
-                          //required
+                          required
                         />
+                         <div onClick={confirmPasswordShow}>
+                        {eye.confirmPasswordEye ? (
+                          <FiEye className="eye" />
+                        ) : (
+                          <FiEyeOff className="eye" />
+                        )}
+                      </div>
                         <label
                           htmlFor="confirmpassword"
                           className="floating-label text-grey"
                         >
                           請再次輸入密碼確認
                         </label>
+                        {fieldErrors.confirmPassword !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.confirmPassword}
+                        </div>
+                      )}
                       </div>
                       {/* -------- 地址資料 -------- */}
                       <div className="row">
@@ -397,7 +607,9 @@ const Storecheck = () => {
                         </div> */}
                         <div className="col-6">
                           <label>City</label>
-                          <select className="form-control custom-input"
+                          <select className={`form-control custom-input ${
+                          fieldErrors.City !== "" && "input-error"
+                        }`}
                             name="City"
                             placeholder="City"
                             value={selectedCity}
@@ -412,11 +624,18 @@ const Storecheck = () => {
                               );
                             })}
                           </select>
+                          {fieldErrors.City !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.City}
+                        </div>
+                      )}
                         </div>
 
                         <div className="col-6">
                           <label>選擇區域</label>
-                          <select className="form-control custom-input"
+                          <select className={`form-control custom-input ${
+                          fieldErrors.Area !== "" && "input-error"
+                        }`}
                           name="Area"
                             placeholder="Area"
                             value={selectedArea}
@@ -431,6 +650,11 @@ const Storecheck = () => {
                               );
                             })}
                           </select>
+                          {fieldErrors.Area !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.Area}
+                        </div>
+                      )}
                         </div>
                         {/* <div id="twzipcode"></div> */}
                         {/* <TWzipcode css={["col-6 form-select custom-input county-sel", "col-6 form-select custom-input district-sel", "d-none zipcode"]}
@@ -448,14 +672,15 @@ const Storecheck = () => {
                         <input
                           name="address"
                           type="text"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${
+                            fieldErrors.address !== "" && "input-error"
+                          }`}
                           id="address"
                           placeholder="請輸入詳細地址"
                           value={address}
                           maxLength="80"
                           onChange={handleAddressChange}
-                          //required
-
+                          required
                         />
                         <label
                           htmlFor="address"
@@ -463,6 +688,11 @@ const Storecheck = () => {
                         >
                           請輸入詳細地址
                         </label>
+                        {fieldErrors.address !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.address}
+                        </div>
+                      )}
                       </div>
                       {/* -------- 營業店家名稱 -------- */}
                       <label
@@ -475,7 +705,9 @@ const Storecheck = () => {
                         <input
                           name="storeName"
                           type="text"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${
+                            fieldErrors.storeName !== "" && "input-error"
+                          }`}
                           id="storeName"
                           placeholder="營業店家名稱"
                           value={member.storeName}
@@ -485,11 +717,16 @@ const Storecheck = () => {
 
                         />
                         <label
-                          htmlFor="phone"
+                          htmlFor="storeName"
                           className="floating-label  text-grey"
                         >
                           請輸入營業商店名稱
                         </label>
+                        {fieldErrors.storeName !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.storeName}
+                        </div>
+                      )}
                       </div>
                       {/* -------- 營業店家電話 -------- */}
                       <label
@@ -502,14 +739,15 @@ const Storecheck = () => {
                         <input
                           name="phone"
                           type="phone"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${
+                            fieldErrors.phone !== "" && "input-error"
+                          }`}
                           id="phone"
                           placeholder="name@example.com"
                           value={member.phone}
                           maxLength="10"
                           onChange={handleChange}
-                          //required
-
+                          required
                         />
                         <label
                           htmlFor="phone"
@@ -517,6 +755,11 @@ const Storecheck = () => {
                         >
                           09XXXXXXXX
                         </label>
+                        {fieldErrors.phone !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.phone}
+                        </div>
+                      )}
                       </div>
                       {/* -------- 使用者同意條款 -------- */}
 
@@ -540,7 +783,7 @@ const Storecheck = () => {
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
-                          //required
+                          required
 
                         />
                       </div>
@@ -559,7 +802,7 @@ const Storecheck = () => {
                           id="storeLicence"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
-                          //required
+                          required
 
                         />
                       </div>
@@ -578,7 +821,7 @@ const Storecheck = () => {
                           placeholder="商品類別"
                           value={member.storeType}
                           onChange={handleChange}
-                          //required
+                          required
                         >
                           <option>--請選擇商品分類--</option>
                           <option value="1">港式</option>
@@ -657,7 +900,9 @@ const Storecheck = () => {
                                 <input
                                   name="openHour"
                                   type="number"
-                                  className="form-control custom-input time"
+                                  className={`form-control custom-input time ${
+                                    fieldErrors.openHour !== "" && "input-error"
+                                  }`}
                                   id="openHour"
                                   placeholder="時"
                                   value={member.openHour}
@@ -665,7 +910,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  //required
+                                  required
 
                                 />
                                 <label
@@ -673,6 +918,11 @@ const Storecheck = () => {
                                   className="floating-label  text-grey"
                                 >時
                                 </label>
+                                {fieldErrors.openHour !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.openHour}
+                        </div>
+                      )}
                               </div>
                             </div>
                             {/* 冒號 */}
@@ -683,7 +933,9 @@ const Storecheck = () => {
                                 <input
                                   name="openMinute"
                                   type="number"
-                                  className="form-control custom-input time"
+                                  className={`form-control custom-input time ${
+                                    fieldErrors.openMinute !== "" && "input-error"
+                                  }`}
                                   id="openMinute"
                                   placeholder="分"
                                   value={member.openMinute}
@@ -691,7 +943,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleOpenTimeChange}
-                                  //required
+                                  required
 
                                 />
                                 <label
@@ -700,6 +952,11 @@ const Storecheck = () => {
                                 >
                                   分
                                 </label>
+                                {fieldErrors.openMinute !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.openMinute}
+                        </div>
+                      )}
                               </div>
                             </div>
                           </div>
@@ -714,7 +971,9 @@ const Storecheck = () => {
                                 <input
                                   name="closeHour"
                                   type="number"
-                                  className="form-control custom-input time"
+                                  className={`form-control custom-input time ${
+                                    fieldErrors.closeHour !== "" && "input-error"
+                                  }`}
                                   id="closeHour"
                                   placeholder="時"
                                   value={member.closeHour}
@@ -722,8 +981,7 @@ const Storecheck = () => {
                                   max={24}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  //required
-
+                                  required
                                 />
                                 <label
                                   htmlFor="closeHour"
@@ -731,6 +989,11 @@ const Storecheck = () => {
                                 >
                                   時
                                 </label>
+                                {fieldErrors.closeHour !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.closeHour}
+                        </div>
+                      )}
                               </div>
                             </div>
                             {/* 冒號 */}
@@ -741,7 +1004,9 @@ const Storecheck = () => {
                                 <input
                                   name="closeMinute"
                                   type="number"
-                                  className="form-control custom-input time"
+                                  className={`form-control custom-input time ${
+                                    fieldErrors.closeMinute !== "" && "input-error"
+                                  }`}
                                   id="closeMinute"
                                   placeholder="分"
                                   value={member.closeMinute}
@@ -749,8 +1014,7 @@ const Storecheck = () => {
                                   max={60}
                                   min={0}
                                   onChange={handleCloseTimeChange}
-                                  //required
-
+                                  required
                                 />
                                 <label
                                   htmlFor="closeMinute"
@@ -758,6 +1022,11 @@ const Storecheck = () => {
                                 >
                                   分
                                 </label>
+                                {fieldErrors.closeMinute !== "" && (
+                        <div className="error text-end">
+                          {fieldErrors.closeMinute}
+                        </div>
+                      )}
                               </div>
                             </div>
                           </div>
@@ -781,7 +1050,7 @@ const Storecheck = () => {
                       {/* TODO:當同意條款為true時以下按鈕才生效 */}
                       <button
                         type="submit"
-                        className="btn btn-register col-lg-12 mb-2"
+                        className="btn btn-register flex-column mt-2"
                         disabled={!agree}
                       >
                         註冊
@@ -796,14 +1065,6 @@ const Storecheck = () => {
                   <div className="d-flex align-items-center justify-content-between mb-2" >
                     <hr className="col-lg-5" />或 <hr className="col-lg-5" />
                   </div>
-                  {/* -------- Facebook 登入 -------- */}
-                  {/* <button
-                    className="col-lg-12 btn-fb-login btn d-flex align-items-center text-center justify-content-center m-0 mb-3"
-                  >
-                    <ImFacebook2 className="big-icon col-lg-2" />
-                    使用 Facebook 註冊
-                    <div className="col-lg-2"> </div>
-                  </button> */}
 
                   <p className=" input-label-title text-grey text-center m-0 mb-3">
                     已經註冊過您的店舖 ,

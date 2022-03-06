@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { FiEye, FiEyeOff } from "react-icons/fi";
+import Swal from "sweetalert2";
 
 // import LoginForm from "./LoginForm"; 曾經的分離表單
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
@@ -15,8 +16,8 @@ const StoreLogin = (props) => {
   const { loginSeller, setLoginSeller } = useAuth();
 
 const [loginStore, setLoginStore] = useState({
-  email:"",
-  password:""
+  email:"test",
+  password:"test"
 });
 
    const [fieldErrors, setFieldErrors] = useState({

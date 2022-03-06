@@ -96,3 +96,9 @@ input.dayCheck {
 .time{
   text-align: center;
 }
+.input-error {
+  border: 2px solid $color-red;
+}
+.error {
+  color: $color-red;
+}
