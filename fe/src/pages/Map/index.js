@@ -20,7 +20,9 @@ const MapPage = () => {
   const [storeLocation, setStoreLocation] = useState();
   const [keyword, setKeyword] = useState();
   const [storeList, setStoreList] = useState();
-  const [cateListShow, setCateListShow] = useState(false);
+  const [cateListShowSwitch, setcateListShowSwitch] = useState(false);
+  const [opListShowSwitch, setOpListShowSwitch] = useState(false);
+  const [showIsOpen, setShowIsOpen] = useState("營業中店家");
 
   // const location = {
   //   address: "320桃園市中壢區新生路二段421號",
@@ -45,9 +47,7 @@ const MapPage = () => {
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
   };
-  console.log(category);
   console.log("選到的類別", storeList);
-  console.log(cateListShow);
   const showCategoryList = () => {
     console.log("click");
 
@@ -81,18 +81,62 @@ const MapPage = () => {
       </div>
       <div className="map-side-bar col-lg-4 text-center d-flex flex-column">
         <div className="map-title">搜尋附近店家</div>
-        <div className="col-lg-8 map-filter-bar m-auto align-items-center  d-flex flex-column">
-          <select name="" id="" className="col-lg-10">
+        <div className="col-lg-8 map-filter-bar m-auto align-items-center d-flex flex-column">
+          <ul
+            name=""
+            id=""
+            className="col-lg-10 list-unstyled map-select-bar"
+            onClick={() => {
+              setOpListShowSwitch(!opListShowSwitch);
+            }}
+          >
+            <div
+              role="button"
+              className="me-3 ms-3 d-flex align-items-center justify-content-between"
+            >
+              {showIsOpen}
+              {opListShowSwitch === true ? (
+                <HiOutlineChevronUp className="" />
+              ) : (
+                <HiOutlineChevronDown className="" />
+              )}
+            </div>
+            {opListShowSwitch ? (
+              <>
+                <li
+                  className="cate-option"
+                  onClick={() => {
+                    setShowIsOpen("營業中店家");
+                  }}
+                >
+                  營業中店家
+                </li>
+                <li
+                  className="cate-option"
+                  onClick={() => {
+                    setShowIsOpen("休息中店家");
+                  }}
+                >
+                  休息中店家
+                </li>
+              </>
+            ) : (
+              <>
+                <div></div>
+              </>
+            )}
+          </ul>
+          {/* <select name="" id="" className="col-lg-10">
             <option value="1">營業中店家</option>
             <option value="0">休息中店家</option>
-          </select>
+          </select> */}
 
           <ul
             name=""
             id=""
             className="col-lg-10 list-unstyled map-select-bar"
             onClick={() => {
-              setCateListShow(!cateListShow);
+              setcateListShowSwitch(!cateListShowSwitch);
             }}
           >
             <div
@@ -100,13 +144,13 @@ const MapPage = () => {
               className="me-3 ms-3 d-flex align-items-center justify-content-between"
             >
               {showCategory}
-              {cateListShow === true ? (
+              {cateListShowSwitch === true ? (
                 <HiOutlineChevronUp className="" />
               ) : (
                 <HiOutlineChevronDown className="" />
               )}
             </div>
-            {cateListShow ? (
+            {cateListShowSwitch ? (
               category.map((c) => {
                 return (
                   <>
@@ -133,7 +177,7 @@ const MapPage = () => {
             )}
           </ul>
 
-          <div className="map-store-card">
+          <div className="map-store-card mt-lg-5">
             <StoreForMap />
           </div>
         </div>
