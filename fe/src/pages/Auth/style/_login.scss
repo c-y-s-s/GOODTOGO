@@ -1,0 +1,14 @@
+.login-bg {
+  margin: auto;
+  background: $color-yellow;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  .content {
+    border-radius: 4px;
+    background: white;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
+  }
+}
+.error {
+  color: $color-red;
+}

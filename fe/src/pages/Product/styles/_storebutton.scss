@@ -1,12 +1,13 @@
 .product-button {
-    a {
+    button {
         color: $color-green;
         margin-top: 4.7rem;
-        margin-left: 1.45rem;
+        margin: 3rem 0.75rem 0 0.75rem;
         border: 1px solid $color-green;
         border-radius: 0;
         padding: 0.4rem 2.9rem;
         font-size: 1.2rem;
+        transition: 0.25s;
         &:hover {
             color: #fff;
             background: $color-green;
@@ -15,5 +16,9 @@
         // &:nth-child(2) {
         //     margin-left: 0.75rem;
         // }
+    }
+    .active {
+        color: #fff;
+        background: $color-green;
     }
 }

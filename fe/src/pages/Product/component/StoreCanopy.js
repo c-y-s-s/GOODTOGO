@@ -1,16 +1,13 @@
 import React from "react";
-
-let canopyID = 100;
+// -------- uuid --------
+import { v4 as uuidv4 } from "uuid";
 const StoreCanopy = ({ canopy }) => {
-  return (
+  return ( 
     <div>
       <div className="canopy">
         <ul className="d-flex">
           {canopy.map(() => {
-            {
-              canopyID++;
-            }
-            return <li key={canopyID}></li>;
+            return <li key={uuidv4()}></li>;
           })}
         </ul>
       </div>

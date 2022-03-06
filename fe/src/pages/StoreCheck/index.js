@@ -14,7 +14,7 @@ import CityCountyData from "./components/CityCountyData.json";
 import Swal from "sweetalert2";
 
 
-const Storecheck = () => {
+const StoreCheck = () => {
 
   const navigate = useNavigate();
   const swal = Swal.mixin({
@@ -1058,4 +1058,4 @@ const Storecheck = () => {
   );
 };
 
-export default Storecheck;
+export default StoreCheck;

@@ -1,102 +1,253 @@
 // -------- hero3 --------
-
 .hero3 {
-  height: 136.125rem;
+  display: grid;
+  height: fit-content;
   background-color: $color-light;
+  grid-template-columns: 60% 40%;
+  grid-template-rows: [row0]6.5rem [row1]40rem [row2]20rem [row3]35rem [row4]20rem [row5]20rem;
   overflow: hidden;
-  .hero3food {
-    width: 532px;
-    height: 735px;
-    background-color: pink;
-    margin-top: 27px;
-    z-index: 2;
-  }
-  .hero3-info {
-    text-align: center;
-    width: 569.29px;
-    height: 399px;
-    margin-top: 151px;
-    margin-left: 198px;
-
-    .hero3Text {
-      margin-bottom: 68.4px;
+  .hero3-info-1 {
+    width: fit-content;
+    padding: 10rem;
+    grid-area: 2 / 1 / 3 / 2;
+    line-height: 3rem;
+    justify-self: center;
+    align-self: center;
+    z-index: 1050;
+    @include hero-text-md;
+    .hero3-info-1-text {
+      margin-bottom: 3rem;
     }
   }
-  .wave-bg {
+  .pizza {
+    z-index: 1000;
+    grid-area: 1/2/3/2;
+    justify-self: end;
+    width: 40vw;
+  }
+  .hero3-tower {
+    grid-area: 3/1/5/1;
+    justify-self: start;
+    // width: 150%;
+  }
+  .hero3-info-2 {
+    grid-area: 4/1;
+    justify-self: end;
     position: relative;
-    top: 12rem;
-    height: 1049.61px;
-    background-image: url(../images/wave.svg);
-    background-size: cover;
-    .hero3Tower {
-      position: relative;
-      top: -32rem;
-      z-index: 11;
+    top: -2.5rem;
+    left: -2.8rem;
+    .hero3-info-2-text {
+      padding: 0 1rem;
     }
-
-    .hero3-info-3 {
+    .hero3-info-2-p {
+      padding-top: 2rem;
+      color: white;
+      @include hero-text-md;
       position: relative;
-      top: -33%;
-      z-index: 50;
-      .hero3Earth {
-        position: relative;
-
-        z-index: 11;
+      top: 8rem;
+    }
+  }
+  .hero3-last {
+    grid-area: 5/1/7/3;
+    align-items: center;
+    height: fit-content;
+    .hero3-info-3 {
+      // grid-area: 5/1/7/3;
+      justify-self: end;
+      padding: 5rem 8rem 5rem 5rem;
+      .hero3-info-3-p {
+        margin: 0;
+        padding: 4rem 1rem 1rem;
+        height: fit-content;
+        width: fit-content;
+        line-height: 3rem;
+        color: white;
+        @include hero-text-md;
       }
     }
   }
 
-  // .wave {
-  //   position: relative;
-  //   top: 190.39px;
+  .wave-bg {
+    grid-area: 4/1/7/3;
+    background-image: url(../images/wave.svg);
+    background-size: cover;
+    margin-top: 8rem;
+  }
+  .bg-sm-fix {
+    display: none;
+  }
+}
+@media screen and (max-width: 540px) {
+  .hero3 {
+    grid-template-rows: [row0]6.5rem [row1]33rem [row2]20rem [row3]20rem [row4]25rem [row5]35rem;
+    .pizza {
+      margin-top: 5rem;
+      opacity: 0.5;
+      width: 70vw;
+    }
+    .hero3-info-1 {
+      width: 100vw;
+      grid-area: 2/1/3/3;
+      padding: 0 0;
+      align-self: flex-start;
+      margin-top: 3rem;
+      filter: drop-shadow(0.3rem 0.3rem 2px rgba(255, 255, 255, 0.301));
+      .hero3-info-1-text {
+        width: 100vw;
+        padding: 0 2rem;
+      }
+      .hero3-info-1-p {
+        margin-top: 3rem;
+        font-size: $fz-md;
+      }
+    }
+    .hero3-tower {
+      grid-area: 3/1/4/3;
+      height: fit-content;
+      width: 115vw;
+      justify-self: center;
+    }
+    .hero3-info-2 {
+      grid-area: 3/1/4/3;
+      justify-self: start;
+      align-self: flex-start;
+      margin-top: 11rem;
+      .hero3-info-2-text {
+        flex-direction: column;
+        align-items: center;
 
-  //   z-index: 5;
-  // }
-  // .wave {
-  //   position: absolute;
-  //   width: 100vw;
-  //   overflow: hidden;
-  //   z-index: 100;
-  //   .waveA {
-  //     position: absolute;
-  //     background-image: url(../images/waveA.svg);
-  //     background-repeat: repeat-x;
-  //     top: 2719.15px;
-  //     left: 0;
-  //     right: 0;
-  //     height: 180px;
-  //     width: 200%;
-  //     height: 100%;
-  //     animation: wave 10s -3s linear infinite;
-  //     transform: translate3d(0, 0, 0);
-  //     opacity: 1;
-  //     z-index: 101;
-  //     overflow: hidden;
-  //     &:nth-of-type(2) {
-  //       bottom: 0;
-  //       animation: wave 18s linear reverse infinite;
-  //       opacity: 0.5;
-  //     }
-  //     &:nth-of-type(3) {
-  //       bottom: 0;
-  //       animation: wave 20s -1s linear infinite;
-  //       opacity: 0.3;
-  //     }
-  //   }
-  //   @keyframes wave {
-  //     0% {
-  //       transform: translateX(0);
-  //     }
-  //     50% {
-  //       transform: translateX(-25%);
-  //     }
-  //     100% {
-  //       transform: translateX(-50%);
-  //     }
-  //   }
-  //   .waveB {
-  //     position: absolute;
-  //     top: 2899.15px;
-  //   }
-  // }
+        .text-1 {
+          width: 60%;
+        }
+        .text-2 {
+          width: 85%;
+        }
+      }
+      .hero3-info-2-p {
+        margin: 10rem 4.6rem 0 5rem;
+        width: fit-content;
+        padding: 0;
+        @include hero-text-md;
+      }
+    }
+    .wave-bg {
+      margin-top: 2rem;
+    }
+    .hero3-earth {
+      grid-area: 5/1/6/3;
+      margin: 0;
+      justify-self: center;
+      width: 90vw;
+    }
+    .hero3-info-3 {
+      grid-area: 6/1/7/3;
+      padding: 0;
+      .hero3-text {
+        width: 85%;
+      }
+      .hero3-info-3-p {
+        font-size: $fz-lg;
+        padding: 1rem;
+      }
+    }
+  }
+}
+@media screen and (max-width: 390px) {
+  .hero3 {
+    display: grid;
+    height: max-content;
+    grid-template-rows: [row0]1% [row1]23rem [row2]26rem [row3]45% [row5]1%;
+    overflow: hidden;
+    .hero3-info-1 {
+      width: fit-content;
+      grid-area: 2 / 1;
+      justify-self: center;
+      align-self: center;
+      z-index: 1050;
+      @include hero-text-sm;
+      .hero3-info-1-text {
+        margin-bottom: 0;
+      }
+      .hero3-info-1-p {
+        margin-top: 1rem;
+      }
+    }
+    .pizza {
+      z-index: 1000;
+      grid-area: 1/2/3/2;
+      justify-self: end;
+      width: 40vw;
+    }
+    .hero3-tower {
+      grid-area: 3/1/5/1;
+      justify-self: start;
+      width: 100vw;
+      height: fit-content;
+    }
+    .hero3-info-2 {
+      grid-area: 3/1/4/2;
+      justify-self: end;
+      position: relative;
+      align-items: center;
+      top: 2.5rem;
+      left: 2rem;
+      .text-1 {
+        height: fit-content;
+        margin-bottom: 1rem;
+      }
+      .text-2 {
+        height: fit-content;
+      }
+      .hero3-info-2-text {
+        justify-self: end;
+      }
+      .hero3-info-2-p {
+        margin: 0;
+        padding-top: 0;
+        color: white;
+        position: relative;
+        top: 2.5rem;
+        left: 2.5rem;
+        width: max-content;
+        @include hero-text-ssm;
+      }
+    }
+    .hero3-last {
+      grid-area: 4/1/5/3;
+      align-items: center;
+      .hero3-earth {
+        padding: 1rem 3.5rem;
+        height: fit-content;
+      }
+      .hero3-info-3 {
+        justify-self: end;
+        padding: 0;
+        .hero3-text {
+          position: relative;
+          height: fit-content;
+          padding: 0 2.5rem;
+        }
+        .hero3-info-3-p {
+          padding: 2.5rem 1rem;
+          line-height: 3rem;
+          color: white;
+          width: fit-content;
+          @include hero-text-ssm;
+        }
+      }
+    }
+
+    .wave-bg {
+      grid-area: 3/1/5/3;
+      background-image: url(../images/wave.svg);
+      background-size: contain;
+      margin-top: 12.7rem;
+      background-repeat: no-repeat;
+    }
+    .bg-sm-fix {
+      display: inline-block;
+      background-color: $color-green;
+      grid-area: 4/1/6/3;
+    }
+  }
 }

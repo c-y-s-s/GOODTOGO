@@ -11,9 +11,7 @@ import Reset from "../StoreCheck/components/StoreReset";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 
-const StoreLogin = (props) => {
-  // 存下登入資訊給全站使用
-  const { loginSeller, setLoginSeller } = useAuth();
+const StoreLogin = () => {
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -33,7 +31,7 @@ const StoreLogin = (props) => {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              navigate("#");
+              navigate("/");
             }
           })}
       </>
@@ -123,13 +121,13 @@ function passwordShow() {
     e.preventDefault();
     //比對資料庫是否有此會員
     try {
-      let response = await axios.post(`${API_URL}/storeLogin`, loginStore,
+      let response = await axios.post(`${API_URL}/storeLogin/storeLogin`, loginStore,
       {withCredentials: true});
       console.log("登入成功", response.data);
       // console.log("前端登入成功");
-      setLoginSeller(response.data.data);
+      // setLoginSeller(response.data.data);
       loginSuccessAlert();
-      navigate("#");
+      navigate("/");
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error("測試登入", ERR_MSG);
@@ -137,7 +135,6 @@ function passwordShow() {
 
     }
   };
-  console.log("seller from Login.js", loginSeller);
 
 
   return (

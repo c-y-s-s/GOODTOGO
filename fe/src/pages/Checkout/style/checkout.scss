@@ -1,0 +1,471 @@
+tbody,
+td,
+tfoot,
+th,
+thead,
+tr {
+    border-style: none;
+    font-size: $fz-md;
+}
+.checkout-top-title {
+    background-color: $color-light-green;
+    text-align: center;
+    color: #fff;
+    padding: 1.55rem 0;
+    font-size: $fz-xxxx-lg;
+    letter-spacing: 1rem;
+}
+.checkout-data {
+    border: 1px solid $color-light-grey;
+    border-radius: 0.2rem;
+    padding: 1.2rem 2rem 0 2rem;
+    margin-top: 2.2rem;
+    //bootstrap5 table 預設粗度 700 設為 500
+    th {
+        font-weight: 500;
+    }
+    //標頭
+    .checkout-data-table {
+        color: $color-dark-grey;
+        letter-spacing: $ls-lg;
+        font-weight: 500;
+        .checkout-title {
+            border-bottom: none;
+            padding: 5rem 0;
+            .checkout-title-text {
+                padding-bottom: 1.5rem;
+                tr {
+                }
+                .checkout-title-icon {
+                    color: $color-light-grey;
+                    margin-right: 0.8rem;
+                }
+                .checkout-title-storename {
+                    font-size: $fz-md;
+                }
+                .checkout-title-category {
+                    background-color: #eaeaea;
+                    margin-left: 1rem;
+                    padding: 0.15rem 0.65rem;
+                    border-radius: 0.8rem;
+                    font-size: $fz-s-sm;
+                }
+                .checkout-title-price {
+                }
+                .checkout-title-amount {
+                }
+                .checkout-title-total {
+                }
+            }
+        }
+    }
+    .checkout-data-products {
+        padding: 2rem 0;
+
+        tr {
+            border-top: 1px solid $color-light-grey;
+            border-bottom: 1px solid $color-light-grey;
+        }
+        .cover-photo {
+            width: 6.4rem;
+            height: 5.4rem;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+        .checkout-data-products-name {
+            padding-left: 1.25rem;
+            font-size: $fz-xx-lg;
+            letter-spacing: $ls-lg;
+        }
+        .checkout-data-products-price {
+            font-size: $fz-xx-lg;
+            letter-spacing: $ls-sm;
+        }
+        .checkout-data-products-amount {
+            font-size: $fz-xxxx-lg;
+            color: $color-green;
+        }
+        .checkout-data-products-total {
+            font-size: $fz-xx-lg;
+            color: $color-green;
+            letter-spacing: $ls-sm;
+        }
+        .order-total {
+            padding: 1.5rem 0;
+            font-size: $fz-sm;
+            max-width: 100%;
+
+            .order-total-price {
+                margin-left: 2rem;
+                font-size: $fz-xxxx-lg;
+                color: $color-dark-yellow;
+                font-weight: 700;
+                padding-right: 0.35rem;
+                .order-total-price-NT {
+                }
+            }
+        }
+        .checkout-data-products-footer {
+            border-bottom: none;
+
+            .payment-method {
+                padding-top: 1.9rem;
+                div {
+                    color: $color-green;
+                    border: 2px solid $color-green;
+                    width: 10rem;
+                    text-align: center;
+                    padding: 0.5rem 0;
+                    font-size: $fz-lg;
+                    font-weight: 500;
+                }
+            }
+            .payment-method-card {
+                padding-top: 1.9rem;
+
+                .payment-method-card-name {
+                    color: $color-green;
+                    border: 2px solid $color-green;
+                    width: 10rem;
+                    text-align: center;
+                    padding: 0.5rem 0;
+                    font-size: $fz-lg;
+                    font-weight: 500;
+                }
+                .payment-method-card-company {
+                    width: 3.5rem;
+                    height: 2.7rem;
+                    border: 2px solid $color-light-grey;
+                    color: #1434cb;
+                }
+                .payment-method-card-number {
+                }
+            }
+            .send-order {
+                text-align: end;
+                padding-top: 1.9rem;
+                button {
+                    border: none;
+                    background-color: white;
+                    .get-order {
+                        padding: 0.65rem 4rem;
+                        background: $color-light-green;
+                        color: white;
+                        font-size: $fz-lg;
+                        font-weight: 500;
+                        width: 200px;
+                        transition: 0.3s;
+                        &:hover {
+                            background-color: $color-green;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .checkout-data {
+        .checkout-data-table {
+            .checkout-title {
+                .checkout-title-text {
+                    padding-bottom: 0.58rem;
+                }
+                .checkout-title-storename {
+                    padding-right: 1.4rem;
+                }
+                .checkout-title-category {
+                    width: 4.1rem;
+                    margin-left: 0;
+                    text-align: center;
+                }
+            }
+        }
+    }
+
+    .send-order {
+        button {
+            .get-order {
+                width: 200px;
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .checkout-data {
+        padding: 1.2rem 0.75rem;
+    }
+    .checkout-data .checkout-data-products .checkout-data-products-name {
+        font-size: $fz-lg;
+    }
+    .checkout-data .checkout-data-products .order-total .order-total-price {
+        margin-left: 1rem;
+    }
+
+    .checkout-data-products-footer {
+        display: none;
+    }
+    .checkout-title-none {
+        display: none;
+    }
+    .checkout-data-products-md-none {
+        display: none;
+    }
+    .checkout-data-products-md-style {
+        padding-left: 1.25rem;
+        font-size: $fz-md;
+    }
+    .checkout-data-products-md-style-amount {
+        font-size: $fz-xx-lg;
+    }
+    .checkout-data-products-md-style-total {
+        font-size: $fz-xx-lg;
+    }
+    .checkout-data-products-footer-md {
+        text-align: center;
+        margin-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        .payment-method-md {
+            display: flex;
+            justify-content: center;
+            .payment-method {
+                color: $color-green;
+                border: 2px solid $color-green;
+                width: 10rem;
+                padding: 0.5rem 0;
+                font-size: $fz-lg;
+                font-weight: 500;
+            }
+        }
+        .send-order-md {
+            margin-top: 1.6rem;
+            text-align: center;
+            padding-top: 1.9rem;
+            border: none;
+            background-color: white;
+            padding: 0.65rem 4rem;
+            background: $color-light-green;
+            color: white;
+            font-size: $fz-lg;
+            font-weight: 500;
+        }
+
+        .payment-method-card-name {
+            color: $color-green;
+            border: 2px solid $color-green;
+            width: 10rem;
+            text-align: center;
+            padding: 0.5rem 0;
+            font-size: $fz-lg;
+            font-weight: 500;
+        }
+        .payment-method-card-company {
+            width: 3.5rem;
+            height: 2.7rem;
+            border: 2px solid $color-light-grey;
+            color: #1434cb;
+        }
+        .payment-method-card-number {
+        }
+    }
+}
+
+@media screen and (max-width: 413px) {
+    .checkout-data {
+        .checkout-data-table {
+            .checkout-title {
+                .checkout-title-category {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+// Modal
+.order-modal-bgcolor {
+    background-color: rgba(44, 44, 44, 0.137);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.order-modal {
+    font-weight: $fw-bold;
+    .order-modal-card {
+        width: 436px;
+        border-top: 0.625rem solid $color-yellow;
+        border-bottom: 0.625rem solid $color-yellow;
+        .order-modal-card-top {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.2rem;
+            align-items: center;
+            border-bottom: 1px solid $color-light-grey;
+            width: 89%;
+            align-items: center;
+            margin: auto;
+            padding: 1.5rem 0;
+            color: $color-green;
+            .order-modal-card-top-icon {
+                padding-right: 0.8rem;
+                padding-top: 0.35rem;
+
+                .order-modal-card-top-icon-style {
+                    width: 3.5rem;
+                    height: 3.5rem;
+                    color: $color-dark-yellow;
+                }
+            }
+            .order-modal-card-top-text {
+                div:nth-child(1) {
+                    font-size: 26/16 + rem;
+                    padding-bottom: 0.15rem;
+                }
+            }
+        }
+        .order-modal-card-center-text {
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            text-align: center;
+            font-size: $fz-md;
+            div:nth-child(1) {
+                color: $color-green;
+                letter-spacing: $ls-sm;
+            }
+            div:nth-child(2) {
+                background-color: $color-green;
+                width: 65%;
+                margin: auto;
+                color: white;
+                padding: 0.25rem 0.25rem;
+                letter-spacing: $ls-md;
+                margin-top: 0.55rem;
+                border-radius: 0.12rem;
+                font-weight: 400;
+            }
+        }
+        .order-modal-card-remind-text {
+            text-align: center;
+            padding-bottom: 1.65rem;
+            border-bottom: 1px solid $color-light-grey;
+            width: 89%;
+            margin: auto;
+            font-size: $fz-md;
+            letter-spacing: $ls-md;
+        }
+
+        .order-modal-card-warn {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding-top: 1.5rem;
+            .order-modal-card-warn-icon {
+                padding-right: 0.8rem;
+
+                .order-modal-card-warn-iconstyle {
+                    width: 1.7rem;
+                    height: 1.7rem;
+                    color: $color-yellow;
+                }
+            }
+            .order-modal-card-warn-text {
+                letter-spacing: $ls-md;
+                font-size: $fz-md;
+                color: $color-yellow;
+            }
+        }
+        .order-modal-buttom {
+            padding-top: 2.2rem;
+            text-align: center;
+            a {
+                text-decoration: none;
+                background-color: $color-light-green;
+                padding: 0.5rem 1.25rem;
+                border-radius: 0.25rem;
+                color: white;
+                transition: 0.3s;
+                &:hover {
+                    background-color: $color-green;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .order-modal {
+        .order-modal-card {
+            width: 314px;
+            .order-modal-card-top {
+                width: 95%;
+            }
+
+            .order-modal-card-center-text {
+                div:nth-child(2) {
+                    width: 87%;
+                    margin: auto;
+                    color: white;
+                    padding: 0.25rem 0.15rem;
+                    letter-spacing: $ls-md;
+                    margin-top: 0.55rem;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .order-modal {
+        .order-modal-card {
+            width: 314px;
+            .order-modal-card-top {
+                width: 95%;
+            }
+
+            .order-modal-card-center-text {
+                div:nth-child(2) {
+                    width: 87%;
+                    margin: auto;
+                    color: white;
+                    padding: 0.25rem 0.15rem;
+                    letter-spacing: $ls-md;
+                    margin-top: 0.55rem;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 767px) {
+    .order-modal {
+        .order-modal-card {
+            width: 314px;
+            .order-modal-card-top {
+                width: 95%;
+            }
+
+            .order-modal-card-center-text {
+                div:nth-child(2) {
+                    width: 87%;
+                    margin: auto;
+                    color: white;
+                    padding: 0.25rem 0.15rem;
+                    letter-spacing: $ls-md;
+                    margin-top: 0.55rem;
+                    border-radius: 0.25rem;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+}

@@ -1,25 +1,13 @@
 const express = require("express");
 const router = express.Router();
-const argon2 = require("argon2");
 const connection = require("../utils/db");
+const path = require("path");
+// const { body, validationResult } = require("express-validator");
 
-//-------- 後端驗證套件 express-validator --------
-const { body, validationResult } = require("express-validator");
-
-const emailRule = [body("email").isEmail().withMessage("email欄位格式錯誤")];
-const passwordRule = [
-  body("password").trim().isLength({ min: 6 }).withMessage("密碼長度至少為6"),
-  body("confirmPassword")
-    .trim()
-    .custom((value, { req }) => {
-      return value == req.body.password;
-    })
-    .withMessage("兩次輸入的密碼不相同"),
-];
+const argon2 = require("argon2");
 
 // -------- 商家登入 --------
 
-// /api/storeLogin
 router.post(
   "/storeLogin", async (req, res, next) => {
   //to confirm if the mail exists

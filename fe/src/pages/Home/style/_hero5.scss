@@ -1,18 +1,59 @@
 // -------- hero 5 --------
-.hero5 {
-  overflow: hidden;
+.hero5-bg {
+  background: radial-gradient(rgba(166, 191, 75, 0.3), rgba(102, 140, 74, 0.3)),
+    url(../images/hero5.jpg);
+  height: fit-content;
+  background-size: 105%;
+  background-repeat: no-repeat;
+  // background-blend-mode: soft-light;
+  // filter: blur(3px);
+  // background-size:100%  ;
+  .hero5-main-content {
+    padding: 7.5rem 5rem;
+    .hero5-text-sm {
+      display: none;
+    }
+    .hero5-static {
+      @include drop-shadow-dark;
+      .hero-5-static-text {
+        @include hero-text-lg;
+      }
+      .hero-5-static-text-sm {
+        @include hero-text-md;
+      }
+    }
+  }
+}
+// -------- 手機RWD --------
+@media screen and (max-width: 390px) {
   .hero5-bg {
     background: radial-gradient(
         rgba(166, 191, 75, 0.3),
         rgba(102, 140, 74, 0.3)
       ),
-      url(../images/hero5.svg);
-    height: 45.375rem;
-    background-size: contain;
+      url(../images/hero5.jpg);
     background-repeat: no-repeat;
-    background-blend-mode: soft-light;
-
-    filter: blur(3px);
-    // background-size:100%  ;
+    background-size: cover;
+    align-items: center;
+    background-position: center;
+    .hero5-main-content {
+      padding: 2rem;
+      .hero5-text {
+        display: none;
+      }
+      .hero5-text-sm {
+        margin: 2rem 0 1rem;
+        display: block;
+      }
+      .hero5-static {
+        @include drop-shadow-dark;
+        .hero-5-static-text {
+          @include hero-text-md;
+        }
+        .hero-5-static-text-sm {
+          @include hero-text-sm;
+        }
+      }
+    }
   }
 }
