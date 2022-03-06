@@ -11,7 +11,9 @@ import Reset from "../StoreCheck/components/StoreReset";
 import { API_URL } from "../../utils/config";
 import { ERR_MSG } from "../../utils/error";
 
-const StoreLogin = () => {
+const StoreLogin = (props) => {
+  const { loginSeller, setLoginSeller } = useAuth();
+
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -125,7 +127,9 @@ function passwordShow() {
       {withCredentials: true});
       console.log("登入成功", response.data);
       // console.log("前端登入成功");
-      // setLoginSeller(response.data.data);
+      console.log(response.data.data);
+      setLoginSeller(response.data.data);
+      // console.log("登入成功", response.data);
       loginSuccessAlert();
       navigate("/");
     } catch (e) {

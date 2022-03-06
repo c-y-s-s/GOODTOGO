@@ -33,6 +33,7 @@ import CheckOut from "./pages/Checkout";
 function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
+  const [loginSeller, setLoginSeller] = useState(null);
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
@@ -55,9 +56,25 @@ function App() {
     };
     getMember();
   }, []);
+
+  useEffect(() => {
+    // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
+    const getSeller = async () => {
+      try {
+        let result = await axios.get(`${API_URL}/checkStore`, {
+          withCredentials: true,
+        });
+        setLoginSeller(result.data);
+      } catch (e) {}
+    };
+    getSeller();
+  }, []);
   console.log("member from App.js", loginMember); //ok
-  return (
-    <AuthContext.Provider value={{ loginMember, setLoginMember }}>
+  console.log("seller from App.js", loginSeller); //ok
+
+    return (
+    
+    <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}>
       <Router>
         {isModalTouch && <Navbar />}
         <Routes>
@@ -116,7 +133,6 @@ function App() {
         <Footer />
       </Router>
     </AuthContext.Provider>
-  );
-}
+  );}
 
 export default App;

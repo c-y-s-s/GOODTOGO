@@ -38,6 +38,7 @@ router.post(
   };
 // session
   req.session.store = returnStore;
+  console.log("商家session長這樣", req.session.store);
 
   res.json({
     code: "0",
