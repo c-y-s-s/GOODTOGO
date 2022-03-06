@@ -17,7 +17,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 
 const StoreInfoList = (props) => {
-  const { setTotalHeart, setProductAmount, setTotalStar } = props;
+  const { setTotalHeart, setProductAmount, setTotalStar, likeList } = props;
   //*儲存-顯示的商家列表
   const [storeList, setStoreList] = useState([]);
   //*儲存-全部類別
@@ -153,6 +153,7 @@ const StoreInfoList = (props) => {
     opState,
     ratingHeartOn,
     ratingCommentOn,
+    likeList,
   ]);
 
   //*計算頁面總數量並顯示頁碼，該頁碼
@@ -236,6 +237,7 @@ const StoreInfoList = (props) => {
             storeLikeCount={storeLikeCount}
             amount={amount}
             storeStarsCount={storeStarsCount}
+            likeList={likeList}
           />
         </div>
         <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
