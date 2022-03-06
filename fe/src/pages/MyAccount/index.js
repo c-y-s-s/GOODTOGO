@@ -94,7 +94,7 @@ const MyAccount = (props) => {
               <li>
                 <NavLink
                   className="d-flex align-items-center mb-3 text-decoration-none menu_Title_unActive"
-                  to={"/member/profile" || "/member/payment" || "/member/like"}
+                  to={"/member/profile" || "/member/payment" || "/member/password"}
                 >
                   <div>
                     <FiUser className="menu_Icon d-flex" />
@@ -104,7 +104,7 @@ const MyAccount = (props) => {
                 {/* -------- 我的帳戶選單開始 -------- */}
                 <div
                   className={
-                    userInfo === "order" || userInfo === "coupon"
+                    userInfo === "order" || userInfo === "like"
                       ? "menu_Close"
                       : "menu_Open"
                   }
