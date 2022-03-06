@@ -28,7 +28,7 @@ const ProductsDetails = ({
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
-
+  console.log("11111111", productModalData);
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
   // console.log(shoppingErrormsg);
@@ -82,13 +82,16 @@ const ProductsDetails = ({
   function handleBackgroundDelete(e) {
     // e.target.id === "products-details-data" ?
     let backgroundId = e.target.id;
-
-    if (backgroundId === "products-details-data") {
+    console.log(backgroundId);
+    if (
+      backgroundId === "products-details-data" ||
+      backgroundId === "delete-button"
+    ) {
       setOpenProductsModal(false);
       setisModalTouch(true);
-    }else{
-        setOpenProductsModal(true);
-        setisModalTouch(false);
+    } else {
+      setOpenProductsModal(true);
+      setisModalTouch(false);
     }
   }
   async function handleAddShoppingCar(e) {
@@ -145,7 +148,7 @@ const ProductsDetails = ({
                       setisModalTouch(true);
                     }}
                   >
-                    <FiX />
+                    <FiX id="delete-button" />
                   </button>
                   <div className="card-body py-3">
                     <h5 className="card-title">{data.name}</h5>
@@ -243,7 +246,28 @@ const ProductsDetails = ({
 
                     {/* // !這邊還沒測試有沒有bug */}
                     <div className="product-buy-car my-1 text-center">
+                      {/* {openProductsModaltimeEnd <= 0 ? (
+                        <div href="#" className="btn btn-primary close-buy-car">
+                          無法提供
+                        </div>
+                      ) : storeinOperation ? (
+                        <button
+                          className="btn btn-primary"
+                          id={`${data.id}`}
+                          onClick={handleAddShoppingCar}
+                        >
+                          加入購物車
+                        </button>
+                      ) : (
+                        <div href="#" className="btn btn-primary close-buy-car">
+                          無法提供
+                        </div>
+                      )} */}
                       {openProductsModaltimeEnd <= 0 ? (
+                        <div href="#" className="btn btn-primary close-buy-car">
+                          無法提供
+                        </div>
+                      ) : data.amount <= 0 ? (
                         <div href="#" className="btn btn-primary close-buy-car">
                           無法提供
                         </div>
