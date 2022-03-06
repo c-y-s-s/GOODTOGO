@@ -28,6 +28,7 @@ import Reset from "./pages/Login/components/Reset";
 function App() {
   // -------- 判斷登入與否 --------
   const [loginMember, setLoginMember] = useState(null);
+  const [loginSeller, setLoginSeller] = useState(null);
 
   // const [auth, setAuth] = useState(false);
 

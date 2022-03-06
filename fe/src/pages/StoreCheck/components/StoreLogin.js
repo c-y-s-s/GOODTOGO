@@ -15,8 +15,8 @@ const StoreLogin = (props) => {
   const { loginSeller, setLoginSeller } = useAuth();
 
 const [loginStore, setLoginStore] = useState({
-  email:"seller01",
-  password:"pwd"
+  email:"",
+  password:""
 });
 
    const [fieldErrors, setFieldErrors] = useState({
@@ -89,6 +89,7 @@ function passwordShow() {
       console.error("測試登入", ERR_MSG);
     }
   };
+  console.log("seller from Login.js", loginSeller);
 
 
   return (
