@@ -16,7 +16,7 @@ import Store from "./pages/Store";
 import StoreList from "./pages/StoreList";
 import Storecheck from "./pages/StoreCheck";
 import StoreReset from "./pages/StoreCheck/components/StoreReset";
-import StoreLogin from "./pages/StoreCheck/components/StoreLogin";
+import StoreLogin from "./pages/StoreLogin";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import MyAccount from "./pages/MyAccount";
@@ -53,7 +53,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/my_account" element={<MyAccount />}></Route>
         <Route path="/Storecheck" element={<Storecheck />}></Route>
-        <Route path="/StoreLogin" element={<StoreLogin />}></Route>
+        <Route path="/storeLogin" element={<StoreLogin />}></Route>
         <Route path="/StoreReset" element={<StoreReset />}></Route>
       </Routes>
 

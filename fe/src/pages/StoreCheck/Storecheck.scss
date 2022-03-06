@@ -12,6 +12,10 @@
     filter: drop-shadow(0 0 0.5rem $color-grey);
     margin: auto;
   }
+
+
+
+
   // -------- input樣式 --------
   .input-label-title {
     font-size: $fz-x-lg;
@@ -43,6 +47,13 @@
   background: $color-light-green;
   padding: 4rem;
 
+.flex{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center;
+
+}
   .content {
     background-color: white;
     .btn-fb-login {

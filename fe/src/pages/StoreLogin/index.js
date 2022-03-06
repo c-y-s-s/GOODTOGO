@@ -5,16 +5,60 @@ import Swal from "sweetalert2";
 
 // import LoginForm from "./LoginForm"; 曾經的分離表單
 import { Routes, Route, Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../../../context/auth";
-import "../Storecheck.scss"
-import Reset from "./StoreReset";
-import { API_URL } from "../../../utils/config";
-import { ERR_MSG } from "../../../utils/error";
+import { useAuth } from "../../context/auth";
+import "../StoreCheck/Storecheck.scss"
+import Reset from "../StoreCheck/components/StoreReset";
+import { API_URL } from "../../utils/config";
+import { ERR_MSG } from "../../utils/error";
 
 const StoreLogin = (props) => {
   // 存下登入資訊給全站使用
   const { loginSeller, setLoginSeller } = useAuth();
-
+  const swal = Swal.mixin({
+    customClass: {
+      confirmButton: "btn round-btn-green ms-2 me-2",
+    },
+    buttonsStyling: false,
+  });
+  const loginSuccessAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            text: "登入成功",
+            icon:"success",
+            confirmButtonText: "管理您的店舖",
+            showConfirmButton: true,
+            showCloseButton: true,
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("#");
+            }
+          })}
+      </>
+    );
+  };
+  const loginFailedAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            icon: "error",
+            title: "登入失敗",
+            text: "好像怪怪的,請再試一次",
+            showConfirmButton: true,
+            confirmButtonText: "再試一試",
+            footer: "不妨檢查看看信箱與密碼是否打錯"
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("/storeLogin");
+            }
+          })}
+      </>
+    );
+  };
 const [loginStore, setLoginStore] = useState({
   email:"test",
   password:"test"
@@ -53,14 +97,14 @@ function passwordShow() {
       };
       setFieldErrors(updatedFieldErrors);
     }
-      //密碼欄位錯誤
-    //  else if (name === "password") {
-    //   const updatedFieldErrors = {
-    //     ...fieldErrors,
-    //     password: "密碼至少為6個字元",
-    //   };
-    //   setFieldErrors(updatedFieldErrors);
-    // }
+      // 密碼欄位錯誤
+     else if (name === "password") {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        password: "密碼至少為6個字元",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
   };
   // -------- 當整個表單有更動時會觸發 --------
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
@@ -84,10 +128,13 @@ function passwordShow() {
       console.log("登入成功", response.data);
       // console.log("前端登入成功");
       setLoginSeller(response.data.data);
-      navigate("/store");
+      loginSuccessAlert();
+      navigate("#");
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error("測試登入", ERR_MSG);
+      loginFailedAlert();
+
     }
   };
   console.log("seller from Login.js", loginSeller);

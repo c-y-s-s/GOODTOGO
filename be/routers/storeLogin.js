@@ -20,7 +20,8 @@ const passwordRule = [
 // -------- 商家登入 --------
 
 // /api/storeLogin
-router.post("/", async (req, res, next) => {
+router.post(
+  "/storeLogin", async (req, res, next) => {
   //to confirm if the mail exists
   let [stores] = await connection.execute("SELECT * FROM stores WHERE email=?", [
     req.body.email,

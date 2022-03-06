@@ -8,34 +8,46 @@ const path = require("path");
 const cors = require("cors");
 //引用express-session、session-file-store 來儲存資料
 const session = require("express-session");
-let FileStore = require("session-file-store")(session);
+// let FileStore = require("session-file-store")(session);
+// const passport = require("passport");
+// require("./config/passport")(passport);
 
 let app = express();
-
 app.use(express.urlencoded({ extended: true }));
+
 //要讓express認得json
 app.use(express.json());
 
-//使用 cors 設定的中間鍵，開放所有網域皆可連線
 // app.use(cors());
+//使用 cors 設定的中間鍵，開放所有網域皆可連線
 app.use(
   cors({
     // 為了要讓 browser 在 CORS 的情況下還是幫我們送 cookie
     origin: ["http://localhost:3000","http://localhost:3003"],
     credentials: true,
   })
-);
+  );
+const expressSession = require("express-session");
+
+let FileStore = require("session-file-store")(expressSession);
+
 app.use(
-  session({
+  expressSession({
+    // 將 session 存硬碟
     store: new FileStore({
       path: path.join(__dirname, "..", "sessions"),
+      // 記得 sessions 檔案夾先建好
     }),
-    secret: 'keyboard cat',
+    // secret: 加密的 key
+    secret: "keyboard cat",
     resave: false,
     saveUninitialized: false,
   })
 );
 
+
+// -------- 靜態圖片 --------
+app.use("/static", express.static(path.join(__dirname, "public")));
 
 
 // :TODO: -------- 商家 RESTful API 列表 --------
@@ -51,9 +63,9 @@ app.use("/api/products", productsRouter);
 // -------- 商家登入 RESTful API 列表 -------- //
 
 let storeLoginRouter = require("./routers/storeLogin");
-app.use("/api/storeLogin", storeLoginRouter);
+let storeCheckRouter = require("./routers/storeCheck");
 
-let storeCheckRouter = require("./routers/storeCheck")
+app.use("/api/storeLogin", storeLoginRouter);
 app.use("/api/storeCheck", storeCheckRouter);
 
 let checkStoreRouter = require("./routers/checkStore");
