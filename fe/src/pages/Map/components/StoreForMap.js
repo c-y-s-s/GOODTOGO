@@ -25,10 +25,15 @@ const StoreForMap = (props) => {
     <div>
       {clickStoreData.length === 1 &&
         clickStoreData.map((item) => {
+          // -------- 處理沒有分店名的空白欄位 --------
+          let space = "";
+          for (let i = 1; i < item.name.length; i++) {
+            item.name[i] === " " && (space = true);
+          }
           console.log(item);
           return (
             <div>
-              <Link to={`#`} className="no-link" key={item.id}>
+              <Link to={`/store/${item.id}`} className="no-link" key={item.id}>
                 <div className="store-info-card shadow d-flex align-items-center">
                   <div className="info-img col-12">
                     <img
@@ -52,7 +57,7 @@ const StoreForMap = (props) => {
                       <br />
                       {/* --->分店名 */}
                       <span className="text-dark-grey detail-sm">
-                        {item.name.split(" ")[1]}
+                        {space === true ? item.name.split(" ")[1] : <div />}
                       </span>
                     </span>
 

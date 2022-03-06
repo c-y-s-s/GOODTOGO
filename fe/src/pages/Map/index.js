@@ -27,6 +27,10 @@ const MapPage = () => {
   //下拉式表單開關
   const [cateListShowSwitch, setcateListShowSwitch] = useState(false);
   const [opListShowSwitch, setOpListShowSwitch] = useState(false);
+  //RWD menu開關狀態
+  const [menuShowSwitch, setMenuShowSwitch] = useState(false);
+  console.log("menuShowSwitch", menuShowSwitch);
+
   //儲存輸入關鍵字
   const [keyword, setKeyword] = useState("");
 
@@ -55,7 +59,7 @@ const MapPage = () => {
   return (
     <div className="container-fluid map-bg p-0">
       <div className="map-wrapper col-lg-8 col-12">
-        <div className="map-search d-flex align-items-center justify-content-between">
+        <div className="map-search d-flex align-items-center justify-content-end">
           {/* <form
             action=""
             method="get"
@@ -72,7 +76,12 @@ const MapPage = () => {
               // onChange={handleKeywordChange}
             />
           </form> */}
-          <HiOutlineAdjustments className="toggle-controller me-2" />
+          <HiOutlineAdjustments
+            className="toggle-controller me-2"
+            onClick={() => {
+              setMenuShowSwitch(!menuShowSwitch);
+            }}
+          />
         </div>
         <div className="google-map col-lg-12">
           <Map
@@ -80,10 +89,13 @@ const MapPage = () => {
             zoomLevel={12}
             setClickStoreId={setClickStoreId}
           />
+          <div className="map-store-card mt-lg-5 rwd-show">
+            <StoreForMap clickStoreId={clickStoreId} />
+          </div>
           {/* {console.log("ssss",displayStoreList)} */}
         </div>
       </div>
-      <div className="map-side-bar col-lg-4 text-center d-flex flex-column">
+      <div className="map-side-bar col-lg-4 col-12 text-center">
         <div className="map-title">搜尋附近店家</div>
         <div className="col-lg-8 map-filter-bar m-auto align-items-center d-flex flex-column">
           <ul

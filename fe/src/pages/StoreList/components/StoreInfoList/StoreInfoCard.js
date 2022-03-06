@@ -79,7 +79,6 @@ const StoreInfoCard = (props) => {
           {
             /* console.log(space); */
           }
-          // -------- 處理評分星星 --------
 
           return (
             <div className="me-lg-2 ms-lg-2">
