@@ -6,16 +6,21 @@ import { API_URL } from "../../../utils/config";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-
+import { useAuth } from "../../../context/auth";
 const ProductsData = ({
   storeid,
   setDeleteLive,
   deleteLive,
   setPriceTotal,
   priceTotal,
+  setNavShoppingDeleteParameter,
+  navshoppingDeleteParameter,
+  loginMemberId,
 }) => {
+  const { loginMember } = useAuth();
+  //存目前登入使用者的購物車資料
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
-
+  console.log("123~~~~~~~~~", loginMemberId);
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
 
@@ -24,40 +29,44 @@ const ProductsData = ({
     setProductsAmountTotal(productsAmountTotal + 1);
     //點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 由 app.js 傳進來為了刷新導覽列購物車同步所設置
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-
   async function handlePlus(item) {
+    // 點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal + 1);
+    // 點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 由 app.js 傳進來為了刷新導覽列購物車同步所設置
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
 
     let response = await axios.post(`${API_URL}/shop/shoppingcartotoal`, item);
   }
-  // console.log("加減數量", productsAmountTotal);
 
   async function handleDeleteProduct(item) {
-    //為刷新useEffect所設置
+    // 點到就刷新 商品表 api
     setProductsAmountTotal(productsAmountTotal + 1);
+    // 點到就刷新 店家所有購物車 api
     setPriceTotal(!priceTotal);
+    // 點刪除就刷新購物車 api
     setDeleteLive(!deleteLive);
-
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
     let response = await axios.post(
       `${API_URL}/shop/shoppingcartotoaldelete`,
       item
     );
-    // console.log(response.data);
   }
   // 撈使用者所有購物車資料裡面符合 storeid 的商品資料
   useEffect(() => {
     let getShoppingProductsData = async () => {
-      //撈指定 ID 商品的評論
       let shoppingProductsDataResponse = await axios.get(
-        `${API_URL}/shop/shoppingcar/1/${storeid}`
+        `${API_URL}/shop/shoppingcar/${loginMemberId}/${storeid}`
       );
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
     getShoppingProductsData();
-  }, [productsAmountTotal, deleteLive]);
+  }, [productsAmountTotal, deleteLive, navshoppingDeleteParameter]);
 
   return (
     <div>

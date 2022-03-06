@@ -110,9 +110,8 @@ $fw-black: 700; // black
   top: 2rem;
 }
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
-  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
-  sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
+  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 #root {
   font-family: $font-family;
@@ -208,5 +207,7 @@ $btn-border-radius: 2px;
 @import "../pages/shoppingcart/style/shoppingcart.scss";
 // ------- 結帳頁 --------
 @import "../pages/Checkout/style/checkout.scss";
+
+@import "./navShoppingCart";
 // -------- MAP --------
 @import "../pages/Map/styles/map.scss";
