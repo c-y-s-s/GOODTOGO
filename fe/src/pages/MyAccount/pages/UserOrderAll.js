@@ -8,8 +8,9 @@ import Swal from "sweetalert2";
 const UserOrderAll = (props) => {
   const [orderAll, setOrderAll] = useState([]);
 
-  console.log("Order All - props.orders", props.orders);
-  console.log("Order All - props.orders.length", props.orders.length);
+  // index 傳過來 用於判斷是否有資料呈現 (執行api)
+  // console.log("OrderAll - props.orders", props.orders);
+  // console.log("OrderAll - props.orders.length", props.orders.length);
 
   // 載入 使用者收藏店家清單
   useEffect(() => {
@@ -21,6 +22,8 @@ const UserOrderAll = (props) => {
         });
         console.log("api/member/order(get) response.data: ", response.data);
         setOrderAll(response.data);
+
+        // 更新 待領取數量 顯示待領取 badge 數字用
         let stayNum = response.data.filter((v) => Object.values(v)[4] === 1);
         console.log("stayNum: ", stayNum);
         props.setStayNum(stayNum.length);
@@ -58,7 +61,10 @@ const UserOrderAll = (props) => {
       // http://localhost:3002/api/member/order/cancel (router.post)
       let response = await axios.post(
         `${API_URL}/member/order/cancel`,
-        cancelOrder
+        cancelOrder,
+        {
+          withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
+        }
       );
       console.log("會員取消訂單 :", response.data);
 
@@ -73,26 +79,18 @@ const UserOrderAll = (props) => {
       props.setStayNum(
         orderAll.filter((obj) => Object.values(obj)[4] === 1).length - 1
       );
-      // 更新使用者訂單紀錄，判斷各訂單頁有無資料用
+
+      // 更新 props.orders (將待領取1 -> 取消3)
+      // index 傳過來 用於判斷是否有資料可呈現 (執行api)
+      // !!!!! 會更動到 props 要用複製的 [...XXX]
+      // let data = props.orders;
+      let data = [...props.orders];
       let findIndex = props.orders.findIndex(
         (v) => Object.values(v)[0] === cancelOrder.cancelOrder
       );
-      console.log("Order All - findIndex", findIndex);
-      props.orders[findIndex].status_id = 3;
-      props.setOrders(props.orders);
-      console.log("Order All - reNewOrder", props.orders);
-      // (X) -> 錯誤寫法，這樣訂單紀錄總數少一筆
-      // props.setOrders(
-      //   props.orders.filter(
-      //     (v) => Object.values(v)[0] !== cancelOrder.cancelOrder
-      //   )
-      // );
-      // console.log(
-      //   "filter",
-      //   props.orders.filter(
-      //     (v) => Object.values(v)[0] !== cancelOrder.cancelOrder
-      //   )
-      // );
+      console.log("OrderAll - findIndex", findIndex);
+      data[findIndex].status_id = 3;
+      props.setOrders(data);
     } catch (e) {
       console.error("res.error:", e.response);
     }

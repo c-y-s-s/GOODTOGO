@@ -9,13 +9,11 @@ const UserOrderCancel = (props) => {
   const { status } = useParams();
   const [orderCancel, setOrderCancel] = useState([]);
 
+  // index 傳過來 用於判斷是否有資料呈現 (執行api)
   let orderCancelCount = props.orders.filter((v) => Object.values(v)[1] === 3);
-  console.log("Order Cancel - props.orders", props.orders);
-  console.log("Order Cancel - orderCancelCount", orderCancelCount);
-  console.log(
-    "Order Cancel - orderCancelCount.length",
-    orderCancelCount.length
-  );
+  // console.log("OrderCancel - props.orders", props.orders);
+  // console.log("OrderCancel - orderCancelCount", orderCancelCount);
+  // console.log("OrderCancel - orderCancelCount.length", orderCancelCount.length);
 
   // 載入 使用者收藏店家清單
   useEffect(() => {
@@ -34,7 +32,7 @@ const UserOrderCancel = (props) => {
       };
       getOrderCancel();
     }
-  }, [orderCancelCount.length,status]);
+  }, []);
 
   return (
     <>

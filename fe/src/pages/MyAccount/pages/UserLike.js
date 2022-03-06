@@ -8,6 +8,7 @@ import { css } from "@emotion/react";
 import BarLoader from "react-spinners/BarLoader";
 
 const UserLike = (props) => {
+  // index 傳過來 用於判斷使否有資料呈現 (執行api)
   console.log("Like - props.likes", props.likes);
   console.log("Like - props.likes.length", props.likes.length);
 
@@ -35,6 +36,11 @@ const UserLike = (props) => {
   // 紀錄選單目前顯示類別
   const [showCate, setShowCate] = useState("全部店家");
   // console.log(showCate);
+
+  // 判斷目前分類有無資料可顯示
+  // true 有資料 // false 此分類無資料
+  // const [hasCateData, setHasCateData] = useState(true);
+  // console.log("UserLike - showCateData", hasCateData);
 
   // 載入 使用者收藏店家清單
   useEffect(() => {
@@ -83,7 +89,10 @@ const UserLike = (props) => {
       // http://localhost:3002/api/member/like/remove (router.post)
       let response = await axios.post(
         `${API_URL}/member/like/remove`,
-        removeStoreId
+        removeStoreId,
+        {
+          withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
+        }
       );
       console.log("會員有移除 like :", response.data);
 
@@ -103,10 +112,16 @@ const UserLike = (props) => {
       setLikeStoreIds(
         [...likeStoreIds].filter((v) => v !== Object.values(removeStoreId)[0])
       );
-      // 更新 喜愛店家 store_id 列表 (濾除取消收藏)
+      // 更新 props.likes (濾除取消收藏)
+      // index 傳過來 用於判斷使否有資料呈現 (執行api)
       props.setLikes(
-        [...props.likes].filter((v) => v.store_id !== Object.values(removeStoreId)[0])
+        [...props.likes].filter(
+          (v) => v.store_id !== Object.values(removeStoreId)[0]
+        )
       );
+
+      // 判斷目前顯示的此分類有無資料可顯示
+      // showLikeStores.length > 0 ? setHasCateData(true) : setHasCateData(false);
     } catch (e) {
       console.error("res.error:", e.response);
     }
@@ -141,6 +156,8 @@ const UserLike = (props) => {
                           // 點選 全部 類別
                           setShowLikeStores([...likeStores]);
                           setShowCate("全部店家");
+                          // 有資料顯示
+                          // setHasCateData(true);
                         } else {
                           // 點選 其他類別 將其類別濾出後呈現
                           setShowLikeStores(
@@ -149,6 +166,13 @@ const UserLike = (props) => {
                             )
                           );
                           setShowCate(ca.category);
+
+                          // 判斷此分類有無資料可顯示
+                          // [...likeStores].filter(
+                          //   (v) => Object.values(v)[7] === ca.category
+                          // ).length > 0
+                          //   ? setHasCateData(true)
+                          //   : setHasCateData(false);
                         }
                       }}
                     >
@@ -181,114 +205,120 @@ const UserLike = (props) => {
               </div>
               <div className="row">
                 {/* ------- store card 開始 -------- */}
-                {showLikeStores.map((item) => {
-                  return (
-                    <div
-                      key={item.storeId}
-                      className="col col-lg-6 col-xl-4 my-4 d-flex justify-content-center flex-wrap"
-                    >
-                      <Link to="" className="text-decoration-none card_Link">
-                        <div className="store_Card position-relative">
-                          {/* 卡片的內容 */}
-                          <div className="px-4 pt-4 pb-3 h-100">
-                            {/* 照片 */}
-                            <div className="store_Img mx-auto">
-                              {item.isToday === "營業中" ? (
-                                <span className="position-absolute store_Status_Open badge">
-                                  {item.isToday}
-                                </span>
-                              ) : (
-                                <span className="position-absolute store_Status_Close badge">
-                                  {item.isToday}
-                                </span>
-                              )}
-                              <img
-                                src={IMAGE_URL + item.storeImg}
-                                className="cover-fit"
-                                alt="storeImage"
-                              />
-                            </div>
-                            {/* 店名 */}
-                            <div className="d-flex align-items-center justify-content-between">
-                              <h4 className="store_Title my-3">
-                                {item.storeName}
-                                <span className="d-block fz-sm mt-2 ls-md">
-                                  {item.storeBranchName ? (
-                                    item.storeBranchName
-                                  ) : (
-                                    <span>&emsp;</span>
-                                  )}
-                                </span>
-                              </h4>
-
-                              <div className="store_Category rounded-pill mb-4">
-                                <span>{item.storeCate}</span>
-                              </div>
-                            </div>
-                            {/* 資訊 時間 剩餘餐點 */}
-                            <div className="d-flex align-items-center justify-content-between store_Info">
-                              <FiClock className="store_Clock me-1" />
-                              <span className="flex-grow-1">
-                                {item.openTime} - {item.closeTime}
-                              </span>
-                              <span className="fz-sm">餐點剩餘:&nbsp;</span>
-                              <span>{item.products}</span>
-                            </div>
-                            {/* 分數相關 */}
-                            <div className="d-flex align-items-center justify-content-between store_Score">
-                              {/* 星星 */}
-                              <div className="d-flex align-items-center">
-                                <Rating
-                                  className="store_Star"
-                                  // defaultValue={3}
-                                  value={Number(item.starScore)}
-                                  precision={0.1}
-                                  // onChange={handleStar}
-                                  readOnly
-                                />
-                                <span className="ls-sm ps-1 fz-md">
-                                  {item.starScore} ({item.commentTotal})
-                                </span>
-                              </div>
-                              {/* 愛心 */}
-                              <div
-                                onClick={() => {
-                                  // alert(item.storeId);
-                                  if (likeStoreIds.includes(item.storeId)) {
-                                    // remove
-                                    setLikeStoreIds(
-                                      likeStoreIds.filter(
-                                        (v) => v !== item.storeId
-                                      )
-                                      // 符合條件留下 (比對 不是 storeId 的留下)
-                                    );
-                                    //setFavAction({ action: 'remove', storeId: id })
-                                    handleRemoveLike(item.storeId);
-                                  } else {
-                                    //add
-                                    // setLikeStoreIds([...likeStoreIds, item.storeId]);
-                                    //setFavAction({ action: 'add', storeId: id })
-                                  }
-                                }}
-                                className="d-flex align-items-center"
-                              >
-                                {likeStoreIds.includes(item.storeId) ? (
-                                  <FiHeart className="store_Like_Active" />
+                {showLikeStores.length > 0 ? (
+                  showLikeStores.map((item) => {
+                    return (
+                      <div
+                        key={item.storeId}
+                        className="col col-lg-6 col-xl-4 my-4 d-flex justify-content-center flex-wrap"
+                      >
+                        <Link to="" className="text-decoration-none card_Link">
+                          <div className="store_Card position-relative">
+                            {/* 卡片的內容 */}
+                            <div className="px-4 pt-4 pb-3 h-100">
+                              {/* 照片 */}
+                              <div className="store_Img mx-auto">
+                                {item.isToday === "營業中" ? (
+                                  <span className="position-absolute store_Status_Open badge">
+                                    {item.isToday}
+                                  </span>
                                 ) : (
-                                  <FiHeart className="store_Like_unActive" />
+                                  <span className="position-absolute store_Status_Close badge">
+                                    {item.isToday}
+                                  </span>
                                 )}
+                                <img
+                                  src={IMAGE_URL + item.storeImg}
+                                  className="cover-fit"
+                                  alt="storeImage"
+                                />
+                              </div>
+                              {/* 店名 */}
+                              <div className="d-flex align-items-center justify-content-between">
+                                <h4 className="store_Title my-3">
+                                  {item.storeName}
+                                  <span className="d-block fz-sm mt-2 ls-md">
+                                    {item.storeBranchName ? (
+                                      item.storeBranchName
+                                    ) : (
+                                      <span>&emsp;</span>
+                                    )}
+                                  </span>
+                                </h4>
 
-                                <span className="ls-sm ps-1 fz-md">
-                                  {item.likeTotal}
+                                <div className="store_Category rounded-pill mb-4">
+                                  <span>{item.storeCate}</span>
+                                </div>
+                              </div>
+                              {/* 資訊 時間 剩餘餐點 */}
+                              <div className="d-flex align-items-center justify-content-between store_Info">
+                                <FiClock className="store_Clock me-1" />
+                                <span className="flex-grow-1">
+                                  {item.openTime} - {item.closeTime}
                                 </span>
+                                <span className="fz-sm">餐點剩餘:&nbsp;</span>
+                                <span>{item.products}</span>
+                              </div>
+                              {/* 分數相關 */}
+                              <div className="d-flex align-items-center justify-content-between store_Score">
+                                {/* 星星 */}
+                                <div className="d-flex align-items-center">
+                                  <Rating
+                                    className="store_Star"
+                                    // defaultValue={3}
+                                    value={Number(item.starScore)}
+                                    precision={0.1}
+                                    // onChange={handleStar}
+                                    readOnly
+                                  />
+                                  <span className="ls-sm ps-1 fz-md">
+                                    {item.starScore} ({item.commentTotal})
+                                  </span>
+                                </div>
+                                {/* 愛心 */}
+                                <div
+                                  onClick={() => {
+                                    // alert(item.storeId);
+                                    if (likeStoreIds.includes(item.storeId)) {
+                                      // remove
+                                      setLikeStoreIds(
+                                        likeStoreIds.filter(
+                                          (v) => v !== item.storeId
+                                        )
+                                        // 符合條件留下 (比對 不是 storeId 的留下)
+                                      );
+                                      //setFavAction({ action: 'remove', storeId: id })
+                                      handleRemoveLike(item.storeId);
+                                    } else {
+                                      //add
+                                      // setLikeStoreIds([...likeStoreIds, item.storeId]);
+                                      //setFavAction({ action: 'add', storeId: id })
+                                    }
+                                  }}
+                                  className="d-flex align-items-center"
+                                >
+                                  {likeStoreIds.includes(item.storeId) ? (
+                                    <FiHeart className="store_Like_Active" />
+                                  ) : (
+                                    <FiHeart className="store_Like_unActive" />
+                                  )}
+
+                                  <span className="ls-sm ps-1 fz-md">
+                                    {item.likeTotal}
+                                  </span>
+                                </div>
                               </div>
                             </div>
                           </div>
-                        </div>
-                      </Link>
-                    </div>
-                  );
-                })}
+                        </Link>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className=" ls-md c-grey text-center pt-4">
+                    您尚未收藏 {showCate} 類別的店家
+                  </div>
+                )}
                 {/* ------- store card 結束 -------- */}
               </div>
               {/* -------- 店家收藏清單 結束 -------- */}

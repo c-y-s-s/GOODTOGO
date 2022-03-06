@@ -2,27 +2,15 @@ import React, { useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
-import { FiEye, FiEyeOff } from "react-icons/fi";
 
-const UserCreditCard = () => {
+const UserCreditCard = (props) => {
   const [card, setCard] = useState();
-
-  // -------- 修改會員密碼 進資料庫 --------
-  // 發 http request 到後端 -> axios
-  // async function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   try {
-  //     // http://localhost:3002/api/member/payment (router.post)
-  //     let response = await axios.post(`${API_URL}/member/payment`, payment);
-  //     console.log("會員有更改信用卡: ", response.data);
-  //   } catch (e) {
-  //     console.error("會員更改信用卡 error: ", ERR_MSG[e.response.data.code]);
-  //     console.error("res.error:", e.response.data);
-  //   }
-
-  // }
-
+  const [openCredit, setOpenCredit] = useState(false);
+  function handleOpen() {
+    props.setisModalTouch(false);
+    props.setOpenHeight(true);
+    setOpenCredit(true);
+  }
   return (
     <>
       <div className="col-md-9 col-lg-10 ps-lg-5 mt-3 mt-md-0">
@@ -31,12 +19,32 @@ const UserCreditCard = () => {
         </div>
         <hr></hr>
         {/* -------- 更改密碼 表單開始 -------- */}
-        <form>
+        <div className="row mt-4 position-relative">
+          {/* -------- 表單左 -------- */}
+          <div className="col my-4 d-flex align-items-center text-nowrap flex-wrap flex-column flex-sm-row">
+            <div className="col-sm-3 col-lg-3 col-xl-2 me-xl-2 credit_Text">
+              信用卡號碼
+            </div>
+            <div className="d-flex align-items-center text-nowrap my-4 my-sm-0">
+              <div className="fz-sm ls-lg">
+                ＊＊＊＊&emsp;＊＊＊＊&emsp;＊＊＊＊&emsp;
+              </div>
+              <div className="fz-x-lg credit_Num me-sm-5 ms-2">5678</div>
+            </div>
 
-          
-          
-        </form>
+            <div className="d-flex mx-auto mx-lg-0 my-4 my-lg-0">
+              <button
+                className="btn text-white btn_Credit ms-lg-5"
+                onClick={handleOpen}
+              >
+                更&emsp;改
+              </button>
+            </div>
+          </div>
+        </div>
         {/* -------- 會員資料表單結束 -------- */}
+        {openCredit && <div className="credit_bg"></div>}
+        {/* <div className="credit_bg"></div> */}
       </div>
     </>
   );

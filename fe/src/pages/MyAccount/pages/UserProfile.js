@@ -149,7 +149,8 @@ const UserProfile = (props) => {
       // http://localhost:3002/api/member/profile/edit (router.post)
       let response = await axios.post(
         `${API_URL}/member/profile/edit`,
-        formData
+        formData,
+        { withCredentials: true }
       );
       console.log("使用者有上傳資料: ", response.data);
 
@@ -166,7 +167,7 @@ const UserProfile = (props) => {
       props.setUserName(response.data.name);
       props.setHeadShot(response.data.photo);
     } catch (e) {
-      // TODO: 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
+      // 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
       console.error("會員修改資料 error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);

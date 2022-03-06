@@ -22,7 +22,7 @@
   }
   .controller-right {
     position: absolute;
-    left: 15rem;
+    right: -6rem;
     height: 2rem;
     width: 2rem;
     border-radius: 50%;
@@ -33,7 +33,7 @@
   }
   .carousel-indicators {
     position: absolute;
-    top: 37rem;
+    top: 50rem;
   }
 }
 
@@ -61,7 +61,7 @@
     }
     .controller-right {
       position: absolute;
-      left: 1rem;
+      right: 1rem;
       height: 2rem;
       width: 2rem;
       border-radius: 50%;

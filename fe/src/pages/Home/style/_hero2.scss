@@ -2,13 +2,10 @@
 .hero2 {
   background-color: $color-light-green;
   color: white;
-  grid-template-columns: 8.25rem 40.85% 40.85% 8.25rem;
+  grid-template-columns: 1fr 1fr 8%;
 
   .hero2-trash {
-    grid-column-start: 1;
-    grid-column-end: 3;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-area: 1/1/2/2;
     width: max-content;
     height: 100.009%;
   }
@@ -21,14 +18,12 @@
     // filter: drop-shadow(0.188rem 0.188rem 5px $color-dark-grey);
   }
   .hero2-info {
-    grid-column-start: 3;
-    grid-column-end: 4;
-    grid-row-start: 1;
-    grid-row-end: 3;
+    grid-area: 1/2/2/2;
     text-align: center;
-    margin: 150px auto 150px;
-    width: 500px;
+    // margin: 150px auto 150px;
+    width: 50vw;
     height: fit-content;
+    @include hero-text-md;
   }
 }
 @media screen and (max-width: 1296px) {
@@ -123,7 +118,7 @@
       height: auto;
     }
     .hero2-info {
-      padding: 0.3rem;
+      padding: 0.4rem;
       height: fit-content;
       width: fit-content;
       font-size: $fz-sm;
@@ -131,6 +126,7 @@
       grid-row-start: 1;
       margin: auto;
       z-index: 10001;
+      @include hero-text-sm;
       .hero2-text {
         height: fit-content;
         width: 60vw;

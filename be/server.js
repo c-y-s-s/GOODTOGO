@@ -9,13 +9,16 @@ const cors = require("cors");
 //引用express-session、session-file-store 來儲存資料
 const session = require("express-session");
 // let FileStore = require("session-file-store")(session);
+// const cookieSession = require("cookie-session");
+const passport = require("passport");
+require("./config/passport")(passport);
 
 let app = express();
-
 app.use(express.urlencoded({ extended: true }));
 //要讓express認得json
 app.use(express.json());
 
+app.use;
 //使用 cors 設定的中間鍵，開放所有網域皆可連線
 // app.use(cors()); // 全開
 // 跨源 cookie 要設定 可接收的請求來源(前端)
@@ -26,6 +29,8 @@ app.use(
     credentials: true, // 要設 credentials 就要設來源 origin
   })
 );
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // 要讓 express 認得 body
 app.use(express.urlencoded({ extended: true }));
@@ -36,6 +41,7 @@ app.use(express.json());
 const expressSession = require("express-session");
 // 為使 session 存硬碟
 let FileStore = require("session-file-store")(expressSession);
+
 app.use(
   expressSession({
     // 將 session 存硬碟
@@ -50,17 +56,22 @@ app.use(
   })
 );
 
-
+// app.use(
+//   cookieSession({
+//     name: "session",
+//     keys: process.env.SESSION_SECRET,
+//     maxAge: 24 * 60 * 60 * 100,
+//   })
+// );
+// app.use(passport.authenticate("session"));
 // -------- 靜態圖片 --------
 app.use("/static", express.static(path.join(__dirname, "public")));
 
-
-
 // -------- 會員註冊、登入API --------
 let checkMemberRouter = require("./routers/checkMember");
-app.use("/api/checkMember", checkMemberRouter);
-
 let authRouter = require("./routers/auth");
+
+app.use("/api/checkMember", checkMemberRouter);
 app.use("/api/auth", authRouter);
 
 //  -------- 商家 RESTful API 列表 --------
@@ -77,7 +88,9 @@ app.use("/api/storeRecommRouter", storeRecommRouter);
 let storesMapRouter = require("./routers/storemap");
 app.use("/api/storesmap", storesMapRouter);
 //  ------- 指定商家座標 RESTful API 結束 -------
-
+// -------- MAP --------
+let mapRouter = require("./routers/map");
+app.use("/api/map", mapRouter);
 
 // -------- 商品 RESTful API 列表 --------
 let productsRouter = require("./routers/products");
@@ -118,7 +131,6 @@ let storeCommentTotal = require("./routers/storeCommentTotal");
 app.use("/api/storecommittotal", storeCommentTotal);
 // -------- 指定商家所有評論  RESTful API 結束  --------
 
-
 //  -------- 商品評論做頁數處理 RESTful API 列表 --------
 let productsCommentRouter = require("./routers/productsCommentPage");
 app.use("/api/productscommit", productsCommentRouter);
@@ -128,9 +140,6 @@ app.use("/api/productscommit", productsCommentRouter);
 let productsDesignateCommitRouter = require("./routers/productsModalCommit");
 app.use("/api/productsdesignatecommit", productsDesignateCommitRouter);
 // -------- 指定商品評論 RESTful API 列表 結束 --------
-
-// 
-
 //  -------- 會員 RESTful API 列表 --------
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
@@ -140,7 +149,6 @@ app.use("/api/member", memberRouter);
 app.use((req, res, next) => {
   res.status(404).send("404 Not Found");
 });
-
 
 // 設置 port || 預設值
 const port = process.env.SERVER_PORT || 3000;

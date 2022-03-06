@@ -9,13 +9,11 @@ const UserOrderFinish = (props) => {
   const { status } = useParams();
   const [orderFinish, setOrderFinish] = useState([]);
 
+  // index 傳過來 用於判斷是否有資料呈現 (執行api)
   let orderFinishCount = props.orders.filter((v) => Object.values(v)[1] === 2);
-  console.log("Order Finish - props.orders", props.orders);
-  console.log("Order Finish - orderFinishCount", orderFinishCount);
-  console.log(
-    "Order Finish - orderFinishCount.length",
-    orderFinishCount.length
-  );
+  // console.log("OrderFinish - props.orders", props.orders);
+  // console.log("OrderFinish - orderFinishCount", orderFinishCount);
+  // console.log("OrderFinish - orderFinishCount.length", orderFinishCount.length);
 
   // 載入 使用者收藏店家清單
   useEffect(() => {

@@ -3,7 +3,7 @@ import { ReactComponent as Star } from "../../images/star.svg";
 import RecomCard from "./RecomCard";
 
 const Recomm = (props) => {
-  const { totalHeart, productAmount } = props;
+  const { totalHeart, productAmount, totalStar } = props;
   return (
     <>
       <div className="rec-content">
@@ -16,8 +16,12 @@ const Recomm = (props) => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder col-lg-10 col-9 d-flex align-items-center m-auto">
-          <RecomCard totalHeart={totalHeart} productAmount={productAmount} />
+        <div className="rec-cards-holder col-lg-8 col-9 d-flex align-items-center m-auto flex-wrap">
+          <RecomCard
+            totalHeart={totalHeart}
+            productAmount={productAmount}
+            totalStar={totalStar}
+          />
         </div>
 
         <div className="bottom-area"></div>

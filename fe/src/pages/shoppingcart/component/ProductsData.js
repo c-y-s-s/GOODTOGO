@@ -74,7 +74,7 @@ const ProductsData = ({
       {specifyProductsData.map((item) => {
         return (
           <div
-            className="d-flex user-shopping-cart-products-data"
+            className="d-flex user-shopping-cart-products-data align-items-center"
             key={item.id}
           >
             <div className="d-flex user-shopping-cart-products-data-name">
@@ -109,7 +109,7 @@ const ProductsData = ({
               </div>
             </div>
 
-            <div className="user-shopping-cart-products-data-calculate">
+            <div className="user-shopping-cart-products-data-calculate justify-content-lg-center">
               <div className="d-flex user-shopping-cart-products-data-amount">
                 <div className="d-flex buy-num">
                   {/* 減號 */}

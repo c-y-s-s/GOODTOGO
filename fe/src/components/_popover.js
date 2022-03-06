@@ -1,14 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../context/auth";
+//引用antd popover
 import { Popover } from "antd";
 import "antd/dist/antd.css";
-import { useAuth } from "../context/auth";
 //引用icon
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
+//alert套件
 import Swal from "sweetalert2";
+import { IMAGE_URL } from "../utils/config";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
+  const navigate = useNavigate();
   const swal = Swal.mixin({
     customClass: {
       confirmButton: " btn confirmbtn ms-2 me-2",
@@ -32,6 +36,8 @@ const _popover = () => {
             if (result.isConfirmed) {
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
+              navigate("/");
+              window.scrollTo(0, 0);
             } else if (
               /* Read more about handling dismissals below */
               result.dismiss === Swal.DismissReason.cancel
@@ -42,7 +48,6 @@ const _popover = () => {
       </>
     );
   };
-
   const notLoggedin = (
     <div className="nav-popover">
       <div className="popover-item text-center">
@@ -60,7 +65,7 @@ const _popover = () => {
   const loggedin = (
     <div className="nav-popover">
       <div className="popover-item text-center">
-        <Link to="/member" className="nav-popover-link">
+        <Link to="/member/profile" className="nav-popover-link">
           會員中心
         </Link>
       </div>
@@ -91,7 +96,15 @@ const _popover = () => {
         content={loginMember ? loggedin : notLoggedin}
         // trigger="click"
       >
-        <UserIcon className="nav-icon mt-1" />
+        {loginMember ? (
+          <img
+            className="navbar-profile-pic"
+            src={IMAGE_URL + loginMember.headshots}
+            alt="profile"
+          />
+        ) : (
+          <UserIcon className="nav-icon mt-1" />
+        )}
       </Popover>
     </>
   );

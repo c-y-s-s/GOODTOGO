@@ -6,6 +6,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./styles/index.scss";
+import "antd/dist/antd.css";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
 // -------- import pages --------
@@ -78,9 +79,7 @@ function App() {
             <Route path="reset" element={<Reset />}></Route>
           </Route>
           <Route path="/admin" element={<Admin />}></Route>
-          <Route path="/stores" element={<StoreList />}>
-            <Route path="all/:storeId" element={<Product />} />
-          </Route>
+          <Route path="/stores" element={<StoreList />} />
           {/* 店家商品頁，店家點進來顯示店家所賣商品 */}
           <Route
             path="/store/:storeId/"
@@ -91,12 +90,16 @@ function App() {
           <Route
             path="/shoppingcart"
             element={
-              <ShoppingCart
+              loginMember ? (
+                <ShoppingCart
                 setCheckoutData={setCheckoutData}
                 checkoutData={checkoutData}
                 setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
                 navshoppingDeleteParameter={navshoppingDeleteParameter}
               />
+              ) : (
+                <Login />
+              )
             }
           ></Route>
           <Route
@@ -112,7 +115,10 @@ function App() {
 
           <Route path="/map" element={<Map />}></Route>
 
-          <Route path="member/*" element={<MyAccount />}>
+          <Route
+            path="member/*"
+            element={<MyAccount setisModalTouch={setisModalTouch} />}
+          >
             <Route path=":userInfo" element={<MyAccount />}>
               <Route path=":status" element={<MyAccount />} />
             </Route>

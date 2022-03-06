@@ -44,7 +44,7 @@ const Shoppingcart = ({
   return (
     <div>
       <div className="container-fluid shopping-title">購物車</div>
-      <div className="container user-shopping-cart  ">
+      <div className="container user-shopping-cart">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
             console.log(item);

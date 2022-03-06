@@ -36,7 +36,79 @@ $fw-regular: 300; // regular
 $fw-medium: 400; // medium
 $fw-bold: 500; // bold
 $fw-black: 700; // black
+//Swal
+.popup {
+  width: 100px;
+  height: 75%;
+}
+.round {
+  border-radius: 16px;
+}
+.confirmbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-red;
+  color: white;
+  border-radius: 2px;
+}
+.cancelbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-green;
+  color: white;
+  border-radius: 2px;
+}
+.round-btn-green {
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: $color-light-green;
+  color: white;
+  font-size: larger;
+  border: 3px solid $color-green;
+  border-radius: 30px;
+  position: relative;
+  top: -3rem;
+  &:after {
+    content: "";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: $color-yellow;
+    border-radius: 50%;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: relative;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color-yellow, 15%);
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: white;
+    background-color: $color-green;
+    &:before {
+      width: 100%;
+    }
+  }
+}
 
+.no-bg {
+  background-color: transparent;
+}
+.close-btn-ads {
+  width: fit-content;
+  height: fit-content;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.336);
+  position: relative;
+  top: 2rem;
+}
 // -------- font-family 字體 --------
 $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
   "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -55,7 +127,7 @@ $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Micro
   scroll-behavior: smooth;
 }
 
-//------echo
+// -------- 高度 --------
 $navbar-height: 6.25rem;
 $footer-height: 15.063rem;
 
@@ -93,6 +165,12 @@ $footer-height: 15.063rem;
   font-size: $fz-sm;
 }
 // -------- 文字樣式 --------
+@mixin drop-shadow-light {
+  filter: drop-shadow(0.3rem 0.3rem 2px rgba(255, 255, 255, 0.877));
+}
+@mixin drop-shadow-dark {
+  filter: drop-shadow(0.188rem 0.188rem 10px rgba(112, 108, 108, 0.541));
+}
 .text-light {
   color: white;
 }
@@ -131,3 +209,5 @@ $btn-border-radius: 2px;
 @import "../pages/Checkout/style/checkout.scss";
 
 @import "./navShoppingCart";
+// -------- MAP --------
+@import "../pages/Map/styles/map.scss";
