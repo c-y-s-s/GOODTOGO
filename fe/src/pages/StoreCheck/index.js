@@ -166,7 +166,7 @@ const Storecheck = () => {
   // -------- 店家LOGO上傳開始 --------//
   const handleLogoChange = (e) => {
     console.log(e.target.value);
-    const file = e.target.files[0]; // 抓取上傳的圖片
+    const file1 = e.target.files[0]; // 抓取上傳的圖片
     const reader = new FileReader(); // 讀取 file
     reader.addEventListener(
       "load",
@@ -174,15 +174,15 @@ const Storecheck = () => {
     //     // convert image file to base64 string
         setImageSrc(reader.result);
       },
-      false // false在這邊等同於 e.preventDefault()
+      false // e.preventDefault()
     );
 
-    if (file) {
-      reader.readAsDataURL(file);
+    if (file1) {
+      reader.readAsDataURL(file1);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    console.log("/member/profile 上傳圖片檔名 file.name: ", file1.name); // e.target.files[0].name
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file1); // e.target.files[0]
     console.log(e.target.files[0]);
     setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
@@ -190,7 +190,7 @@ const Storecheck = () => {
   // -------- 表單營業許可證上傳開始 --------//
   const handleLicenseChange = (e) => {
     console.log(e.target.value);
-    const file = e.target.files[0]; // 抓取上傳的圖片
+    const file2 = e.target.files[0]; // 抓取上傳的圖片
     const reader = new FileReader(); // 讀取 input type="file" 的 file
     reader.addEventListener(
       "load",
@@ -198,16 +198,15 @@ const Storecheck = () => {
         // convert image file to base64 string
         setImageSrc(reader.result);
       },
-      false // false -> e.preventDefault() 阻擋預設行為
+      false //  e.preventDefault() 
     );
 
-    if (file) {
-      reader.readAsDataURL(file);
-      // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+    if (file2) {
+      reader.readAsDataURL(file2);
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
-    // setMember({ ...member, [e.target.name]: e.target.files[0] });
+    console.log("/member/profile 上傳圖片檔名 file.name: ", file2.name); // e.target.files[0].name
+    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file2); // e.target.files[0]
+    setMember({ ...member, [e.target.name]: e.target.files[0] });
   };
 
   // -------- 表單營業許可證上傳結束 --------//
@@ -230,7 +229,7 @@ const Storecheck = () => {
       formData.append("storeName",member.storeName);
       formData.append("phone",member.phone);
       formData.append("storeLogo",member.storeLogo);
-      // formData.append("storeLicence",member.storeLicence);
+      formData.append("storeLicence",member.storeLicence);
       formData.append("storeType",member.storeType);
       formData.append("day",member.day);
       formData.append("openTime",openTime.openHour+`:`+openTime.openMinute+`:`+`00.000000`);
@@ -241,9 +240,9 @@ const Storecheck = () => {
       let response = await axios.post(`${API_URL}/storeCheck/storeCheck`, formData);
 
       console.log(response.data);
+      
     } catch (e) {
-      // console.error("錯誤:", e.response.data);
-      console.error(ERR_MSG[e.response.data].code);
+      console.error("錯誤:", e.response.data);
     }
     
   };

@@ -11,8 +11,8 @@ import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 
 const StoreLogin = (props) => {
-// 存下登入資訊給全站使用
-  // const { loginSeller, setLoginSeller } = useAuth();
+  // 存下登入資訊給全站使用
+  const { loginSeller, setLoginSeller } = useAuth();
 
 const [loginStore, setLoginStore] = useState({
   email:"seller01",
@@ -51,14 +51,15 @@ function passwordShow() {
         email: "email格式輸入錯誤",
       };
       setFieldErrors(updatedFieldErrors);
-      //密碼欄位錯誤
-    } else if (name === "password") {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        password: "密碼至少為6個字元",
-      };
-      setFieldErrors(updatedFieldErrors);
     }
+      //密碼欄位錯誤
+    //  else if (name === "password") {
+    //   const updatedFieldErrors = {
+    //     ...fieldErrors,
+    //     password: "密碼至少為6個字元",
+    //   };
+    //   setFieldErrors(updatedFieldErrors);
+    // }
   };
   // -------- 當整個表單有更動時會觸發 --------
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
@@ -77,18 +78,18 @@ function passwordShow() {
     e.preventDefault();
     //比對資料庫是否有此會員
     try {
-      let response = await axios.post(`${API_URL}/auth/storeLogin`, loginStore,
+      let response = await axios.post(`${API_URL}/storeLogin`, loginStore,
       {withCredentials: true});
       console.log("登入成功", response.data);
-      // setLoginSeller(response.data.data);
+      // console.log("前端登入成功");
+      setLoginSeller(response.data.data);
       navigate("/store");
-    } catch (error) {
+    } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error("測試登入", ERR_MSG);
     }
   };
 
-  console.log("前端登入成功");
 
   return (
     <>

@@ -10,8 +10,8 @@ const multer = require("multer");
 // const bcrypt = require("bcrypt");
 const argon2 = require("argon2");
 
-const updateProfileRules = [
-    // FIXME: 前後端錯誤訊息
+const registerRules = [
+    // 驗證規則&錯誤訊息
     body("name").contains().withMessage("姓名 請填寫正確格式"),
     body("email").isEmail().withMessage("電子信箱 請填寫正確格式"),
     body("phone").isNumeric().withMessage("電話號碼 請填寫正確格式"), //.isMobilePhone()
@@ -21,8 +21,8 @@ const updateProfileRules = [
   const storage = multer.diskStorage({
     // 設定儲存的目的地(硬碟->檔案夾)
     destination: function (req, file, cb) {
-      // ../public/uploads/headshots <-- 檔案夾要自己先建立好
-      cb(null, path.join(__dirname, "..", "public", "uploads", "headshots"));
+      // ../public/uploads/storeLogo
+      cb(null, path.join(__dirname, "..", "public", "uploads", "storeLogo"));
       // 錯誤訊息 先給null
     },
     // 設定儲存的檔名
@@ -32,7 +32,7 @@ const updateProfileRules = [
       // 取用副檔名 ext
       const ext = file.originalname.split(".").pop();
       // 組合要放進資料夾(、資料庫)的名稱
-      cb(null, `member-${Date.now()}.${ext}`);
+      cb(null, `store-${Date.now()}.${ext}`);
     },
   });
   
@@ -57,15 +57,17 @@ const updateProfileRules = [
     // 過濾 檔案尺寸
     limits: {
       // 1K: 1024 bytes
-      fileSize: 200 * 1024, // 限制 < 200K
+      fileSize: 1024 * 1024, // 限制 < 200K
     },
   });
 
   router.post(
     "/storeCheck",
-    uploader.single("storeLogo"),
-    // 只傳一張 single // fieldname: photo 表單欄位名稱
-    updateProfileRules, // 驗證更新資料中間件
+    uploader.fields([
+        {name: 'storeLogo', maxCount: 1 },
+        {name: 'storeLicence', maxCount: 1 }
+    ]),
+    registerRules, // 驗證更新資料中間件
   
     async (req, res, next) => {
       // express-validator 驗證結果 回傳錯誤訊息
@@ -82,36 +84,33 @@ const updateProfileRules = [
         });
       }
   
-      // 檢查 email 是不是非原本使用者、已經註冊
+      // 檢查 email 是否已經註冊
       let [members] = await connection.execute(
-        "SELECT * FROM users WHERE email=?",
+        "SELECT * FROM stores WHERE email=?",
         [req.body.email]
-        // req.body (form post 的物件 裡面的 email)
       );
-      // console.log("有沒有此 email", members); // [] 空的 -> 沒有此email -> 可以註冊
-      // console.log("有沒有此 email id", members[0].id);
-      // console.log("此使用者登入的 id", req.session.member.id);
       if (members.length > 0 ) {
-        // 表示有查到此 email 且不是使用者原本的 email -> 註冊過了
+        // 表示有查到此 email -> 註冊過了
         return res.status(400).send({
-          // send? json?
           code: "33002",
           msg: "這個 email 已經註冊過了",
         });
       }
   
-      // 到這邊表示前面沒錯誤了 (所有資料驗證ok、email尚未被註冊)
-  
       // 處理圖片
-      console.log("前端送來、multer中間件處理過 req.file: ", req.file);
+      console.log("前端送來、multer中間件處理過 req.files: ", req.files);
+      
+      let filename1 = "/static/uploads/storeLogo/" + req.files.storeLogo[0].filename;
+      console.log("加上路徑的 filename: ", filename1);
+      
+      let filename2 = "/static/uploads/storeLogo/" + req.files.storeLicence[0].filename;
+      console.log("加上路徑的 filename: ", filename2);
+      
       let hashpassword = await argon2.hash(req.body.password);
-
-      let filename = "/static/uploads/headshots/" + req.file.filename;
-      console.log("加上路徑的 filename: ", filename);
   
       // -------- 儲存到資料庫 --------
       let [updateProfileResult] = await connection.execute(
-        `INSERT INTO stores bossname, name, email, account, password, tel_no, address, open_time, close_time, certification-img, logo, valid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);`,
+        `INSERT INTO stores (bossname, name, email, account, password, tel_no, address, open_time, close_time, certification_img, logo, valid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?);`,
         [
             req.body.name,
             req.body.storeName,
@@ -122,8 +121,8 @@ const updateProfileRules = [
             req.body.address,
             req.body.openTime,
             req.body.closeTime,
-            filename,
-            filename,
+            filename1,
+            filename2,
             "1"
         ]
       );
@@ -133,7 +132,8 @@ const updateProfileRules = [
       // console.log("req.body: ", req.body);
       res.json({
         name: req.body.name,
-        photo: filename,
+        logo: filename1,
+        licence:filename2,
         message: "儲存修改資料 ok",
       });
     }

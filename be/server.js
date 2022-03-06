@@ -50,8 +50,8 @@ app.use("/api/products", productsRouter);
 
 // -------- 商家登入 RESTful API 列表 -------- //
 
-let authRouter = require("./routers/auth");
-app.use("/api/auth", authRouter);
+let storeLoginRouter = require("./routers/storeLogin");
+app.use("/api/storeLogin", storeLoginRouter);
 
 let storeCheckRouter = require("./routers/storeCheck")
 app.use("/api/storeCheck", storeCheckRouter);
