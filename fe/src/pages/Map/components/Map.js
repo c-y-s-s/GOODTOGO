@@ -9,19 +9,17 @@ const Map = (props) => {
   //!也就是說必需先整理出需要的location 陣列
   //!然後利用去map這個陣列然後 裡面map LocationPin
 
-
   // 先把得到的資料塞進一個空陣列裡
-  const locationArr = []
-  displayStoreList.forEach((i)=>{
-
+  const locationArr = [];
+  displayStoreList.forEach((i) => {
     locationArr.push({
       //storeId在右邊顯示小卡片可能會用到
       // storeID:i.id,
-      name:i.name,
+      name: i.name,
       lng: i.lat,
       lat: i.lng,
     });
-  })
+  });
 
   const location = {
     address: "320桃園市中壢區新生路二段421號",
@@ -55,9 +53,9 @@ const Map = (props) => {
               lng={location.lng}
               text={location.name}
             />
-    
+
             {/* // !用傳進來的資料map,只是為了得到他的index長度,實際上裡面的資料是用上面處理好的 */}
-            {displayStoreList.map((item,index)=>{
+            {displayStoreList.map((item, index) => {
               return (
                 <LocationPin
                   storeId={item.id}
@@ -68,16 +66,7 @@ const Map = (props) => {
                   setClickStoreId={props.setClickStoreId}
                 />
               );
-    
             })}
-    
-
-            {/* <LocationPin
-              className="location-pin"
-              lat={location2.lat}
-              lng={location2.lng}
-            /> */}
-
             {/* {displayStoreList.map((store) => {
      
               return (

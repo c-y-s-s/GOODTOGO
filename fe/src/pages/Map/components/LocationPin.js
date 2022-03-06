@@ -13,9 +13,12 @@ const LocationPin = (props) => {
         <div className="time pt-2">10:00 - 18:00</div>
         <div className="product-left mt-2">剩餘:2</div>
       </p>
-      <Pin className="pin-icon" onClick={()=>{
+      <GoLocation
+        className="pin-icon"
+        onClick={() => {
           props.setClickStoreId(props.storeId);
-      }} />
+        }}
+      />
     </div>
   );
 };

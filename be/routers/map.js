@@ -5,9 +5,6 @@ const moment = require("moment");
 moment.locale("zh-tw");
 
 router.get("/info", async (req, res, next) => {
-  let [location] = await connection.execute(
-    `SELECT longitude AS lng, latitude AS lat, store_id FROM map `
-  );
   let [category] = await connection.execute("SELECT * FROM stores_category");
   category.unshift({ id: 0, category: "全部店家", valid: 1 });
   let [likeResult] = await connection.execute(
@@ -16,7 +13,6 @@ router.get("/info", async (req, res, next) => {
     GROUP BY store_id
     ORDER BY likeTotal DESC;`
   );
-
   let [storeResult] = await connection.execute(
     `SELECT a.id,
     a.name,
@@ -33,7 +29,6 @@ router.get("/info", async (req, res, next) => {
     JOIN map AS c ON a.id = c.store_id 
     WHERE a.valid = 1;`
   );
-
   let [starResult] = await connection.execute(
     `SELECT
     store_id,
@@ -41,7 +36,6 @@ router.get("/info", async (req, res, next) => {
     FROM products_comment
     GROUP BY store_id;`
   );
-
   storeResult.map((item) => {
     // 放入 愛心
     let setLike = likeResult.find(
@@ -96,16 +90,8 @@ router.get("/info", async (req, res, next) => {
     } else {
       item.opState = true; //true=營業中
     }
-    //   // console.log("filter: opState", item.opState);
   });
   // console.log("storeResult數量", storeResult);
-  let openStore = storeResult.filter((v) => Object.values(v)[9] === true);
-  let closedStore = storeResult.filter((v) => Object.values(v)[9] === false);
-  let thaiFood = storeResult.filter((v) => Object.values(v)[6] === "泰式");
-  let vegan = storeResult.filter((v) => Object.values(v)[6] === "蔬食");
-  let western = storeResult.filter((v) => Object.values(v)[6] === "西式");
-
-  console.log("thaiFood");
   res.json([storeResult, category]);
 });
 module.exports = router;

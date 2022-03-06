@@ -7,20 +7,20 @@ import { API_URL } from "../../../utils/config";
 import axios from "axios";
 
 const StoreForMap = (props) => {
- console.log(props.clickStoreId);
- const [clickStoreData,setClickStoreDate]=useState([])
-console.log(props.clickStoreId);
+  console.log(props.clickStoreId);
+  const [clickStoreData, setClickStoreDate] = useState([]);
+  console.log(props.clickStoreId);
 
-   useEffect(() => {
-     let getClickStoreData = async () => {
-       let clickStoreDataRes = await axios.get(
-         `${API_URL}/stores/${props.clickStoreId}`
-       );
-       setClickStoreDate(clickStoreDataRes.data);
-     };
-     getClickStoreData();
-   }, [props.clickStoreId]);
-   console.log(clickStoreData.length);
+  useEffect(() => {
+    let getClickStoreData = async () => {
+      let clickStoreDataRes = await axios.get(
+        `${API_URL}/stores/${props.clickStoreId}`
+      );
+      setClickStoreDate(clickStoreDataRes.data);
+    };
+    getClickStoreData();
+  }, [props.clickStoreId]);
+  console.log(clickStoreData.length);
   return (
     <div>
       {clickStoreData.length === 1 &&
@@ -47,13 +47,13 @@ console.log(props.clickStoreId);
                   {/* --->店名 */}
                   <div className="info-title mt-3 d-flex justify-content-between col-12">
                     <span className="text-dark-grey input-label-title">
-                      {item.name}
+                      {item.name.split(" ")[0]}
                       <br />
                       {/* --->分店名 */}
-                      <span className="text-dark-grey detail-sm">分店</span>
-                      {/*分店名<--- */}
+                      <span className="text-dark-grey detail-sm">
+                        {item.name.split(" ")[1]}
+                      </span>
                     </span>
-                    {/* 店名 <--- */}
 
                     <div className="cate-tag">{item.category}</div>
                   </div>
@@ -98,7 +98,6 @@ console.log(props.clickStoreId);
         })}
     </div>
   );
-
 };
 
 export default StoreForMap;

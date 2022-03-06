@@ -24,17 +24,7 @@ const RecomCard = (props) => {
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
-      let recommStores = recommRes.data[0];
-      setDisplayList(recommStores);
-
-      // 計算指定商品的評論平均分數
-      let productstarTotal = 0;
-      // productModalCommentData.forEach((item) => {
-      //   productstarTotal += item.star;
-      // });
-      // let productstarTotalAVG = (
-      //   productstarTotal / productModalCommentData.length
-      // ).toFixed(1);
+      setDisplayList(recommRes.data[0]);
     };
     getRecomm();
   }, []);
@@ -63,7 +53,6 @@ const RecomCard = (props) => {
         {
           /* console.log(space); */
         }
-        // -------- 處理評分星星 --------
 
         return (
           <div>
