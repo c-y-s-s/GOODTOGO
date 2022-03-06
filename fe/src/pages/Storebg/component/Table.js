@@ -101,9 +101,9 @@ const Table = () => {
             <th scope="col" className="text-center">
               數量
             </th>
-            <th scope="col" className="text-center">
+            {/* <th scope="col" className="text-center">
               已售出
-            </th>
+            </th> */}
             <th scope="col">販售時間</th>
             <th scope="col">上架日期</th>
             <th scope="col" className="text-center">
@@ -131,7 +131,7 @@ const Table = () => {
                 <td>{item.name}</td>
                 <td className="text-center">NT${item.price}</td>
                 <td className="text-center">{item.amount}</td>
-                <td className="text-center">1</td>
+                {/* <td className="text-center">1</td> */}
                 <td>
                   {item.start_time} ~ {item.due_time}
                 </td>
