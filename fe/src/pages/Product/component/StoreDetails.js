@@ -47,7 +47,7 @@ const StoreDetails = ({
   const [storeMapDataLng, setStoreMapDataLng] = useState([]);
   // 店家評論總數
   const [storeLikeData,setStoreLikeData]=useState([]) 
-  console.log("=======",storeLikeData);
+  // console.log("=======",storeLikeData);
   useEffect(() => {
     let getStoreDetalis = async () => {
       // 撈店家所有評論
@@ -100,11 +100,23 @@ const StoreDetails = ({
             setStoreTodayClose(true);
           }
         });
-
+        let closeDayData = JSON.parse(item.close_day);
+        let closeDayChinese = [];
+        closeDayData.forEach((item) => {
+          console.log(typeof item);
+          if (item === 1) closeDayChinese.push("一");
+          if (item === 2) closeDayChinese.push("二");
+          if (item === 3) closeDayChinese.push("三");
+          if (item === 4) closeDayChinese.push("四");
+          if (item === 5) closeDayChinese.push("五");
+          if (item === 6) closeDayChinese.push("六");
+          if (item === 0) closeDayChinese.push("日");
+        });
         /* // 休息日調整格式 */
-        let closeday = JSON.parse(item.close_day).join("、");
+        let closeday = closeDayChinese.join("、");
         /* 電話號碼加上- */
         let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
+     
 
         /* // !營業時間秒數 */
 
@@ -152,7 +164,25 @@ const StoreDetails = ({
                 <div className="col-12 col-md-6 col-lg-4 pe-lg-3">
                   <div className="store-data-left">
                     <div className="store-data-left-outline py-1">
-                      <h1 className="store-data-left-name">{item.name}</h1>
+                      <div className="d-flex">
+                        <h1 className="store-data-left-name">{item.name}</h1>
+                        <div>
+                          {storeTodayClose ? (
+                            <div className="d-flex store-data-left-content-close ">
+                              休息中
+                            </div>
+                          ) : inOperation ? (
+                            <div className="d-flex store-data-left-content-open">
+                              營業中
+                            </div>
+                          ) : (
+                            <div className="d-flex store-data-left-content-close">
+                              休息中
+                            </div>
+                          )}
+                        </div>
+                      </div>
+
                       <div className="d-flex mt-4 align-items-center">
                         <div className="store-data-left-category ">
                           {item.category}
@@ -210,19 +240,19 @@ const StoreDetails = ({
                         )} */}
 
                         {/* 判斷公休日及營業時間區間 */}
-                        {storeTodayClose ? (
-                          <div className="d-flex store-data-left-content-close">
+                        {/* {storeTodayClose ? (
+                          <div className="d-flex store-data-left-content-close d-lg-none">
                             休息中
                           </div>
                         ) : inOperation ? (
-                          <div className="d-flex store-data-left-content-open">
+                          <div className="d-flex store-data-left-content-open d-lg-none">
                             營業中
                           </div>
                         ) : (
-                          <div className="d-flex store-data-left-content-close">
+                          <div className="d-flex store-data-left-content-close d-lg-none">
                             休息中
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
 

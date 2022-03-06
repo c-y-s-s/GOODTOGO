@@ -49,6 +49,8 @@
             .user-data-name {
                 letter-spacing: $ls-md;
                 font-size: $fz-xx-lg;
+                color: $color-dark-grey;
+                font-weight: 500;
             }
             // -------- 留言時間 --------
             .user-data-comment-time {
@@ -146,8 +148,8 @@
         .active {
             border-radius: 50%;
             margin: 2rem 0.8rem;
-            width: 10rem;
-            height: 10rem;
+            width: 9rem;
+            height: 9rem;
             background: $color-light-green;
             color: white;
         }
@@ -160,7 +162,6 @@
         .product-comment {
             .user-comment {
                 padding-right: 0;
-                font-weight: 100;
             }
             .product-photo {
                 display: none;

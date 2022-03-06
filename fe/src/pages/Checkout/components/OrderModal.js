@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { BsCheck2Circle } from "react-icons/bs";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
 const OrderModal = ({ timeInsecond, orderNumber, OrderDetail }) => {
-  console.log(OrderDetail);
+
   return (
     <div>
       <div className="container-fluid mt-5 order-modal-bgcolor">
