@@ -22,6 +22,11 @@ const passwordRule = [
 //*api/auth/facebook
 router.get("/facebook/token", async (req, res, next) => {});
 //* 註冊：api/auth/register
+router.get("/check", async (req, res, next) => {
+  let [allEmails] = await connection.execute("SELECT email FROM users");
+  let [allPhones] = await connection.execute("SELECT phone FROM users");
+  res.json([allEmails, allPhones]);
+});
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   console.log(req.body);
   //*確認格式是否正確
@@ -123,11 +128,12 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
 // /api/auth/login
 router.post("/login", async (req, res, next) => {
   //TODO: 確認帳號是否存在
-  let [users] = await connection.execute("SELECT * FROM users WHERE email=?", [
-    req.body.email,
-  ]);
-  console.log(users);
-  if (users.length === 0) {
+  let [members] = await connection.execute(
+    "SELECT * FROM users WHERE email=?",
+    [req.body.email]
+  );
+  console.log(members);
+  if (members.length === 0) {
     //沒有查到這個email
     return res.status(404).send({
       code: "33003",
@@ -135,10 +141,10 @@ router.post("/login", async (req, res, next) => {
     });
   }
   //TODO: 如果有這個帳號，再去比對密碼
-  let user = users[0];
+  let member = members[0];
   //TODO: 密碼比對成功，記錄在session
 
-  let result = await argon2.verify(user.password, req.body.password);
+  let result = await argon2.verify(member.password, req.body.password);
   if (!result) {
     //password not match
     return res.status(400).send({
@@ -148,9 +154,9 @@ router.post("/login", async (req, res, next) => {
   }
   // 整理需要的資料
   let returnUser = {
-    id: user.id,
-    name: user.name,
-    headshots: user.headshots ? user.headshots : "",
+    id: member.id,
+    name: member.name,
+    headshots: member.headshots ? member.headshots : "",
   };
   console.log(returnUser);
   // 如果密碼比對成功，記錄在 session

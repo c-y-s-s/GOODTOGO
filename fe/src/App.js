@@ -6,6 +6,7 @@ import axios from "axios";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./styles/index.scss";
+import "antd/dist/antd.css";
 
 // 這邊的資料夾命名方式可以不用指定裡面的 index
 // -------- import pages --------
