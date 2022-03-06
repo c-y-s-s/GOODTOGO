@@ -6,7 +6,7 @@ const Filtercontent = () => {
   return (
     <div>
       <div className="d-flex justify-content-end ">
-        <button
+        {/* <button
           className="background-storebg-data-right-sort me-4"
           type="button"
           data-bs-toggle="dropdown"
@@ -14,7 +14,7 @@ const Filtercontent = () => {
         >
           <FiFilter />
           排序
-        </button>
+        </button> */}
         <NavLink
           type="button"
           className="btn btn-warning mx-3 text-white rounded-pill"
@@ -22,24 +22,20 @@ const Filtercontent = () => {
         >
           新增商品
         </NavLink>
-        <ul className="dropdown-menu background-storebg-data-right-sort-options">
+        {/* <ul className="dropdown-menu background-storebg-data-right-sort-options">
           <li>
-            {/* <a href="#/">價格高到低</a> */}
             <button>價格高到低</button>
           </li>
           <li>
-            {/* <a href="#/">價格低到高</a> */}
             <button>價格低到高</button>
           </li>
           <li>
-            {/* <a href="#/">數量多到少</a> */}
             <button>數量多到少</button>
           </li>
           <li>
-            {/* <a href="#/">數量少到多</a> */}
             <button>數量少到多</button>
           </li>
-        </ul>
+        </ul> */}
       </div>
     </div>
   );
