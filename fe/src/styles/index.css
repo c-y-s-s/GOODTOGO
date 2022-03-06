@@ -5503,6 +5503,10 @@ tr {
 
 .map-bg {
   background-color: #668c4a;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 677px;
 }
 
 .map-bg .map-wrapper {
@@ -5510,31 +5514,92 @@ tr {
 }
 
 .map-bg .map-wrapper .google-map {
-  height: 85vh;
+  height: 677px;
   z-index: 1005;
+}
+
+.map-bg .map-wrapper .google-map .pin .pin-text {
+  opacity: 0;
+  padding: 1rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  border-radius: 3px;
+  background-color: white;
+  color: #666666;
+  font-size: x-large;
+}
+
+.map-bg .map-wrapper .google-map .pin .pin-text .product-left {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 0.3rem 0.6rem;
+  border-radius: 25px;
+  background-color: #d3d3d3;
+}
+
+.map-bg .map-wrapper .google-map .pin .pin-icon:hover + .pin-text {
+  opacity: 1;
 }
 
 .map-bg .map-wrapper .map-search {
   position: absolute;
-  right: 45rem;
-  top: 12rem;
+  right: 32rem;
+  top: 9rem;
   border: 3px solid #668c4a;
   z-index: 1010;
+  background-color: white;
+}
+
+.map-bg .map-wrapper .map-search .toggle-controller {
+  display: none;
 }
 
 .map-bg .map-wrapper .map-search .map-search-icon {
   color: #668c4a;
-  font-size: xx-large;
+  font-size: x-large;
 }
 
 .map-bg .map-wrapper .map-search .search-bar {
-  width: 24rem;
+  width: 20rem;
   height: 3rem;
-  border-color: transparent;
+  margin-left: 0.5rem;
+  border: none;
+  outline: none;
+  font-size: large;
 }
 
 .map-bg .map-side-bar {
   padding: 4rem 0 10rem;
+}
+
+.map-bg .map-side-bar .map-select-bar {
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 0.5rem;
+  width: 16rem;
+  background-color: white;
+  color: #668c4a;
+  border: 4px solid #a6bf4b;
+  border-radius: 3px;
+}
+
+.map-bg .map-side-bar .map-select-bar .cate-option {
+  -webkit-transition: 0.3s;
+  transition: 0.3s;
+}
+
+.map-bg .map-side-bar .map-select-bar .cate-option:hover {
+  background-color: #f2c53d;
+  color: white;
 }
 
 .map-bg .map-side-bar .map-title {
@@ -5606,7 +5671,7 @@ tr {
   -ms-flex-item-align: end;
       align-self: flex-end;
   position: relative;
-  top: -1.2rem;
+  top: -2rem;
   left: 10.35rem;
 }
 
@@ -5626,5 +5691,179 @@ tr {
   height: fit-content;
   font-size: 0.75rem;
   color: #666666;
+}
+
+@media screen and (max-width: 390px) {
+  .map-bg {
+    background-color: #668c4a;
+  }
+  .map-bg .map-wrapper {
+    border: 2px solid red;
+  }
+  .map-bg .map-wrapper .google-map {
+    height: 85vh;
+    z-index: 1005;
+  }
+  .map-bg .map-wrapper .google-map .pin-icon:hover {
+    border: 4px solid blue;
+  }
+  .map-bg .map-wrapper .google-map .pin-text {
+    padding: 1rem;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    border-radius: 3px;
+    background-color: white;
+    color: #666666;
+    font-size: x-large;
+  }
+  .map-bg .map-wrapper .google-map .pin-text .product-left {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 0.3rem 0.6rem;
+    border-radius: 25px;
+    background-color: #d3d3d3;
+  }
+  .map-bg .map-wrapper .map-search {
+    position: relative;
+    right: 0;
+    top: 0;
+    border: 4px solid #668c4a;
+    padding: 0.5rem;
+    z-index: 1010;
+    background-color: #859731;
+  }
+  .map-bg .map-wrapper .map-search .toggle-controller {
+    display: block;
+    color: white;
+    font-size: x-large;
+    -webkit-transform: rotate(90deg);
+            transform: rotate(90deg);
+  }
+  .map-bg .map-wrapper .map-search .map-search-icon {
+    color: #668c4a;
+    font-size: xx-large;
+  }
+  .map-bg .map-wrapper .map-search .search-bar {
+    width: 15rem;
+    height: 3rem;
+    margin-left: 0.5rem;
+    border: none;
+    outline: none;
+    font-size: large;
+  }
+  .map-bg .map-side-bar {
+    padding: 0.3rem 0 10rem;
+  }
+  .map-bg .map-side-bar .map-select-bar {
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 0.5rem;
+    width: 16rem;
+    background-color: white;
+    color: #668c4a;
+    border: 4px solid #a6bf4b;
+    border-radius: 3px;
+  }
+  .map-bg .map-side-bar .map-select-bar .cate-option {
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    z-index: 1050;
+  }
+  .map-bg .map-side-bar .map-select-bar .cate-option:hover {
+    background-color: #f2c53d;
+    color: white;
+  }
+  .map-bg .map-side-bar .map-title {
+    color: white;
+    font-size: x-large;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card {
+    overflow: hidden;
+    background-color: white;
+    width: 263px;
+    height: 359px;
+    border-radius: 0.4rem;
+    padding: 1.6rem 1rem;
+    border-top: 0.54rem solid #a6bf4b;
+    border-bottom: 0.54rem solid #a6bf4b;
+    -webkit-transition: 0.38s;
+    transition: 0.38s;
+    position: relative;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card:hover {
+    -webkit-filter: drop-shadow(0.188rem 0.188rem 10px rgba(112, 108, 108, 0.541));
+            filter: drop-shadow(0.188rem 0.188rem 10px rgba(112, 108, 108, 0.541));
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card .info-img {
+    height: 162px;
+    background-color: gray;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card .info-img img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: cover;
+       object-fit: cover;
+    z-index: 1000;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card .info-img .is-open {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: #a6bf4b;
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 5px;
+    z-index: 1009;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    position: relative;
+    top: -2rem;
+    left: 10.35rem;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card .info-img .is-closed {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    background-color: #b1b1ac;
+    color: white;
+    padding: 0.1rem 0.4rem;
+    border-radius: 5px;
+    z-index: 1009;
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+    position: relative;
+    top: -1.2rem;
+    left: 10.35rem;
+  }
+  .map-bg .map-side-bar .map-store-card .store-info-card .info-title .cate-tag {
+    text-align: center;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    padding: 0.1rem 0.4rem;
+    background-color: #d3d3d3;
+    border-radius: 12px;
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    font-size: 0.75rem;
+    color: #666666;
+  }
 }
 /*# sourceMappingURL=index.css.map */

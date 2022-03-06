@@ -122,7 +122,9 @@ const Register = () => {
         ...fieldErrors,
         email: "輸入格式有誤 example@example.com",
       });
-    } else if (emails.find((v) => Object.values(v)[0] !== e.target.value)) {
+    } else if (
+      emails.find((v) => Object.values(v)[0] === e.target.value.trim())
+    ) {
       setFieldErrors({
         ...fieldErrors,
         email: "這個電子郵件已經有人使用",

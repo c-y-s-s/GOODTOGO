@@ -10,12 +10,14 @@ import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import Swal from "sweetalert2";
 import { IMAGE_URL } from "../utils/config";
 
+import BlankProfile from "../images/nohead.jpeg";
+
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
   const navigate = useNavigate();
   const swal = Swal.mixin({
     customClass: {
-      confirmButton: " btn confirmbtn ms-2 me-2",
+      confirmButton: "btn confirmbtn ms-2 me-2",
       cancelButton: "btn cancelbtn ms-2 me-2",
     },
     buttonsStyling: false,
@@ -98,8 +100,16 @@ const _popover = () => {
       >
         {loginMember ? (
           <img
-            className="navbar-profile-pic"
-            src={IMAGE_URL + loginMember.headshots}
+            className={
+              loginMember.headshots !== ""
+                ? "navbar-profile-pic"
+                : "navbar-profile-pic-empty"
+            }
+            src={
+              loginMember.headshots !== ""
+                ? IMAGE_URL + loginMember.headshots
+                : BlankProfile
+            }
             alt="profile"
           />
         ) : (

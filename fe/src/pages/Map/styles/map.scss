@@ -10,7 +10,7 @@
       z-index: 1005;
       .pin {
         .pin-text {
-          opacity: 1;
+          opacity: 0;
           padding: 1rem;
           width: max-content;
           height: fit-content;
@@ -28,11 +28,11 @@
             background-color: $color-light-grey;
           }
         }
+        //!hover 標籤要出來
+        .pin-icon:hover + .pin-text {
+          opacity: 1;
+        }
       }
-    }
-    //!hover 標籤要出來
-    .pin-icon:hover {
-      border: 5px solid red;
     }
 
     .map-search {
