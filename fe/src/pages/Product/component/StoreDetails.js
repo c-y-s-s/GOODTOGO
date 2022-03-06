@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from "uuid";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-
+import { ReactComponent as Subtract } from "../images/Subtract.svg";
 const StoreDetails = ({
   storeId,
   storeData,
