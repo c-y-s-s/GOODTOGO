@@ -4,11 +4,12 @@ const connection = require("../utils/db");
 const moment = require("moment");
 moment.locale("zh-tw");
 
-router.get("/location", async (req, res, next) => {
+router.get("/info", async (req, res, next) => {
   let [location] = await connection.execute(
     `SELECT longitude AS lng, latitude AS lat, store_id FROM map `
   );
   let [category] = await connection.execute("SELECT * FROM stores_category");
+  category.unshift({ id: 0, category: "全部店家", valid: 1 });
   let [likeResult] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
     FROM user_like
@@ -103,8 +104,8 @@ router.get("/location", async (req, res, next) => {
   let thaiFood = storeResult.filter((v) => Object.values(v)[6] === "泰式");
   let vegan = storeResult.filter((v) => Object.values(v)[6] === "蔬食");
   let western = storeResult.filter((v) => Object.values(v)[6] === "西式");
-  console.log("thaiFood", thaiFood);
 
-  res.json([location, category]);
+  console.log("thaiFood");
+  res.json([storeResult, category]);
 });
 module.exports = router;
