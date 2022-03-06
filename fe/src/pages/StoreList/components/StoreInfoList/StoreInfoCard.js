@@ -88,34 +88,36 @@ const StoreInfoCard = (props) => {
                 key={item.id}
                 className="store-info-card shadow d-flex align-items-center"
               >
-                <div className="info-img col-12">
-                  <img
-                    src={require(`../../../../images/store_img/${item.logo}`)}
-                    alt="logo"
-                  />
+                <Link to={`/store/${item.id}`} className="no-link">
+                  <div className="info-img col-12">
+                    <img
+                      src={require(`../../../../images/store_img/${item.logo}`)}
+                      alt="logo"
+                    />
 
-                  <div
-                    className={`${
-                      item.opState === false ? "is-closed" : "is-open"
-                    }`}
-                  >
-                    {item.opState === false ? "休息中" : "營業中"}
+                    <div
+                      className={`${
+                        item.opState === false ? "is-closed" : "is-open"
+                      }`}
+                    >
+                      {item.opState === false ? "休息中" : "營業中"}
+                    </div>
                   </div>
-                </div>
-                <div className="info-title mt-3 d-flex justify-content-between col-12">
-                  <span className="text-dark-grey input-label-title">
-                    {item.name.split(" ")[0]}
-                    <br />
-                    <span className="text-dark-grey detail-sm">
-                      {space === true ? item.name.split(" ")[1] : <div />}
-                      {/* 開發中才開啟 */}
-                      {item.close_day}
-                      {/* 實際不會用到 */}
+                  <div className="info-title mt-3 d-flex justify-content-between col-12">
+                    <span className="text-dark-grey input-label-title">
+                      {item.name.split(" ")[0]}
+                      <br />
+                      <span className="text-dark-grey detail-sm">
+                        {space === true ? item.name.split(" ")[1] : <div />}
+                        {/* 開發中才開啟 */}
+                        {item.close_day}
+                        {/* 實際不會用到 */}
+                      </span>
                     </span>
-                  </span>
 
-                  <div className="cate-tag">{item.category}</div>
-                </div>
+                    <div className="cate-tag">{item.category}</div>
+                  </div>
+                </Link>
                 <div className="info-detail col-12 text-dark-grey detail-sm d-flex align-items-center justify-content-between flex-wrap mt-2">
                   <div className=" d-flex align-items-center">
                     <AiOutlineClockCircle className="me-1" /> {item.open_time} -{" "}
