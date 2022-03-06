@@ -15,12 +15,15 @@ import { API_URL } from "../../utils/config";
 const MapPage = () => {
   //儲存脞有店家資料
   const [storeList, setStoreList] = useState([]);
+  // console.log("storeListO_O",storeList);
   //要顯示到map上的店家
   const [displayStoreList, setDisplayStoreList] = useState([]);
+//  console.log("displayStoreListO_O", displayStoreList);
   //儲存所有分類
   const [category, setCategory] = useState();
   //下拉式選單顯示選到的
   const [showCategory, setShowCategory] = useState("全部店家");
+ 
   const [showIsOpen, setShowIsOpen] = useState("營業中店家");
   //下拉式表單開關
   const [cateListShowSwitch, setcateListShowSwitch] = useState(false);
@@ -32,6 +35,9 @@ const MapPage = () => {
   const [filterCategory, setFilterCategory] = useState();
   const [storeLocation, setStoreLocation] = useState();
 
+  // ! 取得點擊到的storeID
+   const [clickStoreId, setClickStoreId] = useState("");
+   console.log("yoyoyoyo", clickStoreId);
   // const location = {
   //   address: "320桃園市中壢區新生路二段421號",
   //   lat: 24.985128,
@@ -46,8 +52,9 @@ const MapPage = () => {
       // let productAmount = storesRes.data[4];
       // let storeStarsCount = storesRes.data[5];
       // setCategory(category);
-      console.log("cat", storesRes.data);
+      // console.log("cat", storesRes.data);
       setStoreList(storesRes.data[0]);
+      setDisplayStoreList(storesRes.data[0]);
       setCategory(storesRes.data[1]);
     };
     getStores();
@@ -55,9 +62,9 @@ const MapPage = () => {
   const handleKeywordChange = (e) => {
     setKeyword(e.target.value);
   };
-  console.log("選到的類別", storeList);
+  // console.log("選到的類別", storeList);
   const showCategoryList = () => {
-    console.log("click");
+    // console.log("click");
 
     // return category.map((c) => <li>{c.category}</li>);
   };
@@ -84,7 +91,12 @@ const MapPage = () => {
           <HiOutlineAdjustments className="toggle-controller me-2" />
         </div>
         <div className="google-map col-lg-12">
-          <Map displayStoreList={displayStoreList} zoomLevel={12} />
+          <Map
+            displayStoreList={displayStoreList}
+            zoomLevel={12}
+            setClickStoreId={setClickStoreId}
+          />
+          {/* {console.log("ssss",displayStoreList)} */}
         </div>
       </div>
       <div className="map-side-bar col-lg-4 text-center d-flex flex-column">
@@ -170,9 +182,11 @@ const MapPage = () => {
                       onClick={() => {
                         setShowCategory(c.category);
                         setDisplayStoreList(
-                          [...storeList].filter(
-                            (v) => v.category === c.category
-                          )
+                          [...storeList].filter((v) => {
+                            return c.category === "全部店家"
+                              ? v
+                              : v.category === c.category;
+                          })
                         );
                       }}
                     >
@@ -189,7 +203,7 @@ const MapPage = () => {
           </ul>
 
           <div className="map-store-card mt-lg-5">
-            <StoreForMap />
+            <StoreForMap clickStoreId={clickStoreId} />
           </div>
         </div>
       </div>
