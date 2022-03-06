@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { GoLocation } from "react-icons/go";
+import { MdLocationPin } from "react-icons/md";
 import { ReactComponent as Pin } from "../images/pin_map.svg";
 
 const LocationPin = (props) => {
@@ -13,7 +13,7 @@ const LocationPin = (props) => {
         </div>
         <div className="product-left mt-2">剩餘: {props.amount}</div>
       </p>
-      <Pin
+      <MdLocationPin
         role="button"
         className="pin-icon"
         onClick={() => {

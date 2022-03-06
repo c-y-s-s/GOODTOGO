@@ -9,6 +9,21 @@
       height: 677px;
       z-index: 1005;
       .pin {
+        .pin-icon {
+          color: $color-yellow;
+          font-size: xx-large;
+          transition: 0.3s;
+          &:hover {
+            animation: pin-hover 0.6 infinite linear;
+          }
+          @keyframes pin-hover {
+            0% {
+            }
+            100% {
+              transform: translateY(1rem);
+            }
+          }
+        }
         .pin-text {
           opacity: 0;
           padding: 1rem;
@@ -29,128 +44,128 @@
           }
         }
         //!hover 標籤要出來
-        .pin-icon:hover + .pin-text {
-          opacity: 1;
-        }
-      }
-    }
-
-    .map-search {
-      position: absolute;
-      right: 32rem;
-      top: 9rem;
-      border: 3px solid $color-green;
-      z-index: 1010;
-      background-color: white;
-      .toggle-controller {
-        display: none;
-      }
-      .map-search-icon {
-        color: $color-green;
-        font-size: x-large;
-      }
-      .search-bar {
-        width: 20rem;
-        height: 3rem;
-        margin-left: 0.5rem;
-        border: none;
-        outline: none;
-        font-size: large;
+        // .pin-icon:hover + .pin-text {
+        //   opacity: 1;
+        // }
       }
     }
   }
-  .map-side-bar {
-    padding: 4rem 0 10rem;
-    .map-select-bar {
-      height: fit-content;
-      padding: 0.5rem;
-      width: 16rem;
-      background-color: white;
-      color: $color-green;
-      border: 4px solid $color-light-green;
-      border-radius: 3px;
-      .cate-option {
-        transition: 0.3s;
-        &:hover {
-          background-color: $color-yellow;
-          color: white;
-        }
-      }
+  .map-search {
+    position: absolute;
+    right: 32rem;
+    top: 9rem;
+    border: 3px solid $color-green;
+    z-index: 1010;
+    background-color: white;
+    .toggle-controller {
+      display: none;
     }
-    .map-title {
-      color: white;
+    .map-search-icon {
+      color: $color-green;
       font-size: x-large;
     }
-    .map-store-card {
-      .store-info-card {
-        overflow: hidden;
-        background-color: white;
-        width: 263px;
-        height: 359px;
-        border-radius: 0.4rem;
-        padding: 1.6rem 1rem;
-        border-top: 0.54rem solid $color-light-green;
-        border-bottom: 0.54rem solid $color-light-green;
-        transition: 0.38s;
-        position: relative;
-        flex-direction: column;
-        &:hover {
-          @include drop-shadow-dark;
-        }
+    .search-bar {
+      width: 20rem;
+      height: 3rem;
+      margin-left: 0.5rem;
+      border: none;
+      outline: none;
+      font-size: large;
+    }
+  }
+}
+.map-side-bar {
+  padding: 4rem 0 10rem;
+  .map-select-bar {
+    height: fit-content;
+    padding: 0.5rem;
+    width: 16rem;
+    background-color: white;
+    color: $color-green;
+    border: 4px solid $color-light-green;
+    border-radius: 3px;
+    .cate-option {
+      transition: 0.3s;
+      &:hover {
+        background-color: $color-yellow;
+        color: white;
+      }
+    }
+  }
+  .map-title {
+    color: white;
+    font-size: x-large;
+  }
+  .map-store-card {
+    .store-info-card {
+      overflow: hidden;
+      background-color: white;
+      width: 263px;
+      height: 359px;
+      border-radius: 0.4rem;
+      padding: 1.6rem 1rem;
+      border-top: 0.54rem solid $color-light-green;
+      border-bottom: 0.54rem solid $color-light-green;
+      transition: 0.38s;
+      position: relative;
+      flex-direction: column;
+      &:hover {
+        @include drop-shadow-dark;
+      }
 
-        .info-img {
-          // width: 233px;
-          height: 162px;
-          background-color: gray;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1000;
-          }
-          .is-open {
-            width: fit-content;
-            background-color: $color-light-green;
-            color: white;
-            padding: 0.1rem 0.4rem;
-            border-radius: 5px;
-            z-index: 1009;
-            align-self: flex-end;
-            position: relative;
-            top: -2rem;
-            left: 10.35rem;
-          }
-          .is-closed {
-            width: fit-content;
-            background-color: $color-grey;
-            color: white;
-            padding: 0.1rem 0.4rem;
-            border-radius: 5px;
-            z-index: 1009;
-            align-self: flex-end;
-            position: relative;
-            top: -2rem;
-            left: 10.35rem;
-          }
+      .info-img {
+        // width: 233px;
+        height: 162px;
+        background-color: gray;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 1000;
         }
-        .info-title {
-          // width: 233px;
-          .cate-tag {
-            text-align: center;
-            align-items: center;
-            padding: 0.1rem 0.4rem;
-            background-color: $color-light-grey;
-            border-radius: 12px;
-            width: fit-content;
-            height: fit-content;
-            font-size: $fz-ss-sm;
-            color: $color-dark-grey;
-          }
+        .is-open {
+          width: fit-content;
+          background-color: $color-light-green;
+          color: white;
+          padding: 0.1rem 0.4rem;
+          border-radius: 5px;
+          z-index: 1009;
+          align-self: flex-end;
+          position: relative;
+          top: -2rem;
+          left: 10.35rem;
+        }
+        .is-closed {
+          width: fit-content;
+          background-color: $color-grey;
+          color: white;
+          padding: 0.1rem 0.4rem;
+          border-radius: 5px;
+          z-index: 1009;
+          align-self: flex-end;
+          position: relative;
+          top: -2rem;
+          left: 10.35rem;
+        }
+      }
+      .info-title {
+        // width: 233px;
+        .cate-tag {
+          text-align: center;
+          align-items: center;
+          padding: 0.1rem 0.4rem;
+          background-color: $color-light-grey;
+          border-radius: 12px;
+          width: fit-content;
+          height: fit-content;
+          font-size: $fz-ss-sm;
+          color: $color-dark-grey;
         }
       }
     }
   }
 }
+
 @media screen and (max-width: 390px) {
   .map-bg {
     background-color: $color-green;
