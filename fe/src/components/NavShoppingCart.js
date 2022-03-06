@@ -24,7 +24,7 @@ const NavShoppingCart = ({
   useEffect(() => {
     let getShoppingData = async () => {
       let ShoppingDataResponse = await axios.get(
-        `${API_URL}/shop/shoppingcar/1`
+        `${API_URL}/shop/shoppingcar/${loginMember.id}`
       );
       setNavShoppingCartData(ShoppingDataResponse.data);
       setShoppingCartTotalPages(ShoppingDataResponse.data.length);

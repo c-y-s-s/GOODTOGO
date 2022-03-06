@@ -38,7 +38,7 @@ const Navbar = (props) => {
               navshoppingDeleteParameter={props.navshoppingDeleteParameter}
             />
           </Link>
-
+          <MenuToggle />
           <div className="side-menu"></div>
         </div>
         {/* RWD專用漢堡menu end */}

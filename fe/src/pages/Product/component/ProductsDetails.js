@@ -14,7 +14,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- 商品光箱 --------
 import Swal from "sweetalert2";
-
+import { useAuth } from "../../../context/auth";
 const ProductsDetails = ({
   setOpenProductsModal,
   openProductsModaID,
@@ -23,7 +23,7 @@ const ProductsDetails = ({
   setisModalTouch,
 }) => {
   const { storeId } = useParams();
-
+  const { loginMember } = useAuth();
   //  存指定 ID 商品的評論
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
@@ -35,7 +35,7 @@ const ProductsDetails = ({
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
     store_id: storeId,
-    user_id: 1,
+    user_id: loginMember.id,
     products_id: openProductsModaID,
     amount: 1,
   });

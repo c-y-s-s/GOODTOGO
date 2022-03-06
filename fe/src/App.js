@@ -28,14 +28,18 @@ import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
 import ShoppingCart from "./pages/shoppingcart";
 import CheckOut from "./pages/Checkout";
+import { useAuth } from "../src/context/auth";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
+
+  
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
-
+  // console.log("11111111111", loginMember.id);
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
-  console.log(isModalTouch);
+  // console.log("aaaaaaaaa",isModalTouch);
+
   // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
   const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
     useState(0);
@@ -44,10 +48,11 @@ function App() {
   // 結帳所需 data
   const [checkoutData, setCheckoutData] = useState({
     //!整合須改為目前登入者 id
-    userId: 1,
+    userId: "1",
     storeId: "",
     paymentMethod: "1",
   });
+  console.log("哈囉",checkoutData);
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 // import CheckoutProducts from "./compoments/CheckoutProducts";
 import { API_URL } from "../../utils/config";
@@ -14,12 +14,16 @@ import { RiVisaLine } from "react-icons/ri";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
+import { useAuth } from "../../context/auth";
 
 const Checkout = ({
   checkoutData,
   setNavShoppingDeleteParameter,
   navshoppingDeleteParameter,
 }) => {
+  const {loginMember} = useAuth()
+// console.log(typeof loginMember.id.toString());
+  
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -34,7 +38,7 @@ const Checkout = ({
   // 後端訂單所需要資料物件
   const [OrderDetail, setOrderDetail] = useState({
     id: "",
-    userId: "1",
+    userId: loginMember.id,
     storeId: checkoutData.storeId,
     statusId: "1",
     paymentMethod: checkoutData.paymentMethod,

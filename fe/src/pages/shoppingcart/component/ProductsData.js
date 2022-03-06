@@ -6,7 +6,7 @@ import { API_URL } from "../../../utils/config";
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-
+import { useAuth } from "../../../context/auth";
 const ProductsData = ({
   storeid,
   setDeleteLive,
@@ -15,14 +15,14 @@ const ProductsData = ({
   priceTotal,
   setNavShoppingDeleteParameter,
   navshoppingDeleteParameter,
+  loginMemberId,
 }) => {
-  
+  const { loginMember } = useAuth();
   //存目前登入使用者的購物車資料
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
-
+  console.log("123~~~~~~~~~", loginMemberId);
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
-
 
   async function handleMinus(item) {
     //點到就刷新 商品表 api
@@ -60,9 +60,8 @@ const ProductsData = ({
   // 撈使用者所有購物車資料裡面符合 storeid 的商品資料
   useEffect(() => {
     let getShoppingProductsData = async () => {
-      //撈指定 ID 商品的評論
       let shoppingProductsDataResponse = await axios.get(
-        `${API_URL}/shop/shoppingcar/1/${storeid}`
+        `${API_URL}/shop/shoppingcar/${loginMemberId}/${storeid}`
       );
       setSpecifyProductsData(shoppingProductsDataResponse.data);
     };
