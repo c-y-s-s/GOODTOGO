@@ -13,6 +13,7 @@ import axios from "axios";
 import { API_URL } from "../../../utils/config";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
+import { IMAGE_URL } from "../../../utils/config";
 // -------- 商品評論 --------
 const StoreProductsComment = () => {
 
@@ -73,7 +74,7 @@ const StoreProductsComment = () => {
     getComment();
         setTimeout(() => {
           setIsLoading(false);
-        }, 100);
+        }, 300);
   }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
 
   // productsComment.map((item) => {
@@ -159,6 +160,7 @@ const StoreProductsComment = () => {
             </div>
           </div>
           {productsComment.map((item) => {
+            console.log()
             return (
               <div className="col-12 mt-3 product-comment" key={uuidv4()}>
                 <div className="d-flex justify-content-between ">
@@ -167,7 +169,7 @@ const StoreProductsComment = () => {
                       <div className="user-photo mt-3">
                         <img
                           className="cover-photo"
-                          src={require(`../../../images/store_img/01.jpg`)}
+                          src={IMAGE_URL + item.headshots}
                           alt=""
                         />
                       </div>
