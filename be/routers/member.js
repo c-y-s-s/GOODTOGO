@@ -171,6 +171,7 @@ router.get("/profile", async (req, res, next) => {
     photo: data[0].headshots,
     // photo: req.session.member.photo,
   };
+  console.log("profile", profile);
   res.json({ profile, emails, likes, orders });
 });
 

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useAuth } from "../../../context/auth";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
@@ -9,7 +10,8 @@ import Swal from "sweetalert2";
 const UserProfile = (props) => {
   // console.log(props);
 
-  // const { member, setMember } = useAuth();
+  const { loginMember, setLoginMember } = useAuth();
+  console.log("loginMember", loginMember);
 
   // 儲存載入的使用者資料，比對 email 用
   const [userEmail, setUserEmail] = useState("");
@@ -48,6 +50,10 @@ const UserProfile = (props) => {
       console.log(
         "api/member/profile(get) response.data.profile: ",
         response.data.profile
+      );
+      console.log(
+        "api/member/profile(get) response.data.profile.photo: ",
+        response.data.profile.photo
       );
       console.log(
         "api/member/profile(get) response.data.profile.email: ",
@@ -115,7 +121,7 @@ const UserProfile = (props) => {
 
   // -------- 使用者預覽上傳圖片 --------
   const handleOnPreview = (e) => {
-    console.log(remove)
+    console.log(remove);
     const file = e.target.files[0]; // 抓取上傳的圖片
     const reader = new FileReader(); // 讀取 input type="file" 的 file
     reader.addEventListener(
@@ -191,9 +197,12 @@ const UserProfile = (props) => {
       // 更新資料於 index.js 姓名、頭貼(儲存後)
       props.setUserName(response.data.name);
       props.setHeadShot(response.data.photo);
+
+      // 更新頭貼於 navbar
+      setLoginMember({ ...loginMember, photo: response.data.photo });
     } catch (e) {
       // 不同錯誤訊息另外包state存，先判斷進來的是什麼號碼=某種錯誤，去客製化
-      console.error("會員修改資料 error: ", ERR_MSG[e.response.data.code]);
+      // console.error("會員修改資料 error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
       // setErr(e.response.data.msg);
     }

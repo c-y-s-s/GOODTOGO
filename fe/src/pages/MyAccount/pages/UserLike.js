@@ -215,6 +215,10 @@ const UserLike = (props) => {
                         <Link
                           to={"/store/" + item.storeId}
                           className="text-decoration-none card_Link"
+                          onClick={(e) => {
+                            // e.preventDefault()
+                            // e.stopPropagation();
+                          }}
                         >
                           <div className="store_Card position-relative">
                             {/* 卡片的內容 */}
@@ -280,8 +284,10 @@ const UserLike = (props) => {
                                 </div>
                                 {/* 愛心 */}
                                 <div
-                                  onClick={() => {
+                                  onClick={(e) => {
                                     // alert(item.storeId);
+                                    // 阻止點擊愛心後，也點進卡片的店家連結
+                                    e.preventDefault();
                                     if (likeStoreIds.includes(item.storeId)) {
                                       // remove
                                       setLikeStoreIds(
