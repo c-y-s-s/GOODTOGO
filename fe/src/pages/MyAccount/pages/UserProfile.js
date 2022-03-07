@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
-import { FiFolder } from "react-icons/fi";
+import { FiFolder, FiX } from "react-icons/fi";
 import Swal from "sweetalert2";
 
 const UserProfile = (props) => {
@@ -26,6 +26,9 @@ const UserProfile = (props) => {
 
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
+
+  // 有無移除圖片
+  const [remove, setRemove] = useState(false);
 
   // 錯誤訊息開關
   const [err, setErr] = useState({
@@ -112,6 +115,7 @@ const UserProfile = (props) => {
 
   // -------- 使用者預覽上傳圖片 --------
   const handleOnPreview = (e) => {
+    console.log(remove)
     const file = e.target.files[0]; // 抓取上傳的圖片
     const reader = new FileReader(); // 讀取 input type="file" 的 file
     reader.addEventListener(
@@ -126,12 +130,26 @@ const UserProfile = (props) => {
     if (file) {
       reader.readAsDataURL(file);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+
+      // 移除圖片關閉
+      setRemove(false);
     }
     console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
     console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     setMember({ ...member, [e.target.name]: e.target.files[0] });
     // member.photo
   };
+
+  // 使用者移除上傳圖片
+  function handleRemoveImg() {
+    setImageSrc("");
+    // console.log(imageSrc)
+    // 有移除圖片
+    setRemove(true);
+    setMember({ ...member, photo: "" });
+    // console.log(remove);
+    // console.log(member.photo);
+  }
 
   // -------- 修改會員資料進資料庫 --------
   // 發 http request 到後端 -> axios
@@ -143,9 +161,15 @@ const UserProfile = (props) => {
       formData.append("name", member.name);
       formData.append("email", member.email);
       formData.append("phone", member.phone);
-      formData.append("photo", member.photo ? member.photo : "");
+      // 是否有移除圖片
+      remove
+        ? formData.append("photo", "remove")
+        : formData.append("photo", member.photo ? member.photo : "");
       // 若沒有新上傳圖片 member.photo 為 db head shot
       // 若 db head shot ="" 則上傳 ""
+      // console.log(remove);
+      // console.log(formData.get("photo"));
+      // console.log(member.photo);
 
       // http://localhost:3002/api/member/profile/edit (router.post)
       let response = await axios.post(
@@ -318,7 +342,7 @@ const UserProfile = (props) => {
             <div className="col-lg-5 order-1 order-lg-2 d-flex d-lg-block justify-content-center align-items-center">
               <div className="user_Upload_Img ms-4 ms-lg-0 my-4 mt-lg-4 d-flex d-lg-block align-items-center">
                 {/* user head shot */}
-                <div>
+                <div className="position-relative">
                   <div className="headShot">
                     <img
                       src={
@@ -332,6 +356,13 @@ const UserProfile = (props) => {
                       alt="head shot"
                       className="cover-fit"
                     />
+                  </div>
+                  <div
+                    className="user_Remove_Img_Btn d-flex align-items-center"
+                    onClick={handleRemoveImg}
+                  >
+                    <FiX className="user_Remove_Img_X" />
+                    <span className="fz-sm ms-1 ls-sm">移除圖片</span>
                   </div>
                 </div>
                 <div className="d-block">

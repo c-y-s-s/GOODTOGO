@@ -221,7 +221,11 @@ router.post(
     // console.log("前端送來、multer中間件處理過 req.file: ", req.file);
     let filename = req.file
       ? "/static/uploads/headshots/" + req.file.filename
+      : req.body.photo === "remove"
+      ? ""
       : req.session.member.photo;
+    // 是否有移除圖片
+    console.log("remove???", req.body.photo);
     // console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
@@ -669,8 +673,6 @@ router.get("/like", async (req, res, next) => {
   // 新增 "全部" 類別
   storeCategories.unshift({ categoryId: 0, category: "全部" });
   // console.log(storeCategories);
-
-  // FIXME: 若沒有資料給前端會壞掉
 
   // 傳送使用者喜愛店家清單、喜愛店家 storeId 列表
   res.json({ userLikeStores, likeStoreIds, storeCategories });

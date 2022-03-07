@@ -233,9 +233,13 @@
   padding-bottom: 0.45rem;
   letter-spacing: $ls-md;
   color: $color-dark-grey;
+  // 移除表單瀏覽器自動填入藍底
+  box-shadow: 0 0 0px 1000px white inset;
   &:focus {
-    box-shadow: none;
+    // box-shadow: none;
     border-color: $color-green;
+    // 移除表單瀏覽器自動填入藍底
+    box-shadow: 0 0 0px 1000px white inset;
   }
 }
 
@@ -287,7 +291,36 @@
     border-radius: 50%;
     margin: 0 auto;
     overflow: hidden;
+    cursor: pointer;
+    &:hover + .user_Remove_Img_Btn {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
   }
+}
+.user_Remove_Img_Btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: $color-dark-grey;
+  transition: 0.3s;
+  // border: solid 1px $color-green;
+  padding: 2px 3px;
+  background-color: rgba($color: #fff, $alpha: 0.7);
+  border-radius: 3px;
+  opacity: 0;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
+    background-color: rgba($color: $color-grey, $alpha: 0.7);
+    color: #fff;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+.user_Remove_Img_X {
+  width: 18px;
+  height: 18px;
 }
 
 .btn.btn_Upload {
@@ -576,7 +609,7 @@ h4.store_Title {
   transform: translateY(0.8px);
 }
 .store_Score {
-  margin: 12px 0;
+  margin: 10px 0;
   span.store_Star {
     font-size: 22px;
     color: $color-yellow;
