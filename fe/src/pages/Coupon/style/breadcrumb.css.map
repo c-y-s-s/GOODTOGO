@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EACjC,AAAA,kBAAkB,CAAC;IACjB,OAAO,EAAE,IAAI;IACb,eAAe,EAAE,MAAM;GACxB",
+    "sources": [
+        "breadcrumb.scss"
+    ],
+    "names": [],
+    "file": "breadcrumb.css"
+}

@@ -11,11 +11,15 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+
+
 //判斷會員下拉選單是登入 or 未登入的
 
 // const Navbar = ({ auth, isAdmin }) => {
+  // 判斷後台不用頁首頁尾
+  
   const Navbar = (props) => {
-    // 判斷後台不用頁首頁尾
+  // if (isAdmin) return <></>;
 
   return (
     <div className="container-fluid navbar justify-content-center sticky-top shadow">

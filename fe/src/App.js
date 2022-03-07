@@ -45,8 +45,11 @@ function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
   const [loginSeller, setLoginSeller] = useState(null);
+
+  // todo 修改  navbar顯示方式判斷↓↓
   const [auth, setAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
+  // todo 修改  navbar顯示方式判斷↑↑
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
