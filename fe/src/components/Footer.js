@@ -7,7 +7,7 @@ const Footer = (props) => {
   if(props.isAdmin) return <></>
 
   return (
-    <footer className="container-fluid">
+    <footer className="container-fluid"  id="footer">
       <div className="row justify-content-center">
         <div className="col-lg-10 col-sm-9 footer-content">
           <div className="footer-top row justify-content-between">
