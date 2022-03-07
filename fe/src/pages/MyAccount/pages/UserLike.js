@@ -212,7 +212,10 @@ const UserLike = (props) => {
                         key={item.storeId}
                         className="col col-lg-6 col-xl-4 my-4 d-flex justify-content-center flex-wrap"
                       >
-                        <Link to="" className="text-decoration-none card_Link">
+                        <Link
+                          to={"/store/" + item.storeId}
+                          className="text-decoration-none card_Link"
+                        >
                           <div className="store_Card position-relative">
                             {/* 卡片的內容 */}
                             <div className="px-4 pt-4 pb-3 h-100">
