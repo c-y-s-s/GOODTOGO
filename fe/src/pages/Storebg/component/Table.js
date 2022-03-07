@@ -13,12 +13,16 @@ import { FiMoreVertical } from "react-icons/fi";
 import { v4 as uuidv4 } from "uuid";
 // 光箱
 import CheckModal from "./CheckModel";
+import { useAuth } from "../../../context/auth";
 
 const Table = () => {
+  const { loginSeller } = useAuth();
   // 店家商品列表
   const [productsData, setproductsData] = useState([]);
   // 取得頁數
+  const { productId } = useParams();
   const { currentPage } = useParams();
+
   //按下上架刷新 API
   const [modalSwitch, setModalSwitch] = useState("");
 
@@ -27,13 +31,15 @@ const Table = () => {
   const [lastPage, setLastPage] = useState(1);
   // let page = parseInt(currentPage, 10) || 1;
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
+  console.log("productId", productId);
   // console.log("currentPage", currentPage, page);
+
 
   useEffect(() => {
     let getPrices = async () => {
       // 預設 created_at DESC
       let response = await axios.get(
-        `${API_URL}/storebg/productslist?page=${page}`
+        `${API_URL}/storebg/productslist?store_id=${loginSeller.id}?page=${page}`,
       );
       // 價錢 DESC
       // let productsPriceDescResponse = await axios.get(
@@ -51,6 +57,7 @@ const Table = () => {
       // let productsAmountAscResponse = await axios.get(
       //   `${API_URL}/storebg/productsamountasc?page=${page}`
       // );
+      // console.log("test1111111111111111111", response.data);
 
       let productsListPage = response.data[0];
       // console.log("productsListPage", productsListPage);
@@ -65,7 +72,7 @@ const Table = () => {
       // setLastPage(response.data.pagination.lastPage);
     };
     getPrices();
-  }, [page, modalSwitch]);
+  }, [page, modalSwitch,loginSeller]);
 
   //計算頁面總數量並顯示頁碼，該頁碼
   let navigate = useNavigate();
@@ -158,15 +165,15 @@ const Table = () => {
                   />
                 </td>
                 <td>
-                  <button
+                  {/* <button
                     className="background-storebg-data-right-sort "
                     type="button"
                     data-bs-toggle="dropdown"
-                    aria-expanded="false"
+                    aria-expanded="true"
                   >
                     <FiMoreVertical />
-                  </button>
-                  <ul className="dropdown-menu background-storebg-data-right-sort-options ">
+                  </button> */}
+                  <ul className="background-storebg-data-right-sort-options ">
                     <div className="navLink-g-color">
                       <NavLink
                         type="button"
