@@ -10,7 +10,7 @@ import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import Swal from "sweetalert2";
 import { IMAGE_URL } from "../utils/config";
 
-import BlankProfile from "../images/nohead.jpeg";
+import BlankProfile from "../images/headShot.png";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
@@ -58,7 +58,7 @@ const _popover = () => {
         </Link>
       </div>
       <div className="popover-item text-center">
-        <Link to="＃" className="nav-popover-link">
+        <Link to="/storelogin" className="nav-popover-link">
           店家登入
         </Link>
       </div>
