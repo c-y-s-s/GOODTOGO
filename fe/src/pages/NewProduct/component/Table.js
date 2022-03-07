@@ -12,8 +12,12 @@ import axios from "axios";
 import { ERR_MSG } from "../../../utils/error";
 import moment from "moment";
 import "moment/min/locales";
+import { useAuth } from "../../../context/auth";
 
 const Table = () => {
+  const { loginSeller } = useAuth();
+    // console.log("loginSellerloginSellerloginSellerloginSellerloginSeller",loginSeller);
+
   // 抓出目前時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   const [productsUpdate, setProductsUpdate] = useState([]);
@@ -25,7 +29,7 @@ const Table = () => {
   // console.log(productsUpdate);
   const { productId } = useParams();
   const [product, setProduct] = useState({
-    storeId: "1",
+    storeId: loginSeller.id,
     productSelected: "",
     productName: "",
     productImg: "",
@@ -84,9 +88,9 @@ const Table = () => {
       formData.append("due_time", product.salesTimeEnd);
       formData.append("created_at", product.createdAt);
 
-      for (var pair of formData.entries()) {
-        console.log(pair);
-      }
+      // for (var pair of formData.entries()) {
+      //   console.log(pair);
+      // }
 
       let response = await axios.post(
         `${API_URL}/storebgaddproduct/newproduct`,
