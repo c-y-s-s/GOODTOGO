@@ -66,12 +66,6 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
-            <div className="shopping-cart-number">1</div>
-            <ShoppingBag className="shopping-cart-icon" />
-            <div className="shopping-cart-products">1</div>
-          </Link> */}
-
           {/* 連結至 nav 以及 nav 下滑區塊 */}
           <Link to="/shoppingcart" className="nav-icon">
             <div className="shopping-cart-icon-total-page">
