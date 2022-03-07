@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Popover from "./_popover";
 import MenuToggle from "./_menuToggle";
@@ -12,21 +12,20 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 
+
 //判斷會員下拉選單是登入 or 未登入的
 
 // const Navbar = ({ auth, isAdmin }) => {
-// 判斷後台不用頁首頁尾
-const paths = ["/storebg", "/newproduct", "/productedit"];
-
-const Navbar = (props) => {
+  // 判斷後台不用頁首頁尾
+  
+  const Navbar = (props) => {
   // if (isAdmin) return <></>;
-  const { location } = useLocation();
 
   return (
     <div className="container-fluid navbar justify-content-center sticky-top shadow" id="navbar">
       <div className="nav-content">
         <div>
-          <Link to="/stores">
+          <Link to="/">
             <Logo className="nav-logo" />
           </Link>
         </div>
@@ -72,8 +71,7 @@ const Navbar = (props) => {
           </Link>
         </div>
       </div>
-    </div>
-  );
-};
+    </div>)
+    };
 
 export default Navbar;
