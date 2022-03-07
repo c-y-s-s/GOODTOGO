@@ -51,7 +51,7 @@ import Register from "../pages/Register";
           >
             立即訂購
           </Link>
-          <Link to="/joinus" className="nav-link">
+          <Link to="/StoreCheck" className="nav-link">
             店家申請
           </Link>
           {/* <Link to="/faq" className="nav-link">

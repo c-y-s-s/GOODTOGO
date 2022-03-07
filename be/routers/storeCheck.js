@@ -57,7 +57,7 @@ const registerRules = [
     // 過濾 檔案尺寸
     limits: {
       // 1K: 1024 bytes
-      fileSize: 1024 * 1024, // 限制 < 200K
+      fileSize: 2048 * 1024, // 限制 < 200K
     },
   });
 

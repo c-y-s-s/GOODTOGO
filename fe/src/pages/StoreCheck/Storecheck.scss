@@ -113,3 +113,23 @@ input.dayCheck {
 .error {
   color: $color-red;
 }
+.flex{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.timeZone{
+  flex:3 1 0;
+}
+.timeSymbol{
+  flex:1 1 0;
+  text-align: center;
+  }
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance:auto; 
+  }
+  .cover-fit{
+    border: 2px solid #a6bf4b;
+    border-radius: 5px;
+  }

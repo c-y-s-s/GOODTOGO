@@ -228,11 +228,11 @@ function passwordShow() {
         </form>
         {/* -------- 表格結束 -------- */}
       </div>
-      <div className="row align-self-center">
+      {/* <div className="row align-self-center">
       <Link to="/StoreReset" className="no-link">
         <p className="text-grey no-link m-0 mt-3">忘記密碼？</p>
       </Link>
-</div>
+</div> */}
       <hr className="col-lg-12 mt-3" />
 
       <p className="text-grey  m-0">

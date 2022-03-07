@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { ImFacebook2 } from "react-icons/im";
 import axios from "axios";
+import { jQuery, $ } from "jquery";
 // import TWzipcode from "react-twzipcode";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-
+import { AiOutlineCamera } from "react-icons/ai";
 import { ReactComponent as Logo } from "../../images/logo-face.svg";
 // import TwCitySelector from "tw-city-selector";
 import { API_URL } from "../../utils/config";
@@ -15,6 +16,8 @@ import Swal from "sweetalert2";
 
 
 const StoreCheck = () => {
+
+
 
   const navigate = useNavigate();
   const swal = Swal.mixin({
@@ -42,6 +45,27 @@ const StoreCheck = () => {
     );
   };
 
+  const registrationFailedAlert = () => {
+    return (
+      <>
+        {swal
+          .fire({
+            text: "資料有誤喔!請再檢查一次",
+            icon: "question",
+            showCancelButton: false,
+            confirmButtonText: "檢查資料",
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              navigate("/StoreCheck");
+            }
+          })}
+      </>
+    );
+  };
+
+
+
   const [member, setMember] = useState("");
   const [fieldErrors, setFieldErrors] = useState({
     name: "",
@@ -55,7 +79,7 @@ const StoreCheck = () => {
     openMinute: "",
     closeHour: "",
     closeMinute: "",
-    storeName:""
+    storeName: ""
   });
 
   const [eye, setEye] = useState({
@@ -192,25 +216,25 @@ const StoreCheck = () => {
     } else if ((name === "openHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        openHour: "請填入時間",
+        openHour: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "openMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        openMinute: "請填入時間",
+        openMinute: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "closeHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        closeHour: "請填入時間",
+        closeHour: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "closeMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        closeMinute: "請填入時間",
+        closeMinute: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     }
@@ -243,7 +267,9 @@ const StoreCheck = () => {
 
   const [closeTime, setCloseTime] = useState()
 
-  const [imageSrc, setImageSrc] = useState();
+  const [logoSrc, setLogoSrc] = useState("");
+
+  const [licenceSrc, setLicenceSrc] = useState("");
 
   const [address, setAddress] = useState();
 
@@ -312,36 +338,47 @@ const StoreCheck = () => {
   // -------- 店家LOGO上傳開始 --------//
   const handleLogoChange = (e) => {
     console.log(e.target.value);
-    const file1 = e.target.files[0]; // 抓取上傳的圖片
+    let file1 = e.target.files[0]; // 抓取上傳的圖片
+    if (e.target.files[0].size > 2097152) {
+      alert("檔案太大囉!");
+      [...file1] = "";
+      console.log(e.target.value);
+
+    }
     const reader = new FileReader(); // 讀取 file
     reader.addEventListener(
       "load",
       function () {
         //     // convert image file to base64 string
-        setImageSrc(reader.result);
+        setLogoSrc(reader.result);
       },
       false // e.preventDefault()
     );
 
-    if (file1) {
+    if (file1 !== "") {
       reader.readAsDataURL(file1);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
+      console.log("商家註冊LOGO", file1.name); // e.target.files[0].name
+      console.log(e.target.files[0]);
+      setMember({ ...member, [e.target.name]: e.target.files[0] });
     }
-    console.log("商家註冊LOGO", file1.name); // e.target.files[0].name
-    console.log(e.target.files[0]);
-    setMember({ ...member, [e.target.name]: e.target.files[0] });
+    else console.log("重新選擇圖片");
   };
   // -------- 店家LOGO上傳結束 --------//
   // -------- 表單營業許可證上傳開始 --------//
   const handleLicenseChange = (e) => {
     console.log(e.target.value);
     const file2 = e.target.files[0]; // 抓取上傳的圖片
+    if (e.target.files[0].size > 2097152) {
+      alert("檔案太大囉!");
+      [...file2] = "";
+    }
     const reader = new FileReader(); // 讀取 input type="file" 的 file
     reader.addEventListener(
       "load",
       function () {
         // convert image file to base64 string
-        setImageSrc(reader.result);
+        setLicenceSrc(reader.result);
       },
       false //  e.preventDefault() 
     );
@@ -397,6 +434,7 @@ const StoreCheck = () => {
       navigate("/storeLogin");
       registrationSuccessAlert();
     } catch (e) {
+      registrationFailedAlert();
       console.error(ERR_MSG[e.response.data].code);
     }
   };
@@ -623,7 +661,7 @@ const StoreCheck = () => {
                             value={selectedArea}
                             onChange={handleAreaChange}
                           >
-                            <option>--Choose County--</option>
+                            <option>選擇區域</option>
                             {availableArea?.AreaList.map((e, key) => {
                               return (
                                 <option value={e.AreaName} key={key}>
@@ -693,7 +731,7 @@ const StoreCheck = () => {
                           value={member.storeName}
                           maxLength="30"
                           onChange={handleChange}
-                        required
+                          required
 
                         />
                         <label
@@ -758,13 +796,21 @@ const StoreCheck = () => {
                         <input
                           name="storeLogo"
                           type="file"
+                          accept="image/jpg, image/jpeg, image/png"
                           className="form-control custom-input"
                           id="storeLogo"
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
                           required
-
                         />
+                        <AiOutlineCamera size={24}/>預覽區塊
+                        {logoSrc !== "" && (
+                        <img
+                          src={logoSrc}
+                      // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
+                      alt="照片預覽"
+                      className="cover-fit"
+                    />)}
                       </div>
                       {/* -------- 營業登記證上傳 -------- */}
                       <label
@@ -782,8 +828,15 @@ const StoreCheck = () => {
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
                           required
-
                         />
+                        <AiOutlineCamera size={24}/>預覽區塊
+                        {licenceSrc !== "" && (
+                        <img
+                          src={licenceSrc}
+                      // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
+                      alt="照片預覽"
+                      className="cover-fit"
+                    />)}
                       </div>
 
                       <label
@@ -829,7 +882,7 @@ const StoreCheck = () => {
                         營業星期(複選)
                       </label>
                       <div className="d-block mb-3 me-0 opendayCheck">
-                        <div className="row mt-3 mb-3 ms-1 me-1">
+                        <div id="dayCheck" className="row mt-3 mb-3 ms-1 me-1">
                           {/* {dayObject.map(({ day, isOpen }, index) => {
                             return (
                               <input key={index}
@@ -842,8 +895,8 @@ const StoreCheck = () => {
                               />
                             );
                           })} */}
-                          <input type="checkbox" id="mon" name="一" value={member.day} className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="tue" name="二" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="mon" name="一" value="1" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="tue" name="二" value="2" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="wed" name="三" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="thu" name="四" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="fri" name="五" className="col dayCheck" onChange={handleDayChange}></input>
@@ -867,141 +920,123 @@ const StoreCheck = () => {
                       >
                         營業時間
                       </label>
-                      <div className="row">
-                        <div className="col-5">
-                          <div className="row">
-                            <div className="col-5 pe-0">
-                              {/* 幾點 */}
-                              <div className="form-floating">
-                                <input
-                                  name="openHour"
-                                  type="number"
-                                  className={`form-control custom-input time ${fieldErrors.openHour !== "" && "input-error"
-                                    }`}
-                                  id="openHour"
-                                  placeholder="時"
-                                  value={member.openHour}
-                                  maxLength="2"
-                                  max={24}
-                                  min={0}
-                                  onChange={handleOpenTimeChange}
-                                  required
-
-                                />
-                                <label
-                                  htmlFor="openHour"
-                                  className="floating-label  text-grey"
-                                >時
-                                </label>
-                                {fieldErrors.openHour !== "" && (
-                                  <div className="error text-end">
-                                    {fieldErrors.openHour}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                            {/* 冒號 */}
-                            <div className="H4 col-1 py-3 fs-2 time">:</div>
-                            {/* 幾分 */}
-                            <div className="col-5">
-                              <div className="form-floating">
-                                <input
-                                  name="openMinute"
-                                  type="number"
-                                  className={`form-control custom-input time ${fieldErrors.openMinute !== "" && "input-error"
-                                    }`}
-                                  id="openMinute"
-                                  placeholder="分"
-                                  value={member.openMinute}
-                                  maxLength="2"
-                                  max={60}
-                                  min={0}
-                                  onChange={handleOpenTimeChange}
-                                  required
-
-                                />
-                                <label
-                                  htmlFor="openMinute"
-                                  className="floating-label  text-grey"
-                                >
-                                  分
-                                </label>
-                                {fieldErrors.openMinute !== "" && (
-                                  <div className="error text-end">
-                                    {fieldErrors.openMinute}
-                                  </div>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                          {/* 到 */}
-                        </div>
-                        <div className="H4 col-1 py-3 fs-2 time" >~</div>
+                      <div className="flex mb-3">
                         {/* 幾點 */}
-                        <div className="col-5">
-                          <div className="row">
-                            <div className="col-5">
-                              <div className="form-floating">
-                                <input
-                                  name="closeHour"
-                                  type="number"
-                                  className={`form-control custom-input time ${fieldErrors.closeHour !== "" && "input-error"
-                                    }`}
-                                  id="closeHour"
-                                  placeholder="時"
-                                  value={member.closeHour}
-                                  maxLength="2"
-                                  max={24}
-                                  min={0}
-                                  onChange={handleCloseTimeChange}
-                                  required
-                                />
-                                <label
-                                  htmlFor="closeHour"
-                                  className="floating-label  text-grey"
-                                >
-                                  時
-                                </label>
-                                {fieldErrors.closeHour !== "" && (
-                                  <div className="error text-end">
-                                    {fieldErrors.closeHour}
-                                  </div>
-                                )}
-                              </div>
+                        <div className="form-floating timeZone">
+                          <input
+                            name="openHour"
+                            type="number"
+                            className={`form-control custom-input time ${fieldErrors.openHour !== "" && "input-error"
+                              }`}
+                            id="openHour"
+                            placeholder="時"
+                            value={member.openHour}
+                            maxLength="2"
+                            max={24}
+                            min={0}
+                            onChange={handleOpenTimeChange}
+                            required
+                          />
+                          <label
+                            htmlFor="openHour"
+                            className="floating-label text-grey"
+                          >時
+                          </label>
+                          {fieldErrors.openHour !== "" && (
+                            <div className="error text-end">
+                              {fieldErrors.openHour}
                             </div>
-                            {/* 冒號 */}
-                            <div className="H4 col-1 py-3 fs-2 time">:</div>
-                            {/* 幾分 */}
-                            <div className="col-5">
-                              <div className="form-floating">
-                                <input
-                                  name="closeMinute"
-                                  type="number"
-                                  className={`form-control custom-input time ${fieldErrors.closeMinute !== "" && "input-error"
-                                    }`}
-                                  id="closeMinute"
-                                  placeholder="分"
-                                  value={member.closeMinute}
-                                  maxLength="2"
-                                  max={60}
-                                  min={0}
-                                  onChange={handleCloseTimeChange}
-                                  required
-                                />
-                                <label
-                                  htmlFor="closeMinute"
-                                  className="floating-label  text-grey"
-                                >
-                                  分
-                                </label>
-                                {fieldErrors.closeMinute !== "" && (
-                                  <div className="error text-end">
-                                    {fieldErrors.closeMinute}
-                                  </div>
-                                )}
-                              </div>
+                          )}
+                        </div>
+                        {/* 冒號 */}
+                        <div className="timeSymbol">:</div>
+                        {/* 幾分 */}
+                        <div className="form-floating timeZone">
+                          <input
+                            name="openMinute"
+                            type="number"
+                            className={`form-control custom-input time ${fieldErrors.openMinute !== "" && "input-error"
+                              }`}
+                            id="openMinute"
+                            placeholder="分"
+                            value={member.openMinute}
+                            maxLength="2"
+                            max={60}
+                            min={0}
+                            onChange={handleOpenTimeChange}
+                            required
+                          />
+                          <label
+                            htmlFor="openMinute"
+                            className="floating-label  text-grey"
+                          >
+                            分
+                          </label>
+                          {fieldErrors.openMinute !== "" && (
+                            <div className="error text-end">
+                              {fieldErrors.openMinute}
                             </div>
-                          </div>
+                          )}
+                        </div>
+                        {/* 到 */}
+                        <div className="timeSymbol" >~</div>
+                        {/* 幾點 */}
+                        <div className="form-floating timeZone">
+                          <input
+                            name="closeHour"
+                            type="number"
+                            className={`form-control custom-input time ${fieldErrors.closeHour !== "" && "input-error"
+                              }`}
+                            id="closeHour"
+                            placeholder="時"
+                            value={member.closeHour}
+                            maxLength="2"
+                            max={24}
+                            min={0}
+                            onChange={handleCloseTimeChange}
+                            required
+                          />
+                          <label
+                            htmlFor="closeHour"
+                            className="floating-label  text-grey"
+                          >
+                            時
+                          </label>
+                          {fieldErrors.closeHour !== "" && (
+                            <div className="error text-end">
+                              {fieldErrors.closeHour}
+                            </div>
+                          )}
+                        </div>
+                        {/* 冒號 */}
+                        <div className="timeSymbol">:</div>
+                        {/* 幾分 */}
+                        <div className="form-floating timeZone">
+                          <input
+                            name="closeMinute"
+                            type="number"
+                            className={`form-control custom-input time ${fieldErrors.closeMinute !== "" && "input-error"
+                              }`}
+                            id="closeMinute"
+                            placeholder="分"
+                            value={member.closeMinute}
+                            maxLength="2"
+                            max={60}
+                            min={0}
+                            onChange={handleCloseTimeChange}
+                            required
+                          />
+                          <label
+                            htmlFor="closeMinute"
+                            className="floating-label  text-grey"
+                          >
+                            分
+                          </label>
+                          {fieldErrors.closeMinute !== "" && (
+                            <div className="error text-end">
+                              {fieldErrors.closeMinute}
+                            </div>
+                          )}
                         </div>
                       </div>
                       {/* -------- 營業時間設定結束 -------- */}
