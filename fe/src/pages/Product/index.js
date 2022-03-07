@@ -42,7 +42,8 @@ const Product = ({ setisModalTouch }) => {
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
 
       setStoreData(storeResponse.data);
-      setproductsComment(productsCommentResponse.data);
+      //這個東西沒宣告到  報錯  試跑先註解掉
+      // setproductsComment(productsCommentResponse.data);
     };
     getStores();
   }, []);

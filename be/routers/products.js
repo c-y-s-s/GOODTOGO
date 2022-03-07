@@ -74,4 +74,25 @@ router.get("/:storeId", async (req, res, next) => {
 
 
 
+
+// 撈出商品清單點擊編輯時所選 id
+router.get("/productsdifferent/:productId", async (req, res, next) => {
+  // let [data, fields] = await connection.execute(
+  //   "SELECT COUNT(*) AS total FROM products WHERE store_id = ? "
+  // );
+  // console.log(data);
+  // res.json(data);
+  // req.params.storeId
+  //取出網址上的 stockId 確認
+  // console.log(req.params.storeId);
+  //撈資料
+  let [data, fields] = await connection.execute(
+    "SELECT * FROM products WHERE id = ?",
+    [req.params.productId]
+  );
+  res.json(data);
+});
+
+
+
 module.exports = router;

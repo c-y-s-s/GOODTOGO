@@ -15,6 +15,15 @@ import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
 import Store from "./pages/Store";
+import StoreBg from "./pages/Storebg";
+import NewProduct from "./pages/NewProduct";
+import ProductEdit from "./pages/ProductEdit";
+import StoreProfileEditing from "./pages/StoreProfileEditing";
+import LatestNews from "./pages/LatestNews";
+import Activity from "./pages/Activity";
+import Checkout from "./pages/Checkout";
+import CheckoutPhone from "./pages/CheckoutPhone";
+import Coupon from "./pages/Coupon";
 import StoreList from "./pages/StoreList";
 import StoreCheck from "./pages/StoreCheck";
 import StoreLogin from "./pages/StoreLogin";
@@ -23,6 +32,8 @@ import Auth from "./pages/Auth";
 import MyAccount from "./pages/MyAccount";
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
+import ProductComment from "../src/pages/Productcomment";
+
 import Admin from "./pages/Admin/";
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
@@ -34,6 +45,8 @@ function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
   const [loginSeller, setLoginSeller] = useState(null);
+  const [auth, setAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
@@ -76,6 +89,8 @@ function App() {
     
     <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}>
       <Router>
+      {/* <Navbar auth={auth} isAdmin={isAdmin} /> */}
+
         {isModalTouch && <Navbar />}
         <Routes>
           <Route path="/" element={<Home />}></Route>
@@ -85,6 +100,28 @@ function App() {
             <Route path="register" element={<Register />}></Route>
             <Route path="reset" element={<Reset />}></Route>
           </Route>
+          <Route path="/storebg" element={<StoreBg setIsAdmin={setIsAdmin} />}>
+          <Route
+            path=":currentPage"
+            element={<StoreBg setIsAdmin={setIsAdmin} />}>
+          </Route>
+          </Route>
+          <Route
+          path="/newproduct"
+          element={<NewProduct setIsAdmin={setIsAdmin} />}>
+          </Route>
+          <Route
+          path="/productedit/:productId/"
+          element={<ProductEdit setIsAdmin={setIsAdmin} />}>
+          </Route>
+          <Route
+          path="/storeprofileediting"
+          element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}>
+          </Route>
+          <Route path="/latestnews" element={<LatestNews />}></Route>
+          <Route path="/activity" element={<Activity />}></Route>
+          <Route path="/checkoutphone" element={<CheckoutPhone />}></Route>
+          <Route path="/coupon" element={<Coupon />}></Route>
           <Route path="/storeCheck" element={<StoreCheck />}></Route>
           <Route path="/storeLogin" element={<StoreLogin />}></Route>
           <Route path="/admin" element={<Admin />}></Route>

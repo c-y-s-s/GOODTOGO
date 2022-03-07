@@ -33,7 +33,7 @@ const StoreLogin = (props) => {
           })
           .then((result) => {
             if (result.isConfirmed) {
-              navigate("/");
+              navigate("/storebg");
             }
           })}
       </>
@@ -46,9 +46,8 @@ const StoreLogin = (props) => {
           .fire({
             icon: "error",
             title: "登入失敗",
-            text: "好像怪怪的,請再試一次",
             showConfirmButton: true,
-            confirmButtonText: "再試一試",
+            confirmButtonText: "再試一次",
             footer: "不妨檢查看看信箱與密碼是否打錯"
           })
           .then((result) => {

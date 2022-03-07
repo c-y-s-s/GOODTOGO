@@ -35,6 +35,7 @@ router.post(
   let returnStore = {
     id: store.id,
     name: store.name,
+    logo:store.logo
   };
 // session
   req.session.store = returnStore;

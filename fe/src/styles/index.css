@@ -1832,6 +1832,7 @@ footer .footer-content .footer-bottom .footer-sign-info {
   letter-spacing: 0.05rem;
 }
 
+<<<<<<< HEAD
 .form-control.form_Input {
   border-radius: 2px;
   height: 2.5rem;
@@ -2097,10 +2098,61 @@ footer .footer-content .footer-bottom .footer-sign-info {
   top: 31px;
   width: 0%;
   border-bottom: 4px solid #f2c53d;
+=======
+.container {
+  position: relative;
+  width: 100%;
+}
+
+.logo-mb {
+  margin-bottom: 30px;
+}
+
+.store-bg-sortAndAdd {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
+}
+
+.store-bg-sort {
+  padding: 0 20px;
+}
+
+.store-bg-td {
+  width: 14%;
+  text-align: center;
+}
+
+.store-bg-amount {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.store-bg-center {
+  text-align: center;
+}
+
+.store-bg-main {
+  position: relative;
+  width: calc(100% - 300px);
+  left: 300px;
+  min-height: 100vh;
+>>>>>>> ft_store_be
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
 
+<<<<<<< HEAD
 .page_Title_Category_Hover:hover .page_Title_Category::after {
   width: 100%;
   left: 0;
@@ -3365,10 +3417,96 @@ h4.store_Title {
   -webkit-transition: 0.38s;
   transition: 0.38s;
   margin: 1.5rem 0.95rem;
+=======
+.store-bg-green {
+  background-color: #668c4a;
+}
+
+.store-bg-dominant {
+  background-color: #fff;
+  border-radius: 30px;
+}
+
+.navigation {
+  position: fixed;
+  width: 300px;
+  height: 100%;
+  margin-top: 50px;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  overflow: hidden;
+}
+
+.navigation ul {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  margin-bottom: 100px;
+}
+
+.navigation ul li {
+  position: relative;
+  width: 100%;
+  list-style: none;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.navigation ul li a {
+  position: relative;
+  display: block;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  text-decoration: none;
+  color: #668c4a;
+}
+
+.navigation ul li a .icon {
+  position: relative;
+  display: block;
+  height: 60px;
+  line-height: 60px;
+  text-align: center;
+  font-size: 1.75em;
+}
+
+.navigation ul li a .title {
+  position: relative;
+  display: block;
+  padding: 0 10px;
+  height: 60px;
+  line-height: 60px;
+  text-align: start;
+  white-space: nowrap;
+}
+
+.topbar {
+  width: 100%;
+  height: 70px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0 30px;
+  -webkit-box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+          box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.product-list {
+>>>>>>> ft_store_be
   position: relative;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+<<<<<<< HEAD
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
@@ -5626,5 +5764,48 @@ tr {
   height: fit-content;
   font-size: 0.75rem;
   color: #666666;
+=======
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.storeBg-topNavbar-right {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.storeBg-topNavbar-aiOutlineSearch {
+  font-size: 1.3rem;
+  color: #666666;
+}
+
+.storeBg-topNavbar-bsBellFill {
+  color: #666666;
+}
+
+.user {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.user img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+>>>>>>> ft_store_be
 }
 /*# sourceMappingURL=index.css.map */
