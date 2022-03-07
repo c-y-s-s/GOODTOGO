@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
+import { useAuth } from "../../../context/auth";
+
 
 const CheckModel = ({ productValid, productId, setModalSwitch }) => {
+  const { loginSeller } = useAuth();
+
   // 上下架 修改按鈕
   async function handleSubmit(e) {
     e.preventDefault();
@@ -14,7 +18,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
     try {
       // http://localhost:3002/api/member/password (router.post)
       let response = await axios.post(
-        `${API_URL}/storebg/productslistvalid`,
+        `${API_URL}/storebg/productslistvalid?store_id=${loginSeller.id}`,
         productValidId
       );
       console.log("上下架訊息 ", response.data);
@@ -35,7 +39,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
 
     try {
       let response = await axios.post(
-        `${API_URL}/storebg/remove`,
+        `${API_URL}/storebg/remove?store_id=77`,
         productValidId
       );
       console.log("刪除訊息 ", response.data);
