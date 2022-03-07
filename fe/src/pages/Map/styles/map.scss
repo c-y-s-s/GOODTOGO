@@ -3,169 +3,207 @@
   display: flex;
   height: 677px;
   .map-wrapper {
+    .rwd-show {
+      display: none;
+    }
     // height: 85vh;
     border: 2px solid red;
     .google-map {
       height: 677px;
       z-index: 1005;
-      .pin-icon {
-        &:hover {
-          border: 4px solid blue;
-        }
-      }
-      .pin-text {
-        padding: 1rem;
-        width: max-content;
-        height: fit-content;
-        border-radius: 3px;
-        background-color: white;
-        color: $color-dark-grey;
-        // position: relative;
-        // left: -1.5rem;
-        font-size: x-large;
-        .product-left {
-          width: fit-content;
+      .pin {
+        .pin-text {
+          opacity: 0;
+          padding: 1rem;
+          width: max-content;
           height: fit-content;
-          padding: 0.3rem 0.6rem;
-          border-radius: 25px;
-          background-color: $color-light-grey;
+          border-radius: 3px;
+          background-color: white;
+          color: $color-dark-grey;
+          // position: relative;
+          // left: -1.5rem;
+          font-size: x-large;
+          .product-left {
+            width: fit-content;
+            height: fit-content;
+            padding: 0.3rem 0.6rem;
+            border-radius: 25px;
+            background-color: $color-light-grey;
+          }
         }
-        .time {
+        .pin-icon {
+          color: $color-yellow;
+          font-size: xx-large;
+          transition: 0.3s;
+          &:hover {
+            // animation: TestMove2 0.6 infinite alternate;
+            transform: scale(3);
+            + .pin-text {
+              opacity: 1;
+            }
+          }
+
+          @keyframes TestMove2 {
+            0% {
+              transform: translate(0px, 0px);
+            }
+            50% {
+              transform: translate(0px, -10px);
+            }
+            100% {
+              transform: translate(0px, 0px);
+            }
+          }
         }
-      }
-    }
-    .map-search {
-      position: absolute;
-      right: 32rem;
-      top: 9rem;
-      border: 3px solid $color-green;
-      z-index: 1010;
-      background-color: white;
-      .toggle-controller {
-        display: none;
-      }
-      .map-search-icon {
-        color: $color-green;
-        font-size: x-large;
-      }
-      .search-bar {
-        width: 20rem;
-        height: 3rem;
-        margin-left: 0.5rem;
-        border: none;
-        outline: none;
-        font-size: large;
+
+        //!hover 標籤要出來
+        // .pin-icon:hover + .pin-text {
+        //   opacity: 1;
+        // }
       }
     }
   }
-  .map-side-bar {
-    padding: 4rem 0 10rem;
-    .map-select-bar {
-      height: fit-content;
-      padding: 0.5rem;
-      width: 16rem;
-      background-color: white;
-      color: $color-green;
-      border: 4px solid $color-light-green;
-      border-radius: 3px;
-      .cate-option {
-        transition: 0.3s;
-        &:hover {
-          background-color: $color-yellow;
-          color: white;
-        }
-      }
+  .map-search {
+    position: absolute;
+    right: 32rem;
+    top: 9rem;
+    border: 3px solid $color-green;
+    z-index: 1010;
+    background-color: white;
+    .toggle-controller {
+      display: none;
     }
-    .map-title {
-      color: white;
+    .map-search-icon {
+      color: $color-green;
       font-size: x-large;
     }
-    .map-store-card {
-      .store-info-card {
-        overflow: hidden;
-        background-color: white;
-        width: 263px;
-        height: 359px;
-        border-radius: 0.4rem;
-        padding: 1.6rem 1rem;
-        border-top: 0.54rem solid $color-light-green;
-        border-bottom: 0.54rem solid $color-light-green;
-        transition: 0.38s;
-        position: relative;
-        flex-direction: column;
-        &:hover {
-          @include drop-shadow-dark;
-        }
+    .search-bar {
+      width: 20rem;
+      height: 3rem;
+      margin-left: 0.5rem;
+      border: none;
+      outline: none;
+      font-size: large;
+    }
+  }
+}
+.map-side-bar {
+  display: flex;
+  flex-direction: column;
+  padding: 4rem 0 10rem;
+  .map-select-bar {
+    height: fit-content;
+    padding: 0.5rem;
+    width: 16rem;
+    background-color: white;
+    color: $color-green;
+    border: 4px solid $color-light-green;
+    border-radius: 3px;
+    .cate-option {
+      transition: 0.3s;
+      &:hover {
+        background-color: $color-yellow;
+        color: white;
+      }
+    }
+  }
+  .map-title {
+    color: white;
+    font-size: x-large;
+  }
+  .map-store-card {
+    .store-info-card {
+      overflow: hidden;
+      background-color: white;
+      width: 263px;
+      height: 359px;
+      border-radius: 0.4rem;
+      padding: 1.6rem 1rem;
+      border-top: 0.54rem solid $color-light-green;
+      border-bottom: 0.54rem solid $color-light-green;
+      transition: 0.38s;
+      position: relative;
+      flex-direction: column;
+      &:hover {
+        @include drop-shadow-dark;
+      }
 
-        .info-img {
-          // width: 233px;
-          height: 162px;
-          background-color: gray;
-          img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            z-index: 1000;
-          }
-          .is-open {
-            width: fit-content;
-            background-color: $color-light-green;
-            color: white;
-            padding: 0.1rem 0.4rem;
-            border-radius: 5px;
-            z-index: 1009;
-            align-self: flex-end;
-            position: relative;
-            top: -2rem;
-            left: 10.35rem;
-          }
-          .is-closed {
-            width: fit-content;
-            background-color: $color-grey;
-            color: white;
-            padding: 0.1rem 0.4rem;
-            border-radius: 5px;
-            z-index: 1009;
-            align-self: flex-end;
-            position: relative;
-            top: -1.2rem;
-            left: 10.35rem;
-          }
+      .info-img {
+        // width: 233px;
+        height: 162px;
+        background-color: gray;
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 1000;
         }
-        .info-title {
-          // width: 233px;
-          .cate-tag {
-            text-align: center;
-            align-items: center;
-            padding: 0.1rem 0.4rem;
-            background-color: $color-light-grey;
-            border-radius: 12px;
-            width: fit-content;
-            height: fit-content;
-            font-size: $fz-ss-sm;
-            color: $color-dark-grey;
-          }
+        .is-open {
+          width: fit-content;
+          background-color: $color-light-green;
+          color: white;
+          padding: 0.1rem 0.4rem;
+          border-radius: 5px;
+          z-index: 1009;
+          align-self: flex-end;
+          position: relative;
+          top: -2rem;
+          left: 10.35rem;
+        }
+        .is-closed {
+          width: fit-content;
+          background-color: $color-grey;
+          color: white;
+          padding: 0.1rem 0.4rem;
+          border-radius: 5px;
+          z-index: 1009;
+          align-self: flex-end;
+          position: relative;
+          top: -2rem;
+          left: 10.35rem;
+        }
+      }
+      .info-title {
+        // width: 233px;
+        .cate-tag {
+          text-align: center;
+          align-items: center;
+          padding: 0.1rem 0.4rem;
+          background-color: $color-light-grey;
+          border-radius: 12px;
+          width: fit-content;
+          height: fit-content;
+          font-size: $fz-ss-sm;
+          color: $color-dark-grey;
         }
       }
     }
   }
 }
+
 @media screen and (max-width: 390px) {
   .map-bg {
     background-color: $color-green;
-
+    height: 90vh;
     .map-wrapper {
-      // height: 85vh;
-
-      border: 2px solid red;
+      height: 90vh;
+      border: 2px solid transparent;
+      overflow: hidden;
+      .rwd-show {
+        display: block;
+        z-index: 1030;
+        position: absolute;
+        top: 28rem;
+        left: 2rem;
+      }
       .google-map {
-        height: 85vh;
+        height: 83.7vh;
         z-index: 1005;
-        .pin-icon {
-          &:hover {
-            border: 4px solid blue;
-          }
-        }
+        // .pin-icon {
+        //   &:hover {
+        //     border: 4px solid blue;
+        //   }
+        // }
         .pin-text {
           padding: 1rem;
           width: max-content;
@@ -216,6 +254,9 @@
       }
     }
     .map-side-bar {
+      position: absolute;
+      z-index: 1031;
+      top: 6rem;
       padding: 0.3rem 0 10rem;
       .map-select-bar {
         height: fit-content;
@@ -239,6 +280,7 @@
         font-size: x-large;
       }
       .map-store-card {
+        display: none;
         .store-info-card {
           overflow: hidden;
           background-color: white;
