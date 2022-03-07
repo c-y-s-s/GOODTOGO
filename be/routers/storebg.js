@@ -21,30 +21,31 @@ router.use((req, res, next) => {
   //     name: member.name,
   //     photo: member.logo
   //   }
-  req.session.store = {
-    name: store.name,
-    // photo: "",
-    store_id: store.id,
-    logo: store.storeLogo,
-  };
+  // console.log(req.session);
+  // req.session.store = {
+  //   name: store.name,
+  //   photo: "",
+  //   id: store.id,
+  //   logo: store.storeLogo,
+  // };
   // ----- 測試，假設已取得登入後的 session
 
   // console.log("測試傳入id,name,logo", req.session.member);
   // 有無 session
-  if (req.session.member) {
-    // 表示登入過
-    // console.log("測試 has session");
-    next(); // 這樣會跳出 router 到 server.js 繼續 next()???
-  } else {
-    // 表示尚未登入
-    res.status(400).json({
-      code: "99001",
-      msg: "會員未登入",
-    });
-  }
+  // if (req.session.store) {
+  // 表示登入過
+  // console.log("測試 has session");
+  // next(); // 這樣會跳出 router 到 server.js 繼續 next()???
+  // } else {
+  // 表示尚未登入
+  // res.status(400).json({
+  // code: "99001",
+  // msg: "會員未登入",
+  // });
+  // }
 
   // 到這裡，表示 req.session.member 一定有資料
-  // next(); // 往下走讓 其他頁撈資料
+  next(); // 往下走讓 其他頁撈資料
   // res.json(req.session.member); // 先測試看看前端能不能得到 session
 });
 
@@ -97,18 +98,18 @@ const uploader = multer({
 router.get("/profile", async (req, res, next) => {
   let [data] = await connection.execute(
     "SELECT name, email, logo FROM stores WHERE id=?",
-    [req.session.member.id]
+    [req.session.store.id]
   );
-  // console.log("db_stores id: ", req.session.member.id);
+  // console.log("db_stores id: ", req.session);
   // console.log("取得 stores: ", data);
 
   // 打包資料給 res
   let profile = {
-    name: data[0].name,
-    email: data[0].email,
-    logo: data[0].logo,
+    name: req.session.store.name,
+    email: req.session.store.email,
+    // logo: data[0].logo,
     // photo: data[0].headshots,
-    logo: req.session.member.logo,
+    logo: req.session.store.logo,
   };
   res.json(profile);
 });
@@ -116,26 +117,32 @@ router.get("/profile", async (req, res, next) => {
 // -------- 商品清單資料顯示 --------
 // /api/member/profile (get)
 router.get("/productslist", async (req, res, next) => {
+
+  console.log("sessionsessionsession", req.query);
+  // console.log("sessionsessionsession", req.params);
+  // console.log("sessionsessionsession", req.query.store_id);
   let [productsData] = await connection.execute(
     "SELECT * FROM products WHERE store_id = ?",
-    [req.session.member.id]
+    [req.query.store_id]
   );
+
   // console.log("db_stores id: ", req.session.member.id);
-  // console.log("取得 stores: ", productsData);
+  console.log("取得 stores: ", productsData);
 
   let page = req.query.page || 1;
+  // console.log(req.query.page, "111111111111111111111111111");
   // console.log("目前所在頁數：", page);
 
   let [total] = await connection.execute(
     "SELECT COUNT(*) AS total FROM products WHERE store_id=?",
-    [req.session.member.id]
+    [req.query.store_id]
   );
 
   // console.log("總筆數：", total);
   total = total[0].total; // total = 6
 
   // 計算總共應該要有幾頁
-  const perPage = 3;
+  const perPage = 6;
   // lastPage: 總共有幾頁
   const lastPage = Math.ceil(total / perPage);
   // 計算 SQL 要用的 offset
@@ -143,16 +150,16 @@ router.get("/productslist", async (req, res, next) => {
   // 取得資料
   let [data] = await connection.execute(
     "SELECT * FROM products WHERE store_id=? ORDER BY created_at DESC LIMIT ? OFFSET ?",
-    [req.session.member.id, perPage, offset]
+    [req.query.store_id, perPage, offset]
   );
-  // console.log("目前店家id", req.session.member.id);
+  // console.log("目前店家id", req.query.store_id);
   // console.log("目前一頁有幾筆", perPage);
   // console.log("offsetoffsetoffset3", offset);
   // -------- 整理分頁資訊回傳的資料 --------
   //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
   let pagination = { total, perPage, page, lastPage };
 
-  // console.log("data", data);
+  console.log("data", data);
 
   res.json([data, productsData, pagination]);
 });
@@ -166,12 +173,12 @@ router.post("/productslistvalid", async (req, res, next) => {
   if (req.body.productValid === 1) {
     let [validResult] = await connection.execute(
       `UPDATE products SET valid=0 WHERE store_id=? AND id=?;`,
-      [req.session.member.id, req.body.productId]
+      [req.query.store_id, req.body.productId]
     );
   } else {
     let [validResult] = await connection.execute(
       `UPDATE products SET valid=1 WHERE store_id=? AND id=?;`,
-      [req.session.member.id, req.body.productId]
+      [req.query.store_id, req.body.productId]
     );
   }
   // 把會員資料從陣列中拿出來
@@ -201,7 +208,7 @@ router.post("/productslistvalid", async (req, res, next) => {
 router.post("/remove", async (req, res, next) => {
   let [removeProductIndex] = await connection.execute(
     `DELETE FROM products WHERE store_id=? AND id=?;`,
-    [req.session.member.id, req.body.productId]
+    [req.query.store_id, req.body.productId]
   );
 
   // console.log(req.body.removeStoreId);
@@ -210,5 +217,12 @@ router.post("/remove", async (req, res, next) => {
     message: "會員移除收藏店家 ok",
   });
 });
+
+router.get("/storeLogout", (req, res, next) => {
+  req.session.store = null;
+  res.sendStatus(202);
+  console.log("登出");
+});
+
 
 module.exports = router;
