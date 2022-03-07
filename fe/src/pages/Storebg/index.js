@@ -10,6 +10,8 @@ const Storebg = ({ setIsAdmin }) => {
   // 判斷頁首頁尾
   useEffect(() => {
     setIsAdmin(true);
+    document.getElementById("navbar").style.display = "none";
+    document.getElementById("footer").style.display = "none";
   }, []);
 
   return (
