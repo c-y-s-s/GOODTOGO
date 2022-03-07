@@ -20,7 +20,6 @@ import Register from "../pages/Register";
   
   const Navbar = (props) => {
   // if (isAdmin) return <></>;
-
   return (
     <div className="container-fluid navbar justify-content-center sticky-top shadow">
       <div className="nav-content">

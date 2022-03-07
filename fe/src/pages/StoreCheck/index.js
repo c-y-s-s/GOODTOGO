@@ -5,7 +5,7 @@ import axios from "axios";
 import { jQuery, $ } from "jquery";
 // import TWzipcode from "react-twzipcode";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-
+import { AiOutlineCamera } from "react-icons/ai";
 import { ReactComponent as Logo } from "../../images/logo-face.svg";
 // import TwCitySelector from "tw-city-selector";
 import { API_URL } from "../../utils/config";
@@ -216,25 +216,25 @@ const StoreCheck = () => {
     } else if ((name === "openHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        openHour: "空白",
+        openHour: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "openMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        openMinute: "空白",
+        openMinute: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "closeHour")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        closeHour: "空白",
+        closeHour: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     } else if ((name === "closeMinute")) {
       const updatedFieldErrors = {
         ...fieldErrors,
-        closeMinute: "空白",
+        closeMinute: "格式錯誤",
       };
       setFieldErrors(updatedFieldErrors);
     }
@@ -267,7 +267,9 @@ const StoreCheck = () => {
 
   const [closeTime, setCloseTime] = useState()
 
-  const [imageSrc, setImageSrc] = useState();
+  const [logoSrc, setLogoSrc] = useState("");
+
+  const [licenceSrc, setLicenceSrc] = useState("");
 
   const [address, setAddress] = useState();
 
@@ -348,7 +350,7 @@ const StoreCheck = () => {
       "load",
       function () {
         //     // convert image file to base64 string
-        setImageSrc(reader.result);
+        setLogoSrc(reader.result);
       },
       false // e.preventDefault()
     );
@@ -376,7 +378,7 @@ const StoreCheck = () => {
       "load",
       function () {
         // convert image file to base64 string
-        setImageSrc(reader.result);
+        setLicenceSrc(reader.result);
       },
       false //  e.preventDefault() 
     );
@@ -800,8 +802,15 @@ const StoreCheck = () => {
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLogoChange}
                           required
-
                         />
+                        <AiOutlineCamera size={24}/>預覽區塊
+                        {logoSrc !== "" && (
+                        <img
+                          src={logoSrc}
+                      // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
+                      alt="照片預覽"
+                      className="cover-fit"
+                    />)}
                       </div>
                       {/* -------- 營業登記證上傳 -------- */}
                       <label
@@ -819,8 +828,15 @@ const StoreCheck = () => {
                           placeholder=".jpg/.jpeg/.png 上限 2MB"
                           onChange={handleLicenseChange}
                           required
-
                         />
+                        <AiOutlineCamera size={24}/>預覽區塊
+                        {licenceSrc !== "" && (
+                        <img
+                          src={licenceSrc}
+                      // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
+                      alt="照片預覽"
+                      className="cover-fit"
+                    />)}
                       </div>
 
                       <label
