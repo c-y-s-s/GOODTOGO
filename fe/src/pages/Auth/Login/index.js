@@ -1,24 +1,22 @@
-// -------- login 功能 --------
-import React, { useState } from "react";
-import { Routes, Route, Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../../context/auth";
 import Swal from "sweetalert2";
-import FacebookLogin from "@greatsumini/react-facebook-login";
+// import FacebookLogin from "@greatsumini/react-facebook-login";
 import Ads from "../../../images/ads/ads2.jpg";
 
-//-------- 引用icon --------
-import { ImFacebook2 } from "react-icons/im";
+// import { ImFacebook2 } from "react-icons/im";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 
-//-------- 串接API套件 --------
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
-// require("dotenv").config();
 
 const Login = (props) => {
-  //登入後存入會員資料給全域使用
+  let navigate = useNavigate();
+  // -------- 登入後存入會員資料給全域使用 --------
   const { loginMember, setLoginMember } = useAuth();
+  //-------- swal樣式 --------
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -27,17 +25,17 @@ const Login = (props) => {
     },
     buttonsStyling: false,
   });
+  //-------- swal視窗呼叫函式 --------
   const loginSuccessAlert = () => {
     return (
       <>
         {swal
           .fire({
-            position: "center",
             imageUrl: `${Ads}`,
             imageWidth: "512px",
             imageHeight: "650px",
             background: "transparent",
-            confirmButtonText: "立馬搶救即期美食 GO!",
+            confirmButtonText: `<div>立馬搶救即期美食 GO!</div>`,
             showConfirmButton: true,
             showCloseButton: true,
           })
@@ -49,22 +47,30 @@ const Login = (props) => {
       </>
     );
   };
-
-  // 從App傳來的登入狀態
-  //預設個欄位的值為空（開發中所以有先給值）
+  // -------- 存取所有的 email，比對用 --------
+  const [emails, setEmails] = useState([]);
+  //預設個欄位的值為空
   const [loginUser, setLoginUser] = useState({
-    email: "echo@test.com",
-    password: "0000000000",
+    email: "",
+    password: "",
   });
   //制定錯誤訊息，預設為沒有錯誤訊息
   const [fieldErrors, setFieldErrors] = useState({
     email: "",
     password: "",
   });
-  // 切換看密碼開關
+  // -------- 切換密碼顯示、隱藏開關 --------
   const [eye, setEye] = useState({
     passwordEye: false,
   });
+  // -------- 讀取所有已註冊過的email和電話 --------
+  useEffect(() => {
+    let getInfo = async () => {
+      let res = await axios.get(`${API_URL}/auth/check`);
+      setEmails(res.data[0]);
+    };
+    getInfo();
+  }, []);
   // --------切換顯示/隱藏密碼 --------
   function passwordShow() {
     setEye(
@@ -81,17 +87,8 @@ const Login = (props) => {
   const handleFormInvalid = (e) => {
     // 阻擋form的預設送出行為(錯誤泡泡訊息)
     e.preventDefault();
-
     let name = e.target.name;
-    //email欄位錯誤
-    if (name === "email") {
-      const updatedFieldErrors = {
-        ...fieldErrors,
-        email: "email格式輸入錯誤",
-      };
-      setFieldErrors(updatedFieldErrors);
-      //密碼欄位錯誤
-    } else if (name === "password") {
+    if (name === "password") {
       const updatedFieldErrors = {
         ...fieldErrors,
         password: "密碼至少為6個字元",
@@ -99,18 +96,37 @@ const Login = (props) => {
       setFieldErrors(updatedFieldErrors);
     }
   };
+  // -------- 驗證email格式以及是否已註冊過 --------
+  const regEmail = (e) => {
+    console.log("regE.name", e.target.name);
+    console.log("regE.value", e.target.value);
+    const reEmail =
+      /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+    if (!reEmail.test(e.target.value)) {
+      setFieldErrors({
+        ...fieldErrors,
+        email: "輸入格式有誤 example@example.com",
+      });
+    } else if (
+      !emails.find((v) => Object.values(v)[0] === e.target.value.trim())
+    ) {
+      const updatedFieldErrors = {
+        ...fieldErrors,
+        email: "這個帳號不存在",
+      };
+      setFieldErrors(updatedFieldErrors);
+    }
+  };
+
   // -------- 當整個表單有更動時會觸發 --------
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
   const handleFormChange = (e) => {
     // 清空某個欄位錯誤訊息
-    const updatedFieldErrors = {
+    setFieldErrors({
       ...fieldErrors,
       [e.target.name]: "",
-    };
-    // 設定回錯誤訊息狀態
-    setFieldErrors(updatedFieldErrors);
+    });
   };
-  let navigate = useNavigate();
   // -------- 表單提交 --------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,9 +148,18 @@ const Login = (props) => {
   const handleFBLogin = async (response) => {
     try {
       let fb_response = await axios.get(
-        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`
+        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`,
+        {
+          withCredentials: true,
+          headers: {
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
       );
-      console.log("fb login test response", fb_response);
+      console.log("fb login test response", fb_response.data);
+      if (fb_response.data.id) {
+        setLoginMember(fb_response.data.id);
+      }
     } catch (e) {
       console.error("測試fb登入", ERR_MSG);
     }
@@ -143,20 +168,19 @@ const Login = (props) => {
 
   return (
     <div className="container-fluid login-bg">
-      <div className="col-lg-4 col-sm-10 m-0 p-0 m-auto">
+      <div className="col-lg-4 col-12 m-0 p-0 m-auto">
         <div className="content text-center m-auto">
-          <div className="col-lg-10 col-md-8 col-sm-12 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
+          <div className="col-lg-10 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
             <>
               <div className="h4 text-dark-grey">會員登入</div>
               {/* -------- 表格開始 -------- */}
-
               <form
-                className="needs-validation col-lg-10 col-md-6 col-sm-12 col-10"
+                className="col-lg-12 col-md-6 col-10 p-0"
                 onSubmit={handleSubmit}
                 onInvalid={handleFormInvalid}
                 onChange={handleFormChange}
               >
-                <div className="label-group d-flex flex-column ">
+                <div className="label-group d-flex flex-column">
                   {/* email */}
                   <div className="text-start mt-3 mb-1">
                     <label
@@ -176,6 +200,8 @@ const Login = (props) => {
                         placeholder="帳號"
                         value={loginUser.email}
                         onChange={handleChange}
+                        // onFocus={regEmail}
+                        onBlur={regEmail}
                         required
                       />
                       <label
@@ -194,6 +220,7 @@ const Login = (props) => {
                   </div>
 
                   {/* password */}
+
                   <div className=" text-start mt-2 mb-4">
                     <label
                       htmlfor=""
@@ -246,7 +273,13 @@ const Login = (props) => {
                   )} */}
                 </div>
                 <div className="btn-group d-grid gap-3">
-                  <button type="submit" className="btn submit-btn col-lg-12">
+                  <button
+                    type="submit"
+                    className="btn submit-btn col-lg-12"
+                    style={{
+                      borderRadius: "2px",
+                    }}
+                  >
                     登入
                   </button>
                   {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
@@ -254,14 +287,21 @@ const Login = (props) => {
                     使用 Facebook 登入
                     <div className="col-lg-2"> </div>
                   </button> */}
-                  <FacebookLogin
+                  {/* //*facebook登入 */}
+                  {/* <FacebookLogin
+                    className="btn btn-fb-login d-flex align-items-center text-center justify-content-evenly"
+                    style={{
+                      backgroundColor: "#4267b2",
+                      borderRadius: "2px",
+                    }}
                     appId={process.env.REACT_APP_FACEBOOK_CLIENT_ID}
                     fields="name,email,picture"
                     scope="public_profile, email"
                     onSuccess={handleFBLogin}
                   >
                     <ImFacebook2 className="fb-icon col-lg-2 " />
-                  </FacebookLogin>
+                    使用 Facebook 登入
+                  </FacebookLogin> */}
                 </div>
 
                 {/* -------- 表格結束 -------- */}

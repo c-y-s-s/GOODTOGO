@@ -12,7 +12,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const ProductsDetailsComment = ({ productModalCommentData }) => {
   let data = productModalCommentData;
-  console.log(productModalCommentData);
+  // console.log(productModalCommentData);
   let commentDatatowTwoPieces = [];
 
   // 評價排序開關
@@ -60,10 +60,10 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
   }
 
   return (
-    <div>
+    <div className="">
       {/* // 判斷有無資料 */}
       {productModalCommentData.length ? (
-        <div className="product-users-comment">
+        <div className="product-users-comment ">
           {/* <a href="#product-top" className="product-users-comment-gotop">
             <FiArrowUpCircle />
           </a> */}

@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/auth";
 import Popover from "./_popover";
+import NavShoppingCart from "./NavShoppingCart";
 import MenuToggle from "./_menuToggle";
-
 
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
@@ -12,7 +12,10 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();
-
+  const [isOpen, setOpen] = useState(false);
+  console.log(props);
+  // 購物車總筆數
+  const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
   return (
     <div className="container-fluid navbar justify-content-center sticky-top shadow">
       <div className="nav-content">
@@ -21,12 +24,24 @@ const Navbar = (props) => {
             <Logo className="nav-logo" />
           </Link>
         </div>
-        <div className="sm-logo-left align-items-center">
-          <Link to="/shoppingcart" className="sm-icon">
-            <ShoppingBag />
+
+        <div className="sm-menu-toggle">
+          <Link to="/shoppingcart" className="nav-icon">
+            <div className="shopping-cart-icon-total-page">
+              {shoppingCartTotalPages}
+            </div>
+            <NavShoppingCart
+              setShoppingCartTotalPages={setShoppingCartTotalPages}
+              setNavShoppingDeleteParameter={
+                props.setNavShoppingDeleteParameter
+              }
+              navshoppingDeleteParameter={props.navshoppingDeleteParameter}
+            />
           </Link>
           <MenuToggle />
+          <div className="side-menu"></div>
         </div>
+        {/* RWD專用漢堡menu end */}
         <div className="nav-links">
           <Link to="/about" className="nav-link">
             關於我們
@@ -51,12 +66,19 @@ const Navbar = (props) => {
 
         <div className="nav-icons">
           <Popover />
-          {/* FIXME: 這連結會影響信用卡按鈕，先註解起來 */}
-          {/* <Link to="/shoppingcart" className="nav-icon shopping-cart">
-            <div className="shopping-cart-number">1</div>
-            <ShoppingBag className="shopping-cart-icon" />
-            <div className="shopping-cart-products">1</div>
-          </Link> */}
+          {/* 連結至 nav 以及 nav 下滑區塊 */}
+          <Link to="/shoppingcart" className="nav-icon">
+            <div className="shopping-cart-icon-total-page">
+              {shoppingCartTotalPages}
+            </div>
+            <NavShoppingCart
+              setShoppingCartTotalPages={setShoppingCartTotalPages}
+              setNavShoppingDeleteParameter={
+                props.setNavShoppingDeleteParameter
+              }
+              navshoppingDeleteParameter={props.navshoppingDeleteParameter}
+            />
+          </Link>
 
           <Link to="/map" className="nav-icon">
             <FiMapPin />

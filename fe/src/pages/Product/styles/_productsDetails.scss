@@ -26,6 +26,7 @@
         .products-details-data-card {
             width: 25rem;
         }
+
         // -------- 商品上半部 --------
         .product-logo {
             height: 10rem;
@@ -51,7 +52,7 @@
             border-right: 0;
             border-left: 0;
             border-bottom: 0;
-            border-radius: 0.4rem 0.4rem 0 0;
+            border-radius: 0.4rem 0.4rem 0.4rem 0.4rem;
             .card-body {
                 padding: 0 1.87rem;
                 //商品名稱
@@ -169,8 +170,20 @@
 
             // -------- 評論下半部 --------
             .product-users-comment {
-                scroll-behavior: smooth;
                 padding: 0 1.7rem;
+                overflow-y: auto;
+                height: 300px;
+                border-radius: 0 3rem 3rem 0;
+                &::-webkit-scrollbar {
+                    width: 0.45rem;
+                    border-radius: 10px;
+                    background: rgba(236, 236, 236, 0.1);
+                    border: none;
+                }
+                &::-webkit-scrollbar-thumb {
+                    border-radius: 10px;
+                    background: $color-light-green;
+                }
                 //箭頭錨點
 
                 //用戶圖片
@@ -194,76 +207,75 @@
                     }
                 }
 
-                .product-users-comment-photo {
-                    width: 3.8rem;
-                    height: 3.8rem;
+                // -------- 顧客評論結束 --------
+            }
+        }
+    }
+    .product-users-comment-photo {
+        width: 3.8rem;
+        height: 3.8rem;
 
-                    .cover-photo {
-                        width: 100%;
-                        height: 100%;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    }
+        .cover-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+    .product-users-comment-data {
+        border-bottom: 1px solid $color-green;
+        padding-bottom: 2rem;
+        &:last-child {
+            margin-bottom: 0.25rem;
+        }
+        .product-users-comment-userdata {
+            flex: 1 0 0;
+            //用戶名稱
+            .product-users-comment-userdata-name {
+                letter-spacing: $ls-md;
+                font-size: $fz-md;
+            }
+            //留言時間
+            .product-users-comment-userdata-time {
+                font-size: $fz-sm;
+                color: $color-grey;
+                font-weight: $fw-medium;
+                flex: 0 0 1;
+                align-items: center;
+                letter-spacing: -0.5px;
+                .user-data-report {
+                    color: $color-grey;
+                    font-weight: $fw-medium;
+                    border: none;
+                    background-color: rgba(0, 0, 0, 0);
                 }
-                .product-users-comment-data {
-                    border-bottom: 1px solid $color-green;
-                    padding-bottom: 2rem;
-                    &:last-child {
-                        margin-bottom: 0.25rem;
-                    }
-                    .product-users-comment-userdata {
-                        flex: 1 0 0;
-                        //用戶名稱
-                        .product-users-comment-userdata-name {
-                            letter-spacing: $ls-md;
-                            font-size: $fz-md;
-                        }
-                        //留言時間
-                        .product-users-comment-userdata-time {
-                            font-size: $fz-sm;
-                            color: $color-grey;
-                            font-weight: $fw-medium;
-                            flex: 0 0 1;
-                            align-items: center;
-                            letter-spacing: -0.5px;
-                            .user-data-report {
-                                color: $color-grey;
-                                font-weight: $fw-medium;
-                                border: none;
-                                background-color: rgba(0, 0, 0, 0);
-                            }
-                            .dropdown-menu {
-                                padding-left: 0.3rem;
-                                background-color: rgba(0, 0, 0, 0);
-                                min-width: 3rem;
-                                a {
-                                    text-decoration: none;
-                                    color: $color-black;
-                                    transition: 0.3s;
-                                    &:hover {
-                                        color: $color-light-red;
-                                    }
-                                }
-                            }
-                        }
-                        //用戶給的評價
-                        .product-users-comment-userdata-star {
-                            padding-top: 1rem;
-                        }
-                        //用戶評論
-                        .product-users-comment-userdata-text {
-                            font-size: $fz-s-sm;
-                            padding-top: 1rem;
-                            font-weight: $fw-medium;
+                .dropdown-menu {
+                    padding-left: 0.3rem;
+                    background-color: rgba(0, 0, 0, 0);
+                    min-width: 3rem;
+                    a {
+                        text-decoration: none;
+                        color: $color-black;
+                        transition: 0.3s;
+                        &:hover {
+                            color: $color-light-red;
                         }
                     }
                 }
             }
-            // -------- 顧客評論結束 --------
+            //用戶給的評價
+            .product-users-comment-userdata-star {
+                padding-top: 1rem;
+            }
+            //用戶評論
+            .product-users-comment-userdata-text {
+                font-size: $fz-s-sm;
+                padding-top: 1rem;
+                font-weight: $fw-medium;
+            }
         }
     }
 }
-
 .nothing-product-comment {
     padding: 3rem 0;
     display: flex;
@@ -290,6 +302,7 @@
 .expand-comment {
     text-align: center;
     transition: 0.3s;
+    border-radius: 0rem 0rem 0.4rem 0.4rem;
     .expand-comment-btn {
         border: none;
         background-color: rgba(0, 0, 0, 0);

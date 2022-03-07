@@ -104,3 +104,12 @@ router.post("/shoppingcar", async (req, res, next) => {
 });
 
 module.exports = router;
+
+
+// SELECT a.amount,
+// b.name,
+// b.img,
+// b.price
+// FROM shopping_cart AS a
+// JOIN products AS b ON a.products_id = b.id
+// WHERE  a.user_id = 1;

@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
 
 // -------- 引入元件區塊 --------
-
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
 import Storebutton from "./component/StoreButton";
