@@ -77,9 +77,9 @@ const Table = () => {
       formData.append("due_time", product.salesTimeEnd);
       formData.append("created_at", product.createdAt);
 
-      for (var pair of formData.entries()) {
-        console.log(pair);
-      }
+      // for (var pair of formData.entries()) {
+      //   console.log(pair);
+      // }
 
       let response = await axios.post(
         `${API_URL}/storebgeditproduct/productedit`,
