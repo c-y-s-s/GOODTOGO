@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
     `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
     FROM stores AS a 
     JOIN stores_category AS b ON a.stores_category_id = b.id
-    WHERE a.valid = 1 ORDER BY RAND() LIMIT 4`
+    WHERE a.valid = 1 ORDER BY RAND()`
   );
   // -------- 營業時間判斷＆處理 --------
   data.map((item) => {
@@ -18,9 +18,9 @@ router.get("/", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -44,8 +44,12 @@ router.get("/", async (req, res, next) => {
     // console.log("closeDay", closeDay);
     // console.log("opState", item.opState);
   });
-
-  res.json(data);
+  //  data.filter((v) => v.opState === true).slice(2, 6);
+  res.json(
+    data.filter((v) => v.opState === true).length !== 0
+      ? data.filter((v) => v.opState === true).slice(2, 6)
+      : data.slice(2, 6)
+  );
 });
 
 module.exports = router;
