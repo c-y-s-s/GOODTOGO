@@ -30,7 +30,7 @@ const Table = () => {
     salesTimeEnd: "",
     createdAt: timeInsecond,
   });
-  console.log(product);
+  // console.log(product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
@@ -86,7 +86,7 @@ const Table = () => {
         formData,
         { withCredentials: true }
       );
-      console.log("上傳商品資料: ", response.data);
+      // console.log("上傳商品資料: ", response.data);
       Swal.fire({
         icon: "success",
         title: "資料修改成功",
@@ -95,7 +95,7 @@ const Table = () => {
       });
     } catch (e) {
       // console.error("錯誤:", e.response.data);
-      console.error(ERR_MSG[e.response.data].code);
+      // console.error(ERR_MSG[e.response.data].code);
     }
     navigate(`/storebg`);
   };

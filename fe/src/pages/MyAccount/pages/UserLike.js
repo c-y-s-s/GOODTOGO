@@ -236,7 +236,7 @@ const UserLike = (props) => {
                                 )}
                                 <img
                                   src={IMAGE_URL + item.storeImg}
-                                  className="cover-fit"
+                                  className="cover-fit_Member"
                                   alt="storeImage"
                                 />
                               </div>

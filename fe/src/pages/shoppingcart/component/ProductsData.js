@@ -20,7 +20,7 @@ const ProductsData = ({
   const { loginMember } = useAuth();
   //存目前登入使用者的購物車資料
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
-  console.log("123~~~~~~~~~", loginMemberId);
+  // console.log("123~~~~~~~~~", loginMemberId);
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
 

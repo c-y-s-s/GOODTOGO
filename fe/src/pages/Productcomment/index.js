@@ -25,7 +25,7 @@ const Productcomment = () => {
       setStoreData(storeResponse.data);
       setData(productsCommitResponse.data);
       
-      console.log(productsCommitResponse.data);
+      // console.log(productsCommitResponse.data);
     };
     getProducts();
   }, []);

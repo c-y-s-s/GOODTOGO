@@ -28,7 +28,7 @@ const ProductsDetails = ({
   const [productModalCommentData, setProductModalCommentData] = useState([]);
   // 存指定 ID 的商品 data
   const [productModalData, setproductModalData] = useState([]);
-  console.log("11111111", productModalData);
+  // console.log("11111111", productModalData);
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
   // console.log(shoppingErrormsg);
@@ -82,7 +82,7 @@ const ProductsDetails = ({
   function handleBackgroundDelete(e) {
     // e.target.id === "products-details-data" ?
     let backgroundId = e.target.id;
-    console.log(backgroundId);
+    // console.log(backgroundId);
     if (
       backgroundId === "products-details-data" ||
       backgroundId === "delete-button"

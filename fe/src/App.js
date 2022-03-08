@@ -71,7 +71,7 @@ function App() {
     storeId: "",
     paymentMethod: "1",
   });
-  console.log("哈囉",checkoutData);
+  // console.log("哈囉",checkoutData);
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {
