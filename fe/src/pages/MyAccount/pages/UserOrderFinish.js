@@ -104,7 +104,7 @@ const UserOrderFinish = (props) => {
                       <div className="order_Store_Img">
                         <img
                           src={IMAGE_URL + detail.img}
-                          className="cover-fit"
+                          className="cover-fit_Member"
                           alt="storeImage"
                         />
                       </div>
