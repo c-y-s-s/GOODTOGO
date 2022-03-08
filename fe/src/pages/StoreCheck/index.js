@@ -764,7 +764,7 @@ console.log(closeDay)
                           id="phone"
                           placeholder="name@example.com"
                           value={member.phone}
-                          maxLength="12"
+                          maxLength="10"
                           onChange={handleChange}
                           onWheel={(e) => e.target.blur()} 
                           required
