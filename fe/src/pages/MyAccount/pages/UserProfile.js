@@ -363,7 +363,7 @@ const UserProfile = (props) => {
                       }
                       // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
                       alt="head shot"
-                      className="cover-fit"
+                      className="cover-fit_Member"
                     />
                   </div>
                   <div
