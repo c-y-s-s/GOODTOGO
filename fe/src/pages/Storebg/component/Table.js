@@ -15,10 +15,11 @@ import { v4 as uuidv4 } from "uuid";
 import CheckModal from "./CheckModel";
 import { useAuth } from "../../../context/auth";
 
-const Table = () => {
+const Table = (props) => {
   const { loginSeller } = useAuth();
   // 店家商品列表
-  const [productsData, setproductsData] = useState([]);
+  //const [productsData, setproductsData] = useState([]);
+  const {productsData, setproductsData} =props
   // 取得頁數
   const { productId } = useParams();
   const { currentPage } = useParams();
@@ -39,7 +40,7 @@ const Table = () => {
     let getPrices = async () => {
       // 預設 created_at DESC
       let response = await axios.get(
-        `${API_URL}/storebg/productslist?store_id=${loginSeller.id}?page=${page}`,
+        `${API_URL}/storebg/productslist?store_id=${loginSeller.id}&page=${page}`,
       );
       // 價錢 DESC
       // let productsPriceDescResponse = await axios.get(
@@ -81,7 +82,7 @@ const Table = () => {
   for (let i = 1; i <= lastPage; i++) {
     pages.push(
       <li className="page-item" key={uuidv4()}>
-        <a
+        <span
           href=" "
           className={`page-link pages ${page === i ? "active" : ""}`}
           onClick={(e) => {
@@ -90,7 +91,7 @@ const Table = () => {
           }}
         >
           {i}
-        </a>
+        </span>
       </li>
     );
   }
