@@ -12,6 +12,7 @@
 /build
 # 隱藏google金鑰
 key.js
+key copy.js
 # misc
 .DS_Store
 .env
