@@ -17,7 +17,7 @@ const _menuToggle = () => {
   const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
   const navigate = useNavigate();
-  console.log("me open", isOpen);
+  // console.log("me open", isOpen);
   //antd menu
   const { SubMenu } = Menu;
   //swal

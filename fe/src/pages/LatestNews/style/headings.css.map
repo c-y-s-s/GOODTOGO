@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AACA,AAAA,qBAAqB,CAAA;EACjB,aAAa,EAAE,SAAS;CAC3B",
+    "sources": [
+        "headings.scss"
+    ],
+    "names": [],
+    "file": "headings.css"
+}

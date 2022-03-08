@@ -13,7 +13,7 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
-  console.log(props);
+  // console.log(props);
   // 購物車總筆數
   const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
   return (

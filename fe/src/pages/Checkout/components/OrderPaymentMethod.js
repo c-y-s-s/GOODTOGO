@@ -24,7 +24,7 @@ export const OrderPaymentMethod = ({
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   let orderNumber = moment().format("YYMMDDHHmmss");
-  console.log("pppppppp",checkProductsData);
+  // console.log("pppppppp",checkProductsData);
   // 將商品存成陣列寫進資料庫，因需跟訂單號一起寫入所以用此方法
   let productsArr = [];
   checkProductsData.forEach((item) => {

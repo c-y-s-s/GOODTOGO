@@ -103,7 +103,7 @@ const StoreDetails = ({
         let closeDayData = JSON.parse(item.close_day);
         let closeDayChinese = [];
         closeDayData.forEach((item) => {
-          console.log(typeof item);
+          {/* console.log(typeof item); */}
           if (item === 1) closeDayChinese.push("一");
           if (item === 2) closeDayChinese.push("二");
           if (item === 3) closeDayChinese.push("三");
