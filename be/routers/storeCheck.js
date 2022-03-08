@@ -110,7 +110,7 @@ const registerRules = [
   
       // -------- 儲存到資料庫 --------
       let [updateProfileResult] = await connection.execute(
-        `INSERT INTO stores (bossname, name, email, account, password, tel_no, address, open_time, close_time,close_day, certification_img, logo,stores_category_id, valid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
+        `INSERT INTO stores (bossname, name, email, account, password, tel_no, address, open_time, close_time,close_day,logo,certification_img,stores_category_id, valid) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?);`,
         [
             req.body.name,
             req.body.storeName,

@@ -98,7 +98,7 @@ function App() {
   }, []);
   // console.log("member from App.js", loginMember); //ok
   return (
-    <AuthContext.Provider value={{ loginMember, setLoginMember }}>
+    <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller}}>
       <Router>
         {isModalTouch && (
           <Navbar
