@@ -58,7 +58,8 @@ const StoreInfoCard = (props) => {
           let favStoresMap = likeList.map((d) => {
             return d.store_id;
           });
-          console.log("favStoresMap", favStoresMap);
+          {/* console.log("aaaaa", likeList); */}
+          {/* console.log("favStoresMap", favStoresMap); */}
           // -------- 取得該店家愛心總數量 --------
           let likeCount = Object.values(storeLikeCount)[item.id - 1];
           // -------- 取得該店家產品總數量 --------
