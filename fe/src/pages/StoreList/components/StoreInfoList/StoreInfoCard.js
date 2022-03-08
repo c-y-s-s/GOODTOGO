@@ -163,7 +163,7 @@ const StoreInfoCard = (props) => {
                           };
                           setStoreLikeCount(updatedCount);
                           const updatedLikeList = [...likeList].filter(
-                            (v) => v.store_id === item.id
+                            (v) => v.store_id !== item.id
                           );
                           console.log("updateLikeList", updatedLikeList);
                           setLikeList(updatedLikeList);

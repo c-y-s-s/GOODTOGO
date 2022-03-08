@@ -413,11 +413,11 @@ const Register = () => {
 
                       {/* -------- Facebook 登入 -------- */}
 
-                      <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between mb-2">
+                      {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between mb-2">
                         <ImFacebook2 className="fb-icon col-lg-2 " />
                         使用 Facebook 註冊
                         <div className="col-lg-2"> </div>
-                      </button>
+                      </button> */}
                     </div>
                   </form>
                   <p className=" input-label-title text-grey text-center m-0 mb-3">

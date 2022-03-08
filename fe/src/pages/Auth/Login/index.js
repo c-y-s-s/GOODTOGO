@@ -306,9 +306,9 @@ const Login = (props) => {
 
                 {/* -------- 表格結束 -------- */}
               </form>
-              <Link to="/auth/reset" className="no-link">
+              {/* <Link to="/auth/reset" className="no-link">
                 <p className="text-grey no-link m-0 mt-3">忘記密碼？</p>
-              </Link>
+              </Link> */}
 
               <hr className="col-lg-10 col-sm-10 mt-lg-3 split" />
 
