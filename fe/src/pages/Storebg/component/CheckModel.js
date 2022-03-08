@@ -39,7 +39,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
 
     try {
       let response = await axios.post(
-        `${API_URL}/storebg/remove?store_id=77`,
+        `${API_URL}/storebg/remove?store_id=${loginSeller.id}`,
         productValidId
       );
       console.log("刪除訊息 ", response.data);

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_URL, IMAGE_URL, PROFILE_IMAGE_URL } from "../../../utils/config";
 import { useAuth } from "../../../context/auth";
+import Swal from "sweetalert2";
+
 
 
 const TopNav = () => {
@@ -13,6 +15,13 @@ const TopNav = () => {
     await axios.get(`${API_URL}/storebg/storeLogout`, {
       withCredentials: true,
     });
+        // sweet alert
+        Swal.fire({
+          icon: "success",
+          title: "登出成功",
+          showConfirmButton: false,
+          timer: 1500,
+        });
     setMember(null);
   };
 
