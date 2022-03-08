@@ -33,20 +33,21 @@ router.post("/orderdetail", async (req, res, next) => {
     [
       req.body.id,
       req.body.userId,
-      req.body.storeId,
       req.body.statusId,
+      req.body.storeId,
       req.body.paymentMethod,
       req.body.orderTime,
       req.body.order_number,
     ]
   );
+  // console.log("bbbbbbbbbb", result);
   // 刪除購物車資料
   let [DeteleResult] = await connection.execute(
     `DELETE FROM shopping_cart
        WHERE user_id = ? AND store_id = ?;`,
     [req.body.userId, req.body.storeId]
   );
-  console.log(req.body);
+  // console.log(req.body);
   res.json({ msg: "ok" });
 });
 
@@ -58,7 +59,7 @@ router.post("/userorderdetail", async (req, res, next) => {
       [item.orderId, item.productsId, item.amount]
     );
   });
-  console.log(req.body);
+  // console.log(req.body);
   res.json({ msg: "Checkout Products INSERT ok" });
 });
 

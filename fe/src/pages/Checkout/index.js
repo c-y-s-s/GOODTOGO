@@ -45,7 +45,7 @@ const Checkout = ({
     orderTime: "",
     order_number: "",
   });
-
+  // console.log("aaaaa",OrderDetail);
   useEffect(() => {
     let getcheckProductsData = async () => {
       //撈指定 ID 商品的評論
