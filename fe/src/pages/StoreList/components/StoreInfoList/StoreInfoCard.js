@@ -99,6 +99,7 @@ const StoreInfoCard = (props) => {
                         item.opState === false ? "is-closed" : "is-open"
                       }`}
                     >
+                  
                       {item.opState === false ? "休息中" : "營業中"}
                     </div>
                   </div>

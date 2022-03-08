@@ -74,7 +74,7 @@ const StoreProductsComment = () => {
     getComment();
         setTimeout(() => {
           setIsLoading(false);
-        }, 300);
+        }, 350);
   }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
 
   // productsComment.map((item) => {
@@ -117,7 +117,7 @@ const StoreProductsComment = () => {
         {/* <div className="spinner-grow text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div> */}
-        <div className="text-center loading-img mt-5">
+        <div className="text-center loading-img mt-5 m-auto">
           {/* <div className="xxxx">1234</div> */}
           <img
             className=""
