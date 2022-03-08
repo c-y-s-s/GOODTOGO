@@ -13,7 +13,7 @@ const LocationPin = (props) => {
         onClick={() => {
           props.setClickStoreId(props.storeId);
         }}
-      />
+      ></MdLocationPin>
       <p className="pin-text d-flex flex-column align-items-center">
         <div className="title pt-2">{props.name}</div>
         <div className="time pt-2">
