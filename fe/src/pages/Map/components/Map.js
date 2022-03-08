@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LocationPin from "./LocationPin";
 import CurrentLocationPin from "./CurrentLocationPin";
 import { MdOutlineEmojiPeople } from "react-icons/md";
-import { LARGE_MAP_KEY } from "../../../key";
+// import { LARGE_MAP_KEY } from "../../../key";
 
 const Map = (props) => {
   const { displayStoreList, zoomLevel } = props;
@@ -49,7 +49,7 @@ const Map = (props) => {
         <div className="google-map">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: LARGE_MAP_KEY,
+              // key: LARGE_MAP_KEY,
             }}
             defaultCenter={location}
             defaultZoom={zoomLevel}

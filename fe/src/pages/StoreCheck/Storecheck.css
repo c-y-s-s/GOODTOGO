@@ -7244,4 +7244,168 @@ input[type=number]::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
-/*# sourceMappingURL=index.css.map */
+
+.storelogin-con {
+  background: #a6bf4b;
+  padding: 4rem;
+}
+
+.storelogin-con .content {
+  background: white;
+  -webkit-filter: drop-shadow(0 0 0.5rem #b1b1ac);
+          filter: drop-shadow(0 0 0.5rem #b1b1ac);
+  margin: auto;
+}
+
+.storelogin-con .input-label-title {
+  font-size: 1.0625rem;
+}
+
+.storelogin-con .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.storelogin-con .submit-btn {
+  background-color: #668c4a;
+  border-radius: 2px;
+}
+
+.storelogin-con .btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.storelogin-con .btn-fb-login .big-icon {
+  font-size: 26px;
+}
+
+.error {
+  color: #9b1313;
+}
+
+.storereg-con {
+  background: #a6bf4b;
+  padding: 4rem;
+}
+
+.storereg-con .flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.storereg-con .content {
+  background-color: white;
+}
+
+.storereg-con .content .btn-fb-login {
+  color: white;
+  background-color: #3b5998;
+  border-radius: 2px;
+}
+
+.storereg-con .content .btn-fb-login .big-icon {
+  font-size: 26px;
+}
+
+.storereg-con .input-label-title {
+  font-size: 1.0625rem;
+}
+
+.storereg-con .custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
+}
+
+.label-group {
+  font-size: 0.875rem;
+}
+
+.label-group .btn-register {
+  background-color: #668c4a;
+  color: white;
+  border-radius: 2px;
+}
+
+.opendayCheck {
+  background: rgba(166, 191, 75, 0.2);
+  border: 2px solid #d3d3d3;
+  border-radius: 2px;
+}
+
+.form-check .form-check-input {
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  margin-top: 1.5em;
+}
+
+input.dayCheck {
+  width: 18px;
+  height: 18px;
+  border: 10px solid #bcbcbc;
+  border-radius: 2px;
+  color: -internal-light-dark(#bcbcbc, white);
+}
+
+.opendayCheck .row .col {
+  padding: 0px;
+}
+
+.time {
+  text-align: center;
+}
+
+.input-error {
+  border: 2px solid #9b1313;
+}
+
+.error {
+  color: #9b1313;
+}
+
+.flex {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.timeZone {
+  -webkit-box-flex: 3;
+      -ms-flex: 3 1 0px;
+          flex: 3 1 0;
+}
+
+.timeZone input[type=number]::-webkit-inner-spin-button,
+.timeZone input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: auto;
+}
+
+.timeSymbol {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+  text-align: center;
+}
+
+.cover-fit {
+  border: 2px solid #a6bf4b;
+  border-radius: 5px;
+}
+/*# sourceMappingURL=Storecheck.css.map */

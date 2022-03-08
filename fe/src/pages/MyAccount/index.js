@@ -82,7 +82,7 @@ const MyAccount = (props) => {
                       src={headShot ? IMAGE_URL + headShot : PROFILE_IMAGE_URL}
                       // 顯示順序: 資料庫圖片 -> 預設圖片
                       alt="head shot"
-                      className="cover-fit"
+                      className="cover-fit_Member"
                     />
                   </div>
                 </div>
