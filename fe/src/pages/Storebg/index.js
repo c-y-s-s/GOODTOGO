@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 
 import LeftNav from "./component/LeftNav";
 import TopNav from "./component/TopNav";
@@ -7,6 +7,8 @@ import PenCount from "./component/PenCount";
 import Table from "./component/Table";
 import Pagination from "./component/Pagination";
 const Storebg = ({ setIsAdmin }) => {
+
+  const [productsData, setproductsData] = useState([]);
   // 判斷頁首頁尾
   useEffect(() => {
     setIsAdmin(true);
@@ -29,9 +31,9 @@ const Storebg = ({ setIsAdmin }) => {
               {/* -------- 排序區塊 -------- */}
               <FilterContent />
               {/* -------- 筆數 -------- */}
-              <PenCount />
+              <PenCount productsData={productsData} setproductsData={setproductsData}/>
               {/* -------- 表格 資料主要呈現區塊開始 -------- */}
-              <Table />
+              <Table productsData={productsData} setproductsData={setproductsData}/>
               {/* -------- 分頁區塊開始 --------*/}
               {/* <Pagination /> */}
             </div>
