@@ -38,9 +38,9 @@ router.get("/", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -158,9 +158,9 @@ router.get("/search", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -220,9 +220,9 @@ router.get("/filter/c", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -274,9 +274,9 @@ router.get("/filter/op", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -372,9 +372,9 @@ router.get("/rating/heart", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -461,9 +461,9 @@ router.get("/rating/comment", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -484,7 +484,7 @@ router.get("/rating/comment", async (req, res, next) => {
     }
     // console.log("filter: opState", item.opState);
   });
-  console.log("storeResult數量", storeResult);
+  // console.log("storeResult數量", storeResult);
   res.json(storeResult);
 });
 //
@@ -495,7 +495,7 @@ router.get("/likelist/:id", async (req, res, next) => {
     [req.params.id]
   );
   res.json(list);
-  console.log("收藏", list);
+  // console.log("收藏", list); [{ store_id: 4 },{ store_id: 7 },{ store_id: 1 }]
 });
 //*取消收藏愛心api - api/stores/remove_like
 router.post("/remove_like/:id", async (req, res, next) => {
@@ -524,8 +524,8 @@ router.post("/add_like/:id", async (req, res, next) => {
     `INSERT INTO user_like( user_id, store_id) VALUES (?, ?);`,
     [req.params.id, req.body.id]
   );
-  console.log("memer", req.params.id);
-  console.log("store", req.body.id);
+  // console.log("memer", req.params.id);
+  // console.log("store", req.body.id);
   res.json({
     message: "會員新增收藏店家 ok",
   });
