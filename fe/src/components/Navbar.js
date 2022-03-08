@@ -5,6 +5,9 @@ import Popover from "./_popover";
 import NavShoppingCart from "./NavShoppingCart";
 import MenuToggle from "./_menuToggle";
 
+//引用漢堡
+import Hamburger from "hamburger-react";
+
 // -------- icons --------
 import { FiMapPin } from "react-icons/fi";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
@@ -17,8 +20,11 @@ const Navbar = (props) => {
   // 購物車總筆數
   const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
   return (
-    <div className="container-fluid navbar justify-content-center sticky-top shadow" id="navbar">
-      <div className="nav-content">
+    <div
+      className="container-fluid navbar justify-content-center sticky-top shadow"
+      id="navbar"
+    >
+      <div className="nav-content align-items-center">
         <div>
           <Link to="/">
             <Logo className="nav-logo" />
@@ -38,7 +44,21 @@ const Navbar = (props) => {
               navshoppingDeleteParameter={props.navshoppingDeleteParameter}
             />
           </Link>
-          <MenuToggle />
+          <div className="">
+            <Hamburger
+              toggled={isOpen}
+              toggle={setOpen}
+              size={25}
+              color="#668C4A"
+              rounded
+            />
+          </div>
+          {isOpen ? (
+            <MenuToggle setOpen={setOpen} isOpen={isOpen} />
+          ) : (
+            <div></div>
+          )}
+
           <div className="side-menu"></div>
         </div>
         {/* RWD專用漢堡menu end */}
@@ -80,12 +100,13 @@ const Navbar = (props) => {
             />
           </Link>
 
-          <Link to="/map" className="nav-icon">
+          <Link to="/map" className="nav-icon nav-icon-map">
             <FiMapPin />
           </Link>
         </div>
       </div>
-    </div>)
-    };
+    </div>
+  );
+};
 
 export default Navbar;

@@ -41,7 +41,7 @@ const NavShoppingCart = ({
     setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
   }
 
-    const notLoggedin = <div className="nav-popover">尚未登入帳號</div>;
+  const notLoggedin = <div className="nav-popover">尚未登入帳號</div>;
 
   const shoppingList = (
     <div>
@@ -102,12 +102,12 @@ const NavShoppingCart = ({
       <Popover
         placement="bottomRight"
         // content={loginMember ? shoppingList : notLoggedin}
-        content={shoppingList }
+        content={shoppingList}
         // content={shoppingList}
         // trigger="click"
         // trigger={loginMember && "click" }
       >
-        <ShoppingBag className="nav-icon mt-1" />
+        <ShoppingBag className="nav-icon me-2" />
       </Popover>
     </>
   );

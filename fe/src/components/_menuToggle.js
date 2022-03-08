@@ -4,22 +4,17 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 //alert套件
 import Swal from "sweetalert2";
-//引用antd popover
-import { Menu } from "antd";
-import "antd/dist/antd.css";
-//引用漢堡
-import Hamburger from "hamburger-react";
+
 //引用icon
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import { ReactComponent as StoreIcon } from "../images/store-icon.svg";
+import { ReactComponent as MapIcon } from "../images/map-pin-icon.svg";
 
-const _menuToggle = () => {
+const _menuToggle = (props) => {
   const { loginMember, setLoginMember } = useAuth();
-  const [isOpen, setOpen] = useState(false);
+  const { setIsOpen, isOpen } = props;
   const navigate = useNavigate();
-  // console.log("me open", isOpen);
-  //antd menu
-  const { SubMenu } = Menu;
+
   //swal
   const swal = Swal.mixin({
     customClass: {
@@ -57,73 +52,61 @@ const _menuToggle = () => {
     );
   };
   const loggedin = (
-    <div className="nav-toggle-menu">
-      <div className="popover-item text-center">
+    <ul
+      className="list-unstyled drop-down-menu"
+      onClick={() => {
+        setIsOpen(!isOpen);
+      }}
+    >
+      <li class="popover-item">
         <Link to="/member" className="nav-popover-link">
           會員中心
         </Link>
-      </div>
-      <div className="popover-item text-center">
+      </li>
+      <li class="popover-item">
         <Link to="/member/order" className="nav-popover-link">
           我的訂單
         </Link>
-      </div>
-      {/* <div className="popover-item text-center">
-        <Link to="#" className="nav-popover-link">
-          優惠券
-        </Link>
-      </div> */}
-      <div className="popover-item text-center">
-        {/* <Link to="auth/logout" className="nav-popover-link">
-          登出
-        </Link> */}
-        <div onClick={click} className="nav-popover-link">
-          登出
-        </div>
-      </div>
-    </div>
+      </li>
+      <li onClick={click} className="nav-popover-link">
+        登出
+      </li>
+    </ul>
   );
   const notLoggedin = (
-    <div className="nav-toggle-menu">
-      <div className="popover-item text-center d-flex align-items-center">
-        <UserIcon className="me-3" />
+    <ul className="list-unstyled drop-down-menu">
+      <li class="popover-item">
         <Link to="/auth/login" className="nav-popover-link no-link">
           會員登入
         </Link>
-        <div className="me-3 ms-3">|</div>
-        <Link to="＃" className="nav-popover-link">
+      </li>
+      <li class="popover-item">
+        <Link to="/storelogin" className="nav-popover-link">
           店家登入
         </Link>
-      </div>
-      <div className="popover-item text-center">
+      </li>
+      <hr className="col-8 m-auto" />
+      <li class="popover-item">
         <Link to="stores" className="nav-popover-link no-link">
           <StoreIcon className="me-3" />
           探索美食
         </Link>
-      </div>
-    </div>
+      </li>
+      <li class="popover-item">
+        <Link to="map" className="nav-popover-link">
+          <MapIcon className="me-3" />
+          地圖探索
+        </Link>
+      </li>
+      {/* <li class="popover-item">
+        <Link to="/storecheck" className="nav-popover-link">
+          店家申請
+        </Link>
+      </li> */}
+    </ul>
   );
 
-  return (
-    <>
-      <Menu mode="horizontal" triggerSubMenuAction="click">
-        <SubMenu
-          className="p-0 justify-self-end"
-          icon={
-            <Hamburger
-              toggled={isOpen}
-              toggle={setOpen}
-              size={22}
-              color="#668C4A"
-              rounded
-            />
-          }
-        >
-          {loginMember ? loggedin : notLoggedin}
-        </SubMenu>
-      </Menu>
-    </>
-  );
+  return <>{loginMember !== null ? loggedin : notLoggedin}</>;
 };
 
 export default _menuToggle;

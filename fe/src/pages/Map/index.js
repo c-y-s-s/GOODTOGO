@@ -58,14 +58,14 @@ const MapPage = () => {
   return (
     <div className="container-fluid map-bg p-0">
       <div className="map-wrapper col-lg-8 col-12">
-        <div className="map-search d-flex align-items-center justify-content-end">
+        {/*        
           <HiOutlineAdjustments
             className="toggle-controller me-2"
             onClick={() => {
               setMenuShowSwitch(!menuShowSwitch);
             }}
           />
-        </div>
+        */}
         <div className="col-lg-12">
           <Map
             displayStoreList={displayStoreList}
@@ -78,7 +78,6 @@ const MapPage = () => {
         </div>
       </div>
       <div className="map-side-bar col-lg-4 col-12 text-center">
-        <div className="map-title">搜尋附近店家</div>
         <div className=" map-filter-bar align-items-center d-flex flex-column">
           <ul
             name=""
