@@ -191,13 +191,6 @@ const StoreInfoCard = (props) => {
                     <div className="ms-2">{likeCount > 0 ? likeCount : 0}</div>
                   </>
                 )}
-                {/* <FiHeart
-                      className="store_Like_unActive"
-                      onClick={(e) => {}}
-                    />
-                    <div className="ms-2">
-                      {likeCount > 0 ? likeCount : 0}
-                    </div> */}
               </div>
             </div>
           </div>

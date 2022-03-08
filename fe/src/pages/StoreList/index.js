@@ -38,9 +38,11 @@ const StoryList = () => {
         <Slider />
         <Recommodation
           totalHeart={totalHeart}
+          setTotalHeart={setTotalHeart}
           productAmount={productAmount}
           totalStar={totalStar}
           likeList={likeList}
+          setLikeList={setLikeList}
         />
         <StoreInfoList
           setTotalHeart={setTotalHeart}
