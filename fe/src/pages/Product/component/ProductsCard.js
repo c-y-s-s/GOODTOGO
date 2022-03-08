@@ -55,7 +55,7 @@ const StoreCard = ({
     return <span>結束販售</span>;
   };
 
-  // ! 卡片跳動bug尚未解決
+
   // ? 時間倒數套件
   const renderer = ({ hours, minutes, seconds, completed }) => {
     if (completed) {
@@ -95,7 +95,7 @@ const StoreCard = ({
               parseInt(item.due_time[6] + item.due_time[7]);
             // ! 商品結束販售時間 - 現在時間
             let timeEnd = itemTimeProductCloseSecond - timeInsecondResult;
-
+            console.log(item)
             // ! 店家休息 false 就不倒數
             // ! 如果日期是休息日
             // ! timeEnd = 0
@@ -111,7 +111,7 @@ const StoreCard = ({
               : storeinOperation
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
               : (timeEnd = 0);
-
+         
             //! 現在時間秒數要大於開始販售時間才是開始販售
             timeInsecondResult > itemTimeProductOpenSecond
               ? (timeEnd = itemTimeProductCloseSecond - timeInsecondResult)
@@ -121,7 +121,7 @@ const StoreCard = ({
               <div
                 className="col-12 col-md-6 col-lg-3 product-card"
                 style={{ width: `15.9rem` }}
-                key={uuidv4()}
+                key={item.id}
                 onClick={() => {
                   setOpenProductsModalID(item.id);
                   setOpenProductsModal(true);
@@ -133,17 +133,23 @@ const StoreCard = ({
                   <div className="d-flex product-card-text">
                     <div className="time-text">
                       時間倒數
-                      <span
-                        className={`${
-                          timeEnd < 3600 && "count-down-one-hour"
-                        } ps-1`}
-                      >
-                        <Countdown
-                          date={Date.now() + timeEnd * 1000}
-                          zeroPadTime={2}
-                          renderer={renderer}
-                        />
-                      </span>
+                      {item.amount > 0 ? (
+                        <span
+                          className={`${
+                            timeEnd < 3600 && "count-down-one-hour"
+                          } ps-1`}
+                        >
+                          <Countdown
+                            date={Date.now() + timeEnd * 1000}
+                            zeroPadTime={2}
+                            renderer={renderer}
+                          />
+                        </span>
+                      ) : (
+                        <span className="count-down-one-hour">
+                          <span>結束販售</span>
+                        </span>
+                      )}
                     </div>
                     <div className="amount-text">
                       剩餘
@@ -161,13 +167,16 @@ const StoreCard = ({
                         : item.amount}
                     </div>
                   </div>
+                  {/* //數量邏輯判斷 */}
                   <div
                     className={`product-img ratio ratio-4x3 ${
                       storeDayClose
                         ? "close-active"
                         : storeinOperation === false
                         ? "close-active"
-                        : timeEnd <= 0 && "close-active"
+                        : timeEnd <= 0
+                        ? "close-active"
+                        : item.amount <= 0 && "close-active"
                     }`}
                   >
                     <img

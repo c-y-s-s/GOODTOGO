@@ -17,12 +17,14 @@ export const OrderPaymentMethod = ({
   OrderDetail,
   checkoutData,
   setOrderCheckSwitch,
+  setNavShoppingDeleteParameter,
+  navshoppingDeleteParameter,
 }) => {
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
   let orderNumber = moment().format("YYMMDDHHmmss");
-
+  console.log("pppppppp",checkProductsData);
   // 將商品存成陣列寫進資料庫，因需跟訂單號一起寫入所以用此方法
   let productsArr = [];
   checkProductsData.forEach((item) => {
@@ -30,6 +32,7 @@ export const OrderPaymentMethod = ({
       orderId: OrderDetail.id,
       productsId: item.products_id,
       amount: item.amount,
+      productsNowAmount: item.product_now_amount,
     };
     productsArr.push(obj);
   });
@@ -38,6 +41,7 @@ export const OrderPaymentMethod = ({
     // 寫入按下送出訂單哪一刻的時間
     timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
     orderNumber = moment().format("YYMMDDHHmmss");
+
     let response = await axios.post(`${API_URL}/checkout/orderdetail`, {
       ...OrderDetail,
       orderTime: timeInsecond,
@@ -48,6 +52,14 @@ export const OrderPaymentMethod = ({
       `${API_URL}/checkout/userorderdetail`,
       productsArr
     );
+
+        let productsDeleteAmountResponse = await axios.post(
+          `${API_URL}/checkout/deleteproductsamount`,
+          productsArr
+        );
+
+
+    setNavShoppingDeleteParameter(navshoppingDeleteParameter + 1);
     setOrderCheckSwitch(true);
   }
   return (

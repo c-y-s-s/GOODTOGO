@@ -3,7 +3,8 @@ const express = require("express");
 // 引入 express router
 const router = express.Router();
 const connection = require("../utils/db");
-
+let moment = require("moment"); // require
+moment().format(); 
 router.post("/shoppingcartotoaldelete", async (req, res, next) => {
   // console.log(req.body);
   // TODO: 寫進資料庫
@@ -84,7 +85,8 @@ router.get("/shoppingcar/:userId/", async (req, res, next) => {
   res.status(200).json(data);
 });
 
-// /api/auth/register 這邊是因為先寫前端所以網址就要設定前端所設定的
+
+// /api/shop/shoppingcar
 router.post("/shoppingcar", async (req, res, next) => {
   //req.params 變數是在網址上
   //req.query ?xxx
@@ -103,4 +105,99 @@ router.post("/shoppingcar", async (req, res, next) => {
   res.json({ msg: "加入購物車成功" });
 });
 
+
+// async function go(){
+// let cccarr = [
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "~!",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+//   {
+//     com: "",
+//     star: Math.floor(Math.random() * 5 + 1),
+//   },
+// ];
+
+// for (let a = 11; a <= 15; a++) {
+//   for (let b = 13; b <= 18; b++) {
+//     let aaa = moment("2022-02-01 05:00:00")
+//       .add(a, "day")
+//       .add(a, "h")
+//       .add(a + 1, "m")
+//       .add(a + 2, "s")
+//       .format("YYYY-MM-DD hh:mm:ss");
+//     console.log(
+//       `用戶${a},評論商家1的商品id${b} 時間${aaa} 評論:${cccarr[a - 10].com} 星:${
+//         cccarr[a - 10].star
+//       }`
+//     );
+
+//     let [data, fields] = await connection.execute(
+//       `INSERT INTO 
+//     products_comment (user_id,products_id,store_id,comment,star,create_time)
+//     VALUES(${a},${b},3,"${cccarr[a - 10].com}",${cccarr[a - 10].star},"${aaa}")`
+//     );
+//   }
+// }
+
+// }
+// go()
+
+
+// async function go1(){
+
+// for (let a = 1; a <= 30; a++) {
+//   for (let b = 1; b <= 76; b++) {
+//     let [data, fields] = await connection.execute(
+//       `INSERT INTO 
+//     user_like (user_id,store_id)
+//     VALUES(${a},${b})`
+//     );
+//     console.log(`會員${a} 按了${b}商家愛心`)
+//   }
+// }
+
+// }
+// go1()
+
+
 module.exports = router;
+
+
+
+
+
+
+

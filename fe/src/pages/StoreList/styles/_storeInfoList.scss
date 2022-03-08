@@ -4,6 +4,7 @@
     background-image: url(../images/storelist_bg_2.svg);
     background-size: contain;
     background-repeat: no-repeat;
+    background-size: contain;
     height: 12rem;
     width: 100vw;
     position: relative;
@@ -75,7 +76,7 @@
     margin: auto;
     display: grid;
     row-gap: 2rem;
-    column-gap: 2rem;
+    column-gap: 4.3rem;
   }
   .pages {
     display: flex;

@@ -6,10 +6,20 @@ import { API_URL } from "../../utils/config";
 // -------- react icon --------
 import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
+import { ReactComponent as JumpIcon }  from "../../images/editor-0.9s-215px.gif";
+import { useAuth } from "../../context/auth";
+const Shoppingcart = ({
+  setCheckoutData,
+  checkoutData,
+  navshoppingDeleteParameter,
+  setNavShoppingDeleteParameter,
+}) => {
 
-const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
+   
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
+    const { loginMember } = useAuth();
+         console.log("~~~~~~~~1~", loginMember.id);
   // 刪除商品刷新頁面開關
   const [deleteLive, setDeleteLive] = useState(true);
   // 總金額刷新開關
@@ -19,7 +29,7 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
   // 存入所要結帳商家 ID 和 付款方式寫進資料庫
   const [shoppingCheckData, setShoppingCheckData] = useState({
     //!整合須改為目前登入者 id
-    userId: 1,
+    userId: loginMember.id,
     storeId: "",
     paymentMethod: "",
     storeName: "",
@@ -29,12 +39,12 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
     let getShoppingData = async () => {
       // 撈 user_id 所存入購物車的資料
       let shoppingDataResponse = await axios.get(
-        `${API_URL}/shop/shoppingstoredata/1`
+        `${API_URL}/shop/shoppingstoredata/${loginMember.id}`
       );
       setShoppingCartData(shoppingDataResponse.data);
     };
     getShoppingData();
-  }, [deleteLive, priceTotal]);
+  }, [deleteLive, priceTotal, navshoppingDeleteParameter]);
 
   return (
     <div>
@@ -84,6 +94,9 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
                   deleteLive={deleteLive}
                   setPriceTotal={setPriceTotal}
                   priceTotal={priceTotal}
+                  setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                  navshoppingDeleteParameter={navshoppingDeleteParameter}
+                  loginMemberId={loginMember.id}
                 />
                 {/* 下排 */}
                 <div className="d-flex justify-content-between   user-shopping-cart-data-payment ">
@@ -159,7 +172,12 @@ const Shoppingcart = ({ setCheckoutData, checkoutData }) => {
             );
           })
         ) : (
-          <div>可以加入沒商品時的畫面</div>
+          <div className="shopping-cart-nothing-products">
+            <img src={require(`../../images/editor-0.9s-215px.gif`)} />
+            <div className="shopping-cart-nothing-products-text">
+              購物車沒有商品
+            </div>
+          </div>
         )}
       </div>
     </div>

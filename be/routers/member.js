@@ -28,7 +28,7 @@ moment.locale("zh-tw", {
 // 登入成功後進到內頁 /member -> 利用 session 確認有無登入過 -> 進到其他路由中間件撈資料 profile/password...
 
 // -------- 驗證是否已登入 中間件 --------
-router.use(checkLogin); // 最後要抽離成 middleware 引入
+router.use(checkLogin); // 抽離成 middleware 引入
 router.use((req, res, next) => {
   // ----- 測試，假設已取得登入後的 session
   // req.session.member = {
@@ -93,7 +93,6 @@ const storage = multer.diskStorage({
   },
 });
 
-//
 // router.post 過濾圖片用的中間件
 const uploader = multer({
   storage: storage, // 上面的 storage 圖片儲存資訊
@@ -148,7 +147,7 @@ router.get("/profile", async (req, res, next) => {
   console.log("取得 user: ", data);
 
   let [emails] = await connection.execute(`SELECT email FROM users;`);
-  console.log("取得 emails: ", emails);
+  // console.log("取得 emails: ", emails);
 
   let [likes] = await connection.execute(
     `SELECT store_id FROM user_like WHERE user_id=?;`,
@@ -172,6 +171,7 @@ router.get("/profile", async (req, res, next) => {
     photo: data[0].headshots,
     // photo: req.session.member.photo,
   };
+  console.log("profile", profile);
   res.json({ profile, emails, likes, orders });
 });
 
@@ -222,7 +222,11 @@ router.post(
     // console.log("前端送來、multer中間件處理過 req.file: ", req.file);
     let filename = req.file
       ? "/static/uploads/headshots/" + req.file.filename
+      : req.body.photo === "remove"
+      ? ""
       : req.session.member.photo;
+    // 是否有移除圖片
+    console.log("remove???", req.body.photo);
     // console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
@@ -236,17 +240,17 @@ router.post(
         req.session.member.id,
       ]
     );
-    // 整理需要的資料
+    // console.log(updateProfileResult);
+
+    // -------- 更新 session --------
     let returnUser = {
       ...req.session.member,
       name: req.body.name,
       photo: filename,
     };
     console.log("returnUser", returnUser);
-    // 如果密碼比對成功，記錄在 session
     // 寫 session
     req.session.member = returnUser;
-    // console.log(updateProfileResult);
 
     // 寫內容前先測試能不能得到 req
     // console.log("req.body: ", req.body);
@@ -257,6 +261,46 @@ router.post(
     });
   }
 );
+// -------- 會員信用卡資料顯示 --------
+router.get("/payment", async (req, res, next) => {
+  let [creditNum] = await connection.execute(
+    `SELECT
+    credit_number
+    FROM users
+    WHERE id=?;`,
+    [req.session.member.id]
+  );
+  res.json(creditNum[0]);
+});
+
+// -------- 會員信用卡更新 --------
+// /api/member/payment/edit (post)
+router.post("/payment/edit", async (req, res, next) => {
+  // 處理信用卡號碼
+  let twelveNum = req.body.number.split(" ").slice(0, -1).join("");
+  let fourNum = req.body.number.split(" ").pop();
+  // 寫內容前先測試能不能得到 req
+  console.log("payment req.body: ", req.body);
+  console.log("payment req.body.number 前12碼: ", twelveNum);
+  console.log("payment req.body.number 後4碼: ", fourNum);
+
+  // 雜湊 hashNum
+  let hashtwelveNum = await argon2.hash(twelveNum);
+
+  // -------- 儲存到資料庫 --------
+  let [updateCreditResult] = await connection.execute(
+    `UPDATE users
+    SET credit_card=?,credit_number=?
+    WHERE id=?;`,
+    [hashtwelveNum, fourNum, req.session.member.id]
+  );
+  // console.log("updateCreditResult", updateCreditResult);
+
+  res.json({
+    fourNum: fourNum,
+    message: "儲存更新信用卡 ok",
+  });
+});
 
 // -------- 會員密碼修改儲存 --------
 // /api/member/password (post)
@@ -630,8 +674,6 @@ router.get("/like", async (req, res, next) => {
   // 新增 "全部" 類別
   storeCategories.unshift({ categoryId: 0, category: "全部" });
   // console.log(storeCategories);
-
-  // FIXME: 若沒有資料給前端會壞掉
 
   // 傳送使用者喜愛店家清單、喜愛店家 storeId 列表
   res.json({ userLikeStores, likeStoreIds, storeCategories });

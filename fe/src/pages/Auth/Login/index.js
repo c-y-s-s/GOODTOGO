@@ -97,7 +97,6 @@ const Login = (props) => {
     }
   };
   // -------- 驗證email格式以及是否已註冊過 --------
-
   const regEmail = (e) => {
     console.log("regE.name", e.target.name);
     console.log("regE.value", e.target.value);
@@ -108,7 +107,9 @@ const Login = (props) => {
         ...fieldErrors,
         email: "輸入格式有誤 example@example.com",
       });
-    } else if (emails.find((v) => Object.values(v)[0] !== e.target.value)) {
+    } else if (
+      !emails.find((v) => Object.values(v)[0] === e.target.value.trim())
+    ) {
       const updatedFieldErrors = {
         ...fieldErrors,
         email: "這個帳號不存在",
@@ -121,12 +122,10 @@ const Login = (props) => {
   // 認定使用者輸入某個欄位(更正某個有錯誤的欄位)
   const handleFormChange = (e) => {
     // 清空某個欄位錯誤訊息
-    const updatedFieldErrors = {
+    setFieldErrors({
       ...fieldErrors,
       [e.target.name]: "",
-    };
-    // 設定回錯誤訊息狀態
-    setFieldErrors(updatedFieldErrors);
+    });
   };
   // -------- 表單提交 --------
   const handleSubmit = async (e) => {

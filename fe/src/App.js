@@ -40,26 +40,38 @@ import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
 import ShoppingCart from "./pages/shoppingcart";
 import CheckOut from "./pages/Checkout";
+import { useAuth } from "../src/context/auth";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
+
+  
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
   const [loginSeller, setLoginSeller] = useState(null);
 
   // todo 修改  navbar顯示方式判斷↓↓
-  const [auth, setAuth] = useState(false);
+  // const [auth, setAuth] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
   // todo 修改  navbar顯示方式判斷↑↑
 
+  // console.log("11111111111", loginMember.id);
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
+  // console.log("aaaaaaaaa",isModalTouch);
+
+  // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
+  const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
+    useState(0);
+  // 用來頁面購物車與導覽列購物車同步加減數量的state
+  const [shoppingNumPost, setShoppingNumPost] = useState(0);
   // 結帳所需 data
   const [checkoutData, setCheckoutData] = useState({
     //!整合須改為目前登入者 id
-    userId: 1,
+    userId: "1",
     storeId: "",
     paymentMethod: "1",
   });
+  console.log("哈囉",checkoutData);
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {
@@ -72,7 +84,6 @@ function App() {
     };
     getMember();
   }, []);
-
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getSeller = async () => {
@@ -85,16 +96,16 @@ function App() {
     };
     getSeller();
   }, []);
-  console.log("member from App.js", loginMember); //ok
-  console.log("seller from App.js", loginSeller); //ok
-
-    return (
-    
-    <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}>
+  // console.log("member from App.js", loginMember); //ok
+  return (
+    <AuthContext.Provider value={{ loginMember, setLoginMember }}>
       <Router>
-      {/* <Navbar auth={auth} isAdmin={isAdmin} /> */}
-
-        {isModalTouch && <Navbar />}
+        {isModalTouch && (
+          <Navbar
+            setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+            navshoppingDeleteParameter={navshoppingDeleteParameter}
+          />
+        )}
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
@@ -141,9 +152,11 @@ function App() {
             element={
               loginMember ? (
                 <ShoppingCart
-                  setCheckoutData={setCheckoutData}
-                  checkoutData={checkoutData}
-                />
+                setCheckoutData={setCheckoutData}
+                checkoutData={checkoutData}
+                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                navshoppingDeleteParameter={navshoppingDeleteParameter}
+              />
               ) : (
                 <Login />
               )
@@ -151,7 +164,13 @@ function App() {
           ></Route>
           <Route
             path="/checkout"
-            element={<CheckOut checkoutData={checkoutData} />}
+            element={
+              <CheckOut
+                checkoutData={checkoutData}
+                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                navshoppingDeleteParameter={navshoppingDeleteParameter}
+              />
+            }
           ></Route>
 
           <Route path="/map" element={<Map />}></Route>

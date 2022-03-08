@@ -3,7 +3,7 @@ import { ReactComponent as Star } from "../../images/star.svg";
 import RecomCard from "./RecomCard";
 
 const Recomm = (props) => {
-  const { totalHeart, productAmount, totalStar } = props;
+  const { totalHeart, productAmount, totalStar, likeList } = props;
   return (
     <>
       <div className="rec-content">
@@ -21,6 +21,7 @@ const Recomm = (props) => {
             totalHeart={totalHeart}
             productAmount={productAmount}
             totalStar={totalStar}
+            likeList={likeList}
           />
         </div>
 
