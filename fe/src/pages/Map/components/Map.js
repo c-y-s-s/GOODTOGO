@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import LocationPin from "./LocationPin";
 import CurrentLocationPin from "./CurrentLocationPin";
 import { MdOutlineEmojiPeople } from "react-icons/md";
+import { LARGE_MAP_KEY } from "../../../key";
 
 const Map = (props) => {
   const { displayStoreList, zoomLevel } = props;
@@ -39,15 +40,8 @@ const Map = (props) => {
     // address: "320桃園市中壢區新生路二段421號",
     lat: currentLat,
     lng: currentLng,
-    // name: "你在這",
-    // lat: 25.033964,
-    // lng: 121.564468,
   };
-  // const location2 = {
-  //   address: "101",
-  //
-  // };
-  // console.log(displayStoreList, "lsit");
+
   return (
     <>
       <div className="map">
@@ -55,13 +49,11 @@ const Map = (props) => {
         <div className="google-map">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: process.env.API_KEY,
+              key: LARGE_MAP_KEY,
             }}
             defaultCenter={location}
             defaultZoom={zoomLevel}
-            resetBoundsOnResize="true"
           >
-            {/* {storeLIst.map(()=>{return()})} */}
             {/* 使用者位置，預設學校 */}
             <CurrentLocationPin
               className="location-pin"
@@ -86,27 +78,6 @@ const Map = (props) => {
                 />
               );
             })}
-            {/* {displayStoreList.map((store) => {
-     
-              return (
-                <>
-                  <div key={store.id}>
-                    <LocationPin
-                      className="location-pin"
-                      lat={locationArr.map((i)=>{
-                        console.log("iiiiii",i.lat)
-                        return i.lat;
-                      })}
-                      lng={locationArr.map((i)=>{
-                        console.log("ggggggggg", i.lng);
-                        return i.lng
-                      })}
-                      text={store.name}
-                    />
-                  </div>
-                </>
-              );
-            })} */}
           </GoogleMapReact>
         </div>
       </div>
