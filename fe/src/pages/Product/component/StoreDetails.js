@@ -7,7 +7,7 @@ import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-
+import { MAP_KEY } from "../../../key";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -20,7 +20,7 @@ import { v4 as uuidv4 } from "uuid";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-
+import { ReactComponent as Subtract } from "../images/Subtract.svg";
 const StoreDetails = ({
   storeId,
   storeData,
@@ -275,7 +275,7 @@ const StoreDetails = ({
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        key: "",
+                        key: MAP_KEY,
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}
