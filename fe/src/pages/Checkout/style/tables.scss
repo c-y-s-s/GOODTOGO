@@ -1,0 +1,59 @@
+.product-category {
+  background: $color-light-grey;
+  font-size: smaller;
+}
+
+.product-image {
+  max-width: 100px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.credit-card {
+  color: $color-light-green;
+  border: 1px solid $color-light-green;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+
+.complete-checkout {
+  background: $color-light-green;
+}
+
+.check-img {
+  max-width: 40px;
+}
+
+.modal-sm {
+  max-width: 370px;
+}
+
+.text-colors-g {
+  color: $color-green;
+}
+
+.text-size {
+  font-size: 0.5rem;
+}
+
+.text-colors-dy {
+  color: $color-dark-yellow;
+}
+
+.order-bt {
+  background: $color-green;
+  color: $color-light;
+}
+
+// 結帳 model close btn css 設定
+.closeBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(7px, -7px);
+  background-color: $color-light-green;
+  color: $color-light;
+  opacity: 1;
+}
+

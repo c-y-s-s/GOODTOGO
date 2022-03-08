@@ -17,7 +17,7 @@ const Navbar = (props) => {
   // 購物車總筆數
   const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
   return (
-    <div className="container-fluid navbar justify-content-center sticky-top shadow">
+    <div className="container-fluid navbar justify-content-center sticky-top shadow" id="navbar">
       <div className="nav-content">
         <div>
           <Link to="/">
@@ -56,7 +56,7 @@ const Navbar = (props) => {
           >
             立即訂購
           </Link>
-          <Link to="/joinus" className="nav-link">
+          <Link to="/StoreCheck" className="nav-link">
             店家申請
           </Link>
           {/* <Link to="/faq" className="nav-link">
@@ -85,8 +85,7 @@ const Navbar = (props) => {
           </Link>
         </div>
       </div>
-    </div>
-  );
-};
+    </div>)
+    };
 
 export default Navbar;

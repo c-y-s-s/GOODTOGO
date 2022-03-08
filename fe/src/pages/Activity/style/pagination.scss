@@ -1,0 +1,13 @@
+.background-activity-data-right-content-pages {
+  ul {
+    li {
+      a {
+        color: $color-light-green;
+        &:hover {
+          color: $color-light;
+          background: $color-light-green;
+        }
+      }
+    }
+  }
+}

@@ -17,7 +17,13 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
 
 const StoreInfoList = (props) => {
-  const { setTotalHeart, setProductAmount, setTotalStar, likeList } = props;
+  const {
+    setTotalHeart,
+    setProductAmount,
+    setTotalStar,
+    likeList,
+    setLikeList,
+  } = props;
   //*儲存-顯示的商家列表
   const [storeList, setStoreList] = useState([]);
   //*儲存-全部類別
@@ -44,6 +50,7 @@ const StoreInfoList = (props) => {
   const [ratingHeartOn, setRatingHeartOn] = useState("");
   //*Rating排序 - 評論開關
   const [ratingCommentOn, setRatingCommentOn] = useState("");
+  const [loading, setLoading] = useState(false);
 
   // -------- 分頁處理 --------
   //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
@@ -52,6 +59,7 @@ const StoreInfoList = (props) => {
   const [lastPage, setLastPage] = useState(1);
 
   useEffect(() => {
+    setLoading(true);
     // console.log("page effect", page);
     //*有分頁的全部店家api:  api/stores/
     let getStore = async () => {
@@ -144,6 +152,11 @@ const StoreInfoList = (props) => {
     } else {
       getStore();
     }
+    // 2秒後關起指示器
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+
     // window.scrollTo(2000, 2000);
   }, [
     page,
@@ -153,7 +166,6 @@ const StoreInfoList = (props) => {
     opState,
     ratingHeartOn,
     ratingCommentOn,
-    likeList,
   ]);
 
   //*計算頁面總數量並顯示頁碼，該頁碼
@@ -235,9 +247,12 @@ const StoreInfoList = (props) => {
           <StoreInfoCard
             storeList={storeList}
             storeLikeCount={storeLikeCount}
+            setStoreLikeCount={setStoreLikeCount}
             amount={amount}
             storeStarsCount={storeStarsCount}
             likeList={likeList}
+            setLikeList={setLikeList}
+            loading={loading}
           />
         </div>
         <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">

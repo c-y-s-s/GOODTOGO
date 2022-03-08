@@ -60,22 +60,6 @@ const MapPage = () => {
     <div className="container-fluid map-bg p-0">
       <div className="map-wrapper col-lg-8 col-12">
         <div className="map-search d-flex align-items-center justify-content-end">
-          {/* <form
-            action=""
-            method="get"
-            onSubmit={(e) => {
-              e.preventDefault();
-            }}
-          >
-            <HiOutlineSearch className="ms-lg-3 me-lg-2 ms-1 me-1 map-search-icon" />
-            <input
-              type="text"
-              className="col-lg-12  search-bar"
-              placeholder="地圖搜尋: 店名"
-              value={keyword}
-              // onChange={handleKeywordChange}
-            />
-          </form> */}
           <HiOutlineAdjustments
             className="toggle-controller me-2"
             onClick={() => {
@@ -83,7 +67,7 @@ const MapPage = () => {
             }}
           />
         </div>
-        <div className="google-map col-lg-12">
+        <div className="col-lg-12">
           <Map
             displayStoreList={displayStoreList}
             zoomLevel={12}
@@ -92,7 +76,6 @@ const MapPage = () => {
           <div className="map-store-card mt-lg-5 rwd-show">
             <StoreForMap clickStoreId={clickStoreId} />
           </div>
-          {/* {console.log("ssss",displayStoreList)} */}
         </div>
       </div>
       <div className="map-side-bar col-lg-4 col-12 text-center">

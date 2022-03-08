@@ -15,8 +15,8 @@ module.exports = function (passport) {
   passport.use(
     new FacebookTokenStrategy(
       {
-        clientID: process.env.FACEBOOK_APP_ID,
-        clientSecret: process.env.FACEBOOK_APP_SECRET,
+        clientID: "null",
+        clientSecret: "null",
         fbGraphVersion: "v3.0",
       },
       function (accessToken, refreshToken, profile, done) {
@@ -31,8 +31,8 @@ module.exports = function (passport) {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientID: "null",
+      clientSecret: "null",
       callbackURL: "http://localhost:3002/oauth2/redirect/google",
     },
     function (accessToken, refreshToken, profile, cb) {

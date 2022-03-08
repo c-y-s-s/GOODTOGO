@@ -7,62 +7,64 @@
       display: none;
     }
     // height: 85vh;
-    border: 2px solid red;
+    // border: 2px solid red;
     .google-map {
       height: 677px;
       z-index: 1005;
-      .pin {
-        .pin-text {
-          opacity: 0;
-          padding: 1rem;
-          width: max-content;
+      .pin-text {
+        opacity: 0;
+        padding: 1rem;
+        width: max-content;
+        height: fit-content;
+        border-radius: 3px;
+        background-color: white;
+        color: $color-dark-grey;
+        font-size: x-large;
+        z-index: 1070;
+        .product-left {
+          width: fit-content;
           height: fit-content;
-          border-radius: 3px;
-          background-color: white;
-          color: $color-dark-grey;
-          // position: relative;
-          // left: -1.5rem;
-          font-size: x-large;
-          .product-left {
-            width: fit-content;
-            height: fit-content;
-            padding: 0.3rem 0.6rem;
-            border-radius: 25px;
-            background-color: $color-light-grey;
-          }
+          padding: 0.3rem 0.6rem;
+          border-radius: 25px;
+          background-color: $color-light-grey;
         }
-        .pin-icon {
-          color: $color-yellow;
-          font-size: xx-large;
-          transition: 0.3s;
-          &:hover {
-            // animation: TestMove2 0.6 infinite alternate;
-            transform: scale(3);
-            + .pin-text {
-              opacity: 1;
-            }
-          }
-
-          @keyframes TestMove2 {
-            0% {
-              transform: translate(0px, 0px);
-            }
-            50% {
-              transform: translate(0px, -10px);
-            }
-            100% {
-              transform: translate(0px, 0px);
-            }
+      }
+      .pin-icon-user {
+        color: $color-green;
+        font-size: xx-large;
+        transition: 0.3s;
+        &:hover {
+          transform: scale(3);
+        }
+      }
+      .pin-icon {
+        cursor: pointer;
+        color: $color-red;
+        font-size: 3rem;
+        transition: 0.3s;
+        z-index: 1080;
+        &:hover {
+          transform: scale(3);
+          + pin-text {
+            opacity: 1;
           }
         }
 
-        //!hover 標籤要出來
-        // .pin-icon:hover + .pin-text {
-        //   opacity: 1;
-        // }
+        @keyframes TestMove2 {
+          0% {
+            transform: translate(0px, 0px);
+          }
+          50% {
+            transform: translate(0px, -10px);
+          }
+          100% {
+            transform: translate(0px, 0px);
+          }
+        }
       }
     }
   }
+
   .map-search {
     position: absolute;
     right: 32rem;

@@ -35,16 +35,23 @@ const Product = ({ setisModalTouch }) => {
   //串接後端API
   //倒數計時變 true 自動重抓一次 api
 
+  //串接後端API
   useEffect(() => {
     let getStores = async () => {
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
 
       setStoreData(storeResponse.data);
+      //這個東西沒宣告到  報錯  試跑先註解掉
+      // setproductsComment(productsCommentResponse.data);
     };
     getStores();
   }, []);
   // 遮雨棚參數
   const canopyTotal = Array.from({ length: 30 });
+
+  // -------- ID區塊先用來避免產生錯誤之後會修改 -------
+  let storeDataID = 1;
+  // -------- ID 結束 --------
 
   return (
     <div>
