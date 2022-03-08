@@ -180,7 +180,7 @@ const StoreCard = ({
                     }`}
                   >
                     <img
-                      className=" cover-fit"
+                      className="cover-fit-card-photo"
                       src={require(`../../../images/products_img/${item.img}`)}
                       alt="商品"
                     />

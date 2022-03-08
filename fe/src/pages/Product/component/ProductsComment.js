@@ -117,7 +117,7 @@ const StoreProductsComment = () => {
         {/* <div className="spinner-grow text-primary" role="status">
           <span className="visually-hidden">Loading...</span>
         </div> */}
-        <div className="text-center loading-img mt-5">
+        <div className="text-center loading-img mt-5 m-auto">
           {/* <div className="xxxx">1234</div> */}
           <img
             className=""
@@ -160,7 +160,6 @@ const StoreProductsComment = () => {
             </div>
           </div>
           {productsComment.map((item) => {
-            console.log()
             return (
               <div className="col-12 mt-3 product-comment" key={uuidv4()}>
                 <div className="d-flex justify-content-between ">
