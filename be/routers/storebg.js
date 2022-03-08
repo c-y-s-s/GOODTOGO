@@ -30,11 +30,11 @@ router.use((req, res, next) => {
   };
   // ----- 測試，假設已取得登入後的 session
 
-  console.log("測試傳入id,name,logo", req.session.member);
+  // console.log("測試傳入id,name,logo", req.session.member);
   // 有無 session
   if (req.session.member) {
     // 表示登入過
-    console.log("測試 has session");
+    // console.log("測試 has session");
     next(); // 這樣會跳出 router 到 server.js 繼續 next()???
   } else {
     // 表示尚未登入
@@ -48,16 +48,6 @@ router.use((req, res, next) => {
   // next(); // 往下走讓 其他頁撈資料
   // res.json(req.session.member); // 先測試看看前端能不能得到 session
 });
-// -------- 驗證是否已登入 中間件 結束 --------
-
-// 檢查要 update 的資料是否符合格式 中間件
-// express-validator {body} 驗證
-const updateProfileRules = [
-  // FIXME: 前後端錯誤訊息
-  body("name").contains().withMessage("姓名 請填寫正確格式"),
-  body("email").isEmail().withMessage("電子信箱 請填寫正確格式"),
-  body("phone").isNumeric().withMessage("電話號碼 請填寫正確格式"), //.isMobilePhone()
-];
 
 // 設定上傳圖片儲存資訊 (資料夾、檔名)
 const storage = multer.diskStorage({
@@ -110,8 +100,8 @@ router.get("/profile", async (req, res, next) => {
     "SELECT name, email, logo FROM stores WHERE id=?",
     [req.session.member.id]
   );
-  console.log("db_stores id: ", req.session.member.id);
-  console.log("取得 stores: ", data);
+  // console.log("db_stores id: ", req.session.member.id);
+  // console.log("取得 stores: ", data);
 
   // 打包資料給 res
   let profile = {
@@ -131,18 +121,18 @@ router.get("/productslist", async (req, res, next) => {
     "SELECT * FROM products WHERE store_id = ?",
     [req.session.member.id]
   );
-  console.log("db_stores id: ", req.session.member.id);
-  console.log("取得 stores: ", productsData);
+  // console.log("db_stores id: ", req.session.member.id);
+  // console.log("取得 stores: ", productsData);
 
   let page = req.query.page || 1;
-  console.log("目前所在頁數：", page);
+  // console.log("目前所在頁數：", page);
 
   let [total] = await connection.execute(
     "SELECT COUNT(*) AS total FROM products WHERE store_id=?",
     [req.session.member.id]
   );
 
-  console.log("總筆數：", total);
+  // console.log("總筆數：", total);
   total = total[0].total; // total = 6
 
   // 計算總共應該要有幾頁
@@ -156,14 +146,14 @@ router.get("/productslist", async (req, res, next) => {
     "SELECT * FROM products WHERE store_id=? ORDER BY created_at DESC LIMIT ? OFFSET ?",
     [req.session.member.id, perPage, offset]
   );
-  console.log("目前店家id", req.session.member.id);
-  console.log("目前一頁有幾筆", perPage);
-  console.log("offsetoffsetoffset3", offset);
+  // console.log("目前店家id", req.session.member.id);
+  // console.log("目前一頁有幾筆", perPage);
+  // console.log("offsetoffsetoffset3", offset);
   // -------- 整理分頁資訊回傳的資料 --------
   //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
   let pagination = { total, perPage, page, lastPage };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   res.json([data, productsData, pagination]);
 });
@@ -171,7 +161,7 @@ router.get("/productslist", async (req, res, next) => {
 // -------- 上下架修改儲存 --------
 // /api/member/password (post)
 router.post("/productslistvalid", async (req, res, next) => {
-  console.log("ddddd", req.body);
+  // console.log("ddddd", req.body);
 
   // 檢查 req.body.password 密碼是否正確，正確才能改新密碼
   if (req.body.productValid === 1) {
@@ -187,9 +177,9 @@ router.post("/productslistvalid", async (req, res, next) => {
   }
   // 把會員資料從陣列中拿出來
   // let userPassword = passwordResult[0];
-  console.log("11111111111111++++++++++++++", req.session.member.id);
-  console.log("000000++++++++++++++", req.session.member);
-  console.log("2222222++++++++++++++", req.body.productId);
+  // console.log("11111111111111++++++++++++++", req.session.member.id);
+  // console.log("000000++++++++++++++", req.session.member);
+  // console.log("2222222++++++++++++++", req.body.productId);
   // 寫到這 先測試 是否能比對密碼成功(用前台送出表單測試)
   // 再進行後續儲存
 
@@ -216,7 +206,7 @@ router.post("/remove", async (req, res, next) => {
   );
 
   // console.log(req.body.removeStoreId);
-  console.log("刪除會員收藏資料結果: ", removeProductIndex);
+  // console.log("刪除會員收藏資料結果: ", removeProductIndex);
   res.json({
     message: "會員移除收藏店家 ok",
   });

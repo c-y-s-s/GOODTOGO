@@ -9,7 +9,7 @@ router.get("/", async (req, res, next) => {
   let [data] = await connection.execute(
     "SELECT * FROM products_category"
   );
-  console.log(data);
+  // console.log(data);
   res.json(data);
 });
 // -------- 撈出全部商品類別 --------

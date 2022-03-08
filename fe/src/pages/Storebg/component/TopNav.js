@@ -23,14 +23,14 @@ const TopNav = () => {
       });
       // response 是物件
       // console.log("api/member/profile(get) response.data: ", response.data);
-      console.log(
-        "api/storebg/profile(get) response.data.logo: ",
-        response.data.logo
-      );
-      console.log(
-        "api/storebg/profile(get) response.data.name: ",
-        response.data.name
-      );
+      // console.log(
+      //   "api/storebg/profile(get) response.data.logo: ",
+      //   response.data.logo
+      // );
+      // console.log(
+      //   "api/storebg/profile(get) response.data.name: ",
+      //   response.data.name
+      // );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
       setLogo(response.data.logo);
       setStoreName(response.data.name);

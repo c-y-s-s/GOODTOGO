@@ -27,7 +27,7 @@ const Table = () => {
   const [lastPage, setLastPage] = useState(1);
   // let page = parseInt(currentPage, 10) || 1;
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
-  console.log("currentPage", currentPage, page);
+  // console.log("currentPage", currentPage, page);
 
   useEffect(() => {
     let getPrices = async () => {
@@ -53,11 +53,11 @@ const Table = () => {
       // );
 
       let productsListPage = response.data[0];
-      console.log("productsListPage", productsListPage);
+      // console.log("productsListPage", productsListPage);
       // let productsList = response.data[1];
       // console.log("productsList", productsList);
       let productsPagination = response.data[2];
-      console.log("productsPagination", productsPagination);
+      // console.log("productsPagination", productsPagination);
 
       setproductsData(productsListPage);
       setLastPage(productsPagination.lastPage);
@@ -101,9 +101,9 @@ const Table = () => {
             <th scope="col" className="text-center">
               數量
             </th>
-            <th scope="col" className="text-center">
+            {/* <th scope="col" className="text-center">
               已售出
-            </th>
+            </th> */}
             <th scope="col">販售時間</th>
             <th scope="col">上架日期</th>
             <th scope="col" className="text-center">
@@ -121,7 +121,7 @@ const Table = () => {
                     <img
                       src={
                         item.img
-                          ? IMAGE_URL + "/static/uploads/products/" + item.img
+                          ? IMAGE_URL + item.img
                           : STORE_PRODUCT_IMAGE_URL
                       }
                       alt=""
@@ -131,7 +131,7 @@ const Table = () => {
                 <td>{item.name}</td>
                 <td className="text-center">NT${item.price}</td>
                 <td className="text-center">{item.amount}</td>
-                <td className="text-center">1</td>
+                {/* <td className="text-center">1</td> */}
                 <td>
                   {item.start_time} ~ {item.due_time}
                 </td>
