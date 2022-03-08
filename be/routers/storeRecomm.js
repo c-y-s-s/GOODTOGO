@@ -6,11 +6,10 @@ moment.locale("zh-tw");
 
 router.get("/", async (req, res, next) => {
   let [data] = await connection.execute(
-    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category, c.star
+    `SELECT a.id, a.name, a.logo, a.open_time, a.close_time, a.close_day, a.stores_category_id, b.category
     FROM stores AS a 
     JOIN stores_category AS b ON a.stores_category_id = b.id
-    JOIN products_comment AS c ON a.id = c.store_id 
-    WHERE a.valid = 1 ORDER BY c.star DESC LIMIT 4`
+    WHERE a.valid = 1 ORDER BY RAND() LIMIT 4`
   );
   // -------- 營業時間判斷＆處理 --------
   data.map((item) => {
@@ -46,7 +45,7 @@ router.get("/", async (req, res, next) => {
     // console.log("opState", item.opState);
   });
 
-  res.json([data]);
+  res.json(data);
 });
 
 module.exports = router;
