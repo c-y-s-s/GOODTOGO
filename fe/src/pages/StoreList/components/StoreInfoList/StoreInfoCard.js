@@ -28,7 +28,6 @@ const StoreInfoCard = (props) => {
 
   const handleRemoveLike = async (id) => {
     id = { id };
-
     try {
       let response = await axios.post(
         `${API_URL}/stores/remove_like/${loginMember.id}`,
