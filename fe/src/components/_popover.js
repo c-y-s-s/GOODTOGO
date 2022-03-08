@@ -58,7 +58,7 @@ const _popover = () => {
         </Link>
       </div>
       <div className="popover-item text-center">
-        <Link to="＃" className="nav-popover-link">
+        <Link to="/storelogin" className="nav-popover-link">
           店家登入
         </Link>
       </div>
