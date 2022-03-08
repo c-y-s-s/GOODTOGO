@@ -9,7 +9,7 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
-
+import { IMAGE_URL } from "../../../utils/config";
 const ProductsDetailsComment = ({ productModalCommentData }) => {
   let data = productModalCommentData;
   // console.log(productModalCommentData);
@@ -103,7 +103,7 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
                     <div className="product-users-comment-photo ratio ratio-4x3">
                       <img
                         className=" img-fluid  cover-photo"
-                        src={require(`../images/pexels-charles-1851164.jpg`)}
+                        src={IMAGE_URL + item.headshots}
                         alt=""
                       />
                     </div>
@@ -157,7 +157,7 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
                     <div className="product-users-comment-photo ratio ratio-4x3">
                       <img
                         className=" img-fluid  cover-photo"
-                        src={require(`../images/pexels-charles-1851164.jpg`)}
+                        src={IMAGE_URL + item.headshots}
                         alt=""
                       />
                     </div>

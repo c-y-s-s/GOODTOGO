@@ -87,7 +87,7 @@ export const OrderPaymentMethod = ({
               <RiVisaLine className="payment-method-card-company" />
             </div>
             <div className="payment-method-card-number ps-3">
-              ***** ***** ***** 6543
+              ***** ***** ***** 5555
             </div>
           </td>
           <td colSpan="3" className="send-order">
