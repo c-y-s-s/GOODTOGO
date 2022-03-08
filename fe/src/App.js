@@ -39,7 +39,7 @@ function App() {
 
   return (
     <Router>
-      {/* <Navbar auth={auth} isAdmin={isAdmin} /> */}
+      <Navbar auth={auth} isAdmin={isAdmin} />
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
@@ -87,7 +87,7 @@ function App() {
       <StoreCheck />
 
       <Product /> */}
-      {/* <Footer isAdmin={isAdmin} /> */}
+      <Footer isAdmin={isAdmin} />
     </Router>
   );
 }
