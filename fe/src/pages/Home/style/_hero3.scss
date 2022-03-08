@@ -16,6 +16,7 @@
     z-index: 1;
     @include hero-text-md;
     .hero3-info-1-text {
+      z-index: 1001;
       margin-bottom: 3rem;
     }
   }

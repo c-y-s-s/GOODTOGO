@@ -1,5 +1,6 @@
 // -------- hero 2 --------
 .hero2 {
+  z-index: 1100;
   background-color: $color-light-green;
   color: white;
   grid-template-columns: 1fr 1fr 8%;
@@ -29,11 +30,11 @@
 @media screen and (max-width: 1296px) {
   .hero2 {
     .hero2-trash {
-      z-index: 1000;
+      z-index: 1010;
       opacity: 0.8;
     }
     .hero2-info {
-      z-index: 10001;
+      z-index: 1100;
       .hero2-text {
         filter: drop-shadow(0.188rem 0.188rem 5px $color-dark-grey);
       }
@@ -112,7 +113,7 @@
       grid-column-start: 1;
       grid-row-start: 1;
       grid-row-end: 3;
-      z-index: 1000;
+      z-index: 1090;
       opacity: 0.3;
       width: 90vw;
       height: auto;
@@ -125,7 +126,7 @@
       grid-column-start: 1;
       grid-row-start: 1;
       margin: auto;
-      z-index: 10001;
+      z-index: 1100;
       @include hero-text-sm;
       .hero2-text {
         height: fit-content;

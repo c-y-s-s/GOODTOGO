@@ -20,12 +20,12 @@ const hero4 = () => {
       <div className="container-fluid p-0 m-0 ">
         <div className="hero4-top m-auto">
           <div className="d-flex flex-wrap flex-column hero4-title align-items-center justify-content-center m-auto">
-            <Hero4Text1 className="" width="30vw" height="1%" />
-            <Hero4Text2 className="" width="40vw" height="1%" />
+            <Hero4Text1 className="hero4-title-1" />
+            <Hero4Text2 className="hero4-title-2" />
           </div>
         </div>
         <div className="row col-10 hero4-bottom justify-content-around pt-5 m-auto mt-lg-5 mt-2 pb-5  align-items-center">
-          <div className="box mb-lg-0 mb-5 col-lg-2">
+          <div className="box mb-lg-0 mb-5 col-lg-2 ">
             <Pointer1 className="hero4-pointer" />
             <div className="box-info ">
               <img src={Hero1Img1} alt="" />
