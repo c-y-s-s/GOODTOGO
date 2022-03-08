@@ -116,7 +116,7 @@ router.get("/profile", async (req, res, next) => {
 
 // -------- 商品清單資料顯示 --------
 // /api/member/profile (get)
-router.get("/productslist", async (req, res, next) => {
+router.get("/productslist/", async (req, res, next) => {
 
   console.log("sessionsessionsession", req.query);
   // console.log("sessionsessionsession", req.params);
