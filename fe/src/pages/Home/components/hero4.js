@@ -27,7 +27,7 @@ const hero4 = () => {
         <div className="row col-10 hero4-bottom justify-content-around pt-5 m-auto mt-lg-5 mt-2 pb-5  align-items-center">
           <div className="box mb-lg-0 mb-5 col-lg-2 ">
             <Pointer1 className="hero4-pointer" />
-            <div className="box-info ">
+            <div className="box-info">
               <img src={Hero1Img1} alt="" />
               <div>
                 搜尋周邊
