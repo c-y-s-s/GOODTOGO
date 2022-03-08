@@ -59,8 +59,8 @@ const StoreLogin = (props) => {
     );
   };
 const [loginStore, setLoginStore] = useState({
-  email:"test",
-  password:"test"
+  email:"",
+  password:""
 });
 
    const [fieldErrors, setFieldErrors] = useState({
