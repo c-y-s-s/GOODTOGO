@@ -122,7 +122,7 @@ const RecomCard = (props) => {
                     <span className="text-dark-grey detail-sm">
                       {space === true ? item.name.split(" ")[1] : <br />}
                       {/* 開發中才開啟  {item.close_day}*/}
-                      {item.close_day}
+                      {/* {item.close_day} */}
                     </span>
                   </span>
 
