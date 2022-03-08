@@ -46,7 +46,7 @@ router.get("/", async (req, res, next) => {
     // console.log("opState", item.opState);
   });
 
-  res.json([data]);
+  res.json(data);
 });
 
 module.exports = router;

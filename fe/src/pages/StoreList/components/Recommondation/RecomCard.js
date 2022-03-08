@@ -24,7 +24,7 @@ const RecomCard = (props) => {
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
-      setDisplayList(recommRes.data[0]);
+      setDisplayList(recommRes.data);
     };
     getRecomm();
   }, []);
