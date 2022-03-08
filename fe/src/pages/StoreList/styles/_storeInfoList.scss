@@ -1,5 +1,7 @@
 .store-list {
   width: 100vw;
+  margin: auto;
+
   .header {
     background-image: url(../images/storelist_bg_2.svg);
     background-size: contain;
@@ -142,6 +144,11 @@
     height: 15rem;
   }
 }
+.store-list-loading {
+  // margin: auto;
+  height: fit-content;
+  margin: auto;
+}
 @media screen and (max-width: 390px) {
   .store-list {
     .prefix {
@@ -185,6 +192,7 @@
         border-radius: 18.26px;
         color: $color-green;
         transition: 0.3s;
+        margin-bottom: 1.5rem;
         &:hover {
           background-color: $color-green;
           color: white;
@@ -284,4 +292,8 @@
       background-repeat: no-repeat;
     }
   }
+}
+.store-list-loading {
+  // width: 100vw;
+  height: 4rem;
 }

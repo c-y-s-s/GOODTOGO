@@ -51,6 +51,7 @@ const StoreInfoList = (props) => {
   //*Rating排序 - 評論開關
   const [ratingCommentOn, setRatingCommentOn] = useState("");
   const [loading, setLoading] = useState(false);
+  const [pageDisplay, setPageDisplay] = useState(true);
 
   // -------- 分頁處理 --------
   //取出網址上的 currentPage 這邊的 currentPage是對應到 app.js -> :currentPage 若要更改要同步更改
@@ -155,7 +156,7 @@ const StoreInfoList = (props) => {
     // 2秒後關起指示器
     setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500);
 
     // window.scrollTo(2000, 2000);
   }, [
@@ -172,6 +173,7 @@ const StoreInfoList = (props) => {
   let navigate = useNavigate();
   const getPages = () => {
     let pages = [];
+    lastPage === 1 && setPageDisplay(false);
     for (let i = 1; i <= lastPage; i++) {
       pages.push(
         <li className="page-li" key={uuidv4()}>
@@ -253,27 +255,32 @@ const StoreInfoList = (props) => {
             likeList={likeList}
             setLikeList={setLikeList}
             loading={loading}
+            total={total}
           />
         </div>
-        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
-          <IoIosArrowBack
-            role="button"
-            className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
-            onClick={() => {
-              navigate(`?page=${page - 1}`);
-              setPage(page - 1);
-            }}
-          />
-          {getPages()}
-          <IoIosArrowForward
-            role="button"
-            className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
-            onClick={() => {
-              navigate(`?page=${page + 1}`);
-              setPage(page + 1);
-            }}
-          />
-        </ul>
+        {!pageDisplay ? (
+          ""
+        ) : (
+          <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
+            <IoIosArrowBack
+              role="button"
+              className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
+              onClick={() => {
+                navigate(`?page=${page - 1}`);
+                setPage(page - 1);
+              }}
+            />
+            {getPages()}
+            <IoIosArrowForward
+              role="button"
+              className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
+              onClick={() => {
+                navigate(`?page=${page + 1}`);
+                setPage(page + 1);
+              }}
+            />
+          </ul>
+        )}
       </div>
       <div className="footer"></div>
     </div>

@@ -23,6 +23,7 @@ const StoreInfoCard = (props) => {
     likeList,
     loading,
     setLikeList,
+    total,
   } = props;
   const { loginMember } = useAuth();
 
@@ -57,14 +58,12 @@ const StoreInfoCard = (props) => {
       console.error("res.error:", e.response);
     }
   };
-  console.log("sljjjj", storeLikeCount);
-
+  console.log("tt", total);
   const displayList = storeList.map((item) => {
     //使用者收藏愛心
     let favStoresMap = likeList.map((d) => {
       return d.store_id;
     });
-    console.log("favStoresMap", favStoresMap);
     // -------- 取得該店家愛心總數量 --------
     let likeCount = Object.values(storeLikeCount)[item.id - 1];
     // -------- 取得該店家產品總數量 --------
@@ -73,20 +72,15 @@ const StoreInfoCard = (props) => {
     let starCount = Object.values(storeStarsCount)[item.id - 1];
     // -------- 處理沒有分店名的空白欄位 --------
     let space = "";
-    {
-      /* console.log(item.name); */
-    }
     for (let i = 1; i < item.name.length; i++) {
-      {
-        /* console.log(item.name[i]); */
-      }
       item.name[i] === " " && (space = true);
     }
-    {
-      /* console.log(space); */
-    }
 
-    return (
+    return total === 0 ? (
+      <>
+        <div>很抱歉，沒有您查詢的資料</div>
+      </>
+    ) : (
       <div className="me-lg-2 ms-lg-2">
         <Link to={`/store/${item.id}`} className="no-link">
           {/* <Link to={`/store/${item.id}`} className="no-link"> */}
@@ -113,9 +107,9 @@ const StoreInfoCard = (props) => {
                 {item.name.split(" ")[0]}
                 <br />
                 <span className="text-dark-grey detail-sm">
-                  {space === true ? item.name.split(" ")[1] : <div />}
+                  {space === true ? item.name.split(" ")[1] : <br />}
                   {/* 開發中才開啟 */}
-                  {item.close_day}
+                  {/* {item.close_day} */}
                   {/* 實際不會用到 */}
                 </span>
               </span>
@@ -199,7 +193,15 @@ const StoreInfoCard = (props) => {
     );
   });
 
-  return <>{loading ? <img src={Loading} alt="loading"></img> : displayList}</>;
+  return (
+    <>
+      {loading ? (
+        <img src={Loading} alt="loading" className="store-list-loading"></img>
+      ) : (
+        displayList
+      )}
+    </>
+  );
 };
 
 export default StoreInfoCard;
