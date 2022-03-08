@@ -74,7 +74,7 @@ const StoreProductsComment = () => {
     getComment();
         setTimeout(() => {
           setIsLoading(false);
-        }, 350);
+        }, 800);
   }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
 
   // productsComment.map((item) => {
@@ -160,7 +160,7 @@ const StoreProductsComment = () => {
             </div>
           </div>
           {productsComment.map((item) => {
-            console.log()
+            {/* console.log() */}
             return (
               <div className="col-12 mt-3 product-comment" key={uuidv4()}>
                 <div className="d-flex justify-content-between ">
