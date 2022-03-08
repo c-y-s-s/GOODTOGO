@@ -14,6 +14,7 @@ import BlankProfile from "../images/headShot.png";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
+
   const navigate = useNavigate();
   const swal = Swal.mixin({
     customClass: {
@@ -101,14 +102,14 @@ const _popover = () => {
         {loginMember ? (
           <img
             className={
-              loginMember.headshots !== ""
+              loginMember.photo !== ""
                 ? "navbar-profile-pic"
                 : "navbar-profile-pic-empty"
             }
             src={
-              loginMember.headshots !== ""
-                ? IMAGE_URL + loginMember.headshots
-                : BlankProfile
+              loginMember.photo === ""
+                ? BlankProfile
+                : IMAGE_URL + loginMember.photo
             }
             alt="profile"
           />
