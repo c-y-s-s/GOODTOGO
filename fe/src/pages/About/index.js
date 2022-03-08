@@ -1,14 +1,7 @@
-import React from "react";
-import AboutCard from "./component/aboutCard";
+import React from 'react';
 
 const About = () => {
-  return (
-    <div>
-      <div className="container">
-        <AboutCard />
-      </div>
-    </div>
-  );
+  return <div>這是關於GOODTOFO</div>;
 };
 
 export default About;
