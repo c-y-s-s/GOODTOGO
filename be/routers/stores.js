@@ -4,7 +4,7 @@ const connection = require("../utils/db");
 const moment = require("moment");
 moment.locale("zh-tw");
 
-//*有分頁的店家列表: api/stores/
+//*有分頁的店家列表 - api/stores/
 router.get("/", async (req, res, next) => {
   // -------- 取得目前在第幾頁 --------
   // 如果沒有設定 req.quyer.page，那就設成 1
@@ -129,7 +129,7 @@ router.get("/", async (req, res, next) => {
   //回傳：有分頁的商家列表，商家種類，分頁資訊，收藏愛心
   res.json([data, category, pagination, likeCount, productAmout, starCount]);
 });
-//*搜尋店家列表:  api/stores/search
+//*搜尋店家列表 - api/stores/search
 router.get("/search", async (req, res, next) => {
   let keyword = req.query.keyword;
   // 分頁：每頁幾筆資料
@@ -191,7 +191,7 @@ router.get("/search", async (req, res, next) => {
   console.log("keyword", keyword);
   res.json([searchedStores, pagination]);
 });
-//*過濾-類別的店家列表:  api/stores/filter/c
+//*過濾 - 類別的店家列表:  api/stores/filter/c
 router.get("/filter/c", async (req, res, next) => {
   let category = req.query.category;
   // 分頁：每頁幾筆資料
@@ -252,7 +252,7 @@ router.get("/filter/c", async (req, res, next) => {
   let pagination = { total, perPage, page, lastPage };
   res.json([filteredStores, pagination]);
 });
-//*過濾-營業時間的店家列表: api/stores/filter/op
+//*過濾 - 營業時間的店家列表: api/stores/filter/op
 router.get("/filter/op", async (req, res, next) => {
   // let isOpen = req.query.op;
   let isOpen = JSON.parse(req.query.op);
@@ -309,7 +309,7 @@ router.get("/filter/op", async (req, res, next) => {
   // console.log("opResult", opResult);
   res.json(opResult);
 });
-//*排序-api/stores/rating/heart
+//*排序 - api/stores/rating/heart
 router.get("/rating/heart", async (req, res, next) => {
   let [likeResult] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
@@ -398,7 +398,7 @@ router.get("/rating/heart", async (req, res, next) => {
   console.log("storeResult數量", storeResult);
   res.json(storeResult);
 });
-//*排序-api/stores/rating/comment
+//*排序 - api/stores/rating/comment
 router.get("/rating/comment", async (req, res, next) => {
   let [likeResult] = await connection.execute(
     `SELECT store_id, count(id) AS likeTotal
@@ -486,6 +486,49 @@ router.get("/rating/comment", async (req, res, next) => {
   });
   console.log("storeResult數量", storeResult);
   res.json(storeResult);
+});
+//
+//*使用者收藏愛心清單
+router.get("/likelist/:id", async (req, res, next) => {
+  let [list] = await connection.execute(
+    "SELECT store_id FROM user_like WHERE user_id = ?",
+    [req.params.id]
+  );
+  res.json(list);
+  console.log("收藏", list);
+});
+//*取消收藏愛心api - api/stores/remove_like
+router.post("/remove_like/:id", async (req, res, next) => {
+  // 沒有接收到資料
+  // if (!req.body.id) {
+  //   res.json({
+  //     code: 88001,
+  //     message: "會員移除收藏店家 失敗",
+  //   });
+  // }
+  let [removeLikeStoreResult] = await connection.execute(
+    `DELETE FROM user_like WHERE user_id=? AND store_id=?;`,
+    [req.params.id, req.body.id]
+  );
+  console.log("刪除會員收藏資料結果: ", removeLikeStoreResult);
+  console.log("memer", req.params.id);
+  console.log("store", req.body.id);
+  res.json({
+    message: "會員移除收藏店家 ok",
+  });
+});
+
+//*新增收藏愛心api - api/stores/add_like
+router.post("/add_like/:id", async (req, res, next) => {
+  let [addLikeStoreResult] = await connection.execute(
+    `INSERT INTO user_like( user_id, store_id) VALUES (?, ?);`,
+    [req.params.id, req.body.id]
+  );
+  console.log("memer", req.params.id);
+  console.log("store", req.body.id);
+  res.json({
+    message: "會員新增收藏店家 ok",
+  });
 });
 
 router.get("/", async (req, res, next) => {

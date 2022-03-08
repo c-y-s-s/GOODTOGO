@@ -11,6 +11,22 @@
                 font-weight: 500;
                 color: $color-dark-grey;
             }
+            .store-data-left-content-open {
+                background-color: $color-light-green;
+                color: white;
+                border-radius: 0.5rem;
+                padding: 0.3rem 0.6rem;
+                margin-left: 1rem;
+                font-size: $fz-sm;
+            }
+            .store-data-left-content-close {
+                background-color: $color-grey;
+                color: white;
+                border-radius: 0.5rem;
+                padding: 0.3rem 0.6rem;
+                margin-left: 1rem;
+                font-size: $fz-sm;
+            }
             .store-data-left-category {
                 background-color: #eaeaea;
                 padding: 0.1rem 0.75rem;
@@ -50,22 +66,6 @@
                     margin-left: 1.2rem;
                     letter-spacing: $ls-sm;
                 }
-                .store-data-left-content-open {
-                    background-color: $color-light-green;
-                    color: white;
-                    border-radius: 0.5rem;
-                    padding: 0.3rem 0.6rem;
-                    margin-left: 1rem;
-                    font-size: $fz-sm;
-                }
-                .store-data-left-content-close {
-                    background-color: $color-grey;
-                    color: white;
-                    border-radius: 0.5rem;
-                    padding: 0.3rem 0.6rem;
-                    margin-left: 1rem;
-                    font-size: $fz-sm;
-                }
             }
 
             &:nth-child(4) {
@@ -83,3 +83,21 @@
     }
 }
 //-------- 地圖結束 -------
+@media screen and (max-width: 390px) {
+    .store-data {
+        .store-data-left {
+            .store-data-left-content {
+                .workday {
+                    // flex-direction: column;
+                    // align-items: start;
+                    .work-time {
+                        margin-left: 1rem;
+                    }
+                    .store-data-left-content-close {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
