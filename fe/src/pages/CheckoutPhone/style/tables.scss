@@ -1,0 +1,59 @@
+.checkoutphone-product-category {
+  background: $color-light-grey;
+  font-size: smaller;
+}
+
+.checkoutphone-product-image {
+  max-width: 100px;
+  height: 100%;
+  object-fit: cover;
+}
+
+.checkoutphone-credit-card {
+  color: $color-green;
+  border: 1px solid $color-green;
+  &:hover {
+    color: $color-green;
+  }
+}
+
+.checkoutphone-complete-checkout {
+  background: $color-light-green;
+}
+
+.checkoutphone-check-img {
+  max-width: 40px;
+}
+
+.checkoutphone-modal-sm {
+  max-width: 370px;
+}
+
+.checkoutphone-text-colors-g {
+  color: $color-green;
+}
+
+.text-size {
+  font-size: 0.5rem;
+}
+
+.text-colors-dy {
+  color: $color-dark-yellow;
+}
+
+.order-bt {
+  background: $color-green;
+  color: $color-light;
+}
+
+// 結帳 model close btn css 設定
+.checkoutphone-closeBtn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  transform: translate(7px, -7px);
+  background-color: $color-light-green;
+  color: $color-light;
+  opacity: 1;
+}
+

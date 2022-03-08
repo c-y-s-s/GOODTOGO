@@ -1,0 +1,136 @@
+@import "../../styles/index.scss";
+// -------- 登入樣式開始 -------- //
+.storelogin-con {
+  background: $color-light-green;
+  // height: calc(100vh - $navbar-height);
+  // padding-top: calc((100vh - $navbar-height - 578px) / 2);
+  padding: 4rem;
+  .content {
+    background: white;
+    // height: 578px;
+    // width: 475px;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
+    margin: auto;
+  }
+
+
+
+
+  // -------- input樣式 --------
+  .input-label-title {
+    font-size: $fz-x-lg;
+  }
+  .custom-input {
+    border-radius: 2px;
+    border: 2px solid $color-light-grey;
+  }
+
+  .submit-btn {
+    background-color: $color-green;
+    border-radius: 2px;
+  }
+  .btn-fb-login {
+    color: white;
+    background-color: #3b5998;
+    border-radius: 2px;
+    .big-icon {
+      font-size: 26px;
+    }
+  }
+}
+.error {
+  color: $color-red;
+}
+// -------- 登入區塊樣式結束 --------//
+// -------- 註冊區塊樣式開始 -------- //
+.storereg-con {
+  background: $color-light-green;
+  padding: 4rem;
+
+.flex{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content:center;
+
+}
+  .content {
+    background-color: white;
+    .btn-fb-login {
+      color: white;
+      background-color: #3b5998;
+      border-radius: 2px;
+      .big-icon {
+        font-size: 26px;
+      }
+    }
+  }
+  .input-label-title {
+    font-size: $fz-x-lg;
+  }
+  .custom-input {
+    border-radius: 2px;
+    border: 2px solid $color-light-grey;
+  }
+}
+
+.label-group {
+  font-size: $fz-sm;
+
+  .btn-register {
+    background-color: $color-green;
+    color: white;
+    border-radius: 2px;
+  }
+}
+// -------- 註冊區塊樣式結束 -------- //
+.opendayCheck{
+  background: rgba($color: #a6bf4b, $alpha: 0.2);
+  border: 2px solid $color-light-grey;
+  border-radius: 2px;
+}
+.form-check .form-check-input{
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  margin-top: 1.5em;
+}
+input.dayCheck {
+  width : 18px;
+  height : 18px;
+  border: 10px solid #bcbcbc;
+  border-radius: 2px;
+  color: -internal-light-dark(#bcbcbc, white);
+}
+.opendayCheck{.row{.col{
+  padding: 0px;
+}}}
+.time{
+  text-align: center;
+}
+.input-error {
+  border: 2px solid $color-red;
+}
+.error {
+  color: $color-red;
+}
+.flex{
+  display: flex;
+  justify-content:center;
+  align-items:center;
+}
+.timeZone{
+  flex:3 1 0;
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance:auto; 
+  }
+}
+.timeSymbol{
+  flex:1 1 0;
+  text-align: center;
+  }
+
+  .cover-fit{
+    border: 2px solid #a6bf4b;
+    border-radius: 5px;
+  }

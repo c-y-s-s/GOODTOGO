@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100;300;400;500;700;900&display=swap%22");
 .popup {
   width: 100px;
@@ -96,6 +97,35 @@
   background-color: rgba(255, 255, 255, 0.336);
   position: relative;
   top: 2rem;
+}
+
+.text-light {
+  color: white;
+}
+
+.text-grey {
+  color: #b1b1ac;
+}
+
+.text-yellow {
+  color: #f9af08;
+}
+
+.text-green {
+  color: #668c4a;
+}
+
+.no-link {
+  text-decoration: none;
+}
+
+.input-label-title {
+  font-size: 1.0625rem;
+}
+
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid #d3d3d3;
 }
 
 #root {
@@ -512,7 +542,9 @@ footer .footer-content .footer-bottom .footer-sign-info {
       grid-template-columns: 8.5rem auto 8.5rem;
   -ms-grid-rows: [row1-start] 15% [row1-end] 40% [third-line] auto [last-line];
       grid-template-rows: [row1-start] 15% [row1-end] 40% [third-line] auto [last-line];
-      grid-template-areas: "header header header " "main main main " "footer footer footer";
+      grid-template-areas: "header header header "
+ "main main main "
+ "footer footer footer";
 }
 
 .hero1 .hero1-btn {
@@ -569,7 +601,9 @@ footer .footer-content .footer-bottom .footer-sign-info {
         grid-template-columns: 3rem auto 3rem;
     -ms-grid-rows: [row1-start] 6.5rem [row1-end] 20rem [third-line] auto [last-line];
         grid-template-rows: [row1-start] 6.5rem [row1-end] 20rem [third-line] auto [last-line];
-        grid-template-areas: "header header header " "main main main " "footer footer footer";
+        grid-template-areas: "header header header "
+ "main main main "
+ "footer footer footer";
   }
 }
 
@@ -587,7 +621,9 @@ footer .footer-content .footer-bottom .footer-sign-info {
         grid-template-columns: 2% auto 2%;
     -ms-grid-rows: [row1-start] 15% [row1-end] 60% [third-line] auto [last-line];
         grid-template-rows: [row1-start] 15% [row1-end] 60% [third-line] auto [last-line];
-        grid-template-areas: "header header header " "main main main " "footer footer footer";
+        grid-template-areas: "header header header "
+ "main main main "
+ "footer footer footer";
   }
   .hero1 .hero1-btn {
     display: none;

@@ -1,0 +1,48 @@
+.newproduct-data-modal-green {
+  text-decoration: none;
+  background-color: $color-light-green;
+  color: #fff;
+  // padding: 0.4rem;
+  // border-radius: 1rem;
+}
+
+// bootstrap 彈出視窗 頁首 刪除水平線
+.modal-header {
+  border-bottom: 0 none;
+}
+// bootstrap 彈出視窗 頁尾 刪除水平線
+.modal-footer {
+  border-top: 0 none;
+}
+
+// 改變所有 label 顏色
+.container label {
+  color: $color-light-green;
+}
+
+// 改變選擇檔案顏色
+input[type="file"]::file-selector-button {
+  background-color: $color-light-green;
+}
+
+// 禁用 textarea 的 resizable 屬性
+textarea {
+  resize: none;
+}
+
+// 取消按鈕顏色
+.cancel-bg{
+  background: $color-light-grey;
+}
+
+.cover-product{
+  width: 400px;
+  height: 400px;
+  object-fit: cover;
+}
+
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

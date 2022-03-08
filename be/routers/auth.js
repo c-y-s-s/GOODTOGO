@@ -171,6 +171,7 @@ router.post("/login", async (req, res, next) => {
 });
 router.get("/logout", (req, res, next) => {
   req.session.member = null;
+  req.session.store = null;
   res.sendStatus(202);
 });
 module.exports = router;

@@ -4,6 +4,10 @@ export const API_URL =
 export const IMAGE_URL =
   process.env.REACT_APP_API_URL || "http://localhost:3002";
 
-export const PROFILE_IMAGE_URL =
+  export const PROFILE_IMAGE_URL =
   (process.env.REACT_APP_API_URL || "http://localhost:3002") +
   "/static/uploads/headshots/headShot.png";
+
+  export const STORE_PRODUCT_IMAGE_URL =
+  (process.env.REACT_APP_API_URL || "http://localhost:3002") +
+  "/static/uploads/products/noImage.png";

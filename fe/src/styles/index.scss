@@ -113,6 +113,35 @@ $fw-black: 700; // black
 $font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
   "Helvetica Neue", Helvetica, Arial, sans-serif;
 
+// -------- 高度 --------
+$navbar-height: 6.25rem;
+
+$footer-height: 15.063rem;
+// -------- 文字樣式 --------
+.text-light {
+  color: white;
+}
+.text-grey {
+  color: $color-grey;
+}
+.text-yellow {
+  color: $color-dark-yellow;
+}
+.text-green {
+  color: $color-green;
+}
+.no-link {
+  text-decoration: none;
+}
+// -------- input樣式 --------
+.input-label-title {
+  font-size: $fz-x-lg;
+}
+.custom-input {
+  border-radius: 2px;
+  border: 2px solid $color-light-grey;
+}
+
 #root {
   font-family: $font-family;
   color: $color-dark-grey;
@@ -211,3 +240,19 @@ $btn-border-radius: 2px;
 @import "./navShoppingCart";
 // -------- MAP --------
 @import "../pages/Map/styles/map.scss";
+// 店家後台
+@import "../pages/Storebg/style/store-bg.scss";
+// 新產品
+@import "../pages/NewProduct/style/newproduct.scss";
+
+@import "../pages/StoreProfileEditing/style/storeprofileediting.scss";
+// 最新消息
+@import "../pages/LatestNews/style/latestnews.scss";
+
+@import "../pages/CheckoutPhone/style/checkoutphone.scss";
+// 活動
+@import "../pages/Activity/style/activity.scss";
+// 優惠券
+@import "../pages/Coupon/style/coupon.scss";
+// 編輯商品
+@import "../pages/ProductEdit/style/productedit.scss";
