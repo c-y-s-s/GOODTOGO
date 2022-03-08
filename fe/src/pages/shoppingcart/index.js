@@ -19,7 +19,7 @@ const Shoppingcart = ({
   // 購物車資料
   const [shoppingCartData, setShoppingCartData] = useState([]);
     const { loginMember } = useAuth();
-         console.log("~~~~~~~~1~", loginMember.id);
+        //  console.log("~~~~~~~~1~", loginMember.id);
   // 刪除商品刷新頁面開關
   const [deleteLive, setDeleteLive] = useState(true);
   // 總金額刷新開關
@@ -52,7 +52,7 @@ const Shoppingcart = ({
       <div className="container user-shopping-cart">
         {shoppingCartData.length > 0 ? (
           shoppingCartData.map((item) => {
-            console.log(item);
+            {/* console.log(item); */}
             return (
               <div
                 className="col-9 mx-auto user-shopping-cart-data"

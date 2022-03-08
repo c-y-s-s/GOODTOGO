@@ -3801,13 +3801,13 @@ h4.store_Title {
 .products-comment .product-comment .user-data .product-data .product-photo {
   width: 6.5rem;
   height: 5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .products-comment .product-comment .user-data .product-data .product-photo img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .products-comment .product-comment .user-comment {

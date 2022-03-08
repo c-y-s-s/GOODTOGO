@@ -538,7 +538,7 @@ footer .footer-content .footer-bottom .footer-sign-info {
       grid-template-columns: 8.5rem auto 8.5rem;
   -ms-grid-rows: [row1-start] 15% [row1-end] 40% [third-line] auto [last-line];
       grid-template-rows: [row1-start] 15% [row1-end] 40% [third-line] auto [last-line];
-      grid-template-areas: "header header header " "main main main " "footer footer footer";
+      grid-template-areas: "header header header " "main main main " "footer footer footer";
 }
 
 .hero1 .hero1-btn {
@@ -595,7 +595,7 @@ footer .footer-content .footer-bottom .footer-sign-info {
         grid-template-columns: 3rem auto 3rem;
     -ms-grid-rows: [row1-start] 6.5rem [row1-end] 20rem [third-line] auto [last-line];
         grid-template-rows: [row1-start] 6.5rem [row1-end] 20rem [third-line] auto [last-line];
-        grid-template-areas: "header header header " "main main main " "footer footer footer";
+        grid-template-areas: "header header header " "main main main " "footer footer footer";
   }
 }
 
@@ -613,7 +613,7 @@ footer .footer-content .footer-bottom .footer-sign-info {
         grid-template-columns: 2% auto 2%;
     -ms-grid-rows: [row1-start] 15% [row1-end] 60% [third-line] auto [last-line];
         grid-template-rows: [row1-start] 15% [row1-end] 60% [third-line] auto [last-line];
-        grid-template-areas: "header header header " "main main main " "footer footer footer";
+        grid-template-areas: "header header header " "main main main " "footer footer footer";
   }
   .hero1 .hero1-btn {
     display: none;
@@ -3801,13 +3801,13 @@ h4.store_Title {
 .products-comment .product-comment .user-data .product-data .product-photo {
   width: 6.5rem;
   height: 5rem;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .products-comment .product-comment .user-data .product-data .product-photo img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .products-comment .product-comment .user-comment {
@@ -7392,8 +7392,8 @@ input.dayCheck {
           flex: 3 1 0;
 }
 
-.timeZone input[type=number]::-webkit-inner-spin-button,
-.timeZone input[type=number]::-webkit-outer-spin-button {
+.timeZone input[type="number"]::-webkit-inner-spin-button,
+.timeZone input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: auto;
 }
 

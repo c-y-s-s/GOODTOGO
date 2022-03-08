@@ -74,7 +74,7 @@ const StoreProductsComment = () => {
     getComment();
         setTimeout(() => {
           setIsLoading(false);
-        }, 300);
+        }, 800);
   }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
 
   // productsComment.map((item) => {

@@ -95,7 +95,7 @@ const StoreCard = ({
               parseInt(item.due_time[6] + item.due_time[7]);
             // ! 商品結束販售時間 - 現在時間
             let timeEnd = itemTimeProductCloseSecond - timeInsecondResult;
-            console.log(item)
+            {/* console.log(item) */}
             // ! 店家休息 false 就不倒數
             // ! 如果日期是休息日
             // ! timeEnd = 0

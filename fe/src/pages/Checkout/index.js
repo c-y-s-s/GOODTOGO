@@ -31,7 +31,7 @@ const Checkout = ({
 
   // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
-  console.log("aaaaaaaaa",checkProductsData);
+  // console.log("aaaaaaaaa",checkProductsData);
   // Modal 開關
   const [orderCheckSwitch, setOrderCheckSwitch] = useState(false);
 
@@ -45,7 +45,7 @@ const Checkout = ({
     orderTime: "",
     order_number: "",
   });
-
+  // console.log("aaaaa",OrderDetail);
   useEffect(() => {
     let getcheckProductsData = async () => {
       //撈指定 ID 商品的評論
@@ -136,7 +136,7 @@ const Checkout = ({
         </div>
       </div>
       {/* -------- 光箱區塊 -------- */}
-      {console.log("vvvvv",orderCheckSwitch)}
+      {/* {console.log("vvvvv",orderCheckSwitch)} */}
       {orderCheckSwitch && (
         <OrderModal
           timeInsecond={timeInsecond}
