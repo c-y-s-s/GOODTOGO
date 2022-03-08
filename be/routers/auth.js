@@ -156,7 +156,7 @@ router.post("/login", async (req, res, next) => {
   let returnUser = {
     id: member.id,
     name: member.name,
-    headshots: member.headshots ? member.headshots : "",
+    photo: member.headshots ? member.headshots : "",
   };
   console.log(returnUser);
   // 如果密碼比對成功，記錄在 session

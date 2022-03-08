@@ -10,7 +10,7 @@ import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import Swal from "sweetalert2";
 import { IMAGE_URL } from "../utils/config";
 
-import BlankProfile from "../images/nohead.jpeg";
+import BlankProfile from "../images/headShot.png";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
@@ -101,13 +101,13 @@ const _popover = () => {
         {loginMember ? (
           <img
             className={
-              loginMember.headshots !== ""
+              loginMember.photo !== ""
                 ? "navbar-profile-pic"
                 : "navbar-profile-pic-empty"
             }
             src={
-              loginMember.headshots !== ""
-                ? IMAGE_URL + loginMember.headshots
+              loginMember.photo !== ""
+                ? IMAGE_URL + loginMember.photo
                 : BlankProfile
             }
             alt="profile"

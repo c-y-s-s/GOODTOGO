@@ -11,7 +11,6 @@ import UserLike from "./pages/UserLike";
 import UserOrder from "./pages/UserOrder";
 // import UserCoupon from "./pages/UserCoupon";
 import UserCreditCard from "./pages/UserCreditCard";
-import Navbar from "../../components/Navbar"
 
 // user 帶著 session 進入此頁
 
@@ -30,7 +29,8 @@ const MyAccount = (props) => {
   const [orders, setOrders] = useState([]);
   //[ {id: 6, status_id: 1}, {id: 8, status_id: 2} ]
 
-  // 
+  // 信用卡頁面 Navbar 開關
+  const [openCreditHeight, setOpenCreditHeight] = useState(false);
 
   // -------- 用 session cookie 取使用者資料 --------
   useEffect(() => {
@@ -69,7 +69,7 @@ const MyAccount = (props) => {
 
   return (
     <div>
-      {/* <Navbar /> */}
+      {openCreditHeight ? <div className="set_Height"></div> : <></>}
       <div className="container my-5">
         <div className="row">
           <div className="col-md-3 col-lg-2">
@@ -94,7 +94,7 @@ const MyAccount = (props) => {
               <li>
                 <NavLink
                   className="d-flex align-items-center mb-3 text-decoration-none menu_Title_unActive"
-                  to={"/member/profile" || "/member/payment" || "/member/like"}
+                  to={"/member/profile" || "/member/payment" || "/member/password"}
                 >
                   <div>
                     <FiUser className="menu_Icon d-flex" />
@@ -104,7 +104,7 @@ const MyAccount = (props) => {
                 {/* -------- 我的帳戶選單開始 -------- */}
                 <div
                   className={
-                    userInfo === "order" || userInfo === "coupon"
+                    userInfo === "order" || userInfo === "like"
                       ? "menu_Close"
                       : "menu_Open"
                   }
@@ -224,7 +224,10 @@ const MyAccount = (props) => {
             <Route
               path="payment"
               element={
-                <UserCreditCard setisModalTouch={props.setisModalTouch}  />
+                <UserCreditCard
+                  setisModalTouch={props.setisModalTouch}
+                  setOpenCreditHeight={setOpenCreditHeight}
+                />
               }
             />
             <Route path="password" element={<UserPassword />} />
