@@ -1,14 +1,26 @@
 import GoogleMapReact from "google-map-react";
-import React from "react";
+import React, { useState } from "react";
 import LocationPin from "./LocationPin";
+import CurrentLocationPin from "./CurrentLocationPin";
+import { MdOutlineEmojiPeople } from "react-icons/md";
+import { LARGE_MAP_KEY } from "../../../key";
 
 const Map = (props) => {
   const { displayStoreList, zoomLevel } = props;
+  const [currentLat, setCurrentLat] = useState("");
+  const [currentLng, setCurrentLng] = useState("");
   //!渲染是靠location
   //!LocationPin 必需要有相對應的location才能渲染出東西
   //!也就是說必需先整理出需要的location 陣列
   //!然後利用去map這個陣列然後 裡面map LocationPin
 
+  const here = navigator.geolocation.getCurrentPosition(function (position) {
+    console.log(position);
+    setCurrentLat(position.coords.latitude);
+    setCurrentLng(position.coords.longitude);
+  });
+
+  console.log("clng", currentLng, "clat", currentLat);
   // 先把得到的資料塞進一個空陣列裡
   const locationArr = [];
   displayStoreList.forEach((i) => {
@@ -25,16 +37,11 @@ const Map = (props) => {
   });
   console.log("sss", displayStoreList);
   const location = {
-    address: "320桃園市中壢區新生路二段421號",
-    lat: 24.985128,
-    lng: 121.221719,
+    // address: "320桃園市中壢區新生路二段421號",
+    lat: currentLat,
+    lng: currentLng,
   };
-  // const location2 = {
-  //   address: "101",
-  //   lat: 25.033964,
-  //   lng: 121.564468,
-  // };
-  // console.log(displayStoreList, "lsit");
+
   return (
     <>
       <div className="map">
@@ -42,18 +49,16 @@ const Map = (props) => {
         <div className="google-map">
           <GoogleMapReact
             bootstrapURLKeys={{
-              key: process.env.API_KEY,
+              key: LARGE_MAP_KEY,
             }}
             defaultCenter={location}
             defaultZoom={zoomLevel}
-            resetBoundsOnResize="true"
           >
-            {/* {storeLIst.map(()=>{return()})} */}
             {/* 使用者位置，預設學校 */}
-            <LocationPin
+            <CurrentLocationPin
               className="location-pin"
-              lat={location.lat}
-              lng={location.lng}
+              lat={currentLat}
+              lng={currentLng}
               name={location.name}
             />
 
@@ -73,27 +78,6 @@ const Map = (props) => {
                 />
               );
             })}
-            {/* {displayStoreList.map((store) => {
-     
-              return (
-                <>
-                  <div key={store.id}>
-                    <LocationPin
-                      className="location-pin"
-                      lat={locationArr.map((i)=>{
-                        console.log("iiiiii",i.lat)
-                        return i.lat;
-                      })}
-                      lng={locationArr.map((i)=>{
-                        console.log("ggggggggg", i.lng);
-                        return i.lng
-                      })}
-                      text={store.name}
-                    />
-                  </div>
-                </>
-              );
-            })} */}
           </GoogleMapReact>
         </div>
       </div>

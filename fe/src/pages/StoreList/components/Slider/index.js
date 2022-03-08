@@ -3,10 +3,7 @@ import React, { useState, useEffect } from "react";
 import Slider1 from "../../images/Slider1.png";
 import Slider2 from "../../images/Slider2.png";
 import Slider3 from "../../images/Slider3.png";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { v4 as uuidv4 } from "uuid";
-
-//! 現在的問題是，需要調整wrapper的transform:translateX(-1000px * slideIndex)，每張圖片固定寬為1000px，在瀏覽器上的element裡面調整幻燈片就可以動了
 
 const Slider = () => {
   //把圖片檔案存成陣列
@@ -54,8 +51,8 @@ const Slider = () => {
 
   return (
     <>
-      <div className="slider d-grid">
-        <div className="slider-box text-center col-sm-12">
+      <div className="slider m-auto">
+        <div className="slider-box text-center col-sm-12 m-auto">
           <div
             id="carouselExampleIndicators"
             class="carousel slide"

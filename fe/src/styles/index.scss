@@ -38,7 +38,7 @@ $fw-bold: 500; // bold
 $fw-black: 700; // black
 //Swal
 .popup {
-  width: 100px;
+  width: 512px;
   height: 75%;
 }
 .round {
@@ -102,16 +102,17 @@ $fw-black: 700; // black
   background-color: transparent;
 }
 .close-btn-ads {
-  width: fit-content;
-  height: fit-content;
+  width: 2rem;
+  height: 2rem;
   border-radius: 50%;
   background-color: rgba(255, 255, 255, 0.336);
   position: relative;
   top: 2rem;
 }
 // -------- font-family 字體 --------
-$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC", "Microsoft JhengHei", "Microsoft YaHei",
-  "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family: Montserrat, "Noto Sans TC", "PingFang TC", "Lantinghei TC",
+  "Microsoft JhengHei", "Microsoft YaHei", "Helvetica Neue", Helvetica, Arial,
+  sans-serif;
 
 // -------- 高度 --------
 $navbar-height: 6.25rem;
