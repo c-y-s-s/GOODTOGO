@@ -137,6 +137,7 @@ const Login = (props) => {
       });
       console.log("登入成功", response.data);
       setLoginMember(response.data.data);
+      console.log("登入成功", response.data.data);
       loginSuccessAlert();
       navigate("/");
     } catch (e) {

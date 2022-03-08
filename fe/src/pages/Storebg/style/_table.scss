@@ -1,0 +1,105 @@
+.background-storebg-data-right-content-table {
+  color: $color-black;
+  border-color: $color-light-grey;
+
+  tbody {
+    tr {
+      td {
+        padding: 1.1rem 0;
+        padding-left: 0.5rem;
+        vertical-align: middle;
+        font-size: $fz-sm;
+      }
+    }
+  }
+}
+
+.storebg-product-photo {
+  width: 2.5rem;
+  height: 2.5rem;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+}
+
+.storebg-data-green {
+  text-decoration: none;
+  background-color: $color-light-green;
+  color: $color-light;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  &:hover {
+    color: $color-light-red;
+  }
+}
+.storebg-data-modal-green {
+  text-decoration: none;
+  background-color: $color-light-green;
+  color: $color-light;
+  // padding: 0.4rem;
+  // border-radius: 1rem;
+  &:hover {
+    color: $color-light-red;
+  }
+}
+
+.storebg-data-red {
+  text-decoration: none;
+  background-color: $color-light-red;
+  color: $color-light;
+  padding: 0.4rem;
+  border-radius: 1rem;
+  outline: none;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+// bootstrap 彈出視窗 頁首 刪除水平線
+.storebg-modal-header {
+  border-bottom: 0 none;
+}
+// bootstrap 彈出視窗 頁尾 刪除水平線
+.storebg-modal-footer {
+  border-top: 0 none;
+}
+
+.storebg-model-btn-green {
+  background: $color-light-green;
+  color: $color-light;
+}
+
+.navLink-g-color {
+  color: $color-light-green;
+  text-decoration: none;
+  &:hover {
+    color: $color-light-green;
+  }
+}
+.navLink-r-color {
+  color: $color-light-red;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  border: 0;
+  outline: 0;
+  background: white;
+  &:hover {
+    color: $color-light-red;
+  }
+}
+
+.background-storebg-data-right-content-pages {
+  ul {
+    .pages {
+      color: $color-green;
+    }
+    .active {
+      background: $color-light-green;
+      color: white;
+    }
+  }
+}

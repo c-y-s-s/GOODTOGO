@@ -11,7 +11,8 @@ const session = require("express-session");
 // let FileStore = require("session-file-store")(session);
 // const cookieSession = require("cookie-session");
 const passport = require("passport");
-require("./config/passport")(passport);
+// FIXME: 這段開了會壞掉 - 先註解起來
+// require("./config/passport")(passport);
 
 let app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -73,6 +74,14 @@ let authRouter = require("./routers/auth");
 
 app.use("/api/checkMember", checkMemberRouter);
 app.use("/api/auth", authRouter);
+
+// -------- 商家註冊、登入API --------
+let checkStoreRouter = require("./routers/checkStore");
+app.use("/api/checkStore", checkStoreRouter);
+let storeCheckRouter = require("./routers/storeCheck");
+app.use("/api/storeCheck", storeCheckRouter);
+let storeLoginRouter = require("./routers/storeLogin");
+app.use("/api/storeLogin", storeLoginRouter);
 
 //  -------- 商家 RESTful API 列表 --------
 let storesRouter = require("./routers/stores");
@@ -144,6 +153,36 @@ app.use("/api/productsdesignatecommit", productsDesignateCommitRouter);
 let memberRouter = require("./routers/member");
 app.use("/api/member", memberRouter);
 // -------- 會員 RESTful API 列表 --------
+
+// :TODO: -------- 商家後台 RESTful API 列表 --------
+let storebgRouter = require("./routers/storebg");
+app.use("/api/storebg", storebgRouter);
+// -------- 商家後台 RESTful API 列表 --------
+
+//  -------- 價格排序由高到低 --------
+let productsPriceDesc = require("./routers/productsPriceDesc");
+app.use("/api/productspricedesc", productsPriceDesc);
+
+//  -------- 價格排序由低到高 --------
+let productsPriceAsc = require("./routers/productsPriceAsc");
+app.use("/api/productspriceasc", productsPriceAsc);
+
+//  -------- 數量排序由高到低 --------
+let productsAmountDesc = require("./routers/productsAmountDesc");
+app.use("/api/productsamountdesc", productsAmountDesc);
+//  -------- 數量排序由低到高 --------
+let productsAmountAsc = require("./routers/productsAmountAsc");
+app.use("/api/productsamountasc", productsAmountAsc);
+//  -------- 商品類別 下拉選單 --------
+let selectedProductList = require("./routers/selectedProductList");
+app.use("/api/selectedproductlist", selectedProductList);
+
+// -------- 商家後台寫入資料 --------
+let storeBgAddProduct = require("./routers/storeBgAddProduct");
+app.use("/api/storebgaddproduct", storeBgAddProduct);
+// -------- 商家後台編輯寫入資料 --------
+let storeBgEditProduct = require("./routers/storeBgEditProduct");
+app.use("/api/storebgeditproduct", storeBgEditProduct);
 
 // 404
 app.use((req, res, next) => {

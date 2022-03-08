@@ -13,6 +13,7 @@ router.get("/:productId", async (req, res, next) => {
   // console.log(data);
   res.json(data);
 });
+
 // -------- 撈出全部商品結束 --------
 
 module.exports = router;
