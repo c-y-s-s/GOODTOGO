@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 // import { ImFacebook2 } from "react-icons/im";
 import axios from "axios";
-import { jQuery, $ } from "jquery";
 // import TWzipcode from "react-twzipcode";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { AiOutlineCamera } from "react-icons/ai";
@@ -137,28 +136,50 @@ const StoreCheck = () => {
   // const [checkedState, setCheckedState] = useState(
   //   new Array(dayObject.length).fill(false)
   // );
+  // }
+  // }
 
+  // -------- 表單營業日期變更開始 -------- //
   // 宣告營業日
-  // const [openDay, setOpenDay] = useState("");
+  let [closeDay, setCloseDay] = useState([
+    "1","2","3","4","5","6","7"
+  ]);
+  
+  const handleDayChange = (e) =>{
+  parseInt(e.target.value)
+  let found = closeDay.find(element => element === e.target.value);
+  if (found !== undefined){
+    setCloseDay(closeDay.filter(item => item !== e.target.value));
+    console.log("減少",closeDay);
+    setMember({ ...member, ...{closeDay}});
+    
+  }
+  else {
+    setCloseDay([...closeDay,e.target.value]);
+      console.log("增加",closeDay);
+  }
+}
+useEffect(() => {
+console.log(closeDay)
+}, [closeDay]);
 
-  // const handleOnChange = (position) => {
-  //   const updatedCheckedState = checkedState.map((item, index) =>
-  //     index === position ? !item : item
-  //   );
-  //   setCheckedState(updatedCheckedState);
-
-  //   const daysSelected = updatedCheckedState.reduce(
-  //     (sum, currentState, index, openDay) => {
-  //       if (currentState === true) {
-  //         return openDay + dayObject[index].isOpen;
-  //       }
-  //       return openDay;
-  //     },
-  //   );
-  //   setOpenDay(daysSelected);
-  //   setMember({ ...member, ...{ openDay } });
-  // };
-
+    // if (e.target.checked == true) {
+    //   setOpenDay([...openDay,e.target.value]);
+    //   console.log(openDay);
+    //   // openDay.push(e.target.value);
+    // }else{
+    //   let toRemove = e.target.value;
+    //   setOpenDay(openDay.filter(item =>item.toRemove !== toRemove));
+    //   console.log(openDay);
+    // }
+    // const handleDayChange = (e) => {
+    //   console.log(e.target.value);
+    
+    //   setDay({ ...day, [e.target.name]: e.target.value });
+    //   setMember({ ...member, ...{ day } });
+    // };
+    // -------- 表單營業日期變更結束 -------- //
+    
   const handleFormInvalid = (e) => {
     // 阻擋form的預設送出行為(錯誤泡泡訊息和method="get")
     e.preventDefault();
@@ -252,17 +273,6 @@ const StoreCheck = () => {
     setFieldErrors(updatedFieldErrors);
   };
 
-  const [day, setDay] = useState({
-    // 一: "false",
-    // 二: "false",
-    // 三: "false",
-    // 四: "false",
-    // 五: "false",
-    // 六: "false",
-    // 日: "false"
-  });
-
-
   const [openTime, setOpenTime] = useState()
 
   const [closeTime, setCloseTime] = useState()
@@ -273,14 +283,6 @@ const StoreCheck = () => {
 
   const [address, setAddress] = useState();
 
-  // -------- 表單營業日期變更開始 -------- //
-  const handleDayChange = (e) => {
-    console.log(e.target.value);
-
-    setDay({ ...day, [e.target.name]: e.target.value });
-    setMember({ ...member, ...{ day } });
-  };
-  // -------- 表單營業日期變更結束 -------- //
 
   const handleOpenTimeChange = (e) => {
     console.log(e.target.value);
@@ -368,7 +370,7 @@ const StoreCheck = () => {
   // -------- 表單營業許可證上傳開始 --------//
   const handleLicenseChange = (e) => {
     console.log(e.target.value);
-    const file2 = e.target.files[0]; // 抓取上傳的圖片
+    let file2 = e.target.files[0]; // 抓取上傳的圖片
     if (e.target.files[0].size > 2097152) {
       alert("檔案太大囉!");
       [...file2] = "";
@@ -422,7 +424,7 @@ const StoreCheck = () => {
       formData.append("storeLogo", member.storeLogo);
       formData.append("storeLicence", member.storeLicence);
       formData.append("storeType", member.storeType);
-      formData.append("day", member.day);
+      formData.append("closeDay", member.closeDay);
       formData.append("openTime", openTime.openHour + `:` + openTime.openMinute + `:` + `00.000000`);
       formData.append("closeTime", closeTime.closeHour + `:` + closeTime.closeMinute + `:` + `00.000000`);
 
@@ -756,21 +758,22 @@ const StoreCheck = () => {
                       <div className="form-floating mb-3">
                         <input
                           name="phone"
-                          type="phone"
+                          type="number"
                           className={`form-control custom-input ${fieldErrors.phone !== "" && "input-error"
                             }`}
                           id="phone"
                           placeholder="name@example.com"
                           value={member.phone}
-                          maxLength="10"
+                          maxLength="12"
                           onChange={handleChange}
+                          onWheel={(e) => e.target.blur()} 
                           required
                         />
                         <label
                           htmlFor="phone"
                           className="floating-label  text-grey"
                         >
-                          09XXXXXXXX
+                          不含符號
                         </label>
                         {fieldErrors.phone !== "" && (
                           <div className="error text-end">
@@ -854,7 +857,7 @@ const StoreCheck = () => {
                           value={member.storeType}
                           onChange={handleChange}
                           required
-                        >
+                        > <option value="" disabled selected>請選擇類別</option>
                           <option value="1">港式</option>
                           <option value="2">中式</option>
                           <option value="3">韓式</option>
@@ -869,7 +872,7 @@ const StoreCheck = () => {
                           htmlFor="storeType"
                           className="floating-label  text-grey"
                         >
-                          好吃ㄉ蘇喜仔爭鮮
+                          主打的是...
                         </label>
                       </div>
 
@@ -897,11 +900,11 @@ const StoreCheck = () => {
                           })} */}
                           <input type="checkbox" id="mon" name="一" value="1" className="col dayCheck" onChange={handleDayChange}></input>
                           <input type="checkbox" id="tue" name="二" value="2" className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="wed" name="三" className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="thu" name="四" className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="fri" name="五" className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="sat" name="六" className="col dayCheck" onChange={handleDayChange}></input>
-                          <input type="checkbox" id="sun" name="日" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="wed" name="三" value="3" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="thu" name="四" value="4" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="fri" name="五" value="5" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="sat" name="六" value="6" className="col dayCheck" onChange={handleDayChange}></input>
+                          <input type="checkbox" id="sun" name="日" value="7" className="col dayCheck" onChange={handleDayChange}></input>
                         </div>
                         <div className="row input-label-title text-green text-center mt-3 mb-3 ms-1 me-1">
                           <label htmlFor="mon" className="col">一</label>
@@ -935,6 +938,7 @@ const StoreCheck = () => {
                             max={24}
                             min={0}
                             onChange={handleOpenTimeChange}
+                            onWheel={(e) => e.target.blur()} 
                             required
                           />
                           <label
@@ -964,6 +968,7 @@ const StoreCheck = () => {
                             max={60}
                             min={0}
                             onChange={handleOpenTimeChange}
+                            onWheel={(e) => e.target.blur()} 
                             required
                           />
                           <label
@@ -994,6 +999,7 @@ const StoreCheck = () => {
                             max={24}
                             min={0}
                             onChange={handleCloseTimeChange}
+                            onWheel={(e) => e.target.blur()} 
                             required
                           />
                           <label
@@ -1024,6 +1030,7 @@ const StoreCheck = () => {
                             max={60}
                             min={0}
                             onChange={handleCloseTimeChange}
+                            onWheel={(e) => e.target.blur()} 
                             required
                           />
                           <label
