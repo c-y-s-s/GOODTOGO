@@ -140,6 +140,7 @@
       justify-self: center;
       width: 90vw;
     }
+
     .hero3-info-3 {
       grid-area: 6/1/7/3;
       padding: 0;
@@ -153,6 +154,18 @@
     }
   }
 }
+.rotate {
+  animation: rotate 25s linear infinite;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 @media screen and (max-width: 390px) {
   .hero3 {
     display: grid;

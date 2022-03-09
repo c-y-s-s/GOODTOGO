@@ -47,7 +47,7 @@ const hero3 = () => {
         </div>
       </div>
       <div className="hero3-last d-flex justify-content-lg-evenly justify-content-center flex-wrap">
-        <Hero3Earth className="hero3-earth" />
+        <Hero3Earth className="hero3-earth rotate" />
         <div className="hero3-info-3 text-center">
           <Hero3Text3 className="hero3-text" />
           <div className="hero3-info-3-p">
