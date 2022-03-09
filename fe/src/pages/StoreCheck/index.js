@@ -630,7 +630,7 @@ console.log(closeDay)
                           </select>
                         </div> */}
                         <div className="col-6">
-                          <label>City</label>
+                          <label>縣市</label>
                           <select className={`form-control custom-input ${fieldErrors.City !== "" && "input-error"
                             }`}
                             name="City"
@@ -655,7 +655,7 @@ console.log(closeDay)
                         </div>
 
                         <div className="col-6">
-                          <label>選擇區域</label>
+                          <label>區域</label>
                           <select className={`form-control custom-input ${fieldErrors.Area !== "" && "input-error"
                             }`}
                             name="Area"
@@ -852,7 +852,7 @@ console.log(closeDay)
                         <select
                           name="storeType"
                           className={`form-control custom-input ${fieldErrors.storeType !== "" && "input-error"
-                            }`}
+                        }`}
                           id="storeType"
                           placeholder="商品類別"
                           value={member.storeType}
@@ -879,10 +879,7 @@ console.log(closeDay)
                           <div className="error text-end">
                             {fieldErrors.storeType}
                           </div>
-                        )}
-                      </div>
-
-
+                        )}</div>
                       {/* ------- 營業星期 (複選) -------- */}
                       <label
                         htmlFor="opendayCheck"
@@ -1054,7 +1051,7 @@ console.log(closeDay)
                       </div>
                       {/* -------- 營業時間設定結束 -------- */}
                       {/* -------- 註冊同意按鈕開始 -------- */}
-                      <div className="align-items-center text-grey input-label-title">
+                      <div className="align-items-center text-grey input-label-title mt-5">
                         <input
                           type="checkbox"
                           checked={agree}
