@@ -851,7 +851,8 @@ console.log(closeDay)
                       <div className="form-floating mb-3">
                         <select
                           name="storeType"
-                          className="form-control custom-input"
+                          className={`form-control custom-input ${fieldErrors.storeType !== "" && "input-error"
+                            }`}
                           id="storeType"
                           placeholder="商品類別"
                           value={member.storeType}
@@ -874,6 +875,11 @@ console.log(closeDay)
                         >
                           主打的是...
                         </label>
+                        {fieldErrors.storeType !== "" && (
+                          <div className="error text-end">
+                            {fieldErrors.storeType}
+                          </div>
+                        )}
                       </div>
 
 
