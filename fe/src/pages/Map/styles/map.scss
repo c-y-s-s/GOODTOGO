@@ -97,14 +97,13 @@
   display: flex;
   flex-direction: column;
   padding: 4rem 0 10rem;
-
   .map-select-bar {
     &:nth-child(2) {
       position: absolute;
       top: 20rem;
-      z-index: 1009;
+      z-index: 999;
     }
-    z-index: 1010;
+    z-index: 1000;
     height: fit-content;
     padding: 0.5rem;
     width: 16rem;
@@ -265,9 +264,9 @@
     }
     .map-side-bar {
       position: absolute;
-      z-index: 1031;
       top: 5.5rem;
       padding: 0.3rem 0 10rem;
+      z-index: 0;
       .map-select-bar {
         position: absolute;
         z-index: 1031;

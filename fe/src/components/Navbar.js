@@ -16,6 +16,7 @@ import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();
   const [isOpen, setOpen] = useState(false);
+  const [burgetOpen, setBurgerOpen] = useState(false);
   // console.log(props);
   // 購物車總筆數
   const [shoppingCartTotalPages, setShoppingCartTotalPages] = useState(0);
@@ -51,10 +52,13 @@ const Navbar = (props) => {
               size={25}
               color="#668C4A"
               rounded
+              onClick={() => {
+                setBurgerOpen(!burgetOpen);
+              }}
             />
           </div>
           {isOpen ? (
-            <MenuToggle setOpen={setOpen} isOpen={isOpen} />
+            <MenuToggle burgetOpen={burgetOpen} setBurgerOpen={setBurgerOpen} />
           ) : (
             <div></div>
           )}

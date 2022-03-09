@@ -9,10 +9,11 @@ import Swal from "sweetalert2";
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import { ReactComponent as StoreIcon } from "../images/store-icon.svg";
 import { ReactComponent as MapIcon } from "../images/map-pin-icon.svg";
+import { FiMapPin } from "react-icons/fi";
+import { BiStore } from "react-icons/bi";
 
 const _menuToggle = (props) => {
   const { loginMember, setLoginMember } = useAuth();
-  const { setIsOpen, isOpen } = props;
   const navigate = useNavigate();
 
   //swal
@@ -52,12 +53,7 @@ const _menuToggle = (props) => {
     );
   };
   const loggedin = (
-    <ul
-      className="list-unstyled drop-down-menu"
-      onClick={() => {
-        setIsOpen(!isOpen);
-      }}
-    >
+    <ul className="list-unstyled drop-down-menu">
       <li class="popover-item">
         <Link to="/member" className="nav-popover-link">
           會員中心
@@ -86,16 +82,19 @@ const _menuToggle = (props) => {
         </Link>
       </li>
       <hr className="col-8 m-auto" />
-      <li class="popover-item">
-        <Link to="stores" className="nav-popover-link no-link">
-          <StoreIcon className="me-3" />
+      <li class="popover-item mt-1">
+        <Link
+          to="stores"
+          className="nav-popover-link d-flex align-items-center"
+        >
+          <BiStore className="me-3 toggle-menu-icon" />
           探索美食
         </Link>
       </li>
       <li class="popover-item">
-        <Link to="map" className="nav-popover-link">
-          <MapIcon className="me-3" />
-          地圖探索
+        <Link to="map" className="nav-popover-link d-flex align-items-center">
+          <FiMapPin className="me-3 toggle-menu-icon" />
+          <span>地圖探索</span>
         </Link>
       </li>
       {/* <li class="popover-item">

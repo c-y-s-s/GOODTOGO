@@ -161,16 +161,26 @@
   background-color: white;
   padding: 0.5rem 0.5rem;
   font-size: larger;
-  li {
+  .popover-item {
     padding: 0.5rem 1rem;
-    a {
+    .nav-popover-link {
       text-decoration: none;
       color: $color-dark-grey;
       font-size: $fz-lg;
       transition: 0.3s;
-      &:hover {
-        background-color: $color-grey;
+      .toggle-menu-icon {
+        font-size: 1rem;
+      }
+    }
+    &:hover {
+      background-color: $color-grey;
+      .nav-popover-link {
         color: white;
+        .toggle-menu-icon {
+          position: relative;
+          z-index: 1002;
+          color: white;
+        }
       }
     }
   }
