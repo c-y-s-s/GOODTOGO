@@ -9,8 +9,10 @@ import Swal from "sweetalert2";
 import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 import { ReactComponent as StoreIcon } from "../images/store-icon.svg";
 import { ReactComponent as MapIcon } from "../images/map-pin-icon.svg";
-import { FiMapPin } from "react-icons/fi";
+import { FiMapPin, FiLogOut } from "react-icons/fi";
 import { BiStore } from "react-icons/bi";
+import { BsCardChecklist } from "react-icons/bs";
+import { VscSmiley } from "react-icons/vsc";
 
 const _menuToggle = (props) => {
   const { loginMember, setLoginMember } = useAuth();
@@ -56,16 +58,27 @@ const _menuToggle = (props) => {
     <ul className="list-unstyled drop-down-menu">
       <li class="popover-item">
         <Link to="/member" className="nav-popover-link">
+          <VscSmiley className="me-3 toggle-menu-icon" />
           會員中心
         </Link>
       </li>
       <li class="popover-item">
         <Link to="/member/order" className="nav-popover-link">
+          <BsCardChecklist className="me-3 toggle-menu-icon" />
           我的訂單
         </Link>
       </li>
-      <li onClick={click} className="nav-popover-link">
-        登出
+      <li class="popover-item">
+        <Link to="map" className="nav-popover-link d-flex align-items-center">
+          <FiMapPin className="me-3 toggle-menu-icon" />
+          <span>地圖探索</span>
+        </Link>
+      </li>
+      <li onClick={click} className="popover-item">
+        <Link to="#" className="nav-popover-link d-flex align-items-center">
+          <FiLogOut className="me-3 toggle-menu-icon" />
+          <span>登出</span>
+        </Link>
       </li>
     </ul>
   );
