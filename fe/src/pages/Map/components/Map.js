@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import LocationPin from "./LocationPin";
 import CurrentLocationPin from "./CurrentLocationPin";
 import { MdOutlineEmojiPeople } from "react-icons/md";
-// import { LARGE_MAP_KEY } from "../../../key";
+import { LARGE_MAP_KEY } from "../../../key";
 
 const Map = (props) => {
   const { displayStoreList, zoomLevel } = props;
@@ -35,11 +35,11 @@ const Map = (props) => {
       amount: i.amount,
     });
   });
-  console.log("sss", displayStoreList);
+  // console.log("sss", displayStoreList);
   const location = {
     // address: "320桃園市中壢區新生路二段421號",
-    lat: currentLat,
-    lng: currentLng,
+    lat: 24.985238,
+    lng: 121.222178,
   };
 
   return (
@@ -49,7 +49,7 @@ const Map = (props) => {
         <div className="google-map">
           <GoogleMapReact
             bootstrapURLKeys={{
-              // key: LARGE_MAP_KEY,
+              key: LARGE_MAP_KEY,
             }}
             defaultCenter={location}
             defaultZoom={zoomLevel}
@@ -57,8 +57,8 @@ const Map = (props) => {
             {/* 使用者位置，預設學校 */}
             <CurrentLocationPin
               className="location-pin"
-              lat={currentLat}
-              lng={currentLng}
+              lat={location.lat}
+              lng={location.lng}
               name={location.name}
             />
 

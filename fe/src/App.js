@@ -54,7 +54,7 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   // todo 修改  navbar顯示方式判斷↑↑
 
-  // console.log("11111111111", loginMember.id);
+  console.log("11111111111", loginMember);
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
   // console.log("aaaaaaaaa",isModalTouch);

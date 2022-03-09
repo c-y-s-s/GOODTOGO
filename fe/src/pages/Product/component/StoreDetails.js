@@ -7,7 +7,7 @@ import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
 import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
-// import { MAP_KEY } from "../../../key";
+import { MAP_KEY } from "../../../key";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
@@ -275,7 +275,7 @@ const StoreDetails = ({
                   <div className="store-map">
                     <GoogleMapReact
                       bootstrapURLKeys={{
-                        // key: MAP_KEY,
+                        key: MAP_KEY,
                       }}
                       defaultCenter={defaultProps.center}
                       defaultZoom={defaultProps.zoom}

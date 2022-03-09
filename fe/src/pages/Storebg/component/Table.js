@@ -155,7 +155,7 @@ const Table = (props) => {
                     data-bs-toggle="modal"
                     data-bs-target={"#takeDown" + item.id}
                   >
-                    {item.valid === 1 ? "上架中" : "下架中"}
+                    {item.valid === 1 ? "已上架" : "已下架"}
                   </button>
 
                   {/* //checkModal */}

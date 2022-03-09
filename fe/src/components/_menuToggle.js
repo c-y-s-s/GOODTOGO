@@ -57,7 +57,7 @@ const _menuToggle = (props) => {
   const loggedin = (
     <ul className="list-unstyled drop-down-menu">
       <li class="popover-item">
-        <Link to="/member" className="nav-popover-link">
+        <Link to="/member/profile" className="nav-popover-link">
           <VscSmiley className="me-3 toggle-menu-icon" />
           會員中心
         </Link>
