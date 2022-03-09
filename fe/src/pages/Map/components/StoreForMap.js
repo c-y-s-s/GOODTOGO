@@ -30,14 +30,14 @@ const StoreForMap = (props) => {
           for (let i = 1; i < item.name.length; i++) {
             item.name[i] === " " && (space = true);
           }
-          console.log(item);
+          {/* console.log("aaaaa",item); */}
           return (
             <div>
               <Link to={`/store/${item.id}`} className="no-link" key={item.id}>
                 <div className="store-info-card shadow d-flex align-items-center">
                   <div className="info-img col-12">
                     <img
-                      src={require(`../../../images/store_img/03.jpg`)}
+                      src={require(`../../../images/store_img/${item.logo}`)}
                       alt="logo"
                     />
                     {/* --->營業中標籤 */}
@@ -57,7 +57,7 @@ const StoreForMap = (props) => {
                       <br />
                       {/* --->分店名 */}
                       <span className="text-dark-grey detail-sm">
-                        {space === true ? item.name.split(" ")[1] : <div />}
+                        {space === true ? item.name.split(" ")[1] : <br />}
                       </span>
                     </span>
 
