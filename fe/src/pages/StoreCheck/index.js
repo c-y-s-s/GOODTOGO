@@ -806,13 +806,13 @@ console.log(closeDay)
                           onChange={handleLogoChange}
                           required
                         />
-                        <AiOutlineCamera size={24}/>預覽區塊
+                        <AiOutlineCamera size={24}/>預覽區塊(限制2MB,預覽成功才能上傳!)
                         {logoSrc !== "" && (
                         <img
                           src={logoSrc}
                       // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
                       alt="照片預覽"
-                      className="cover-fit"
+                      className="cover-fit preview"
                     />)}
                       </div>
                       {/* -------- 營業登記證上傳 -------- */}
@@ -832,13 +832,13 @@ console.log(closeDay)
                           onChange={handleLicenseChange}
                           required
                         />
-                        <AiOutlineCamera size={24}/>預覽區塊
+                        <AiOutlineCamera size={24}/>預覽區塊(限制2MB,預覽成功才能上傳!)
                         {licenceSrc !== "" && (
                         <img
                           src={licenceSrc}
                       // 顯示順序: 上傳圖片 -> 資料庫圖片 -> 預設圖片
                       alt="照片預覽"
-                      className="cover-fit"
+                      className="cover-fit preview"
                     />)}
                       </div>
 

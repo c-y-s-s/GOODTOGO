@@ -127,7 +127,9 @@ const registerRules = [
             req.body.storeType,
             "1"
         ]
-      );
+      ).then(connection.execute(
+        `UPDATE stores SET close_day='[6,7]' WHERE id > 76`))
+      ;
       console.log(updateProfileResult);
   
       // 寫內容前先測試能不能得到 req
