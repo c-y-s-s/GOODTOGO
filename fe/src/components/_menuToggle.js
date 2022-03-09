@@ -68,6 +68,15 @@ const _menuToggle = (props) => {
           我的訂單
         </Link>
       </li>
+      <li class="popover-item mt-1">
+        <Link
+          to="stores"
+          className="nav-popover-link d-flex align-items-center"
+        >
+          <BiStore className="me-3 toggle-menu-icon" />
+          探索美食
+        </Link>
+      </li>
       <li class="popover-item">
         <Link to="map" className="nav-popover-link d-flex align-items-center">
           <FiMapPin className="me-3 toggle-menu-icon" />
