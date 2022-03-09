@@ -173,7 +173,6 @@ const StoreInfoList = (props) => {
   let navigate = useNavigate();
   const getPages = () => {
     let pages = [];
-    lastPage === 1 && setPageDisplay(false);
     for (let i = 1; i <= lastPage; i++) {
       pages.push(
         <li className="page-li" key={uuidv4()}>
@@ -258,7 +257,7 @@ const StoreInfoList = (props) => {
             total={total}
           />
         </div>
-        {!pageDisplay ? (
+        {lastPage === 1 ? (
           ""
         ) : (
           <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
