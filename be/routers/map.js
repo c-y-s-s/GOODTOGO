@@ -84,9 +84,9 @@ router.get("/info", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130
@@ -183,9 +183,9 @@ router.get("/info/:storeId", async (req, res, next) => {
     item.close_time = moment(item.close_time, "hh:mm:ss.000").format("HH:mm");
     //*[step 2] 判斷目前是否營業中
     //TODO 判斷 a.現在時間
-    //?let nowTime = Number(moment().format("HHmm"));
+    let nowTime = Number(moment().format("HHmm"));
     //開發中的假時間
-    let nowTime = 2131;
+    // let nowTime = 2131;
     //把營業時間轉為數字 09:30 -> 930
     let storeOpen = Number(moment(item.open_time, "hh:mm").format("hhmm"));
     let storeClosed = Number(moment(item.close_time, "hh:mm").format("HHmm")); //2130

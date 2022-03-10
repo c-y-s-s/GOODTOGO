@@ -51,7 +51,11 @@ const TopNav = () => {
         <div className="background-storebg-data-right-nav-content">
           <div className="username">{storeName}</div>
           <div className="user-photo">
-            <img src={logo ? IMAGE_URL + logo : PROFILE_IMAGE_URL} alt="logo" />
+            {/* <img src={logo ? IMAGE_URL + logo : PROFILE_IMAGE_URL} alt="logo" /> */}
+            <img
+              src={require(`../images/EUU6kHiUMAAcOZs.png`)}
+              alt="logo"
+            />
           </div>
           <Link
             type="button"
