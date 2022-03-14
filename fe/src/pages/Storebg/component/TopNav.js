@@ -52,10 +52,10 @@ const TopNav = () => {
           <div className="username">{storeName}</div>
           <div className="user-photo">
             {/* <img src={logo ? IMAGE_URL + logo : PROFILE_IMAGE_URL} alt="logo" /> */}
-            <img
+            {/* <img
               src={require(`../images/EUU6kHiUMAAcOZs.png`)}
               alt="logo"
-            />
+            /> */}
           </div>
           <Link
             type="button"
