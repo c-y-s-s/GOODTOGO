@@ -10,8 +10,7 @@ import Countdown, { zeroPad } from "react-countdown";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-// -------- uuid --------
-import { v4 as uuidv4 } from "uuid";
+
 const StoreCard = ({
   storeId,
   storeinOperation,
@@ -153,11 +152,6 @@ const StoreCard = ({
                     </div>
                     <div className="amount-text">
                       剩餘
-                      {/* {storeinOperation === false
-                        ? 0
-                        : timeEnd <= 0
-                        ? 0
-                        : item.amount} */}
                       {storeDayClose
                         ? 0
                         : storeinOperation === false

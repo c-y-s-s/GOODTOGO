@@ -1,12 +1,12 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
+import { useAuth } from "../../../context/auth";
 // ------- reacticon ------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
 import { FiX } from "react-icons/fi";
-import { useAuth } from "../../../context/auth";
+
 const ProductsData = ({
   storeid,
   setDeleteLive,
@@ -20,7 +20,6 @@ const ProductsData = ({
   const { loginMember } = useAuth();
   //存目前登入使用者的購物車資料
   const [specifyProductsData, setSpecifyProductsData] = useState([]);
-  // console.log("123~~~~~~~~~", loginMemberId);
   // 加減數量刷新api開關
   const [productsAmountTotal, setProductsAmountTotal] = useState(0);
 

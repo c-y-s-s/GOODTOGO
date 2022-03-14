@@ -1,13 +1,8 @@
-import React, { useState, useEffect, useLayoutEffect } from "react";
+import React from "react";
 import axios from "axios";
-// import CheckoutProducts from "./compoments/CheckoutProducts";
 import { API_URL } from "../../../utils/config";
-
 // -------- react icon --------
-
-import { FaStore } from "react-icons/fa";
 import { RiVisaLine } from "react-icons/ri";
-
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";

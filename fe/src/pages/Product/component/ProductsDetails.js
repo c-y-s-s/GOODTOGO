@@ -96,6 +96,7 @@ const ProductsDetails = ({
   }
   async function handleAddShoppingCar(e) {
     e.preventDefault();
+    //sweetalert 套件樣式
     Swal.fire({
       position: "center",
       icon: "success",
@@ -246,23 +247,6 @@ const ProductsDetails = ({
 
                     {/* // !這邊還沒測試有沒有bug */}
                     <div className="product-buy-car my-1 text-center">
-                      {/* {openProductsModaltimeEnd <= 0 ? (
-                        <div href="#" className="btn btn-primary close-buy-car">
-                          無法提供
-                        </div>
-                      ) : storeinOperation ? (
-                        <button
-                          className="btn btn-primary"
-                          id={`${data.id}`}
-                          onClick={handleAddShoppingCar}
-                        >
-                          加入購物車
-                        </button>
-                      ) : (
-                        <div href="#" className="btn btn-primary close-buy-car">
-                          無法提供
-                        </div>
-                      )} */}
                       {openProductsModaltimeEnd <= 0 ? (
                         <div href="#" className="btn btn-primary close-buy-car">
                           無法提供

@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-// import CheckoutProducts from "./compoments/CheckoutProducts";
 import { API_URL } from "../../utils/config";
-import { ERR_MSG } from "../../utils/error";
+import { useAuth } from "../../context/auth";
 import OrderModal from "./components/OrderModal";
 import OrderProducts from "./components/OrderProducts";
 import OrderPaymentMethod from "./components/OrderPaymentMethod";
 // -------- react icon --------
-
 import { FaStore } from "react-icons/fa";
-import { RiVisaLine } from "react-icons/ri";
-
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-import { useAuth } from "../../context/auth";
+
 
 const Checkout = ({
   checkoutData,
@@ -22,8 +18,6 @@ const Checkout = ({
   navshoppingDeleteParameter,
 }) => {
   const {loginMember} = useAuth()
-// console.log(typeof loginMember.id.toString());
-  
   moment.locale("zh-tw");
   // 抓出訂單所需時間格式
   let timeInsecond = moment().format("YYYY-MM-DD HH:mm:ss");
@@ -31,7 +25,6 @@ const Checkout = ({
 
   // 頁面商品資料
   const [checkProductsData, setCheckProductsData] = useState([]);
-  // console.log("aaaaaaaaa",checkProductsData);
   // Modal 開關
   const [orderCheckSwitch, setOrderCheckSwitch] = useState(false);
 

@@ -1,12 +1,10 @@
-import { useState, useEffect, useLayoutEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import ProductsData from "./component/ProductsData";
 import { API_URL } from "../../utils/config";
 // -------- react icon --------
-import { v4 as uuidv4 } from "uuid";
 import { FaStore } from "react-icons/fa";
-import { ReactComponent as JumpIcon }  from "../../images/editor-0.9s-215px.gif";
 import { useAuth } from "../../context/auth";
 const Shoppingcart = ({
   setCheckoutData,

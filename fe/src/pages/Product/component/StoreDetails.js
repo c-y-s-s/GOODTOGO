@@ -5,10 +5,9 @@ import { API_URL } from "../../../utils/config";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
 import { FaPhoneAlt } from "react-icons/fa";
-import { FaExclamationCircle } from "react-icons/fa";
 import { FaHeart } from "react-icons/fa";
 import { MAP_KEY } from "../../../key";
-// -------- MUI  Rating--------
+// -------- MUI Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- google map -------
@@ -20,7 +19,7 @@ import { v4 as uuidv4 } from "uuid";
 // -------- Moment plugin --------
 import moment from "moment";
 import "moment/min/locales";
-import { ReactComponent as Subtract } from "../images/Subtract.svg";
+
 const StoreDetails = ({
   storeId,
   storeData,
@@ -28,9 +27,9 @@ const StoreDetails = ({
   setStoreTodayClose,
   storeTodayClose,
 }) => {
+  
+  //設定 moment 時區
   moment.locale("zh-tw");
-
-
   let timeInsecond = moment().format("LTS");
   // ! 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
   //!目前時間總秒數
@@ -103,7 +102,7 @@ const StoreDetails = ({
         let closeDayData = JSON.parse(item.close_day);
         let closeDayChinese = [];
         closeDayData.forEach((item) => {
-          {/* console.log(typeof item); */}
+        
           if (item === 1) closeDayChinese.push("一");
           if (item === 2) closeDayChinese.push("二");
           if (item === 3) closeDayChinese.push("三");
@@ -228,31 +227,6 @@ const StoreDetails = ({
                           {moment(item.open_time, "hh:mm:ss").format("LT")}-
                           {moment(item.close_time, "hh:mm:ss").format("LT")}
                         </div>
-
-                        {/* {inOperation ? (
-                          <div className="d-flex store-data-left-content-open">
-                            營業中
-                          </div>
-                        ) : (
-                          <div className="d-flex store-data-left-content-close">
-                            休息中
-                          </div>
-                        )} */}
-
-                        {/* 判斷公休日及營業時間區間 */}
-                        {/* {storeTodayClose ? (
-                          <div className="d-flex store-data-left-content-close d-lg-none">
-                            休息中
-                          </div>
-                        ) : inOperation ? (
-                          <div className="d-flex store-data-left-content-open d-lg-none">
-                            營業中
-                          </div>
-                        ) : (
-                          <div className="d-flex store-data-left-content-close d-lg-none">
-                            休息中
-                          </div>
-                        )} */}
                       </div>
                     </div>
 

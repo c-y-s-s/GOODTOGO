@@ -1,9 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// -------- React icon --------
 import { BsCheck2Circle } from "react-icons/bs";
 import { BsFillExclamationCircleFill } from "react-icons/bs";
-const OrderModal = ({ timeInsecond, orderNumber, OrderDetail }) => {
 
+const OrderModal = ({ timeInsecond, orderNumber, OrderDetail }) => {
   return (
     <div>
       <div className="container-fluid mt-5 order-modal-bgcolor">

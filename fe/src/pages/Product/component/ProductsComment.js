@@ -72,15 +72,12 @@ const StoreProductsComment = () => {
       }
     };
     getComment();
+        // 抓完 api 之後先顯示 Loading 延遲 800 毫秒之後關閉
         setTimeout(() => {
           setIsLoading(false);
         }, 800);
   }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
 
-  // productsComment.map((item) => {
-  //   console.log(item.name, item.star ,item.create_time);
-
-  // });
 
   // 開關切換
   function handleStarSort() {
@@ -111,12 +108,9 @@ const StoreProductsComment = () => {
       </a>
     );
   }
-
+// loading 樣式
     const spinner = (
       <>
-        {/* <div className="spinner-grow text-primary" role="status">
-          <span className="visually-hidden">Loading...</span>
-        </div> */}
         <div className="text-center loading-img mt-5 m-auto">
           {/* <div className="xxxx">1234</div> */}
           <img
@@ -124,7 +118,6 @@ const StoreProductsComment = () => {
             src={require(`../images/editor-2.7s-40px.gif`)}
             alt=""
           />
-       
         </div>
       </>
     );
@@ -239,7 +232,7 @@ const StoreProductsComment = () => {
               </div>
             );
           })}
-          {/* // 頁碼功能 */}
+          {/* // 分頁功能 */}
           {/* // ! Link尚未設定錨點 */}
           <div className="products-comment-pagination">
             <div className="pages-icon">

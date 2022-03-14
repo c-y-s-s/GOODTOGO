@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { API_URL } from "../../utils/config";
-
 // -------- 引入元件區塊 --------
 import StoreDetails from "./component/StoreDetails";
 import StoreCanopy from "./component/StoreCanopy";
@@ -29,29 +28,14 @@ const Product = ({ setisModalTouch }) => {
   // 店家星期休息營業?
   const [storeTodayClose, setStoreTodayClose] = useState("");
 
-  // 存倒數計時有沒有結束
-  // const [countdownTimeUp, setCountdownTimeUp] = useState("");
-  // console.log("index --------->",countdownTimeUp);
-  //串接後端API
-  //倒數計時變 true 自動重抓一次 api
-
   //串接後端API
   useEffect(() => {
     let getStores = async () => {
       let storeResponse = await axios.get(`${API_URL}/stores/${storeId}`);
-
       setStoreData(storeResponse.data);
-      //這個東西沒宣告到  報錯  試跑先註解掉
-      // setproductsComment(productsCommentResponse.data);
     };
     getStores();
   }, []);
-  // 遮雨棚參數
-  const canopyTotal = Array.from({ length: 30 });
-
-  // -------- ID區塊先用來避免產生錯誤之後會修改 -------
-  let storeDataID = 1;
-  // -------- ID 結束 --------
 
   return (
     <div>
@@ -70,8 +54,6 @@ const Product = ({ setisModalTouch }) => {
         <div></div>
       </div>
       <div className="container">
-        {/*-------- 遮雨棚區塊 --------*/}
-        {/* <StoreCanopy canopy={canopyTotal} /> */}
         {/* -------- 餐點、評論按鈕 --------*/}
         <Storebutton
           storeId={storeId}

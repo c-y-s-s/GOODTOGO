@@ -1,6 +1,6 @@
 import React from 'react';
 
-let StoreCardID = 1011
+
 const StoreCard = ({data}) => {
   return (
     <div>
@@ -8,15 +8,12 @@ const StoreCard = ({data}) => {
         <div className="row cards">
           <div className="text-center text-md-end py-4">共 6 樣商品</div>
           {data.map((item) => {
-                {
-                  StoreCardID++;
-                }
             return (
           
               <div
                 className="col-12 col-md-6 col-lg-3 product-card "
                 style={{ width: `18rem` }}
-                key={StoreCardID}
+                key={item.id}
               >
                 <div className="card m-0 ">
                   <div className="d-flex product-card-text">
