@@ -1,0 +1,84 @@
+@import "../../styles/index.scss";
+// -------- 登入樣式開始 -------- //
+.storelogin-con {
+  background: $color-light-green;
+  padding: 4rem;
+  .content {
+    background: white;
+    filter: drop-shadow(0 0 0.5rem $color-grey);
+    margin: auto;
+  }
+}
+.error {
+  color: $color-red;
+}
+// -------- 登入區塊樣式結束 --------//
+// -------- 註冊區塊樣式開始 -------- //
+
+.label-group {
+  font-size: $fz-sm;
+
+  .btn-register {
+    background-color: $color-green;
+    color: white;
+    border-radius: 2px;
+  }
+}
+// -------- 註冊區塊樣式結束 -------- //
+.opendayCheck {
+  background: rgba($color: #a6bf4b, $alpha: 0.2);
+  border: 2px solid $color-light-grey;
+  border-radius: 2px;
+}
+.form-check .form-check-input {
+  margin-left: 5% !important;
+  margin-right: 5% !important;
+  margin-top: 1.5em;
+}
+input.dayCheck {
+  width: 18px;
+  height: 18px;
+  border: 10px solid #bcbcbc;
+  border-radius: 2px;
+  color: -internal-light-dark(#bcbcbc, white);
+}
+.opendayCheck {
+  .row {
+    .col {
+      padding: 0px;
+    }
+  }
+}
+.time {
+  text-align: center;
+}
+.input-error {
+  border: 2px solid $color-red;
+}
+.error {
+  color: $color-red;
+}
+.flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.timeZone {
+  flex: 3 1 0;
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: auto;
+  }
+}
+.timeSymbol {
+  flex: 1 1 0;
+  text-align: center;
+}
+
+.cover-fit {
+  border: 2px solid #a6bf4b;
+  border-radius: 5px;
+}
+.preview {
+  max-width: 100%;
+}

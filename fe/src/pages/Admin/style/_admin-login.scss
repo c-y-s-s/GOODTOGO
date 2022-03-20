@@ -1,0 +1,15 @@
+.store-login-bg {
+  background-color: $color-light-green;
+  .store-login-content {
+    background-color: white;
+  }
+  .submit-btn {
+    border: 2px solid $color-green;
+    border-radius: 2px;
+    color: $color-green;
+    &:hover {
+      background-color: $color-green;
+      color: white;
+    }
+  }
+}

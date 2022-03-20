@@ -1,6 +1,6 @@
 import React from "react";
-import Title from "./component/Title";
-import Tables from "./component/Tables";
+import Title from "./components/Title";
+import Tables from "./components/Tables";
 
 const Checkout = () => {
   return (

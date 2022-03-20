@@ -1,11 +1,10 @@
 import React from "react";
-
-import LeftNav from "./component/LeftNav";
-import TopNav from "./component/TopNav";
-import FilterContent from "./component/FilterContent";
-import PenCount from "./component/PenCount";
-import Table from "./component/Table";
-import Pagination from "./component/Pagination";
+import LeftNav from "./components/LeftNav";
+import TopNav from "./components/TopNav";
+import FilterContent from "./components/FilterContent";
+import PenCount from "./components/PenCount";
+import Table from "./components/Table";
+import Pagination from "./components/Pagination";
 const Admin = () => {
   return (
     <div className="background-admin">

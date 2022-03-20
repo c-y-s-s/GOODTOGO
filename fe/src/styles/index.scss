@@ -232,7 +232,7 @@ $btn-border-radius: 2px;
 // -------- 商品列表 --------
 @import "../pages/Product/styles/product.scss";
 // -------- 管理員後台 --------
-@import "../pages/Admin/style/admin.scss";
+@import "../../src/pages/Admin/style/Admin.scss";
 // -------- 購物車 --------
 @import "../pages/shoppingcart/style/shoppingcart.scss";
 // ------- 結帳頁 --------

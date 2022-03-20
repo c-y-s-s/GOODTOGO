@@ -8,41 +8,39 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./styles/index.scss";
 import "antd/dist/antd.css";
 
-// 這邊的資料夾命名方式可以不用指定裡面的 index
 // -------- import pages --------
 import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
-import Store from "./pages/Store";
+import LatestNews from "./pages/LatestNews";
+import Activity from "./pages/Activity";
+import StoreList from "./pages/StoreList";
+//admin
+import StoreRegister from "./pages/Admin/components/Register";
+import StoreLogin from "./pages/Admin/components/Login";
 import StoreBg from "./pages/Storebg";
+
 import NewProduct from "./pages/NewProduct";
 import ProductEdit from "./pages/ProductEdit";
 import StoreProfileEditing from "./pages/StoreProfileEditing";
-import LatestNews from "./pages/LatestNews";
-import Activity from "./pages/Activity";
-import Checkout from "./pages/Checkout";
+
 import CheckoutPhone from "./pages/CheckoutPhone";
 import Coupon from "./pages/Coupon";
-import StoreList from "./pages/StoreList";
-import StoreCheck from "./pages/StoreCheck";
-import StoreLogin from "./pages/StoreLogin";
-import Auth from "./pages/Auth";
-// import Register from "./pages/Register";
-import MyAccount from "./pages/MyAccount";
+
 import Product from "./pages/Product";
 import Footer from "./components/Footer";
 import ProductComment from "../src/pages/Productcomment";
 
 import Admin from "./pages/Admin/";
+//會員註冊
 import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
+import MyAccount from "./pages/MyAccount";
 import ShoppingCart from "./pages/shoppingcart";
 import CheckOut from "./pages/Checkout";
-import { useAuth } from "../src/context/auth";
 
-// import Reset from "./pages/Auth/components/Reset";
 function App() {
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
@@ -110,7 +108,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/about" element={<About />}></Route>
-          <Route path="/auth/*" element={<Auth />}>
+          <Route path="/auth/*">
             <Route path="login" element={<Login />}></Route>
             <Route path="register" element={<Register />}></Route>
             <Route path="reset" element={<Reset />}></Route>
@@ -137,7 +135,7 @@ function App() {
           <Route path="/activity" element={<Activity />}></Route>
           <Route path="/checkoutphone" element={<CheckoutPhone />}></Route>
           <Route path="/coupon" element={<Coupon />}></Route>
-          <Route path="/storeCheck" element={<StoreCheck />}></Route>
+          <Route path="/Joinus" element={<StoreRegister />}></Route>
           <Route path="/storeLogin" element={<StoreLogin />}></Route>
           <Route path="/admin" element={<Admin />}></Route>
           <Route path="/stores" element={<StoreList />} />
@@ -184,11 +182,6 @@ function App() {
             </Route>
           </Route>
         </Routes>
-
-        {/* <StoreList />
-      <StoreCheck />
-
-      <Product /> */}
         <Footer />
       </Router>
     </AuthContext.Provider>

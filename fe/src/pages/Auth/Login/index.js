@@ -14,9 +14,8 @@ import { ERR_MSG } from "../../../utils/error";
 
 const Login = (props) => {
   let navigate = useNavigate();
-  // -------- 登入後存入會員資料給全域使用 --------
   const { loginMember, setLoginMember } = useAuth();
-  //-------- swal樣式 --------
+
   const swal = Swal.mixin({
     customClass: {
       confirmButton: "btn round-btn-green ms-2 me-2",
@@ -25,7 +24,7 @@ const Login = (props) => {
     },
     buttonsStyling: false,
   });
-  //-------- swal視窗呼叫函式 --------
+
   const loginSuccessAlert = () => {
     return (
       <>
@@ -173,7 +172,7 @@ const Login = (props) => {
         <div className="content text-center m-auto">
           <div className="col-lg-10 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
             <>
-              <div className="h4 text-dark-grey">會員登入</div>
+              <h4 className="text-dark-grey">會員登入</h4>
               {/* -------- 表格開始 -------- */}
               <form
                 className="col-lg-12 col-md-6 col-10 p-0"
