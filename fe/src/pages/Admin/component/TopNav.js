@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import { FiBell } from "react-icons/fi";
 import { FiSearch } from "react-icons/fi";
 const TopNav = () => {
@@ -26,7 +26,7 @@ const TopNav = () => {
           </div>
           <div className="username">管理員 : admin01</div>
           <div className="user-photo">
-            <img src={require(`../imges/4.1.jpg`)} alt="" />
+            <img src={require(`../images/4.1.jpg`)} alt="" />
           </div>
           <button type="button" class="btn btn-warning mx-3">
             登出
@@ -36,6 +36,6 @@ const TopNav = () => {
       {/* -------- 上方導覽列結束 -------- */}
     </div>
   );
-}
+};
 
-export default TopNav
+export default TopNav;

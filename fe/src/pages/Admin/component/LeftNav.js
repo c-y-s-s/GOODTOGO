@@ -1,6 +1,6 @@
 import React from "react";
 import { ReactComponent as Logo } from "../../../images/logo.svg";
-import icon1 from "../imges/Vector3.png";
+import icon1 from "../images/Vector3.png";
 
 const DataLeftNav = () => {
   return (
