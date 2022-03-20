@@ -22,17 +22,21 @@
 
 ## 🥳 使用方式
 
+1. 複製專案到本地環境
+                                                                 
 ```bash
 $ git clone https://github.com/dosskkr/GOODTOGO.git
 $ cd GOODTOGO
 ```
-
+2. 到後端檔案(be) 安裝套件並啟用後端
+                                                                 
 ```bash
 $ cd be
 $ npm i
 $ npm run dev
 ```
-
+3. 到前端檔案(fe) 安裝套件並啟用
+                                                                 
 ```bash
 $ cd fe
 $ npm i
