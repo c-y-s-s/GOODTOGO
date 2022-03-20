@@ -7,10 +7,25 @@
 </div>
 
 ##  ✨ 關於GOODTOGO
-
+                                                                                           
+##  🥳 使用方式
+ ```bash
+$ git clone
+$ cd goodtogo                                                                                
+```
+```bash
+$ cd be
+$ npm i  
+$ npm run dev                                                                                           
+```
+```bash
+$ cd fe
+$ npm i  
+$ npm start                                                                                           
+```                                                                                           
 ##  🛠 開發工具
 
-##  🥳 使用方式
+
 
  
   
