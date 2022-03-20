@@ -16,7 +16,7 @@ const StoryList = () => {
   const [totalStar, setTotalStar] = useState("");
   const [productAmount, setProductAmount] = useState("");
   const [likeList, setLikeList] = useState([]);
-  //TODO知道目前user的收藏
+  //promt for user's collection
   useEffect(() => {
     const getLikeList = async () => {
       let likeListRes = await axios.get(
@@ -30,8 +30,7 @@ const StoryList = () => {
     }
   }, [loginMember]);
   console.log("likeList", likeList);
-  //TODO比對如果收藏列表裡面有這個店的id就呈現實心，無則否
-  //TODO 如果空愛心(沒有在收藏列表)onclick就要加入，實心onclick就要移除
+
   return (
     <>
       <div className="container-fluid p-0">
