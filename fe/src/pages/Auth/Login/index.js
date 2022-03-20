@@ -167,128 +167,125 @@ const Login = (props) => {
   console.log("member from Login.js", loginMember);
 
   return (
-    <div className="container-fluid login-bg">
-      <div className="col-lg-4 col-12 m-0 p-0 m-auto">
-        <div className="content text-center m-auto">
-          <div className="col-lg-10 col-12 d-flex pt-5 pb-4 m-auto flex-column justify-content-evenly align-items-center ">
-            <>
-              <h4 className="text-dark-grey">會員登入</h4>
-              {/* -------- 表格開始 -------- */}
-              <form
-                className="col-lg-12 col-md-6 col-10 p-0"
-                onSubmit={handleSubmit}
-                onInvalid={handleFormInvalid}
-                onChange={handleFormChange}
-              >
-                <div className="label-group d-flex flex-column">
-                  {/* email */}
-                  <div className="text-start mt-3 mb-1">
+    <div className="container-fluid login-bg m-auto pt-5 pb-5">
+      <div className="content text-center col-lg-4 col-12 m-0 p-0 m-auto pt-5 pb-4">
+        <div className="col-lg-10 col-12 d-flex m-auto flex-column justify-content-evenly align-items-center ">
+          <>
+            <h4 className="text-dark-grey">會員登入</h4>
+            {/* -------- 表格開始 -------- */}
+            <form
+              className="col-lg-12 col-md-6 col-10 p-0"
+              onSubmit={handleSubmit}
+              onInvalid={handleFormInvalid}
+              onChange={handleFormChange}
+            >
+              <div className="label-group d-flex flex-column">
+                {/* email */}
+                <div className="text-start mt-3 mb-1">
+                  <label
+                    htmlfor="email"
+                    className="input-label-title text-green p-0 text-start"
+                  >
+                    電子郵件
+                  </label>
+                  <div class="form-floating">
+                    <input
+                      name="email"
+                      type="email"
+                      className={`form-control custom-input ${
+                        fieldErrors.email !== "" && "input-error"
+                      }`}
+                      id="floatingInput"
+                      placeholder="帳號"
+                      value={loginUser.email}
+                      onChange={handleChange}
+                      // onFocus={regEmail}
+                      onBlur={regEmail}
+                      required
+                    />
                     <label
-                      htmlfor="email"
-                      className="input-label-title text-green p-0 text-start"
+                      htmlfor="floatingInput"
+                      className="floating-label text-grey "
                     >
-                      電子郵件
+                      請填入電子信箱
                     </label>
-                    <div class="form-floating">
-                      <input
-                        name="email"
-                        type="email"
-                        className={`form-control custom-input ${
-                          fieldErrors.email !== "" && "input-error"
-                        }`}
-                        id="floatingInput"
-                        placeholder="帳號"
-                        value={loginUser.email}
-                        onChange={handleChange}
-                        // onFocus={regEmail}
-                        onBlur={regEmail}
-                        required
-                      />
-                      <label
-                        htmlfor="floatingInput"
-                        className="floating-label text-grey "
-                      >
-                        請填入電子信箱
-                      </label>
-                      {/* 如果有錯誤訊息，呈現出來 */}
-                      {fieldErrors.email !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.email}
-                        </div>
+                    {/* 如果有錯誤訊息，呈現出來 */}
+                    {fieldErrors.email !== "" && (
+                      <div className="error text-end">{fieldErrors.email}</div>
+                    )}
+                  </div>
+                </div>
+
+                {/* password */}
+
+                <div className="text-start mt-2 mb-4">
+                  <label
+                    htmlfor=""
+                    className=" input-label-title  text-green text-start p-0"
+                  >
+                    密碼
+                  </label>
+                  <div class="form-floating">
+                    <input
+                      name="password"
+                      type={eye.passwordEye ? "text" : "password"}
+                      autoComplete="off"
+                      className={`form-control custom-input ${
+                        fieldErrors.password !== "" && "input-error"
+                      }`}
+                      id="floatingInput"
+                      placeholder="密碼"
+                      value={loginUser.password}
+                      onChange={handleChange}
+                      minLength="6"
+                      required
+                    />
+                    <div onClick={passwordShow}>
+                      {eye.passwordEye ? (
+                        <FiEye className="eye" />
+                      ) : (
+                        <FiEyeOff className="eye" />
                       )}
                     </div>
-                  </div>
 
-                  {/* password */}
-
-                  <div className=" text-start mt-2 mb-4">
                     <label
-                      htmlfor=""
-                      className=" input-label-title  text-green text-start p-0"
+                      htmlfor="floatingInput"
+                      className="floating-label text-grey"
                     >
-                      密碼
+                      請填入密碼
                     </label>
-                    <div class="form-floating">
-                      <input
-                        name="password"
-                        type={eye.passwordEye ? "text" : "password"}
-                        autoComplete="off"
-                        className={`form-control custom-input ${
-                          fieldErrors.password !== "" && "input-error"
-                        }`}
-                        id="floatingInput"
-                        placeholder="密碼"
-                        value={loginUser.password}
-                        onChange={handleChange}
-                        minLength="6"
-                        required
-                      />
-                      <div onClick={passwordShow}>
-                        {eye.passwordEye ? (
-                          <FiEye className="eye" />
-                        ) : (
-                          <FiEyeOff className="eye" />
-                        )}
+                    {/* 如果有錯誤訊息，呈現出來 */}
+                    {fieldErrors.password !== "" && (
+                      <div className="error text-end">
+                        {fieldErrors.password}
                       </div>
-
-                      <label
-                        htmlfor="floatingInput"
-                        className="floating-label text-grey"
-                      >
-                        請填入密碼
-                      </label>
-                      {/* 如果有錯誤訊息，呈現出來 */}
-                      {fieldErrors.password !== "" && (
-                        <div className="error text-end">
-                          {fieldErrors.password}
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
+                </div>
 
-                  {/* {fieldErrors.password !== "" && (
+                {/* {fieldErrors.password !== "" && (
                     <div className="error text-end mb-3">
                       {fieldErrors.password}
                     </div>
                   )} */}
-                </div>
-                <div className="btn-group d-grid gap-3">
-                  <button
-                    type="submit"
-                    className="btn submit-btn col-lg-12"
-                    style={{
-                      borderRadius: "2px",
-                    }}
-                  >
-                    登入
-                  </button>
-                  {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
+              </div>
+              <div className="btn-group d-grid gap-3">
+                <button
+                  type="submit"
+                  className="btn submit-btn col-lg-12"
+                  style={{
+                    borderRadius: "2px",
+                  }}
+                >
+                  登入
+                </button>
+                {/* <button className="btn btn-fb-login col-lg-12 d-flex align-items-center text-center justify-content-between">
                     <ImFacebook2 className="fb-icon col-lg-2 " />
                     使用 Facebook 登入
                     <div className="col-lg-2"> </div>
                   </button> */}
-                  {/* //*facebook登入 */}
-                  {/* <FacebookLogin
+                {/* //*facebook登入 */}
+                {/* <FacebookLogin
                     className="btn btn-fb-login d-flex align-items-center text-center justify-content-evenly"
                     style={{
                       backgroundColor: "#4267b2",
@@ -302,24 +299,23 @@ const Login = (props) => {
                     <ImFacebook2 className="fb-icon col-lg-2 " />
                     使用 Facebook 登入
                   </FacebookLogin> */}
-                </div>
+              </div>
 
-                {/* -------- 表格結束 -------- */}
-              </form>
-              {/* <Link to="/auth/reset" className="no-link">
+              {/* -------- 表格結束 -------- */}
+            </form>
+            {/* <Link to="/auth/reset" className="no-link">
                 <p className="text-grey no-link m-0 mt-3">忘記密碼？</p>
               </Link> */}
 
-              <hr className="col-lg-10 col-sm-10 mt-lg-3 split" />
+            <hr className="col-lg-12 col-sm-10 mt-lg-3 split mt-3" />
 
-              <p className="text-grey m-0">
-                尚未加入GOODTOGO？
-                <Link to="/auth/register" className="no-link">
-                  <span className="text-yellow">立即註冊</span>
-                </Link>
-              </p>
-            </>
-          </div>
+            <p className="text-grey  ">
+              尚未加入GOODTOGO？
+              <Link to="/auth/register" className="no-link">
+                <span className="text-yellow">立即註冊</span>
+              </Link>
+            </p>
+          </>
         </div>
       </div>
     </div>

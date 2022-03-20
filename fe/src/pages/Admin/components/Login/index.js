@@ -143,7 +143,7 @@ const StoreLogin = (props) => {
   return (
     <>
       <div className="container-fluid store-login-bg m-auto pt-5 pb-5">
-        <div className="store-login-content col-lg-5 m-auto pt-4 pb-4">
+        <div className="store-login-content col-lg-4 m-auto pt-5 pb-4">
           <h4 className="text-dark-grey text-center">店家登入</h4>
           {/* -------- 表格開始 -------- */}
           <div className="col-lg-10 m-auto">
@@ -157,7 +157,7 @@ const StoreLogin = (props) => {
                 {/* email */}
                 <label
                   for=""
-                  className="col-form-label input-label-title text-green p-0 text-start"
+                  className="col-form-label input-label-title text-green p-0 text-start mt-3"
                 >
                   電子郵件
                 </label>
@@ -186,7 +186,7 @@ const StoreLogin = (props) => {
                 {/* password */}
                 <label
                   for=""
-                  className="col-form-label input-label-title  text-green text-start p-0 mt-2"
+                  className="col-form-label input-label-title  text-green text-start p-0 mt-3"
                 >
                   密碼
                 </label>
@@ -222,7 +222,7 @@ const StoreLogin = (props) => {
                   </div>
                 )}
 
-                <button type="submit" className="btn submit-btn mt-3 col-lg-12">
+                <button type="submit" className="btn submit-btn mt-4 col-lg-12">
                   登入
                 </button>
               </form>
