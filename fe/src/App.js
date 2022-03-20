@@ -41,10 +41,9 @@ import Register from "./pages/Auth/Register";
 import ShoppingCart from "./pages/shoppingcart";
 import CheckOut from "./pages/Checkout";
 import { useAuth } from "../src/context/auth";
+
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
-
-  
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
   const [loginSeller, setLoginSeller] = useState(null);
@@ -98,7 +97,9 @@ function App() {
   }, []);
   // console.log("member from App.js", loginMember); //ok
   return (
-    <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller}}>
+    <AuthContext.Provider
+      value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}
+    >
       <Router>
         {isModalTouch && (
           <Navbar
@@ -115,23 +116,23 @@ function App() {
             <Route path="reset" element={<Reset />}></Route>
           </Route>
           <Route path="/storebg" element={<StoreBg setIsAdmin={setIsAdmin} />}>
-          <Route
-            path=":currentPage"
-            element={<StoreBg setIsAdmin={setIsAdmin} />}>
-          </Route>
-          </Route>
-          <Route
-          path="/newproduct"
-          element={<NewProduct setIsAdmin={setIsAdmin} />}>
+            <Route
+              path=":currentPage"
+              element={<StoreBg setIsAdmin={setIsAdmin} />}
+            ></Route>
           </Route>
           <Route
-          path="/productedit/:productId/"
-          element={<ProductEdit setIsAdmin={setIsAdmin} />}>
-          </Route>
+            path="/newproduct"
+            element={<NewProduct setIsAdmin={setIsAdmin} />}
+          ></Route>
           <Route
-          path="/storeprofileediting"
-          element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}>
-          </Route>
+            path="/productedit/:productId/"
+            element={<ProductEdit setIsAdmin={setIsAdmin} />}
+          ></Route>
+          <Route
+            path="/storeprofileediting"
+            element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}
+          ></Route>
           <Route path="/latestnews" element={<LatestNews />}></Route>
           <Route path="/activity" element={<Activity />}></Route>
           <Route path="/checkoutphone" element={<CheckoutPhone />}></Route>
@@ -152,11 +153,11 @@ function App() {
             element={
               loginMember ? (
                 <ShoppingCart
-                setCheckoutData={setCheckoutData}
-                checkoutData={checkoutData}
-                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
-                navshoppingDeleteParameter={navshoppingDeleteParameter}
-              />
+                  setCheckoutData={setCheckoutData}
+                  checkoutData={checkoutData}
+                  setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                  navshoppingDeleteParameter={navshoppingDeleteParameter}
+                />
               ) : (
                 <Login />
               )
@@ -172,7 +173,7 @@ function App() {
               />
             }
           ></Route>
-
+          <img src="./" alt="" />
           <Route path="/map" element={<Map />}></Route>
 
           <Route
@@ -192,6 +193,7 @@ function App() {
         <Footer />
       </Router>
     </AuthContext.Provider>
-  );}
+  );
+}
 
 export default App;
