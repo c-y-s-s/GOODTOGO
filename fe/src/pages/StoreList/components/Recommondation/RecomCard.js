@@ -17,7 +17,6 @@ const moment = require("moment");
 const RecomCard = (props) => {
   moment.locale("zh-tw");
   const [displayList, setDisplayList] = useState([]);
-  const [commentCount, setCommentCount] = useState([]);
   const {
     totalHeart,
     productAmount,
@@ -27,7 +26,7 @@ const RecomCard = (props) => {
     setTotalHeart,
   } = props;
   const { loginMember } = useAuth();
-  console.log("rec", likeList);
+
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
