@@ -10,8 +10,8 @@
                                                                                            
 ##  🥳 使用方式
  ```bash
-$ git clone
-$ cd goodtogo                                                                                
+$ git clone https://github.com/dosskkr/GOODTOGO.git
+$ cd GOODTOGO                                                                                
 ```
 ```bash
 $ cd be
