@@ -1,3 +1,4 @@
+<img src="./fe/src/images/logo.svg" alt="logo">
 <h1 align="center"> GOODTOGO 即期美食平台</h1>
 <div align="center">
  <img alt="react" src="https://img.shields.io/badge/React-000?&logo=react"/>  
@@ -6,26 +7,25 @@
 <img alt="styled prettier" src="https://img.shields.io/badge/styled%20with-Prettier-yellow"/>
 </div>
 
-##  ✨ 關於GOODTOGO
-                                                                                           
-##  🥳 使用方式
- ```bash
+## ✨ 關於 GOODTOGO
+
+## 🥳 使用方式
+
+```bash
 $ git clone https://github.com/dosskkr/GOODTOGO.git
-$ cd GOODTOGO                                                                                
+$ cd GOODTOGO
 ```
+
 ```bash
 $ cd be
-$ npm i  
-$ npm run dev                                                                                           
+$ npm i
+$ npm run dev
 ```
+
 ```bash
 $ cd fe
-$ npm i  
-$ npm start                                                                                           
-```                                                                                           
-##  🛠 開發工具
+$ npm i
+$ npm start
+```
 
-
-
- 
-  
+## 🛠 開發工具
