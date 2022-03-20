@@ -1,4 +1,6 @@
-<img src="./fe/src/images/logo.svg" alt="logo">
+<p align="center">
+ <img src="./fe/src/images/IMG_1138.GIF" alt="logo">
+ </p>
 <h1 align="center"> GOODTOGO 即期美食平台</h1>
 <div align="center">
  <img alt="react" src="https://img.shields.io/badge/React-000?&logo=react"/>  
