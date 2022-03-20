@@ -173,7 +173,6 @@ function App() {
               />
             }
           ></Route>
-          <img src="./" alt="" />
           <Route path="/map" element={<Map />}></Route>
 
           <Route
