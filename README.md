@@ -12,7 +12,7 @@
 ## ✨ 關於 GOODTOGO
                                                                                            
 <p align="center">
- <img src="./fe/src/images/screenshot.jpg" alt="logo">
+ <img src="./fe/src/images/screenshot.jpg" alt="logo" width="80%">
  </p>                                                                                           
                                                                                            
 減少剩食以愛護地球為理念所創建的平台，提供商家販售即將到期的食品、申請為
