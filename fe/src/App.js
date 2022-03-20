@@ -14,7 +14,6 @@ import Navbar from "./components/Navbar";
 import Home from "./pages/Home";
 import Map from "./pages/Map";
 import About from "./pages/About";
-import Store from "./pages/Store";
 import StoreBg from "./pages/Storebg";
 import NewProduct from "./pages/NewProduct";
 import ProductEdit from "./pages/ProductEdit";
@@ -43,8 +42,6 @@ import CheckOut from "./pages/Checkout";
 import { useAuth } from "../src/context/auth";
 // import Reset from "./pages/Auth/components/Reset";
 function App() {
-
-  
   // -------- 判斷登入與否 member有資料就是已登入 --------
   const [loginMember, setLoginMember] = useState(null);
   const [loginSeller, setLoginSeller] = useState(null);
@@ -71,7 +68,7 @@ function App() {
     storeId: "",
     paymentMethod: "1",
   });
-  console.log("哈囉",checkoutData);
+  console.log("哈囉", checkoutData);
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {
@@ -98,7 +95,9 @@ function App() {
   }, []);
   // console.log("member from App.js", loginMember); //ok
   return (
-    <AuthContext.Provider value={{ loginMember, setLoginMember, loginSeller, setLoginSeller}}>
+    <AuthContext.Provider
+      value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}
+    >
       <Router>
         {isModalTouch && (
           <Navbar
@@ -115,23 +114,23 @@ function App() {
             <Route path="reset" element={<Reset />}></Route>
           </Route>
           <Route path="/storebg" element={<StoreBg setIsAdmin={setIsAdmin} />}>
-          <Route
-            path=":currentPage"
-            element={<StoreBg setIsAdmin={setIsAdmin} />}>
-          </Route>
-          </Route>
-          <Route
-          path="/newproduct"
-          element={<NewProduct setIsAdmin={setIsAdmin} />}>
+            <Route
+              path=":currentPage"
+              element={<StoreBg setIsAdmin={setIsAdmin} />}
+            ></Route>
           </Route>
           <Route
-          path="/productedit/:productId/"
-          element={<ProductEdit setIsAdmin={setIsAdmin} />}>
-          </Route>
+            path="/newproduct"
+            element={<NewProduct setIsAdmin={setIsAdmin} />}
+          ></Route>
           <Route
-          path="/storeprofileediting"
-          element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}>
-          </Route>
+            path="/productedit/:productId/"
+            element={<ProductEdit setIsAdmin={setIsAdmin} />}
+          ></Route>
+          <Route
+            path="/storeprofileediting"
+            element={<StoreProfileEditing setIsAdmin={setIsAdmin} />}
+          ></Route>
           <Route path="/latestnews" element={<LatestNews />}></Route>
           <Route path="/activity" element={<Activity />}></Route>
           <Route path="/checkoutphone" element={<CheckoutPhone />}></Route>
@@ -152,11 +151,11 @@ function App() {
             element={
               loginMember ? (
                 <ShoppingCart
-                setCheckoutData={setCheckoutData}
-                checkoutData={checkoutData}
-                setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
-                navshoppingDeleteParameter={navshoppingDeleteParameter}
-              />
+                  setCheckoutData={setCheckoutData}
+                  checkoutData={checkoutData}
+                  setNavShoppingDeleteParameter={setNavShoppingDeleteParameter}
+                  navshoppingDeleteParameter={navshoppingDeleteParameter}
+                />
               ) : (
                 <Login />
               )
@@ -192,6 +191,7 @@ function App() {
         <Footer />
       </Router>
     </AuthContext.Provider>
-  );}
+  );
+}
 
 export default App;
