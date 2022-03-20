@@ -199,7 +199,6 @@ const StoreInfoList = (props) => {
 
   return (
     <div className="store-list">
-      {/* <div className="prefix"></div> */}
       <div className="header"></div>
       <div className="store-list-content col-lg-10 col-9 m-auto">
         {/* 標題 */}
@@ -255,25 +254,27 @@ const StoreInfoList = (props) => {
             loading={loading}
           />
         </div>
-        <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
-          <IoIosArrowBack
-            role="button"
-            className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
-            onClick={() => {
-              navigate(`?page=${page - 1}`);
-              setPage(page - 1);
-            }}
-          />
-          {getPages()}
-          <IoIosArrowForward
-            role="button"
-            className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
-            onClick={() => {
-              navigate(`?page=${page + 1}`);
-              setPage(page + 1);
-            }}
-          />
-        </ul>
+        {!loading && (
+          <ul className="pages p-0 align-items-center d-flex col-12 col-lg-3 justify-content-lg-between justify-content-center m-auto mt-lg-5 mb-lg-2 mt-4">
+            <IoIosArrowBack
+              role="button"
+              className={`page-arrow mt-1 ${page === 1 ? "d-none" : ""}`}
+              onClick={() => {
+                navigate(`?page=${page - 1}`);
+                setPage(page - 1);
+              }}
+            />
+            {lastPage !== 1 && getPages()}
+            <IoIosArrowForward
+              role="button"
+              className={`page-arrow mt-1 ${page === lastPage ? "d-none" : ""}`}
+              onClick={() => {
+                navigate(`?page=${page + 1}`);
+                setPage(page + 1);
+              }}
+            />
+          </ul>
+        )}
       </div>
       <div className="footer"></div>
     </div>

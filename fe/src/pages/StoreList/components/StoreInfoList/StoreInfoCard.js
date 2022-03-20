@@ -57,7 +57,6 @@ const StoreInfoCard = (props) => {
       console.error("res.error:", e.response);
     }
   };
-  console.log("sljjjj", storeLikeCount);
 
   const displayList = storeList.map((item) => {
     //使用者收藏愛心
@@ -73,17 +72,9 @@ const StoreInfoCard = (props) => {
     let starCount = Object.values(storeStarsCount)[item.id - 1];
     // -------- 處理沒有分店名的空白欄位 --------
     let space = "";
-    {
-      /* console.log(item.name); */
-    }
+
     for (let i = 1; i < item.name.length; i++) {
-      {
-        /* console.log(item.name[i]); */
-      }
       item.name[i] === " " && (space = true);
-    }
-    {
-      /* console.log(space); */
     }
 
     return (
@@ -199,7 +190,15 @@ const StoreInfoCard = (props) => {
     );
   });
 
-  return <>{loading ? <img src={Loading} alt="loading"></img> : displayList}</>;
+  return (
+    <>
+      {loading ? (
+        <img src={Loading} alt="loading" className="m-auto"></img>
+      ) : (
+        displayList
+      )}
+    </>
+  );
 };
 
 export default StoreInfoCard;
