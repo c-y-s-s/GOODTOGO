@@ -27,12 +27,13 @@
 ## 🥳 使用方式
 
 #### 1. 複製專案到本地環境
-#### 2. 匯入 goodtogodata.sql 
-                                                                 
 ```bash
 $ git clone https://github.com/dosskkr/GOODTOGO.git
 $ cd GOODTOGO
 ```
+                                                                 
+#### 2. 匯入或執行 goodtogodata.sql 
+                                                                 
 #### 3. 到後端檔案(be) 安裝套件並啟用後端
                                                                  
 ```bash
