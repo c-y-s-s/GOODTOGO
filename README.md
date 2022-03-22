@@ -1,5 +1,5 @@
 <p align="center">
-![](https://i.imgur.com/5CcqO7E.gif)
+https://i.imgur.com/5CcqO7E.gif
  </p>
 <h1 align="center"> GOODTOGO 即期美食平台</h1>
 <div align="center">
