@@ -1,5 +1,5 @@
 <p align="center">
- <img src="./fe/src/images/IMG_1138.GIF" alt="logo">
+- [ ] ![](https://i.imgur.com/5CcqO7E.gif)
  </p>
 <h1 align="center"> GOODTOGO 即期美食平台</h1>
 <div align="center">
