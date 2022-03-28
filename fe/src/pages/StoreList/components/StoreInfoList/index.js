@@ -192,12 +192,6 @@ const StoreInfoList = (props) => {
     return pages;
   };
 
-  // console.log("searchSwitch", searchSwitch);
-  // console.log("selected category", selectedCat);
-  // console.log("storeList", storeList);
-  // console.log("open hour", opState);
-  // console.log("keyword", keyword);
-
   return (
     <div className="store-list">
       {/* <div className="prefix"></div> */}
@@ -244,7 +238,7 @@ const StoreInfoList = (props) => {
         </div>
         {/* 商家列表顯示區 */}
 
-        <div className="store-info-list d-flex flex-wrap justify-content-lg-start justify-content-center col-10 mt-lg-5 g-2">
+        <div className="store-info-list d-flex flex-wrap justify-content-start m-auto col-12 col-lg-12 mt-lg-5">
           <StoreInfoCard
             storeList={storeList}
             storeLikeCount={storeLikeCount}
