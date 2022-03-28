@@ -6,9 +6,6 @@ import { useNavigate } from "react-router";
 import Swal from "sweetalert2";
 
 //引用icon
-import { ReactComponent as UserIcon } from "../images/user-icon.svg";
-import { ReactComponent as StoreIcon } from "../images/store-icon.svg";
-import { ReactComponent as MapIcon } from "../images/map-pin-icon.svg";
 import { FiMapPin, FiLogOut } from "react-icons/fi";
 import { BiStore } from "react-icons/bi";
 import { BsCardChecklist } from "react-icons/bs";
