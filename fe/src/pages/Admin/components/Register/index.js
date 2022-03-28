@@ -434,9 +434,9 @@ const StoreCheck = () => {
 
   return (
     <div className="container-fluid store-register-bg pt-4 pb-4">
-      <div className="store-register-content col-lg-8 m-auto">
+      <div className="store-register-content col-lg-8 m-auto p-2">
         <div className="col-lg-10 mt-3 mb-3 p-0 m-auto">
-          <div className="col-lg-12 row m-0 p-0 gy-3 flex-column ">
+          <div className="col-lg-12 row m-0 p-0 gy-3 flex-column">
             <h4 className="text-dark-grey text-center">商家註冊</h4>
             {/* -------- 註冊資料開始 -------- */}
             <div className="label-group d-flex text-start flex-column justify-content-evenly gy-2">
