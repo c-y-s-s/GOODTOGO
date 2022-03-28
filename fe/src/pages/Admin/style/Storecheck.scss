@@ -9,9 +9,7 @@
     margin: auto;
   }
 }
-.error {
-  color: $color-red;
-}
+
 // -------- 登入區塊樣式結束 --------//
 // -------- 註冊區塊樣式開始 -------- //
 
@@ -55,9 +53,7 @@ input.dayCheck {
 .input-error {
   border: 2px solid $color-red;
 }
-.error {
-  color: $color-red;
-}
+
 .flex {
   display: flex;
   justify-content: center;

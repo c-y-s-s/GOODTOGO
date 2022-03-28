@@ -5,7 +5,7 @@ const Reset = () => {
   return (
     <div className="container-fluid reset-bg m-auto align-items-center d-flex">
       <div className="col-lg-5 col-md-8 col-12 m-0 p-0 m-auto">
-        <div className="content text-center  m-auto">
+        <div className="reset-bg_content text-center  m-auto">
           <div className="col-lg-10 col-10 d-flex flex-column pt-5 pb-4 m-auto text-center">
             <>
               <div className="h4 text-dark-grey">忘記密碼</div>

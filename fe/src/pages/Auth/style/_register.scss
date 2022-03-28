@@ -3,7 +3,7 @@
   padding-top: 3rem;
   padding-bottom: 3rem;
   margin: auto;
-  .content {
+  &_content {
     background-color: white;
     border-radius: 4px;
     filter: drop-shadow(0 0 0.5rem $color-grey);

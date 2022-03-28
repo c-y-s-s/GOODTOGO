@@ -190,7 +190,7 @@ const Register = () => {
       <div className="reg-con">
         <div className="container-fluid m-auto">
           <div className="col-lg-5 col-md-8 m-auto col-12 m-0 p-0">
-            <div className="content text-center row justify-content-center gy-0 gx-0 shadow">
+            <div className="reg-con_content text-center row justify-content-center gy-0 gx-0 shadow">
               <div className="col-lg-10 col-10 d-flex flex-column pt-5 pb-4">
                 <div className="h4 text-dark-grey">會員註冊</div>
                 {/* -------- 表格開始 -------- */}

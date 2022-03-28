@@ -168,7 +168,7 @@ const Login = (props) => {
 
   return (
     <div className="container-fluid login-bg m-auto pt-5 pb-5">
-      <div className="content text-center col-lg-4 col-12 m-0 p-0 m-auto pt-5 pb-4">
+      <div className="login-bg_content text-center col-lg-4 col-12 m-0 p-0 m-auto pt-5 pb-4">
         <div className="col-lg-10 col-12 d-flex m-auto flex-column justify-content-evenly align-items-center ">
           <>
             <h4 className="text-dark-grey">會員登入</h4>
