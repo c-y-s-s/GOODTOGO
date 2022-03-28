@@ -1,7 +1,5 @@
 .store-list {
   width: 100vw;
-  margin: auto;
-
   .header {
     background-image: url(../images/storelist_bg_2.svg);
     background-size: contain;
@@ -61,7 +59,6 @@
       .store-select {
         font-size: $fz-xx-lg;
         padding: 0.2em 0;
-        // box-sizing: border-box;
         border-radius: 0;
         border: 1px solid transparent;
         color: $color-green;
@@ -75,10 +72,8 @@
     color: $color-dark-grey;
   }
   .store-info-list {
-    margin: auto;
-    display: grid;
     row-gap: 2rem;
-    column-gap: 4.3rem;
+    column-gap: 3rem;
   }
   .pages {
     display: flex;

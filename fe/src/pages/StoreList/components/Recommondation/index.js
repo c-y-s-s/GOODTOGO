@@ -23,7 +23,7 @@ const Recomm = (props) => {
             <Star />
           </div>
         </div>
-        <div className="rec-cards-holder col-lg-8 col-9 d-flex align-items-center m-auto flex-wrap">
+        <div className="rec-cards-holder col-lg-10 col-10 d-flex align-items-center m-auto flex-wrap">
           <RecomCard
             totalHeart={totalHeart}
             setTotalHeart={setTotalHeart}
