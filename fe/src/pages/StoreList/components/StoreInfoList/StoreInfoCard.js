@@ -9,6 +9,7 @@ import axios from "axios";
 import { API_URL } from "../../../../utils/config";
 import "moment/min/locales";
 import Loading from "../../images/loading.gif";
+import InfoCard from "../../../../components/shared/InfoCard";
 
 const moment = require("moment");
 
@@ -81,13 +82,9 @@ const StoreInfoCard = (props) => {
         <div>很抱歉，沒有您查詢的資料</div>
       </>
     ) : (
-      <div className="me-lg-2 ms-lg-2">
+      <div className="">
         <Link to={`/store/${item.id}`} className="no-link">
-          {/* <Link to={`/store/${item.id}`} className="no-link"> */}
-          <div
-            key={item.id}
-            className="store-info-card shadow d-flex align-items-center"
-          >
+          <InfoCard key={item.id} version="info">
             <div className="info-img col-12">
               <img
                 src={require(`../../../../images/store_img/${item.logo}`)}
@@ -187,7 +184,7 @@ const StoreInfoCard = (props) => {
                 )}
               </div>
             </div>
-          </div>
+          </InfoCard>
         </Link>
       </div>
     );

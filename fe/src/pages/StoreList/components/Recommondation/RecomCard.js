@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../../../context/auth";
 import { FiHeart } from "react-icons/fi";
+import InfoCard from "../../../../components/shared/InfoCard";
 
 //UI套件
 import { Rating } from "@mui/material";
@@ -98,10 +99,7 @@ const RecomCard = (props) => {
         return (
           <div>
             <Link to={`/store/${item.id}`} className="no-link">
-              <div
-                className="store-rec-card shadow d-flex align-items-center col-lg-3 col-10"
-                key={item.id}
-              >
+              <InfoCard key={item.id} version="rec">
                 <div className="info-img col-12">
                   <img
                     src={require(`../../../../images/store_img/${item.logo}`)}
@@ -202,7 +200,7 @@ const RecomCard = (props) => {
                     )}
                   </div>
                 </div>
-              </div>
+              </InfoCard>
             </Link>
           </div>
         );
