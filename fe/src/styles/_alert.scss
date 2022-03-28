@@ -1,0 +1,73 @@
+//Swal
+.popup {
+  width: 512px;
+  height: 75%;
+}
+.round {
+  border-radius: 16px;
+}
+.confirmbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-red;
+  color: white;
+  border-radius: 2px;
+}
+.cancelbtn {
+  width: fit-content;
+  height: fit-content;
+  background-color: $color-green;
+  color: white;
+  border-radius: 2px;
+}
+.round-btn-green {
+  display: inline-block;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: $color-light-green;
+  color: white;
+  font-size: larger;
+  border: 3px solid $color-green;
+  border-radius: 30px;
+  position: relative;
+  top: -3rem;
+  &:after {
+    content: "";
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: $color-yellow;
+    border-radius: 50%;
+    z-index: -2;
+  }
+  &:before {
+    content: "";
+    position: relative;
+    width: 0%;
+    height: 100%;
+    background-color: darken($color-yellow, 15%);
+    transition: all 0.3s;
+    border-radius: 10rem;
+    z-index: -1;
+  }
+  &:hover {
+    color: white;
+    background-color: $color-green;
+    &:before {
+      width: 100%;
+    }
+  }
+}
+
+.no-bg {
+  background-color: transparent;
+}
+.close-btn-ads {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.336);
+  position: relative;
+  top: 2rem;
+}
