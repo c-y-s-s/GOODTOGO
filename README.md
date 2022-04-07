@@ -26,10 +26,11 @@
                                                                  
 ## 🥳 使用方式
 
-#### 1. 複製專案到本地環境
+#### 1. 複製專案到本地環境並切換至測試分支
 ```bash
 $ git clone https://github.com/dosskkr/GOODTOGO.git
 $ cd GOODTOGO
+$ git switch test_release                                                                 
 ```
                                                                  
 #### 2. 匯入或執行 goodtogodata.sql 
