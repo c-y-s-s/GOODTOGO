@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const About = () => {
-  return <div>這是關於GOODTOFO</div>;
+  return <div>這是關於GOODTOGO</div>;
 };
 
 export default About;
