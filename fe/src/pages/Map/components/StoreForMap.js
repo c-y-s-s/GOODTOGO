@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import { AiOutlineClockCircle } from "react-icons/ai";
 import { FiHeart } from "react-icons/fi";
 import { Rating } from "@mui/material";
+
 import { API_URL } from "../../../utils/config";
-import axios from "axios";
 
 const StoreForMap = (props) => {
   console.log(props.clickStoreId);
@@ -30,7 +32,9 @@ const StoreForMap = (props) => {
           for (let i = 1; i < item.name.length; i++) {
             item.name[i] === " " && (space = true);
           }
-          {/* console.log("aaaaa",item); */}
+          {
+            /* console.log("aaaaa",item); */
+          }
           return (
             <div>
               <Link to={`/store/${item.id}`} className="no-link" key={item.id}>

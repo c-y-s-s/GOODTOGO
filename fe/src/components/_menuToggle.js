@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { useAuth } from "../context/auth";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
-//alert套件
-import Swal from "sweetalert2";
 
-//引用icon
+import Swal from "sweetalert2";
 import { FiMapPin, FiLogOut } from "react-icons/fi";
 import { BiStore } from "react-icons/bi";
 import { BsCardChecklist } from "react-icons/bs";
 import { VscSmiley } from "react-icons/vsc";
+
+import { useAuth } from "../context/auth";
 
 const _menuToggle = (props) => {
   const { loginMember, setLoginMember } = useAuth();

@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
-
 import { Link } from "react-router-dom";
+import axios from "axios";
+
 import { Popover } from "antd";
 import "antd/dist/antd.css";
+
 import { useAuth } from "../context/auth";
 import { API_URL } from "../utils/config";
-//引用icon
 import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
-import axios from "axios";
+
 const NavShoppingCart = ({
   setShoppingCartTotalPages,
   setNavShoppingDeleteParameter,

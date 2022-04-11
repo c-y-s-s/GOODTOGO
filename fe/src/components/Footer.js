@@ -1,13 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import { ReactComponent as Logo } from "../images/navLogo.svg";
 
 const Footer = (props) => {
-    // 判斷後台不用頁首頁尾
-  if(props.isAdmin) return <></>
+  // 判斷後台不用頁首頁尾
+  if (props.isAdmin) return <></>;
 
   return (
-    <footer className="container-fluid"  id="footer">
+    <footer className="container-fluid" id="footer">
       <div className="row justify-content-center">
         <div className="col-lg-10 col-sm-9 footer-content">
           <div className="footer-top row justify-content-between">

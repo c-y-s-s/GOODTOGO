@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { useAuth } from "../context/auth";
+import Hamburger from "hamburger-react";
+
 import Popover from "./_popover";
 import NavShoppingCart from "./NavShoppingCart";
 import MenuToggle from "./_menuToggle";
+import { useAuth } from "../context/auth";
 
-//引用漢堡
-import Hamburger from "hamburger-react";
-
-// -------- icons --------
 import { FiMapPin } from "react-icons/fi";
 import { ReactComponent as Logo } from "../images/navLogo.svg";
-import { ReactComponent as ShoppingBag } from "../images/shopping-bag-icon.svg";
 
 const Navbar = (props) => {
   const { loginMember, setLoginMember } = useAuth();

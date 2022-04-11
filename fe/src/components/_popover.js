@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useAuth } from "../context/auth";
-//引用antd popover
+
 import { Popover } from "antd";
 import "antd/dist/antd.css";
-//引用icon
-import { ReactComponent as UserIcon } from "../images/user-icon.svg";
-//alert套件
 import Swal from "sweetalert2";
-import { IMAGE_URL } from "../utils/config";
 
+import { IMAGE_URL } from "../utils/config";
+import { useAuth } from "../context/auth";
 import BlankProfile from "../images/headShot.png";
+import { ReactComponent as UserIcon } from "../images/user-icon.svg";
 
 const _popover = () => {
   const { loginMember, setLoginMember } = useAuth();
