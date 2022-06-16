@@ -20,10 +20,13 @@
 會員的使用者於網站上購買即期食物，並藉由網站傳達惜食的觀念，幫助降低因人
 類產生過多的碳排放，期許將良好的用意、理念，透過平台讓更多人一起加入行
 動。
+
+## 🌱 專案Demo
+[Youtube影片連結](https://youtu.be/qhXxDpclSNk)
                                                                  
 > 更多詳細資料請參閱我們的[企劃書](https://github.com/dosskkr/GOODTOGO/blob/main/GOODTOGO%20%E4%BC%81%E5%8A%83%E6%9B%B8.pdf) 
-                                                                                                                                                                                          
-## 🥳 使用方式
+                                                                                                                                                          
+## 🛠 使用方式
  > p.s. 此專案仍在加強維護階段，若造成不便敬請見諒，我們隨時歡迎前輩指示      
 
 #### 1. 複製專案到本地環境並切換至測試分支test_release
