@@ -17,7 +17,7 @@ const Pagination = () => {
   const { currentPage } = useParams();
   
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
-  console.log("currentPage", currentPage, page);
+  // console.log("currentPage", currentPage, page);
 
   useEffect(() => {
     let getPrices = async () => {

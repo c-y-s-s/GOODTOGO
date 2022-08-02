@@ -41,22 +41,22 @@ const MyAccount = (props) => {
       });
       // response 是物件
       // console.log("api/member/profile(get) response.data: ", response.data);
-      console.log(
-        "api/member/profile(get) response.data.profile.photo: ",
-        response.data.profile.photo
-      );
-      console.log(
-        "api/member/profile(get) response.data.profile.name: ",
-        response.data.profile.name
-      );
-      console.log(
-        "api/member/profile(get) response.data.likes: ",
-        response.data.likes
-      );
-      console.log(
-        "api/member/profile(get) response.data.orders: ",
-        response.data.orders
-      );
+      // console.log(
+      //   "api/member/profile(get) response.data.profile.photo: ",
+      //   response.data.profile.photo
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.profile.name: ",
+      //   response.data.profile.name
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.likes: ",
+      //   response.data.likes
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.orders: ",
+      //   response.data.orders
+      // );
       // 另外存 db head shot、name 要顯示頭貼用 不能與上傳的綁在一起
       setHeadShot(response.data.profile.photo);
       setUserName(response.data.profile.name);

@@ -40,7 +40,7 @@ const Table = () => {
     salesTimeEnd: "",
     createdAt: timeInsecond,
   });
-  console.log("product---->", product);
+  // console.log("product---->", product);
   // input 上傳的圖片物件(二進位檔)
   const [imageSrc, setImageSrc] = useState("");
 
@@ -66,8 +66,8 @@ const Table = () => {
       reader.readAsDataURL(file);
       // readAsDataURL 將讀取到的檔案編碼成 Data URL 內嵌網頁裡
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    // console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    // console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     setProduct({ ...product, [e.target.name]: e.target.files[0] });
   };
 
@@ -97,7 +97,7 @@ const Table = () => {
         formData,
         { withCredentials: true }
       );
-      console.log("上傳商品資料: ", response.data);
+      // console.log("上傳商品資料: ", response.data);
       // sweet alert
       Swal.fire({
         icon: "success",

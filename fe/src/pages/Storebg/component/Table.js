@@ -32,7 +32,7 @@ const Table = (props) => {
   const [lastPage, setLastPage] = useState(1);
   // let page = parseInt(currentPage, 10) || 1;
   const [page, setPage] = useState(parseInt(currentPage, 10) || 1);
-  console.log("productId", productId);
+  // console.log("productId", productId);
   // console.log("currentPage", currentPage, page);
 
 

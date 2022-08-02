@@ -11,7 +11,7 @@ const UserProfile = (props) => {
   // console.log(props);
 
   const { loginMember, setLoginMember } = useAuth();
-  console.log("loginMember", loginMember);
+  // console.log("loginMember", loginMember);
 
   // 儲存載入的使用者資料，比對 email 用
   const [userEmail, setUserEmail] = useState("");
@@ -47,22 +47,22 @@ const UserProfile = (props) => {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
       });
       // response 是物件
-      console.log(
-        "api/member/profile(get) response.data.profile: ",
-        response.data.profile
-      );
-      console.log(
-        "api/member/profile(get) response.data.profile.photo: ",
-        response.data.profile.photo
-      );
-      console.log(
-        "api/member/profile(get) response.data.profile.email: ",
-        response.data.profile.email
-      );
-      console.log(
-        "api/member/profile(get) response.data.emails: ",
-        response.data.emails
-      );
+      // console.log(
+      //   "api/member/profile(get) response.data.profile: ",
+      //   response.data.profile
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.profile.photo: ",
+      //   response.data.profile.photo
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.profile.email: ",
+      //   response.data.profile.email
+      // );
+      // console.log(
+      //   "api/member/profile(get) response.data.emails: ",
+      //   response.data.emails
+      // );
       // 登入者的資訊
       setMember(response.data.profile);
       // 登入者的 email 單獨存，判斷用
@@ -76,7 +76,7 @@ const UserProfile = (props) => {
   // -------- 使用者修改資料 --------
   function handleChange(e) {
     setMember({ ...member, [e.target.name]: e.target.value });
-    console.log("handleChange", e.target.name);
+    // console.log("handleChange", e.target.name);
     e.target.name === "name"
       ? regName(e)
       : e.target.name === "email"
@@ -86,23 +86,23 @@ const UserProfile = (props) => {
 
   // -------- 驗證資料 --------
   function regName(e) {
-    console.log("regName", e.target.name);
+    // console.log("regName", e.target.name);
     const reName = /^[\u4e00-\u9fa5]+$|^[a-zA-Z\s]+$/;
     reName.test(e.target.value)
       ? setErr({ ...err, name: "" })
       : setErr({ ...err, name: "姓名格式有誤，請輸入全 中文 / 英文" });
   }
   function regEmail(e) {
-    console.log("regEmail", e.target.name);
-    console.log("regEmail", e.target.value);
+    // console.log("regEmail", e.target.name);
+    // console.log("regEmail", e.target.value);
     const reEmail =
       /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
     reEmail.test(e.target.value)
       ? setErr({ ...err, email: "" })
       : setErr({ ...err, email: "輸入格式有誤 example@example.com" });
 
-    console.log(emails);
-    console.log(emails.find((v) => Object.values(v)[0] === e.target.value));
+    // console.log(emails);
+    // console.log(emails.find((v) => Object.values(v)[0] === e.target.value));
     // console.log(userEmail);
     if (
       emails.find((v) => Object.values(v)[0] === e.target.value) &&
@@ -112,7 +112,7 @@ const UserProfile = (props) => {
     }
   }
   function regPhone(e) {
-    console.log("regPhone", e.target.name);
+    // console.log("regPhone", e.target.name);
     const rePhone = /^09\d{8}$/;
     rePhone.test(e.target.value)
       ? setErr({ ...err, phone: "" })
@@ -121,7 +121,7 @@ const UserProfile = (props) => {
 
   // -------- 使用者預覽上傳圖片 --------
   const handleOnPreview = (e) => {
-    console.log(remove);
+    // console.log(remove);
     const file = e.target.files[0]; // 抓取上傳的圖片
     const reader = new FileReader(); // 讀取 input type="file" 的 file
     reader.addEventListener(
@@ -140,8 +140,8 @@ const UserProfile = (props) => {
       // 移除圖片關閉
       setRemove(false);
     }
-    console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
-    console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
+    // console.log("/member/profile 上傳圖片檔名 file.name: ", file.name); // e.target.files[0].name
+    // console.log("/member/profile 要 setMember 的圖片 file(二進位檔): ", file); // e.target.files[0]
     setMember({ ...member, [e.target.name]: e.target.files[0] });
     // member.photo
   };
@@ -183,7 +183,7 @@ const UserProfile = (props) => {
         formData,
         { withCredentials: true }
       );
-      console.log("使用者有上傳資料: ", response.data);
+      // console.log("使用者有上傳資料: ", response.data);
 
       // sweet alert
       Swal.fire({

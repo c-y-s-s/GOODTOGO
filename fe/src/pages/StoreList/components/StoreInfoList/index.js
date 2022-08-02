@@ -89,7 +89,7 @@ const StoreInfoList = (props) => {
       let storeSearchRes = await axios.get(
         `${API_URL}/stores/search?page=${page}&keyword=${keyword.trim()}`
       );
-      console.log(storeSearchRes);
+      // console.log(storeSearchRes);
       setStoreList(storeSearchRes.data[0]);
       setTotal(storeSearchRes.data[1].total);
       setLastPage(storeSearchRes.data[1].lastPage);
@@ -116,7 +116,7 @@ const StoreInfoList = (props) => {
     //*排序-營業時間的店家列表api: api/stores/rating/heart
     let getRatingByHeart = async () => {
       let ratingRes = await axios.get(`${API_URL}/stores/rating/heart`);
-      console.log("ratingRes", ratingRes);
+      // console.log("ratingRes", ratingRes);
       setStoreList(ratingRes.data);
       setTotal(ratingRes.data.length);
       setLastPage(1);
@@ -124,7 +124,7 @@ const StoreInfoList = (props) => {
     //*排序-營業時間的店家列表api: api/stores/rating/comment
     let getRatingByComment = async () => {
       let ratingRes = await axios.get(`${API_URL}/stores/rating/comment`);
-      console.log("ratingRes", ratingRes);
+      // console.log("ratingRes", ratingRes);
       setStoreList(ratingRes.data);
       setTotal(ratingRes.data.length);
       setLastPage(1);

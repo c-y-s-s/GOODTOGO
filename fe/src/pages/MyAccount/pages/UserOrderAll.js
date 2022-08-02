@@ -20,12 +20,12 @@ const UserOrderAll = (props) => {
         let response = await axios.get(`${API_URL}/member/order`, {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         });
-        console.log("api/member/order(get) response.data: ", response.data);
+        // console.log("api/member/order(get) response.data: ", response.data);
         setOrderAll(response.data);
 
         // 更新 待領取數量 顯示待領取 badge 數字用
         let stayNum = response.data.filter((v) => Object.values(v)[4] === 1);
-        console.log("stayNum: ", stayNum);
+        // console.log("stayNum: ", stayNum);
         props.setStayNum(stayNum.length);
 
         // test
@@ -66,7 +66,7 @@ const UserOrderAll = (props) => {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         }
       );
-      console.log("會員取消訂單 :", response.data);
+      // console.log("會員取消訂單 :", response.data);
 
       // 更新待領取訂單
       // 下面的 props 更新後 頁面重新 render 就會重新 api get -> 取消訂單 變為 已取消
@@ -88,7 +88,7 @@ const UserOrderAll = (props) => {
       let findIndex = props.orders.findIndex(
         (v) => Object.values(v)[0] === cancelOrder.cancelOrder
       );
-      console.log("OrderAll - findIndex", findIndex);
+      // console.log("OrderAll - findIndex", findIndex);
       data[findIndex].status_id = 3;
       props.setOrders(data);
     } catch (e) {

@@ -62,7 +62,7 @@ export default class CreditCard extends React.Component {
       }, {});
     // this.setState({ formData });
     // this.form.reset();
-    console.log(formData)
+    // console.log(formData)
 
     let updateCreditCard = async () => {
       try {
@@ -78,7 +78,7 @@ export default class CreditCard extends React.Component {
             withCredentials: true,
           }
         );
-        console.log("使用者有更新信用卡: ", response.data);
+        // console.log("使用者有更新信用卡: ", response.data);
         this.props.setCreditNum(response.data.fourNum);
 
         // sweet alert

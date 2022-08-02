@@ -115,7 +115,7 @@ const UserPassword = () => {
   // }
 
   function regPassword(e) {
-    console.log("regPassword", e.target.value);
+    // console.log("regPassword", e.target.value);
     // 最短6位，最長16位 {6,16} // 可以包含小寫大母 [a-z] 和大寫字母 [A-Z]
     // 可以包含數字 [0-9]  // 可以包含下劃線 [ _ ] 和減號 [ – ]
     const rePassword = /^[\w_-]{6,16}$/;
@@ -145,7 +145,7 @@ const UserPassword = () => {
       let response = await axios.post(`${API_URL}/member/password`, password, {
         withCredentials: true,
       });
-      console.log("會員有更改密碼: ", response.data);
+      // console.log("會員有更改密碼: ", response.data);
 
       // sweet alert
       Swal.fire({

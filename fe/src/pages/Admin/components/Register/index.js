@@ -142,15 +142,15 @@ const StoreCheck = () => {
     let found = closeDay.find((element) => element === e.target.value);
     if (found !== undefined) {
       setCloseDay(closeDay.filter((item) => item !== e.target.value));
-      console.log("減少", closeDay);
+      // console.log("減少", closeDay);
       setMember({ ...member, ...{ closeDay } });
     } else {
       setCloseDay([...closeDay, e.target.value]);
-      console.log("增加", closeDay);
+      // console.log("增加", closeDay);
     }
   };
   useEffect(() => {
-    console.log(closeDay);
+    // console.log(closeDay);
   }, [closeDay]);
 
   // if (e.target.checked == true) {

@@ -27,7 +27,7 @@ const Register = () => {
 
     try {
       let response = await axios.post(`${API_URL}/auth/register`, member);
-      console.log(response.data);
+      // console.log(response.data);
     } catch (e) {
       // console.error("錯誤:", e.response.data);
       console.error(ERR_MSG[e.response.data].code);

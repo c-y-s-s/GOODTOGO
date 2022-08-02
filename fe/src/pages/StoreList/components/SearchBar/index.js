@@ -14,7 +14,7 @@ const SearchBar = (props) => {
         method="get"
         onSubmit={(e) => {
           e.preventDefault();
-          console.log("form submit");
+          // console.log("form submit");
           setSearchSwitch(true);
           Navigate(`?page=0&keyword=${keyword}`);
           // window.scrollTo(0, 1500);

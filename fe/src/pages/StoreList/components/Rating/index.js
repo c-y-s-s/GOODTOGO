@@ -15,7 +15,7 @@ const Rating = ({
           onClick={() => {
             setRatingCommentOn(true);
             setRatingHeartOn(false);
-            console.log("heart");
+            // console.log("heart");
             setKeyword("");
             setOpState("");
             setSelectedCat("");

@@ -27,7 +27,7 @@ const RecomCard = (props) => {
     setTotalHeart,
   } = props;
   const { loginMember } = useAuth();
-  console.log("rec", likeList);
+  // console.log("rec", likeList);
   useEffect(() => {
     let getRecomm = async () => {
       let recommRes = await axios.get(`${API_URL}/storeRecommRouter`);
@@ -45,9 +45,9 @@ const RecomCard = (props) => {
           withCredentials: true,
         }
       );
-      console.log("移除成功", response.data);
+      // console.log("移除成功", response.data);
     } catch (e) {
-      console.error("res.error:", e.response);
+      // console.error("res.error:", e.response);
     }
   };
   const handleAddLike = async (id) => {
@@ -60,7 +60,7 @@ const RecomCard = (props) => {
           withCredentials: true,
         }
       );
-      console.log("新增成功", response.data);
+      // console.log("新增成功", response.data);
     } catch (e) {
       console.error("res.error:", e.response);
     }
@@ -170,7 +170,7 @@ const RecomCard = (props) => {
                               const updatedLikeList = [...likeList].filter(
                                 (v) => v.store_id !== item.id
                               );
-                              console.log("updateLikeList", updatedLikeList);
+                              // console.log("updateLikeList", updatedLikeList);
                               setLikeList(updatedLikeList);
                             } else {
                               //add:該store_id沒有在陣列裡面(空心)=>要從加入陣列
@@ -181,10 +181,10 @@ const RecomCard = (props) => {
                               };
                               setTotalHeart(updatedCount);
                               setLikeList([...likeList, { store_id: item.id }]);
-                              console.log("test...", [
-                                ...likeList,
-                                { store_id: item.id },
-                              ]);
+                              // console.log("test...", [
+                              //   ...likeList,
+                              //   { store_id: item.id },
+                              // ]);
                             }
                           }}
                         />

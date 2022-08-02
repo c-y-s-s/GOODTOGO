@@ -13,7 +13,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
     e.preventDefault();
 
     let productValidId = { productValid, productId };
-    console.log("productValidId 111", productValidId);
+    // console.log("productValidId 111", productValidId);
     setModalSwitch(productValidId);
     try {
       // http://localhost:3002/api/member/password (router.post)
@@ -21,7 +21,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
         `${API_URL}/storebg/productslistvalid?store_id=${loginSeller.id}`,
         productValidId
       );
-      console.log("上下架訊息 ", response.data);
+      // console.log("上下架訊息 ", response.data);
     } catch (e) {
       console.error("valid error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);
@@ -34,7 +34,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
     e.preventDefault();
 
     let productValidId = { productValid, productId };
-    console.log("productValidId 222", productValidId);
+    // console.log("productValidId 222", productValidId);
     setModalSwitch(productValidId);
 
     try {
@@ -42,7 +42,7 @@ const CheckModel = ({ productValid, productId, setModalSwitch }) => {
         `${API_URL}/storebg/remove?store_id=${loginSeller.id}`,
         productValidId
       );
-      console.log("刪除訊息 ", response.data);
+      // console.log("刪除訊息 ", response.data);
     } catch (e) {
       console.error("valid error: ", ERR_MSG[e.response.data.code]);
       console.error("res.error:", e.response.data);

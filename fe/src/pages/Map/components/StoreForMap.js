@@ -7,9 +7,9 @@ import { API_URL } from "../../../utils/config";
 import axios from "axios";
 
 const StoreForMap = (props) => {
-  console.log(props.clickStoreId);
+  // console.log(props.clickStoreId);
   const [clickStoreData, setClickStoreDate] = useState([]);
-  console.log(props.clickStoreId);
+  // console.log(props.clickStoreId);
 
   useEffect(() => {
     let getClickStoreData = async () => {
@@ -20,7 +20,7 @@ const StoreForMap = (props) => {
     };
     getClickStoreData();
   }, [props.clickStoreId]);
-  console.log(clickStoreData.length);
+  // console.log(clickStoreData.length);
   return (
     <div>
       {clickStoreData.length === 1 &&

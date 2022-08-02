@@ -15,12 +15,12 @@ const Map = (props) => {
   //!然後利用去map這個陣列然後 裡面map LocationPin
 
   const here = navigator.geolocation.getCurrentPosition(function (position) {
-    console.log(position);
+    // console.log(position);
     setCurrentLat(position.coords.latitude);
     setCurrentLng(position.coords.longitude);
   });
 
-  console.log("clng", currentLng, "clat", currentLat);
+  // console.log("clng", currentLng, "clat", currentLat);
   // 先把得到的資料塞進一個空陣列裡
   const locationArr = [];
   displayStoreList.forEach((i) => {

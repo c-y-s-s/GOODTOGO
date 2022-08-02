@@ -9,8 +9,8 @@ import BarLoader from "react-spinners/BarLoader";
 
 const UserLike = (props) => {
   // index 傳過來 用於判斷使否有資料呈現 (執行api)
-  console.log("Like - props.likes", props.likes);
-  console.log("Like - props.likes.length", props.likes.length);
+  // console.log("Like - props.likes", props.likes);
+  // console.log("Like - props.likes.length", props.likes.length);
 
   // loading 開關
   const [loading, setLoading] = useState(false);
@@ -53,18 +53,18 @@ const UserLike = (props) => {
         let response = await axios.get(`${API_URL}/member/like`, {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         });
-        console.log(
-          "api/member/like(get) response.data.userLikeStores: ",
-          response.data.userLikeStores
-        );
-        console.log(
-          "api/member/like(get) response.data.storeCategories: ",
-          response.data.storeCategories
-        );
-        console.log(
-          "api/member/like(get) response.data.likeStoreIds: ",
-          response.data.likeStoreIds
-        );
+        // console.log(
+        //   "api/member/like(get) response.data.userLikeStores: ",
+        //   response.data.userLikeStores
+        // );
+        // console.log(
+        //   "api/member/like(get) response.data.storeCategories: ",
+        //   response.data.storeCategories
+        // );
+        // console.log(
+        //   "api/member/like(get) response.data.likeStoreIds: ",
+        //   response.data.likeStoreIds
+        // );
 
         setLikeStores(response.data.userLikeStores); // 儲存 喜愛店家清單
         setShowLikeStores(response.data.userLikeStores); // 顯示 喜愛店家清單
@@ -94,7 +94,7 @@ const UserLike = (props) => {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         }
       );
-      console.log("會員有移除 like :", response.data);
+      // console.log("會員有移除 like :", response.data);
 
       // 更新 儲存 喜愛店家列表 (濾除取消收藏)
       setLikeStores(

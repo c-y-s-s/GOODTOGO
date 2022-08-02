@@ -12,7 +12,7 @@ const UserOrder = (props) => {
 
   // 存取 待領取數量 顯示待領取 badge 數字用
   const [stayNum, setStayNum] = useState(0);
-  console.log("Order - stayNum", stayNum);
+  // console.log("Order - stayNum", stayNum);
 
   // index 傳過來 用於判斷是否有資料呈現 (執行api)
   // console.log("Order - props.orders", props.orders);

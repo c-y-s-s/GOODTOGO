@@ -51,10 +51,10 @@ function App() {
   const [isAdmin, setIsAdmin] = useState(false);
   // todo 修改  navbar顯示方式判斷↑↑
 
-  console.log("11111111111", loginMember);
+  
   // 商品細節頁 Modal 判斷有沒有點就讓導覽列消失
   const [isModalTouch, setisModalTouch] = useState(true);
-  // console.log("aaaaaaaaa",isModalTouch);
+
 
   // Nav shoppingCart 刪除觸發刷新 api 開關需與購物車頁面同步
   const [navshoppingDeleteParameter, setNavShoppingDeleteParameter] =
@@ -68,7 +68,7 @@ function App() {
     storeId: "",
     paymentMethod: "1",
   });
-  // console.log("哈囉",checkoutData);
+
   useEffect(() => {
     // 每次重新整理或開啟頁面時，都去確認一下是否在已經登入的狀態。
     const getMember = async () => {
@@ -93,7 +93,7 @@ function App() {
     };
     getSeller();
   }, []);
-  // console.log("member from App.js", loginMember); //ok
+
   return (
     <AuthContext.Provider
       value={{ loginMember, setLoginMember, loginSeller, setLoginSeller }}

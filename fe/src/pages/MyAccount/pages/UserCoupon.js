@@ -12,22 +12,22 @@ const UserCoupon = () => {
       let response = await axios.get(`${API_URL}/member/like`, {
         withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
       });
-      console.log(
-        "api/member/like(get) response.data.userLikeStores: ",
-        response.data.userLikeStores
-      );
-      console.log(
-        "api/member/like(get) response.data.storeCategories: ",
-        response.data.storeCategories
-      );
-      console.log(
-        "api/member/like(get) response.data.likeStoreIds: ",
-        response.data.likeStoreIds
-      );
-      console.log(
-        "api/member/like(get) response.data.userLikeStores.storeCate: ",
-        response.data.userLikeStores.map((v) => v.storeCate)
-      );
+      // console.log(
+      //   "api/member/like(get) response.data.userLikeStores: ",
+      //   response.data.userLikeStores
+      // );
+      // console.log(
+      //   "api/member/like(get) response.data.storeCategories: ",
+      //   response.data.storeCategories
+      // );
+      // console.log(
+      //   "api/member/like(get) response.data.likeStoreIds: ",
+      //   response.data.likeStoreIds
+      // );
+      // console.log(
+      //   "api/member/like(get) response.data.userLikeStores.storeCate: ",
+      //   response.data.userLikeStores.map((v) => v.storeCate)
+      // );
 
 
     };

@@ -30,10 +30,10 @@ const UserCreditCard = (props) => {
       let response = await axios.get(`${API_URL}/member/payment`, {
         withCredentials: true,
       });
-      console.log(
-        "api/member/payment(get) response.data.credit_number: ",
-        response.data.credit_number
-      );
+      // console.log(
+      //   "api/member/payment(get) response.data.credit_number: ",
+      //   response.data.credit_number
+      // );
       setCreditNum(response.data.credit_number);
     };
     getCreditNum();

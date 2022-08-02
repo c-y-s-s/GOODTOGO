@@ -29,10 +29,10 @@ const UserOrderStay = (props) => {
         let response = await axios.get(`${API_URL}/member/order/${status}`, {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         });
-        console.log(
-          "api/member/order/status=1(get) response.data: ",
-          response.data
-        );
+        // console.log(
+        //   "api/member/order/status=1(get) response.data: ",
+        //   response.data
+        // );
         setOrderStay(response.data);
 
         // 更新 待領取數量 顯示待領取 badge 數字用
@@ -66,7 +66,7 @@ const UserOrderStay = (props) => {
           withCredentials: true, // 為了跨源存取 cookie // 登入狀態帶著 cookie 跟後端要資料
         }
       );
-      console.log("會員取消訂單 :", response.data);
+      // console.log("會員取消訂單 :", response.data);
 
       // 更新待領取訂單
       setOrderStay(

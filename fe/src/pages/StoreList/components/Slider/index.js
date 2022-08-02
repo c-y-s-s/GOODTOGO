@@ -36,8 +36,8 @@ const Slider = () => {
   const moveDot = (index) => {
     setSlideIndex(index);
   };
-  console.log(typeof slideIndex);
-  console.log(slideIndex);
+  // console.log(typeof slideIndex);
+  // console.log(slideIndex);
   // console.log("圖片的數量", displayImage.length); //長度跟陣列[1]都有值
   // const showSlide = () => {
   //   for (let i = 0; i <= displayImage.length; i++) {

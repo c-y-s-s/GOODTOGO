@@ -37,7 +37,7 @@ const StoreInfoCard = (props) => {
           withCredentials: true,
         }
       );
-      console.log("移除成功", response.data);
+      // console.log("移除成功", response.data);
     } catch (e) {
       console.error("res.error:", e.response);
     }
@@ -53,12 +53,12 @@ const StoreInfoCard = (props) => {
           withCredentials: true,
         }
       );
-      console.log("新增成功", response.data);
+      // console.log("新增成功", response.data);
     } catch (e) {
       console.error("res.error:", e.response);
     }
   };
-  console.log("tt", total);
+  // console.log("tt", total);
   const displayList = storeList.map((item) => {
     //使用者收藏愛心
     let favStoresMap = likeList.map((d) => {
@@ -159,7 +159,7 @@ const StoreInfoCard = (props) => {
                           const updatedLikeList = [...likeList].filter(
                             (v) => v.store_id !== item.id
                           );
-                          console.log("updateLikeList", updatedLikeList);
+                          // console.log("updateLikeList", updatedLikeList);
                           setLikeList(updatedLikeList);
                         } else {
                           //add:該store_id沒有在陣列裡面(空心)=>要從加入陣列
@@ -170,10 +170,10 @@ const StoreInfoCard = (props) => {
                           };
                           setStoreLikeCount(updatedCount);
                           setLikeList([...likeList, { store_id: item.id }]);
-                          console.log("test...", [
-                            ...likeList,
-                            { store_id: item.id },
-                          ]);
+                          // console.log("test...", [
+                          //   ...likeList,
+                          //   { store_id: item.id },
+                          // ]);
                         }
                       }}
                     />
