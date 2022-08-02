@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { API_URL } from "../../utils/config";
+
 // -------- 引入元件區塊 --------
 import StoreDetails from "./component/StoreDetails";
 import Storebutton from "./component/StoreButton";
 import StoreCard from "./component/ProductsCard";
 import StoreProductsComment from "./component/ProductsComment.js";
-import UseQuery from "./Hooks/UseQuery";
+import { UseGetData } from "./Hooks/Usedata";
 // -------- 引入元件區塊結束 --------
 
 const Product = ({ setisModalTouch }) => {
   //取 url 上面的 storeId  app.js 若要更改要同步更改
   const { storeId } = useParams();
   // call store api 
-  const storeData = UseQuery(storeId);
+
+  const storeData = UseGetData("stores", storeId);
 
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
