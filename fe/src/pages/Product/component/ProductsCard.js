@@ -190,7 +190,7 @@ const StoreCard = ({
                               <Stack spacing={1}>
                                 <Rating
                                   name="half-rating-read"
-                                  classNmae=""
+                                  className=""
                                   defaultValue={item.score}
                                   precision={0.1}
                                   readOnly
