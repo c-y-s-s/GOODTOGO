@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
+import {UseProductsCommentPageDate,UseProductsCommentTotalData} from '../Hooks/Usedata'
 // -------- React Icon --------
 import { RiArrowUpDownFill } from "react-icons/ri";
 import { FiChevronLeft } from "react-icons/fi";
@@ -9,75 +10,40 @@ import { FiMoreVertical } from "react-icons/fi";
 // -------- MUI  Rating--------
 import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
-import axios from "axios";
-import { API_URL } from "../../../utils/config";
 // -------- uuid --------
 import { v4 as uuidv4 } from "uuid";
 import { IMAGE_URL } from "../../../utils/config";
 // -------- 商品評論 --------
 const StoreProductsComment = () => {
-
   const { storeId } = useParams();
   const { currentPage } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  // 存指定商家 ID 評論
-  const [productsComment, setproductsComment] = useState([]);
-  // 存總筆數
-  const [totalPages, setTotalPages] = useState([]);
+  const [page, setPage] = useState(parseInt(currentPage, 10) || parseInt(1));
+
   // 評分留言切換開關
   const [productsCommitStarSortSwitch, setproductsCommitStarSortSwitch] =
     useState("");
   // 時間排序切換開關
   const [productsCommitTimeSortSwitch, setproductsCommitTimeSortSwitch] =
     useState("");
-  // 總頁數預設 1
-  const [lastPage, SetLastPage] = useState(1);
-  const [page, setPage] = useState(parseInt(currentPage, 10) || parseInt(1));
 
-  // 撈指定商家評論
-  useEffect(() => {
-        setIsLoading(true);
-    let getComment = async () => {
-      // 預設 create_time DESC API
-      let productsCommentResponse = await axios.get(
-        `${API_URL}/productscommit/${storeId}?page=${page}`
-      );
-      //評價 DESC API
-      let productsCommentStarDescResponse = await axios.get(
-        `${API_URL}/productscommentstardesc/${storeId}?page=${page}`
-      );
-      // 評價 ASC API
-      let productsCommentStarAscResponse = await axios.get(
-        `${API_URL}/productscommentstarasc/${storeId}?page=${page}`
-      );
-      // create_time ASC API
-      let productsCommentTimeAscResponse = await axios.get(
-        `${API_URL}/productscommenttimeasc/${storeId}?page=${page}`
-      );
-      setproductsComment(productsCommentResponse.data.data);
-      // 總筆數
-      setTotalPages(productsCommentResponse.data.pagination.total);
-      // 共幾頁
-      SetLastPage(productsCommentResponse.data.pagination.lastPage);
-      // 判斷 評分、留言開關 boolean 帶入不同支api
-      if (productsCommitTimeSortSwitch === false) {
-        setproductsComment(productsCommentResponse.data.data);
-      } else if (productsCommitStarSortSwitch === true) {
-        setproductsComment(productsCommentStarDescResponse.data.data);
-      
-      } else if (productsCommitStarSortSwitch === false) {
-        setproductsComment(productsCommentStarAscResponse.data.data);
-      } else if (productsCommitTimeSortSwitch === true) {
-        setproductsComment(productsCommentTimeAscResponse.data.data);
-      }
-    };
-    getComment();
-        // 抓完 api 之後先顯示 Loading 延遲 800 毫秒之後關閉
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 800);
-  }, [page, productsCommitTimeSortSwitch, productsCommitStarSortSwitch]);
+  // const [productsComment, setproductsComment] = useState([]);
 
+  // 總筆數 、 總頁數
+  const { totalPage, lastPage } = UseProductsCommentPageDate(
+    "productscommit",
+    storeId,
+    page
+  );
+  // 指定商家 ID 評論跟排序條件評論
+  const productsComment = UseProductsCommentTotalData(
+    "productscommit",
+    storeId,
+    page,
+    setIsLoading,
+    productsCommitStarSortSwitch,
+    productsCommitTimeSortSwitch
+  );
 
   // 開關切換
   function handleStarSort() {
@@ -108,19 +74,19 @@ const StoreProductsComment = () => {
       </a>
     );
   }
-// loading 樣式
-    const spinner = (
-      <>
-        <div className="text-center loading-img mt-5 m-auto">
-          {/* <div className="xxxx">1234</div> */}
-          <img
-            className=""
-            src={require(`../images/editor-2.7s-40px.gif`)}
-            alt=""
-          />
-        </div>
-      </>
-    );
+  // loading 樣式
+  const spinner = (
+    <>
+      <div className="text-center loading-img mt-5 m-auto">
+        {/* <div className="xxxx">1234</div> */}
+        <img
+          className=""
+          src={require(`../images/editor-2.7s-40px.gif`)}
+          alt=""
+        />
+      </div>
+    </>
+  );
   return (
     <div>
       {isLoading ? (
@@ -149,7 +115,7 @@ const StoreProductsComment = () => {
                   </button>
                 </div>
               </div>
-              <div>共 {totalPages} 則留言</div>
+              <div>共 {totalPage} 則留言</div>
             </div>
           </div>
           {productsComment.map((item) => {

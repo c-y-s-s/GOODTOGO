@@ -48,6 +48,7 @@ const StoreDetails = ({
   const defaultProps = {
     center: {
       lat: storeMapLikeData.longitude,
+      
       lng: storeMapLikeData.latitude,
     },
     zoom: 17,
@@ -90,21 +91,21 @@ const StoreDetails = ({
         /* 電話號碼加上- */
         let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
 
-        /* // !營業時間秒數 */
+        /* 營業時間秒數 */
 
         let storeOpenTimeSecond =
           parseInt(item.open_time[0] + item.open_time[1]) * 60 * 60 +
           parseInt(item.open_time[3] + item.open_time[4]) * 60 +
           parseInt(item.open_time[6] + item.open_time[7]);
 
-        /* // !關店時間秒數 */
+        /* 關店時間秒數 */
 
         let storeCloseTimeSecond =
           parseInt(item.close_time[0] + item.close_time[1]) * 60 * 60 +
           parseInt(item.close_time[3] + item.close_time[4]) * 60 +
           parseInt(item.close_time[6] + item.close_time[7]);
 
-        /*   // !判斷營業中或是非營業中 */
+        /*  判斷營業中或是非營業中 */
 
         let inOperation = "";
         if (
