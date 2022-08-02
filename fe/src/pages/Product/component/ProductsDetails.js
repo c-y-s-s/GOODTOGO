@@ -1,9 +1,10 @@
-import { useState, useLayoutEffect } from "react";
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 import axios from "axios";
 import ProductsDetailsComment from "./ProductsDetailsComment";
+import { UseGetData } from "../Hooks/Usedata";
 // -------- React icon --------
 import { FiMinusCircle } from "react-icons/fi";
 import { FiPlusCircle } from "react-icons/fi";
@@ -24,14 +25,19 @@ const ProductsDetails = ({
 }) => {
   const { storeId } = useParams();
   const { loginMember } = useAuth();
-  //  存指定 ID 商品的評論
-  const [productModalCommentData, setProductModalCommentData] = useState([]);
-  // 存指定 ID 的商品 data
-  const [productModalData, setproductModalData] = useState([]);
-  // console.log("11111111", productModalData);
+
+  // 指定 ID 商品評論
+  const productModalCommentData = UseGetData(
+    "productsdesignatecommit",
+    openProductsModaID
+  );
+  // 指定 ID 商品 data
+  const productModalData = UseGetData("product", openProductsModaID);
+    console.log(productModalData)
+
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
-  // console.log(shoppingErrormsg);
+
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
     store_id: storeId,
@@ -40,21 +46,6 @@ const ProductsDetails = ({
     amount: 1,
   });
 
-  // const [productcar,setProductArr] = useState([])
-  useLayoutEffect(() => {
-    let getProductId = async () => {
-      //撈指定 ID 商品的評論
-      let productModalCommentResponse = await axios.get(
-        `${API_URL}/productsdesignatecommit/${openProductsModaID}`
-      );
-      let productModalResponse = await axios.get(
-        `${API_URL}/product/${openProductsModaID}`
-      );
-      setProductModalCommentData(productModalCommentResponse.data);
-      setproductModalData(productModalResponse.data);
-    };
-    getProductId();
-  }, [openProductsModaID]);
 
   // 計算指定商品的評論平均分數
   let productstarTotal = 0;
@@ -67,17 +58,17 @@ const ProductsDetails = ({
 
   // 購買數量計數器
   const [buyamount, setBuyamount] = useState(1);
-  function handlePlus(e) {
-    setBuyamount(buyamount + 1);
 
-    setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
-    setshoopingErrormsg("");
-  }
-  function handleMinus(e) {
-    setBuyamount(buyamount - 1);
-
-    setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
-    setshoopingErrormsg("");
+  function handleCounter(condition) {
+    if(condition === 'plus'){
+        setBuyamount(buyamount + 1);
+        setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
+        setshoopingErrormsg("");
+    }else if(condition === 'minus'){
+        setBuyamount(buyamount - 1);
+        setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
+        setshoopingErrormsg("");
+    }
   }
   function handleBackgroundDelete(e) {
     // e.target.id === "products-details-data" ?
@@ -139,12 +130,13 @@ const ProductsDetails = ({
                       className=""
                       src={require(`../../../images/products_img/${data.img}`)}
                       id="product-top"
+                      alt=""
                     />
                   </div>
                   {/* 關閉按鈕 */}
                   <button
                     className="products-close"
-                    onClick={(e) => {
+                    onClick={() => {
                       setOpenProductsModal(false);
                       setisModalTouch(true);
                     }}
@@ -155,7 +147,6 @@ const ProductsDetails = ({
                     <h5 className="card-title">{data.name}</h5>
                     <div className="d-flex justify-content-between card-value align-items-center">
                       {/* 評價的地方 */}
-
                       {productstarTotal ? (
                         <div className="card-star d-flex">
                           <div>
@@ -173,9 +164,9 @@ const ProductsDetails = ({
                       ) : (
                         <div>商品還沒有評價呦</div>
                       )}
-
                       <div className="card-price">NT$ {data.price}</div>
                     </div>
+
                     <p className="card-text mb-0 fw-normal">
                       {data.description}
                     </p>
@@ -207,7 +198,9 @@ const ProductsDetails = ({
                             {buyamount > 1 ? (
                               <button
                                 className=" buy-num-minus equation"
-                                onClick={handleMinus}
+                                onClick={()=>{
+                                  handleCounter('minus')
+                                }}
                                 id={`${data.id}`}
                               >
                                 <FiMinusCircle />
@@ -228,7 +221,9 @@ const ProductsDetails = ({
                             {buyamount < data.amount ? (
                               <button
                                 className=" buy-num-plus equation"
-                                onClick={handlePlus}
+                                onClick={()=>{
+                                    handleCounter("plus");
+                                }}
                                 id={`${data.id}`}
                               >
                                 <FiPlusCircle />

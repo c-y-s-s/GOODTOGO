@@ -1,4 +1,4 @@
-import { useState, useEffect, useLayoutEffect } from "react";
+import { useState, useEffect } from "react";
 import ProductsDetails from "./ProductsDetails";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
