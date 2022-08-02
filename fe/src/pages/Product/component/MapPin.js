@@ -1,7 +1,7 @@
 import React from "react";
 import { ReactComponent as Subtract } from "../images/Subtract.svg";
 // -------- React Icon --------
-import { FiMapPin } from "react-icons/fi";
+
 
 const MapPin = ({ text }) => {
   return (

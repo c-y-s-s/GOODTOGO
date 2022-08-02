@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { API_URL } from "../../../utils/config";
+import { UseGetStoreData ,UseGetData} from "../Hooks/Usedata";
 // -------- React Icon --------
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaClock } from "react-icons/fa";
@@ -27,53 +28,27 @@ const StoreDetails = ({
   setStoreTodayClose,
   storeTodayClose,
 }) => {
-  
   //設定 moment 時區
   moment.locale("zh-tw");
   let timeInsecond = moment().format("LTS");
-  // ! 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
-  //!目前時間總秒數
+  // 現在秒數必須大於開店秒數而且小於關店秒數才是營業中
+  // 目前時間總秒數
   let timeInsecondResult =
     parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
 
+
   // 存店家所有評論資料
-  const [storeCommentTotalData, setStoreCommentTotalData] = useState([]);
-  // 店家經度
-  const [storeMapDataLat, setStoreMapDataLat] = useState([]);
-  // 店家緯度
-  const [storeMapDataLng, setStoreMapDataLng] = useState([]);
-  // 店家評論總數
-  const [storeLikeData,setStoreLikeData]=useState([]) 
-  // console.log("=======",storeLikeData);
-  useEffect(() => {
-    let getStoreDetalis = async () => {
-      // 撈店家所有評論
-      let storeCommentTotalResponse = await axios.get(
-        `${API_URL}/storecommittotal/${storeId}`
-      );
-      // 撈店家經緯度
-      let storeMapDataReaponse = await axios.get(
-        `${API_URL}/storesmap/${storeId}`
-      );
-      //店家愛心總數
-        let storeLikeDataReaponse = await axios.get(
-          `${API_URL}/products/storelike/${storeId}`
-        );
-      setStoreCommentTotalData(storeCommentTotalResponse.data);
-      setStoreMapDataLat(storeMapDataReaponse.data[0].longitude);
-      setStoreMapDataLng(storeMapDataReaponse.data[0].latitude);
-      setStoreLikeData(storeLikeDataReaponse.data[0].storeLikeTotal);
-    };
-    getStoreDetalis();
-  }, []);
+  const storeCommentTotalData = UseGetData("storecommittotal", storeId);
+  // 經緯度、評論總數
+  const storeMapLikeData = UseGetStoreData(storeId);
 
   // 地圖預設顯示地點
   const defaultProps = {
     center: {
-      lat: storeMapDataLat,
-      lng: storeMapDataLng,
+      lat: storeMapLikeData.longitude,
+      lng: storeMapLikeData.latitude,
     },
     zoom: 17,
   };
@@ -102,7 +77,6 @@ const StoreDetails = ({
         let closeDayData = JSON.parse(item.close_day);
         let closeDayChinese = [];
         closeDayData.forEach((item) => {
-        
           if (item === 1) closeDayChinese.push("一");
           if (item === 2) closeDayChinese.push("二");
           if (item === 3) closeDayChinese.push("三");
@@ -115,7 +89,6 @@ const StoreDetails = ({
         let closeday = closeDayChinese.join("、");
         /* 電話號碼加上- */
         let newTelNo = item.tel_no.replace(/(.{2})/, "$1-");
-     
 
         /* // !營業時間秒數 */
 
@@ -204,7 +177,7 @@ const StoreDetails = ({
                             <FaHeart className="pb-1" />
                           </div>
                           <div className="store-data-left-favorite-num">
-                            {storeLikeData}
+                            {storeMapLikeData.storeLikeTotal}
                           </div>
                         </div>
                       </div>
@@ -255,8 +228,8 @@ const StoreDetails = ({
                       defaultZoom={defaultProps.zoom}
                     >
                       <MapPin
-                        lat={storeMapDataLat}
-                        lng={storeMapDataLng}
+                        lat={storeMapLikeData.longitude}
+                        lng={storeMapLikeData.latitude}
                         text={item.address}
                       />
                     </GoogleMapReact>

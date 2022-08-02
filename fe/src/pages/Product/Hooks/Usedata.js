@@ -16,3 +16,33 @@ import { API_URL } from "../../../utils/config";
 
     return data;
   };
+
+  export const UseGetStoreData = (id) => {
+    const [data, setDate] = useState({
+      longitude:"",
+      latitude:"",
+      storeLikeTotal:"",
+    });
+
+ useEffect(() => {
+   let getData = async () => {
+     // 店家經緯度
+     let storeMapDataReaponse = await axios.get(`${API_URL}/storesmap/${id}`);
+     // 店家愛心總數
+     let storeLikeDataReaponse = await axios.get(
+       `${API_URL}/products/storelike/${id}`
+     );
+     setDate({
+       longitude: storeMapDataReaponse.data[0].longitude,
+       latitude: storeMapDataReaponse.data[0].latitude,
+       storeLikeTotal: storeLikeDataReaponse.data[0].storeLikeTotal,
+     });
+   };
+   getData();
+ }, [id]);
+
+    return data;
+  };
+
+
+
