@@ -12,9 +12,6 @@ import { UseGetData } from "./Hooks/Usedata";
 const Product = ({ setisModalTouch }) => {
   //取 url 上面的 storeId  app.js 若要更改要同步更改
   const { storeId } = useParams();
-  // call store api 
-
-  const storeData = UseGetData("stores", storeId);
 
   // 切換按鈕
   const [buttonToggle, setbutonToggle] = useState("products");
@@ -23,13 +20,11 @@ const Product = ({ setisModalTouch }) => {
   // 店家星期休息或營業
   const [storeTodayClose, setStoreTodayClose] = useState("");
 
-
-
   return (
     <div>
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
       <StoreDetails
-        storeData={storeData}
+
         storeId={storeId}
         setStoreInOperation={setStoreInOperation}
         setStoreTodayClose={setStoreTodayClose}

@@ -23,7 +23,7 @@ import "moment/min/locales";
 
 const StoreDetails = ({
   storeId,
-  storeData,
+
   setStoreInOperation,
   setStoreTodayClose,
   storeTodayClose,
@@ -37,6 +37,9 @@ const StoreDetails = ({
     parseInt(timeInsecond[0] + timeInsecond[1]) * 60 * 60 +
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
+    
+  // call store api
+  const storeData = UseGetData("stores", storeId);
 
 
   // 存店家所有評論資料
@@ -48,7 +51,7 @@ const StoreDetails = ({
   const defaultProps = {
     center: {
       lat: storeMapLikeData.longitude,
-      
+
       lng: storeMapLikeData.latitude,
     },
     zoom: 17,
