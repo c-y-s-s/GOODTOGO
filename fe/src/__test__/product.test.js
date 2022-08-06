@@ -1,8 +1,11 @@
+/* eslint-disable testing-library/prefer-screen-queries */
+/* eslint-disable testing-library/no-wait-for-side-effects */
 import {
   render,
   cleanup,
   waitForElement,
   waitFor,
+  fireEvent,
 } from "@testing-library/react";
 import { screen } from "@testing-library/dom";
 import "@testing-library/jest-dom";
@@ -16,7 +19,8 @@ import ReactRouter from "react-router";
 import ProductsDetails from "../pages/Product/component/ProductsDetails";
 import { AuthContext } from "../context/auth";
 import axios from "axios";
-afterEach(cleanup);
+import { act } from "react-dom/test-utils";
+// afterEach(cleanup);
 jest.mock("axios");
 
 const user = {
@@ -723,75 +727,10 @@ const productModalCommentData = {
       create_time: "2022-02-10 02:10:11",
       headshots: "/static/uploads/headshots/member-1646472593397.jpg",
       name: "咪木",
-    },
-    {
-      id: 43,
-      comment: "少給東西",
-      star: 2,
-      create_time: "2022-02-09 01:09:10",
-      headshots: "/static/uploads/headshots/member-1646472480378.jpg",
-      name: "臭猴子",
-    },
-    {
-      id: 37,
-      comment: "不喜歡",
-      star: 1,
-      create_time: "2022-02-08 12:08:09",
-      headshots: "/static/uploads/headshots/member-1646472350288.jpg",
-      name: "石頭先生",
-    },
-    {
-      id: 31,
-      comment: "有股臭味",
-      star: 1,
-      create_time: "2022-02-07 11:07:08",
-      headshots: "/static/uploads/headshots/member-1646472146752.jpg",
-      name: "小不點",
-    },
-    {
-      id: 25,
-      comment: "老闆態度是在差什麼",
-      star: 2,
-      create_time: "2022-02-06 10:06:07",
-      headshots: "/static/uploads/headshots/member-1646472059130.jpg",
-      name: "光頭王",
-    },
-    {
-      id: 19,
-      comment: "還行吧",
-      star: 3,
-      create_time: "2022-02-05 09:05:06",
-      headshots: "/static/uploads/headshots/member-1646471961558.jpg",
-      name: "Peter Parker",
-    },
-    {
-      id: 13,
-      comment: "每個禮拜都買好幾次東西超好吃",
-      star: 4,
-      create_time: "2022-02-04 08:04:05",
-      headshots: "/static/uploads/headshots/member-1646471715912.jpg",
-      name: "寶寶",
-    },
-    {
-      id: 7,
-      comment: "很划算",
-      star: 4,
-      create_time: "2022-02-03 07:03:04",
-      headshots: "/static/uploads/headshots/member-1646471552744.jpg",
-      name: "史瑞克",
-    },
-    {
-      id: 1,
-      comment: "超好吃的欸",
-      star: 5,
-      create_time: "2022-02-02 06:02:03",
-      headshots: "/static/uploads/headshots/member-1646471470852.jpg",
-      name: "青森犬",
-    },
-  ],
+    },]
 };
 
-const productModalData = {
+let productModalData = {
   data: [
     {
       id: 1,
@@ -800,7 +739,7 @@ const productModalData = {
       name: "螺絲奶香卷",
       img: "06e3a32e-4e54-4e4c-9b7b-20118d324ca7.jpeg",
       price: 50,
-      amount: 5,
+      amount: 3,
       description: "含3顆。",
       start_time: "00:00:00",
       due_time: "23:59:00",
@@ -810,27 +749,92 @@ const productModalData = {
   ],
 };
 
-describe("ProductsDetails",()=>{
-test("ProductsDetails brings in data and renders normally", () => {
-  axiosMock.get
-    .mockResolvedValueOnce(productModalCommentData)
-    .mockResolvedValueOnce(productModalData);
+describe("ProductsDetails", () => {
+  test("openProductsModaltimeEnd  <=0", async () => {
+    let productModalData = {
+      data: [
+        {
+          id: 1,
+          store_id: 1,
+          category_id: 2,
+          name: "螺絲奶香卷",
+          img: "06e3a32e-4e54-4e4c-9b7b-20118d324ca7.jpeg",
+          price: 50,
+          amount: 0,
+          description: "含3顆。",
+          start_time: "00:00:00",
+          due_time: "23:59:00",
+          created_at: "2022-01-28 13:21:59",
+          valid: 1,
+        },
+      ],
+    };
+    axiosMock.get
+      .mockResolvedValueOnce(productModalCommentData)
+      .mockResolvedValueOnce(productModalData);
 
-  const { container } = render(
-    <AuthContext.Provider value={{ loginMember: user }}>
-      <ProductsDetails
-        openProductsModaID={1}
-        storeinOperation={false}
-        openProductsModaltimeEnd={0}
-        setOpenProductsModal={jest.fn()}
-        setisModalTouch={jest.fn()}
-      />
-    </AuthContext.Provider>
-  );
-  expect(container).toBeInTheDocument();
-});
-});
+    const { container } = render(
+      <AuthContext.Provider value={{ loginMember: user }}>
+        <ProductsDetails
+          openProductsModaID={1}
+          storeinOperation={false}
+          openProductsModaltimeEnd={-1}
+          setOpenProductsModal={jest.fn()}
+          setisModalTouch={jest.fn()}
+        />
+      </AuthContext.Provider>
+    );
+    expect(container).toBeInTheDocument();
+  });
+  test("close button click", async () => {
+    axiosMock.get
+      .mockResolvedValueOnce(productModalCommentData)
+      .mockResolvedValueOnce(productModalData);
+    //  先帶入 ProductsDetails 所需要的 props and data
 
+    const { queryByTestId } = render(
+      <AuthContext.Provider value={{ loginMember: user }}>
+        <ProductsDetails
+          openProductsModaID={1}
+          storeinOperation={jest.fn()}
+          openProductsModaltimeEnd={34038}
+          setOpenProductsModal={jest.fn()}
+          setisModalTouch={jest.fn()}
+        />
+      </AuthContext.Provider>
+    );
+    await waitFor(() => {
+      let productsCloseButton = queryByTestId("products-close");
+      fireEvent.click(productsCloseButton);
+    });
+  });
+  test("plus and mins button click", async () => {
+    axiosMock.get
+      .mockResolvedValueOnce(productModalCommentData)
+      .mockResolvedValueOnce(productModalData);
+
+    const { queryByTestId } = render(
+      <AuthContext.Provider value={{ loginMember: user }}>
+        <ProductsDetails
+          openProductsModaID={1}
+          storeinOperation={jest.fn()}
+          openProductsModaltimeEnd={34038}
+          setOpenProductsModal={jest.fn()}
+          setisModalTouch={jest.fn()}
+        />
+      </AuthContext.Provider>
+    );
+    await waitFor(() => {
+      let plusButton = queryByTestId("buy-num-plus");
+      fireEvent.click(plusButton);
+      fireEvent.click(plusButton);
+      let minsButton = queryByTestId("buy-num-minus");
+      fireEvent.click(minsButton);
+      let addShoppingCarButton = queryByTestId("add-shopping-car");
+      fireEvent.click(addShoppingCarButton);
+    });
+  });
+});
 
 // jest.mock("react-router-dom", () => ({
 //   ...jest.requireActual("react-router-dom"), // use actual for all non-hook parts
