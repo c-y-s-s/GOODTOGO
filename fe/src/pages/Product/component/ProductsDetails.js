@@ -33,7 +33,6 @@ const ProductsDetails = ({
   );
   // 指定 ID 商品 data
   const productModalData = UseGetData("product", openProductsModaID);
-    console.log(productModalData)
 
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);
@@ -45,7 +44,6 @@ const ProductsDetails = ({
     products_id: openProductsModaID,
     amount: 1,
   });
-
 
   // 計算指定商品的評論平均分數
   let productstarTotal = 0;
@@ -60,14 +58,14 @@ const ProductsDetails = ({
   const [buyamount, setBuyamount] = useState(1);
 
   function handleCounter(condition) {
-    if(condition === 'plus'){
-        setBuyamount(buyamount + 1);
-        setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
-        setshoopingErrormsg("");
-    }else if(condition === 'minus'){
-        setBuyamount(buyamount - 1);
-        setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
-        setshoopingErrormsg("");
+    if (condition === "plus") {
+      setBuyamount(buyamount + 1);
+      setShoppIngData({ ...shoppingData, amount: buyamount + 1 });
+      setshoopingErrormsg("");
+    } else if (condition === "minus") {
+      setBuyamount(buyamount - 1);
+      setShoppIngData({ ...shoppingData, amount: buyamount - 1 });
+      setshoopingErrormsg("");
     }
   }
   function handleBackgroundDelete(e) {
@@ -107,7 +105,7 @@ const ProductsDetails = ({
       //印出錯誤物件
       // console.error(e.response)
       //把錯誤的data訊息放進自己做的errors模組裡後端傳出來的code號對應模組裡的訊息
-      setshoopingErrormsg(ERR_MSG[e.response.data.code]);
+      // setshoopingErrormsg(ERR_MSG[e.response.data.code]);
     }
   }
 
@@ -136,6 +134,7 @@ const ProductsDetails = ({
                   {/* 關閉按鈕 */}
                   <button
                     className="products-close"
+                    data-testid="products-close"
                     onClick={() => {
                       setOpenProductsModal(false);
                       setisModalTouch(true);
@@ -176,10 +175,12 @@ const ProductsDetails = ({
                       </div>
                       本商品不附帶免洗餐具
                     </div>
-                    {/* // !這邊還沒測試有沒有bug */}
-                    {openProductsModaltimeEnd <= 0 ? (
+
+                    {openProductsModaltimeEnd > 0 === false ||
+                    storeinOperation === false ||
+                    data.amount > 0 === false ? (
                       ""
-                    ) : storeinOperation ? (
+                    ) : (
                       <div>
                         <div className="d-flex justify-content-between pt-4 fw-normal">
                           <div>合計金額</div>
@@ -198,8 +199,9 @@ const ProductsDetails = ({
                             {buyamount > 1 ? (
                               <button
                                 className=" buy-num-minus equation"
-                                onClick={()=>{
-                                  handleCounter('minus')
+                                data-testid="buy-num-minus"
+                                onClick={() => {
+                                  handleCounter("minus");
                                 }}
                                 id={`${data.id}`}
                               >
@@ -210,19 +212,15 @@ const ProductsDetails = ({
                                 <FiMinusCircle />
                               </button>
                             )}
+                            <div className=" buy-num-num ">{buyamount}</div>
 
-                            <div className=" buy-num-num ">
-                              {buyamount > data.amount
-                                ? data.amount
-                                : buyamount}
-                            </div>
-
-                            {/* 加號 */}
+                            {/* 加號  因避免跑版所以用這種方式寫*/}
                             {buyamount < data.amount ? (
                               <button
                                 className=" buy-num-plus equation"
-                                onClick={()=>{
-                                    handleCounter("plus");
+                                data-testid="buy-num-plus"
+                                onClick={() => {
+                                  handleCounter("plus");
                                 }}
                                 id={`${data.id}`}
                               >
@@ -236,32 +234,23 @@ const ProductsDetails = ({
                           </div>
                         </div>
                       </div>
-                    ) : (
-                      ""
                     )}
-
-                    {/* // !這邊還沒測試有沒有bug */}
                     <div className="product-buy-car my-1 text-center">
-                      {openProductsModaltimeEnd <= 0 ? (
+                      {openProductsModaltimeEnd > 0 === false ||
+                      data.amount > 0 === false ||
+                      storeinOperation === false ? (
                         <div href="#" className="btn btn-primary close-buy-car">
                           無法提供
                         </div>
-                      ) : data.amount <= 0 ? (
-                        <div href="#" className="btn btn-primary close-buy-car">
-                          無法提供
-                        </div>
-                      ) : storeinOperation ? (
+                      ) : (
                         <button
                           className="btn btn-primary"
                           id={`${data.id}`}
                           onClick={handleAddShoppingCar}
+                          data-testid="add-shopping-car"
                         >
                           加入購物車
                         </button>
-                      ) : (
-                        <div href="#" className="btn btn-primary close-buy-car">
-                          無法提供
-                        </div>
                       )}
                     </div>
                   </div>
