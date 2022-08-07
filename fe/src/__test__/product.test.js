@@ -775,7 +775,7 @@ describe("ProductsDetails", () => {
     axiosMock.get
       .mockResolvedValueOnce(productModalCommentData)
       .mockResolvedValueOnce(productModalData);
-
+    const user = null;
     const { queryByTestId } = render(
       <AuthContext.Provider value={{ loginMember: user }}>
         <ProductsDetails
@@ -820,8 +820,8 @@ describe("ProductsDetails", () => {
   });
   test("backgroundDelete click", async () => {
     const productModalCommentData = {
-      data:[]
-    }
+      data: [],
+    };
     axiosMock.get
       .mockResolvedValueOnce(productModalCommentData)
       .mockResolvedValueOnce(productModalData);
@@ -844,9 +844,9 @@ describe("ProductsDetails", () => {
         />
       </AuthContext.Provider>
     );
-      await waitFor(() => {
-        let backgroundDelete = queryByTestId("background-delete");
-        fireEvent.click(backgroundDelete);
-      });
+    await waitFor(() => {
+      let backgroundDelete = queryByTestId("background-delete");
+      fireEvent.click(backgroundDelete);
+    });
   });
 });

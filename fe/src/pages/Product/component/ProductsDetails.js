@@ -25,7 +25,7 @@ const ProductsDetails = ({
 }) => {
   const { storeId } = useParams();
   const { loginMember } = useAuth();
-
+  console.log(loginMember,'loginMeber')
   // 指定 ID 商品評論
   const productModalCommentData = UseGetData(
     "productsdesignatecommit",
@@ -40,10 +40,10 @@ const ProductsDetails = ({
   //存購物車商品內容
   const [shoppingData, setShoppIngData] = useState({
     store_id: storeId,
-    user_id: loginMember.id,
+    user_id:  loginMember !== null &&  loginMember.id,
     products_id: openProductsModaID,
     amount: 1,
-  });
+  }); 
 
   // 計算指定商品的評論平均分數
   let productstarTotal = 0;
@@ -181,7 +181,7 @@ const ProductsDetails = ({
                       <div>
                         <div className="d-flex justify-content-between pt-4 fw-normal">
                           <div>合計金額</div>
-                          <div >
+                          <div>
                             <span className="pe-2">餐點剩餘</span>
                             {data.amount}
                           </div>
@@ -239,6 +239,13 @@ const ProductsDetails = ({
                         <div href="#" className="btn btn-primary close-buy-car">
                           無法提供
                         </div>
+                      ) : loginMember === null ? (
+                        <a
+                          href="/auth/login"
+                          className="btn btn-primary not-signed-in"
+                        >
+                          尚未登入
+                        </a>
                       ) : (
                         <button
                           className="btn btn-primary"
