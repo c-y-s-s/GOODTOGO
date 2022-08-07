@@ -28,12 +28,12 @@ router.get("/check", async (req, res, next) => {
   res.json([allEmails, allPhones]);
 });
 router.post("/register", emailRule, passwordRule, async (req, res, next) => {
-  console.log(req.body);
+  // console.log(req.body);
   //*確認格式是否正確
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     let error = errors.array();
-    console.log("validation:", error);
+    // console.log("validation:", error);
     // return res.status(400).json({ code: "33001", msg: error[0].msg });
     return res.status(400).json({ errors: error });
   }
@@ -42,7 +42,7 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
     "SELECT * FROM users WHERE email=?",
     [req.body.email]
   );
-  console.log(members);
+  // console.log(members);
   if (members.length > 0) {
     return res.status(400).send({
       code: "33002",
@@ -52,13 +52,13 @@ router.post("/register", emailRule, passwordRule, async (req, res, next) => {
   //*雜湊密碼
   let hashpassword = await argon2.hash(req.body.password);
   let createdTime = Date.now();
-  console.log(createdTime);
+  // console.log(createdTime);
   //*存入資料庫
   let [result] = await connection.execute(
     "INSERT INTO users (email, password, name, phone, valid) VALUES (?,?,?,?,?)",
     [req.body.email, hashpassword, req.body.name, req.body.phone, "1"]
   );
-  console.log(result);
+  // console.log(result);
   res.json({ message: "ok" });
 });
 //Login with Google
@@ -132,7 +132,7 @@ router.post("/login", async (req, res, next) => {
     "SELECT * FROM users WHERE email=?",
     [req.body.email]
   );
-  console.log(members);
+  // console.log(members);
   if (members.length === 0) {
     //沒有查到這個email
     return res.status(404).send({
@@ -158,7 +158,7 @@ router.post("/login", async (req, res, next) => {
     name: member.name,
     photo: member.headshots ? member.headshots : "",
   };
-  console.log(returnUser);
+  // console.log(returnUser);
   // 如果密碼比對成功，記錄在 session
   // 寫 session
   req.session.member = returnUser;

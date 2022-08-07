@@ -207,8 +207,8 @@ router.get("/info/:storeId", async (req, res, next) => {
     // console.log("filter: opState", item.opState);
   });
 
-  console.log("starResult", starResult);
-  console.log("storeProduct", storeProducts);
+  // console.log("starResult", starResult);
+  // console.log("storeProduct", storeProducts);
   res.json(storeResult);
 });
 

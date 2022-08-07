@@ -9,18 +9,18 @@ router.get("/productsamountdesc", async (req, res, next) => {
     "SELECT * FROM products WHERE store_id = ?",
     [req.session.member.id]
   );
-  console.log("db_stores id: ", req.session.member.id);
-  console.log("取得 stores: ", productsData);
+  // console.log("db_stores id: ", req.session.member.id);
+  // console.log("取得 stores: ", productsData);
 
   let page = req.query.page || 1;
-  console.log("目前所在頁數：", page);
+  // console.log("目前所在頁數：", page);
 
   let [total] = await connection.execute(
     "SELECT COUNT(*) AS total FROM products WHERE store_id=?",
     [req.session.member.id]
   );
 
-  console.log("總筆數：", total);
+  // console.log("總筆數：", total);
   total = total[0].total; // total = 6
 
   // 計算總共應該要有幾頁
@@ -34,14 +34,14 @@ router.get("/productsamountdesc", async (req, res, next) => {
     "SELECT * FROM products WHERE store_id=? ORDER BY amount DESC LIMIT ? OFFSET ?",
     [req.session.member.id, perPage, offset]
   );
-  console.log("目前店家id", req.session.member.id);
-  console.log("目前一頁有幾筆", perPage);
-  console.log("offsetoffsetoffset3", offset);
+  // console.log("目前店家id", req.session.member.id);
+  // console.log("目前一頁有幾筆", perPage);
+  // console.log("offsetoffsetoffset3", offset);
   // -------- 整理分頁資訊回傳的資料 --------
   //全部商家數，一頁幾筆資料，在第幾頁，最後一頁
   let pagination = { total, perPage, page, lastPage };
 
-  console.log("data", data);
+  // console.log("data", data);
 
   res.json([data, productsData, pagination]);
 });

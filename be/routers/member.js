@@ -44,7 +44,7 @@ router.use((req, res, next) => {
   // };
   // ----- 測試，假設已取得登入後的 session
 
-  console.log("req.session.member", req.session.member);
+  // console.log("req.session.member", req.session.member);
   next();
   // 有無 session
   // if (req.session.member) {
@@ -143,8 +143,8 @@ router.get("/profile", async (req, res, next) => {
     WHERE id=?;`,
     [req.session.member.id]
   );
-  console.log("db_users id: ", req.session.member.id);
-  console.log("取得 user: ", data);
+  // console.log("db_users id: ", req.session.member.id);
+  // console.log("取得 user: ", data);
 
   let [emails] = await connection.execute(`SELECT email FROM users;`);
   // console.log("取得 emails: ", emails);
@@ -171,7 +171,7 @@ router.get("/profile", async (req, res, next) => {
     photo: data[0].headshots,
     // photo: req.session.member.photo,
   };
-  console.log("profile", profile);
+  // console.log("profile", profile);
   res.json({ profile, emails, likes, orders });
 });
 
@@ -226,7 +226,7 @@ router.post(
       ? ""
       : req.session.member.photo;
     // 是否有移除圖片
-    console.log("remove???", req.body.photo);
+    // console.log("remove???", req.body.photo);
     // console.log("加上路徑的 filename: ", filename);
 
     // -------- 儲存到資料庫 --------
@@ -248,7 +248,7 @@ router.post(
       name: req.body.name,
       photo: filename,
     };
-    console.log("returnUser", returnUser);
+    // console.log("returnUser", returnUser);
     // 寫 session
     req.session.member = returnUser;
 
@@ -280,9 +280,9 @@ router.post("/payment/edit", async (req, res, next) => {
   let twelveNum = req.body.number.split(" ").slice(0, -1).join("");
   let fourNum = req.body.number.split(" ").pop();
   // 寫內容前先測試能不能得到 req
-  console.log("payment req.body: ", req.body);
-  console.log("payment req.body.number 前12碼: ", twelveNum);
-  console.log("payment req.body.number 後4碼: ", fourNum);
+  // console.log("payment req.body: ", req.body);
+  // console.log("payment req.body.number 前12碼: ", twelveNum);
+  // console.log("payment req.body.number 後4碼: ", fourNum);
 
   // 雜湊 hashNum
   let hashtwelveNum = await argon2.hash(twelveNum);
@@ -873,8 +873,8 @@ router.post("/order/cancel", async (req, res, next) => {
     [req.session.member.id, req.body.cancelOrder]
   );
 
-  console.log("req.body.cancelOrder: ", req.body.cancelOrder);
-  console.log("取消訂單資料結果: ", cancelOrderResult);
+  // console.log("req.body.cancelOrder: ", req.body.cancelOrder);
+  // console.log("取消訂單資料結果: ", cancelOrderResult);
   res.json({
     message: "會員取消訂單 ok",
   });
