@@ -84,21 +84,17 @@ const ProductsDetails = ({
     }
   }
   async function handleAddShoppingCar(e) {
-    e.preventDefault();
-    //sweetalert 套件樣式
-    Swal.fire({
-      position: "center",
-      icon: "success",
-      title: "加入購物車成功",
-      showConfirmButton: false,
-      timer: 1500,
-    });
     try {
-      let response = await axios.post(
-        `${API_URL}/shop/shoppingcar`,
-        shoppingData
-      );
-      // console.log(response.data);
+      e.preventDefault();
+      await axios.post(`${API_URL}/shop/shoppingcar`, shoppingData);
+      //sweetalert 套件樣式
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "加入購物車成功",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       setOpenProductsModal(false);
       setisModalTouch(true);
     } catch (e) {
@@ -120,6 +116,7 @@ const ProductsDetails = ({
               className="col-12 pt-2 products-details-data "
               id="products-details-data"
               onClick={handleBackgroundDelete}
+              data-testid="background-delete"
             >
               <div className="card products-details-data-card mx-auto">
                 <div className="">
@@ -146,7 +143,7 @@ const ProductsDetails = ({
                     <h5 className="card-title">{data.name}</h5>
                     <div className="d-flex justify-content-between card-value align-items-center">
                       {/* 評價的地方 */}
-                      {productstarTotal ? (
+                      {productstarTotal > 0 ? (
                         <div className="card-star d-flex">
                           <div>
                             <Stack spacing={2}>
@@ -184,9 +181,9 @@ const ProductsDetails = ({
                       <div>
                         <div className="d-flex justify-content-between pt-4 fw-normal">
                           <div>合計金額</div>
-                          <div className="">
+                          <div >
                             <span className="pe-2">餐點剩餘</span>
-                            {storeinOperation === false ? 0 : data.amount}
+                            {data.amount}
                           </div>
                         </div>
 

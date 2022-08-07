@@ -18,8 +18,10 @@ import Fetch from "../components/Fetch";
 import ReactRouter from "react-router";
 import ProductsDetails from "../pages/Product/component/ProductsDetails";
 import { AuthContext } from "../context/auth";
-import axios from "axios";
+
 import { act } from "react-dom/test-utils";
+
+
 // afterEach(cleanup);
 jest.mock("axios");
 
@@ -727,7 +729,8 @@ const productModalCommentData = {
       create_time: "2022-02-10 02:10:11",
       headshots: "/static/uploads/headshots/member-1646472593397.jpg",
       name: "咪木",
-    },]
+    },
+  ],
 };
 
 let productModalData = {
@@ -751,24 +754,6 @@ let productModalData = {
 
 describe("ProductsDetails", () => {
   test("openProductsModaltimeEnd  <=0", async () => {
-    let productModalData = {
-      data: [
-        {
-          id: 1,
-          store_id: 1,
-          category_id: 2,
-          name: "螺絲奶香卷",
-          img: "06e3a32e-4e54-4e4c-9b7b-20118d324ca7.jpeg",
-          price: 50,
-          amount: 0,
-          description: "含3顆。",
-          start_time: "00:00:00",
-          due_time: "23:59:00",
-          created_at: "2022-01-28 13:21:59",
-          valid: 1,
-        },
-      ],
-    };
     axiosMock.get
       .mockResolvedValueOnce(productModalCommentData)
       .mockResolvedValueOnce(productModalData);
@@ -790,7 +775,6 @@ describe("ProductsDetails", () => {
     axiosMock.get
       .mockResolvedValueOnce(productModalCommentData)
       .mockResolvedValueOnce(productModalData);
-    //  先帶入 ProductsDetails 所需要的 props and data
 
     const { queryByTestId } = render(
       <AuthContext.Provider value={{ loginMember: user }}>
@@ -834,39 +818,35 @@ describe("ProductsDetails", () => {
       fireEvent.click(addShoppingCarButton);
     });
   });
+  test("backgroundDelete click", async () => {
+    const productModalCommentData = {
+      data:[]
+    }
+    axiosMock.get
+      .mockResolvedValueOnce(productModalCommentData)
+      .mockResolvedValueOnce(productModalData);
+    axiosMock.post.mockResolvedValueOnce({
+      data: {
+        store_id: "1",
+        user_id: 35,
+        products_id: 1,
+        amount: 1,
+      },
+    });
+    const { queryByTestId } = render(
+      <AuthContext.Provider value={{ loginMember: user }}>
+        <ProductsDetails
+          openProductsModaID={1}
+          storeinOperation={false}
+          openProductsModaltimeEnd={34038}
+          setOpenProductsModal={jest.fn()}
+          setisModalTouch={jest.fn()}
+        />
+      </AuthContext.Provider>
+    );
+      await waitFor(() => {
+        let backgroundDelete = queryByTestId("background-delete");
+        fireEvent.click(backgroundDelete);
+      });
+  });
 });
-
-// jest.mock("react-router-dom", () => ({
-//   ...jest.requireActual("react-router-dom"), // use actual for all non-hook parts
-//   useParams: () => ({
-//     storeId: "1",
-//   }),
-//   useRouteMatch: () => ({ url: "/tttt/1" }),
-// }));
-// it("aaa", async () => {
-//   axiosMock.get
-//     .mockResolvedValueOnce(storeData)
-//     .mockResolvedValueOnce(storeCommentTotalData)
-//     .mockResolvedValueOnce(productsData)
-//     .mockResolvedValueOnce({
-//       data: [
-//         {
-//           longitude: 24.962912068600176,
-//           latitude: 121.25388469744311,
-//         },
-//       ],
-//     })
-//     .mockResolvedValueOnce({
-//       data: [
-//         {
-//           storeLikeTotal: 28,
-//         },
-//       ],
-//     });
-//   const { container } = render(<Product />);
-//   await waitFor(() => {
-//     expect(container).toBeInTheDocument();
-//   });
-
-// expect(axiosMock.get).toHaveBeenCalledTimes(5);
-// });
