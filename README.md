@@ -29,11 +29,10 @@
 ## 🛠 使用方式
  > p.s. 此專案仍在加強維護階段，若造成不便敬請見諒，我們隨時歡迎前輩指示      
 
-#### 1. 複製專案到本地環境並切換至測試分支test_release
+#### 1. 複製專案到本地環境並在 main branch 運行
 ```bash
 $ git clone https://github.com/dosskkr/GOODTOGO.git
-$ cd GOODTOGO
-$ git switch test_release                                                                 
+$ cd GOODTOGO                                                          
 ```
                                                                  
 #### 2. 匯入或執行 goodtogodata.sql 
