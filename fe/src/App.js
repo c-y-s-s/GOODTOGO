@@ -38,7 +38,7 @@ import Login from "./pages/Auth/Login";
 import Reset from "./pages/Auth/Reset";
 import Register from "./pages/Auth/Register";
 import MyAccount from "./pages/MyAccount";
-import ShoppingCart from "./pages/shoppingcart";
+import ShoppingCart from "./pages/ShoppingCart";
 import CheckOut from "./pages/Checkout";
 
 function App() {

@@ -14,7 +14,6 @@ import Product from "../pages/Product";
 import StoreDetails from "../pages/Product/component/StoreDetails";
 import StoreButton from "../pages/Product/component/StoreButton";
 import Loading from "../pages/Product/component/Loading";
-import Fetch from "../components/Fetch";
 import ReactRouter from "react-router";
 import ProductsDetails from "../pages/Product/component/ProductsDetails";
 import { AuthContext } from "../context/auth";
