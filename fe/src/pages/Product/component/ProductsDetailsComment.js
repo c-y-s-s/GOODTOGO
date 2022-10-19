@@ -95,6 +95,7 @@ const ProductsDetailsComment = ({ productModalCommentData }) => {
           </div>
           {commitSwitch
             ? data.map((item) => {
+              console.log(item.headshots,'sdlkslkgsdklgks;lkd')
                 return (
                   <div
                     className="d-flex mt-3 product-users-comment-data mt-4"

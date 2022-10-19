@@ -15,6 +15,8 @@ import Rating from "@mui/material/Rating";
 import Stack from "@mui/material/Stack";
 // -------- 商品光箱 --------
 import Swal from "sweetalert2";
+
+import { getOnlyProductData, getProductComment } from "../data";
 import { useAuth } from "../../../context/auth";
 const ProductsDetails = ({
   setOpenProductsModal,
@@ -25,14 +27,12 @@ const ProductsDetails = ({
 }) => {
   const { storeId } = useParams();
   const { loginMember } = useAuth();
-  console.log(loginMember,'loginMeber')
+
   // 指定 ID 商品評論
-  const productModalCommentData = UseGetData(
-    "productsdesignatecommit",
-    openProductsModaID
+  const productModalCommentData = getProductComment(openProductsModaID
   );
   // 指定 ID 商品 data
-  const productModalData = UseGetData("product", openProductsModaID);
+  const productModalData = getOnlyProductData(openProductsModaID);
 
   // 存錯誤訊息
   const [shoppingErrormsg, setshoopingErrormsg] = useState([]);

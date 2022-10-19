@@ -11,6 +11,8 @@ import Countdown, { zeroPad } from "react-countdown";
 import moment from "moment";
 import "moment/min/locales";
 
+
+import {getProductData} from "../data"
 const StoreCard = ({
   storeId,
   storeinOperation,
@@ -35,19 +37,20 @@ const StoreCard = ({
   // 存商品是否已結束販售
   const [openProductsModaltimeEnd, setopenProductsModaltimeEnd] = useState(0);
   // 存商家商品
-  const [productsdata, setProducts] = useState([]);
+  const productsdata = getProductData(storeId);
+  console.log(productsdata,'s')
 
   // ? 倒數計時及時開關
   const [countdownTimeUp, setCountdownTimeUp] = useState("");
 
   // 第二層
-  useEffect(() => {
-    let getProducts = async () => {
-      let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
-      setProducts(productsResponse.data);
-    };
-    getProducts();
-  }, [countdownTimeUp]);
+  // useEffect(() => {
+  //   let getProducts = async () => {
+  //     let productsResponse = await axios.get(`${API_URL}/products/${storeId}`);
+  //     setProducts(productsResponse.data);
+  //   };
+  //   getProducts();
+  // }, [countdownTimeUp]);
 
   // ? 時間到執行這個元件
   const Completionist = () => {
