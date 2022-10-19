@@ -21,9 +21,10 @@ import { v4 as uuidv4 } from "uuid";
 import moment from "moment";
 import "moment/min/locales";
 
+
+import { getStoreData, getStoreCommentData, getStoreMapData } from "../data";
 const StoreDetails = ({
   storeId,
-
   setStoreInOperation,
   setStoreTodayClose,
   storeTodayClose,
@@ -38,14 +39,15 @@ const StoreDetails = ({
     parseInt(timeInsecond[3] + timeInsecond[4]) * 60 +
     parseInt(parseInt(timeInsecond[6] + timeInsecond[7]));
     
+  // ---- data api ----
   // call store api
-  const storeData = UseGetData("stores", storeId);
-
-
+  // const storeData = UseGetData("stores", storeId);
+const storeData = getStoreData(storeId);
   // 存店家所有評論資料
-  const storeCommentTotalData = UseGetData("storecommittotal", storeId);
+  // const storeCommentTotalData = UseGetData("storecommittotal", storeId);
+  const storeCommentTotalData = getStoreCommentData(storeId)
   // 經緯度、評論總數
-  const storeMapLikeData = UseGetStoreData(storeId);
+  const storeMapLikeData = getStoreMapData(storeId);
 
   // 地圖預設顯示地點
   const defaultProps = {
@@ -123,7 +125,7 @@ const StoreDetails = ({
         }
 
         return (
-          <div key={uuidv4()}>
+          <div key={item.id}>
             <div>
               <div className="container-fluid p-0">
                 <div className="storeLogo">

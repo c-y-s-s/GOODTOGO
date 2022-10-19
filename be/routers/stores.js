@@ -542,7 +542,11 @@ router.get("/", async (req, res, next) => {
 // -------- 撈出對應商家 ID 詳細資訊 --------
 router.get("/:storeId", async (req, res, next) => {
   let [data, fields] = await connection.execute(
-    "SELECT a.* , b.category FROM stores AS a JOIN products_category AS b ON b.id = a.stores_category_id WHERE a.id = ?",
+    `SELECT a.* , b.category 
+    FROM stores AS a 
+    JOIN products_category AS b 
+    ON b.id = a.stores_category_id 
+    `,
     [req.params.storeId]
   );
   res.json(data);

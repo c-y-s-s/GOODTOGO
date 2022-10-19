@@ -3695,7 +3695,7 @@ CREATE TABLE `stores` (
   `close_day` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `open_time` time(6) DEFAULT NULL,
   `close_time` time(6) DEFAULT NULL,
-  `certification-img` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `certification_img` varchar(250) COLLATE utf8mb4_unicode_ci NOT NULL,
   `stores_category_id` int(5) NOT NULL,
   `created_at` datetime NOT NULL,
   `valid` tinyint(4) NOT NULL
@@ -3705,7 +3705,7 @@ CREATE TABLE `stores` (
 -- 傾印資料表的資料 `stores`
 --
 
-INSERT INTO `stores` (`id`, `logo`, `bossname`, `name`, `email`, `account`, `password`, `tel_no`, `address`, `close_day`, `open_time`, `close_time`, `certification-img`, `stores_category_id`, `created_at`, `valid`) VALUES
+INSERT INTO `stores` (`id`, `logo`, `bossname`, `name`, `email`, `account`, `password`, `tel_no`, `address`, `close_day`, `open_time`, `close_time`, `certification_img`, `stores_category_id`, `created_at`, `valid`) VALUES
 (1, '01.jpg', '楊昆幸', '豪記港式飲茶 永福店', 'crd62707@zwoho.com', '', '', '035550000', '桃園市中壢區永福路938號', '[6]', '09:30:00.000000', '21:30:00.000000', '', 1, '2021-12-10 00:50:18', 1),
 (2, '02.jpg', '林宥慧', '豪記港式飲茶 中園店', 'mdw59566@zwoho.com', '', '', '036879797', '桃園市中壢區中園路二段509號4樓', '[1,3]', '09:30:00.000000', '21:30:00.000000', '', 1, '2021-12-10 00:57:43', 1),
 (3, '03.jpg', '林凱婷', '豪記港式飲茶 民權路店', 'jyl81035@boofx.com', '', '', '0312345678', '桃園市中壢區民權路398號', '[1,5]', '09:30:00.000000', '23:30:00.156000', '', 1, '2021-12-10 01:09:24', 1),

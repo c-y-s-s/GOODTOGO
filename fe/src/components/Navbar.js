@@ -58,7 +58,11 @@ const Navbar = (props) => {
             />
           </div>
           {isOpen ? (
-            <MenuToggle burgetOpen={burgetOpen} setBurgerOpen={setBurgerOpen} />
+            <MenuToggle
+              burgetOpen={burgetOpen}
+              setBurgerOpen={setBurgerOpen}
+              setLoginBoolean={props.setLoginBoolean}
+            />
           ) : (
             <div></div>
           )}

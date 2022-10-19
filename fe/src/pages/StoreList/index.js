@@ -21,15 +21,13 @@ const StoryList = () => {
     const getLikeList = async () => {
       let likeListRes = await axios.get(
         `${API_URL}/stores/likelist/${loginMember.id}`
-      );
-      // console.log("likeListRes", likeListRes.data);
+      ); 
       setLikeList(likeListRes.data);
     };
     if (loginMember !== null) {
       getLikeList();
     }
   }, [loginMember]);
-  // console.log("likeList", likeList);
   //TODO比對如果收藏列表裡面有這個店的id就呈現實心，無則否
   //TODO 如果空愛心(沒有在收藏列表)onclick就要加入，實心onclick就要移除
   return (

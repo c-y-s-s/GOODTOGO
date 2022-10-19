@@ -40,6 +40,7 @@ const _menuToggle = (props) => {
           })
           .then((result) => {
             if (result.isConfirmed) {
+              props.setLoginBoolean(false)
               setLoginMember(null);
               swal.fire("登出囉！", "我們隨時歡迎您:)", "success");
               navigate("/");

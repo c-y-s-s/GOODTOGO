@@ -5,7 +5,6 @@ import { API_URL } from "../../../utils/config";
 
   export const UseGetData = (typeUrl, id) => {
     const [data, setDate] = useState([]);
-
     useEffect(() => {
       let getData = async () => {
         let dataResponse = await axios.get(`${API_URL}/${typeUrl}/${id}`);
@@ -13,7 +12,6 @@ import { API_URL } from "../../../utils/config";
       };
       getData();
     }, [typeUrl,id]);
-
     return data;
   };
 
@@ -27,15 +25,15 @@ import { API_URL } from "../../../utils/config";
  useEffect(() => {
    let getData = async () => {
      // 店家經緯度
-     let storeMapDataReaponse = await axios.get(`${API_URL}/storesmap/${id}`);
+     let storeMapDataResponse = await axios.get(`${API_URL}/storesmap/${id}`);
      // 店家愛心總數
-     let storeLikeDataReaponse = await axios.get(
+     let storeLikeDataResponse = await axios.get(
        `${API_URL}/products/storelike/${id}`
      );
      setDate({
-       longitude: storeMapDataReaponse.data[0].longitude,
-       latitude: storeMapDataReaponse.data[0].latitude,
-       storeLikeTotal: storeLikeDataReaponse.data[0].storeLikeTotal,
+       longitude: storeMapDataResponse.data[0].longitude,
+       latitude: storeMapDataResponse.data[0].latitude,
+       storeLikeTotal: storeLikeDataResponse.data[0].storeLikeTotal,
      });
    };
    getData();

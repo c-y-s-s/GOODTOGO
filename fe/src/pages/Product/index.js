@@ -24,7 +24,6 @@ const Product = ({ setisModalTouch }) => {
     <div>
       {/* -------- 商家Logo、詳細資訊區塊 -------- */}
       <StoreDetails
-
         storeId={storeId}
         setStoreInOperation={setStoreInOperation}
         setStoreTodayClose={setStoreTodayClose}

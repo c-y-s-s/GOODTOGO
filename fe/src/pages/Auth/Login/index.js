@@ -12,7 +12,7 @@ import axios from "axios";
 import { API_URL } from "../../../utils/config";
 import { ERR_MSG } from "../../../utils/error";
 
-const Login = (props) => {
+const Login = ({ setLoginBoolean }) => {
   let navigate = useNavigate();
   const { loginMember, setLoginMember } = useAuth();
 
@@ -63,13 +63,13 @@ const Login = (props) => {
     passwordEye: false,
   });
   // -------- 讀取所有已註冊過的email和電話 --------
-  useEffect(() => {
-    let getInfo = async () => {
-      let res = await axios.get(`${API_URL}/auth/check`);
-      setEmails(res.data[0]);
-    };
-    getInfo();
-  }, []);
+  // useEffect(() => {
+  //   let getInfo = async () => {
+  //     let res = await axios.get(`${API_URL}/auth/check`);
+  //     setEmails(res.data[0]);
+  //   };
+  //   getInfo();
+  // }, []);
   // --------切換顯示/隱藏密碼 --------
   function passwordShow() {
     setEye(
@@ -127,43 +127,48 @@ const Login = (props) => {
     });
   };
   // -------- 表單提交 --------
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = (e) => {
+    // e.preventDefault();
     //比對資料庫是否有此會員
-    try {
-      let response = await axios.post(`${API_URL}/auth/login`, loginUser, {
-        withCredentials: true,
-      });
-      console.log("登入成功", response.data);
-      setLoginMember(response.data.data);
-      console.log("登入成功", response.data.data);
-      loginSuccessAlert();
-      navigate("/");
-    } catch (e) {
-      // console.error("錯誤:", e.response.data);
-      console.error("測試登入", ERR_MSG);
-    }
+
+    // let response = await axios.post(`${API_URL}/auth/login`, loginUser, {
+    //   withCredentials: true,
+    // });
+    // console.log("登入成功", response.data);
+    setLoginBoolean(true);
+    setLoginMember({
+      id: 36,
+      name: "testtest",
+      photo: "",
+    });
+    // console.log("登入成功", response.data.data);
+
+    loginSuccessAlert();
+    navigate("/");
+
+    // console.error("錯誤:", e.response.data);
+    // console.error("測試登入", ERR_MSG);
   };
   //傳fb token到後端
-  const handleFBLogin = async (response) => {
-    try {
-      let fb_response = await axios.get(
-        `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`,
-        {
-          withCredentials: true,
-          headers: {
-            "Access-Control-Allow-Origin": "*",
-          },
-        }
-      );
-      console.log("fb login test response", fb_response.data);
-      if (fb_response.data.id) {
-        setLoginMember(fb_response.data.id);
-      }
-    } catch (e) {
-      console.error("測試fb登入", ERR_MSG);
-    }
-  };
+  // const handleFBLogin = async (response) => {
+  //   try {
+  //     let fb_response = await axios.get(
+  //       `${API_URL}/auth/facebook/token?access_token=${response.accessToken}`,
+  //       {
+  //         withCredentials: true,
+  //         headers: {
+  //           "Access-Control-Allow-Origin": "*",
+  //         },
+  //       }
+  //     );
+  //     console.log("fb login test response", fb_response.data);
+  //     if (fb_response.data.id) {
+  //       setLoginMember(fb_response.data.id);
+  //     }
+  //   } catch (e) {
+  //     console.error("測試fb登入", ERR_MSG);
+  //   }
+  // };
   console.log("member from Login.js", loginMember);
 
   return (
@@ -198,8 +203,9 @@ const Login = (props) => {
                         }`}
                         id="floatingInput"
                         placeholder="帳號"
-                        value={loginUser.email}
-                        onChange={handleChange}
+                        value="testtest@test.com"
+                        // value={loginUser.email}
+                        // onChange={handleChange}
                         // onFocus={regEmail}
                         onBlur={regEmail}
                         required
@@ -238,8 +244,9 @@ const Login = (props) => {
                         }`}
                         id="floatingInput"
                         placeholder="密碼"
-                        value={loginUser.password}
-                        onChange={handleChange}
+                        value={"testtest"}
+                        // value={loginUser.password}
+                        // onChange={handleChange}
                         minLength="6"
                         required
                       />

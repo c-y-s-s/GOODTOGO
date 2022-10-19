@@ -16,6 +16,7 @@ import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 //uuid
 import { v4 as uuidv4 } from "uuid";
 
+import { storeResData, getSearchData } from "../../data";
 const StoreInfoList = (props) => {
   const {
     setTotalHeart,
@@ -64,13 +65,15 @@ const StoreInfoList = (props) => {
     // console.log("page effect", page);
     //*有分頁的全部店家api:  api/stores/
     let getStore = async () => {
-      let storeRes = await axios.get(`${API_URL}/stores?page=${page}`);
-      let stores = storeRes.data[0];
-      let category = storeRes.data[1];
-      let pagination = storeRes.data[2];
-      let storeLikeCount = storeRes.data[3];
-      let productAmount = storeRes.data[4];
-      let storeStarsCount = storeRes.data[5];
+      let storeRes = await storeResData(page)
+      let stores = storeRes[0];
+      let category = storeRes[1];
+      let pagination = storeRes[2];
+      let storeLikeCount = storeRes[3];
+      let productAmount = storeRes[4];
+      let storeStarsCount = storeRes[5];
+
+      console.log(stores,'s');
       setCategory(category);
       setStoreList(stores);
       setLastPage(pagination.lastPage);
@@ -82,17 +85,19 @@ const StoreInfoList = (props) => {
       setTotalHeart(storeLikeCount);
       setTotalStar(storeStarsCount);
       setProductAmount(productAmount);
-      // console.log("愛心", storeLikeCount);
+
     };
     //*搜尋店家列表api:  api/stores/search
     let getSearch = async () => {
-      let storeSearchRes = await axios.get(
-        `${API_URL}/stores/search?page=${page}&keyword=${keyword.trim()}`
-      );
-      // console.log(storeSearchRes);
-      setStoreList(storeSearchRes.data[0]);
-      setTotal(storeSearchRes.data[1].total);
-      setLastPage(storeSearchRes.data[1].lastPage);
+      // let storeSearchRes = await axios.get(
+      //   `${API_URL}/stores/search?page=${page}&keyword=${keyword.trim()}`
+      // );
+
+  let storeSearchRes = await getSearchData(page, keyword.trim());
+ 
+      setStoreList(storeSearchRes.keyWordArray);
+      setTotal(storeSearchRes.keyWordArrayLength);
+      setLastPage(storeSearchRes.page);
     };
     //*過濾-類別的店家列表api:  api/stores/filter/c
     let getCategoryStore = async () => {
@@ -192,11 +197,6 @@ const StoreInfoList = (props) => {
     return pages;
   };
 
-  // console.log("searchSwitch", searchSwitch);
-  // console.log("selected category", selectedCat);
-  // console.log("storeList", storeList);
-  // console.log("open hour", opState);
-  // console.log("keyword", keyword);
 
   return (
     <div className="store-list">
